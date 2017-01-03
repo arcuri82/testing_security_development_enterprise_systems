@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.tsdes.jee.ejb</groupId>
+    <artifactId>ejb</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.tsdes.jee</groupId>
+        <artifactId>jee</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>framework</module>
+        <module>stateless</module>
+        <module>singleton</module>
+        <module>multithreading</module>
+        <module>stateful</module>
+        <module>async</module>
+        <module>query</module>
+        <module>arquillian</module>
+        <module>callback</module>
+        <module>time</module>
+    </modules>
+
+
+
+</project>

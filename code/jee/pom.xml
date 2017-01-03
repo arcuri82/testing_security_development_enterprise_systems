@@ -15,7 +15,7 @@
     <modules>
         <module>jpa</module>
         <module>ejb</module>
-        <!--<module>jta</module>-->
+        <module>jta</module>
         <!--<module>jsf</module>-->
         <!--<module>exam_example</module>-->
     </modules>

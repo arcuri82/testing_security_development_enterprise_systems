@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  It is essential that this file is under "resources/META-INF".
+  Files under "resources" are not compiled, but get copied inside the assembled jar/war file,
+  and can be available on the classpath.
+  You can see the copies when the module is compiled under "target/classes", together with
+  the compiled .class files
+-->
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+
+
+    <persistence-unit name="DB" transaction-type="RESOURCE_LOCAL">
+        <!--
+        RESOURCE_LOCAL means that we handle the "transactions" manually, which is the case when using
+        JPA/Hibernate in Java Standard Edition (SE) and not JEE. We will see
+        later how to automatically delegate it to the JEE container by using "JTA"
+        -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <!-- for now we use an embedded database (ie H2), just for testing-->
+            <property name="connection.driver_class" value="org.h2.Driver"/>
+            <!-- specify we are connecting to a H2 database -->
+            <property name="hibernate.connection.url" value="jdbc:h2:./target/db"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <!--
+            This will make sure we use a new database at each new connection (ie EntityManagerFactory),
+            deleting all existing data. The schema is created based on the @Entity classes
+            on the classpath
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <!-- This does show on the console the SQL statements executed by Hibernate -->
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+
+

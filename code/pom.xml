@@ -1,0 +1,414 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.tsdes</groupId>
+    <artifactId>root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Root of TSDES</name>
+
+    <modules>
+        <module>jee</module>
+    </modules>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hibernate.version>5.2.2.Final</hibernate.version>
+        <wildfly.version>10.1.0.Final</wildfly.version>
+        <jbossTarget>${basedir}/target/downloaded_Wildfly</jbossTarget>
+        <jbossHome>${jbossTarget}/wildfly-${wildfly.version}</jbossHome>
+        <version.jacoco>0.7.7.201606060606</version.jacoco>
+        <fs>${file.separator}</fs>
+    </properties>
+
+
+    <!--
+    Here we define all third-party dependencies we need in the sub-modules, so that we
+    do not have to copy&paste each time the <version> and <scope> tags
+    -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!--
+                The scope
+                <scope>provided</scope>
+                is quite important for JEE.
+                It means that those libraries are available at compilation and test time, but,
+                they will not be included in the final WAR/JAR files.
+                Why? Because the JEE container will already contain them. However, what is
+                actually contained depends from container to container (eg few differences
+                between GlassFish and JBoss/WildFly). Here we have settings for WildFly.
+                Note: actual settings can be overwritten in the module pom.xml files.
+            -->
+
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>7.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-7.0</artifactId>
+                <version>1.0.3.Final</version>
+                <!-- Import all libraries definitions in this dependency pom file  -->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>3.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- JPA / Hibernate / Database -->
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>1.0.0.Final</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-java8</artifactId>
+                <version>${hibernate.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.192</version>
+                <scope>provided</scope>
+            </dependency>
+
+
+            <!-- test -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <!-- JUnit 5 has come out this year (2016), but still not in a stable / widely supported state -->
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <!-- used to control a browser for system testing -->
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <!--
+                    Usually, you should avoid using libraries in "beta", however this is the
+                    only way to get Selenium working on Firefox 48.x (which is the most
+                    recent at the time of writing this)
+                -->
+                <!--<version>3.0.0-beta3</version>-->
+                <version>2.53.1</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Arquilian, needed for integration testing of EJB -->
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.1.11.Final</version>
+                <!--
+                    This is bit tricky. The Arquillian ecosystem defines
+                    many different dependencies, but often you will just need
+                    only some of them.
+                    However, you do not want to mix different versions.
+                    By "import" a BOM (Bill Of Materials) pom file, you practically
+                    define all those dependencies here in this <dependencyManagement>
+                    having all the same version.
+
+                    See:
+                    https://mvnrepository.com/artifact/org.jboss.arquillian/arquillian-bom/1.1.11.Final
+                    https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html
+                -->
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wildfly.arquillian</groupId>
+                <artifactId>wildfly-arquillian-container-managed</artifactId>
+                <version>1.1.0.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-jacoco</artifactId>
+                <version>1.0.0.Alpha8</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.core</artifactId>
+                <version>${version.jacoco}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <!-- embedded JEE GlassFish container -->
+                <groupId>org.glassfish.main.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>4.1.1</version>
+            </dependency>
+
+
+            <!-- Misc -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>19.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>3.0.16.Final</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+
+        <!--
+            like dependencyManagement, this only defines which (and how) plugins to use.
+            to actually activate them, they need to be directly under <plugins> (without
+            the need to reset all their configurations).
+            Note: some plugins are default in Maven, like the compiler.
+            To see what actually executed, you can look at the logs.
+        -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <inherited>true</inherited>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+
+                <!-- this is needed to run integration tests -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <executions>
+                        <execution>
+                            <id>run-tests</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+
+                <!-- Used to download and unpack JBoss/Wildfly automatically before running the tests-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>unpack</id>
+                            <phase>process-test-classes</phase>
+                            <goals>
+                                <goal>unpack</goal>
+                            </goals>
+                            <configuration>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>org.wildfly</groupId>
+                                        <artifactId>wildfly-dist</artifactId>
+                                        <version>${wildfly.version}</version>
+                                        <type>zip</type>
+                                        <overWrite>false</overWrite>
+                                        <outputDirectory>${jbossTarget}</outputDirectory>
+                                    </artifactItem>
+                                </artifactItems>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!--
+                    Maven phases:
+                    https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
+
+                    Main ones:
+
+                    *clean*
+                    compile
+                    process-test-classes
+                    test
+                    package
+                    pre-integration-test
+                    integration-test
+                    post-integration-test
+                    verify
+                    install
+                    deploy
+
+                    apart from *clean*, when executing one of those phases (eg "mvn test"), all previous
+                    phases are executed as well.
+
+                    Note:
+
+                    process-test-classes: this is when we download/unpack Wildfly
+                    test: unit tests (*Test.java) are executed
+                    package: creation of jar/war files
+                    pre-integration-test: we start Wildfly for the integration tests
+                    integration-test: execute all *IT.java tests
+                    post-integration-test: stop Wildfly
+                    install: copy the jar/war files into your ~/.m2 folder (like any other dependency)
+
+                    clean: delete everything in the "target" folders
+                -->
+
+
+                <!--
+                   Plugin configuration to automatically start WildFly before integration tests are
+                   started, and then stop it once all are finished
+                -->
+                <plugin>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>1.1.0.Alpha11</version>
+                    <configuration>
+                        <!--
+                            If jbossHome is not specified, this plugin will download it.
+                            Here, we point to the same installation done for the unit tests
+                            with the maven-dependency-plugin, as to avoid double download/installation
+                          -->
+                        <jbossHome>${jbossHome}</jbossHome>
+                        <add-user>
+                            <users>
+                                <user>
+                                    <username>admin</username>
+                                    <password>admin</password>
+                                </user>
+                            </users>
+                        </add-user>
+                        <java-opts>
+                            <!-- comment out if need to attach a remote debugger -->
+                            <!--<javaOpt>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</javaOpt>-->
+                        </java-opts>
+                    </configuration>
+                    <executions>
+
+                        <!--
+                            for list of Maven phases, see
+
+                            https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
+
+                            for Wildfly plugin goals, see
+
+                            https://docs.jboss.org/wildfly/plugins/maven/latest/usage.html
+                        -->
+                        <execution>
+                            <!--
+                                This means:
+                                when Maven is executing the "pre-integration-test" phase of the build,
+                                then this plugin will execute the commands "start" (which does start WildFly)
+                                and then "deploy" (which deploy the compiled/packaged WAR of the project)
+                            -->
+                            <id>init</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>start</goal>
+                                <!--
+                                this starts WildFly asynchronously, ie non-blocking as "run" would do.
+                                When running tests from IDE, can start WildFly with "mvn wildfly:run"
+                                 -->
+                                <goal>deploy</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>shutdown</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>undeploy</goal>
+                                <goal>shutdown</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!--
+                    Avoid failing War generation if web.xml is missing, as we ll not
+                    use it in some example modules
+                -->
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+
+
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.7.7.201606060606</version>
+                    <executions>
+                        <execution>
+                            <id>default-prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-report</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-prepare-agent-integration</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>prepare-agent-integration</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-report-integration</id>
+                            <goals>
+                                <goal>report-integration</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

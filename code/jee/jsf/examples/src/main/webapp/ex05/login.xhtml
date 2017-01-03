@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<ui:composition template="../layout.xhtml">
+
+    <ui:define name="title">Login / Create New User</ui:define>
+
+    <ui:define name="content">
+
+        <p>
+            This is just an example. Usually you would have different pages
+            for login and create new user, two input texts for passwords to
+            check if they match, validation of inputs, etc. etc.
+        </p>
+
+        <h:form id="loginForm">
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="User name : "/>
+                <h:inputText value="#{loggingController.formUserName}" id="userId"/>
+
+                <h:outputLabel value="Password : "/>
+                <h:inputSecret value="#{loggingController.formPassword}" id="password"/>
+
+            </h:panelGrid>
+
+            <h:commandButton value="Log in" action="#{loggingController.logIn}" id="logIn"/>
+            <h:commandButton value="Register new" action="#{loggingController.registerNew}" id="create"/>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+</html>

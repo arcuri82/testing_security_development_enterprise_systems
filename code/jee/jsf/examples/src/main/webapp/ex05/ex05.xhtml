@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+
+<ui:composition template="../layout.xhtml">
+
+    <ui:define name="title">
+        Unsecure Logging Example
+    </ui:define>
+
+
+    <ui:define name="content">
+
+        <p>
+            <b>Note</b>: what done here is very <b>unsecure</b>: this means that breaking/hacking this logging mechanism
+            is trivial. We will see more about security in the next course PG6100.
+            Here, this is done to just give you some basic ways to distinguish between different users.
+        </p>
+
+        <hr/>
+
+        <c:choose>
+            <c:when test="#{loggingController.loggedIn}">
+                <h:form id="logoutForm">
+                    <h:outputText value="Hi #{loggingController.registeredUser}!  "/>
+                    <h:commandButton value="Log Out" action="#{loggingController.logOut}" id="logoutButton"/>
+                </h:form>
+            </c:when>
+            <c:otherwise>
+                <h:outputText value="Not logged in  "/>
+                <h:button value="Log In" outcome="login.jsf" id="loginButton"/>
+            </c:otherwise>
+        </c:choose>
+
+
+        <!-- Add possibility of creating new post only if user is logged in -->
+        <c:if test="#{loggingController.loggedIn}">
+            <h:form id="postForm">
+                <h:outputLabel value="New post:"/>
+                <h:inputTextarea value="#{postController.formText}" cols="50" rows="5" id="postText"/>
+                <h:commandButton value="Post" action="#{postController.doPostText(loggingController.registeredUser)}"
+                    id="createPost"/>
+            </h:form>
+        </c:if>
+
+
+        <h2>Latest News</h2>
+
+
+        <c:if test="#{postController.allPosts.size() == 0}">
+            <h:outputText value="No news yet :( "/>
+        </c:if>
+
+
+        <!-- Could have used a table. Here, just as an example, I used a forEach -->
+        <div id="posts">
+            <c:forEach var="post" items="#{postController.allPosts}">
+
+                <div class="post">
+                    <h:outputText value="#{post.author.userId} wrote on #{post.creationTime}: #{post.text}">
+                        <f:convertDateTime pattern="MM/dd/yy - hh:mm"/>
+                    </h:outputText>
+
+                    <!--
+                        Only the author of a post can delete it. Recall: this is a very weak security
+                        mechanism, as a hacker could just do direct HTTP calls.
+                    -->
+                    <c:if test="#{post.author.userId.equals(loggingController.registeredUser)}">
+                        <div class="deleteButton">
+                            <h:form>
+                                <h:commandButton value="Delete" action="#{postController.deletePost(post.id)}"/>
+                            </h:form>
+                        </div>
+                    </c:if>
+                </div>
+                <hr/>
+            </c:forEach>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+
+<ui:composition template="../layout.xhtml">
+
+    <ui:define name="title">
+        SessionScoped vs. RequestScoped
+    </ui:define>
+
+
+
+    <ui:define name="content">
+
+        <p>
+           A JSF managed bean marked with   <b>SessionScoped</b> will live for the whole <em>session</em> with
+            the user.
+            On the other hand, a <b>RequestScoped</b> bean will only live for the duration of the HTTP request (eg.,
+            a single GET or POST request).
+        </p>
+
+
+        <h2>Counter using RequestScoped</h2>
+        <h:form id="formRequest">
+            <h:commandButton value="+" action="#{requestCounter.increaseCounter}" id="requestPlusButtonId"/>
+            <h:commandButton value="-" action="#{requestCounter.decreaseCounter}" id="requestMinusButtonId"/>
+            <h:outputText    value="#{requestCounter.counter}"                    id="requestCounterTextId"/>
+            <h:commandButton value="Reset" action="#{requestCounter.reset}"       id="requestResetButtonId" />
+        </h:form>
+
+        <h2>Counter using SessionScoped</h2>
+        <h:form id="formSession">
+            <h:commandButton value="+" action="#{sessionCounter.increaseCounter}" id="sessionPlusButtonId"/>
+            <h:commandButton value="-" action="#{sessionCounter.decreaseCounter}" id="sessionMinusButtonId"/>
+            <h:outputText    value="#{sessionCounter.counter}"                    id="sessionCounterTextId"/>
+            <h:commandButton value="Reset" action="#{sessionCounter.reset}"       id="sessionResetButtonId" />
+        </h:form>
+
+        <p>
+            One uses a RequestedScoped when needs to just transfer some data (eg, the data in the forms),
+            and such data does not need to be kept
+            for the whole interactions/session with the user.
+            So, every time we clich the plus button, a new counter bean with value 0 is created and used.
+            On the other hand, the SessionScoped instance is always the same. It is more expensive,
+            as we keep in memory one instance per user.
+            <em>But how does Wildfly know that a request comes from the same user session???</em>
+            This is achieved by using <b>cookies</b>.
+        </p>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

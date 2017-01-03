@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+
+
+    <persistence-unit name="DB" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <property name="connection.driver_class" value="org.h2.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:h2:./target/db"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+
+            <!--
+            Instead of creating a database schema based on the @Entity classes, it could happen
+            that there exists already a database, and we want to create a JEE program that
+            does access the DB using JPA.
+
+            Here, we "simulate" an existing DB by executing an SQL script that creates a table
+            called MOVIE
+
+            See also: https://docs.oracle.com/javaee/7/tutorial/persistence-intro005.htm
+            -->
+            <!--<property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.create-source" value="script"/>
+            <property name="javax.persistence.schema-generation.create-script-source" value="createDB.sql" />
+
+            <!-- this one is needed to have SQL commands on multiple lines in the SQL scripts, eg createDB.sql -->
+            <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor" />
+        </properties>
+    </persistence-unit>
+</persistence>
+
+

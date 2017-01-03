@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="title">Create New Event</ui:define>
+
+    <ui:define name="content">
+
+
+        <h:form id="createEventForm">
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Title : "/>
+                <h:inputText value="#{createEventController.formTitle}" id="title"/>
+
+                <h:outputLabel value="Country : "/>
+                <h:selectOneMenu value="#{createEventController.formCountry}" id="country">
+                    <f:selectItems value="#{loggingController.countries}" />
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Location : "/>
+                <h:inputText value="#{createEventController.formLocation}" id="location"/>
+
+                <h:outputLabel value="Description : "/>
+                <h:inputTextarea value="#{createEventController.formText}" id="description"/>
+
+
+            </h:panelGrid>
+
+            <h:commandButton value="Create" action="#{createEventController.createEvent}" id="createButton"/>
+        </h:form>
+
+        <h:button value="Cancel" outcome="home.jsf" />
+
+    </ui:define>
+
+</ui:composition>
+</html>

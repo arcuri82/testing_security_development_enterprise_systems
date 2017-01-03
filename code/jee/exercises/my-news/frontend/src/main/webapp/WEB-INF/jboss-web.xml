@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<jboss-web>
+    <context-root>/pg5100_exam</context-root>
+</jboss-web>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+>
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="title">News Details</ui:define>
+
+    <ui:define name="content">
+
+        <c:set var="post" value="#{commentController.getPost(commentController.postId)}" />
+
+        <h2>News</h2>
+
+        <h:outputText value="On the #{post.createdTime}, user #{post.author.userId} wrote:" >
+            <f:convertDateTime pattern="dd/MM/yyyy, HH:mm:ss"/>
+        </h:outputText>
+        <h:outputText value="#{post.text}" />
+
+        <hr />
+
+        <c:if test="#{loggingController.loggedIn}">
+
+            <h:form id="createForm">
+                <h:inputTextarea value="#{commentController.formText}" id="createText"/>
+                <h:commandButton value="Add Comment" action="#{commentController.createNewComment(post.id)}" id="createButton">
+                </h:commandButton>
+            </h:form>
+
+        </c:if>
+
+        <hr />
+
+
+
+        <c:set var="comments" value="#{commentController.getComments(post.id)}"/>
+
+        <c:choose>
+
+            <c:when test="#{comments.size() == 0}">
+                <h:outputText value="No comments yet :( Be the first to create one!"/>
+            </c:when>
+
+            <c:otherwise>
+
+                <h:dataTable value="#{comments}" var="comment" border="1" id="commentTable">
+
+                    <h:column>
+                        <f:facet name="header">Author</f:facet>
+                        <h:link value="#{comment.author.userId}" outcome="userDetails.jsf?id=#{comment.author.userId}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Comment</f:facet>
+                        <h:outputText value="#{commentController.getCommentText(comment)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Score</f:facet>
+                        <h:outputText value="#{comment.computeScore()}"/>
+                    </h:column>
+
+
+                    <c:if test="#{loggingController.loggedIn}">
+                        <h:column>
+                            <f:facet name="header">Your Vote</f:facet>
+                            <h:form>
+                                <h:selectOneRadio value="#{commentController.voteMap[comment.id]}"
+                                                  onclick="submit()"
+                                                  valueChangeListener="#{commentController.updateVoteListener}">
+                                    <f:attribute name="commentId" value="#{comment.id}" />
+                                    <f:selectItem itemValue="Against" itemLabel="-1" />
+                                    <f:selectItem itemValue="None" itemLabel="0" />
+                                    <f:selectItem itemValue="For" itemLabel="+1" />
+                                </h:selectOneRadio>
+                            </h:form>
+                        </h:column>
+
+                        <c:if test="#{loggingController.registeredUser.equals(post.author.userId)}" >
+                            <h:column>
+                                <f:facet name="header">Moderation</f:facet>
+                                <h:form id="moderateForm">
+                                    <h:selectBooleanCheckbox
+                                            value="#{comment.moderated}"
+                                            onclick="submit()"
+                                            valueChangeListener="#{commentController.flipModerate(comment)}"
+                                            id="moderate">
+                                    </h:selectBooleanCheckbox>
+                                </h:form>
+                            </h:column>
+                        </c:if>
+
+                    </c:if>
+                </h:dataTable>
+            </c:otherwise>
+        </c:choose>
+
+    </ui:define>
+
+</ui:composition>
+</html>

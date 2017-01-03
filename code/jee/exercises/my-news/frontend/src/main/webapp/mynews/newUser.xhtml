@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="title">Create User</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="createUserForm">
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="User name (id) : "/>
+                <h:inputText value="#{loggingController.formUserName}" id="userName"/>
+
+                <h:outputLabel value="Password : "/>
+                <h:inputSecret value="#{loggingController.formPassword}" id="password"/>
+
+                <h:outputLabel value="Confirm password : "/>
+                <h:inputSecret value="#{loggingController.formConfirmPassword}" id="confirmPassword"/>
+
+                <h:outputLabel value="Firt name : "/>
+                <h:inputText value="#{loggingController.formFirstName}" id="firstName"/>
+
+                <h:outputLabel value="Middle name : "/>
+                <h:inputText value="#{loggingController.formMiddleName}" id="middleName"/>
+
+                <h:outputLabel value="Last name : "/>
+                <h:inputText value="#{loggingController.formLastName}" id="lastName"/>
+
+
+            </h:panelGrid>
+
+            <h:commandButton value="Create" action="#{loggingController.registerNew}" id="createButton"/>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+</html>

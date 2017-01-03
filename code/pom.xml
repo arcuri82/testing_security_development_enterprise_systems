@@ -27,6 +27,10 @@
     <!--
     Here we define all third-party dependencies we need in the sub-modules, so that we
     do not have to copy&paste each time the <version> and <scope> tags
+
+    To check for new versions, use:
+
+    mvn versions:display-dependency-updates
     -->
     <dependencyManagement>
         <dependencies>

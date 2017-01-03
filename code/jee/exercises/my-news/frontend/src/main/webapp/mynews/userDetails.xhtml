@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+>
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="title">User details</ui:define>
+
+    <ui:define name="content">
+
+        <c:set var="user" value="#{userController.getUser(param['id'])}" />
+
+        <b>Id</b>: <h:outputLabel value="#{user.userId}" id="userId"/> <br />
+        <b>Name</b>: <h:outputLabel value="#{user.firstName}"/> <br />
+        <b>Middle Name</b>: <h:outputLabel value="#{user.middleName}"/> <br />
+        <b>Family Name</b>: <h:outputLabel value="#{user.lastName}"/> <br />
+        <b>Since</b>: <h:outputLabel value="#{user.registrationTime}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:outputLabel> <br />
+        <b>Karma</b>: <h:outputLabel value="#{userController.getKarma(user.userId)}" id="karma"/> <br />
+
+    </ui:define>
+
+</ui:composition>
+</html>

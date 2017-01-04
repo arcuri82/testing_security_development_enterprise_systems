@@ -15,11 +15,11 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hibernate.version>5.2.2.Final</hibernate.version>
         <wildfly.version>10.1.0.Final</wildfly.version>
         <jbossTarget>${basedir}/target/downloaded_Wildfly</jbossTarget>
         <jbossHome>${jbossTarget}/wildfly-${wildfly.version}</jbossHome>
-        <version.jacoco>0.7.7.201606060606</version.jacoco>
+        <version.jacoco>0.7.8</version.jacoco>
+        <version.javax.el>2.2.4</version.javax.el>
         <fs>${file.separator}</fs>
     </properties>
 
@@ -56,17 +56,12 @@
             <dependency>
                 <groupId>org.jboss.spec</groupId>
                 <artifactId>jboss-javaee-7.0</artifactId>
-                <version>1.0.3.Final</version>
+                <version>1.0.4.Final</version>
                 <!-- Import all libraries definitions in this dependency pom file  -->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>javax.el-api</artifactId>
-                <version>3.0.0</version>
-                <scope>provided</scope>
-            </dependency>
+
 
             <!-- JPA / Hibernate / Database -->
             <dependency>
@@ -77,35 +72,39 @@
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-java8</artifactId>
-                <version>${hibernate.version}</version>
+                <artifactId>hibernate-core</artifactId>
+                <version>5.2.6.Final</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>${hibernate.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernate.version}</version>
+                <version>5.3.4.Final</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
-                <version>1.4.192</version>
+                <version>1.4.193</version>
                 <scope>provided</scope>
             </dependency>
-
+            <!-- these are needed when using Hibernate in SE instead of JEE -->
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${version.javax.el}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${version.javax.el}</version>
+            </dependency>
 
             <!-- test -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <!-- JUnit 5 has come out this year (2016), but still not in a stable / widely supported state -->
+                <!-- JUnit 5 is out, but still not in a stable / widely supported state -->
                 <version>4.12</version>
                 <scope>test</scope>
             </dependency>
@@ -113,12 +112,6 @@
                 <!-- used to control a browser for system testing -->
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <!--
-                    Usually, you should avoid using libraries in "beta", however this is the
-                    only way to get Selenium working on Firefox 48.x (which is the most
-                    recent at the time of writing this)
-                -->
-                <!--<version>3.0.0-beta3</version>-->
                 <version>2.53.1</version>
                 <scope>test</scope>
             </dependency>
@@ -127,7 +120,7 @@
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
-                <version>1.1.11.Final</version>
+                <version>1.1.12.Final</version>
                 <!--
                     This is bit tricky. The Arquillian ecosystem defines
                     many different dependencies, but often you will just need
@@ -187,7 +180,7 @@
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-client</artifactId>
-                <version>3.0.16.Final</version>
+                <version>3.1.0.Final</version>
             </dependency>
 
         </dependencies>

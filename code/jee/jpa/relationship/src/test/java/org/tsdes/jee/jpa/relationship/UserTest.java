@@ -94,16 +94,20 @@ public class UserTest {
         //even after persisting object to DB, the list is not initialized
         assertNull(user.getSentMessages());
 
+
+        User anotherUser = new User();
+
         Message msg = new Message();
-        user.setSentMessages(new ArrayList<>());
-        user.getSentMessages().add(msg);
+        anotherUser.setSentMessages(new ArrayList<>());
+        anotherUser.getSentMessages().add(msg);
 
        /*
             This fails because actions on sentMessages are not cascaded to its values, ie
             the msg objects
          */
-        assertFalse(persistInATransaction(user));
+        assertFalse(persistInATransaction(anotherUser));
     }
+
 
     @Test
     public void testMessagesPassByResettingId(){

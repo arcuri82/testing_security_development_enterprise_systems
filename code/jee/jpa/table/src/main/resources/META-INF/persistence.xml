@@ -15,7 +15,7 @@
             <property name="connection.driver_class" value="org.h2.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:h2:./target/db"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
 
             <!--
             Instead of creating a database schema based on the @Entity classes, it could happen

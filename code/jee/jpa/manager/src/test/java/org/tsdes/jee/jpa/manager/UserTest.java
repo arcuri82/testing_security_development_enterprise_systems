@@ -321,7 +321,7 @@ public class UserTest {
             fail();
         }
 
-        //User is owner of the OneToOne relation, so, bacause of "orphanRemoval,
+        //User is owner of the OneToOne relation, so, because of "orphanRemoval,
         //address get removed as well
         found = em.find(Address.class, address.getId());
         assertNull(found);

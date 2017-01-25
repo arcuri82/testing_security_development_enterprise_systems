@@ -211,6 +211,7 @@ public class UserTest {
         assertFalse(persistInATransaction(user));
 
         user.setEmail("stillThisIs@nInvalidEmail");
+        user.setId(null);
 
         assertTrue(hasViolations(user));
         assertFalse(persistInATransaction(user));

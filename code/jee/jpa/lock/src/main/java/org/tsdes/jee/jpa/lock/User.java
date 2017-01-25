@@ -9,6 +9,15 @@ public class User {
     @Id @GeneratedValue
     private Long id;
 
+    /*
+        Besides having a field marked with @Version, there are other
+        options for optimistic locking.
+
+        You can use org.hibernate.annotations.OptimisticLocking to choose
+        existing fields for the update/change checks.
+        However, that is a special feature of Hibernate, and not part
+        of the JPA 2.1 standard
+     */
     @Version
     private Integer version;
 

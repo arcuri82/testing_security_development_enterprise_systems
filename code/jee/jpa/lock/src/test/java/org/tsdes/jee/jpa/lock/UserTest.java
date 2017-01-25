@@ -316,7 +316,11 @@ public class UserTest {
 
             Again: if you read JEE documentation, this should not really happen,
             as you should be able to get a read lock if no one else is having
-            a write one
+            a write one.
+
+            However, PESSIMISTIC_READ does depend on the actual database.
+            If the database does not support it, it would default to
+            PESSIMISTIC_WRITE
          */
 
         Thread.sleep(5_000); // simulate a long processing here
@@ -337,11 +341,14 @@ public class UserTest {
         In conclusion:
 
         pessimistic locks are handled by the database, and not by the JEE container (eg JPA).
-        Documentation about them is confusing.
+        Documentation about them can be quite confusing.
         To be on safe side, just use PESSIMISTIC_WRITE when you need to enforce locking and
-        conflicts are expected to be high.
+        conflicts are expected to be high, as PESSIMISTIC_READ might not be supported (
+        and so default to PESSIMISTIC_WRITE that should always be available).
         Do write test cases to check if your understanding of locks is indeed correct.
 
-        By all means, if you find issues in the above tests, contact me ;)
+        At any rate, the difference when choosing between PESSIMISTIC_READ and PESSIMISTIC_WRITE should
+        be mainly for performance. But performance should not be evaluated on an embedded database,
+        but rather on a real, production one.
      */
 }

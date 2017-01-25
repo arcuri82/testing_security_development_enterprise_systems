@@ -128,7 +128,13 @@ public class UserTest {
     @Test
     public void testNew(){
 
-        //can create new objects based on the data in the database
+        /*
+            can create new objects based on the data in the database.
+            Note: this is particularly useful for efficiency: let's say you
+            have an Entity with a lot of data (ie fields), but you just
+            need a small subset: by creating this kind of object on the fly,
+            only the needed data is read from database, and not the whole Entity
+         */
         Query query = em.createQuery(
                 "select NEW " + Message.class.getName()+"(u.name) from User u");
 
@@ -243,7 +249,8 @@ public class UserTest {
         assertEquals(3, query.getResultList().size());
 
         /*
-            SQL mainly when dealing with legacy, non-JPA code.
+            SQL mainly when dealing with legacy, non-JPA code, or when you have very complex
+            queries, and the generated SQL from JPQL is not enough efficient
             Recall:
             - SQL works directly on the actual tables in the DB (and there is no Address table there)
             - JPQL works at the @Entity level (so User entity has no country, and one has to access it

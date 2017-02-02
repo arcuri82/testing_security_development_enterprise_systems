@@ -23,6 +23,7 @@
         <module>fetch</module>
         <module>lock</module>
         <module>validation</module>
+        <module>outerjoin</module>
     </modules>
 
 

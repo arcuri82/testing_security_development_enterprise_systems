@@ -21,9 +21,9 @@
         <module>manager</module>
         <module>jpql</module>
         <module>fetch</module>
+        <module>outerjoin</module>
         <module>lock</module>
         <module>validation</module>
-        <module>outerjoin</module>
     </modules>
 
 

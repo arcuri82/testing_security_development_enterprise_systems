@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.tsdes</groupId>
-    <artifactId>root</artifactId>
+    <artifactId>tsdes</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Root of TSDES</name>

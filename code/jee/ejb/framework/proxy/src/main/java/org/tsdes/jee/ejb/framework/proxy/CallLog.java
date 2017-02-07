@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class CallLog implements InvocationHandler {
 
-    //using an atomic integer just to avoid multitreading issues
+    //using an atomic integer just to avoid multithreading issues
     private final AtomicInteger counter = new AtomicInteger(0);
 
     private final Object instance;

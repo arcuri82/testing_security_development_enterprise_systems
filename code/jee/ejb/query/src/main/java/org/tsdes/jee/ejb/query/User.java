@@ -29,7 +29,7 @@ public class User {
         - have to make sure the counter is always updated
 
         But it does have a positive side:
-        - if it is very used often, then might be more efficient instead of re-calculating each time
+        - if it is used very often, then might be more efficient instead of re-calculating each time
      */
     private int counter;
 

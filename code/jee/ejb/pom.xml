@@ -13,15 +13,15 @@
     </parent>
 
     <modules>
-        <module>framework</module>
         <module>stateless</module>
+        <module>query</module>
+        <module>framework</module>
         <module>singleton</module>
+        <module>arquillian</module>
         <module>multithreading</module>
         <module>stateful</module>
-        <module>async</module>
-        <module>query</module>
-        <module>arquillian</module>
         <module>callback</module>
+        <module>async</module>
         <module>time</module>
     </modules>
 

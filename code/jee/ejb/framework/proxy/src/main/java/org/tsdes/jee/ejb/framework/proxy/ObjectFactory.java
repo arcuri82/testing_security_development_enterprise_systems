@@ -14,7 +14,7 @@ public class ObjectFactory {
     }
 
     public int getTotalInvocationCount(){
-        return (int) callLogs.stream()
+        return  callLogs.stream()
                 .mapToInt(CallLog::getInvocationCount)
                 .sum();
     }

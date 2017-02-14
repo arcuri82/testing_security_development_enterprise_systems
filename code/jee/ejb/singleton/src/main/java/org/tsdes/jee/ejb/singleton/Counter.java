@@ -9,7 +9,7 @@ public class Counter {
 
     /*
         Access to Singleton classes are automatically synchronized (more details later)
-        by the JEE container, but, when dealing mutlithreaded code, it is always
+        by the JEE container, but, when dealing multithreaded code, it is always
         good to be on the safe-side and add further synchronization, as
         long as performance is not hit too much...
      */

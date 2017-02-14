@@ -4,7 +4,7 @@
 
     <groupId>org.tsdes.jee.jta</groupId>
     <artifactId>jta</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>org.tsdes.jee</groupId>
@@ -12,17 +12,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <modules>
+        <module>transactions</module>
+    </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.main.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-        </dependency>
-    </dependencies>
 
 
 </project>

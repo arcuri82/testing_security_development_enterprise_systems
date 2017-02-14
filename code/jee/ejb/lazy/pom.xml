@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.tsdes.jee.ejb</groupId>
-    <artifactId>jta-lazy</artifactId>
+    <artifactId>ejb-lazy</artifactId>
     <packaging>jar</packaging>
 
     <parent>

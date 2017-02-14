@@ -1,21 +1,13 @@
-package org.tsdes.jee.jta.lazy;
+package org.tsdes.jee.ejb.lazy;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
-import javax.ejb.embeddable.EJBContainer;
-import javax.naming.Context;
-import javax.naming.NamingException;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package org.tsdes.jee.jta.lazy;
+package org.tsdes.jee.ejb.lazy;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

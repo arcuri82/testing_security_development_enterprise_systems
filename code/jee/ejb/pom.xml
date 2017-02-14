@@ -23,6 +23,7 @@
         <module>callback</module>
         <module>async</module>
         <module>time</module>
+        <module>lazy</module>
     </modules>
 
 

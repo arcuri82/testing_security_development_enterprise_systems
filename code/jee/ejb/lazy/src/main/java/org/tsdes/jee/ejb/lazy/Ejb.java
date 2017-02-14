@@ -1,4 +1,4 @@
-package org.tsdes.jee.jta.lazy;
+package org.tsdes.jee.ejb.lazy;
 
 import org.hibernate.Hibernate;
 
@@ -44,10 +44,10 @@ public class Ejb {
         /*
             force the fetching of the list by calling one of its methods.
 
-            However, note that this approach is not efficient, as it might create
-            one SQL query for each element.
-            Another approach is to use a JPQL query instead of "em.find", as done
-            in "jee/jpa/fetch".
+            However, note that this approach is not very efficient, as it might create
+            one or more SQL queries.
+            Another approach is to use a specific JPQL query instead of "em.find", as done
+            in "jee/jpa/fetch", which will be translated in one single SQL query.
             However, it all depends on how the JPA provider (eg Hibernate or EclipseLink)
             does the conversion to SQL.
             When performance is critical, you need to double-check all the created SQL

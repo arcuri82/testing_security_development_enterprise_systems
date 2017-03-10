@@ -1,6 +1,6 @@
-package org.pg5100.jsf.jacoco.frontend;
+package org.tsdes.jee.jsf.jacoco.frontend;
 
-import org.pg5100.jsf.jacoco.backend.DataEjb;
+import org.tsdes.jee.jsf.jacoco.backend.DataEjb;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;

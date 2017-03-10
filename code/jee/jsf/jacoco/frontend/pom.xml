@@ -64,9 +64,36 @@
             <artifactId>selenium-java</artifactId>
         </dependency>
 
-
-
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>selenium</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <configuration>
+                            <!--
+                                This is quite complex (ie Java Agents and bytecode instrumentation on the fly)...
+                                for now just copy&paste it.
+                                We ll look into bytecode instrumentation later on
+                            -->
+                            <java-opts>
+                                -javaagent:${settings.localRepository}${fs}org${fs}jacoco${fs}org.jacoco.agent${fs}${version.jacoco}${fs}org.jacoco.agent-${version.jacoco}-runtime.jar=destfile=${basedir}${fs}target${fs}jacoco-it.exec
+                            </java-opts>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 
     <build>
         <plugins>
@@ -83,29 +110,6 @@
                 <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
 
-            <!--
-                These two plugins are needed to run the Selenium tests automatically
-                from Maven when executing "mvn verify"
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <configuration>
-                    <!--
-                        This is quite complex (ie Java Agents and bytecode instrumentantion on the fly)...
-                        for now just copy&paste it.
-                        If you are really interested in understanding what it is actually doing,
-                        ask me in the breaks after the lectures
-                    -->
-                    <java-opts>
-                        -javaagent:${settings.localRepository}${fs}org${fs}jacoco${fs}org.jacoco.agent${fs}${version.jacoco}${fs}org.jacoco.agent-${version.jacoco}-runtime.jar=destfile=${basedir}${fs}target${fs}jacoco-it.exec
-                    </java-opts>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 

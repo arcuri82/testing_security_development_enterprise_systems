@@ -1,12 +1,10 @@
-package org.pg5100.jsf.jacoco.frontend;
+package org.tsdes.jee.jsf.jacoco.frontend;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

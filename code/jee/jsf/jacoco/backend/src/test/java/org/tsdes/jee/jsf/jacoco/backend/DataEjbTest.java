@@ -1,4 +1,4 @@
-package org.pg5100.jsf.jacoco.backend;
+package org.tsdes.jee.jsf.jacoco.backend;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;

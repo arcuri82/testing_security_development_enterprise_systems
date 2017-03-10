@@ -1,4 +1,4 @@
-package org.pg5100.jsf.jacoco.backend;
+package org.tsdes.jee.jsf.jacoco.backend;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;

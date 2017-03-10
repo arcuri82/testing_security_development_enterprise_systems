@@ -81,25 +81,43 @@
 
     </dependencies>
 
+    <!--
+        Profiles enable you to have custom configurations only in some special occasions.
+        For example, End-to-End tests (eg Selenium tests) can be very expensive to run,
+        and you might not want to run them every time you build your application.
+        By default, they ll not be executed. But, if the following profile is activated,
+        then execute them. You can use "-P <id>" to activate a profile with the given <id>, eg
+
+        mvn verify -P selenium
+    -->
+    <profiles>
+        <profile>
+            <id>selenium</id>
+            <build>
+                <plugins>
+                    <!--
+                    These two plugins are needed to run the Selenium tests automatically
+                    from Maven when executing "mvn verify"
+                    -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <!-- Make sure that Wildfly is automatically downloaded and installed -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-
-            <!--
-                These two plugins are needed to run the Selenium tests automatically
-                from Maven when executing "mvn verify"
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

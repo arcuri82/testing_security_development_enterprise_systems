@@ -1,4 +1,4 @@
-package org.pg5100.jsf.jacoco.frontend;
+package org.tsdes.jee.jsf.jacoco.frontend;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

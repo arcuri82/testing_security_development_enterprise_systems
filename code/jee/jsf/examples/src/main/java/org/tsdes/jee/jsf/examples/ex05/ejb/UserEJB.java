@@ -136,6 +136,9 @@ public class UserEJB implements Serializable{
                This is because now the hashed string
                will be at least the length of the salt (eg 26) regardless of
                the length of the password.
+
+            Note: DigestUtils from commons-codec library is just an utility to simplify
+            the usage of Java API own MessageDigest class
          */
 
         String hash = DigestUtils.sha256Hex(combined);

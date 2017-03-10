@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>base</artifactId>
 
-    <!-- Note that year we want to build a WAR and not a JAR file -->
+    <!-- Note that here we want to build a WAR and not a JAR file -->
     <packaging>war</packaging>
 
     <parent>

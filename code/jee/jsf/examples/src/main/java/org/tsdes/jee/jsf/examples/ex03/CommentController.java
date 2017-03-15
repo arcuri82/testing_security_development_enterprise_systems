@@ -6,7 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.util.List;
 
-@Named //need to be accesible from JSF XHTML files
+@Named //need to be accessible from JSF XHTML files
 @RequestScoped //no need to keep state, just needed for the POST request
 public class CommentController {
 

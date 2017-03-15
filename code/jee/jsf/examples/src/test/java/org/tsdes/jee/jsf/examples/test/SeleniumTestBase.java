@@ -19,7 +19,7 @@ public abstract class SeleniumTestBase {
 
     private static WebDriver driver;
 
-    private static boolean tryToSetGeckoIfExists(String property, Path path){
+    private static boolean tryToSetDriverIfExists(String property, Path path){
         if(Files.exists(path)){
             System.setProperty(property, path.toAbsolutePath().toString());
             return true;
@@ -28,12 +28,13 @@ public abstract class SeleniumTestBase {
     }
 
     private static void setupDriverExecutable(String executableName, String property){
+        //You need to download the drivers under your home directory
         String homeDir = System.getProperty("user.home");
 
         //first try Linux/Mac executable
-        if(! tryToSetGeckoIfExists(property, Paths.get(homeDir,executableName))){
+        if(! tryToSetDriverIfExists(property, Paths.get(homeDir,executableName))){
             //then check if on Windows
-            if(! tryToSetGeckoIfExists(property, Paths.get(homeDir,executableName+".exe"))){
+            if(! tryToSetDriverIfExists(property, Paths.get(homeDir,executableName+".exe"))){
                 fail("Cannot locate the "+executableName+" in your home directory "+homeDir);
             }
         }
@@ -41,16 +42,15 @@ public abstract class SeleniumTestBase {
 
     private static WebDriver getFirefoxDriver(){
         /*
-            Need to have an updated Firefox (eg 48.x), but also need
-            to download and put the geckodriver (eg 0.10.0) in your own home dir.
+            Need to have an updated Firefox, but also need
+            to download and put the geckodriver in your own home dir.
             See:
 
             https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette/WebDriver
             https://github.com/mozilla/geckodriver/releases
 
-            However, it looks like this driver is still unstable, at least on Mac.
-            Note: there was a big change in Firefox 47, which at the time completely
-            broke the firefox driver, and the new "marionette" became the new one
+            However, drivers for FireFox have been often unstable.
+            Therefore, I do recommend to use Chrome instead
          */
 
         setupDriverExecutable("geckodriver", "webdriver.gecko.driver");
@@ -65,7 +65,7 @@ public abstract class SeleniumTestBase {
     private static WebDriver getChromeDriver(){
 
         /*
-            Need to have Chrome (eg version 53.x) and the Chrome Driver (eg 2.24),
+            Need to have Chrome  and the Chrome Driver,
             whose executable should be saved directly under your home directory
 
             see https://sites.google.com/a/chromium.org/chromedriver/getting-started
@@ -79,7 +79,7 @@ public abstract class SeleniumTestBase {
     @BeforeClass
     public static void init() throws InterruptedException {
 
-        //driver = getFirefoxDriver(); //need Selenium 3.x, but still giving few issues (at least on Mac)
+        //driver = getFirefoxDriver(); //not so stable
         driver = getChromeDriver();
 
 

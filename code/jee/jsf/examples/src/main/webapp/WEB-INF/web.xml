@@ -5,7 +5,7 @@
 
   <display-name>Set of JSF examples</display-name>
 
-  <!-- default page, recall that if none define, index.html would be the default anyway... -->
+  <!-- default page, recall that, if none is defined, then index.html would be the default anyway... -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
@@ -47,7 +47,7 @@
 
 
   <!--
-    Quite essential parameter: it tells the JSF servelts to skip all
+    Quite essential parameter: it tells the JSF servlets to skip all
     the HTML/XML comments (like this one) inside the XHTML files
   -->
   <context-param>

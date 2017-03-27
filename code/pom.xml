@@ -19,7 +19,7 @@
         <wildfly.version>10.1.0.Final</wildfly.version>
         <jbossTarget>${basedir}/target/downloaded_Wildfly</jbossTarget>
         <jbossHome>${jbossTarget}/wildfly-${wildfly.version}</jbossHome>
-        <version.jacoco>0.7.8</version.jacoco>
+        <version.jacoco>0.7.9</version.jacoco>
         <version.javax.el>2.2.4</version.javax.el>
         <fs>${file.separator}</fs>
     </properties>
@@ -386,7 +386,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.7.7.201606060606</version>
+                    <version>${version.jacoco}</version>
                     <executions>
                         <execution>
                             <id>default-prepare-agent</id>

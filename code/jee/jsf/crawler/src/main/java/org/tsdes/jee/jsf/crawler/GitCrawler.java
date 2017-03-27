@@ -22,8 +22,6 @@ import java.util.stream.Collectors;
 /*
     For XPath syntax, see:
     http://www.w3schools.com/xsl/xpath_syntax.asp
-
-    also XPath was mentioned in the book at page 392
  */
 
 
@@ -33,8 +31,9 @@ import java.util.stream.Collectors;
     Note: this is just an example, as Github provides a REST-api which would be
     better in this context.
 
-    Note2: the code here depends on the HTML of the pages returned by Github.
-    If those do change, then the code here will be broken...
+    Note 2: the code here depends on the HTML of the pages returned by Github.
+    If those do change, then the code here will be broken... and this has
+    actually happened in the past
  */
 public class GitCrawler {
 
@@ -65,14 +64,8 @@ public class GitCrawler {
         setupDriverExecutable("chromedriver", "webdriver.chrome.driver");
         WebDriver driver =  new ChromeDriver();
 
-
-        int start = 1;
-        if(args.length==1){
-            start = Integer.parseInt(args[0]);
-        }
-
         try {
-            crawl(driver, start);
+            crawl(driver);
         } catch (Exception e){
             System.out.println("ERROR: "+e.getMessage());
             e.printStackTrace();
@@ -81,28 +74,55 @@ public class GitCrawler {
         driver.close();
     }
 
-    private static void crawl(WebDriver driver, int start) {
+    private static void openPagedSearchResult(WebDriver driver, int page){
         //Java projects, Most Stars
-        int stars = 100000;
-        String search =  "search?l=&p="+start+"&q=language%3Ajava+stars%3A<%3D"+stars+"&ref=advsearch&type=Repositories&utf8=✓";
+        String search =  "search?l=&o=desc&p="+page+"&q=language%3AJava&ref=advsearch&s=stars&type=Repositories&utf8=✓";
 
         driver.get(github + search);
+    }
 
-        for(int i=start; i <= 100; i++) {
+    private static void crawl(WebDriver driver) {
+
+        for(int i=1; i <= 100; i++) {
             System.out.println("Page: "+i);
-            scanCurrentPage(driver);
+            openPagedSearchResult(driver, i);
+            scanCurrentPage(driver, i);
 
             if(i==100){
                 //a search returns at most 100 pages. so, to continue, we would need a new search
                 break;
             }
-            nextPage(driver);
+            nextPage(driver, i);
         }
     }
 
-    private static void nextPage(WebDriver driver) {
+    private static WebElement getElement(WebDriver driver, By by, int current){
 
-        WebElement next = driver.findElement(By.xpath("//a[@class='next_page']"));
+        WebElement element = null;
+
+        while(true) {
+            try {
+                element = driver.findElement(by);
+            } catch (Exception e){
+                //might happen due to Github blocking crawling
+                try {
+                    long time = 60_000;
+                    System.out.println("Cannot find -> "+by.toString()+"\n Going to wait for "+time+"ms");
+                    Thread.sleep(time);
+                    openPagedSearchResult(driver, current);
+                } catch (InterruptedException e1) {
+                }
+                continue;
+            }
+            break;
+        }
+
+        return element;
+    }
+
+    private static void nextPage(WebDriver driver, int current) {
+
+        WebElement next = getElement(driver, By.xpath("//a[@class='next_page']"), current);
         next.click();
         waitForPageToLoad(driver);
 
@@ -112,10 +132,13 @@ public class GitCrawler {
         }
     }
 
-    private static void scanCurrentPage(WebDriver driver) {
+    private static void scanCurrentPage(WebDriver driver, int page) {
         String current = driver.getCurrentUrl();
 
-        String xpath = "//h3[@class='repo-list-name']/a";
+        //Note: there was a layout change in the past on Github page
+        //String xpath = "//h3[@class='repo-list-name']/a";
+        String xpath = "//div[@class='container']//ul//h3//a";
+
         List<WebElement> projects = driver.findElements(By.xpath(xpath));
         List<String> names = projects.stream().map(p -> p.getText()).collect(Collectors.toList());
 
@@ -135,36 +158,29 @@ public class GitCrawler {
             } catch (InterruptedException e) {
             }
 
-            WebElement a;
-            while(true) {
-                try {
-                    a = driver.findElement(By.xpath(xpath + "[text()='" + name + "']"));
-                } catch (Exception e){
-                    //might happen due to Github blocking crawling
-                    try {
-                        long time = 60_000;
-                        System.out.println("Cannot find "+name+". Going to wait for "+time+"ms");
-                        Thread.sleep(time);
-                        driver.get(current);
-                        waitForPageToLoad(driver);
-                    } catch (InterruptedException e1) {
-                    }
-                    continue;
-                }
-                break;
-            }
+            By byName = By.xpath(xpath + "[text()='" + name + "']");
+            WebElement a = getElement(driver, byName, page);
             a.click();
             Boolean loaded = waitForPageToLoad(driver);
 
             if (loaded) {
 
-                List<WebElement> pom = driver.findElements(By.xpath("//td[@class='content']//a[@title='pom.xml']"));
-                if (!pom.isEmpty()) {
-                    boolean valid = isValidPom(pom.get(0).getAttribute("href"));
-                    if (valid) {
-                        System.out.println("VALID PROJECT THAT IS USING Selenium AT: " + driver.getCurrentUrl());
-                    } else{
-                        System.out.println("NOT valid project at: " + driver.getCurrentUrl());
+                /*
+                    Checking if either Maven or Gradle
+
+                    Note: not a robust check:
+                    - build files might not be in root folder
+                    - no check if there was any error in the loaded page
+                 */
+                List<WebElement> maven = driver.findElements(By.xpath("//td[@class='content']//a[@title='pom.xml']"));
+                if (!maven.isEmpty()) {
+                    System.out.println("" + name + " uses Maven");
+                } else {
+                    List<WebElement> gradle =  driver.findElements(By.xpath("//td[@class='content']//a[@title='build.gradle']"));
+                    if (!gradle.isEmpty()) {
+                        System.out.println("" + name + " uses Gradle");
+                    } else {
+                        System.out.println("" + name + " undefined build system");
                     }
                 }
             }
@@ -173,38 +189,6 @@ public class GitCrawler {
             waitForPageToLoad(driver);
         }
     }
-
-    //does the target project contain any reference to Selenium in its pom.xml file?
-    private static boolean isValidPom(String href) {
-
-        String url = href;
-        if(!url.startsWith(github)){
-            url = github + href;
-        }
-
-        System.out.println("Going to download: "+url);
-
-        try {
-            URL u = new URL(url);
-            URLConnection connection = u.openConnection();
-            connection.connect();
-            InputStream in = new BufferedInputStream(connection.getInputStream());
-            StringBuffer buffer = new StringBuffer();
-            Scanner scanner = new Scanner(in);
-            while(scanner.hasNextLine()){
-                buffer.append(scanner.nextLine());
-                buffer.append("\n");
-            }
-            String content = buffer.toString();
-
-            return content.contains("selenium");
-
-        } catch (Exception e) {
-            System.out.println("Failed to read pom.xml from " + url + " : " + e.getMessage());
-            return false;
-        }
-    }
-
 
     private static Boolean waitForPageToLoad(WebDriver driver) {
 

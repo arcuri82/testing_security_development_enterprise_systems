@@ -52,9 +52,7 @@ public class CommentPageObject extends PageObject {
             So to check how many comments there are on the page, we can look at how many rows exist
             in the table that is showing them.
 
-            Note: XPath is also mentioned in the book (p392), but just half page
-
-            Note2: a good way to try XPath is to run them directly in the browser. Eg, in
+            Note: a good way to try XPath is to run them directly in the browser. Eg, in
              Chrome go under "Developer tools", and when you "search" in the Elements view
              you can use XPath
          */

@@ -10,7 +10,7 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
     public void testCreateFooRequired() throws Exception {
         EJB_05_REQUIRES_NEW ejb = getEJB(EJB_05_REQUIRES_NEW.class);
 
-        String name = "pg5100";
+        String name = "foo";
 
         assertFalse(queriesEJB.isInDB(name));
 
@@ -23,7 +23,7 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
     public void testCreateFooRequiresNew() throws Exception {
         EJB_05_REQUIRES_NEW ejb = getEJB(EJB_05_REQUIRES_NEW.class);
 
-        String name = "pg5100";
+        String name = "foo";
 
         assertFalse(queriesEJB.isInDB(name));
 

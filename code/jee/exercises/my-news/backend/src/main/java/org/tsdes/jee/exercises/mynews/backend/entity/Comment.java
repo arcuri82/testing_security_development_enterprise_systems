@@ -10,7 +10,7 @@ public class Comment extends Post {
 
 
     @NotNull
-    @ManyToOne()
+    @ManyToOne
     private Post post;
 
     @NotNull

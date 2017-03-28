@@ -2,6 +2,8 @@ package org.tsdes.jee.exercises.mynews.backend.entity;
 
 
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
@@ -25,14 +27,14 @@ public class User {
     @Size(max = 26)
     private String salt;
 
-    @NotNull
+    @NotBlank
     @Size(min=1 , max = 32)
     private String firstName;
 
     @Size(min=0 , max = 32)
     private String middleName;
 
-    @NotNull
+    @NotBlank
     @Size(min=1 , max = 32)
     private String lastName;
 

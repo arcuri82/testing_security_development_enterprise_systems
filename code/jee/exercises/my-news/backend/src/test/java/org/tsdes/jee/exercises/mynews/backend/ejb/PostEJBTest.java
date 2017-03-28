@@ -156,6 +156,31 @@ public class PostEJBTest extends EjbTestBase{
     }
 
     @Test
+    public void testGetAllPostByTimeWithVotes(){
+
+        String a = "a", b = "b", c = "c";
+
+        createUser(a);
+        createUser(b);
+        createUser(c);
+
+        List<Post> posts = postEJB.getAllPostsByTime();
+        assertEquals(0, posts.size());
+
+        long id = postEJB.createPost(a, "some text");
+
+        postEJB.voteAgainst(a, id);
+        postEJB.voteAgainst(b, id);
+        postEJB.voteFor(c, id);
+
+        postEJB.getPost(id).computeScore();
+
+        posts = postEJB.getAllPostsByTime();
+        assertEquals(1, posts.size());
+    }
+
+
+    @Test
     public void testGetAllPostByScore(){
 
         String userId = "foo";

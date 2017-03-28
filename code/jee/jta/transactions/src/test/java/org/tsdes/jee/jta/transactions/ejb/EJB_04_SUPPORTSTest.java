@@ -14,7 +14,7 @@ public class EJB_04_SUPPORTSTest extends TestBase{
 
         EJB_04_SUPPORTS ejb = getEJB(EJB_04_SUPPORTS.class);
 
-        String name = "pg5100";
+        String name = "foo";
 
         assertFalse(queriesEJB.isInDB(name));
 
@@ -32,7 +32,7 @@ public class EJB_04_SUPPORTSTest extends TestBase{
 
         EJB_04_SUPPORTS ejb = getEJB(EJB_04_SUPPORTS.class);
 
-        String name = "pg5100";
+        String name = "foo";
 
         assertFalse(queriesEJB.isInDB(name));
 
@@ -45,8 +45,6 @@ public class EJB_04_SUPPORTSTest extends TestBase{
     public void testWrite(){
 
         EJB_04_SUPPORTS ejb = getEJB(EJB_04_SUPPORTS.class);
-
-        String name = "pg5100";
 
         String first = "first";
         String second = "second";

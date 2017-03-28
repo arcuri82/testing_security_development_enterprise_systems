@@ -2,6 +2,8 @@ package org.tsdes.jee.exercises.mynews.backend.entity;
 
 
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,7 +16,7 @@ public class Post {
     @GeneratedValue
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Size(min = 1, max = 1024)
     private String text;
 
@@ -26,13 +28,13 @@ public class Post {
     @ManyToOne
     private User author;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     private Set<String> votesFor;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     private Set<String> votesAgainst;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
 

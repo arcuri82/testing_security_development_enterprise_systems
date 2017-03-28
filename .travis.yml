@@ -1,0 +1,21 @@
+language: java
+sudo: false
+
+jdk:
+  - oraclejdk8
+
+# As the build will download JAR files from Maven Central, optimize their storage,
+# so they do not get re-downloaded each time
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
+
+notifications:
+  email: false
+
+before_script: cd code
+
+# Note: there is no "-P selenium" here, as by default they would fail on Travis, unless extra
+# configurations are set
+script: mvn clean verify  -Dmaven.test.redirectTestOutputToFile=true

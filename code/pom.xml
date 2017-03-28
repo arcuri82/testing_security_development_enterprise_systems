@@ -76,7 +76,7 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
-                <version>5.2.6.Final</version>
+                <version>5.2.9.Final</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -88,7 +88,7 @@
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
-                <version>1.4.193</version>
+                <version>1.4.194</version>
                 <scope>provided</scope>
             </dependency>
             <!-- these are needed when using Hibernate in SE instead of JEE -->
@@ -131,7 +131,7 @@
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
-                <version>1.1.12.Final</version>
+                <version>1.1.13.Final</version>
                 <!--
                     This is bit tricky. The Arquillian ecosystem defines
                     many different dependencies, but often you will just need
@@ -181,7 +181,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>19.0</version>
+                <version>21.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
@@ -309,7 +309,7 @@
                 <plugin>
                     <groupId>org.wildfly.plugins</groupId>
                     <artifactId>wildfly-maven-plugin</artifactId>
-                    <version>1.1.0.Alpha11</version>
+                    <version>1.2.0.Alpha4</version>
                     <configuration>
                         <!--
                             If jbossHome is not specified, this plugin will download it.
@@ -361,6 +361,15 @@
                         </execution>
                         <execution>
                             <id>shutdown</id>
+                            <!--
+                                WARNING: when integration tests fail, still the
+                                post-integration-test phase is executed.
+                                However, it seems there are issues with this plugin (or Failsafe),
+                                in which that phase is not executed.
+                                This means that, if you have any failing Selenium test, then
+                                Wildfly process will be left running, and you need to kill it
+                                manually.
+                            -->
                             <phase>post-integration-test</phase>
                             <goals>
                                 <goal>undeploy</goal>

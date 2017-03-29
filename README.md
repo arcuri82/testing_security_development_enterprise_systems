@@ -10,7 +10,7 @@ in particular.
 This repository is still in an early stage of development (e.g., there are plans to
 add more on Spring, Kotlin and NodeJS).
 Documentation (early work in progress) is available 
-[here](doc/main.md)
+[here](doc/main.md).
 
 ### Requirements
 

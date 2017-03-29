@@ -15,7 +15,7 @@ public class HomePageObject extends PageObject {
     }
 
     public HomePageObject toStartingPage() {
-        String context = "/exam_example"; // see jboss-web.xml
+        String context = "/event_list"; // see jboss-web.xml
         driver.get("localhost:8080" + context + "/home.jsf");
         waitForPageToLoad();
 

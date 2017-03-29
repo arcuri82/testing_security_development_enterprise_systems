@@ -6,7 +6,7 @@
   <display-name>Exam Examples</display-name>
 
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>mynews/home.jsf</welcome-file>
   </welcome-file-list>
   
   <servlet>

@@ -6,8 +6,11 @@ This repository contains a set of examples related to the testing, security
 and development of enterprise systems.
 Currently, this repository focuses on Java (version 8), and JEE (version 7) 
 in particular.
+
 This repository is still in an early stage of development (e.g., there are plans to
 add more on Spring, Kotlin and NodeJS).
+Documentation (early work in progress) is available 
+[here](doc/main.md)
 
 ### Requirements
 

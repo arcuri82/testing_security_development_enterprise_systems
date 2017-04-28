@@ -26,7 +26,7 @@ The code should run on all major operating systems, i.e. Mac, Linux and Windows.
 
 ### Useful Maven Commands
 
-* `mvn install -skipTests`
+* `mvn install -DskipTests`
 
   this will compile all the code and install all the generated jar files into 
   your local Maven repository. Does not run the tests.

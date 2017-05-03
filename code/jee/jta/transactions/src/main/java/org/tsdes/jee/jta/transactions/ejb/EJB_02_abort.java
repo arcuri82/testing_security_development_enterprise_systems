@@ -21,7 +21,13 @@ public class EJB_02_abort {
             em.persist(foo);
             em.persist(copy);//should fail, because same id
         }catch (Exception e){
-            //even if catch exception here, the container will propagate it
+            /*
+                The exception is thrown not when em.persist(copy)
+                is executed, so this catch is not reached.
+                The exception is thrown once this method is completed,
+                and the JEE container will execute the transaction toward
+                the database. Recall, em here is just a cache.
+             */
         }
     }
 }

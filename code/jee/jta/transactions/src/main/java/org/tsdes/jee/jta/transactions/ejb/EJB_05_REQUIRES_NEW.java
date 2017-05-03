@@ -38,8 +38,11 @@ public class EJB_05_REQUIRES_NEW {
         createFooRequired(first); //uses current transaction
         createFooRequiresNew(second); //creates a new one
 
-        //would expect no impact on "second", but it does, because those above
-        //are not EJB calls, but direct Java calles from within the EJB
+        /*
+            would expect no impact on "second", but it does, because those above
+            are not EJB calls, but direct Java calls from within the EJB,
+            and not on the proxy that does handle the transactions
+         */
         ctx.setRollbackOnly();
     }
 

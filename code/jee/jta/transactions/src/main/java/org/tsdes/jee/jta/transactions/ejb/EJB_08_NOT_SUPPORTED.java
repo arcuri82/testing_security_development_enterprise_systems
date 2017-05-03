@@ -48,7 +48,7 @@ public class EJB_08_NOT_SUPPORTED {
 
     public void createFooIndirectlyWithEJBCallWithSupports(String name){
         EJB_08_NOT_SUPPORTED ejb = ctx.getBusinessObject(EJB_08_NOT_SUPPORTED.class);
-        ejb.createFooSupports(name); //will not fail if we are in a transaction
+        ejb.createFooSupports(name); //will not fail as we are in a transaction
     }
 
 

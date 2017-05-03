@@ -47,7 +47,7 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
         ejb.createTwoWithRollback(first, second);
 
         assertFalse(queriesEJB.isInDB(first)); //failed because rollback
-        assertFalse(queriesEJB.isInDB(second));//still failed, as REQUIRES_NES was not in a EJB call
+        assertFalse(queriesEJB.isInDB(second));//still failed, as REQUIRES_NES was not in a EJB proxy call
     }
 
     @Test

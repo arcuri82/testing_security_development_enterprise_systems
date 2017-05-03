@@ -45,8 +45,12 @@ public class EJB_04_SUPPORTS {
 
         createFooWithRequiredTransaction(first); //in same transaction, no need to create a new one
 
-        //as we are in a transaction, this will work.
-        //however, this is regardless of the annotation, as this is a java call from inside the EJB
+        /*
+            as we are in a transaction, this will work.
+            however, this is regardless of the annotation,
+            as this is a java call from inside the EJB, and not
+            the proxy created by the JEE container
+         */
         createFooWithSupports(second);
     }
 }

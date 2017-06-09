@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+>
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="title">Dishes</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="createForm">
+            <h:inputText value="#{dishesController.formName}" id="formName"/>
+            <h:inputTextarea value="#{dishesController.formDescription}" id="formDescription"/>
+            <h:commandButton value="Create" action="#{dishesController.createDish}" id="createButton"/>
+        </h:form>
+
+        <c:set var="dishList" value="#{dishesController.dishes}"/>
+
+        <c:if test="#{dishList.size() != 0}">
+            <h:dataTable value="#{dishList}" var="dish" border="1" id="dishTable">
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputLabel value="#{dish.name}" class="dishName"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    <h:outputText value="#{dish.description}"/>
+                </h:column>
+            </h:dataTable>
+        </c:if>
+    </ui:define>
+
+</ui:composition>
+</html>

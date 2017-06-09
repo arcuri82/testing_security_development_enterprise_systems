@@ -229,10 +229,7 @@ public class UserTest {
 
         /*
             NEVER EVER write something like this, ie concatenating a JPQL/SQL query with a + on
-            an input parameter... why? 2 reasons:
-            1) SQL injection that can compromise the database
-            2) likely you ll get a straight F in the exam, with no appeal... do not say you
-               have not be warned...
+            an input parameter... reasons is that SQL injections can compromise the database
          */
 
         Query query = em.createQuery("select u from User u where u.address.country = '" + country + "'");

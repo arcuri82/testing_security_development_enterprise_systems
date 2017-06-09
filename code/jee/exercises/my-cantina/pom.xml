@@ -2,20 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.jee.exercises</groupId>
-    <artifactId>jee-exercises</artifactId>
+    <groupId>org.tsdes.jee.exercises.mycantina</groupId>
+    <artifactId>my-cantina</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.jee</groupId>
-        <artifactId>jee</artifactId>
+        <groupId>org.tsdes.jee.exercises</groupId>
+        <artifactId>jee-exercises</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
-        <module>event-list</module>
-        <module>my-news</module>
-        <module>my-cantina</module>
+        <module>backend</module>
+        <module>frontend</module>
+        <module>report</module>
     </modules>
 
 

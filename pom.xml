@@ -10,7 +10,6 @@
 
     <modules>
         <module>jee</module>
-        <module>testing</module>
     </modules>
 
 

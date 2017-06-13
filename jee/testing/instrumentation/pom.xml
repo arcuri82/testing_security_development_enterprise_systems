@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.testing</groupId>
+        <groupId>org.tsdes.jee.testing</groupId>
         <artifactId>testing</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

@@ -14,7 +14,6 @@ cache:
 notifications:
   email: false
 
-before_script: cd code
 
 # Note: there is no "-P selenium" here, as by default those tests would fail on Travis, unless extra
 # configurations are set (eg, remote servers / testing providers where GUI tests can be run)

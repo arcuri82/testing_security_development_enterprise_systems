@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+Schema automatically generated with IntelliJ by selecting "TopPosts" and using
+
+Tools -> JAXB -> "Generate Xml Schema..."
+
+Note:
+
+required = true   maps to  minOccurs=1
+required = false  maps to  minOccurs=0
+
+however, in @XmlElement  the default is "required = false" whereas in
+xs:element it is "minOccurs=1" (ie the other way round).
+See:
+
+http://www.w3schools.com/xml/el_element.asp
+and source code of @XmlElement
+
+
+Java class can be automatically generated from the XSD, eg select schema and use
+JAXB tools. See results in "automated" package.
+However, if @XmlRootElement is missing, add it manually to the generated files
+
+
+WHY is this very useful?
+You can write your Java code, and extract the schema automatically.
+Then, you can distribute the schema to your clients.
+If a client is using C# or Python (for example), then they can use their
+tools to automatically generate C#/Python object code for automatically
+(un)marshalling the XML
+
+-->
+
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="topPosts" type="topPosts"/>
+
+  <xs:complexType name="post">
+    <xs:sequence>
+      <xs:element name="content" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="author" type="xs:string"/>
+    <xs:attribute name="votes" type="xs:int"/>
+  </xs:complexType>
+
+  <xs:complexType name="topPosts">
+    <xs:sequence>
+      <xs:element name="retrievedTime" type="xs:dateTime"/>
+      <xs:element name="postList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="post" type="post" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

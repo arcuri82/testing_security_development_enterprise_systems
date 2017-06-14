@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<topPosts>
+    <retrievedTime>2016-10-08T10:41:28.497+02:00</retrievedTime>
+    <postList>
+        <post author="First" votes="2">
+            <content>A post</content>
+        </post>
+        <post>
+            <content>A second post with no attributes</content>
+        </post>
+    </postList>
+</topPosts>

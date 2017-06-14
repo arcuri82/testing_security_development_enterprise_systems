@@ -14,6 +14,7 @@
 
     <modules>
         <module>xml-and-json</module>
+        <module>rest</module>
     </modules>
 
 
@@ -25,6 +26,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.tsdes.spring.xmlandjson</groupId>
+                <artifactId>xmlandjson</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib-jre8</artifactId>

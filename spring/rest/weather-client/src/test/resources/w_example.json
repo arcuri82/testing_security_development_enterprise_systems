@@ -1,0 +1,945 @@
+{
+  "response": {
+    "version":"0.1",
+    "termsofService":"http://www.wunderground.com/weather/api/d/terms.html",
+    "features": {
+      "geolookup": 1
+    ,
+      "conditions": 1
+    ,
+      "forecast": 1
+    }
+  }
+,	"location": {
+  "type":"INTLCITY",
+  "country":"NO",
+  "country_iso3166":"NO",
+  "country_name":"Norway",
+  "state":"",
+  "city":"Oslo",
+  "tz_short":"CET",
+  "tz_long":"Europe/Oslo",
+  "lat":"60.11999893",
+  "lon":"10.82999992",
+  "zip":"00000",
+  "magic":"1",
+  "wmo":"01488",
+  "l":"/q/zmw:00000.1.01488",
+  "requesturl":"global/stations/01488.html",
+  "wuiurl":"http://www.wunderground.com/global/stations/01488.html",
+  "nearby_weather_stations": {
+    "airport": {
+      "station": [
+        { "city":"Oslo / Fornebu", "state":"", "country":"Norway", "icao":"", "lat":"60.11722183", "lon":"10.82888889" }
+      ,{ "city":"Oslo Airport", "state":"", "country":"NO", "icao":"ENGM", "lat":"60.20639038", "lon":"11.07999992" }
+      ,{ "city":"Oseberg", "state":"", "country":"NO", "icao":"ENOA", "lat":"60.49186325", "lon":"2.82731390" }
+      ,{ "city":"Rygge", "state":"", "country":"NO", "icao":"ENRY", "lat":"59.38277817", "lon":"10.78805637" }
+      ]
+    }
+  ,
+    "pws": {
+      "station": [
+        {
+          "neighborhood":"Solvangveien",
+          "city":"Hakadal",
+          "state":"",
+          "country":"NO",
+          "id":"IHAKADAL3",
+          "lat":60.114681,
+          "lon":10.830335,
+          "distance_km":0,
+          "distance_mi":0
+        },
+        {
+          "neighborhood":"Hadelandsveien",
+          "city":"Hakadal",
+          "state":"",
+          "country":"NO",
+          "id":"IHAKADAL13",
+          "lat":60.112373,
+          "lon":10.843196,
+          "distance_km":1,
+          "distance_mi":0
+        },
+        {
+          "neighborhood":"Kalkbrennerveien",
+          "city":"Hakadal",
+          "state":"",
+          "country":"NO",
+          "id":"IHAKADAL7",
+          "lat":60.122524,
+          "lon":10.852719,
+          "distance_km":1,
+          "distance_mi":0
+        },
+        {
+          "neighborhood":"Kvartsveien",
+          "city":"Hakadal",
+          "state":"",
+          "country":"NO",
+          "id":"IHAKADAL2",
+          "lat":60.115395,
+          "lon":10.861767,
+          "distance_km":1,
+          "distance_mi":1
+        },
+        {
+          "neighborhood":"Vargveien",
+          "city":"Hakadal",
+          "state":"",
+          "country":"NO",
+          "id":"IHAKADAL5",
+          "lat":60.106289,
+          "lon":10.851376,
+          "distance_km":1,
+          "distance_mi":1
+        },
+        {
+          "neighborhood":"Lunden",
+          "city":"Hakadal",
+          "state":"",
+          "country":"NO",
+          "id":"IHAKADAL19",
+          "lat":60.137669,
+          "lon":10.824527,
+          "distance_km":1,
+          "distance_mi":1
+        },
+        {
+          "neighborhood":"Gamleveien",
+          "city":"Hakadal",
+          "state":"",
+          "country":"NO",
+          "id":"IHAKADAL11",
+          "lat":60.100243,
+          "lon":10.880092,
+          "distance_km":3,
+          "distance_mi":2
+        },
+        {
+          "neighborhood":"Gamleveien",
+          "city":"Hakadal",
+          "state":"",
+          "country":"NO",
+          "id":"IHAKADAL10",
+          "lat":60.099697,
+          "lon":10.881482,
+          "distance_km":3,
+          "distance_mi":2
+        },
+        {
+          "neighborhood":"Peiskrokveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA10",
+          "lat":60.064281,
+          "lon":10.864019,
+          "distance_km":6,
+          "distance_mi":3
+        },
+        {
+          "neighborhood":"Nordliveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA29",
+          "lat":60.062347,
+          "lon":10.855411,
+          "distance_km":6,
+          "distance_mi":3
+        },
+        {
+          "neighborhood":"Peiskrokveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA31",
+          "lat":60.063473,
+          "lon":10.864230,
+          "distance_km":6,
+          "distance_mi":3
+        },
+        {
+          "neighborhood":"Peiskrokveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA5",
+          "lat":60.063320,
+          "lon":10.864469,
+          "distance_km":6,
+          "distance_mi":3
+        },
+        {
+          "neighborhood":"Ringveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA6",
+          "lat":60.061798,
+          "lon":10.852706,
+          "distance_km":6,
+          "distance_mi":3
+        },
+        {
+          "neighborhood":"Riksveg 4",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA7",
+          "lat":60.066700,
+          "lon":10.883300,
+          "distance_km":6,
+          "distance_mi":3
+        },
+        {
+          "neighborhood":"Vestliveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA25",
+          "lat":60.060909,
+          "lon":10.855435,
+          "distance_km":6,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Sørliveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA21",
+          "lat":60.059845,
+          "lon":10.855812,
+          "distance_km":6,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Peer Gynts vei",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA33",
+          "lat":60.056023,
+          "lon":10.855770,
+          "distance_km":7,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Myrveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA23",
+          "lat":60.054726,
+          "lon":10.862850,
+          "distance_km":7,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Echostubben",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA15",
+          "lat":60.052708,
+          "lon":10.857532,
+          "distance_km":7,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Georg Frølichs Vei",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA37",
+          "lat":60.051723,
+          "lon":10.855949,
+          "distance_km":7,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Georg Frølichs Vei",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA19",
+          "lat":60.050709,
+          "lon":10.856840,
+          "distance_km":7,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Sagerudveien",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA35",
+          "lat":60.051960,
+          "lon":10.867677,
+          "distance_km":7,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Nygårdsbakken",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA17",
+          "lat":60.049259,
+          "lon":10.861227,
+          "distance_km":8,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Berget",
+          "city":"Nittedal",
+          "state":"",
+          "country":"NO",
+          "id":"INITTEDA4",
+          "lat":60.049797,
+          "lon":10.880605,
+          "distance_km":8,
+          "distance_mi":4
+        },
+        {
+          "neighborhood":"Torstølveien",
+          "city":"Oslo",
+          "state":"",
+          "country":"NO",
+          "id":"IOSLO1571",
+          "lat":60.038322,
+          "lon":10.803314,
+          "distance_km":9,
+          "distance_mi":5
+        },
+        {
+          "neighborhood":"Teiefjellet",
+          "city":"Gjerdrum",
+          "state":"",
+          "country":"NO",
+          "id":"IGJERDRU21",
+          "lat":60.089031,
+          "lon":10.993540,
+          "distance_km":9,
+          "distance_mi":5
+        },
+        {
+          "neighborhood":"Teiefjellet",
+          "city":"Gjerdrum",
+          "state":"",
+          "country":"NO",
+          "id":"IGJERDRU12",
+          "lat":60.087948,
+          "lon":10.993567,
+          "distance_km":9,
+          "distance_mi":5
+        },
+        {
+          "neighborhood":"Elgfaret",
+          "city":"Gjerdrum",
+          "state":"",
+          "country":"NO",
+          "id":"IGJERDRU16",
+          "lat":60.073380,
+          "lon":10.995316,
+          "distance_km":10,
+          "distance_mi":6
+        },
+        {
+          "neighborhood":"Nylandsvegen",
+          "city":"Gjerdrum",
+          "state":"",
+          "country":"NO",
+          "id":"IGJERDRU14",
+          "lat":60.104366,
+          "lon":11.018585,
+          "distance_km":10,
+          "distance_mi":6
+        },
+        {
+          "neighborhood":"Kikut",
+          "city":"Oslo",
+          "state":"OSLO",
+          "country":"NORGE",
+          "id":"IOSLOOSL39",
+          "lat":60.077053,
+          "lon":10.658604,
+          "distance_km":10,
+          "distance_mi":6
+        },
+        {
+          "neighborhood":"F. E. Stabells veg",
+          "city":"Holter",
+          "state":"",
+          "country":"NO",
+          "id":"IHOLTER2",
+          "lat":60.133263,
+          "lon":11.024945,
+          "distance_km":10,
+          "distance_mi":6
+        },
+        {
+          "neighborhood":"Nedre Sørli / Harestua",
+          "city":"Harestua",
+          "state":"OPPLAND",
+          "country":"NORGE",
+          "id":"IOPPLAND37",
+          "lat":60.193424,
+          "lon":10.679470,
+          "distance_km":11,
+          "distance_mi":6
+        },
+        {
+          "neighborhood":"Rudsteinveien",
+          "city":"Slattum",
+          "state":"",
+          "country":"NO",
+          "id":"ISLATTUM7",
+          "lat":60.021126,
+          "lon":10.903357,
+          "distance_km":11,
+          "distance_mi":7
+        },
+        {
+          "neighborhood":"Rudsteinveien",
+          "city":"Slattum",
+          "state":"",
+          "country":"NO",
+          "id":"ISLATTUM2",
+          "lat":60.019814,
+          "lon":10.901773,
+          "distance_km":11,
+          "distance_mi":7
+        },
+        {
+          "neighborhood":"Brådalsgutua",
+          "city":"Gjerdrum",
+          "state":"",
+          "country":"NO",
+          "id":"IGJERDRU19",
+          "lat":60.070747,
+          "lon":11.022543,
+          "distance_km":11,
+          "distance_mi":7
+        },
+        {
+          "neighborhood":"Bjørklundvegen",
+          "city":"Gjerdrum",
+          "state":"",
+          "country":"NO",
+          "id":"IGJERDRU10",
+          "lat":60.074539,
+          "lon":11.027560,
+          "distance_km":12,
+          "distance_mi":7
+        },
+        {
+          "neighborhood":"Bjørklundvegen",
+          "city":"Gjerdrum",
+          "state":"",
+          "country":"NO",
+          "id":"IGJERDRU8",
+          "lat":60.074852,
+          "lon":11.028238,
+          "distance_km":12,
+          "distance_mi":7
+        },
+        {
+          "neighborhood":"Rognvegen",
+          "city":"Gjerdrum",
+          "state":"",
+          "country":"NO",
+          "id":"IGJERDRU6",
+          "lat":60.075577,
+          "lon":11.034672,
+          "distance_km":12,
+          "distance_mi":7
+        },
+        {
+          "neighborhood":"Holter S",
+          "city":"Nannestad",
+          "state":"AKERSHUS",
+          "country":"NORWAY",
+          "id":"IAKERSHU24",
+          "lat":60.144321,
+          "lon":11.051706,
+          "distance_km":12,
+          "distance_mi":7
+        }
+      ]
+    }
+  }
+}
+,	"current_observation": {
+  "image": {
+    "url":"http://icons.wxug.com/graphics/wu2/logo_130x80.png",
+    "title":"Weather Underground",
+    "link":"http://www.wunderground.com"
+  },
+  "display_location": {
+    "full":"Oslo, Norway",
+    "city":"Oslo",
+    "state":"",
+    "state_name":"Norway",
+    "country":"NO",
+    "country_iso3166":"NO",
+    "zip":"00000",
+    "magic":"1",
+    "wmo":"01488",
+    "latitude":"60.11999893",
+    "longitude":"10.82999992",
+    "elevation":"170.00000000"
+  },
+  "observation_location": {
+    "full":"Oslo Airport, ",
+    "city":"Oslo Airport",
+    "state":"",
+    "country":"NO",
+    "country_iso3166":"NO",
+    "latitude":"60.20639038",
+    "longitude":"11.07999992",
+    "elevation":"679 ft"
+  },
+  "estimated": {
+  },
+  "station_id":"ENGM",
+  "observation_time":"Last Updated on March 6, 4:50 PM CET",
+  "observation_time_rfc822":"Sun, 06 Mar 2016 16:50:00 +0100",
+  "observation_epoch":"1457279400",
+  "local_time_rfc822":"Sun, 06 Mar 2016 17:23:38 +0100",
+  "local_epoch":"1457281418",
+  "local_tz_short":"CET",
+  "local_tz_long":"Europe/Oslo",
+  "local_tz_offset":"+0100",
+  "weather":"Light Snow",
+  "temperature_string":"30 F (-1 C)",
+  "temp_f":30,
+  "temp_c":-1,
+  "relative_humidity":"93%",
+  "wind_string":"From the ENE at 4 MPH",
+  "wind_dir":"ENE",
+  "wind_degrees":70,
+  "wind_mph":4,
+  "wind_gust_mph":0,
+  "wind_kph":6,
+  "wind_gust_kph":0,
+  "pressure_mb":"1001",
+  "pressure_in":"29.56",
+  "pressure_trend":"0",
+  "dewpoint_string":"28 F (-2 C)",
+  "dewpoint_f":28,
+  "dewpoint_c":-2,
+  "heat_index_string":"NA",
+  "heat_index_f":"NA",
+  "heat_index_c":"NA",
+  "windchill_string":"27 F (-3 C)",
+  "windchill_f":"27",
+  "windchill_c":"-3",
+  "feelslike_string":"27 F (-3 C)",
+  "feelslike_f":"27",
+  "feelslike_c":"-3",
+  "visibility_mi":"N/A",
+  "visibility_km":"N/A",
+  "solarradiation":"--",
+  "UV":"0","precip_1hr_string":"-9999.00 in (-9999.00 mm)",
+  "precip_1hr_in":"-9999.00",
+  "precip_1hr_metric":"--",
+  "precip_today_string":"0.00 in (0.0 mm)",
+  "precip_today_in":"0.00",
+  "precip_today_metric":"0.0",
+  "icon":"snow",
+  "icon_url":"http://icons.wxug.com/i/c/k/snow.gif",
+  "forecast_url":"http://www.wunderground.com/global/stations/01488.html",
+  "history_url":"http://www.wunderground.com/history/airport/ENGM/2016/3/6/DailyHistory.html",
+  "ob_url":"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=60.20639038,11.07999992",
+  "nowcast":""
+}
+,
+  "forecast":{
+    "txt_forecast": {
+      "date":"4:25 PM CET",
+      "forecastday": [
+        {
+          "period":0,
+          "icon":"snow",
+          "icon_url":"http://icons.wxug.com/i/c/k/snow.gif",
+          "title":"Sunday",
+          "fcttext":"Snow likely. Lows overnight in the upper 20s.",
+          "fcttext_metric":"Periods of snow. Low -2C.",
+          "pop":"80"
+        }
+      ,
+        {
+          "period":1,
+          "icon":"nt_snow",
+          "icon_url":"http://icons.wxug.com/i/c/k/nt_snow.gif",
+          "title":"Sunday Night",
+          "fcttext":"Cloudy with snow. Low 27F. Winds NE at 5 to 10 mph. Chance of snow 80%. Snow accumulating 1 to 3 inches.",
+          "fcttext_metric":"Cloudy with snow. Low -2C. Winds NE at 10 to 15 km/h. Chance of snow 80%. Snow accumulating 3-7cm.",
+          "pop":"80"
+        }
+      ,
+        {
+          "period":2,
+          "icon":"snow",
+          "icon_url":"http://icons.wxug.com/i/c/k/snow.gif",
+          "title":"Monday",
+          "fcttext":"Snow likely. High 34F. Winds NNE at 5 to 10 mph. Chance of snow 50%. About one inch of snow expected.",
+          "fcttext_metric":"Snow likely. High 2C. Winds NNE at 10 to 15 km/h. Chance of snow 50%. Snowfall of 2-3cm.",
+          "pop":"50"
+        }
+      ,
+        {
+          "period":3,
+          "icon":"nt_snow",
+          "icon_url":"http://icons.wxug.com/i/c/k/nt_snow.gif",
+          "title":"Monday Night",
+          "fcttext":"Snow will taper off and end in the evening but skies will remain cloudy overnight. Low 26F. Winds NNE at 5 to 10 mph. Chance of snow 50%.",
+          "fcttext_metric":"Snow will taper off and end in the evening but skies will remain cloudy overnight. Low -3C. Winds NNE at 10 to 15 km/h. Chance of snow 50%.",
+          "pop":"50"
+        }
+      ,
+        {
+          "period":4,
+          "icon":"partlycloudy",
+          "icon_url":"http://icons.wxug.com/i/c/k/partlycloudy.gif",
+          "title":"Tuesday",
+          "fcttext":"Intervals of clouds and sunshine. High 37F. Winds light and variable.",
+          "fcttext_metric":"Partly cloudy skies. High 3C. Winds light and variable.",
+          "pop":"20"
+        }
+      ,
+        {
+          "period":5,
+          "icon":"nt_chancesnow",
+          "icon_url":"http://icons.wxug.com/i/c/k/nt_chancesnow.gif",
+          "title":"Tuesday Night",
+          "fcttext":"Partly cloudy skies early will give way to occasional snow showers later during the night. Low 26F. Winds light and variable. Chance of snow 50%.",
+          "fcttext_metric":"Partly cloudy skies early will give way to occasional snow showers later during the night. Low near -5C. Winds light and variable. Chance of snow 50%.",
+          "pop":"50"
+        }
+      ,
+        {
+          "period":6,
+          "icon":"snow",
+          "icon_url":"http://icons.wxug.com/i/c/k/snow.gif",
+          "title":"Wednesday",
+          "fcttext":"Mainly cloudy with snow showers around in the morning. High near 35F. Winds light and variable. Chance of snow 50%.",
+          "fcttext_metric":"Mainly cloudy with snow showers around in the morning. High 2C. Winds light and variable. Chance of snow 50%.",
+          "pop":"50"
+        }
+      ,
+        {
+          "period":7,
+          "icon":"nt_mostlycloudy",
+          "icon_url":"http://icons.wxug.com/i/c/k/nt_mostlycloudy.gif",
+          "title":"Wednesday Night",
+          "fcttext":"Considerable cloudiness. Low 24F. Winds light and variable.",
+          "fcttext_metric":"Considerable cloudiness. Low -4C. Winds light and variable.",
+          "pop":"10"
+        }
+      ]
+    },
+    "simpleforecast": {
+      "forecastday": [
+        {"date":{
+          "epoch":"1457287200",
+          "pretty":"7:00 PM CET on March 06, 2016",
+          "day":6,
+          "month":3,
+          "year":2016,
+          "yday":65,
+          "hour":19,
+          "min":"00",
+          "sec":0,
+          "isdst":"0",
+          "monthname":"March",
+          "monthname_short":"Mar",
+          "weekday_short":"Sun",
+          "weekday":"Sunday",
+          "ampm":"PM",
+          "tz_short":"CET",
+          "tz_long":"Europe/Oslo"
+        },
+          "period":1,
+          "high": {
+            "fahrenheit":"32",
+            "celsius":"0"
+          },
+          "low": {
+            "fahrenheit":"27",
+            "celsius":"-3"
+          },
+          "conditions":"Snow",
+          "icon":"snow",
+          "icon_url":"http://icons.wxug.com/i/c/k/snow.gif",
+          "skyicon":"",
+          "pop":80,
+          "qpf_allday": {
+            "in": 0.19,
+            "mm": 5
+          },
+          "qpf_day": {
+            "in": null,
+            "mm": null
+          },
+          "qpf_night": {
+            "in": 0.19,
+            "mm": 5
+          },
+          "snow_allday": {
+            "in": 1.9,
+            "cm": 4.8
+          },
+          "snow_day": {
+            "in": null,
+            "cm": null
+          },
+          "snow_night": {
+            "in": 1.9,
+            "cm": 4.8
+          },
+          "maxwind": {
+            "mph": 9,
+            "kph": 15,
+            "dir": "ENE",
+            "degrees": 0
+          },
+          "avewind": {
+            "mph": 6,
+            "kph": 9,
+            "dir": "NE",
+            "degrees": 0
+          },
+          "avehumidity": 93,
+          "maxhumidity": 0,
+          "minhumidity": 0
+        }
+      ,
+        {"date":{
+          "epoch":"1457373600",
+          "pretty":"7:00 PM CET on March 07, 2016",
+          "day":7,
+          "month":3,
+          "year":2016,
+          "yday":66,
+          "hour":19,
+          "min":"00",
+          "sec":0,
+          "isdst":"0",
+          "monthname":"March",
+          "monthname_short":"Mar",
+          "weekday_short":"Mon",
+          "weekday":"Monday",
+          "ampm":"PM",
+          "tz_short":"CET",
+          "tz_long":"Europe/Oslo"
+        },
+          "period":2,
+          "high": {
+            "fahrenheit":"34",
+            "celsius":"1"
+          },
+          "low": {
+            "fahrenheit":"26",
+            "celsius":"-3"
+          },
+          "conditions":"Snow",
+          "icon":"snow",
+          "icon_url":"http://icons.wxug.com/i/c/k/snow.gif",
+          "skyicon":"",
+          "pop":50,
+          "qpf_allday": {
+            "in": 0.11,
+            "mm": 3
+          },
+          "qpf_day": {
+            "in": 0.09,
+            "mm": 2
+          },
+          "qpf_night": {
+            "in": 0.03,
+            "mm": 1
+          },
+          "snow_allday": {
+            "in": 1.1,
+            "cm": 2.8
+          },
+          "snow_day": {
+            "in": 0.9,
+            "cm": 2.3
+          },
+          "snow_night": {
+            "in": 0.3,
+            "cm": 0.8
+          },
+          "maxwind": {
+            "mph": 10,
+            "kph": 16,
+            "dir": "NNE",
+            "degrees": 16
+          },
+          "avewind": {
+            "mph": 9,
+            "kph": 14,
+            "dir": "NNE",
+            "degrees": 16
+          },
+          "avehumidity": 83,
+          "maxhumidity": 0,
+          "minhumidity": 0
+        }
+      ,
+        {"date":{
+          "epoch":"1457460000",
+          "pretty":"7:00 PM CET on March 08, 2016",
+          "day":8,
+          "month":3,
+          "year":2016,
+          "yday":67,
+          "hour":19,
+          "min":"00",
+          "sec":0,
+          "isdst":"0",
+          "monthname":"March",
+          "monthname_short":"Mar",
+          "weekday_short":"Tue",
+          "weekday":"Tuesday",
+          "ampm":"PM",
+          "tz_short":"CET",
+          "tz_long":"Europe/Oslo"
+        },
+          "period":3,
+          "high": {
+            "fahrenheit":"37",
+            "celsius":"3"
+          },
+          "low": {
+            "fahrenheit":"26",
+            "celsius":"-3"
+          },
+          "conditions":"Partly Cloudy",
+          "icon":"partlycloudy",
+          "icon_url":"http://icons.wxug.com/i/c/k/partlycloudy.gif",
+          "skyicon":"",
+          "pop":20,
+          "qpf_allday": {
+            "in": 0.02,
+            "mm": 1
+          },
+          "qpf_day": {
+            "in": 0.00,
+            "mm": 0
+          },
+          "qpf_night": {
+            "in": 0.02,
+            "mm": 1
+          },
+          "snow_allday": {
+            "in": 0.2,
+            "cm": 0.5
+          },
+          "snow_day": {
+            "in": 0.0,
+            "cm": 0.0
+          },
+          "snow_night": {
+            "in": 0.2,
+            "cm": 0.5
+          },
+          "maxwind": {
+            "mph": 5,
+            "kph": 8,
+            "dir": "ESE",
+            "degrees": 104
+          },
+          "avewind": {
+            "mph": 3,
+            "kph": 5,
+            "dir": "ESE",
+            "degrees": 104
+          },
+          "avehumidity": 86,
+          "maxhumidity": 0,
+          "minhumidity": 0
+        }
+      ,
+        {"date":{
+          "epoch":"1457546400",
+          "pretty":"7:00 PM CET on March 09, 2016",
+          "day":9,
+          "month":3,
+          "year":2016,
+          "yday":68,
+          "hour":19,
+          "min":"00",
+          "sec":0,
+          "isdst":"0",
+          "monthname":"March",
+          "monthname_short":"Mar",
+          "weekday_short":"Wed",
+          "weekday":"Wednesday",
+          "ampm":"PM",
+          "tz_short":"CET",
+          "tz_long":"Europe/Oslo"
+        },
+          "period":4,
+          "high": {
+            "fahrenheit":"35",
+            "celsius":"2"
+          },
+          "low": {
+            "fahrenheit":"24",
+            "celsius":"-4"
+          },
+          "conditions":"Snow Showers",
+          "icon":"snow",
+          "icon_url":"http://icons.wxug.com/i/c/k/snow.gif",
+          "skyicon":"",
+          "pop":50,
+          "qpf_allday": {
+            "in": 0.03,
+            "mm": 1
+          },
+          "qpf_day": {
+            "in": 0.03,
+            "mm": 1
+          },
+          "qpf_night": {
+            "in": 0.00,
+            "mm": 0
+          },
+          "snow_allday": {
+            "in": 0.3,
+            "cm": 0.8
+          },
+          "snow_day": {
+            "in": 0.3,
+            "cm": 0.8
+          },
+          "snow_night": {
+            "in": 0.0,
+            "cm": 0.0
+          },
+          "maxwind": {
+            "mph": 5,
+            "kph": 8,
+            "dir": "SSE",
+            "degrees": 156
+          },
+          "avewind": {
+            "mph": 2,
+            "kph": 3,
+            "dir": "SSE",
+            "degrees": 156
+          },
+          "avehumidity": 87,
+          "maxhumidity": 0,
+          "minhumidity": 0
+        }
+      ]
+    }
+  }
+}

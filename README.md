@@ -14,7 +14,7 @@ Documentation (early work in progress) is available
 
 ### Requirements
 
-All the code is under the `code` folder, and needs to be built with Maven 3.x.
+Code needs to be built with Maven 3.x.
 Most tasks are automated via Maven.
 For example, JEE code that needs to run in a container will automatically download
 and install Wildfly.

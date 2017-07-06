@@ -14,12 +14,14 @@
 
     <modules>
         <module>xml-and-json</module>
+        <module>examples</module>
         <module>rest</module>
     </modules>
 
 
     <properties>
-        <kotlin.version>1.1.2-5</kotlin.version>
+        <version.springboot>1.5.4.RELEASE</version.springboot>
+        <version.kotlin>1.1.3</version.kotlin>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
@@ -34,7 +36,23 @@
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib-jre8</artifactId>
-                <version>${kotlin.version}</version>
+                <version>${version.kotlin}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-reflect</artifactId>
+                <version>${version.kotlin}</version>
+            </dependency>
+            <dependency>
+                <!--
+                    https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-parent/pom.xml
+                    https://github.com/spring-projects/spring-boot/blob/master/spring-boot-dependencies/pom.xml
+                  -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${version.springboot}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -56,9 +74,38 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <!-- see https://kotlinlang.org/docs/reference/using-maven.html -->
                     <artifactId>kotlin-maven-plugin</artifactId>
                     <groupId>org.jetbrains.kotlin</groupId>
-                    <version>${kotlin.version}</version>
+                    <version>${version.kotlin}</version>
+                    <!--
+                        Kotlin has a major "limitation" that all classes are final by default.
+                        Someone call it a "feature", others (like me) call it a "design flaw".
+                        See more at: https://discuss.kotlinlang.org/t/classes-final-by-default/166/77
+
+                        Why is it a problem? for example, it does not play well with all major frameworks
+                        out there like JPA, Spring, mocking, etc, as they require to create proxy
+                        classes that extend the classes you write.
+                        So here we have to use special plugins to bypass this Kotlin "feature"...
+                    -->
+                    <configuration>
+                        <compilerPlugins>
+                            <plugin>spring</plugin>
+                            <plugin>jpa</plugin>
+                        </compilerPlugins>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-allopen</artifactId>
+                            <version>${version.kotlin}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-noarg</artifactId>
+                            <version>${version.kotlin}</version>
+                        </dependency>
+                    </dependencies>
                     <executions>
                         <execution>
                             <id>compile</id>

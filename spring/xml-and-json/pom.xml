@@ -4,7 +4,7 @@
 
     <groupId>org.tsdes.spring.xmlandjson</groupId>
     <artifactId>xmlandjson</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.tsdes.spring</groupId>

@@ -14,6 +14,7 @@
 
     <modules>
         <module>weather-client</module>
+        <module>news-rest</module>
     </modules>
 
 </project>

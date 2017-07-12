@@ -1,13 +1,11 @@
 package org.tsdes.spring.examples.news
 
-import com.google.common.base.Throwables
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import javax.validation.ConstraintViolationException
 
@@ -16,11 +14,10 @@ import javax.validation.ConstraintViolationException
  */
 @RunWith(SpringRunner::class)
 @DataJpaTest //this take care to start and re-init an embedded database at each test execution
-@SpringBootTest(classes = arrayOf(TestApplication::class))
 class NewsTest {
 
     @Autowired
-    lateinit var crud: NewsRepository
+    private lateinit var crud: NewsRepository
 
     @Test
     fun testInitialization(){

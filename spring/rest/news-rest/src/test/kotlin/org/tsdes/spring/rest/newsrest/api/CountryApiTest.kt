@@ -1,6 +1,10 @@
 package org.tsdes.spring.rest.newsrest.api
 
-import org.junit.Assert.assertTrue
+import com.google.gson.Gson
+import org.apache.http.client.methods.HttpGet
+import org.apache.http.impl.client.HttpClients
+import org.apache.http.util.EntityUtils
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.context.embedded.LocalServerPort
@@ -8,6 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.spring.rest.newsrest.NewsRestApplication
 import org.tsdes.spring.utils.HttpUtil
+import javax.ws.rs.client.ClientBuilder
+import javax.ws.rs.core.UriBuilder
+import io.restassured.RestAssured.given
+import io.restassured.http.ContentType
+import org.hamcrest.Matchers.containsString
+import org.hamcrest.Matchers.greaterThan
+import org.springframework.web.client.RestTemplate
 
 /**
  * Created by arcuri82 on 12-Jul-17.
@@ -51,4 +62,114 @@ class CountryApiTest{
         assertTrue(body.contains("Germany"))
     }
 
+
+    @Test
+    fun testWithApacheHttpClient() {
+
+        /*
+            There are libraries to simplify the use of HTTP.
+            The most popular is Apache HttpClient.
+            Note: this is a generic HTTP library, and not specific for REST
+         */
+
+        val httpclient = HttpClients.createDefault()
+
+        val httpGet = HttpGet("http://localhost:$port/newsrest/api/countries")
+        httpGet.addHeader("Accept", "application/json")
+
+        val response = httpclient.execute(httpGet)
+        assertEquals(200, response.statusLine.statusCode.toLong())
+
+        val body = EntityUtils.toString(response.entity)
+        println(body)
+
+        val gson = Gson()
+        val countries = gson.fromJson(body, List::class.java)
+
+        assertTrue(countries.size > 200)
+        assertTrue(countries.contains("Norway"))
+        assertTrue(countries.contains("Sweden"))
+        assertTrue(countries.contains("Germany"))
+
+        httpGet.releaseConnection()
+    }
+
+    @Test
+    fun testWithRestEasy() {
+
+        /*
+            If you are dealing with REST, you might want to use a library that is
+            specific for REST, like RestEasy.
+            Note: this is the same library used internally in Wildfly to create
+            REST services (ie, an implementation of JAX-RS).
+         */
+
+        val uri = UriBuilder.fromUri("http://localhost/newsrest/api/countries")
+                .port(port)
+                .build()
+        val client = ClientBuilder.newClient()
+
+        val response = client.target(uri).request("application/json").get()
+        assertEquals(200, response.status.toLong())
+
+        val body = response.readEntity(String::class.java)
+
+        val gson = Gson()
+        val countries = gson.fromJson(body, List::class.java)
+
+        assertTrue(countries.size > 200)
+        assertTrue(countries.contains("Norway"))
+        assertTrue(countries.contains("Sweden"))
+        assertTrue(countries.contains("Germany"))
+    }
+
+
+    @Test
+    fun testWithSpringRestTemplate(){
+
+        /*
+            Not surprisingly, Spring has its own HTTP library to
+            work with REST endpoints
+         */
+
+        val client =  RestTemplate()
+        val response = client.getForEntity("http://localhost:$port/newsrest/api/countries", List::class.java)
+
+        assertEquals(200, response.statusCode.value())
+
+        //note that here the JSON body has already been unmarshalled
+        val countries = response.body
+
+        assertTrue(countries.size > 200)
+        assertTrue(countries.contains("Norway"))
+        assertTrue(countries.contains("Sweden"))
+        assertTrue(countries.contains("Germany"))
+    }
+
+
+    @Test
+    fun testWithRestAssured() {
+
+        /*
+            If your goal is testing REST API, there are libraries that
+            are specialized in it. One is RestAssured.
+            You can compare the code beneath with the other tests,
+            and decide which is the easiest to read.
+
+            One good thing of RestAssured is the ability to define
+            assertions on the JSon responses in the body without
+            having to manually parsing (or unmarshalling) it first.
+         */
+
+        given().accept(ContentType.JSON)
+                .and()
+                .get("http://localhost:$port/newsrest/api/countries")
+                .then()
+                .statusCode(200)
+                .and()
+                .body("size()", greaterThan(200))
+                .body(containsString("Norway"))
+                .body(containsString("Sweden"))
+                .body(containsString("Germany"))
+    }
 }

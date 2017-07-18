@@ -151,7 +151,70 @@ class BestDrinkApiTest {
 
         assertEquals(2, asIso.size)
 
-        val first: Int = asIso[0].toInt() and 0xFF //Java/Kotlin do not have unsigned bytes
+        /*
+            Java/Kotlin do not have unsigned bytes.
+            A byte is 8 bits, so can represents 2^8=256 values.
+            A signed byte would hence be in the range [-128, 127].
+            But when looking at Charset tables, values are unsigned,
+            from 0 on.
+
+            So consider the value 216 = 128 + 64  + 16 + 8
+            its unsigned byte representation would be:
+
+            11011000
+
+            and that is what inside the byte array.
+            However, Java/Kotlin reads it as a signed value, where
+            the first leading bit can be used to determine the sign.
+            Negative numbers are stored in "Two's Complement" notation,
+            which in practice means flipping the bits and add 1.
+            So, when read in JAva/Kotlin as signed byte,
+            11011000 does represent the negative
+
+            11011000 (flipping)
+            00100111 + 1 (add one)
+            00101000
+            = 32 + 8 = 40
+
+            216 -> -40
+
+            bytes are 8 bits, so we convert to 32 bits integer, which would still represent a -40.
+            This means that, when we convert from byte to int, it is still a -40, so:
+
+            x = 111111111111111111111111|11011000
+
+            (note the | that is just to mark the last byte out of 4 we are interested into).
+            However, what we really want is the number 216, which as int it is represented as
+
+            y = 000000000000000000000000|11011000
+
+            So, how to transform from x to y? Let's align the two sequences:
+
+            111111111111111111111111|11011000
+            000000000000000000000000|11011000
+
+            in the first 3 bytes (the leftmost 24 bits) we want all 0s.
+            In the remaining byte (rightmost 8 bits) we want the same 1s as x.
+            So, the transformation is done by doing a bitwise AND operation with the
+            value 255, which is represented by
+
+            000000000000000000000000|11111111
+
+            bitwise AND ("&" in Java, "and" in Kotlin) means we only kee the 1s that match
+            on both sequences, so
+
+            111111111111111111111111|11011000 = x
+            000000000000000000000000|11111111 = 255
+            ---------------------------------
+            000000000000000000000000|11011000 = y
+
+            Note, when working with bitwise operation, often hegadeciman notation
+            is used, where 255 is 0xFF
+         */
+
+        assertEquals(255, 0xFF)
+
+        val first: Int = asIso[0].toInt() and 0xFF
         val second: Int = asIso[1].toInt() and 0xFF
 
         assertEquals(216, first)

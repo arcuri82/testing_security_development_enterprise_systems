@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
 /**
- * TODO explain reason for using basePackages
+ * TODO explain reason for using scanBasePackages/basePackages
  *
  * Created by arcuri82 on 06-Jul-17.
  */

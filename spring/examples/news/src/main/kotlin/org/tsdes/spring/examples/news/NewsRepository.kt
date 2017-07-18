@@ -2,6 +2,7 @@ package org.tsdes.spring.examples.news
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 import java.time.ZonedDateTime
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
@@ -19,11 +20,18 @@ interface NewsRepository : CrudRepository<NewsEntity, Long>, NewsRepositoryCusto
     fun findAllByCountryAndAuthorId(country: String, authorId: String) : Iterable<NewsEntity>
 }
 
+@Transactional
 interface NewsRepositoryCustom {
 
     fun createNews(authorId: String, text: String, country: String) : Long
 
     fun updateText(newsId: Long, text: String): Boolean
+
+    fun update( newsId: Long,
+                text: String,
+                authorId: String,
+                country: String,
+                creationTime: ZonedDateTime): Boolean
 }
 
 /*
@@ -47,6 +55,19 @@ open class NewsRepositoryImpl : NewsRepositoryCustom{
     override fun updateText(newsId: Long, text: String): Boolean {
         val news = em.find(NewsEntity::class.java, newsId) ?: return false
         news.text = text
+        return true
+    }
+
+    override fun update( newsId: Long,
+                text: String,
+                authorId: String,
+               country: String,
+               creationTime: ZonedDateTime): Boolean {
+        val news = em.find(NewsEntity::class.java, newsId) ?: return false
+        news.text = text
+        news.authorId = authorId
+        news.country = country
+        news.creationTime = creationTime
         return true
     }
 }

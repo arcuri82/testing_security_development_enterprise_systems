@@ -208,7 +208,7 @@ class BestDrinkApiTest {
             ---------------------------------
             000000000000000000000000|11011000 = y
 
-            Note, when working with bitwise operation, often hegadeciman notation
+            Note, when working with bitwise operation, often hexadecimal notation
             is used, where 255 is 0xFF
          */
 
@@ -270,7 +270,7 @@ class BestDrinkApiTest {
         //continuation byte for Ø, which in ISO-8859-1 is special
         //control "Start of String" (not an actual character).
         //however, to display it in a Java/Kotlin "" string, as it is UTF-16,
-        //I need to use its unicode, which is 0098 (exadecimal), ie \u0098
+        //I need to use its unicode, which is 0098 (hexadecimal), ie \u0098
 
         assertEquals(0b10011000, second)
         assertEquals(152, second)

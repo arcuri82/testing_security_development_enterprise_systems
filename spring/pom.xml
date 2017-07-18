@@ -74,6 +74,11 @@
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${version.springfox}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
                 <artifactId>springfox-spring-web</artifactId>
                 <version>${version.springfox}</version>
             </dependency>
@@ -187,6 +192,19 @@
                     </executions>
                 </plugin>
 
+                <plugin>
+                    <!-- Need to create self-executable uber/fat jars -->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${version.springboot}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
             </plugins>
         </pluginManagement>

@@ -305,4 +305,22 @@ class NewsRestApiTest : NRTestBase() {
                 .then()
                 .statusCode(404)
     }
+
+    /*
+        Test if Swagger is properly configured
+     */
+
+    @Test
+    fun testSwaggerSchema(){
+
+        get("../v2/api-docs")
+                .then()
+                .statusCode(200)
+                .body("swagger", equalTo("2.0"))
+    }
+
+    @Test
+    fun testSwaggerUI(){
+        get("../swagger-ui.html").then().statusCode(200)
+    }
 }

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 import springfox.documentation.builders.ApiInfoBuilder
-import springfox.documentation.builders.PathSelectors.regex
+import springfox.documentation.builders.PathSelectors
 import springfox.documentation.service.ApiInfo
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
@@ -25,7 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
  */
 @SpringBootApplication(scanBasePackages = arrayOf("org.tsdes.spring"))
 @EnableJpaRepositories(basePackages = arrayOf("org.tsdes.spring"))
-@EntityScan(basePackages= arrayOf("org.tsdes.spring"))
+@EntityScan(basePackages = arrayOf("org.tsdes.spring"))
 @EnableSwagger2
 class NewsRestApplication {
 
@@ -34,7 +34,7 @@ class NewsRestApplication {
         return Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .paths(regex("/.*"))
+                .paths(PathSelectors.any())
                 .build()
     }
 

@@ -11,6 +11,50 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <build>
+        <plugins>
+            <plugin>
+                <!--
+                    This will create a uber/fat jar under "target" folder.
+                    The entire application (including the embedded server Tomcat)
+                    can be started from command line with:
+
+                    java -jar target/newsRest.jar
+
+                    Note: this is very different from building a WAR file that
+                    has to be deployed on a running container.
+                    If you really want, it is possible to still build a WAR file
+                    for a Spring application, and then deploy it on a running
+                    Tomcat, or any other server supporting the "servlet" specs
+                    of JEE (no need for full JEE spec implementations though).
+
+                    Once the program is started, the API will be accessible at:
+
+                    http://localhost:8080/newsrest/api
+
+                    you can see which endpoints it has from the logs of the application.
+                    However, you can also access the Swagger schema at:
+
+                    http://localhost:8080/newsrest/api/v2/api-docs
+
+                    furthermore, a human-readable UI web page with the documentation
+                    is accessible at:
+
+                    http://localhost:8080/newsrest/api/swagger-ui.html
+
+                    This can also be used to manually test the API directly from
+                    the browser
+                -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>newsRest</finalName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
     <dependencies>
 
         <dependency>
@@ -39,6 +83,10 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>

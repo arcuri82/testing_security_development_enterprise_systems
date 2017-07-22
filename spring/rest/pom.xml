@@ -16,6 +16,7 @@
         <module>weather-client</module>
         <module>news-rest</module>
         <module>charset</module>
+        <module>patch</module>
     </modules>
 
 </project>

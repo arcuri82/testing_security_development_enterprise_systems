@@ -164,7 +164,7 @@ class CounterRestTest {
                 .statusCode(204)
 
         val readBack = get(dto.id!!)
-        assertEquals((value + delta).toLong(), (readBack.value as Int).toLong())
+        assertEquals(value + delta, readBack.value)
     }
 
 
@@ -184,9 +184,9 @@ class CounterRestTest {
         patchWithMergeJSon(id, "{\"name\":null, \"value\":$modifiedValue}", 204)
 
         val readBack = get(dto.id!!)
-        assertEquals(modifiedValue.toLong(), (readBack.value as Int).toLong())
+        assertEquals(modifiedValue, readBack.value)
         assertNull(readBack.name)
-        assertEquals(id, readBack.id as Long) // should had stayed the same
+        assertEquals(id, readBack.id) // should had stayed the same
     }
 
     @Test
@@ -205,9 +205,9 @@ class CounterRestTest {
         patchWithMergeJSon(id, "{\"value\":$modifiedValue}", 204)
 
         val readBack = get(dto.id!!)
-        assertEquals(modifiedValue.toLong(), (readBack.value as Int).toLong())
+        assertEquals(modifiedValue, readBack.value)
         assertEquals(name, readBack.name) //not modified
-        assertEquals(id, readBack.id as Long) // should had stayed the same
+        assertEquals(id, readBack.id) // should had stayed the same
     }
 
     @Test
@@ -228,8 +228,8 @@ class CounterRestTest {
 
         val readBack = get(dto.id!!)
         //nothing should had been modified, as value was invalid
-        assertEquals(value.toLong(), (readBack.value as Int).toLong())
+        assertEquals(value, readBack.value)
         assertEquals(name, readBack.name) //IMPORTANT that this did not change
-        assertEquals(id, readBack.id as Long)
+        assertEquals(id, readBack.id)
     }
 }

@@ -9,14 +9,14 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel("A numeric counter, with name")
 class CounterDto(
 
-    @ApiModelProperty("The numeric value of the counter")
-    var value: Int? = null,
+        @ApiModelProperty("The unique id that identifies this counter resource")
+        var id: Long? = null,
 
-    @ApiModelProperty("The name of the counter")
-    var name: String? = null,
+        @ApiModelProperty("The name of the counter")
+        var name: String? = null,
 
-    @ApiModelProperty("The unique id that identifies this counter resource")
-    var id: Long? = null
+        @ApiModelProperty("The numeric value of the counter")
+        var value: Int? = null
 
 )
 

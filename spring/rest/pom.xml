@@ -18,6 +18,7 @@
         <module>charset</module>
         <module>patch</module>
         <module>redirect</module>
+        <module>news-rest-v2</module>
     </modules>
 
 </project>

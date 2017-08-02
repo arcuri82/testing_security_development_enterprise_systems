@@ -19,7 +19,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
 /**
- * TODO explain reason for using scanBasePackages/basePackages
  *
  * Created by arcuri82 on 06-Jul-17.
  */
@@ -42,16 +41,15 @@ class NewsRestApplication {
         return ApiInfoBuilder()
                 .title("API for REST News")
                 .description("Some description")
-                .version("1.0")
+                .version("2.0.0") // Note the change in version
                 .build()
     }
 
     @Bean(name = arrayOf("OBJECT_MAPPER_BEAN"))
     fun jsonObjectMapper(): ObjectMapper {
         return Jackson2ObjectMapperBuilder.json()
-                .serializationInclusion(JsonInclude.Include.NON_NULL) // Don’t include null values
-                //TODO explain
-                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) //ISODate
+                .serializationInclusion(JsonInclude.Include.NON_NULL)
+                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .modules(JavaTimeModule())
                 .build()
     }

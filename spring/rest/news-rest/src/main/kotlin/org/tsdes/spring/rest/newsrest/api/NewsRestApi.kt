@@ -261,9 +261,6 @@ class NewsRestApi {
         return ResponseEntity.status(204).build()
     }
 
-    /*
-        TODO discuss 404
-     */
 
     @ApiOperation("Delete a news with the given id")
     @DeleteMapping(path = arrayOf("/id/{id}"))
@@ -279,6 +276,21 @@ class NewsRestApi {
                 TODO discuss why here 400 instead of 404
              */
             return ResponseEntity.status(400).build()
+        }
+
+        /*
+            Bit tricky: once a resource is deleted, if you try to
+            delete it a second time, then you would expect a 404,
+            ie resource not found.
+            However, DELETE is idempotent, which might be confusing
+            in this context. Doing 1 or 100 deletes on the server
+            will not alter the result on the server (the resource is
+            deleted), although the return values (204 vs 404) can
+            be different (this does not affect the definition of
+            idempotent)
+         */
+        if (!crud.exists(id)) {
+            return ResponseEntity.status(404).build()
         }
 
         crud.delete(id)

@@ -5,6 +5,14 @@ import java.time.ZonedDateTime
 import org.tsdes.spring.examples.news.constraint.Country
 
 /**
+ *  A data transfer object (DTO) is what we will use to represent and (un)marshal
+ *  JSon objects.
+ *
+ *  This is just a POJO (plain old Java object), with no logic, just data.
+ *  Also note how Swagger is used here to provide documentation.
+ *
+ *  TODO explain Kotlin "data"
+ *
  * Created by arcuri82 on 12-Jul-17.
  */
 data class NewsDto(

@@ -60,3 +60,14 @@ There are two exceptions though:
    themselves. If you want to run such tests from an IDE, 
    you need first to manually start Wildfly from command line with for example
    `mvn wildfly:run`.   
+
+
+
+### ![](https://www.yourkit.com/images/yklogo.png)
+
+YourKit supports open source projects with its full-featured Java Profiler.
+YourKit, LLC is the creator of 
+<a href="https://www.yourkit.com/java/profiler/">YourKit Java Profiler</a>
+and 
+<a href="https://www.yourkit.com/.net/profiler/">YourKit .NET Profiler</a>,
+innovative and intelligent tools for profiling Java and .NET applications.

@@ -15,7 +15,7 @@ import org.tsdes.spring.rest.newsrest.dto.NewsDto
 import javax.validation.ConstraintViolationException
 import javax.validation.Valid
 import org.springframework.web.util.UriComponentsBuilder
-
+import java.lang.Deprecated
 
 const val ID_PARAM = "The numeric id of the news"
 const val BASE_JSON = "application/json;charset=UTF-8"
@@ -338,11 +338,24 @@ class NewsRestApi {
         The id of the set "/news"?
       */
 
+    /*
+        Kotlin support: Spring is adding first-class support for Kotlin, but
+        current version (in 2017) still has some rough-edges...
+        In particular, to get the deprecation properly visualized in Swagger-UI
+        we need to use
+
+        @java.lang.Deprecated
+
+        instead of
+
+        @kotlin.Deprecated
+     */
+
 
     @ApiOperation("Get all the news in the specified country")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
     @GetMapping(path = arrayOf("/countries/{country}"))
-    @Deprecated("")
+    @Deprecated
     fun deprecatedGetByCountry(@ApiParam("The country name")
                                @PathVariable("country")
                                @Valid @Country
@@ -360,7 +373,7 @@ class NewsRestApi {
     @ApiOperation("Get all the news written by the specified author")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
     @GetMapping(path = arrayOf("/authors/{author}"))
-    @Deprecated("")
+    @Deprecated
     fun deprecatedGetByAuthor(@ApiParam("The id of the author who wrote the news")
                     @PathVariable("author")
                     author: String): ResponseEntity<List<NewsDto>> {
@@ -376,7 +389,7 @@ class NewsRestApi {
     @ApiOperation("Get all the news from a given country written by a given author")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
     @GetMapping(path = arrayOf("/countries/{country}/authors/{author}"))
-    @Deprecated("")
+    @Deprecated
     fun deprecatedGetByCountryAndAuthor(
             @ApiParam("The country name")
             @PathVariable("country")
@@ -401,7 +414,7 @@ class NewsRestApi {
     @ApiOperation("Get a single news specified by id")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
     @GetMapping(path = arrayOf("/id/{id}"))
-    @Deprecated("")
+    @Deprecated
     fun deprecatedGetById(@ApiParam(ID_PARAM)
                           @PathVariable("id")
                           pathId: String?)
@@ -416,7 +429,7 @@ class NewsRestApi {
     @ApiOperation("Update an existing news")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
     @PutMapping(path = arrayOf("/id/{id}"), consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
-    @Deprecated("")
+    @Deprecated
     fun deprecatedUpdate(
             @ApiParam(ID_PARAM)
             @PathVariable("id")
@@ -436,7 +449,7 @@ class NewsRestApi {
     @ApiOperation("Update the text content of an existing news")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
     @PutMapping(path = arrayOf("/id/{id}/text"), consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE))
-    @Deprecated("")
+    @Deprecated
     fun deprecatedUpdateText(
             @ApiParam(ID_PARAM)
             @PathVariable("id")
@@ -456,7 +469,7 @@ class NewsRestApi {
     @ApiOperation("Delete a news with the given id")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
     @DeleteMapping(path = arrayOf("/id/{id}"))
-    @Deprecated("")
+    @Deprecated
     fun deprecatedDelete(@ApiParam(ID_PARAM)
                          @PathVariable("id")
                          pathId: String?): ResponseEntity<Any> {

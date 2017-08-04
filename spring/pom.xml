@@ -17,6 +17,7 @@
         <module>examples</module>
         <module>utils</module>
         <module>rest</module>
+        <module>soap</module>
     </modules>
 
 
@@ -206,7 +207,15 @@
                     </executions>
                 </plugin>
 
+                <plugin>
+                    <!-- Needed for SOAP clients -->
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>jaxws-maven-plugin</artifactId>
+                    <version>2.5</version>
+                </plugin>
+
             </plugins>
+
         </pluginManagement>
     </build>
 

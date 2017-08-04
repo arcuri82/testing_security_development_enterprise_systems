@@ -1,0 +1,1358 @@
+<!--
+This WSDL file was taken from
+
+http://ws.nasdaqdod.com/v1/NASDAQQuotes.asmx?WSDL
+-->
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ws.nasdaqdod.com/services/v1/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://ws.nasdaqdod.com/services/v1/">
+    <wsdl:types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://ws.nasdaqdod.com/services/v1/">
+            <s:element name="ListSymbols">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="StartSymbol" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="EndSymbol" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="ListSymbolsResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="ListSymbolsResult" type="tns:SymbolsList"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="SymbolsList">
+                <s:complexContent mixed="false">
+                    <s:extension base="tns:Common">
+                        <s:sequence>
+                            <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string"/>
+                            <s:element minOccurs="1" maxOccurs="1" name="TotalSymbols" type="s:int"/>
+                            <s:element minOccurs="1" maxOccurs="1" name="ReturnedSymbols" type="s:int"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Symbols" type="tns:ArrayOfString"/>
+                        </s:sequence>
+                    </s:extension>
+                </s:complexContent>
+            </s:complexType>
+            <s:complexType name="Common">
+                <s:sequence>
+                    <s:element minOccurs="1" maxOccurs="1" name="Outcome" type="tns:OutcomeTypes"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="Identity" type="s:string"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="Delay" type="s:double"/>
+                </s:sequence>
+            </s:complexType>
+            <s:simpleType name="OutcomeTypes">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Success"/>
+                    <s:enumeration value="SystemError"/>
+                    <s:enumeration value="RequestError"/>
+                    <s:enumeration value="RegistrationError"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:complexType name="ArrayOfString">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="Header" type="tns:Header"/>
+            <s:complexType name="Header">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="Tracer" type="s:string"/>
+                </s:sequence>
+                <s:anyAttribute/>
+            </s:complexType>
+            <s:element name="SearchSymbol">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="SearchPattern" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchSymbolResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="SearchSymbolResult" type="tns:SearchSymbolResult"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="SearchSymbolResult">
+                <s:complexContent mixed="false">
+                    <s:extension base="tns:Common">
+                        <s:sequence>
+                            <s:element minOccurs="0" maxOccurs="1" name="SearchPattern" type="s:string"/>
+                            <s:element minOccurs="1" maxOccurs="1" name="ReturnedSymbols" type="s:int"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="SearchResults" type="tns:ArrayOfSymbolAndName"/>
+                        </s:sequence>
+                    </s:extension>
+                </s:complexContent>
+            </s:complexType>
+            <s:complexType name="ArrayOfSymbolAndName">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="SymbolAndName" nillable="true" type="tns:SymbolAndName"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="SymbolAndName">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="LookupSymbolAndCompany">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Identifiers" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="IdentifierType" type="tns:IdentifierTypes"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:simpleType name="IdentifierTypes">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Symbol"/>
+                    <s:enumeration value="CIK"/>
+                    <s:enumeration value="CUSIP"/>
+                    <s:enumeration value="ISIN"/>
+                    <s:enumeration value="Valoren"/>
+                    <s:enumeration value="SEDOL"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:element name="LookupSymbolAndCompanyResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="LookupSymbolAndCompanyResult" type="tns:ArrayOfLookupCompanyResult"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="ArrayOfLookupCompanyResult">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="LookupCompanyResult" nillable="true" type="tns:LookupCompanyResult"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="LookupCompanyResult">
+                <s:complexContent mixed="false">
+                    <s:extension base="tns:Common">
+                        <s:sequence>
+                            <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="IdentifierType" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="CIK" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="CUSIP" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="ISIN" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Market" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Valoren" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="SEDOL" type="s:string"/>
+                        </s:sequence>
+                    </s:extension>
+                </s:complexContent>
+            </s:complexType>
+            <s:element name="ListQuoteConditions">
+                <s:complexType/>
+            </s:element>
+            <s:element name="ListQuoteConditionsResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="ListQuoteConditionsResult" type="tns:ArrayOfQuoteCondition"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="ArrayOfQuoteCondition">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="QuoteCondition" nillable="true" type="tns:QuoteCondition"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="QuoteCondition">
+                <s:complexContent mixed="false">
+                    <s:extension base="tns:Common">
+                        <s:sequence>
+                            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Exchange" type="s:string"/>
+                        </s:sequence>
+                    </s:extension>
+                </s:complexContent>
+            </s:complexType>
+            <s:element name="ListMarketCenters">
+                <s:complexType/>
+            </s:element>
+            <s:element name="ListMarketCentersResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="ListMarketCentersResult" type="tns:ArrayOfMarketCenter"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="ArrayOfMarketCenter">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="MarketCenter" nillable="true" type="tns:MarketCenter"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="MarketCenter">
+                <s:complexContent mixed="false">
+                    <s:extension base="tns:Common">
+                        <s:sequence>
+                            <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+                        </s:sequence>
+                    </s:extension>
+                </s:complexContent>
+            </s:complexType>
+            <s:element name="GetQuotes">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Symbols" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="StartDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="EndDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="MarketCenters" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetQuotesResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="GetQuotesResult" type="tns:ArrayOfQuoteResults"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="ArrayOfQuoteResults">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="QuoteResults" nillable="true" type="tns:QuoteResults"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="QuoteResults">
+                <s:complexContent mixed="false">
+                    <s:extension base="tns:Common">
+                        <s:sequence>
+                            <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="StartTime" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:string"/>
+                            <s:element minOccurs="0" maxOccurs="1" name="Quotes" type="tns:ArrayOfQuote"/>
+                        </s:sequence>
+                    </s:extension>
+                </s:complexContent>
+            </s:complexType>
+            <s:complexType name="ArrayOfQuote">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="Quote" nillable="true" type="tns:Quote"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="Quote">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="1" name="MarketCenter" type="s:string"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="BidQuantity" type="s:double"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="BidPrice" type="s:double"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="AskQuantity" type="s:double"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="AskPrice" type="s:double"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="QuoteCondition" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="StartTime" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:string"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="GetPreMarketQuotes">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Symbols" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="QuoteDate" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="MarketCenters" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetPreMarketQuotesResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="GetPreMarketQuotesResult" type="tns:ArrayOfQuoteResults"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetPostMarketQuotes">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Symbols" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="QuoteDate" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="MarketCenters" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetPostMarketQuotesResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="GetPostMarketQuotesResult" type="tns:ArrayOfQuoteResults"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchQuotesByBidAskPrice">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Symbols" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="StartDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="EndDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="MarketCenters" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="LowPrice" type="s:double"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="HighPrice" type="s:double"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="Side" type="tns:SideTypes"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:simpleType name="SideTypes">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Both"/>
+                    <s:enumeration value="Bid"/>
+                    <s:enumeration value="Ask"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:element name="SearchQuotesByBidAskPriceResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="SearchQuotesByBidAskPriceResult" type="tns:ArrayOfQuoteResults"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchQuotesByBidAskQuantity">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Symbols" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="StartDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="EndDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="MarketCenters" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="LowQuantity" type="s:double"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="HighQuantity" type="s:double"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="Side" type="tns:SideTypes"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchQuotesByBidAskQuantityResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="SearchQuotesByBidAskQuantityResult" type="tns:ArrayOfQuoteResults"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchQuotesByQuoteCondition">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Symbols" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="StartDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="EndDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="MarketCenters" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="QuoteCondition" type="tns:QuoteConditionTypes"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:simpleType name="QuoteConditionTypes">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Unknown"/>
+                    <s:enumeration value="ManualAskAutomatedBid"/>
+                    <s:enumeration value="ManualBidAutomatedAsk"/>
+                    <s:enumeration value="FastTrading"/>
+                    <s:enumeration value="ManualBidAndAsk"/>
+                    <s:enumeration value="OrderImbalance"/>
+                    <s:enumeration value="ClosedQuote"/>
+                    <s:enumeration value="NonFirmQuote"/>
+                    <s:enumeration value="OpeningQuoteAutomated"/>
+                    <s:enumeration value="Regular"/>
+                    <s:enumeration value="ManualBidAndAskNonFirm"/>
+                    <s:enumeration value="AutomatedBidNoOfferOrAutomatedOfferNoBid"/>
+                    <s:enumeration value="OrderInflux"/>
+                    <s:enumeration value="NoOpenNoResume"/>
+                    <s:enumeration value="SlowQuoteOnTheOfferSide"/>
+                    <s:enumeration value="SlowQuoteOnTheBidSide"/>
+                    <s:enumeration value="SlowQuoteOnTheBidAndOfferSides"/>
+                    <s:enumeration value="OpeningQuote"/>
+                    <s:enumeration value="RegularForFINRAMarketMakerOpen"/>
+                    <s:enumeration value="SlowQuoteDueToSetSlowListOnBothTheBidAndOfferSides"/>
+                    <s:enumeration value="ClosingQuote"/>
+                    <s:enumeration value="NewsDissemination"/>
+                    <s:enumeration value="SlowQuoteDueToALiquidityReplenishmentPointorGapQuoteOnTheBidSide"/>
+                    <s:enumeration value="SlowQuoteDueToALiquidityReplenishmentPointOrGapQuoteOnTheOfferSide"/>
+                    <s:enumeration value="TradingRangeIndication"/>
+                    <s:enumeration value="DueToRelatedSecurityNewsDissemination"/>
+                    <s:enumeration value="DueToRelatedSecurityNewsPending"/>
+                    <s:enumeration value="MarketMakerQuotesClosed"/>
+                    <s:enumeration value="VolatilityTradingPause"/>
+                    <s:enumeration value="NewsPending"/>
+                    <s:enumeration value="DueToRelatedSecurity"/>
+                    <s:enumeration value="Resume"/>
+                    <s:enumeration value="SlowQuoteDueToANYSELiquidityReplenishmentPointNYSEAMEXToleranceBreachOrGapQuoteOnBothTheBidAndOfferSides"/>
+                    <s:enumeration value="InViewOfCommon"/>
+                    <s:enumeration value="EquipmentChangeover"/>
+                    <s:enumeration value="SubPennyTrading"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:element name="SearchQuotesByQuoteConditionResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="SearchQuotesByQuoteConditionResult" type="tns:ArrayOfQuoteResults"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchQuotesByQuoteConditions">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Symbols" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="StartDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="EndDateTime" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="MarketCenters" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="QuoteConditions" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchQuotesByQuoteConditionsResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="SearchQuotesByQuoteConditionsResult" type="tns:ArrayOfQuoteResults"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SymbolsList" nillable="true" type="tns:SymbolsList"/>
+            <s:element name="SearchSymbolResult" nillable="true" type="tns:SearchSymbolResult"/>
+            <s:element name="ArrayOfLookupCompanyResult" nillable="true" type="tns:ArrayOfLookupCompanyResult"/>
+            <s:element name="ArrayOfQuoteCondition" nillable="true" type="tns:ArrayOfQuoteCondition"/>
+            <s:element name="ArrayOfMarketCenter" nillable="true" type="tns:ArrayOfMarketCenter"/>
+            <s:element name="ArrayOfQuoteResults" nillable="true" type="tns:ArrayOfQuoteResults"/>
+        </s:schema>
+    </wsdl:types>
+    <wsdl:message name="ListSymbolsSoapIn">
+        <wsdl:part name="parameters" element="tns:ListSymbols"/>
+    </wsdl:message>
+    <wsdl:message name="ListSymbolsSoapOut">
+        <wsdl:part name="parameters" element="tns:ListSymbolsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ListSymbolsHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="SearchSymbolSoapIn">
+        <wsdl:part name="parameters" element="tns:SearchSymbol"/>
+    </wsdl:message>
+    <wsdl:message name="SearchSymbolSoapOut">
+        <wsdl:part name="parameters" element="tns:SearchSymbolResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SearchSymbolHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="LookupSymbolAndCompanySoapIn">
+        <wsdl:part name="parameters" element="tns:LookupSymbolAndCompany"/>
+    </wsdl:message>
+    <wsdl:message name="LookupSymbolAndCompanySoapOut">
+        <wsdl:part name="parameters" element="tns:LookupSymbolAndCompanyResponse"/>
+    </wsdl:message>
+    <wsdl:message name="LookupSymbolAndCompanyHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="ListQuoteConditionsSoapIn">
+        <wsdl:part name="parameters" element="tns:ListQuoteConditions"/>
+    </wsdl:message>
+    <wsdl:message name="ListQuoteConditionsSoapOut">
+        <wsdl:part name="parameters" element="tns:ListQuoteConditionsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ListQuoteConditionsHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="ListMarketCentersSoapIn">
+        <wsdl:part name="parameters" element="tns:ListMarketCenters"/>
+    </wsdl:message>
+    <wsdl:message name="ListMarketCentersSoapOut">
+        <wsdl:part name="parameters" element="tns:ListMarketCentersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ListMarketCentersHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="GetQuotesSoapIn">
+        <wsdl:part name="parameters" element="tns:GetQuotes"/>
+    </wsdl:message>
+    <wsdl:message name="GetQuotesSoapOut">
+        <wsdl:part name="parameters" element="tns:GetQuotesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetQuotesHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="GetPreMarketQuotesSoapIn">
+        <wsdl:part name="parameters" element="tns:GetPreMarketQuotes"/>
+    </wsdl:message>
+    <wsdl:message name="GetPreMarketQuotesSoapOut">
+        <wsdl:part name="parameters" element="tns:GetPreMarketQuotesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetPreMarketQuotesHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="GetPostMarketQuotesSoapIn">
+        <wsdl:part name="parameters" element="tns:GetPostMarketQuotes"/>
+    </wsdl:message>
+    <wsdl:message name="GetPostMarketQuotesSoapOut">
+        <wsdl:part name="parameters" element="tns:GetPostMarketQuotesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetPostMarketQuotesHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskPriceSoapIn">
+        <wsdl:part name="parameters" element="tns:SearchQuotesByBidAskPrice"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskPriceSoapOut">
+        <wsdl:part name="parameters" element="tns:SearchQuotesByBidAskPriceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskPriceHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskQuantitySoapIn">
+        <wsdl:part name="parameters" element="tns:SearchQuotesByBidAskQuantity"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskQuantitySoapOut">
+        <wsdl:part name="parameters" element="tns:SearchQuotesByBidAskQuantityResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskQuantityHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionSoapIn">
+        <wsdl:part name="parameters" element="tns:SearchQuotesByQuoteCondition"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionSoapOut">
+        <wsdl:part name="parameters" element="tns:SearchQuotesByQuoteConditionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionsSoapIn">
+        <wsdl:part name="parameters" element="tns:SearchQuotesByQuoteConditions"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionsSoapOut">
+        <wsdl:part name="parameters" element="tns:SearchQuotesByQuoteConditionsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionsHeader">
+        <wsdl:part name="Header" element="tns:Header"/>
+    </wsdl:message>
+    <wsdl:message name="ListSymbolsHttpGetIn">
+        <wsdl:part name="StartDate" type="s:string"/>
+        <wsdl:part name="EndDate" type="s:string"/>
+        <wsdl:part name="StartSymbol" type="s:string"/>
+        <wsdl:part name="EndSymbol" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="ListSymbolsHttpGetOut">
+        <wsdl:part name="Body" element="tns:SymbolsList"/>
+    </wsdl:message>
+    <wsdl:message name="SearchSymbolHttpGetIn">
+        <wsdl:part name="SearchPattern" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchSymbolHttpGetOut">
+        <wsdl:part name="Body" element="tns:SearchSymbolResult"/>
+    </wsdl:message>
+    <wsdl:message name="LookupSymbolAndCompanyHttpGetIn">
+        <wsdl:part name="Identifiers" type="s:string"/>
+        <wsdl:part name="IdentifierType" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="LookupSymbolAndCompanyHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfLookupCompanyResult"/>
+    </wsdl:message>
+    <wsdl:message name="ListQuoteConditionsHttpGetIn"/>
+    <wsdl:message name="ListQuoteConditionsHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteCondition"/>
+    </wsdl:message>
+    <wsdl:message name="ListMarketCentersHttpGetIn"/>
+    <wsdl:message name="ListMarketCentersHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfMarketCenter"/>
+    </wsdl:message>
+    <wsdl:message name="GetQuotesHttpGetIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="GetQuotesHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="GetPreMarketQuotesHttpGetIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="QuoteDate" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="GetPreMarketQuotesHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="GetPostMarketQuotesHttpGetIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="QuoteDate" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="GetPostMarketQuotesHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskPriceHttpGetIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+        <wsdl:part name="LowPrice" type="s:string"/>
+        <wsdl:part name="HighPrice" type="s:string"/>
+        <wsdl:part name="Side" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskPriceHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskQuantityHttpGetIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+        <wsdl:part name="LowQuantity" type="s:string"/>
+        <wsdl:part name="HighQuantity" type="s:string"/>
+        <wsdl:part name="Side" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskQuantityHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionHttpGetIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+        <wsdl:part name="QuoteCondition" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionsHttpGetIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+        <wsdl:part name="QuoteConditions" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionsHttpGetOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="ListSymbolsHttpPostIn">
+        <wsdl:part name="StartDate" type="s:string"/>
+        <wsdl:part name="EndDate" type="s:string"/>
+        <wsdl:part name="StartSymbol" type="s:string"/>
+        <wsdl:part name="EndSymbol" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="ListSymbolsHttpPostOut">
+        <wsdl:part name="Body" element="tns:SymbolsList"/>
+    </wsdl:message>
+    <wsdl:message name="SearchSymbolHttpPostIn">
+        <wsdl:part name="SearchPattern" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchSymbolHttpPostOut">
+        <wsdl:part name="Body" element="tns:SearchSymbolResult"/>
+    </wsdl:message>
+    <wsdl:message name="LookupSymbolAndCompanyHttpPostIn">
+        <wsdl:part name="Identifiers" type="s:string"/>
+        <wsdl:part name="IdentifierType" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="LookupSymbolAndCompanyHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfLookupCompanyResult"/>
+    </wsdl:message>
+    <wsdl:message name="ListQuoteConditionsHttpPostIn"/>
+    <wsdl:message name="ListQuoteConditionsHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteCondition"/>
+    </wsdl:message>
+    <wsdl:message name="ListMarketCentersHttpPostIn"/>
+    <wsdl:message name="ListMarketCentersHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfMarketCenter"/>
+    </wsdl:message>
+    <wsdl:message name="GetQuotesHttpPostIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="GetQuotesHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="GetPreMarketQuotesHttpPostIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="QuoteDate" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="GetPreMarketQuotesHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="GetPostMarketQuotesHttpPostIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="QuoteDate" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="GetPostMarketQuotesHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskPriceHttpPostIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+        <wsdl:part name="LowPrice" type="s:string"/>
+        <wsdl:part name="HighPrice" type="s:string"/>
+        <wsdl:part name="Side" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskPriceHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskQuantityHttpPostIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+        <wsdl:part name="LowQuantity" type="s:string"/>
+        <wsdl:part name="HighQuantity" type="s:string"/>
+        <wsdl:part name="Side" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByBidAskQuantityHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionHttpPostIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+        <wsdl:part name="QuoteCondition" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionsHttpPostIn">
+        <wsdl:part name="Symbols" type="s:string"/>
+        <wsdl:part name="StartDateTime" type="s:string"/>
+        <wsdl:part name="EndDateTime" type="s:string"/>
+        <wsdl:part name="MarketCenters" type="s:string"/>
+        <wsdl:part name="QuoteConditions" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="SearchQuotesByQuoteConditionsHttpPostOut">
+        <wsdl:part name="Body" element="tns:ArrayOfQuoteResults"/>
+    </wsdl:message>
+    <wsdl:portType name="NASDAQQuotesSoap">
+        <wsdl:operation name="ListSymbols">
+            <wsdl:input message="tns:ListSymbolsSoapIn"/>
+            <wsdl:output message="tns:ListSymbolsSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchSymbol">
+            <wsdl:input message="tns:SearchSymbolSoapIn"/>
+            <wsdl:output message="tns:SearchSymbolSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="LookupSymbolAndCompany">
+            <wsdl:input message="tns:LookupSymbolAndCompanySoapIn"/>
+            <wsdl:output message="tns:LookupSymbolAndCompanySoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="ListQuoteConditions">
+            <wsdl:input message="tns:ListQuoteConditionsSoapIn"/>
+            <wsdl:output message="tns:ListQuoteConditionsSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="ListMarketCenters">
+            <wsdl:input message="tns:ListMarketCentersSoapIn"/>
+            <wsdl:output message="tns:ListMarketCentersSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuotes">
+            <wsdl:input message="tns:GetQuotesSoapIn"/>
+            <wsdl:output message="tns:GetQuotesSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPreMarketQuotes">
+            <wsdl:input message="tns:GetPreMarketQuotesSoapIn"/>
+            <wsdl:output message="tns:GetPreMarketQuotesSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPostMarketQuotes">
+            <wsdl:input message="tns:GetPostMarketQuotesSoapIn"/>
+            <wsdl:output message="tns:GetPostMarketQuotesSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskPrice">
+            <wsdl:input message="tns:SearchQuotesByBidAskPriceSoapIn"/>
+            <wsdl:output message="tns:SearchQuotesByBidAskPriceSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskQuantity">
+            <wsdl:input message="tns:SearchQuotesByBidAskQuantitySoapIn"/>
+            <wsdl:output message="tns:SearchQuotesByBidAskQuantitySoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteCondition">
+            <wsdl:input message="tns:SearchQuotesByQuoteConditionSoapIn"/>
+            <wsdl:output message="tns:SearchQuotesByQuoteConditionSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteConditions">
+            <wsdl:input message="tns:SearchQuotesByQuoteConditionsSoapIn"/>
+            <wsdl:output message="tns:SearchQuotesByQuoteConditionsSoapOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="NASDAQQuotesHttpGet">
+        <wsdl:operation name="ListSymbols">
+            <wsdl:input message="tns:ListSymbolsHttpGetIn"/>
+            <wsdl:output message="tns:ListSymbolsHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchSymbol">
+            <wsdl:input message="tns:SearchSymbolHttpGetIn"/>
+            <wsdl:output message="tns:SearchSymbolHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="LookupSymbolAndCompany">
+            <wsdl:input message="tns:LookupSymbolAndCompanyHttpGetIn"/>
+            <wsdl:output message="tns:LookupSymbolAndCompanyHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="ListQuoteConditions">
+            <wsdl:input message="tns:ListQuoteConditionsHttpGetIn"/>
+            <wsdl:output message="tns:ListQuoteConditionsHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="ListMarketCenters">
+            <wsdl:input message="tns:ListMarketCentersHttpGetIn"/>
+            <wsdl:output message="tns:ListMarketCentersHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuotes">
+            <wsdl:input message="tns:GetQuotesHttpGetIn"/>
+            <wsdl:output message="tns:GetQuotesHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPreMarketQuotes">
+            <wsdl:input message="tns:GetPreMarketQuotesHttpGetIn"/>
+            <wsdl:output message="tns:GetPreMarketQuotesHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPostMarketQuotes">
+            <wsdl:input message="tns:GetPostMarketQuotesHttpGetIn"/>
+            <wsdl:output message="tns:GetPostMarketQuotesHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskPrice">
+            <wsdl:input message="tns:SearchQuotesByBidAskPriceHttpGetIn"/>
+            <wsdl:output message="tns:SearchQuotesByBidAskPriceHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskQuantity">
+            <wsdl:input message="tns:SearchQuotesByBidAskQuantityHttpGetIn"/>
+            <wsdl:output message="tns:SearchQuotesByBidAskQuantityHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteCondition">
+            <wsdl:input message="tns:SearchQuotesByQuoteConditionHttpGetIn"/>
+            <wsdl:output message="tns:SearchQuotesByQuoteConditionHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteConditions">
+            <wsdl:input message="tns:SearchQuotesByQuoteConditionsHttpGetIn"/>
+            <wsdl:output message="tns:SearchQuotesByQuoteConditionsHttpGetOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="NASDAQQuotesHttpPost">
+        <wsdl:operation name="ListSymbols">
+            <wsdl:input message="tns:ListSymbolsHttpPostIn"/>
+            <wsdl:output message="tns:ListSymbolsHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchSymbol">
+            <wsdl:input message="tns:SearchSymbolHttpPostIn"/>
+            <wsdl:output message="tns:SearchSymbolHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="LookupSymbolAndCompany">
+            <wsdl:input message="tns:LookupSymbolAndCompanyHttpPostIn"/>
+            <wsdl:output message="tns:LookupSymbolAndCompanyHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="ListQuoteConditions">
+            <wsdl:input message="tns:ListQuoteConditionsHttpPostIn"/>
+            <wsdl:output message="tns:ListQuoteConditionsHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="ListMarketCenters">
+            <wsdl:input message="tns:ListMarketCentersHttpPostIn"/>
+            <wsdl:output message="tns:ListMarketCentersHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuotes">
+            <wsdl:input message="tns:GetQuotesHttpPostIn"/>
+            <wsdl:output message="tns:GetQuotesHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPreMarketQuotes">
+            <wsdl:input message="tns:GetPreMarketQuotesHttpPostIn"/>
+            <wsdl:output message="tns:GetPreMarketQuotesHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPostMarketQuotes">
+            <wsdl:input message="tns:GetPostMarketQuotesHttpPostIn"/>
+            <wsdl:output message="tns:GetPostMarketQuotesHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskPrice">
+            <wsdl:input message="tns:SearchQuotesByBidAskPriceHttpPostIn"/>
+            <wsdl:output message="tns:SearchQuotesByBidAskPriceHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskQuantity">
+            <wsdl:input message="tns:SearchQuotesByBidAskQuantityHttpPostIn"/>
+            <wsdl:output message="tns:SearchQuotesByBidAskQuantityHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteCondition">
+            <wsdl:input message="tns:SearchQuotesByQuoteConditionHttpPostIn"/>
+            <wsdl:output message="tns:SearchQuotesByQuoteConditionHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteConditions">
+            <wsdl:input message="tns:SearchQuotesByQuoteConditionsHttpPostIn"/>
+            <wsdl:output message="tns:SearchQuotesByQuoteConditionsHttpPostOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="NASDAQQuotesSoap" type="tns:NASDAQQuotesSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="ListSymbols">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/ListSymbols" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:ListSymbolsHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchSymbol">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchSymbol" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:SearchSymbolHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="LookupSymbolAndCompany">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/LookupSymbolAndCompany" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:LookupSymbolAndCompanyHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListQuoteConditions">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/ListQuoteConditions" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:ListQuoteConditionsHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListMarketCenters">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/ListMarketCenters" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:ListMarketCentersHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuotes">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/GetQuotes" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:GetQuotesHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPreMarketQuotes">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/GetPreMarketQuotes" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:GetPreMarketQuotesHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPostMarketQuotes">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/GetPostMarketQuotes" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:GetPostMarketQuotesHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskPrice">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchQuotesByBidAskPrice" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:SearchQuotesByBidAskPriceHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskQuantity">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchQuotesByBidAskQuantity" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:SearchQuotesByBidAskQuantityHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteCondition">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchQuotesByQuoteCondition" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:SearchQuotesByQuoteConditionHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteConditions">
+            <soap:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchQuotesByQuoteConditions" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header message="tns:SearchQuotesByQuoteConditionsHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="NASDAQQuotesSoap12" type="tns:NASDAQQuotesSoap">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="ListSymbols">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/ListSymbols" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:ListSymbolsHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchSymbol">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchSymbol" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:SearchSymbolHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="LookupSymbolAndCompany">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/LookupSymbolAndCompany" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:LookupSymbolAndCompanyHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListQuoteConditions">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/ListQuoteConditions" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:ListQuoteConditionsHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListMarketCenters">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/ListMarketCenters" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:ListMarketCentersHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuotes">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/GetQuotes" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:GetQuotesHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPreMarketQuotes">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/GetPreMarketQuotes" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:GetPreMarketQuotesHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPostMarketQuotes">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/GetPostMarketQuotes" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:GetPostMarketQuotesHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskPrice">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchQuotesByBidAskPrice" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:SearchQuotesByBidAskPriceHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskQuantity">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchQuotesByBidAskQuantity" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:SearchQuotesByBidAskQuantityHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteCondition">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchQuotesByQuoteCondition" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:SearchQuotesByQuoteConditionHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteConditions">
+            <soap12:operation soapAction="http://ws.nasdaqdod.com/services/v1/SearchQuotesByQuoteConditions" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:SearchQuotesByQuoteConditionsHeader" part="Header" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="NASDAQQuotesHttpGet" type="tns:NASDAQQuotesHttpGet">
+        <http:binding verb="GET"/>
+        <wsdl:operation name="ListSymbols">
+            <http:operation location="/ListSymbols"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchSymbol">
+            <http:operation location="/SearchSymbol"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="LookupSymbolAndCompany">
+            <http:operation location="/LookupSymbolAndCompany"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListQuoteConditions">
+            <http:operation location="/ListQuoteConditions"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListMarketCenters">
+            <http:operation location="/ListMarketCenters"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuotes">
+            <http:operation location="/GetQuotes"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPreMarketQuotes">
+            <http:operation location="/GetPreMarketQuotes"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPostMarketQuotes">
+            <http:operation location="/GetPostMarketQuotes"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskPrice">
+            <http:operation location="/SearchQuotesByBidAskPrice"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskQuantity">
+            <http:operation location="/SearchQuotesByBidAskQuantity"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteCondition">
+            <http:operation location="/SearchQuotesByQuoteCondition"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteConditions">
+            <http:operation location="/SearchQuotesByQuoteConditions"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="NASDAQQuotesHttpPost" type="tns:NASDAQQuotesHttpPost">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="ListSymbols">
+            <http:operation location="/ListSymbols"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchSymbol">
+            <http:operation location="/SearchSymbol"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="LookupSymbolAndCompany">
+            <http:operation location="/LookupSymbolAndCompany"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListQuoteConditions">
+            <http:operation location="/ListQuoteConditions"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListMarketCenters">
+            <http:operation location="/ListMarketCenters"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuotes">
+            <http:operation location="/GetQuotes"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPreMarketQuotes">
+            <http:operation location="/GetPreMarketQuotes"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPostMarketQuotes">
+            <http:operation location="/GetPostMarketQuotes"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskPrice">
+            <http:operation location="/SearchQuotesByBidAskPrice"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByBidAskQuantity">
+            <http:operation location="/SearchQuotesByBidAskQuantity"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteCondition">
+            <http:operation location="/SearchQuotesByQuoteCondition"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SearchQuotesByQuoteConditions">
+            <http:operation location="/SearchQuotesByQuoteConditions"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="NASDAQQuotes">
+        <wsdl:port name="NASDAQQuotesSoap" binding="tns:NASDAQQuotesSoap">
+            <soap:address location="http://ws.nasdaqdod.com/v1/NASDAQQuotes.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="NASDAQQuotesSoap12" binding="tns:NASDAQQuotesSoap12">
+            <soap12:address location="http://ws.nasdaqdod.com/v1/NASDAQQuotes.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="NASDAQQuotesHttpGet" binding="tns:NASDAQQuotesHttpGet">
+            <http:address location="http://ws.nasdaqdod.com/v1/NASDAQQuotes.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="NASDAQQuotesHttpPost" binding="tns:NASDAQQuotesHttpPost">
+            <http:address location="http://ws.nasdaqdod.com/v1/NASDAQQuotes.asmx"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <ListMarketCentersResponse xmlns="http://ws.nasdaqdod.com/services/v1/">
+            <ListMarketCentersResult>
+                <MarketCenter> <!-- This entry was manually added -->
+                    <Outcome>Success</Outcome>
+                    <Identity>Request</Identity>
+                    <Delay>0</Delay>
+                    <Symbol>WM</Symbol>
+                    <Code>WM</Code>
+                    <Name>A Mocked Name</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Identity>Request</Identity>
+                    <Delay>0</Delay>
+                    <Symbol>NSDQ</Symbol>
+                    <Code>Q</Code>
+                    <Name>The NASDAQ Stock Market LLC</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>CBOE</Symbol>
+                    <Code>W</Code>
+                    <Name>CBOE Stock Exchange</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>BX</Symbol>
+                    <Code>B</Code>
+                    <Name>NASDAQ OMX BX, Inc</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>CHXE</Symbol>
+                    <Code>M</Code>
+                    <Name>Chicago Stock Exchange</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>CINN</Symbol>
+                    <Code>C</Code>
+                    <Name>National Stock Exchange</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>ISEG</Symbol>
+                    <Code>I</Code>
+                    <Name>International Securities Exchange</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>ADFN</Symbol>
+                    <Code>D</Code>
+                    <Name>Industry Regulatory Authority</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>BATS</Symbol>
+                    <Code>Z</Code>
+                    <Name>BATS Exchange Inc.</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>ARCX</Symbol>
+                    <Code>P</Code>
+                    <Name>NYSE Arca</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>NYSE</Symbol>
+                    <Code>N</Code>
+                    <Name>NYSE Euronext</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>AMEX</Symbol>
+                    <Code>A</Code>
+                    <Name>NYSE AMEX</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>INDP</Symbol>
+                    <Code>E</Code>
+                    <Name>Market Independent</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>EDGA</Symbol>
+                    <Code>J</Code>
+                    <Name>EDGA Exchange Inc.</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>EDGX</Symbol>
+                    <Code>K</Code>
+                    <Name>EDGX Exchange Inc.</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>PHLX</Symbol>
+                    <Code>X</Code>
+                    <Name>NASDAQ OMX PSX</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>BATSY</Symbol>
+                    <Code>Y</Code>
+                    <Name>BATS Y-Exchange Inc.</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>NSDQT</Symbol>
+                    <Code>T</Code>
+                    <Name>The NASDAQ Stock Market LLC</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>OTCBB</Symbol>
+                    <Code>U</Code>
+                    <Name>OTC Bulletin Board</Name>
+                </MarketCenter>
+                <MarketCenter>
+                    <Outcome>Success</Outcome>
+                    <Delay>0</Delay>
+                    <Symbol>NNOTC</Symbol>
+                    <Code>u</Code>
+                    <Name>OTC Markets Group</Name>
+                </MarketCenter>
+            </ListMarketCentersResult>
+        </ListMarketCentersResponse>
+    </soap:Body>
+</soap:Envelope>

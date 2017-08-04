@@ -14,6 +14,7 @@
 
     <modules>
         <module>nasdaq</module>
+        <module>nasdaq-wiremock</module>
     </modules>
 
 

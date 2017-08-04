@@ -1,13 +1,11 @@
-package org.tsdes.spring.soap
+package org.tsdes.spring.nasdaq
 
-import org.tsdes.spring.soap.client.NASDAQQuotes
+import org.tsdes.spring.soap.nasdaq.client.NASDAQQuotes
 
 /**
  * Created by arcuri82 on 04-Aug-17.
  */
-class Main {
-}
-
+class Main
 
 fun main(args: Array<String>) {
 
@@ -16,8 +14,8 @@ fun main(args: Array<String>) {
     val service = NASDAQQuotes()
     val ws = service.getNASDAQQuotesSoap()
 
-    for (mc in ws.listMarketCenters().marketCenter) {
-        System.out.println(mc.name)
+    for (mc in ws.listMarketCenters().getMarketCenter()) {
+        println(mc.name)
     }
 
     /*

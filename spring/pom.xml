@@ -26,7 +26,6 @@
         <version.kotlin>1.1.3</version.kotlin>
         <version.springboot>1.5.4.RELEASE</version.springboot>
         <version.springfox>2.6.1</version.springfox>
-        <version.amqp>1.7.3.RELEASE</version.amqp>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
@@ -86,14 +85,9 @@
                 <version>${version.springfox}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.amqp</groupId>
-                <artifactId>spring-amqp</artifactId>
-                <version>${version.amqp}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.amqp</groupId>
-                <artifactId>spring-rabbit</artifactId>
-                <version>${version.amqp}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${version.springboot}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

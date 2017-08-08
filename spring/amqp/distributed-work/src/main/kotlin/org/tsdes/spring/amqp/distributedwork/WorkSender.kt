@@ -1,4 +1,4 @@
-package org.tsdes.spring.amqp.basequeue
+package org.tsdes.spring.amqp.distributedwork
 
 import org.springframework.amqp.core.Queue
 import org.springframework.amqp.rabbit.core.RabbitTemplate

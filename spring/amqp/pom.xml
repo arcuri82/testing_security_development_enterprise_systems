@@ -15,6 +15,7 @@
     <modules>
         <module>base-queue</module>
         <module>distributed-work</module>
+        <module>fanout</module>
     </modules>
 
 

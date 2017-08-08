@@ -1,4 +1,4 @@
-package org.tsdes.spring.amqp.distributedwork
+package org.tsdes.spring.amqp.fanout
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -33,22 +33,22 @@ class WorkerDockerTest {
 
 
     @Test
-    fun testLoadBalanced() {
+    fun testFanout() {
 
-        val list = listOf(2000L, 300, 1000, 300)
+        val list = listOf(100L, 200, 400)
+        val sum = list.sum().toInt()
 
-        counter.reset(list.size)
+        counter.reset(2 * list.size)
 
         sender.send(list)
 
-        val completed = counter.await(4)
+        val completed = counter.await(2)
         assertTrue(completed)
 
         val data = counter.retrieveJobsDone()
 
         assertEquals(2, data.size)
-        assertEquals(list.size, data.values.sum())
-        assertTrue(data.any { it.value == 1 })
-        assertTrue(data.any { it.value == 3 })
+        assertEquals(2 * sum,  data.values.sum())
+        assertTrue(data.all { it.value == sum })
     }
 }

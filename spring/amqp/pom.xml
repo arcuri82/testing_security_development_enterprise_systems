@@ -17,6 +17,7 @@
         <module>distributed-work</module>
         <module>fanout</module>
         <module>direct-exchange</module>
+        <module>topic-exchange</module>
     </modules>
 
 

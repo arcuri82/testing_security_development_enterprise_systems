@@ -3,8 +3,6 @@ package org.tsdes.spring.amqp.distributedwork
 import org.springframework.amqp.core.Queue
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
-import org.tsdes.spring.amqp.basequeue.WorkReceiver
-import org.tsdes.spring.amqp.basequeue.WorkSender
 
 
 const val QUEUE_NAME = "queue:distributed-work"

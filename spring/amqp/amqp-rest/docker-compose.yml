@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  rabbitmq:
+    image:  "rabbitmq:3"
+
+  sender:
+    build:
+        context: ./sender
+        dockerfile: Dockerfile
+    ports:
+       - "9000:8080"
+    depends_on:
+       - rabbitmq
+
+  receiver_0:
+     build:
+        context: ./receiver
+        dockerfile: Dockerfile
+     ports:
+        - "9001:8080"
+     depends_on:
+        - rabbitmq
+
+  receiver_1:
+    build:
+        context: ./receiver
+        dockerfile: Dockerfile
+    ports:
+        - "9002:8080"
+    depends_on:
+        - rabbitmq

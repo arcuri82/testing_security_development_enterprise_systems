@@ -14,6 +14,7 @@
 
     <modules>
         <module>xml-and-json</module>
+        <module>kotlin</module>
         <module>examples</module>
         <module>utils</module>
         <module>rest</module>

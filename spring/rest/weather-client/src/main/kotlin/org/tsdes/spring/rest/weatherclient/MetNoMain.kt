@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
 
     //http://api.met.no/weatherapi/textforecast/1.6/?forecast=land;language=nb
     val uri = UriBuilder.fromUri("http://api.met.no/weatherapi/textforecast/1.6")
-            .port(80) // not necessary, as 80 is default anywat
+            .port(80) // not necessary, as 80 is default anyway
             .queryParam("forecast", "land") // equivalent to "?forecast=land"
             .queryParam("language", "nb")   // equivalent to "&language=nb"
             .build()

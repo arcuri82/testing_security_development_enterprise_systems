@@ -49,6 +49,11 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!--
+                The Java API comes with the JDK itself.
+                On the other hand, the Kotlin API is treated like any other
+                third-party library, and we need to include it here as a dependency.
+            -->
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib-jre8</artifactId>
@@ -102,6 +107,7 @@
     <build>
         <!--see https://kotlinlang.org/docs/kotlin-docs.pdf -->
         <plugins>
+            <!-- It is important that the Kotlin plugin is executed before the Java compiler -->
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <groupId>org.jetbrains.kotlin</groupId>

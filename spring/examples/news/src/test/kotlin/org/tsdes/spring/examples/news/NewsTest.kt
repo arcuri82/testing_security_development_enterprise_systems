@@ -12,9 +12,14 @@ import javax.validation.ConstraintViolationException
 /**
  * Created by arcuri82 on 16-Jun-17.
  */
-@RunWith(SpringRunner::class)
+@RunWith(SpringRunner::class) // needed to let Spring doing all the dependency injection and bean initialization
 @DataJpaTest //this take care to start and re-init an embedded database at each test execution
 class NewsTest {
+
+    /*
+        To do dependency injection in Spring, can use @Autowired.
+        Also JEE @Inject would work.
+     */
 
     @Autowired
     private lateinit var crud: NewsRepository
@@ -170,6 +175,15 @@ class NewsTest {
     }
 }
 
+/*
+    When we run the tests, Spring JUnit Runner will scan the classpath
+    to find a Spring application entry point.
+    So here, we provide one by just having a class annotated with
+    @SpringBootApplication
 
+    Note that Spring Boot analyze what provided on the classpath (ie, the
+    dependencies in the pom file) to decide what to configure (eg if there
+    is the need to start a web server).
+ */
 @SpringBootApplication
 class TestApplication

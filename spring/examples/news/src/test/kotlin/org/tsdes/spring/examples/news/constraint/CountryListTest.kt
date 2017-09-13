@@ -10,8 +10,12 @@ class CountryListTest {
 
     @Test
     fun testList() {
+        /*
+            Note how we access fields in the companion objects like
+            it was a static value in Java.
+         */
         val list = CountryList.countries
         assertTrue("Wrong size: ${list.size}", list.size > 200)
-        assertTrue(list.any({ s -> s.equals("Norway", ignoreCase = true) }))
+        assertTrue(list.any { it.equals("Norway", ignoreCase = true) })
     }
 }

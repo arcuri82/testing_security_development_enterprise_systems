@@ -127,7 +127,7 @@ class BestDrinkApiTest {
         //this now fails, as charset conversion problem
         assertFalse("Body: $body", body.toLowerCase() == "øl")
         assertEquals(2, body.length) // first invalid, but still 2 characters
-        println("Read value: " + body)
+        println("Read value: " + body)  // �l
     }
 
     @Test

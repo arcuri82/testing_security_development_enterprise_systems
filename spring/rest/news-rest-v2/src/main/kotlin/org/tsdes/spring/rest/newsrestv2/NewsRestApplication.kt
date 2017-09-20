@@ -29,7 +29,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 class NewsRestApplication {
 
     @Bean
-    fun piApi(): Docket {
+    fun swaggerApi(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()

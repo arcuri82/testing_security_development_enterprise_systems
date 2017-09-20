@@ -19,18 +19,35 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
 /**
- * TODO explain reason for using scanBasePackages/basePackages
+ * You need to mark a class with @SpringBootApplication.
+ * This will be the entry point for the Spring Boot application.
+ * When started it will recursively scan the classpath of current
+ * package and subpackages for beans to instantiate.
+ *
+ * One problem here is that we are in "org.tsdes.spring.rest.newsrest",
+ * which is not an ancestor of the "org.tsdes.spring.examples.news"
+ * library module we want to use.
+ * Therefore, we need to explicitly tell Spring which packages to scan.
+ * In our case, their common ancestor is "org.tsdes.spring".
+ * However, in that case, we also have to do the same for
+ * @EnableJpaRepositories and @EntityScan.
+ * These latter two annotations would not had been needed if
+ * @SpringBootApplication was in an ancestor package
  *
  * Created by arcuri82 on 06-Jul-17.
  */
 @SpringBootApplication(scanBasePackages = arrayOf("org.tsdes.spring"))
 @EnableJpaRepositories(basePackages = arrayOf("org.tsdes.spring"))
 @EntityScan(basePackages = arrayOf("org.tsdes.spring"))
-@EnableSwagger2
+@EnableSwagger2 //needed to enable Swagger
 class NewsRestApplication {
 
+
+    /*
+        Bean used to configure Swagger documentation
+     */
     @Bean
-    fun piApi(): Docket {
+    fun swaggerApi(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
@@ -46,17 +63,36 @@ class NewsRestApplication {
                 .build()
     }
 
+    /*
+        Bean used to configure how JSON un/marshalling is done.
+     */
     @Bean(name = arrayOf("OBJECT_MAPPER_BEAN"))
     fun jsonObjectMapper(): ObjectMapper {
         return Jackson2ObjectMapperBuilder.json()
                 .serializationInclusion(JsonInclude.Include.NON_NULL) // Don’t include null values
-                //TODO explain
+                /*
+                    JSON does not specify how dates should be represented, whereas JavaScript does.
+                    And in JavaScript it is ISO 8601.
+                    So, to represent dates to send over a network consumed by different clients,
+                    it is reasonable to send them in ISO 8601 instead of a numeric timestamp.
+                    Here we make sure timestamps are not used in marshalling of JSON data.
+
+                    Example:
+                    2001-01-05T13:15:30Z
+                 */
                 .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) //ISODate
+                //make sure we can use Java 8 dates
                 .modules(JavaTimeModule())
                 .build()
     }
 }
 
+/*
+    If you run this directly, you can then check the Swagger documentation at:
+
+    http://localhost:8080/newsrest/api/swagger-ui.html
+
+ */
 fun main(args: Array<String>) {
     SpringApplication.run(NewsRestApplication::class.java, *args)
 }

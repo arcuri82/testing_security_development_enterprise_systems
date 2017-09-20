@@ -11,7 +11,9 @@ import org.tsdes.spring.examples.news.constraint.Country
  *  This is just a POJO (plain old Java object), with no logic, just data.
  *  Also note how Swagger is used here to provide documentation.
  *
- *  TODO explain Kotlin "data"
+ *  Kotlin provides "data" classes. These are POJOs, where common
+ *  functions like "equals/hashCode/toString/copy" are automatically
+ *  provided with meaningful implementations.
  *
  * Created by arcuri82 on 12-Jul-17.
  */

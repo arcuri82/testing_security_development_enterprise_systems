@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 class PatchApplication {
 
     @Bean
-    fun piApi(): Docket {
+    fun swaggerApi(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .paths(PathSelectors.any())

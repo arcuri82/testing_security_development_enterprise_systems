@@ -34,9 +34,17 @@ class NewsRestApi {
         GET: get the resource specified in the URL
         POST: send data, creating a new resource
         PUT: update a resource
+        PATCH: partial update
         DELETE: delete the resource
 
-        TODO HTTP codes used here, plus Swagger for it
+        Common status codes:
+        200: OK
+        201: Resource created
+        204: Done, nothing to return
+        400: General user error, bad request
+        404: Resource not found
+        409: Conflict with current state
+        500: Server error
      */
 
     /*
@@ -273,7 +281,10 @@ class NewsRestApi {
             id = pathId!!.toLong()
         } catch (e: Exception) {
             /*
-                TODO discuss why here 400 instead of 404
+                If the above fails, it means the variable was not
+                a proper number. So could make sense here to
+                return 400 instead of 404, as we know that
+                the request is wrong
              */
             return ResponseEntity.status(400).build()
         }
@@ -299,14 +310,21 @@ class NewsRestApi {
 
 
     /*
-        TODO explain based on
+        This is one case in which JEE is actually better than Spring.
+        You might want to have constraints on user inputs directly
+        as annotations in method parameters, like it is done for
+        example on EJBs.
+        Unfortunately, Spring does not do such validation by default.
+        See poor excuse/motivation at:
 
         https://github.com/spring-projects/spring-boot/issues/6228
         https://github.com/spring-projects/spring-boot/issues/6574
 
-        - also @Validated
-        - JEE is better, as it avoids all this mess
-        - why annotations instead of internal checks? Swagger
+        This means we need to manually register an exception handler.
+        Every time a ConstraintViolationException is thrown, instead
+        of ending up in a 500 error, we catch it are return 400.
+
+        Important: we also need to add @Validated on this class.
      */
     @ExceptionHandler(value = ConstraintViolationException::class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)

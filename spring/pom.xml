@@ -20,6 +20,7 @@
         <module>rest</module>
         <module>soap</module>
         <module>amqp</module>
+        <module>security</module>
     </modules>
 
 
@@ -98,6 +99,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${version.springboot}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
                 <version>${version.springboot}</version>
             </dependency>
         </dependencies>

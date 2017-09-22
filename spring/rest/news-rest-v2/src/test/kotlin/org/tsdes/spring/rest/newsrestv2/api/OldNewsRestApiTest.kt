@@ -51,7 +51,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .body(dto)
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         given().get().then().statusCode(200).body("size()", equalTo(1))
@@ -74,7 +74,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .body(NewsDto(null, "author", "text", "Norway", null))
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         get().then()
@@ -97,7 +97,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .body(NewsDto(null, "author", text, "Norway", null))
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         //check if POST was fine
@@ -186,7 +186,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .body(NewsDto(null, authorId, text, country, null))
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
     }
 
     @Test

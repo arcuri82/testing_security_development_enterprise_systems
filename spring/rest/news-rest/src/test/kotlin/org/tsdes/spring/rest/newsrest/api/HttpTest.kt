@@ -72,7 +72,6 @@ class HttpTest : NRTestBase() {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testWrongVerb() {
 
         /*

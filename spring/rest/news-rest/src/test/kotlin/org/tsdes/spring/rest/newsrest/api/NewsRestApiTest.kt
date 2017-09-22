@@ -42,7 +42,7 @@ class NewsRestApiTest : NRTestBase() {
                 .body(dto)
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         given().get().then().statusCode(200).body("size()", equalTo(1))
@@ -65,7 +65,7 @@ class NewsRestApiTest : NRTestBase() {
                 .body(NewsDto(null, "author", "text", "Norway", null))
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         get().then()
@@ -79,7 +79,6 @@ class NewsRestApiTest : NRTestBase() {
 
 
     @Test
-    @Throws(Exception::class)
     fun testUpdate() {
 
         val text = "someText"
@@ -89,7 +88,7 @@ class NewsRestApiTest : NRTestBase() {
                 .body(NewsDto(null, "author", text, "Norway", null))
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         //check if POST was fine
@@ -178,7 +177,7 @@ class NewsRestApiTest : NRTestBase() {
                 .body(NewsDto(null, authorId, text, country, null))
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
     }
 
     @Test

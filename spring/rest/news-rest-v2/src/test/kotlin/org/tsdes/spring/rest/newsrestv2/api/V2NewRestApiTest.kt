@@ -33,7 +33,7 @@ class V2NewRestApiTest : NRTestBase() {
                 .body(dto)
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         //should be 1 news now
@@ -65,7 +65,7 @@ class V2NewRestApiTest : NRTestBase() {
                 .body(dto)
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         delete("/" + id).then().statusCode(204)

@@ -109,7 +109,7 @@ class NewsRestApi {
 
     @ApiOperation("Create a news")
     @PostMapping(consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
-    @ApiResponse(code = 200, message = "The id of newly created news")
+    @ApiResponse(code = 201, message = "The id of newly created news")
     fun createNews(
             @ApiParam("Text of news, plus author id and country. Should not specify id or creation time")
             @RequestBody
@@ -146,7 +146,7 @@ class NewsRestApi {
             return ResponseEntity.status(500).build()
         }
 
-        return ResponseEntity.ok(id)
+        return ResponseEntity.status(201).body(id)
     }
 
 
@@ -168,9 +168,9 @@ class NewsRestApi {
             return ResponseEntity.status(404).build()
         }
 
-        val dto = crud.findOne(id) ?: return ResponseEntity.status(404).build()
+        val entity = crud.findOne(id) ?: return ResponseEntity.status(404).build()
 
-        return ResponseEntity.ok(NewsConverter.transform(dto))
+        return ResponseEntity.ok(NewsConverter.transform(entity))
     }
 
 

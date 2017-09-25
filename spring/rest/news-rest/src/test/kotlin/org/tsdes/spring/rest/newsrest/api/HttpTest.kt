@@ -34,7 +34,7 @@ class HttpTest : NRTestBase() {
                 .body(dto)
                 .post()
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().asString()
 
         return id

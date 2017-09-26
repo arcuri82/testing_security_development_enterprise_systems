@@ -27,7 +27,11 @@ class SendReceiveDockerTest{
         class KGenericContainer(imageName: String) : GenericContainer<KGenericContainer>(imageName)
 
         /*
-            This will start a RabbitMQ server using Docker
+            This will start a RabbitMQ server using Docker.
+
+            This is equivalent to start the following from command-line:
+
+            docker run -p 5672:5672 rabbitmq:3
          */
         @ClassRule @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3")

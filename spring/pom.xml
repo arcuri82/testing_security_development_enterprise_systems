@@ -20,6 +20,7 @@
         <module>rest</module>
         <module>soap</module>
         <module>amqp</module>
+        <module>microservice</module>
         <module>security</module>
     </modules>
 
@@ -27,6 +28,7 @@
     <properties>
         <version.kotlin>1.1.3</version.kotlin>
         <version.springboot>1.5.4.RELEASE</version.springboot>
+        <version.springcloud>Dalston.SR3</version.springcloud>
         <version.springfox>2.6.1</version.springfox>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
@@ -105,6 +107,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
                 <version>${version.springboot}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${version.springcloud}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

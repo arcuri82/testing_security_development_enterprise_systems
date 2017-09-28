@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty
  * Created by arcuri82 on 20-Jul-17.
  */
 @ApiModel("A numeric counter, with name")
-class CounterDto(
+data class CounterDto(
 
         @ApiModelProperty("The unique id that identifies this counter resource")
         var id: Long? = null,

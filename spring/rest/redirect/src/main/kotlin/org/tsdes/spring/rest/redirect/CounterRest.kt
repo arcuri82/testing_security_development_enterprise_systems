@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicLong
 
     To summarize:
 
-    300: do NOT use, unless you are implementing a HATEOAS API (more on this later in the course)
+    300: do NOT use, unless you are implementing a HATEOAS API.
 
     301: permanent redirect, using the same HTTP verb, ie, the follow up of a POST should still
          be the a POST to the redirected resource (defined in the "Location" header).
@@ -35,7 +35,8 @@ import java.util.concurrent.atomic.AtomicLong
          that X is not a valid URI anymore, and so should always use Y from now on.
 
 
-    302: do NOT use. Do use 307 instead
+    302: do NOT use. Do use 307 instead. However, most browsers interpret 302 like
+         it was a 303.
 
 
     303: do NOT use it, although it is not a mistake. For example, the return code of
@@ -83,6 +84,9 @@ class CounterRest {
      */
     private val map: MutableMap<Long, CounterDto> = ConcurrentHashMap()
 
+    /**
+     * Keep track of the latest created counter
+     */
     private var latest: CounterDto? = null
 
 
@@ -120,8 +124,8 @@ class CounterRest {
 
     @ApiOperation("Get all the existing counters")
     @GetMapping(produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
-    fun getAll(): List<CounterDto> {
-        return map.values.toList()
+    fun getAll(): Collection<CounterDto> {
+        return map.values
     }
 
 
@@ -139,7 +143,7 @@ class CounterRest {
             @PathVariable("id")
             id: Long?): ResponseEntity<CounterDto> {
 
-        val dto = map.get(id)
+        val dto = map[id]
                 ?: return ResponseEntity.status(404).build()
 
         return ResponseEntity.ok(dto)

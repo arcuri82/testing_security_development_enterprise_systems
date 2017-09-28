@@ -20,6 +20,12 @@ import java.util.concurrent.atomic.AtomicLong
 @RestController
 class CounterRest {
 
+    /**
+     * Used to create unique ids.
+     * Note the fact that this is atomic to avoid
+     * concurrency issues if serving 2 HTTP requests
+     * at same time in different threads
+     */
     private val idGenerator = AtomicLong(0)
 
     /**
@@ -27,6 +33,14 @@ class CounterRest {
      */
     private val map: MutableMap<Long, CounterDto> = ConcurrentHashMap()
 
+    /*
+        WARNING: the above is "internal" state of the API.
+        Usually, this is a "a bad thing", and should be avoided.
+        But here we have it just to make the example simpler,
+        so do not have to deal with databases.
+        We ll go back to this point when we will speak of
+        "scaling horizontally" in microservices.
+     */
 
     @ApiOperation("Create a new counter")
     @PostMapping(consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
@@ -49,6 +63,8 @@ class CounterRest {
             here created will set the "Location" header, by specifying the URI of where we can GET it from.
             A relative (ie not absolute) URI will resolve against the URI of the request, eg "http://localhost:8080".
             Note that the response here has no body.
+
+            The return status of "created()" is 201
          */
         return ResponseEntity.created(URI.create("/patch/api/counters/" + dto.id)).build()
     }
@@ -56,8 +72,8 @@ class CounterRest {
 
     @ApiOperation("Get all the existing counters")
     @GetMapping(produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
-    fun getAll(): List<CounterDto> {
-        return map.values.toList()
+    fun getAll(): Collection<CounterDto> {
+        return map.values
     }
 
 
@@ -100,6 +116,10 @@ class CounterRest {
 
         /*
             Note: here we are allowing PUT to create a new resource
+
+            Here, I am allowing creating resources with PUT.
+            Using 201 (created) to mark this event instead of
+            a generic 204 (OK, but no content to return)
          */
         val code = if (map.containsKey(id)) 204 else 201
 
@@ -120,7 +140,7 @@ class CounterRest {
 
     @ApiOperation("Modify the counter based on the instructions in the request body")
     @PatchMapping(path = arrayOf("/{id}"),
-            // could have had a custom type here, but then would need unmarshaller for it
+            // could have had a custom type here, but then would need an unmarshaller for it
             consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE))
     fun patch(@ApiParam("The unique id of the counter")
               @PathVariable("id")
@@ -151,7 +171,7 @@ class CounterRest {
 
 
     /*
-        When dealing with resources that can be expressed/modelled with JSon,
+        When dealing with resources that can be expressed/modelled with JSON,
         there are two main formats for instructions:
         - (1) JSON Patch
         - (2) JSON Merge Patch
@@ -160,13 +180,13 @@ class CounterRest {
         It is more expressive than (2), but
         at the same time more complicated to handle.
 
-        (2) is just sending a subset of the JSon, and each of specified
+        (2) is just sending a subset of the JSON, and each of specified
         changes will be applied, ie overwritten.
         The only tricky thing to keep in mind is the handling of "null"
         values. Missing/unspecified elements will be ignored, whereas
         elements with null will get null.
         For example, if you have:
-        {"A":... , "B":...} as JSon resource, and you get a patch with:
+        {"A":... , "B":...} as JSON resource, and you get a patch with:
         {"B":null}, then A will not be modified, whereas B will be removed,
         ie results of the resource would be:
         {"A":...}
@@ -187,7 +207,6 @@ class CounterRest {
      */
 
     @ApiOperation("Modify the counter using JSON Merge Patch")
-
     @PatchMapping(path = arrayOf("/{id}"),
             consumes = arrayOf("application/merge-patch+json"))
     fun mergePatch(@ApiParam("The unique id of the counter")

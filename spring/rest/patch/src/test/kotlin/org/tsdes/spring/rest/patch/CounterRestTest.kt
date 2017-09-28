@@ -124,9 +124,23 @@ class CounterRestTest {
     }
 
     private fun verifyEqual(a: CounterDto, b: CounterDto) {
-        assertEquals(a.id, b.id)
-        assertEquals(a.name, b.name)
-        assertEquals(a.value, b.value)
+        /*
+            assertEquals(a.id, b.id)
+            assertEquals(a.name, b.name)
+            assertEquals(a.value, b.value)
+
+            Note: as CounterDto is marked as "data class", it
+            will have a sensible "equals" implementation based
+            on each of its fields.
+
+            If you go into the CounterDto class and remove the
+            keyword "data", then the check here will fail, because
+            it would just do a comparisons on the pointers to
+            the heap. Although the compared DTOs have exactly
+            the same state, they can be different objects
+            on the heap.
+        */
+        assertEquals(a, b)
     }
 
 

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 @Service
 class ReceivedMessages {
 
-    private val buffer : MutableList<String> = CopyOnWriteArrayList()
+    private val buffer : MutableList<String> = CopyOnWriteArrayList<String>()
 
     val data: List<String>
         get(){return buffer}

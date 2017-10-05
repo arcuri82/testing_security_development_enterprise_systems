@@ -21,7 +21,19 @@ import org.springframework.web.util.UriComponentsBuilder
 class ConverterRestServiceXml {
 
     /*
-        TODO explain
+        @Value us used to inject properties from the "application.properties" file.
+        Note, however, the "\" in front of "$".
+        Spring uses "${}" to resolve properties.
+        However, Kotlin uses "${}" for string interpolation.
+        So, to bypass the interpolation, we need to escape the "$"
+
+        This API will make a connection to an external one.
+        The URL of this external service is injected, and not hardcoded
+        here. The reason is that, being a property, we can easily change it
+        based on the context.
+        For example, during testing, we will not connect to the real external
+        server, but rather change the address to point to a mock one running
+        on the local host.
      */
     @Value("\${fixerWebAddress}")
     private lateinit var webAddress: String

@@ -3,6 +3,7 @@ package org.tsdes.spring.rest.newsrest.dto
 import io.swagger.annotations.ApiModelProperty
 import java.time.ZonedDateTime
 import org.tsdes.spring.examples.news.constraint.Country
+import java.lang.Deprecated
 
 /**
  * Created by arcuri82 on 12-Jul-17.
@@ -35,7 +36,7 @@ data class NewsDto(
         var text: String? = null,
 
         @ApiModelProperty("The country this news is related to")
-        @Country
+        @get:Country
         var country: String? = null,
 
         @ApiModelProperty("When the news was first created/published")
@@ -44,7 +45,7 @@ data class NewsDto(
 
 
     @ApiModelProperty("Deprecated. Use newsId instead")
-    @Deprecated("")
+    @Deprecated
     var id: String? = null
 
 }

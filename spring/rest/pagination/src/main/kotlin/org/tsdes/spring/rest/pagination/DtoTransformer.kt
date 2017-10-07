@@ -52,11 +52,11 @@ object DtoTransformer {
                   withComments: Boolean,
                   withVotes: Boolean): ListDto<NewsDto> {
 
-        var dtoList: List<NewsDto> = newsList.stream()
+        var dtoList: MutableList<NewsDto> = newsList.stream()
                 .skip(offset.toLong()) // this is a good example of how streams simplify coding
                 .limit(limit.toLong())
                 .map { transform(it, withComments, withVotes) }
-                .toList()
+                .toList().toMutableList()
 
 
         return ListDto<NewsDto>(

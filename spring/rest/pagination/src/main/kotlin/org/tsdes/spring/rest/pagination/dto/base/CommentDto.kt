@@ -7,10 +7,10 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel(description = "A comment on a news")
 class CommentDto(
 
-        id: Long?,
+        id: Long? = null,
 
         @ApiModelProperty("The text of the comment")
-        var text: String?
+        var text: String? = null
 
 
 ) : BaseDto(id)

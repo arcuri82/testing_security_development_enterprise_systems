@@ -7,13 +7,13 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel(description = "A news")
 class NewsDto(
 
-        id: Long?,
+        id: Long? = null,
 
         @ApiModelProperty("The text of the news")
-        var text: String?,
+        var text: String?  = null,
 
         @ApiModelProperty("The country this news is related to")
-        var country: String?,
+        var country: String? = null,
 
         @ApiModelProperty("A list of comments made by users on this news")
         var comments: MutableList<CommentDto> = mutableListOf(),

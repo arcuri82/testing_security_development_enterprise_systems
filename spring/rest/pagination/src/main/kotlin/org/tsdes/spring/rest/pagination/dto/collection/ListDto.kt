@@ -15,16 +15,16 @@ import org.tsdes.spring.rest.pagination.dto.hal.HalObject
 class ListDto<T>(
 
         @get:ApiModelProperty("The list of resources in the current retrieved page")
-        var list: List<T>,
+        var list: MutableList<T> = mutableListOf(),
 
         @get:ApiModelProperty("The index of first element in this page")
-        var rangeMin: Int,
+        var rangeMin: Int = 0,
 
         @get:ApiModelProperty("The index of the last element of this page")
-        var rangeMax: Int,
+        var rangeMax: Int = 0,
 
         @get:ApiModelProperty("The total number of elements in all pages")
-        var totalSize: Int,
+        var totalSize: Int = 0,
 
         next: HalLink? = null,
 

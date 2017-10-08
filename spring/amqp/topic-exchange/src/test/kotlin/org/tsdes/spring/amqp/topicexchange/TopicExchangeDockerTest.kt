@@ -6,6 +6,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.util.EnvironmentTestUtils
+import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringRunner
 import org.testcontainers.containers.GenericContainer
 
@@ -14,6 +18,7 @@ import org.testcontainers.containers.GenericContainer
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest
+@ContextConfiguration(initializers = arrayOf(TopicExchangeDockerTest.Companion.Initializer::class))
 class TopicExchangeDockerTest {
 
     companion object {
@@ -22,6 +27,17 @@ class TopicExchangeDockerTest {
 
         @ClassRule @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3").withExposedPorts(5672)
+
+        class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
+            override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
+                EnvironmentTestUtils.addEnvironment(
+                        "testcontainers",
+                        configurableApplicationContext.environment,
+                        "spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
+                        "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672)
+                )
+            }
+        }
     }
 
     @Autowired

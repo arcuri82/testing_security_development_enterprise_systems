@@ -8,12 +8,17 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.testcontainers.containers.GenericContainer
 import org.junit.Assert.*
+import org.springframework.boot.test.util.EnvironmentTestUtils
+import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.test.context.ContextConfiguration
 
 /**
  * Created by arcuri82 on 09-Aug-17.
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest
+@ContextConfiguration(initializers = arrayOf(DirectExchangeDockerTest.Companion.Initializer::class))
 class DirectExchangeDockerTest {
 
     companion object {
@@ -22,6 +27,18 @@ class DirectExchangeDockerTest {
 
         @ClassRule @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3").withExposedPorts(5672)
+
+
+        class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
+            override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
+                EnvironmentTestUtils.addEnvironment(
+                        "testcontainers",
+                        configurableApplicationContext.environment,
+                        "spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
+                        "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672)
+                )
+            }
+        }
     }
 
     @Autowired

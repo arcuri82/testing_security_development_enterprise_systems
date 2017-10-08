@@ -8,12 +8,15 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate
 /**
  * Created by arcuri82 on 07-Aug-17.
  */
-class Receiver {
+class Receiver(val host: String, val port: Int) {
 
     fun receive(queueName: String) : String?{
 
         val connectionFactory = CachingConnectionFactory()
+        connectionFactory.host = host
+        connectionFactory.port = port
         val admin = RabbitAdmin(connectionFactory)
+
         admin.declareQueue(Queue(queueName))
 
         val template = RabbitTemplate(connectionFactory)

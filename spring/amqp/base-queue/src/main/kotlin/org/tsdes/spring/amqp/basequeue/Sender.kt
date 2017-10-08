@@ -9,11 +9,13 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate
 /**
  * Created by arcuri82 on 07-Aug-17.
  */
-class Sender {
+class Sender(val host: String, val port: Int) {
 
     fun send(queueName: String, msg: String){
 
         val connectionFactory = CachingConnectionFactory()
+        connectionFactory.host = host
+        connectionFactory.port = port
         val admin = RabbitAdmin(connectionFactory)
         admin.declareQueue(Queue(queueName))
 

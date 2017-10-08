@@ -4,6 +4,11 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.testcontainers.containers.GenericContainer
 import org.junit.ClassRule
+import org.testcontainers.containers.FixedHostPortGenericContainer
+import org.springframework.boot.test.util.EnvironmentTestUtils
+import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.context.ApplicationContextInitializer
+
 
 
 
@@ -29,9 +34,12 @@ class SendReceiveDockerTest{
         /*
             This will start a RabbitMQ server using Docker.
 
-            This is equivalent to start the following from command-line:
+            This is "similar" to start the following from command-line:
 
             docker run -p 5672:5672 rabbitmq:3
+
+            However, here, although the port is exposed, it is mapped to a
+            random, free one.
          */
         @ClassRule @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3")
@@ -41,7 +49,8 @@ class SendReceiveDockerTest{
     @Test
     fun receiveNull(){
 
-        val msg = Receiver().receive("queue:receiveNull")
+        val msg = Receiver(rabbitMQ.containerIpAddress, rabbitMQ.getMappedPort(5672))
+                .receive("queue:receiveNull")
         assertNull(msg)
     }
 
@@ -52,9 +61,11 @@ class SendReceiveDockerTest{
         val msg = "Hello World!"
         val queueName = "queue:testSendAndReceive"
 
-        Sender().send(queueName, msg)
+        Sender(rabbitMQ.containerIpAddress, rabbitMQ.getMappedPort(5672))
+                .send(queueName, msg)
 
-        val res = Receiver().receive(queueName)
+        val res = Receiver(rabbitMQ.containerIpAddress, rabbitMQ.getMappedPort(5672))
+                .receive(queueName)
 
         assertEquals(msg, res)
     }

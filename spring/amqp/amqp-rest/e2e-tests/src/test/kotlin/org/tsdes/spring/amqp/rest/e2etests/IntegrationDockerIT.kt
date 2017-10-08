@@ -20,8 +20,15 @@ class IntegrationDockerIT {
 //        @ClassRule @JvmField
 //        val env = KDockerComposeContainer(File("../docker-compose.yml"))
 //                .withLocalCompose(true)
-//
 //    }
+
+    /*
+        TODO: GenericContainer has a waitingFor method, but not DockerComposeContainer.
+        Code below can be replace once following feature is released:
+
+        https://github.com/testcontainers/testcontainers-java/issues/174
+     */
+
 
     private fun waitForSpring(port: Int, timeoutMS: Long) {
         assertWithinTime(timeoutMS, {

@@ -16,6 +16,7 @@
         <module>eureka</module>
         <module>producer</module>
         <module>consumer</module>
+        <module>e2e-tests</module>
     </modules>
 
 

@@ -1,0 +1,53 @@
+version: '3.3'
+
+services:
+
+  eureka:
+    build:
+      context: ./eureka
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+
+  consumer:
+    build:
+        context: ./consumer
+        dockerfile: Dockerfile
+    ports:
+       - "9000:8080"
+    depends_on:
+       - eureka
+
+  producer_0:
+     build:
+        context: ./producer
+        dockerfile: Dockerfile
+     ports:
+        - "9001:8080"
+     environment:
+        - PRODUCER_ID=A
+     depends_on:
+        - eureka
+
+  producer_1:
+     build:
+        context: ./producer
+        dockerfile: Dockerfile
+     ports:
+        - "9002:8080"
+     environment:
+        - PRODUCER_ID=B
+     depends_on:
+        - eureka
+
+  producer_2:
+     build:
+        context: ./producer
+        dockerfile: Dockerfile
+     ports:
+        - "9003:8080"
+     environment:
+        - PRODUCER_ID=C
+     depends_on:
+        - eureka
+

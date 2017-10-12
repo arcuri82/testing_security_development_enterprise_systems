@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+producer-server:
+  ribbon:
+    eureka:
+      enabled: true
+      instance:
+          hostname: eureka

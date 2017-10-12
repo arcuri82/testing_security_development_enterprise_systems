@@ -11,7 +11,7 @@ import java.io.File
 /**
  * Created by arcuri82 on 11-Aug-17.
  */
-class IntegrationDockerIT {
+class AmqpIntegrationDockerIT {
 
 //    companion object {
 //
@@ -46,6 +46,9 @@ class IntegrationDockerIT {
                 lambda.invoke()
                 return
             } catch (e: AssertionError) {
+                Thread.sleep(100)
+                delta = System.currentTimeMillis() - start
+            } catch (e: Exception) {
                 Thread.sleep(100)
                 delta = System.currentTimeMillis() - start
             }

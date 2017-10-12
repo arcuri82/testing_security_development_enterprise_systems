@@ -190,7 +190,7 @@
             <dependency>
                 <groupId>com.netflix.hystrix</groupId>
                 <artifactId>hystrix-core</artifactId>
-                <version>1.5.8</version>
+                <version>1.5.12</version>
             </dependency>
             <dependency>
                 <groupId>io.reactivex</groupId>

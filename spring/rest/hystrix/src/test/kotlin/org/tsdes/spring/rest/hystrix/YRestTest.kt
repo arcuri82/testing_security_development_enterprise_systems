@@ -9,9 +9,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-class YRestTest{
+class YRestTest {
 
     @Before
     fun reset() {
@@ -33,7 +33,14 @@ class YRestTest{
             NOTE: this works ONLY because we are running the RESTful service in the
             same JVM of the tests
          */
-        Hystrix.reset()
+        Hystrix.reset(10, TimeUnit.SECONDS)
+
+        /*
+            Looks like a bug in Hystrix, whose "reset" method does not really
+            seem to guarantee to be blocking until EVERYTHING is actually reset.
+            So here we do an explicit extra wait.
+         */
+        Thread.sleep(10_000)
     }
 
 
@@ -112,7 +119,7 @@ class YRestTest{
         exe(value)
         delta = System.currentTimeMillis() - start
 
-        assertTrue(delta < 1000) //likely even shorter than 1s
+        assertTrue("Delta: $delta", delta < 1000) //likely even shorter than 1s
     }
 
 

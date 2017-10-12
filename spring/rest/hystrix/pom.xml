@@ -51,6 +51,19 @@
             <artifactId>hystrix-core</artifactId>
         </dependency>
         <dependency>
+            <!--
+                This in theory is a third-party library coming
+                with Hystrix. Although it works fine from Maven,
+                it fails to build in IntelliJ if explicit
+                declaration is missing here.
+                Might be a bug in IntelliJ, or some weird
+                classpath edge-case
+            -->
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.8</version>
+        </dependency>
+        <dependency>
             <groupId>io.reactivex</groupId>
             <artifactId>rxjava</artifactId>
         </dependency>

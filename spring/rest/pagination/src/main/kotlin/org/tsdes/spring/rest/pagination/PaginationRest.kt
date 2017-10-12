@@ -195,7 +195,11 @@ class PaginationRest {
     @PostMapping(consumes = arrayOf(Format.JSON_V1))
     fun createNews(@RequestBody dto: NewsDto): ResponseEntity<Void> {
 
-        val id = service.createNews(dto.text!!, dto.country!!) //FIXME
+        if(dto.text == null || dto.country == null){
+            return ResponseEntity.status(400).build()
+        }
+
+        val id = service.createNews(dto.text!!, dto.country!!)
 
         return ResponseEntity.created(UriComponentsBuilder
                 .fromPath("/news/" + id).build().toUri()
@@ -211,7 +215,11 @@ class PaginationRest {
             @RequestBody
             voteDto: VoteDto): ResponseEntity<Void> {
 
-        service.createVote(newsId, voteDto.user!!) //FIXME
+        if(voteDto.user == null){
+            return ResponseEntity.status(400).build()
+        }
+
+        service.createVote(newsId, voteDto.user!!)
 
         return ResponseEntity.status(201).build()
     }
@@ -225,7 +233,11 @@ class PaginationRest {
             @RequestBody
             commentDto: CommentDto): ResponseEntity<Void> {
 
-        service.createComment(newsId, commentDto.text!!) //FIXME
+        if(commentDto.text == null){
+            return ResponseEntity.status(400).build()
+        }
+
+        service.createComment(newsId, commentDto.text!!)
 
         return ResponseEntity.status(201).build()
     }

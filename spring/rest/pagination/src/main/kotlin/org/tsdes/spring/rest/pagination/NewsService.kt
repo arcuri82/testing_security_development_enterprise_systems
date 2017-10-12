@@ -56,7 +56,13 @@ class NewsService {
             Those lists are lazily initialized, so they are going to be
             loaded from database only when accessed for the firs time.
             But it has to be done when there is an open session from an
-            EntityManager, so we do it here
+            EntityManager. So, to be on the safe side, we do it here.
+
+            However, also notice that this code, in this particular case,
+            is redundant. The DTO transformer, even if executed outside of
+            an explicit transaction, can load such data, as it is a read-only
+            operation, still done from an Entity whose Entity Manager is
+            still active
          */
         val result = query.resultList as List<News>
         if (withComments) {

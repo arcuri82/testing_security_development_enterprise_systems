@@ -9,9 +9,19 @@ import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 import javax.persistence.Query
 
+/*
+    Here we define am injectable singleton bean (Service),
+    whose methods are run in a database transaction (Transactional).
+    This is practically equivalent to EJBs in JEE.
+ */
 @Service
 @Transactional
 class NewsService {
+
+    /*
+        Here I am not using a CRUD repository, but
+        rather handling all manually via an JPA Entity Manager.
+     */
 
     @PersistenceContext
     private lateinit var em: EntityManager

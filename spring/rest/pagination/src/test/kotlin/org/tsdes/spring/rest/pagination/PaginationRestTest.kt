@@ -2,8 +2,7 @@ package org.tsdes.spring.rest.pagination
 
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
-import org.hamcrest.Matchers.containsString
-import org.hamcrest.Matchers.equalTo
+import org.hamcrest.Matchers.*
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -221,6 +220,19 @@ class PaginationRestTest {
         assertEquals(n.toLong(), values.size.toLong())
     }
 
+    @Test
+    fun testJsonIgnore() {
+
+        createSeveralNews(30)
+        val limit = 10
+
+        given().queryParam("limit", limit)
+                .get()
+                .then()
+                .statusCode(200)
+                .body("_links.next", notNullValue())
+                .body("next", nullValue())
+    }
 
     @Test
     fun textPreviousLink() {
@@ -388,7 +400,10 @@ class PaginationRestTest {
         /*
             however, what if you just use a param that does not exist?
             it just gets ignored...
-            so the behavior is actually quite inconsistent
+            so the behavior is actually quite inconsistent.
+
+            The main problem here is that, if you just misspell a query
+            parameter, it might just get ignored with no warning.
          */
 
         given().queryParam("bar", "foo")

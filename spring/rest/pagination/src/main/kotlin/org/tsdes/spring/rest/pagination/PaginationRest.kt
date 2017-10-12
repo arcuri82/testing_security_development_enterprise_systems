@@ -37,10 +37,10 @@ class PaginationRest {
         VOTES;
 
         val isWithComments: Boolean
-            get() = this == COMMENTS || this == ALL
+            get() = (this == COMMENTS || this == ALL)
 
         val isWithVotes: Boolean
-            get() = this == VOTES || this == ALL
+            get() = (this == VOTES || this == ALL)
     }
 
 
@@ -110,6 +110,17 @@ class PaginationRest {
             usage of the API.
             Here, to make it simple, we simply do not cache the query.
             So, following a "next" link would result in a new database query.
+
+            However, in the moment in which we do not cache the results, we could
+            ask the database directly for a single page.
+            This can be done in different ways in SQL, by using for example "offset".
+            However, this latter has its own set of limitations, and there are also
+            other approaches like "keyset pagination", eg, see
+            http://use-the-index-luke.com/no-offset
+
+            Note: in this example we are mainly interested on how to handle links and
+            pages in the REST API. How to best retrieve pages from a database is its
+            own topic, related to database optimizations.
          */
 
         if (offset != 0 && offset >= newsList.size) {

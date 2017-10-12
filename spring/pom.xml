@@ -120,16 +120,29 @@
 
 
     <build>
-        <!--see https://kotlinlang.org/docs/kotlin-docs.pdf -->
         <plugins>
-            <!-- It is important that the Kotlin plugin is executed before the Java compiler -->
-            <plugin>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <groupId>org.jetbrains.kotlin</groupId>
-            </plugin>
+            <!--
+                If you have modules with both Kotlin and Java code, the documentation states
+                that it is important that the Kotlin compiler plugin is executed before the Java compiler.
+                See https://kotlinlang.org/docs/kotlin-docs.pdf
+
+                However, here we are not in such case. There is one exception though.
+                In some modules (eg SOAP) we do automatically generate Java source code before
+                the compilation phase.
+                To make it usable from Kotlin, we need to compile such Java code before the
+                Kotlin one. Note: that Java code does not call any Kotlin code.
+                Therefore, here we force the execution of the Java compiler BEFORE
+                the one of Kotlin.
+              -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <groupId>org.jetbrains.kotlin</groupId>
             </plugin>
         </plugins>
 

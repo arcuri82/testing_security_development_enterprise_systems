@@ -4,6 +4,7 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.*
 import org.junit.Ignore
 import org.junit.Test
@@ -13,7 +14,7 @@ class DiscoveryIntegrationDockerIT {
 
     private fun waitForSpring(port: Int, timeoutMS: Long) {
         assertWithinTime(timeoutMS, {
-            RestAssured.given().port(port).get("/health").then().body("status", CoreMatchers.equalTo("UP"))
+            RestAssured.given().port(port).get("/health").then().body("status", equalTo("UP"))
         })
     }
 
@@ -23,15 +24,15 @@ class DiscoveryIntegrationDockerIT {
         var delta = 0L
 
         while (delta < timeoutMS) {
-            try {
+            delta = try {
                 lambda.invoke()
                 return
             } catch (e: AssertionError) {
                 Thread.sleep(100)
-                delta = System.currentTimeMillis() - start
+                System.currentTimeMillis() - start
             } catch (e: Exception) {
                 Thread.sleep(100)
-                delta = System.currentTimeMillis() - start
+                System.currentTimeMillis() - start
             }
         }
 
@@ -63,6 +64,8 @@ class DiscoveryIntegrationDockerIT {
         val first = callConsumer()
         assertTrue(first, first.startsWith("Received:"))
         responses.add(first)
+
+        assertTrue(first, ! first.contains("ERROR", ignoreCase = true))
 
         val second = callConsumer()
         assertTrue(second, second.startsWith("Received:"))

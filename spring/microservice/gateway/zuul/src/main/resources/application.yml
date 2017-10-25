@@ -1,0 +1,17 @@
+zuul:
+  routes:
+    service:
+      path: /service/**
+    frontend:
+      path: /**
+      url: http://frontend/
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/

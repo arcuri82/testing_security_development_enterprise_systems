@@ -1,6 +1,6 @@
 spring:
   application:
-    name: MyService
+    name: service
   datasource:
     url: "jdbc:postgresql://postgres:5432/postgres"
     username: "postgres"
@@ -10,4 +10,13 @@ spring:
     database: "postgresql"
     hibernate:
       ddl-auto: "update"
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
 

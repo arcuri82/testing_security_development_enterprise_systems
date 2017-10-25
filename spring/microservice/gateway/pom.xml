@@ -15,6 +15,7 @@
     <modules>
         <module>service</module>
         <module>zuul</module>
+        <module>eureka</module>
     </modules>
 
 

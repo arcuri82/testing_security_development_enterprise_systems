@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <script src="js/indexCode.js" > </script>
 </head>
 <body>
 
-<h1> Counter </h1>
+<h1> Zuul: Gatekeeper of Gozer </h1>
 <p>
-    TODO
+
+    <img src="img/zuul.png" />
+
+    Zuul is a demigod. She is the <b>Gatekeeper</b> of Gozer, The Destructor.
 </p>
+
+<p>
+    (This is a reference to the 1984 movie <i>Ghostbusters</i>)
+</p>
+
+
+
+
+
+<div onclick="sendToZuul('messageArea','messages')">Send</div> a message to Zuul:
+<textarea id="messageArea"></textarea>
+
+
+<div onclick="deleteMessages('messages')">Delete</div> all messages sent to Zuul.
+
+
+Current messages sent to Zuul:
+<div id="messages"></div>
 
 </body>
 </html>

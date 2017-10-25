@@ -20,8 +20,8 @@ services:
       context: ./eureka
       dockerfile: Dockerfile
     # Uncomment for debugging
-    ports:
-      - "8761:8761"
+#    ports:
+#      - "8761:8761"
 
   frontend:
     build:
@@ -40,25 +40,25 @@ services:
      depends_on:
         - zuul
         - postgres
-#
-#  service_1:
-#     build:
-#        context: ./service
-#        dockerfile: Dockerfile
-#     environment:
-#        - SERVICE_ID=B
-#     depends_on:
-#        - zuul
-#        - postgres
-#
-#  service_2:
-#     build:
-#        context: ./service
-#        dockerfile: Dockerfile
-#     environment:
-#        - SERVICE_ID=C
-#     depends_on:
-#        - zuul
-#        - postgres
+
+  service_1:
+     build:
+        context: ./service
+        dockerfile: Dockerfile
+     environment:
+        - SERVICE_ID=B
+     depends_on:
+        - zuul
+        - postgres
+
+  service_2:
+     build:
+        context: ./service
+        dockerfile: Dockerfile
+     environment:
+        - SERVICE_ID=C
+     depends_on:
+        - zuul
+        - postgres
 
 

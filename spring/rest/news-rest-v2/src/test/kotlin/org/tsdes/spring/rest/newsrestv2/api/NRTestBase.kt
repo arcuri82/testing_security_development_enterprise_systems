@@ -36,8 +36,6 @@ abstract class NRTestBase {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
         /*
-           Recall, as Wildfly is running as a separated process, changed
-           in the database will impact all the tests.
            Here, we read each resource (GET), and then delete them
            one by one (DELETE)
          */

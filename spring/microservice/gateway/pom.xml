@@ -16,6 +16,7 @@
         <module>service</module>
         <module>zuul</module>
         <module>eureka</module>
+        <module>e2e-tests</module>
     </modules>
 
 

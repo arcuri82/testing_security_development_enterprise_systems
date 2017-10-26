@@ -2,6 +2,8 @@
 <html>
 <head>
     <script src="js/indexCode.js" > </script>
+
+    <title>Zuul: Gatekeeper of Gozer</title>
 </head>
 <body>
 
@@ -21,15 +23,15 @@
 
 
 
-<div onclick="sendToZuul('messageArea','messages')">Send</div> a message to Zuul:
-<textarea id="messageArea"></textarea>
+<div onclick="sendToZuul('messageAreaId','messagesId')" id="sendBtnId">Send</div> a message to Zuul:
+<textarea id="messageAreaId"></textarea>
 
 
-<div onclick="deleteMessages('messages')">Delete</div> all messages sent to Zuul.
+<div onclick="deleteMessages('messagesId')" id="deleteBtnId">Delete</div> all messages sent to Zuul.
 
 
 Current messages sent to Zuul:
-<div id="messages"></div>
+<div id="messagesId"></div>
 
 </body>
 </html>

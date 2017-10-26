@@ -28,6 +28,7 @@
         <version.h2>1.4.194</version.h2>
         <version.postgres>42.1.4</version.postgres>
         <version.resteasy>3.1.3.Final</version.resteasy>
+        <version.testcontainers>1.4.2</version.testcontainers>
     </properties>
 
 
@@ -115,7 +116,7 @@
                 <!-- used to control a browser for system testing -->
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>2.53.1</version>
+                <version>3.6.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -129,8 +130,17 @@
                 <!-- To use Docker from tests -->
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers</artifactId>
-                <version>1.4.2</version>
+                <version>${version.testcontainers}</version>
+                <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>selenium</artifactId>
+                <version>${version.testcontainers}</version>
+                <scope>test</scope>
+            </dependency>
+
+
 
             <!-- Misc -->
             <dependency>

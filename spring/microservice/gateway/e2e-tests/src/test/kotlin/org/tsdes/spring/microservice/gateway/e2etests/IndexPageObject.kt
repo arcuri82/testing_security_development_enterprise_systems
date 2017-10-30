@@ -21,7 +21,7 @@ class IndexPageObject(
 
         val n = numberOfMessages()
 
-        val btn = driver.findElement(By.id("sendMsgId"))
+        val btn = driver.findElement(By.id("sendBtnId"))
         val area = driver.findElement(By.id("messageAreaId"))
 
         area.clear()
@@ -33,7 +33,7 @@ class IndexPageObject(
 
     fun deleteMessages(){
 
-        val btn = driver.findElement(By.id("deleteMsgId"))
+        val btn = driver.findElement(By.id("deleteBtnId"))
         btn.click()
 
         waitForDisplayedMessages(0)

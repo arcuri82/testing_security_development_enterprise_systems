@@ -42,7 +42,16 @@ class GatewayIntegrationDockerRestIT {
     @JvmField
     var browser = KBrowserWebDriverContainer()
             .withDesiredCapabilities(DesiredCapabilities.chrome())
+            .withNetworkMode("gateway_default")
+            /*
+                TODO: note following is not working with joined network.
+                But should be doable once can start Compose from test and expose
+                Zuul service:
+                https://github.com/testcontainers/testcontainers-java/issues/282
+             */
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL, File("./target/"))
+
+
 
     /*
         TODO Docker-Compose
@@ -66,15 +75,15 @@ class GatewayIntegrationDockerRestIT {
         val po = IndexPageObject(browser.webDriver)
 
         /*
-            FIXME:
+            Cannot directly connect to localhost:80, as
             testHostIpAddress  does not work on Mac. See:
 
             https://github.com/testcontainers/testcontainers-java/issues/166
 
-            need to make the Selenium container join the network of Compose
+            Need to make the Selenium container join the network of Compose
          */
 
-        po.goToPage(browser.testHostIpAddress, 80)
+        po.goToPage("zuul", 8080)
         assertTrue(po.isOnPage())
 
         po.deleteMessages()

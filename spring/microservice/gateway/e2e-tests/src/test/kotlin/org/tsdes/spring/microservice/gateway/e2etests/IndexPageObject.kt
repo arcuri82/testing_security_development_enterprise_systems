@@ -46,6 +46,13 @@ class IndexPageObject(
         return messages.size
     }
 
+    fun messages() : List<String>{
+
+        val lis = driver.findElements(By.xpath("//div[@id='messagesId']//li"))
+
+        return lis.map {it.text}
+    }
+
     private fun waitForDisplayedMessages(n: Int){
         val wait = WebDriverWait(driver, 5)
 

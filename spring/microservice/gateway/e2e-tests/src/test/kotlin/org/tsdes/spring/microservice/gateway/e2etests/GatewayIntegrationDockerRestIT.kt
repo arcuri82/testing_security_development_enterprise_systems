@@ -3,6 +3,7 @@ package org.tsdes.spring.microservice.gateway.e2etests
 import io.restassured.RestAssured.given
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -60,10 +61,8 @@ class GatewayIntegrationDockerRestIT {
      */
 
 
-    @Ignore
-    @Test
-    fun testIntegration() {
-
+    @Before
+    fun waitForServer(){
         assertWithinTime(180_000, {
             given().get("http://localhost:80/index.html").then().statusCode(200)
 
@@ -71,6 +70,12 @@ class GatewayIntegrationDockerRestIT {
                     .get("http://localhost:80/service/messages")
                     .then().statusCode(200)
         })
+    }
+
+    @Ignore
+    @Test
+    fun testIntegration() {
+
 
         val po = IndexPageObject(browser.webDriver)
 
@@ -97,5 +102,28 @@ class GatewayIntegrationDockerRestIT {
 
         po.deleteMessages()
         assertEquals(0, po.numberOfMessages())
+    }
+
+    @Ignore
+    @Test
+    fun testLoadBalance(){
+
+        val po = IndexPageObject(browser.webDriver)
+
+        po.goToPage("zuul", 8080)
+        assertTrue(po.isOnPage())
+
+        po.deleteMessages()
+        assertEquals(0, po.numberOfMessages())
+
+        (0..20).forEach { po.sendMessage("foo") }
+
+        val messages = po.messages()
+
+        assertTrue(messages.any { it.startsWith("A :") })
+        assertTrue(messages.any { it.startsWith("B :") })
+        assertTrue(messages.any { it.startsWith("C :") })
+
+        po.deleteMessages()
     }
 }

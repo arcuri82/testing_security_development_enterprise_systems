@@ -13,14 +13,14 @@ import java.io.File
  */
 class AmqpIntegrationDockerIT {
 
-//    companion object {
-//
-//        class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
-//
-//        @ClassRule @JvmField
-//        val env = KDockerComposeContainer(File("../docker-compose.yml"))
-//                .withLocalCompose(true)
-//    }
+    companion object {
+
+        class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
+
+        @ClassRule @JvmField
+        val env = KDockerComposeContainer(File("../docker-compose.yml"))
+                .withLocalCompose(true)
+    }
 
     /*
         TODO: GenericContainer has a waitingFor method, but not DockerComposeContainer.
@@ -57,19 +57,7 @@ class AmqpIntegrationDockerIT {
         lambda.invoke()
     }
 
-    /*
-        TODO
 
-        This will be fixed in next release of TestContainers, see
-
-        https://github.com/testcontainers/testcontainers-java/issues/439#issuecomment-321812314
-
-        For now, can be run manually with by first running
-
-        docker-compose build
-        docker-compose up
-     */
-    @Ignore
     @Test
     fun test() {
 

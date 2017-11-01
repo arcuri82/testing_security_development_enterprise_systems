@@ -11,35 +11,62 @@ import org.springframework.context.annotation.Bean
 @SpringBootApplication
 class Application {
 
+    /*
+        Here using a Direct exchange, but
+        not the default one
+     */
     @Bean
     fun direct(): DirectExchange {
         return DirectExchange("tut.direct")
     }
 
+    /*
+        Creating 2 different queues, X and Y
+     */
+
     @Bean
-    fun autoDeleteQueueX(): Queue {
+    fun queueX(): Queue {
         return AnonymousQueue()
     }
 
     @Bean
-    fun autoDeleteQueueY(): Queue {
+    fun queueY(): Queue {
         return AnonymousQueue()
     }
+
+    /*
+        When a message arrive to a Direct exchange, it can be
+        copied to 0, 1 or more queues.
+        This depends on the "routing keys", which is usually
+        the name of the queue.
+        However, we can have custom keys.
+
+        In this example, we bind X and Y to ERROR,
+        whereas WARN only to Y.
+        We also have a key INFO (see Sender), but no queue
+        associated with it.
+
+        So, when receiving message of key:
+        INFO -> ignored
+        WARN -> copied to Y
+        ERROR -> copied to both X and Y
+     */
+
 
     @Bean
     fun bindingX_ERROR(direct: DirectExchange,
-                 autoDeleteQueueX: Queue): Binding {
+                 queueX: Queue): Binding {
         return BindingBuilder
-                .bind(autoDeleteQueueX)
+                .bind(queueX)
                 .to(direct)
                 .with("ERROR")
     }
 
     @Bean
     fun bindingY_ERROR(direct: DirectExchange,
-                 autoDeleteQueueY: Queue): Binding {
+                 queueY: Queue): Binding {
         return BindingBuilder
-                .bind(autoDeleteQueueY)
+                .bind(queueY)
                 .to(direct)
                 .with("ERROR")
     }
@@ -47,9 +74,9 @@ class Application {
 
     @Bean
     fun bindingY_WARN(direct: DirectExchange,
-                 autoDeleteQueueY: Queue): Binding {
+                 queueY: Queue): Binding {
         return BindingBuilder
-                .bind(autoDeleteQueueY)
+                .bind(queueY)
                 .to(direct)
                 .with("WARN")
     }

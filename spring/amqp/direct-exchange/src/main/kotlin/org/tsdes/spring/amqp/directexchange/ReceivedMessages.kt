@@ -14,6 +14,7 @@ class ReceivedMessages {
     private val buffer : MutableList<String> = CopyOnWriteArrayList()
 
     val data: List<String>
+        //the buffer is mutable, but here we return an immutable view of it
         get(){return buffer}
 
     private var latch : CountDownLatch = CountDownLatch(0)

@@ -14,12 +14,19 @@ class Receiver {
     @Autowired
     private lateinit var messages: ReceivedMessages
 
-    @RabbitListener(queues = arrayOf("#{autoDeleteQueueX.name}"))
+    /*
+        Here I am defining two different handlers, listening
+        for messages from 2 different queues.
+     */
+
+
+    //as anonymous queues have random names, we need to resolve them at runtime
+    @RabbitListener(queues = arrayOf("#{queueX.name}"))
     fun receiverX(msg: String) {
         doWork("X", msg)
     }
 
-    @RabbitListener(queues = arrayOf("#{autoDeleteQueueY.name}"))
+    @RabbitListener(queues = arrayOf("#{queueY.name}"))
     fun receiverY(msg: String) {
         doWork("Y", msg)
     }

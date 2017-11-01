@@ -21,6 +21,12 @@ class Sender {
         template.convertAndSend(direct.name, key, msg);
     }
 
+    /*
+        Here I am giving 3 different types of logging messages,
+        which will be routed to the same direct exchange,
+        but with different routing keys
+     */
+
     fun info(msg: String) = send("INFO: $msg", "INFO")
 
     fun warn(msg: String) = send("WARN: $msg", "WARN")

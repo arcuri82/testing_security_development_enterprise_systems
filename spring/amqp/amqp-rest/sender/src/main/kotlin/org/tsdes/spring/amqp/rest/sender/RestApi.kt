@@ -21,6 +21,12 @@ class RestApi {
     @PostMapping(path = arrayOf("/sender"))
     fun send(@RequestBody msg: String) : ResponseEntity<Void>{
 
+        /*
+            Every time we receive a POST on this endpoint,
+            we broadcast the sent message to all the listeners
+            for this fanout exchange
+         */
+
         template.convertAndSend(fanout.name, "", msg)
 
         return ResponseEntity.status(204).build()

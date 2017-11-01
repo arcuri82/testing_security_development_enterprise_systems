@@ -11,7 +11,13 @@ services:
     ports:
        - "9000:8080"
     depends_on:
+       # do not start this image until RabbitMQ is started
        - rabbitmq
+
+  # Starting the same service twice.
+  # To access it from localhost, need to bind them
+  # to different TCP ports.
+
 
   receiver_0:
      build:

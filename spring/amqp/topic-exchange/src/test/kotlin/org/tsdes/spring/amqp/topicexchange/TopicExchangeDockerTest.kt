@@ -54,13 +54,19 @@ class TopicExchangeDockerTest {
 
         val textForNewsInNorwayBySmith = "fcdnsikfbjehfbjebjg"
 
-        sender.publish("smith","usa","sport","a")
-        sender.publish("smith","norway","politics",textForNewsInNorwayBySmith)
-        sender.publish("black","norway","politics","c")
-        sender.publish("white","norway","science","d")
-        sender.publish("white","usa","science","d")
-        sender.publish("white","germany","sport","e")
-        sender.publish("white","germany","politics","e")
+        /*
+            Recall the patterns in Application:
+            X: smith.#
+            Y: *.norway.*
+         */
+
+        sender.publish("smith","usa","sport","a") // X
+        sender.publish("smith","norway","politics",textForNewsInNorwayBySmith) // X and Y
+        sender.publish("black","norway","politics","c")  // Y
+        sender.publish("white","norway","science","d")   // Y
+        sender.publish("white","usa","science","d")      // none
+        sender.publish("white","germany","sport","e")    // none
+        sender.publish("white","germany","politics","e") // none
 
 
         val completed = messages.await(2)
@@ -68,7 +74,7 @@ class TopicExchangeDockerTest {
 
         Assert.assertEquals(2, messages.data.filter { it.contains("X") }.count())
         Assert.assertEquals(3, messages.data.filter { it.contains("Y") }.count())
-        Assert.assertEquals(5, messages.data.size)
+        Assert.assertEquals(5, messages.data.size) // 2nd msg is in 2 queues, so 1 + 2 + 1 + 1  = 5
         Assert.assertEquals(2, messages.data.filter { it.contains(textForNewsInNorwayBySmith) }.count())
     }
 }

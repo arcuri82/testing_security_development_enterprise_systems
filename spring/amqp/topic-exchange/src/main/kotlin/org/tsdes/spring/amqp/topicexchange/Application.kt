@@ -11,37 +11,76 @@ import org.springframework.context.annotation.Bean
 @SpringBootApplication
 class Application {
 
+    /*
+        The last kind of exchange is "Topic".
+        The routing toward queues bound on the exchange
+        is based on the regular expressions on the
+        routing key.
+        This provides fine grained control.
+
+        A "topic" is 1 or more words separated by "."
+        For example, a topic could be
+
+        foo.bar.hello
+
+        There are 2 special characters:
+        * -> substitute for exactly one word
+        # -> substitute for zero or more words.
+     */
+
     @Bean
     fun topic(): TopicExchange {
         return TopicExchange("tut.topic")
     }
 
     @Bean
-    fun autoDeleteQueueX(): Queue {
+    fun queueX(): Queue {
         return AnonymousQueue()
     }
 
     @Bean
-    fun autoDeleteQueueY(): Queue {
+    fun queueY(): Queue {
         return AnonymousQueue()
     }
+
+
+    /*
+        Example of publishing "news".
+        Considering topic in this form:
+
+        author.country.kind
+     */
 
     @Bean
     fun bindingX(topic: TopicExchange,
-                 autoDeleteQueueX: Queue): Binding {
+                 queueX: Queue): Binding {
         return BindingBuilder
-                .bind(autoDeleteQueueX)
+                .bind(queueX)
                 .to(topic)
                 .with("smith.#")
+
+        /*
+            binding this queue to a topic starting with the
+            word "smith", followed by any word.
+            In other words, we bind this queue to receive
+            news written by "smith"
+         */
+
     }
 
     @Bean
     fun bindingY(topic: TopicExchange,
-                 autoDeleteQueueY: Queue): Binding {
+                 queueY: Queue): Binding {
         return BindingBuilder
-                .bind(autoDeleteQueueY)
+                .bind(queueY)
                 .to(topic)
                 .with("*.norway.*")
+
+        /*
+            any word, followed by "norway", followed by any word.
+            In other words, we bind this queue to receive
+            news in "norway" regardless of the author and kind.
+         */
     }
 
 

@@ -16,14 +16,14 @@ class RabbitConfiguration {
     }
 
     @Bean
-    fun autoDeleteQueue(): Queue {
+    fun queue(): Queue {
         return AnonymousQueue()
     }
 
     @Bean
     fun binding(fanout: FanoutExchange,
-                 autoDeleteQueue: Queue): Binding {
-        return BindingBuilder.bind(autoDeleteQueue).to(fanout)
+                 queue: Queue): Binding {
+        return BindingBuilder.bind(queue).to(fanout)
     }
 
 }

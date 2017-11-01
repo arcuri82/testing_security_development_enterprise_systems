@@ -11,15 +11,29 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class RestApi {
 
+    /*
+        Note: this is just an example... as you should
+        not have internal state in a REST API...
+     */
     private var counter = 0
 
-    @RabbitListener(queues = arrayOf("#{autoDeleteQueue.name}"))
+    /*
+        Increase a counter every time we receive a broadcast
+        message from RabbitMQ
+     */
+
+    @RabbitListener(queues = arrayOf("#{queue.name}"))
     fun receiveFromAMQP(msg: String) {
 
         print(msg)
 
         counter++
     }
+
+    /*
+        REST endpoint to read the counter of RabbitMQ messages
+        that have been received so far.
+     */
 
     @GetMapping(path = arrayOf("/counter"))
     fun get(): ResponseEntity<Int> =  ResponseEntity.ok(counter)

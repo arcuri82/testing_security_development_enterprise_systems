@@ -10,6 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired
  */
 class WorkSender {
 
+    /*
+        I am autowiring an instance of RabbitTemplate,
+        so that it gets automatically initialized based
+        on the Spring configuration.
+     */
     @Autowired
     private lateinit var  template: RabbitTemplate
 

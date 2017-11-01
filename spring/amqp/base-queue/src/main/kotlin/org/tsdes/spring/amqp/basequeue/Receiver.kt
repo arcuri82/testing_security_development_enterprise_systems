@@ -17,6 +17,17 @@ class Receiver(val host: String, val port: Int) {
         connectionFactory.port = port
         val admin = RabbitAdmin(connectionFactory)
 
+        /*
+            When we "declare" a queue, an actual queue
+            will be created on RabbitMQ (in our case).
+            It can be created either by the sender or
+            the receiver, whoever is first.
+            When one tries to declare a queue that
+            already exists, nothing happens, unless
+            the setting of the queue are different (in
+            which case you would get an error).
+         */
+
         admin.declareQueue(Queue(queueName))
 
         val template = RabbitTemplate(connectionFactory)

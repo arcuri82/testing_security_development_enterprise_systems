@@ -66,5 +66,10 @@ class WorkerDockerTest {
         assertEquals(2, data.size)
         assertEquals(2 * sum,  data.values.sum())
         assertTrue(data.all { it.value == sum })
+
+        /*
+            Each of the 3 messages is broadcast to
+            the 2 workers.
+         */
     }
 }

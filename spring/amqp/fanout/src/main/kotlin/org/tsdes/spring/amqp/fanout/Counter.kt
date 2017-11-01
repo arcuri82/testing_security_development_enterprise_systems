@@ -5,6 +5,8 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 /**
+ * Same kind of counter class as before
+ *
  * Created by arcuri82 on 07-Aug-17.
  */
 class Counter{

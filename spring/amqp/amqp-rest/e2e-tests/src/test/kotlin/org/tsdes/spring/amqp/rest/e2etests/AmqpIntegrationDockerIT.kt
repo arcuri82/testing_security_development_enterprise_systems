@@ -17,6 +17,12 @@ class AmqpIntegrationDockerIT {
 
         class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
 
+        /*
+            TODO
+            Note: this is currently broken in Windows, but fix is already in master branch
+            of the TestContainer library (ie, will be in next release after 1.4.3)
+         */
+
         @ClassRule @JvmField
         val env = KDockerComposeContainer(File("../docker-compose.yml"))
                 .withLocalCompose(true)

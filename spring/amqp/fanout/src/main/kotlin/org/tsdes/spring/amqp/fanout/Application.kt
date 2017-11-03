@@ -58,7 +58,7 @@ class Application {
 
     @Bean
     fun worker0(
-            @Autowired autoDeleteQueue1: Queue,
+            @Autowired queue1: Queue,
             @Autowired queueNameHolder: QueueNameHolder
     ): WorkReceiver {
 
@@ -67,7 +67,7 @@ class Application {
             Note: only needed because we are running everything
             (ie 1 sender and 2 receivers) in the same Spring application.
          */
-        queueNameHolder.name = autoDeleteQueue1.name
+        queueNameHolder.name = queue1.name
         return WorkReceiver("a")
     }
 
@@ -78,20 +78,20 @@ class Application {
      */
 
     @Bean
-    fun worker1(autoDeleteQueue2: Queue,
+    fun worker1(queue2: Queue,
                 queueNameHolder: QueueNameHolder): WorkReceiver {
-        queueNameHolder.name = autoDeleteQueue2.name
+        queueNameHolder.name = queue2.name
         return WorkReceiver("b")
     }
 
 
     @Bean
-    fun autoDeleteQueue1(): Queue {
+    fun queue1(): Queue {
         return AnonymousQueue()
     }
 
     @Bean
-    fun autoDeleteQueue2(): Queue {
+    fun queue2(): Queue {
         return AnonymousQueue()
     }
 
@@ -115,18 +115,18 @@ class Application {
 
     @Bean
     fun binding1(fanout: FanoutExchange,
-                 autoDeleteQueue1: Queue): Binding {
+                 queue1: Queue): Binding {
         /*
             This will create on RabbitMQ a queue that is bound
             to the given fanout.
          */
-        return BindingBuilder.bind(autoDeleteQueue1).to(fanout)
+        return BindingBuilder.bind(queue1).to(fanout)
     }
 
     @Bean
     fun binding2(fanout: FanoutExchange,
-                 autoDeleteQueue2: Queue): Binding {
-        return BindingBuilder.bind(autoDeleteQueue2).to(fanout)
+                 queue2: Queue): Binding {
+        return BindingBuilder.bind(queue2).to(fanout)
     }
 
 

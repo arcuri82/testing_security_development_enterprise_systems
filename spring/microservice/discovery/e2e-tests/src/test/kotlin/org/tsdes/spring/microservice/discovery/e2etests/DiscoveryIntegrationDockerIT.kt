@@ -3,14 +3,26 @@ package org.tsdes.spring.microservice.discovery.e2etests
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
-import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.*
-import org.junit.Ignore
+import org.junit.ClassRule
 import org.junit.Test
+import org.testcontainers.containers.DockerComposeContainer
+import java.io.File
 
 
 class DiscoveryIntegrationDockerIT {
+
+    companion object {
+
+        class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
+
+
+        @ClassRule
+        @JvmField
+        val env = KDockerComposeContainer(File("../docker-compose.yml"))
+                .withLocalCompose(true)
+    }
 
     private fun waitForSpring(port: Int, timeoutMS: Long) {
         assertWithinTime(timeoutMS, {
@@ -18,7 +30,7 @@ class DiscoveryIntegrationDockerIT {
         })
     }
 
-    private fun assertWithinTime(timeoutMS: Long, lambda: () -> Any) {
+    private fun assertWithinTime(timeoutMS: Long, lambda: () -> Any, waitingMS: Long = 100) {
         val start = System.currentTimeMillis()
 
         var delta = 0L
@@ -28,10 +40,10 @@ class DiscoveryIntegrationDockerIT {
                 lambda.invoke()
                 return
             } catch (e: AssertionError) {
-                Thread.sleep(100)
+                Thread.sleep(waitingMS)
                 System.currentTimeMillis() - start
             } catch (e: Exception) {
-                Thread.sleep(100)
+                Thread.sleep(waitingMS)
                 System.currentTimeMillis() - start
             }
         }
@@ -40,42 +52,59 @@ class DiscoveryIntegrationDockerIT {
     }
 
 
-    /*
-        TODO Docker-Compose
-        docker-compose build
-        docker-compose up
-     */
 
-
-    @Ignore
     @Test
     fun testIntegration(){
 
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
-        waitForSpring(8761, 30_000)
-        waitForSpring(9000, 2_000)
-        waitForSpring(9001, 2_000)
-        waitForSpring(9002, 2_000)
-        waitForSpring(9003, 2_000)
+        waitForSpring(8761, 60_000)
+        waitForSpring(9000, 10_000)
+        waitForSpring(9001, 10_000)
+        waitForSpring(9002, 10_000)
+        waitForSpring(9003, 10_000)
+
+        /*
+            Not only we need to wait for the servers to be up and running,
+            but also need to wait for when they are registered on Eureka.
+
+            Note: with default settings, when running many Docker images on
+            a laptop, might take a while before all services are registered,
+            especially considering that heartbeats might be sent just every
+            30s.
+         */
+
+        assertWithinTime(120_000, {
+            RestAssured.given().port(8761).get("/eureka/apps")
+                    .then()
+                    .body("applications.application.instance.size()", equalTo(4))
+        }, 1_000)
+
+
+        /*
+            Might take time before the list of available instances per service
+            is updated in all the clients of Eureka for client-side balancing
+            with Ribbon.
+         */
+        assertWithinTime(60_000, {
+            val msg = callConsumer()
+            assertTrue(msg, msg.startsWith("Received:"))
+            assertTrue(msg, !msg.contains("ERROR", ignoreCase = true))
+        }, 1_000)
+
+
+        /*
+            Now that everything is setup, send many messages.
+            Each "Producer" service should get at least 1 of them.
+         */
 
         val responses : MutableList<String> = mutableListOf()
 
-        val first = callConsumer()
-        assertTrue(first, first.startsWith("Received:"))
-        responses.add(first)
+        val n = 100
 
-        assertTrue(first, ! first.contains("ERROR", ignoreCase = true))
+        (0 until n).forEach { responses.add(callConsumer()) }
 
-        val second = callConsumer()
-        assertTrue(second, second.startsWith("Received:"))
-        responses.add(second)
-
-        assertNotEquals(first, second)
-
-        (0 until 48).forEach { responses.add(callConsumer()) }
-
-        assertEquals(50, responses.size)
+        assertEquals(n, responses.size)
 
         assertEquals(3, responses.toSet().size)
     }

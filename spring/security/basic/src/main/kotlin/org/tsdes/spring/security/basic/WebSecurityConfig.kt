@@ -1,4 +1,4 @@
-package org.tsdes.spring.security.base
+package org.tsdes.spring.security.basic
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -41,13 +41,15 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                     above.
                  */
                 .anyRequest().denyAll()
-               // .and()
+                .and()
                 /*
                     there are many different ways to define
                     how login is done.
-                    so here we need to configure it
+                    So here we need to configure it.
+                    We start from looking at "Basic" HTTP,
+                    which is the simplest form of authentication
                   */
-                //TODO
+                .httpBasic()
     }
 
 
@@ -58,7 +60,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder) {
 
         auth.inMemoryAuthentication()
-                .withUser("user").password("foo").roles("USER")
-                .and().withUser("admin").password("bar").roles("ADMIN", "USER")
+                .withUser("foo").password("123456").roles("USER").and()
+                .withUser("admin").password("bar").roles("ADMIN", "USER")
     }
 }

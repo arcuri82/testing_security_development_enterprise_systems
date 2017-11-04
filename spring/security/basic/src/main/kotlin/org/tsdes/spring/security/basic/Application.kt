@@ -1,4 +1,4 @@
-package org.tsdes.spring.security.base
+package org.tsdes.spring.security.basic
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

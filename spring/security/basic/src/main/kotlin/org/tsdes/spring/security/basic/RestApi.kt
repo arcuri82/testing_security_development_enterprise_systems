@@ -1,4 +1,4 @@
-package org.tsdes.spring.security.base
+package org.tsdes.spring.security.basic
 
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping

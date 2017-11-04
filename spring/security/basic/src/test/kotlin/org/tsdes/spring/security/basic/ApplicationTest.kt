@@ -3,7 +3,6 @@ package org.tsdes.spring.security.basic
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import org.hamcrest.CoreMatchers.containsString
-import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ApplicationTest{
+class ApplicationTest {
 
     @LocalServerPort
     private var port = 0
@@ -27,7 +26,7 @@ class ApplicationTest{
     }
 
     @Test
-    fun testOpenToAll(){
+    fun testOpenToAll() {
 
         given().get("/openToAll")
                 .then()
@@ -35,7 +34,7 @@ class ApplicationTest{
     }
 
     @Test
-    fun testNotPresent(){
+    fun testNotPresent() {
 
         /*
             Note: here we get a 401 instead of 404,
@@ -49,7 +48,7 @@ class ApplicationTest{
 
 
     @Test
-    fun testNotAuthenticated(){
+    fun testNotAuthenticated() {
 
         given().get("/forUsers")
                 .then()
@@ -59,39 +58,37 @@ class ApplicationTest{
 
 
     @Test
-    fun testAuthenticatedUser(){
+    fun testAuthenticatedUser() {
 
         given()
                 /*
                     this setup the header "Authorization: Basic X", where X is
                     the user+password in Base64 format
                  */
-                .auth().basic("foo","123456")
+                .auth().basic("foo", "123456")
                 .get("/forUsers")
                 .then()
                 .statusCode(200)
     }
 
     @Test
-    fun testUnauthorized(){
+    fun testUnauthorized() {
 
         /*
             Note the difference between 401 (not authenticated)
             and 403 (authenticated, but not authorized)
          */
 
-        given()
-                .auth().basic("foo","123456")
+        given().auth().basic("foo", "123456")
                 .get("/forAdmins")
                 .then()
                 .statusCode(403)
     }
 
     @Test
-    fun testAdmin(){
+    fun testAdmin() {
 
-        given()
-                .auth().basic("admin","bar")
+        given().auth().basic("admin", "bar")
                 .get("/forAdmins")
                 .then()
                 .statusCode(200)

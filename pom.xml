@@ -139,7 +139,13 @@
                 <version>${version.testcontainers}</version>
                 <scope>test</scope>
             </dependency>
-
+            <dependency>
+                <!-- For handling waiting of asynchronous events -->
+                <groupId>org.awaitility</groupId>
+                <artifactId>awaitility</artifactId>
+                <version>3.0.0</version>
+                <scope>test</scope>
+            </dependency>
 
 
             <!-- Misc -->

@@ -2,6 +2,7 @@ package org.tsdes.spring.microservice.gateway.e2etests
 
 import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor
+import org.openqa.selenium.StaleElementReferenceException
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.ui.WebDriverWait
 
@@ -17,7 +18,7 @@ class IndexPageObject(
 
     fun isOnPage() = driver.title.contains("Zuul")
 
-    fun sendMessage(msg: String){
+    fun sendMessage(msg: String, wait: Boolean = true){
 
         val n = numberOfMessages()
 
@@ -28,7 +29,9 @@ class IndexPageObject(
         area.sendKeys(msg)
         btn.click()
 
-        waitForDisplayedMessages(n+1)
+        if(wait) {
+            waitForDisplayedMessages(n + 1)
+        }
     }
 
     fun deleteMessages(){
@@ -48,13 +51,22 @@ class IndexPageObject(
 
     fun messages() : List<String>{
 
-        val lis = driver.findElements(By.xpath("//div[@id='messagesId']//li"))
+        while(true) {
+            try {
+                val lis = driver.findElements(By.xpath("//div[@id='messagesId']//li"))
 
-        return lis.map {it.text}
+                return lis.map { it.text }
+            } catch (e: StaleElementReferenceException){
+                /*
+                    in case a callback change the list while we are
+                    reading it.
+                 */
+            }
+        }
     }
 
     private fun waitForDisplayedMessages(n: Int){
-        val wait = WebDriverWait(driver, 5)
+        val wait = WebDriverWait(driver, 10)
 
         wait.until({numberOfMessages() == n})
 

@@ -19,9 +19,7 @@ services:
     build:
       context: ./eureka
       dockerfile: Dockerfile
-    # Uncomment for debugging
-#    ports:
-#      - "8761:8761"
+
 
   frontend:
     build:

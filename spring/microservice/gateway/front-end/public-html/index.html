@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="js/indexCode.js" > </script>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title>Zuul: Gatekeeper of Gozer</title>
-</head>
-<body>
+        <link rel="stylesheet" href="css/style.css">
 
-<h1> Zuul: Gatekeeper of Gozer </h1>
-<p>
+        <title>Zuul: Gatekeeper of Gozer</title>
 
-    <img src="img/zuul.png" />
+    </head>
+    <body>
 
-    Zuul is a demigod. She is the <b>Gatekeeper</b> of Gozer, The Destructor.
-</p>
+        <h1> Zuul: Gatekeeper of Gozer </h1>
+        <p>
 
-<p>
-    (This is a reference to the 1984 movie <i>Ghostbusters</i>)
-</p>
+            <img src="img/zuul.png" /><br><br>
 
-
-
-
-
-<div onclick="sendToZuul('messageAreaId','messagesId')" id="sendBtnId">Send</div> a message to Zuul:
-<textarea id="messageAreaId"></textarea>
+            Zuul is a demigod. She is the <b>Gatekeeper</b> of Gozer, The Destructor.
+        </p>
 
 
-<div onclick="deleteMessages('messagesId')" id="deleteBtnId">Delete</div> all messages sent to Zuul.
+            <p class="refText">
+                (This is a reference to the 1984 movie <i>Ghostbusters</i>)
+            </p>
 
 
-Current messages sent to Zuul:
-<div id="messagesId"></div>
 
-</body>
+        <div class="textBox">
+
+            <div onclick="sendToZuul('messageAreaId','messagesId')" class="btn" id="sendBtnId">Send</div> a message to Zuul:
+            <textarea id="messageAreaId"></textarea> <br><br>
+
+
+            <div onclick="deleteMessages('messagesId')" class="btn" id="deleteBtnId">Delete</div> all messages sent to Zuul.<br><br>
+
+
+            Current messages sent to Zuul:
+            <div id="messagesId"></div>
+        </div>
+
+        <script src="js/indexCode.js" > </script>
+    </body>
 </html>

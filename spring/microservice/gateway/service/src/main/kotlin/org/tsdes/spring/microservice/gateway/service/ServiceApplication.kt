@@ -48,7 +48,7 @@ class ServiceApplication (
         private val crud: MessageRepository
 ){
 
-    private val id = (System.getenv("SERVICE_ID") ?: "Undefined").trim()
+    private val id = (System.getenv("TSDES_SERVICE_ID") ?: "Undefined").trim()
 
     /*
         Note: for simplicity in this example I am using the @Entity

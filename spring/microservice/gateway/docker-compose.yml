@@ -34,7 +34,7 @@ services:
         context: ./service
         dockerfile: Dockerfile
      environment:
-        - SERVICE_ID=A
+        - TSDES_SERVICE_ID=A
      depends_on:
         - zuul
         - postgres
@@ -44,7 +44,7 @@ services:
         context: ./service
         dockerfile: Dockerfile
      environment:
-        - SERVICE_ID=B
+        - TSDES_SERVICE_ID=B
      depends_on:
         - zuul
         - postgres
@@ -54,7 +54,7 @@ services:
         context: ./service
         dockerfile: Dockerfile
      environment:
-        - SERVICE_ID=C
+        - TSDES_SERVICE_ID=C
      depends_on:
         - zuul
         - postgres

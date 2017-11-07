@@ -2,6 +2,7 @@ package org.tsdes.spring.microservice.gateway.e2etests
 
 import io.restassured.RestAssured.given
 import org.awaitility.Awaitility.await
+import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -26,6 +27,7 @@ class GatewayIntegrationDockerRestIT {
         @ClassRule
         @JvmField
         val env = KDockerComposeContainer(composeId, File("../docker-compose.yml"))
+                .withExposedService("eureka", 8761)
                 .withLocalCompose(true)
     }
 
@@ -55,26 +57,28 @@ class GatewayIntegrationDockerRestIT {
             Note: here I am using the Awaitility library
          */
 
-        await().atMost(180, TimeUnit.SECONDS).until({
-            try {
-                given().get("http://localhost:80/index.html").then().statusCode(200)
+        await().atMost(180, TimeUnit.SECONDS)
+                .ignoreExceptions()
+                .until({
 
-                given().accept("application/json;charset=UTF-8")
-                        .get("http://localhost:80/service/messages")
-                        .then().statusCode(200)
+                    given().get("http://localhost:80/index.html").then().statusCode(200)
 
-                given().accept("application/json;charset=UTF-8")
-                        .delete("http://localhost:80/service/messages")
-                        .then().statusCode(204)
+                    given().accept("application/json;charset=UTF-8")
+                            .get("http://localhost:80/service/messages")
+                            .then().statusCode(200)
 
-                true
+                    given().accept("application/json;charset=UTF-8")
+                            .delete("http://localhost:80/service/messages")
+                            .then().statusCode(204)
 
-            } catch (e: AssertionError) {
-                false
-            } catch (e: Exception) {
-                false
-            }
-        })
+                    given().baseUri("http://${env.getServiceHost("eureka_1", 8761)}")
+                            .port(env.getServicePort("eureka_1", 8761))
+                            .get("/eureka/apps")
+                            .then()
+                            .body("applications.application.instance.size()", equalTo(4))
+
+                    true
+                })
     }
 
     @Test
@@ -109,13 +113,22 @@ class GatewayIntegrationDockerRestIT {
         po.deleteMessages()
         assertEquals(0, po.numberOfMessages())
 
-        (0..20).forEach { po.sendMessage("foo", false) }
 
-        val messages = po.messages()
+        await().atMost(120, TimeUnit.SECONDS)
+                .ignoreExceptions()
+                .until({
+                    (0..3).forEach { po.sendMessage("foo") }
 
-        assertTrue(messages.any { it.startsWith("A :") })
-        assertTrue(messages.any { it.startsWith("B :") })
-        assertTrue(messages.any { it.startsWith("C :") })
+                    val messages = po.messages()
+
+                    assertEquals(3, messages.toSet().size)
+
+                    assertTrue(messages.any { it.startsWith("A :") })
+                    assertTrue(messages.any { it.startsWith("B :") })
+                    assertTrue(messages.any { it.startsWith("C :") })
+
+                    true
+                })
 
         po.deleteMessages()
     }

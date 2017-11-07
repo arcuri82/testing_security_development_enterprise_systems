@@ -71,6 +71,8 @@ interface NewsRepositoryCustom {
     Furthermore, as it is not marked with any Spring annotation, Kotlin makes it final by default, which
     does crash Spring (because it needs to create a proxy bean for it). So have to explicitly add "open"
 */
+@Repository
+@Transactional
 open class NewsRepositoryImpl : NewsRepositoryCustom {
 
     /*

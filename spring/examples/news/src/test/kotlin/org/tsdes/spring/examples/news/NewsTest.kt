@@ -1,12 +1,15 @@
 package org.tsdes.spring.examples.news
 
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.transaction.annotation.Propagation
+import org.springframework.transaction.annotation.Transactional
 import javax.validation.ConstraintViolationException
 
 /**
@@ -14,6 +17,7 @@ import javax.validation.ConstraintViolationException
  */
 @RunWith(SpringRunner::class) // needed to let Spring doing all the dependency injection and bean initialization
 @DataJpaTest //this take care to start and re-init an embedded database at each test execution
+@Transactional(propagation = Propagation.NEVER)
 class NewsTest {
 
     /*
@@ -23,6 +27,11 @@ class NewsTest {
 
     @Autowired
     private lateinit var crud: NewsRepository
+
+    @Before
+    fun cleanDatabase(){
+        crud.deleteAll()
+    }
 
     @Test
     fun testInitialization(){
@@ -154,6 +163,18 @@ class NewsTest {
         }
     }
 
+
+    @Test
+    fun testInvalidCountry() {
+        try {
+            crud.createNews("author", "text", "Foo")
+            fail()
+        } catch (e: ConstraintViolationException) {
+            //expected
+        }
+    }
+
+
     @Test
     fun testInvalidText() {
         try {
@@ -164,14 +185,35 @@ class NewsTest {
         }
     }
 
+
     @Test
-    fun testInvalidCountry() {
+    fun testTooLongText() {
+
+        val text = "a".repeat(1025)
+
         try {
-            crud.createNews("author", "text", "Foo")
+            crud.createNews("author", text, "Norway")
             fail()
         } catch (e: ConstraintViolationException) {
             //expected
         }
+    }
+
+    @Test
+    fun testUpdateWithTooLongText() {
+
+        val text = "text"
+        val id =crud.createNews("author", text, "Norway")
+        assertEquals(1, crud.count())
+
+        val updated = "a".repeat(1025)
+
+        try {
+            crud.updateText(id, updated)
+            fail()
+        }catch (e: Exception){}
+
+        assertNotEquals(updated, crud.findOne(id).text)
     }
 }
 

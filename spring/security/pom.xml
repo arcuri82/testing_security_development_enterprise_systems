@@ -14,7 +14,7 @@
 
     <modules>
         <module>basic</module>
-        <module>form</module>
+        <module>database</module>
     </modules>
 
 

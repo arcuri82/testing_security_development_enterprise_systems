@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Service
 @Transactional
-class UserHandler(
+class UserService(
         @Autowired
         private val userCrud: UserRepository,
         @Autowired
@@ -19,7 +19,7 @@ class UserHandler(
 ){
 
 
-    fun createUser(username: String, password: String) : Boolean{
+    fun createUser(username: String, password: String, roles: Set<String> = setOf()) : Boolean{
 
         try {
             val hash = passwordEncoder.encode(password)
@@ -28,7 +28,7 @@ class UserHandler(
                 return false
             }
 
-            val user = User(username, hash)
+            val user = UserEntity(username, hash, roles)
 
             userCrud.save(user)
 
@@ -40,4 +40,5 @@ class UserHandler(
 
 }
 
-interface UserRepository : CrudRepository<User, String>
+interface UserRepository : CrudRepository<UserEntity, String>
+

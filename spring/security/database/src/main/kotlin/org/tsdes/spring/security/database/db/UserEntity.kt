@@ -1,17 +1,18 @@
 package org.tsdes.spring.security.database.db
 
 import org.hibernate.validator.constraints.NotBlank
-import org.jetbrains.annotations.NotNull
+import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
+import javax.validation.constraints.NotNull
 
 /**
  * Created by arcuri82 on 08-Nov-17.
  */
 @Entity
 @Table(name="USERS")
-class User (
+class UserEntity(
 
         @get:Id
         @get:NotBlank
@@ -19,6 +20,10 @@ class User (
 
         @get:NotBlank
         var password: String?,
+
+        @get:ElementCollection
+        @get:NotNull
+        var roles: Set<String>? = setOf(),
 
         @get:NotNull
         var enabled: Boolean? = true

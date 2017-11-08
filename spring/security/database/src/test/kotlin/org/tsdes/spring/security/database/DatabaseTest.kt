@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
-import org.tsdes.spring.security.database.db.UserHandler
 import org.tsdes.spring.security.database.db.UserRepository
+import org.tsdes.spring.security.database.db.UserService
 
 /**
  * Created by arcuri82 on 08-Nov-17.
@@ -21,10 +21,10 @@ import org.tsdes.spring.security.database.db.UserRepository
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.NONE)
 @DataJpaTest
 @Transactional(propagation = Propagation.NEVER)
-class UserHandlerTest{
+class DatabaseTest {
 
     @Autowired
-    private lateinit var userHandler: UserHandler
+    private lateinit var userHandler: UserService
 
     @Autowired
     private lateinit var userRepository: UserRepository
@@ -34,7 +34,6 @@ class UserHandlerTest{
 
 
     @Before
-    @Transactional
     fun clean(){
         userRepository.deleteAll()
     }
@@ -44,8 +43,9 @@ class UserHandlerTest{
 
         val name = "foo"
         val pwd = "bar"
+        val role = "USER"
 
-        val created = userHandler.createUser(name, pwd)
+        val created = userHandler.createUser(name, pwd, setOf(role))
 
         assertTrue(created)
 

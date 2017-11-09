@@ -1,3 +1,6 @@
+# Configuring here to use an actual database, whose IP address depends
+# on where Docker Compose starts it
+
 spring:
   application:
     name: service
@@ -9,6 +12,9 @@ spring:
   jpa:
     database: "postgresql"
     hibernate:
+      # This is tricky. Schema handling should not really be done
+      # from Hibernate, but rather use an external tool like Flyway,
+      # as to avoid issues with schema migration and losing existing data.
       ddl-auto: "update"
 
 eureka:

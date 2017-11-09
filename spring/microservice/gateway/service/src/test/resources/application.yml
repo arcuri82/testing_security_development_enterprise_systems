@@ -3,6 +3,8 @@
 ## on the classpath, eg H2 database with "test" scope dependency.
 ## Here, I am setting up manually some of these configurations to make
 ## them explicit.
+## For example, here, instead of using real database, I am going to use an
+## embedded one.
 ## See: https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 
 spring:

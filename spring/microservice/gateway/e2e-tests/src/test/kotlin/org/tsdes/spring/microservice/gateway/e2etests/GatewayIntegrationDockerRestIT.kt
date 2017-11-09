@@ -27,9 +27,28 @@ class GatewayIntegrationDockerRestIT {
         @ClassRule
         @JvmField
         val env = KDockerComposeContainer(composeId, File("../docker-compose.yml"))
+                /*
+                    In the docker-compose file, I did not expose the port for Eureka.
+                    Nor I made a route for it in Zuul.
+                    However, I need it in these tests, as need to query it to wait for it
+                    be fully initialized.
+                    So, I expose it here.
+                 */
                 .withExposedService("eureka", 8761)
                 .withLocalCompose(true)
     }
+
+    /*
+        To run Selenium tests, I need a browser and drivers for it, which will
+        depend on the operating system.
+        What about starting it from a Docker?
+        Yes! That works great. Only caveat is that it would be on a different network,
+        and so Selenium would not be able to interact with Zuul.
+        Adding it in the docker-compose.yml would be wrong, as we do not need it in
+        production.
+        So, the approach here is to start it in its own Docker, and then make sure
+        such Docker image share the same network of the Docker Compose one.
+     */
 
     @Rule
     @JvmField
@@ -37,7 +56,7 @@ class GatewayIntegrationDockerRestIT {
             .withDesiredCapabilities(DesiredCapabilities.chrome())
             .withNetworkMode("${composeId}_default")
     /*
-        TODO: note following seems currently not working with joined network.
+        TODO: note following would be great feature, but seems currently not working with joined network.
         https://github.com/testcontainers/testcontainers-java/issues/282
      */
 //            .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL, File("./target/"))
@@ -54,7 +73,7 @@ class GatewayIntegrationDockerRestIT {
             of its clients. See:
             https://github.com/Netflix/eureka/wiki/Understanding-eureka-client-server-communication
 
-            Note: here I am using the Awaitility library
+            Note: here I am using the Awaitility library to do such waits
          */
 
         await().atMost(180, TimeUnit.SECONDS)

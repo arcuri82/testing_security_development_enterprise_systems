@@ -42,6 +42,9 @@ class ServiceApplication (
             completely shield your project from mock framework abuse.
             Still, though, as mock frameworks have some uses in some
             cases, (2) can make more sense in Kotlin.
+
+            Also note that the annotation @Autowired is redundant, as Spring
+            can automatically detect that the input needs to be autowired.
          */
 
         @Autowired

@@ -26,6 +26,10 @@ services:
       context: ./front-end
       dockerfile: Dockerfile
 
+  # Note that here I am using a real database.
+  # Cannot use embedded H2 as done so far, because
+  # all the different instances of the replicated services
+  # need to work on the same data
   postgres:
     image: "postgres:10"
 

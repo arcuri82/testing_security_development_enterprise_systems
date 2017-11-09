@@ -1,12 +1,17 @@
 package org.tsdes.spring.security.database
 
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.password.PasswordEncoder
+import javax.servlet.http.HttpServletResponse
 import javax.sql.DataSource
+import org.springframework.security.core.userdetails.UserDetailsService
+
+
 
 
 @Configuration
@@ -17,26 +22,23 @@ class WebSecurityConfig(
 ) : WebSecurityConfigurerAdapter() {
 
 
+    @Bean
+    override fun userDetailsServiceBean(): UserDetailsService {
+        return super.userDetailsServiceBean()
+    }
 
     override fun configure(http: HttpSecurity) {
 
-        http.authorizeRequests()
+        http
+                .httpBasic().and()
+                .logout()
+                .and()
+                //
+                .authorizeRequests()
                 .antMatchers("/login", "/signIn").permitAll()
-                .antMatchers("/resource", "/logout").hasRole("USER")
+                .antMatchers("/resource").hasRole("USER")
                 .anyRequest().denyAll()
                 .and()
-                // handling of login
-                .formLogin()
-                .loginPage("/login")
-                .usernameParameter("the_user")
-                .passwordParameter("the_password")
-                .and()
-                // logout
-                .logout()
-                .logoutUrl("/logout")
-                .and()
-                // Needed when client is a browser
-                //TODO
                 .csrf().disable()
     }
 

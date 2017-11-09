@@ -1,3 +1,8 @@
 spring:
   jpa:
     show-sql: true
+  session:
+    store-type: hash_map
+
+security:
+  sessions: ALWAYS

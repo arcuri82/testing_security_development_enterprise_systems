@@ -28,7 +28,7 @@ class UserService(
                 return false
             }
 
-            val user = UserEntity(username, hash, roles)
+            val user = UserEntity(username, hash, roles.map{"ROLE_$it"}.toSet())
 
             userCrud.save(user)
 

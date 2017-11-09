@@ -2,19 +2,15 @@ package org.tsdes.spring.security.database
 
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
-import io.restassured.authentication.FormAuthConfig
 import io.restassured.http.ContentType
-import org.hamcrest.CoreMatchers.containsString
-import org.hamcrest.CoreMatchers.not
+import org.junit.Assert.*
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
-import org.springframework.transaction.annotation.Transactional
 import org.tsdes.spring.security.database.db.UserRepository
 
 /**
@@ -44,36 +40,33 @@ class ApplicationTest{
     }
 
 
-    @Ignore //FIXME
+
     @Test
     fun testUnauthorizedAccess(){
 
-        given().accept(ContentType.TEXT)
+        given().accept("${ContentType.TEXT},*/*")
                 .get("/resource")
                 .then()
                 .statusCode(401)
     }
 
-    @Test
-    fun testFailedLogin(){
 
-        given().auth().form("nonRegisteredUser","password",
-                FormAuthConfig("login", "the_user", "the_password"))
-                .post("/login")
-                .then()
-                .statusCode(302)
-                .header("location", containsString("/login?error"))
-    }
 
     @Test
     fun testRegisterUser(){
 
-        given().contentType(ContentType.URLENC)
-                .formParam("the_user", "foo")
-                .formParam("the_password", "bar")
+        registerUser("foo", "bar")
+    }
+
+    private fun registerUser(id: String, password: String) : String?{
+
+        return given().contentType(ContentType.URLENC)
+                .formParam("the_user", id)
+                .formParam("the_password", password)
                 .post("/signIn")
                 .then()
                 .statusCode(204)
+                .extract().cookie("JSESSIONID")
     }
 
     @Test
@@ -99,25 +92,192 @@ class ApplicationTest{
 
 
     @Test
-    fun testRegisterAndThenLogin(){
+    fun testRegisterAndGetResource(){
 
         val name = "foo"
         val pwd = "bar"
 
-        given().contentType(ContentType.URLENC)
-                .formParam("the_user", name)
-                .formParam("the_password", pwd)
-                .post("/signIn")
+       registerUser(name, pwd)
+
+        given().accept("${ContentType.TEXT},*/*")
+                .auth().basic(name, pwd)
+                .get("/resource")
                 .then()
-                .statusCode(204)
+                .statusCode(200)
+    }
+
+    @Test
+    fun testAccessCookie(){
+
+        val name = "foo"
+        val pwd = "bar"
+
+        registerUser(name, pwd)
 
 
-        given().contentType(ContentType.URLENC)
-                .formParam("the_user", name)
-                .formParam("the_password", pwd)
-                .post("/login")
+        val jid = given().accept("${ContentType.TEXT},*/*")
+                .auth().basic(name, pwd)
+                .get("/resource")
+                .then()
+                .statusCode(200)
+                .extract().cookie("JSESSIONID")
+
+
+        //
+        given().accept("${ContentType.TEXT},*/*")
+                .cookie("JSESSIONID", jid)
+                .get("/resource")
+                .then()
+                .statusCode(200)
+    }
+
+    @Test
+    fun testSessionFixation(){
+
+        val first = given().accept("${ContentType.TEXT},*/*")
+                .get("/resource")
+                .then()
+                .statusCode(401)
+                .cookie("JSESSIONID")
+                .extract().cookie("JSESSIONID")
+
+        /*
+            SpringBoot will try to set a session cookie
+         */
+        assertNotNull(first)
+
+        val second = given().accept("${ContentType.TEXT},*/*")
+                .cookie("JSESSIONID", first)
+                .get("/resource")
+                .then()
+                .statusCode(401)
+                .extract().cookie("JSESSIONID")
+
+        /*
+            As we provided a valid session cookie, SpringBoot will
+            use it, and not try to set a new one
+         */
+        assertNull(second)
+
+        val name = "foo"
+        val pwd = "bar"
+
+        registerUser(name, pwd)
+
+        val third = given().accept("${ContentType.TEXT},*/*")
+                .auth().basic(name, pwd)
+                .cookie("JSESSIONID", first)
+                .get("/resource")
+                .then()
+                .statusCode(200)
+                .extract().cookie("JSESSIONID")
+
+        /*
+            The previous session cookie was not authenticated.
+            Now that we do authenticate, SpringBoot does create a
+            new session cookie to prevent session fixation attacks
+         */
+        assertNotNull(third)
+        assertNotEquals(third, second)
+    }
+
+    @Test
+    fun testSignInCreateAuthenticatedSession(){
+
+        val cookie = registerUser("hello", "world")
+        assertNotNull(cookie)
+    }
+
+    @Test
+    fun testSignInAndUseCookie(){
+
+        val first = registerUser("a", "b")
+
+        assertNotNull(first)
+
+        val second = given().accept("${ContentType.TEXT},*/*")
+                .cookie("JSESSIONID", first)
+                .get("/resource")
+                .then()
+                .statusCode(200)
+                .extract().cookie("JSESSIONID")
+
+        assertNull(second)
+    }
+
+    @Test
+    fun testUseBasicAfterSignIn(){
+
+        val name = "foo"
+        val pwd = "bar"
+
+        val first = registerUser(name, pwd)
+
+        val second = given().accept("${ContentType.TEXT},*/*")
+                .auth().basic(name, pwd)
+                .get("/resource")
+                .then()
+                .statusCode(200)
+                .extract().cookie("JSESSIONID")
+
+        assertNotNull(first)
+        assertNotNull(second)
+        assertNotEquals(first,second)
+    }
+
+
+    @Test
+    fun testUseBasicAfterSignInWithSameCookie(){
+
+        val name = "foo"
+        val pwd = "bar"
+
+        val first = registerUser(name, pwd)
+
+        val second = given().accept("${ContentType.TEXT},*/*")
+                .auth().basic(name, pwd)
+                .cookie("JSESSIONID", first)
+                .get("/resource")
+                .then()
+                .statusCode(200)
+                .extract().cookie("JSESSIONID")
+
+        assertNotNull(first)
+        assertNull(second)
+    }
+
+
+    @Test
+    fun testLogout(){
+
+        val cookie = registerUser("a", "b")
+
+        given().accept("${ContentType.TEXT},*/*")
+                .cookie("JSESSIONID", cookie)
+                .get("/resource")
+                .then()
+                .statusCode(200)
+
+        given().post("/logout")
+                .then()
+                //default behavior for "logout" is not REST friendly...
+                .statusCode(302)
+
+        given().accept("${ContentType.TEXT},*/*")
+                .cookie("JSESSIONID", cookie)
+                .get("/resource")
+                .then()
+                .statusCode(200)
+
+        given().cookie("JSESSIONID", cookie)
+                .post("/logout")
                 .then()
                 .statusCode(302)
-                .header("location", not(containsString("/login?error")))
+
+        given().accept("${ContentType.TEXT},*/*")
+                .cookie("JSESSIONID", cookie)
+                .get("/resource")
+                .then()
+                .statusCode(401)
     }
 }

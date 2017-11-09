@@ -3,6 +3,9 @@ package org.tsdes.spring.security.database
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
+import org.hamcrest.CoreMatchers.containsString
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.Matchers.contains
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -279,5 +282,27 @@ class ApplicationTest{
                 .get("/resource")
                 .then()
                 .statusCode(401)
+    }
+
+
+    @Test
+    fun testLogin(){
+
+        val name = "foo"
+        val pwd = "bar"
+
+        registerUser(name, pwd)
+
+        given().get("/user")
+                .then()
+                .statusCode(401)
+
+        given().auth().basic(name, pwd)
+                .get("/user")
+                .then()
+                .statusCode(200)
+                .cookie("JSESSIONID")
+                .body("name", equalTo(name))
+                .body("roles", contains("ROLE_USER"))
     }
 }

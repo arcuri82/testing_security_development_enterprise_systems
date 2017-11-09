@@ -58,6 +58,10 @@ class DiscoveryIntegrationDockerIT {
 
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
+        /*
+            Wait for when these services are up and running
+         */
+
         waitForSpring(8761, 60_000)
         waitForSpring(9000, 10_000)
         waitForSpring(9001, 10_000)
@@ -71,7 +75,8 @@ class DiscoveryIntegrationDockerIT {
             Note: with default settings, when running many Docker images on
             a laptop, might take a while before all services are registered,
             especially considering that heartbeats might be sent just every
-            30s.
+            30s, and there is the need of up to 3 heartbeats to complete
+            all registrations.
          */
 
         assertWithinTime(120_000, {

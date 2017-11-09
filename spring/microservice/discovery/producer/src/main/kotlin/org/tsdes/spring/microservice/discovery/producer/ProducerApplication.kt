@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
  * Created by arcuri82 on 28-Sep-17.
  */
 @SpringBootApplication
-@EnableEurekaClient
+@EnableEurekaClient  //tell Eureka to register this service
 @RestController
 class ProducerApplication {
 
@@ -21,6 +21,12 @@ class ProducerApplication {
     @GetMapping(path = arrayOf("producerData"),
             produces = arrayOf(MediaType.TEXT_PLAIN_VALUE))
     fun get() : ResponseEntity<String>{
+
+        /*
+            Here, I am going to give a different response based on
+            an environment variable, which I do set in the docker-compose.yml
+            file.
+         */
 
         val id = (System.getenv("PRODUCER_ID") ?: "Undefined").trim()
 

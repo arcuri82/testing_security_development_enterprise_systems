@@ -1,6 +1,7 @@
 server:
   port: 8761
-#  host: eureka
+
+# when running from Docker Compose, need to change from "localhost" to "eureka" host name
 
 eureka:
   instance:

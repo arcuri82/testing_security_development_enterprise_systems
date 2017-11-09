@@ -2,11 +2,15 @@ version: '3.3'
 
 services:
 
+  # All services here are going to be accessible from the localhost,
+  # as binding them to different TCP ports.
+
   eureka:
     build:
       context: ./eureka
       dockerfile: Dockerfile
     ports:
+      # By default, Eureka provides a GUI
       - "8761:8761"
 
   consumer:
@@ -17,6 +21,9 @@ services:
        - "9000:8080"
     depends_on:
        - eureka
+
+  # Starting 3 different instances of the same service.
+  # Going to use an environment variable to distinguish them
 
   producer_0:
      build:

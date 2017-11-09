@@ -5,6 +5,9 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
+# the name here will be important for Eureka, as to determine
+# the same "service" among different replicated running instances
+
 spring:
   application:
     name: producer-server

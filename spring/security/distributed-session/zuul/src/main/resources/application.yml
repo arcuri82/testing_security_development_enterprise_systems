@@ -1,0 +1,13 @@
+
+#zuul:
+#  routes:
+
+
+spring:
+  jpa:
+    show-sql: true
+  session:
+    store-type: redis
+
+security:
+  sessions: ALWAYS

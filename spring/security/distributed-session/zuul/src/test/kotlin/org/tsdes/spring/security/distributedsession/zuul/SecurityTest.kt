@@ -103,6 +103,7 @@ class SecurityTest{
                 .then()
                 .statusCode(401)
 
+        //note the difference in cookie name
         given().cookie("SESSION", cookie)
                 .get("/user")
                 .then()

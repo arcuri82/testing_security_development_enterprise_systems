@@ -1,0 +1,6 @@
+
+
+spring:
+  session:
+    store-type: hash_map
+

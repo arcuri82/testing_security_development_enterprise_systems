@@ -1,0 +1,8 @@
+
+
+spring:
+  session:
+    store-type: redis
+
+security:
+  sessions: NEVER

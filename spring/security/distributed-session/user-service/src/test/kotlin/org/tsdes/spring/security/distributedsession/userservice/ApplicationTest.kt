@@ -44,6 +44,21 @@ class ApplicationTest{
                 .statusCode(401)
     }
 
+
+    @Test
+    fun testOpenCount(){
+
+        val count = given().basePath("/usersInfoCount")
+                .get()
+                .then()
+                .statusCode(200)
+                .extract().body().asString().toInt()
+
+        assertEquals(0, count)
+    }
+
+
+
     @Test
     fun testGetAllWithAdmin(){
 

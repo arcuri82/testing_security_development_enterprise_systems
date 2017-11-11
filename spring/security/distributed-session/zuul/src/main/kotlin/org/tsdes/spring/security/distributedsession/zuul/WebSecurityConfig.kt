@@ -34,6 +34,8 @@ class WebSecurityConfig(
                 .authorizeRequests()
                 .antMatchers("/user").authenticated()
                 .antMatchers("/signIn").permitAll()
+                .antMatchers("/user-service/usersInfoCount").permitAll()
+                .antMatchers("/user-service/**").authenticated()
                 .anyRequest().denyAll()
                 .and()
                 .csrf().disable()

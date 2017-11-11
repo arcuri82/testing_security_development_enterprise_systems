@@ -15,6 +15,7 @@
     <modules>
         <module>zuul</module>
         <module>user-service</module>
+        <module>e2e-tests</module>
     </modules>
 
 

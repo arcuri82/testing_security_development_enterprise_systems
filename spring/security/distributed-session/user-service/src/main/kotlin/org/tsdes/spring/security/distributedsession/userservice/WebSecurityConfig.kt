@@ -24,6 +24,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
                      ** matches zero or more directories in a path
                      {foo:[a-z]+} matches the regexp [a-z]+ as a path variable named "foo"
                  */
+                .antMatchers("/usersInfoCount").permitAll()
                 .antMatchers("/usersInfo").hasRole("ADMIN")
                 //
                 .antMatchers("/usersInfo/{id}/**")

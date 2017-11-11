@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+
+  redis:
+    image: "redis:latest"
+
+  zuul:
+    build:
+      context: ./zuul
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"
+    depends_on:
+      - redis
+
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    depends_on:
+      - redis

@@ -12,23 +12,31 @@ interface UserInfoRepository : CrudRepository<UserInfoEntity, String>
 
 
 @RestController
-@RequestMapping(path = arrayOf("/usersInfo"))
+@RequestMapping
 class RestApi(
         private val crud: UserInfoRepository
 ) {
+
+    @GetMapping(path = arrayOf("/usersInfoCount"),
+            produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
+    fun getCount(): ResponseEntity<Long> {
+
+        return ResponseEntity.ok(crud.count())
+    }
 
     /*
         Note: for simplicity here using Entity as DTO...
      */
 
-    @GetMapping(produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
+    @GetMapping(path = arrayOf("/usersInfo"),
+            produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     fun getAll(): ResponseEntity<List<UserInfoEntity>> {
 
         return ResponseEntity.ok(crud.findAll().toList())
     }
 
 
-    @GetMapping(path = arrayOf("/{id}"),
+    @GetMapping(path = arrayOf("/usersInfo/{id}"),
             produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     fun getById(@PathVariable id: String)
             : ResponseEntity<UserInfoEntity> {
@@ -41,7 +49,7 @@ class RestApi(
 
 
 
-    @PutMapping(path = arrayOf("/{id}"),
+    @PutMapping(path = arrayOf("/usersInfo/{id}"),
             consumes = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     fun replace(
             @PathVariable id: String,

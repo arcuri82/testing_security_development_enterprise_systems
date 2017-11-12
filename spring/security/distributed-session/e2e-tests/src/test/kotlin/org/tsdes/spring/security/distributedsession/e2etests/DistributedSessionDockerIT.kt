@@ -61,15 +61,29 @@ class DistributedSessionDockerIT {
                 .statusCode(401)
     }
 
-    private fun registerUser(id: String, password: String): String? {
+    class NeededCookies(val session:String, val csrf: String)
 
-        return given().contentType(ContentType.URLENC)
+    private fun registerUser(id: String, password: String): NeededCookies {
+
+        val xsrfToken = given().contentType(ContentType.URLENC)
                 .formParam("the_user", id)
                 .formParam("the_password", password)
                 .post("/signIn")
                 .then()
+                .statusCode(403)
+                .extract().cookie("XSRF-TOKEN")
+
+        val session=  given().contentType(ContentType.URLENC)
+                .formParam("the_user", id)
+                .formParam("the_password", password)
+                .header("X-XSRF-TOKEN", xsrfToken)
+                .cookie("XSRF-TOKEN", xsrfToken)
+                .post("/signIn")
+                .then()
                 .statusCode(204)
                 .extract().cookie("SESSION")
+
+        return NeededCookies(session, xsrfToken)
     }
 
     private fun createUniqueId(): String {
@@ -84,14 +98,14 @@ class DistributedSessionDockerIT {
         val id = createUniqueId()
         val pwd = "bar"
 
-        val cookie = registerUser(id, pwd)
+        val cookies = registerUser(id, pwd)
 
         given().get("/user")
                 .then()
                 .statusCode(401)
 
         //note the difference in cookie name
-        given().cookie("SESSION", cookie)
+        given().cookie("SESSION", cookies.session)
                 .get("/user")
                 .then()
                 .statusCode(200)
@@ -126,7 +140,7 @@ class DistributedSessionDockerIT {
     fun testForbiddenToChangeOthers() {
 
         val firstId = createUniqueId()
-        val firstCookie = registerUser(firstId, "123")
+        val firstCookies = registerUser(firstId, "123")
         val firstPath = "/user-service/usersInfo/$firstId"
 
         /*
@@ -136,7 +150,7 @@ class DistributedSessionDockerIT {
             as done in these tests
          */
 
-        given().cookie("SESSION", firstCookie)
+        given().cookie("SESSION", firstCookies.session)
                 .get("/user")
                 .then()
                 .statusCode(200)
@@ -144,7 +158,9 @@ class DistributedSessionDockerIT {
                 .body("roles", contains("ROLE_USER"))
 
 
-        given().cookie("SESSION", firstCookie)
+        given().cookie("SESSION", firstCookies.session)
+                .cookie("XSRF-TOKEN", firstCookies.csrf)
+                .header("X-XSRF-TOKEN", firstCookies.csrf)
                 .contentType(ContentType.JSON)
                 .body("""
                     {
@@ -160,10 +176,12 @@ class DistributedSessionDockerIT {
 
 
         val secondId = createUniqueId()
-        val secondCookie = registerUser(secondId, "123")
+        val secondCookies = registerUser(secondId, "123")
         val secondPath = "/user-service/usersInfo/$secondId"
 
-        given().cookie("SESSION", secondCookie)
+        given().cookie("SESSION", secondCookies.session)
+                .cookie("XSRF-TOKEN", secondCookies.csrf)
+                .header("X-XSRF-TOKEN", secondCookies.csrf)
                 .contentType(ContentType.JSON)
                 .body("""
                     {
@@ -179,7 +197,9 @@ class DistributedSessionDockerIT {
 
 
 
-        given().cookie("SESSION", firstCookie)
+        given().cookie("SESSION", firstCookies.session)
+                .cookie("XSRF-TOKEN", firstCookies.csrf)
+                .header("X-XSRF-TOKEN", firstCookies.csrf)
                 .contentType(ContentType.JSON)
                 .body("""
                     {
@@ -199,10 +219,12 @@ class DistributedSessionDockerIT {
         val name = "foo"
         val pwd = "bar"
 
-        val cookie = registerUser(id, pwd)
+        val cookies = registerUser(id, pwd)
 
 
-        given().cookie("SESSION", cookie)
+        given().cookie("SESSION", cookies.session)
+                .cookie("XSRF-TOKEN", cookies.csrf)
+                .header("X-XSRF-TOKEN", cookies.csrf)
                 .contentType(ContentType.JSON)
                 .body("""
                     {
@@ -217,7 +239,7 @@ class DistributedSessionDockerIT {
                 .statusCode(201)
 
 
-        given().cookie("SESSION", cookie)
+        given().cookie("SESSION", cookies.session)
                 .accept(ContentType.JSON)
                 .get("/greetings/api/$id")
                 .then()

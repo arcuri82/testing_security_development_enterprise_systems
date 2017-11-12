@@ -1,0 +1,16 @@
+userServiceAddress: "user-service:8080"
+
+spring:
+  redis:
+    host: redis
+    port: 6379
+  session:
+    store-type: redis
+
+security:
+  sessions: NEVER
+
+
+logging:
+  level:
+    org.springframework.security: debug

@@ -12,7 +12,6 @@ interface UserInfoRepository : CrudRepository<UserInfoEntity, String>
 
 
 @RestController
-@RequestMapping
 class RestApi(
         private val crud: UserInfoRepository
 ) {

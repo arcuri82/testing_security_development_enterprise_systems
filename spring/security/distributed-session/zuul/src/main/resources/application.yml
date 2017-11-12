@@ -9,6 +9,10 @@ zuul:
       # But here we need the cookies for authentication,
       # so we need to allow them.
       sensitive-headers:
+    greetings:
+      path: /greetings/**
+      url: http://greetings:8080
+      sensitive-headers:
 
 spring:
   jpa:

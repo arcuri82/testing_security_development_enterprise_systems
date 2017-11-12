@@ -21,3 +21,11 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - redis
+
+
+  greetings:
+    build:
+      context: ./greetings
+      dockerfile: Dockerfile
+    depends_on:
+      - redis

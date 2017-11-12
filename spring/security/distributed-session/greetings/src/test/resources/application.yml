@@ -1,0 +1,8 @@
+userServiceAddress: "localhost:8099"
+
+spring:
+  session:
+    store-type: hash_map
+
+security:
+  sessions: ALWAYS

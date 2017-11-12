@@ -4,9 +4,9 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.awaitility.Awaitility.await
-import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.Matchers.contains
-import org.junit.Assert
 import org.junit.Assert.assertTrue
 import org.junit.BeforeClass
 import org.junit.ClassRule
@@ -72,7 +72,7 @@ class DistributedSessionDockerIT {
                 .extract().cookie("SESSION")
     }
 
-    private fun createUniqueName(): String {
+    private fun createUniqueId(): String {
         counter++
         return "foo_$counter"
     }
@@ -81,10 +81,10 @@ class DistributedSessionDockerIT {
     @Test
     fun testLogin() {
 
-        val name = createUniqueName()
+        val id = createUniqueId()
         val pwd = "bar"
 
-        val cookie = registerUser(name, pwd)
+        val cookie = registerUser(id, pwd)
 
         given().get("/user")
                 .then()
@@ -95,16 +95,16 @@ class DistributedSessionDockerIT {
                 .get("/user")
                 .then()
                 .statusCode(200)
-                .body("name", equalTo(name))
+                .body("name", equalTo(id))
                 .body("roles", contains("ROLE_USER"))
 
 
-        given().auth().basic(name, pwd)
+        given().auth().basic(id, pwd)
                 .get("/user")
                 .then()
                 .statusCode(200)
                 .cookie("SESSION")
-                .body("name", equalTo(name))
+                .body("name", equalTo(id))
                 .body("roles", contains("ROLE_USER"))
     }
 
@@ -125,7 +125,7 @@ class DistributedSessionDockerIT {
     @Test
     fun testForbiddenToChangeOthers() {
 
-        val firstId = createUniqueName()
+        val firstId = createUniqueId()
         val firstCookie = registerUser(firstId, "123")
         val firstPath = "/user-service/usersInfo/$firstId"
 
@@ -159,7 +159,7 @@ class DistributedSessionDockerIT {
                 .statusCode(201)
 
 
-        val secondId = createUniqueName()
+        val secondId = createUniqueId()
         val secondCookie = registerUser(secondId, "123")
         val secondPath = "/user-service/usersInfo/$secondId"
 
@@ -189,5 +189,41 @@ class DistributedSessionDockerIT {
                 .put(secondPath)
                 .then()
                 .statusCode(403)
+    }
+
+
+    @Test
+    fun testGetGreetings(){
+
+        val id = createUniqueId()
+        val name = "foo"
+        val pwd = "bar"
+
+        val cookie = registerUser(id, pwd)
+
+
+        given().cookie("SESSION", cookie)
+                .contentType(ContentType.JSON)
+                .body("""
+                    {
+                        "userId": "$id",
+                        "name": "$name",
+                        "surname": "B",
+                        "email": "a@a.com"
+                    }
+                    """)
+                .put("/user-service/usersInfo/$id")
+                .then()
+                .statusCode(201)
+
+
+        given().cookie("SESSION", cookie)
+                .accept(ContentType.JSON)
+                .get("/greetings/api/$id")
+                .then()
+                .statusCode(200)
+                .body("message", startsWith("Hello"))
+                .body("message", containsString(name))
+
     }
 }

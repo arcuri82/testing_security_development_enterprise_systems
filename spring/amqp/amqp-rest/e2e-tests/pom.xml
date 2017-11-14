@@ -24,6 +24,33 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+
+        <!--
+            Make sure that you add the dependencies to the other
+            modules here, even if you do not use them.
+            The point is to force Maven to build the e2e-tests
+            module AFTER the others have been built, and so
+            the Docker images can be created because the
+            executable jars exist.
+            Note: to achieve this, we also need to make sure that
+            our tests in this module are integration tests, ie
+            ending with "IT", which will be executed after the
+            "package" phase.
+            If you don't, then executing "mvn clean test" will
+            fail when reaching this module.
+        -->
+        <dependency>
+            <groupId>org.tsdes.spring.amqp</groupId>
+            <artifactId>receiver</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.spring.amqp</groupId>
+            <artifactId>sender</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

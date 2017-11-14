@@ -20,6 +20,23 @@
             <artifactId>kotlin-stdlib-jre8</artifactId>
         </dependency>
 
+        <!-- Force this module to be built last -->
+        <dependency>
+            <groupId>org.tsdes.spring.security.distributedsession</groupId>
+            <artifactId>greetings</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.spring.security.distributedsession</groupId>
+            <artifactId>user-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.spring.security.distributedsession</groupId>
+            <artifactId>zuul</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>

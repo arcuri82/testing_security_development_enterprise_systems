@@ -20,6 +20,24 @@
         </dependency>
 
 
+        <!-- Force this module to be built last -->
+        <dependency>
+            <groupId>org.tsdes.spring.microservice.gateway</groupId>
+            <artifactId>eureka</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.spring.microservice.gateway</groupId>
+            <artifactId>service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.spring.microservice.gateway</groupId>
+            <artifactId>zuul</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

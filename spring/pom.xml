@@ -22,6 +22,7 @@
         <module>amqp</module>
         <module>microservice</module>
         <module>security</module>
+        <module>front-end</module>
     </modules>
 
 

@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>welcome</artifactId>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.tsdes.spring.frontend.react</groupId>
+        <artifactId>react</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+
+    <build>
+        <plugins>
+            <!--
+                Build the static files for web front-end using NPM.
+                See root pom file for configurations.
+              -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+            </plugin>
+            <!--
+                Make sure that, when we run "mvn clean", all the
+                files generated/downloaded by NPM are deleted
+            -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <!--
+                    Even if files are under Git, best to be careful
+                    about deleting files.
+                    So, the deletion settings are done here, and not
+                    in the root pom file, as specific to this project,
+                    and "clean" plugin is on by default on all modules,
+                    ie we do not want to override general settings
+                  -->
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>build</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>coverage</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>node</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>node_modules</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

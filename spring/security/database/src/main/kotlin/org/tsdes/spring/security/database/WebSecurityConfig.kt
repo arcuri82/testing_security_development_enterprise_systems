@@ -42,6 +42,15 @@ class WebSecurityConfig(
                 .antMatchers("/resource").hasRole("USER")
                 .anyRequest().denyAll()
                 .and()
+                /*
+                    CSRF protection is on by default.
+                    Here for simplicity we deactivate it, as
+                    it complicates how we do the HTTP calls.
+                    However, it is extremely important when
+                    the clients are browser, so
+                    in practice it should not be deactivated.
+                    Anyway, we ll look at it in the next module.
+                  */
                 .csrf().disable()
     }
 
@@ -60,6 +69,9 @@ class WebSecurityConfig(
                      FROM users x, user_entity_roles y
                      WHERE x.username=? and y.user_entity_username=x.username
                      """)
+                /*
+                    Note: in BCrypt, the "password" field also contains the salt
+                 */
                 .passwordEncoder(passwordEncoder)
     }
 }

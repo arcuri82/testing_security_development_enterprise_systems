@@ -2,8 +2,19 @@ version: '3.3'
 
 services:
 
+  # "Redis is an open-source in-memory database project implementing a distributed,
+  # in-memory key-value store with optional durability."
+  # We use it here to store session tokens, in a way in which all services can
+  # quickly access it for authentication purposes.
+  # Think about it like a hash-map that you can access remotely.
   redis:
     image: "redis:latest"
+
+
+  # Note: for simplicity I am not starting any real database in this example.
+  # I am going to use embedded H2 databases.
+  # However, ideally I should start here on Postgres per service that needs
+  # a database (eg, zuul and user-service here)
 
   zuul:
     build:

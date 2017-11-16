@@ -40,6 +40,14 @@ class WebSecurityConfig(
                 .antMatchers("/greetings/**").authenticated()
                 .anyRequest().denyAll()
                 .and()
+                /*
+                    CSRF would be on by default.
+                    Here we configure it.
+                    The CSRF token can be sent in different ways.
+                    Here we send it as a cookie readable from JS.
+                    This is secure, and greatly simplify the handling
+                    of it in the browser.
+                 */
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
     }

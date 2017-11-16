@@ -42,6 +42,10 @@ class SecurityTest{
 
         class KGenericContainer(imageName: String) : GenericContainer<KGenericContainer>(imageName)
 
+        /*
+            Here, going to use an actual Redis instance started in Docker
+         */
+
         @ClassRule
         @JvmField
         val redis = KGenericContainer("redis:latest")
@@ -83,7 +87,19 @@ class SecurityTest{
                 .statusCode(401)
     }
 
+
+    /**
+     *   Utility function used to create a new user in the database
+     */
     private fun registerUser(id: String, password: String) : Pair<String,String>{
+
+        /*
+            Every time we do a non-read operation (eg, POST, PUT, DELETE and PATCH),
+            I need to take care of CSRF.
+
+            Even if I have the right userid/password, the very first call
+            to this API will fail, as I do not have a XSRF-TOKEN.
+         */
 
         val xsrfToken = given().contentType(ContentType.URLENC)
                 .formParam("the_user", id)
@@ -91,17 +107,30 @@ class SecurityTest{
                 .post("/signIn")
                 .then()
                 .statusCode(403)
+                //the response will give me the token
                 .extract().cookie("XSRF-TOKEN")
+
 
         val session=  given().contentType(ContentType.URLENC)
                 .formParam("the_user", id)
                 .formParam("the_password", password)
+                /*
+                    The XSRF token has to be passed BOTH as a cookie,
+                    and as a X-XSRF-TOKEN header.
+                 */
                 .header("X-XSRF-TOKEN", xsrfToken)
                 .cookie("XSRF-TOKEN", xsrfToken)
                 .post("/signIn")
                 .then()
                 .statusCode(204)
                 .extract().cookie("SESSION")
+
+        /*
+            From now on, the user is authenticated.
+            I do not need to use userid/password in the following requests.
+            But each further request will need to have both the SESSION
+            cookie and the XSRF token
+         */
 
         return Pair(session, xsrfToken)
     }
@@ -120,7 +149,7 @@ class SecurityTest{
                 .statusCode(401)
 
         /*
-            Note: as these are gets, no need for
+            Note: as these are only GETs, no need for
             setting the CSRF token
          */
         given().cookie("SESSION", session)
@@ -131,11 +160,15 @@ class SecurityTest{
                 .body("roles", contains("ROLE_USER"))
 
 
+        /*
+            Trying to access with login/password will reset
+            the SESSION token.
+         */
         given().auth().basic(name, pwd)
                 .get("/user")
                 .then()
                 .statusCode(200)
-                .cookie("SESSION")
+                .cookie("SESSION") // new SESSION cookie
                 .body("name", CoreMatchers.equalTo(name))
                 .body("roles", Matchers.contains("ROLE_USER"))
     }

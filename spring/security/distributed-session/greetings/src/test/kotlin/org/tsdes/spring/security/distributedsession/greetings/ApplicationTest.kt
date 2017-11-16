@@ -27,6 +27,11 @@ class ApplicationTest {
 
     companion object {
 
+        /*
+            As this service relies on "user-service" being up and running,
+            we need to mock it with WireMock
+         */
+
         private lateinit var wiremockServer: WireMockServer
 
         @BeforeClass
@@ -67,6 +72,12 @@ class ApplicationTest {
     }
 
     private fun stubJsonResponse(json: String, userId: String) {
+
+        /*
+            Here, instructing WireMock to give 2 different responses
+            based on whether the authentication cookie is  set or not,
+            regardless of its content
+         */
 
         wiremockServer.stubFor(
                 WireMock.get(

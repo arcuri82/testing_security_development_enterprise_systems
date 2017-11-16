@@ -25,10 +25,26 @@ class RestApi(
 ) {
 
     @RequestMapping("/user")
-    fun user(user: Principal): ResponseEntity<Map<String, Any>> {
+    fun user(user: Authentication): ResponseEntity<Map<String, Any>> {
+        /*
+            The "Authentication" object (which is a subclass of "Principal")
+            contains information of the currently
+            authenticated user. SpringBoot will automatically autowire it here.
+            If a HTTP request is not authenticated, the "user" here would be
+            null. But, anyway, this code would never be reached in the first
+            place, as such endpoint is marked as "authenticated()" in
+            the WebSecurityConfig file, and so would never be executed if
+            no authentication.
+         */
         val map = mutableMapOf<String,Any>()
         map.put("name", user.name)
-        map.put("roles", AuthorityUtils.authorityListToSet((user as Authentication).authorities))
+        map.put("roles", AuthorityUtils.authorityListToSet(user.authorities))
+
+        /*
+            Returning such data is useful when we want to have different GUIs
+            based on the "roles" of the user, eg if s/he is an Admin
+         */
+
         return ResponseEntity.ok(map)
     }
 
@@ -44,6 +60,15 @@ class RestApi(
         if (!registered) {
             return ResponseEntity.status(400).build()
         }
+
+        /*
+            Not only we created a user, but we also need to authenticate in the
+            same request.
+            Otherwise, the client would have to do another call with the authentication
+            header with the login/password.
+            So here, we do the registration manually directly in code, in which
+            we need to tell Spring Security the user is authenticated.
+         */
 
         val userDetails = userDetailsService.loadUserByUsername(username)
         val token = UsernamePasswordAuthenticationToken(userDetails, password, userDetails.authorities)

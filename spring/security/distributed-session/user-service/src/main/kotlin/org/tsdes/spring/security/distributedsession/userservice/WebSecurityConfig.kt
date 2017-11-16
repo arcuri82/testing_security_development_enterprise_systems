@@ -28,6 +28,10 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
                 .antMatchers("/usersInfo").hasRole("ADMIN")
                 //
                 .antMatchers("/usersInfo/{id}/**")
+                /*
+                    the "#" resolves the variable in the path, "{id}" in this case.
+                    the "@" resolves a current bean.
+                  */
                 .access("hasRole('USER') and @userSecurity.checkId(authentication, #id)")
                 //
                 .anyRequest().denyAll()
@@ -41,7 +45,11 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
     }
 }
 
-
+/**
+ * Custom check. Not only we need a user authenticated, but we also
+ * need to make sure that a user can only access his/her data, and not the
+ * one of the other users
+ */
 class UserSecurity{
 
     fun checkId(authentication: Authentication, id: String) : Boolean{

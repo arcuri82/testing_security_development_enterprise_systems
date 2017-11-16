@@ -17,10 +17,23 @@ import javax.servlet.http.HttpSession
 @RestController
 class RestApi {
 
+    /*
+        This service will communicate with the "user-service" one.
+        We inject the ip address here as a variable, as we ll
+        change it in the tests.
+     */
+
     @Value("\${userServiceAddress}")
     private lateinit var userServiceAddress: String
 
 
+    /**
+     *   This endpoints make a call to "user-service".
+     *   It also gets a boolean parameter as input to determine
+     *   whether the call should be authenticated.
+     *   Note: this is just an example, as you would always
+     *   do an authenticated call.
+     */
     @GetMapping(
             path = arrayOf("/api/{id}"),
             produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -28,7 +41,7 @@ class RestApi {
     fun getGreeting(
             @PathVariable("id") id: String,
             @RequestParam("ignoreSession", required = false) ignoreSession: Boolean?,
-            session: HttpSession
+            session: HttpSession //injected object representing the session
     ): ResponseEntity<GreetingsDto> {
 
         val uri = UriComponentsBuilder
@@ -39,6 +52,8 @@ class RestApi {
 
         val requestHeaders = HttpHeaders()
         if (ignoreSession == null || !ignoreSession) {
+            //if we want to be authenticated, we need to make a
+            //call with the right cookie
             requestHeaders.add("cookie", "SESSION=${session.id}")
         }
         val requestEntity = HttpEntity(null, requestHeaders)

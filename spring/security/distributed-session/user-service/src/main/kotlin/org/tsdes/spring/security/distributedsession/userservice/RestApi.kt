@@ -16,6 +16,9 @@ class RestApi(
         private val crud: UserInfoRepository
 ) {
 
+    /**
+     * Get the number of existing users
+     */
     @GetMapping(path = arrayOf("/usersInfoCount"),
             produces = arrayOf(MediaType.APPLICATION_JSON_UTF8_VALUE))
     fun getCount(): ResponseEntity<Long> {

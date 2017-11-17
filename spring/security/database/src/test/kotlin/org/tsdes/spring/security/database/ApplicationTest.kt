@@ -3,7 +3,6 @@ package org.tsdes.spring.security.database
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
-import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.Matchers.contains
 import org.junit.Assert.*
@@ -21,7 +20,7 @@ import org.tsdes.spring.security.database.db.UserRepository
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ApplicationTest{
+class ApplicationTest {
 
     @Autowired
     private lateinit var userRepository: UserRepository
@@ -38,14 +37,13 @@ class ApplicationTest{
     }
 
     @Before
-    fun clean(){
+    fun clean() {
         userRepository.deleteAll()
     }
 
 
-
     @Test
-    fun testUnauthorizedAccess(){
+    fun testUnauthorizedAccess() {
 
         given().accept("${ContentType.TEXT},*/*")
                 .get("/resource")
@@ -54,14 +52,13 @@ class ApplicationTest{
     }
 
 
-
     @Test
-    fun testRegisterUser(){
+    fun testRegisterUser() {
 
         registerUser("foo", "bar")
     }
 
-    private fun registerUser(id: String, password: String) : String?{
+    private fun registerUser(id: String, password: String): String? {
 
         return given().contentType(ContentType.URLENC)
                 .formParam("the_user", id)
@@ -73,7 +70,7 @@ class ApplicationTest{
     }
 
     @Test
-    fun testFailDoubleRegistration(){
+    fun testFailDoubleRegistration() {
 
         val name = "foo"
         val pwd = "bar"
@@ -95,12 +92,12 @@ class ApplicationTest{
 
 
     @Test
-    fun testRegisterAndGetResource(){
+    fun testRegisterAndGetResource() {
 
         val name = "foo"
         val pwd = "bar"
 
-       registerUser(name, pwd)
+        registerUser(name, pwd)
 
         given().accept("${ContentType.TEXT},*/*")
                 .auth().basic(name, pwd)
@@ -110,7 +107,7 @@ class ApplicationTest{
     }
 
     @Test
-    fun testAccessCookie(){
+    fun testAccessCookie() {
 
         val name = "foo"
         val pwd = "bar"
@@ -135,7 +132,7 @@ class ApplicationTest{
     }
 
     @Test
-    fun testSessionFixation(){
+    fun testSessionFixation() {
 
         val first = given().accept("${ContentType.TEXT},*/*")
                 .get("/resource")
@@ -181,18 +178,19 @@ class ApplicationTest{
             new session cookie to prevent session fixation attacks
          */
         assertNotNull(third)
+        assertNotEquals(third, first)
         assertNotEquals(third, second)
     }
 
     @Test
-    fun testSignInCreateAuthenticatedSession(){
+    fun testSignInCreateAuthenticatedSession() {
 
         val cookie = registerUser("hello", "world")
         assertNotNull(cookie)
     }
 
     @Test
-    fun testSignInAndUseCookie(){
+    fun testSignInAndUseCookie() {
 
         val first = registerUser("a", "b")
 
@@ -209,7 +207,7 @@ class ApplicationTest{
     }
 
     @Test
-    fun testUseBasicAfterSignIn(){
+    fun testUseBasicAfterSignIn() {
 
         val name = "foo"
         val pwd = "bar"
@@ -225,12 +223,12 @@ class ApplicationTest{
 
         assertNotNull(first)
         assertNotNull(second)
-        assertNotEquals(first,second)
+        assertNotEquals(first, second)
     }
 
 
     @Test
-    fun testUseBasicAfterSignInWithSameCookie(){
+    fun testUseBasicAfterSignInWithSameCookie() {
 
         val name = "foo"
         val pwd = "bar"
@@ -251,7 +249,7 @@ class ApplicationTest{
 
 
     @Test
-    fun testLogout(){
+    fun testLogout() {
 
         val cookie = registerUser("a", "b")
 
@@ -286,7 +284,7 @@ class ApplicationTest{
 
 
     @Test
-    fun testLogin(){
+    fun testLogin() {
 
         val name = "foo"
         val pwd = "bar"

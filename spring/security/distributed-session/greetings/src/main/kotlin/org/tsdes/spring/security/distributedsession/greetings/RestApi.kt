@@ -75,9 +75,6 @@ class RestApi {
             }
         }
 
-        if (response.statusCode.value() == 403) {
-
-        }
 
         /*
             If we put the DTOs of UserService in their own module, we

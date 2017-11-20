@@ -9,7 +9,7 @@ class ChatController{
 
     @MessageMapping("/message")
     @SendTo("/topic/messages")
-    fun handleMessage(dto: MessageDto): String {
-        return "${dto.author}: ${dto.text}"
+    fun handleMessage(dto: MessageDto): MessageDto {
+        return dto
     }
 }

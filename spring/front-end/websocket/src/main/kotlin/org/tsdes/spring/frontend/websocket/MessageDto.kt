@@ -1,7 +1,7 @@
 package org.tsdes.spring.frontend.websocket
 
 
-class MessageDto(
+data class MessageDto(
 
     var author: String? = null,
 

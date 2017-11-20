@@ -8,6 +8,7 @@ import org.junit.runner.RunWith
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.messaging.converter.MappingJackson2MessageConverter
+import org.springframework.messaging.converter.StringMessageConverter
 import org.springframework.messaging.simp.stomp.*
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.web.socket.WebSocketHttpHeaders
@@ -42,17 +43,18 @@ class ChatControllerTest {
         }
     }
 
-    //FIXME
+
     @Test
     fun testWebsocket() {
 
         val receivedBack = mutableListOf<String>()
 
         val latch = CountDownLatch(2)
-        val lambda = { id: String, msg: String -> {
-            receivedBack.add("$id:$msg")
+        val lambda = { id: String, dto: MessageDto ->
+            println("Handling incoming message")
+            receivedBack.add("$id: '$dto'")
             latch.countDown()
-        } }
+         }
 
         val url = "ws://localhost:$port/websocket-endpoint"
 
@@ -75,32 +77,29 @@ class ChatControllerTest {
 
     class MyStompHandler(
             val id: String,
-            val lambda: (String, String) -> Any
+            val lambda: (String, MessageDto) -> Any
     ) : StompSessionHandlerAdapter() {
 
         override fun afterConnected(session: StompSession, connectedHeaders: StompHeaders?) {
-            val subscription = session.subscribe("/topic/messages", object : StompFrameHandler {
+            session.subscribe("/topic/messages", object : StompFrameHandler {
 
                 override fun getPayloadType(headers: StompHeaders): Type {
-                    return String::class.java
+                    return MessageDto::class.java
                 }
 
                 override fun handleFrame(headers: StompHeaders, payload: Any) {
-                    val msg = payload as String
-                    lambda.invoke(id, msg)
+                    val dto = payload as MessageDto
+                    lambda.invoke(id, dto)
                 }
             })
-
-            subscription.addReceiptTask{println("Receipt received")}
-            subscription.addReceiptLostTask { println("Receipt lost") }
         }
 
         override fun handleException(s: StompSession?, c: StompCommand?, h: StompHeaders?, p: ByteArray?, ex: Throwable?) {
-            println("ERROR: $ex")
+            println("ERROR exception: $ex")
         }
 
         override fun handleTransportError(session: StompSession?, ex: Throwable?) {
-            println("ERROR: $ex")
+            println("ERROR transport: $ex")
         }
 
     }

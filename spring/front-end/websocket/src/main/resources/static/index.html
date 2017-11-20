@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with WebSocket</title>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+</head>
+<body>
+<noscript>
+    <h2>
+        You need JavaScript activated to use this Web Chat
+    </h2>
+</noscript>
+
+<h2>WebSocket-based Chat</h2>
+
+<div>
+    <p>Your name:</p>
+    <textarea id="nameId" cols="20" rows="1"></textarea>
+</div>
+
+<br><br>
+
+<div>
+    <p>Your message:</p>
+    <textarea id="msgAreaId" cols="50" rows="5"></textarea>
+</div>
+
+<div id="sendId" onclick="sendMsg()">Send</div>
+
+<div id="messagesId"></div>
+
+
+<script src="/app.js"></script>
+
+</body>
+</html>

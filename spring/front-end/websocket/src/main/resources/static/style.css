@@ -1,0 +1,17 @@
+html, body{
+    margin: 0px;
+    background-color: lightgrey;
+    padding-left: 20px;
+}
+
+.inputName{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.btn{
+    border: 2px solid black;
+    width: 45px;
+    text-align: center;
+    cursor: pointer;
+}

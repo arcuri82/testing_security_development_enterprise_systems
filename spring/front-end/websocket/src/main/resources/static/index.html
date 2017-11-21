@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Chat with WebSocket</title>
-    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-</head>
-<body>
-<noscript>
-    <h2>
-        You need JavaScript activated to use this Web Chat
-    </h2>
-</noscript>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<h2>WebSocket-based Chat</h2>
+        <link rel="stylesheet" href="style.css">
 
-<div>
-    <p>Your name:</p>
-    <textarea id="nameId" cols="20" rows="1"></textarea>
-</div>
+        <title>Chat with WebSocket</title>
+    </head>
+    <body>
+        <noscript>
+            <h2>
+                You need JavaScript activated to use this Web Chat
+            </h2>
+        </noscript>
+        <h2>WebSocket-based Chat</h2>
+        <div>
+            <p class="inputName">Your name:</p>
+            <input type="text" name="name" id="nameId"  class="inputName">
+        </div>
+        <br>
 
-<br><br>
+        <div>
+            <p>Your message:</p>
+            <textarea id="msgAreaId" cols="50" rows="5"></textarea>
+        </div>
+        <br>
+        <div id="sendId" class="btn" onclick="sendMsg()">Send</div>
+        <div id="messagesId"></div>
 
-<div>
-    <p>Your message:</p>
-    <textarea id="msgAreaId" cols="50" rows="5"></textarea>
-</div>
-
-<div id="sendId" onclick="sendMsg()">Send</div>
-
-<div id="messagesId"></div>
-
-
-<script src="/app.js"></script>
-
-</body>
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+        <script src="/app.js"></script>
+    </body>
 </html>

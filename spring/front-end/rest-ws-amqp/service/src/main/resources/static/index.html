@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>REST + WS + AMQP example</title>
-    <script src="/ui/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/ui/webjars/stomp-websocket/stomp.min.js"></script>
-</head>
-<body>
-<noscript>
-    <h2>
-        You need JavaScript activated
-    </h2>
-</noscript>
+    <head>
 
-<h2>REST + WS + AMQP example</h2>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div id="btnId" onclick="doRestCall()">Do Ajax POST</div>
+        <link rel="stylesheet" href="/ui/style.css">
+        <title>REST + WS + AMQP example</title>
 
-<div>
-    <p> Counter: <span id="counterId">0</span></p>
-</div>
+    </head>
+    <body>
+        <noscript>
+            <h2>
+                You need JavaScript activated
+            </h2>
+        </noscript>
 
-<script src="/ui/app.js"></script>
+        <h2>REST + WS + AMQP example</h2>
 
-</body>
+        <div id="btnId" class="btn" onclick="doRestCall()">Do Ajax POST</div>
+
+        <div>
+            <p> Counter: <span id="counterId">0</span></p>
+        </div>
+
+        <script src="/ui/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/ui/webjars/stomp-websocket/stomp.min.js"></script>
+        <script src="/ui/app.js"></script>
+
+    </body>
 </html>

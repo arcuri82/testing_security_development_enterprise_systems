@@ -1,0 +1,12 @@
+html, body{
+    margin: 0px;
+    background-color: lightgrey;
+    padding-left: 20px;
+}
+
+.btn{
+    border: 2px solid black;
+    width: 135px;
+    text-align: center;
+    cursor: pointer;
+}

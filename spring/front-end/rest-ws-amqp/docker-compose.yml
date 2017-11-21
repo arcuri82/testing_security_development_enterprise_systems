@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+
+  rabbitmq:
+    image:  "rabbitmq:3"
+
+  zuul:
+    build:
+      context: ./zuul-ws
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"
+    depends_on:
+      - service
+      - rabbitmq
+
+  service:
+     build:
+        context: ./service
+        dockerfile: Dockerfile
+     depends_on:
+       - rabbitmq
+
+

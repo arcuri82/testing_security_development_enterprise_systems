@@ -1,0 +1,13 @@
+spring:
+  rabbitmq:
+    host: rabbitmq
+
+
+zuul:
+  routes:
+    service_default:
+      path: /
+      url: http://service:8080
+    service:
+      path: /ui/**
+      url: http://service:8080

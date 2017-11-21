@@ -2,20 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.spring.frontend</groupId>
-    <artifactId>frontend</artifactId>
+    <groupId>org.tsdes.spring.frontend.restwsamqp</groupId>
+    <artifactId>rest-ws-amqp</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring</groupId>
-        <artifactId>spring</artifactId>
+        <groupId>org.tsdes.spring.frontend</groupId>
+        <artifactId>frontend</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+
     <modules>
-        <module>react</module>
-        <module>websocket</module>
-        <module>rest-ws-amqp</module>
+        <module>service</module>
+        <module>zuul-ws</module>
     </modules>
 
 

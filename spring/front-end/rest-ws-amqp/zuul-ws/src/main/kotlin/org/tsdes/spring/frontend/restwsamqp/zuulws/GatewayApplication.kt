@@ -31,6 +31,11 @@ class GatewayApplication(
     }
 
 
+    /*
+        Every time we receive a broadcast from AMQP, we do
+        a broadcast on WS.
+     */
+
     @RabbitListener(queues = arrayOf("#{queue.name}"))
     fun receiveFromAMQP(msg: String) {
 

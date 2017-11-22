@@ -24,6 +24,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
+        <!--
+            You can import JS libraries from NPM repository via
+            Maven, using the Webjars dependencies.
+            Those jar files contains JS code as resources.
+            Those resources will be made available from the
+            Java servers (eg default Tomcat in SpringBoot) as
+            static assets.
+        -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>

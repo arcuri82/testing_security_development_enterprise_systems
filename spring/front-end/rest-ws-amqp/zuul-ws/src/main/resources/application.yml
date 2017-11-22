@@ -3,9 +3,19 @@ spring:
     host: rabbitmq
 
 
+# Note 0: need to make sure that "/websocket-endpoint" path
+# gets handled here be Zuul and not redirected.
+#
+# Note 1: Zuul 1 does not support routing of WS protocol.
+# Zuul 2 will, but it is not out yet. So, for now, unless you use
+# a different gateway (eg, Kong), you need your WS service inside Zuul.
+
+
 zuul:
   routes:
     service_default:
+      # make sure that root gets redirected to /ui/index.html,
+      # ie /index.html on the backend service
       path: /
       url: http://service:8080
     service:

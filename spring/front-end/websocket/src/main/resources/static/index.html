@@ -30,6 +30,10 @@
         <div id="sendId" class="btn" onclick="sendMsg()">Send</div>
         <div id="messagesId"></div>
 
+        <!--
+            Note: the static JS code from NPM modules like SockJS and Stomp
+            will be accessible under the "/webjars/*" path.
+        -->
         <script src="/webjars/sockjs-client/sockjs.min.js"></script>
         <script src="/webjars/stomp-websocket/stomp.min.js"></script>
         <script src="/app.js"></script>

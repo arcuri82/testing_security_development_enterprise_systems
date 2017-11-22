@@ -27,6 +27,10 @@ class ChatControllerTest {
     @LocalServerPort
     private var port = 0
 
+    /*
+        Usually you will deal with WS on the browser with JavaScript.
+        However, for testing, we can have a client in Java.
+     */
 
     companion object {
 
@@ -39,6 +43,7 @@ class ChatControllerTest {
             val sockJsClient = SockJsClient(transports)
 
             stompClient = WebSocketStompClient(sockJsClient)
+            //specify that in the payload we use JSON
             stompClient.messageConverter = MappingJackson2MessageConverter()
         }
     }
@@ -58,17 +63,20 @@ class ChatControllerTest {
 
         val url = "ws://localhost:$port/websocket-endpoint"
 
+        //creating two different clients
         val first = stompClient.connect(url, MyStompHandler("First", lambda), WebSocketHttpHeaders()).get()
         val second = stompClient.connect(url, MyStompHandler("Second", lambda), WebSocketHttpHeaders()).get()
 
         assertTrue(first.isConnected)
         assertTrue(second.isConnected)
 
+        //send a single message to server from one client
         first.send("/ws-api/message", MessageDto("1st","hello"))
 
         val ok = latch.await(5000, TimeUnit.MILLISECONDS)
         assertTrue(ok)
 
+        //both clients should get the message back from the server
         assertEquals(2, receivedBack.size)
         assertTrue(receivedBack.any { it.startsWith("First") })
         assertTrue(receivedBack.any { it.startsWith("Second") })
@@ -81,6 +89,13 @@ class ChatControllerTest {
     ) : StompSessionHandlerAdapter() {
 
         override fun afterConnected(session: StompSession, connectedHeaders: StompHeaders?) {
+
+            /*
+                Specify that, once a WS connection is established with with the server,
+                we register a callback every time messages are broadcast on the
+                "/topic/messages" topic.
+             */
+
             session.subscribe("/topic/messages", object : StompFrameHandler {
 
                 override fun getPayloadType(headers: StompHeaders): Type {

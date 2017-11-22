@@ -17,6 +17,10 @@ class Application(
         var fanout: FanoutExchange
 ) {
 
+    /*
+        Every time we get a POST on this endpoint, we broadcast
+        a msg to AMQP using a FanoutExchange
+     */
 
     @PostMapping(path = arrayOf("/api/foo"))
     fun postOnFoo(){

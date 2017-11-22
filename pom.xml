@@ -340,12 +340,20 @@
                     <artifactId>frontend-maven-plugin</artifactId>
                     <version>1.6</version>
                     <executions>
+                        <!--
+                            Make sure that NPM/Node get installed
+                        -->
                         <execution>
                             <id>install node and npm</id>
                             <goals>
                                 <goal>install-node-and-npm</goal>
                             </goals>
                         </execution>
+                        <!--
+                            Make sure to call following:
+                            npm install
+                            npm run build
+                        -->
                         <execution>
                             <id>npm install</id>
                             <goals>
@@ -366,6 +374,10 @@
                             </configuration>
                             <phase>generate-resources</phase>
                         </execution>
+                        <!--
+                            when running "mvn test", make sure to
+                            also call "npm test"
+                        -->
                         <execution>
                             <id>npm test</id>
                             <goals>

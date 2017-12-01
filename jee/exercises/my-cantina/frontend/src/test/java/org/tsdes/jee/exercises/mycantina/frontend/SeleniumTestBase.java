@@ -1,19 +1,55 @@
 package org.tsdes.jee.exercises.mycantina.frontend;
 
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.tsdes.jee.exercises.mycantina.frontend.po.DishesPageObject;
 import org.tsdes.jee.exercises.mycantina.frontend.po.HomePageObject;
 import org.tsdes.jee.exercises.mycantina.frontend.po.MenuPageObject;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assume.assumeTrue;
 
 /**
- * Created by arcuri82 on 31-May-17.
+ * Created by arcuri82 on 28-Nov-17.
  */
-public class MyCantinaIT extends WebTestBase{
+public abstract class SeleniumTestBase {
+
+    private static final AtomicLong counter = new AtomicLong(System.currentTimeMillis());
+
+    protected static HomePageObject home;
+
+    protected abstract WebDriver getDriver();
+
+    protected abstract String getJeeHost();
+
+    protected abstract int getJeePort();
+
+
+
+    protected static String getUniqueId() {
+        return "foo" + counter.incrementAndGet();
+    }
+
+
+    @Before
+    public void startFromInitialPage() {
+
+        home = new HomePageObject(getDriver(), getJeeHost(), getJeePort());
+        home.toStartingPage();
+        assertTrue(home.isOnPage());
+    }
 
 
     @Test

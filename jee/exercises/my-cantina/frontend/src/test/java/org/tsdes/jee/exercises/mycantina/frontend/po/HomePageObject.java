@@ -14,16 +14,17 @@ import static org.junit.Assert.assertTrue;
 public class HomePageObject extends PageObject {
 
 
-    public HomePageObject(WebDriver driver) {
-        super(driver);
+
+    public HomePageObject(WebDriver driver, String host, int port) {
+        super(driver, host, port);
     }
 
     public HomePageObject toStartingPage() {
         String context = "/my_cantina"; // see jboss-web.xml
-        driver.get("localhost:8080" + context + "/home.jsf");
+        driver.get("http://"+host+":"+ port + context + "/home.jsf");
         waitForPageToLoad();
 
-        return this;
+        return this; //driver.get("http://172.17.0.2:8080")
     }
 
     public boolean isOnPage() {
@@ -32,14 +33,14 @@ public class HomePageObject extends PageObject {
 
     public DishesPageObject toDishes() {
         clickAndWait("dishesLink");
-        DishesPageObject po = new DishesPageObject(driver);
+        DishesPageObject po = new DishesPageObject(driver, host, port);
         assertTrue(po.isOnPage());
         return po;
     }
 
     public MenuPageObject toMenu() {
         clickAndWait("menuLink");
-        MenuPageObject po = new MenuPageObject(driver);
+        MenuPageObject po = new MenuPageObject(driver, host, port);
         assertTrue(po.isOnPage());
         return po;
     }

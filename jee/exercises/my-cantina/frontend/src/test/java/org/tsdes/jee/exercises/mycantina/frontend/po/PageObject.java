@@ -12,9 +12,13 @@ import java.util.List;
 public abstract class PageObject {
 
     protected final WebDriver driver;
+    protected final String host;
+    protected final int port;
 
-    public PageObject(WebDriver driver) {
+    public PageObject(WebDriver driver, String host, int port) {
         this.driver = driver;
+        this.host = host;
+        this.port = port;
     }
 
     public abstract boolean isOnPage();
@@ -22,7 +26,7 @@ public abstract class PageObject {
     public HomePageObject toHomePage(){
         clickAndWait("homeLink");
 
-        return new HomePageObject(driver);
+        return new HomePageObject(driver, host, port);
     }
 
     public void clickAndWait(String id){

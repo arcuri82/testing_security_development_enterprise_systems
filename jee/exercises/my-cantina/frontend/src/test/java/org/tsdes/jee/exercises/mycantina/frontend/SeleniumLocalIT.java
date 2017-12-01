@@ -1,36 +1,31 @@
 package org.tsdes.jee.exercises.mycantina.frontend;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.importer.ZipImporter;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.tsdes.jee.exercises.mycantina.frontend.po.HomePageObject;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.atomic.AtomicLong;
 
-import static org.junit.Assert.*;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.Assert.fail;
 
-public class WebTestBase {
+/**
+ * Created by arcuri82 on 28-Nov-17.
+ */
+@RunWith(Arquillian.class)
+public class SeleniumLocalIT extends SeleniumTestBase{
 
-    private static final AtomicLong counter = new AtomicLong(System.currentTimeMillis());
-
-    protected static HomePageObject home;
     private static WebDriver driver;
-
-
-    protected WebDriver getDriver(){
-        return driver;
-    }
-
-    protected String getPageSource(){
-        return driver.getPageSource();
-    }
-
 
     private static boolean tryToSetGeckoIfExists(String property, Path path) {
         if (Files.exists(path)) {
@@ -66,46 +61,39 @@ public class WebTestBase {
         return new ChromeDriver();
     }
 
+    @Deployment(testable = false)
+    public static WebArchive createDeployment() {
+        String name = "my-cantina-frontend-0.0.1-SNAPSHOT.war";
+        return ShrinkWrap.create(ZipImporter.class, name)
+                .importFrom(new File("target/" + name))
+                .as(WebArchive.class);
+    }
+
+
+    @Override
+    protected WebDriver getDriver() {
+        return driver;
+    }
+
+    @Override
+    protected String getJeeHost() {
+        return "localhost";
+    }
+
+    @Override
+    protected int getJeePort() {
+        return 8080;
+    }
+
     @BeforeClass
     public static void init() throws InterruptedException {
-
         driver = getChromeDriver();
-
-        /*
-            When the integration tests in this class are run, it might be
-            that WildFly is not ready yet, although it was started. So
-            we need to wait till it is ready.
-         */
-        for (int i = 0; i < 30; i++) {
-            boolean ready = JBossUtil.isJBossUpAndRunning();
-            if (!ready) {
-                Thread.sleep(1_000); //check every second
-                continue;
-            } else {
-                break;
-            }
-        }
-
     }
 
-
-    protected static String getUniqueId() {
-        return "foo" + counter.incrementAndGet();
-    }
-
-
-    @Before
-    public void startFromInitialPage() {
-
-        assumeTrue(JBossUtil.isJBossUpAndRunning());
-
-        home = new HomePageObject(getDriver());
-        home.toStartingPage();
-        assertTrue(home.isOnPage());
-    }
 
     @AfterClass
     public static void tearDown() {
         driver.close();
     }
+
 }

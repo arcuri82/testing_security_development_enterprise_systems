@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class MenuPageObject extends PageObject {
 
-    public MenuPageObject(WebDriver driver) {
-        super(driver);
+    public MenuPageObject(WebDriver driver, String host, int port) {
+        super(driver,host,port);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class MenuPageObject extends PageObject {
         setText("createForm:date", date.toString());
         clickAndWait("createForm:createButton");
 
-        HomePageObject home = new HomePageObject(driver);
+        HomePageObject home = new HomePageObject(driver, host, port);
         if(! home.isOnPage()){
             return null;
         }

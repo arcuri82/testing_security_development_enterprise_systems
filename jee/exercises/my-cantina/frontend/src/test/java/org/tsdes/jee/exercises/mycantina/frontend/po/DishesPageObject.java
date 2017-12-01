@@ -12,8 +12,8 @@ import java.util.List;
 public class DishesPageObject extends PageObject {
 
 
-    public DishesPageObject(WebDriver driver) {
-        super(driver);
+    public DishesPageObject(WebDriver driver,String host, int port) {
+        super(driver, host, port);
     }
 
     @Override

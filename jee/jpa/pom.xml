@@ -24,6 +24,7 @@
         <module>outerjoin</module>
         <module>lock</module>
         <module>validation</module>
+        <module>transactions</module>
     </modules>
 
 

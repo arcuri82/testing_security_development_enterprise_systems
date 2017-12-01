@@ -16,7 +16,6 @@
         <module>testing</module>
         <module>jpa</module>
         <module>ejb</module>
-        <module>jta</module>
         <module>jsf</module>
         <module>exercises</module>
     </modules>

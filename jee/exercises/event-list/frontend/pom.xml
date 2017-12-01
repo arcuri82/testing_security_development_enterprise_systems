@@ -65,12 +65,6 @@
     <build>
         <plugins>
 
-            <!-- make sure we calculate code coverage -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-
             <!-- Make sure that Wildfly is automatically downloaded and installed -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

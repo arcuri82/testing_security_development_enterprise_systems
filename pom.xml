@@ -315,6 +315,9 @@
                 </plugin>
 
 
+                <!--
+                    Used to calculate code-coverage of the tests
+                -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>

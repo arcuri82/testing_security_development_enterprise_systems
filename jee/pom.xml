@@ -67,12 +67,7 @@
                 <version>2.1.0.Final</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-jacoco</artifactId>
-                <version>1.0.0.Alpha8</version>
-                <scope>test</scope>
-            </dependency>
+
             <dependency>
                 <!-- embedded JEE GlassFish container -->
                 <groupId>org.glassfish.main.extras</groupId>

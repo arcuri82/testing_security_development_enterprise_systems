@@ -81,14 +81,7 @@
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-jacoco</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.core</artifactId>
-        </dependency>
+
 
 
     </dependencies>
@@ -97,29 +90,10 @@
     <build>
         <plugins>
 
-            <!-- make sure we calculate code coverage -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-
             <!-- Make sure that Wildfly is automatically downloaded and installed -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <skipTests>false</skipTests>
-                    <systemPropertyVariables>
-                        <!--<arquillian.launch>arquillian-wildfly-managed</arquillian.launch>-->
-                        <!--<jacoco.agent>-javaagent:${settings.localRepository}${fs}org${fs}jacoco${fs}org.jacoco.agent${fs}${version.jacoco}${fs}org.jacoco.agent-${version.jacoco}-runtime.jar=destfile=${basedir}${fs}target${fs}jacoco-it.exec</jacoco.agent>-->
-                        <!--<jacoco.agent>${jacoco.agent}</jacoco.agent>-->
-                    </systemPropertyVariables>
-                </configuration>
             </plugin>
 
         </plugins>

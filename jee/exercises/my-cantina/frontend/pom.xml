@@ -17,7 +17,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>23.5-jre</version>
         </dependency>
 
         <dependency>
@@ -64,16 +63,23 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>selenium</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>org.wildfly.arquillian</groupId>
             <artifactId>wildfly-arquillian-container-managed</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
@@ -84,40 +90,8 @@
             <artifactId>org.jacoco.core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>selenium</artifactId>
-        </dependency>
 
     </dependencies>
-
-
-    <profiles>
-        <profile>
-            <id>selenium</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                    </plugin>
-                    <!--<plugin>-->
-                        <!--<groupId>org.wildfly.plugins</groupId>-->
-                        <!--<artifactId>wildfly-maven-plugin</artifactId>-->
-                        <!--<configuration>-->
-                            <!--<java-opts>-->
-                                <!-- -javaagent:${settings.localRepository}${fs}org${fs}jacoco${fs}org.jacoco.agent${fs}${version.jacoco}${fs}org.jacoco.agent-${version.jacoco}-runtime.jar=destfile=${basedir}${fs}target${fs}jacoco-it.exec-->
-                            <!--</java-opts>-->
-                        <!--</configuration>-->
-                    <!--</plugin>-->
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 
     <build>
@@ -135,7 +109,21 @@
                 <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <skipTests>false</skipTests>
+                    <systemPropertyVariables>
+                        <!--<arquillian.launch>arquillian-wildfly-managed</arquillian.launch>-->
+                        <!--<jacoco.agent>-javaagent:${settings.localRepository}${fs}org${fs}jacoco${fs}org.jacoco.agent${fs}${version.jacoco}${fs}org.jacoco.agent-${version.jacoco}-runtime.jar=destfile=${basedir}${fs}target${fs}jacoco-it.exec</jacoco.agent>-->
+                        <!--<jacoco.agent>${jacoco.agent}</jacoco.agent>-->
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
+
 
 </project>

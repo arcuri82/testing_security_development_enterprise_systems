@@ -8,10 +8,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.Wait;
-import org.testcontainers.containers.wait.WaitStrategy;
 import org.testcontainers.images.builder.ImageFromDockerfile;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**

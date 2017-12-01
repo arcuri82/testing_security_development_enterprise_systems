@@ -1,25 +1,17 @@
 package org.tsdes.jee.exercises.mycantina.frontend;
 
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.tsdes.jee.exercises.mycantina.frontend.po.DishesPageObject;
 import org.tsdes.jee.exercises.mycantina.frontend.po.HomePageObject;
 import org.tsdes.jee.exercises.mycantina.frontend.po.MenuPageObject;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assume.assumeTrue;
 
 /**
  * Created by arcuri82 on 28-Nov-17.
@@ -37,7 +29,6 @@ public abstract class SeleniumTestBase {
     protected abstract int getJeePort();
 
 
-
     protected static String getUniqueId() {
         return "foo" + counter.incrementAndGet();
     }
@@ -53,12 +44,12 @@ public abstract class SeleniumTestBase {
 
 
     @Test
-    public void testHomePage(){
+    public void testHomePage() {
         assertTrue(home.isOnPage());
     }
 
     @Test
-    public void testCreateDish(){
+    public void testCreateDish() {
 
         DishesPageObject dishes = home.toDishes();
 
@@ -71,7 +62,7 @@ public abstract class SeleniumTestBase {
         assertTrue(dishes.hasDishByName(unique));
     }
 
-    private String createUniqueDish(){
+    private String createUniqueDish() {
 
         home.toStartingPage();
 
@@ -85,7 +76,7 @@ public abstract class SeleniumTestBase {
     }
 
     @Test
-    public void testMenu(){
+    public void testMenu() {
 
         String a = createUniqueDish();
         String b = createUniqueDish();
@@ -120,14 +111,14 @@ public abstract class SeleniumTestBase {
         assertTrue(names.contains(c));
     }
 
-    private void createMenu(LocalDate date, String dish){
+    private void createMenu(LocalDate date, String dish) {
         MenuPageObject menu = home.toMenu();
         menu.selectDishByName(dish, true);
         menu.create(date);
     }
 
     @Test
-    public void testDifferentDates(){
+    public void testDifferentDates() {
 
         String dish = createUniqueDish();
 

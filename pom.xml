@@ -246,6 +246,17 @@
         </dependencies>
     </dependencyManagement>
 
+    <!--
+        Profiles enable you to have custom configurations only in some special occasions.
+
+        You can use "-P <id>" to activate a profile with the given <id>, eg
+
+        mvn verify -P <id>
+    -->
+    <profiles>
+    </profiles>
+
+
     <build>
 
         <plugins>
@@ -328,6 +339,9 @@
                             <goals>
                                 <goal>prepare-agent-integration</goal>
                             </goals>
+                            <configuration>
+                                <propertyName>jacoco.agent</propertyName>
+                            </configuration>
                         </execution>
                         <execution>
                             <id>default-report-integration</id>

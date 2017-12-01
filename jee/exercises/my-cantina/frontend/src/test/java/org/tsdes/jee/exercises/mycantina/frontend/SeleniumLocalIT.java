@@ -1,10 +1,10 @@
 package org.tsdes.jee.exercises.mycantina.frontend;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -23,7 +23,7 @@ import static org.junit.Assert.fail;
  * Created by arcuri82 on 28-Nov-17.
  */
 @RunWith(Arquillian.class)
-public class SeleniumLocalIT extends SeleniumTestBase{
+public class SeleniumLocalIT extends SeleniumTestBase {
 
     private static WebDriver driver;
 
@@ -61,6 +61,7 @@ public class SeleniumLocalIT extends SeleniumTestBase{
         return new ChromeDriver();
     }
 
+
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
         String name = "my-cantina-frontend-0.0.1-SNAPSHOT.war";
@@ -68,6 +69,7 @@ public class SeleniumLocalIT extends SeleniumTestBase{
                 .importFrom(new File("target/" + name))
                 .as(WebArchive.class);
     }
+
 
 
     @Override

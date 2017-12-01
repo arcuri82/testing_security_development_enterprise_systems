@@ -66,43 +66,6 @@
 
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>selenium</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
-                        <configuration>
-                            <!--
-                                Here we run Wildfly on a separate process, on which we need to activate JaCoCo instrumentation.
-                                This is achieved by using "Java Agent" technology, which is a way to attach a bytecode
-                                instrumentation on every single class loader used in the target process.
-                                This is done by specifying which JAR file contains the Agent.
-                                Here,  org.jacoco.agent-${version.jacoco}-runtime.jar contains the agent.
-                                So we need to point to the JAR file stored in the local ~/.m2 Maven repository.
-                                To make the build resilient to changes (eg a new version of JaCoCo), this path string
-                                is not only parameterized, but it also uses ${fs} to be able to be used on both Windows
-                                and Linux/Mac machines.
-                                Recall that in the root we have
-                                 <fs>${file.separator}</fs>
-                                 so we use ${fs} just because it is shorter than typing ${file.separator}
-                            -->
-                            <java-opts>
-                                -javaagent:${settings.localRepository}${fs}org${fs}jacoco${fs}org.jacoco.agent${fs}${version.jacoco}${fs}org.jacoco.agent-${version.jacoco}-runtime.jar=destfile=${basedir}${fs}target${fs}jacoco-it.exec
-                            </java-opts>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
 
     <build>
         <plugins>

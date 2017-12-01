@@ -182,95 +182,14 @@
                   phases are executed as well.
 
                   Note:
-
                   process-test-classes: this is when we download/unpack Wildfly
                   test: unit tests (*Test.java) are executed
                   package: creation of jar/war files
-                  pre-integration-test: we start Wildfly for the integration tests
                   integration-test: execute all *IT.java tests
-                  post-integration-test: stop Wildfly
                   install: copy the jar/war files into your ~/.m2 folder (like any other dependency)
 
                   clean: delete everything in the "target" folders
               -->
-
-
-                <!--
-                   Plugin configuration to automatically start WildFly before integration tests are
-                   started, and then stop it once all are finished
-                -->
-                <plugin>
-                    <groupId>org.wildfly.plugins</groupId>
-                    <artifactId>wildfly-maven-plugin</artifactId>
-                    <version>1.2.0.Alpha4</version>
-                    <configuration>
-                        <!--
-                            If jbossHome is not specified, this plugin will download it.
-                            Here, we point to the same installation done for the unit tests
-                            with the maven-dependency-plugin, as to avoid double download/installation
-                          -->
-                        <jbossHome>${jbossHome}</jbossHome>
-                        <add-user>
-                            <users>
-                                <user>
-                                    <username>admin</username>
-                                    <password>admin</password>
-                                </user>
-                            </users>
-                        </add-user>
-                        <java-opts>
-                            <!-- comment out if need to attach a remote debugger -->
-                            <!--<javaOpt>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005</javaOpt>-->
-                        </java-opts>
-                    </configuration>
-                    <executions>
-
-                        <!--
-                            for list of Maven phases, see
-
-                            https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
-
-                            for Wildfly plugin goals, see
-
-                            https://docs.jboss.org/wildfly/plugins/maven/latest/usage.html
-                        -->
-                        <execution>
-                            <!--
-                                This means:
-                                when Maven is executing the "pre-integration-test" phase of the build,
-                                then this plugin will execute the commands "start" (which does start WildFly)
-                                and then "deploy" (which deploy the compiled/packaged WAR of the project)
-                            -->
-                            <id>init</id>
-                            <phase>pre-integration-test</phase>
-                            <goals>
-                                <goal>start</goal>
-                                <!--
-                                this starts WildFly asynchronously, ie non-blocking as "run" would do.
-                                When running tests from IDE, can start WildFly with "mvn wildfly:run"
-                                 -->
-                                <goal>deploy</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>shutdown</id>
-                            <!--
-                                WARNING: when integration tests fail, still the
-                                post-integration-test phase is executed.
-                                However, it seems there are issues with this plugin (or Failsafe),
-                                in which that phase is not executed.
-                                This means that, if you have any failing Selenium test, then
-                                Wildfly process will be left running, and you need to kill it
-                                manually.
-                            -->
-                            <phase>post-integration-test</phase>
-                            <goals>
-                                <goal>undeploy</goal>
-                                <goal>shutdown</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
 
 
             </plugins>

@@ -1,7 +1,5 @@
 package org.tsdes.jee.exercises.mycantina.frontend;
 
-import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -38,7 +36,6 @@ public class SeleniumDockerIT extends SeleniumTestBase {
     public BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
             .withDesiredCapabilities(DesiredCapabilities.chrome())
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.SKIP, null)
-            //.withNetworkMode(jee.getNetworkMode());
             .withNetwork(network);
 
 
@@ -49,10 +46,6 @@ public class SeleniumDockerIT extends SeleniumTestBase {
 
     @Override
     protected String getJeeHost() {
-//        return jee.getContainerInfo()
-//                .getNetworkSettings()
-//                .getNetworks().values().iterator().next()
-//                .getIpAddress();
         return HOST_ALIAS;
     }
 

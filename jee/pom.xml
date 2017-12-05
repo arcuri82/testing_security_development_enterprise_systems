@@ -16,6 +16,7 @@
         <module>jpa</module>
         <module>ejb</module>
         <module>jsf</module>
+        <module>security</module>
         <module>exercises</module>
     </modules>
 
@@ -24,6 +25,7 @@
         <wildfly.version>10.1.0.Final</wildfly.version>
         <jbossTarget>${basedir}/target/downloaded_Wildfly</jbossTarget>
         <jbossHome>${jbossTarget}/wildfly-${wildfly.version}</jbossHome>
+        <shiro.version>1.4.0</shiro.version>
     </properties>
 
     <dependencyManagement>
@@ -116,6 +118,19 @@
                 <version>${version.h2}</version>
                 <scope>provided</scope>
             </dependency>
+
+            <!-- Security -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

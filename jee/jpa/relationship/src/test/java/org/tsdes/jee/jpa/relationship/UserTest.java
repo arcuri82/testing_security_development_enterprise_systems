@@ -205,4 +205,15 @@ public class UserTest {
         // no cascade, so need to persist them all explicitly
         assertTrue(persistInATransaction(u0,u1,g0,g1));
     }
+
+    @Test
+    public void testElementCollection(){
+
+        User u = new User();
+        u.setRoles(new ArrayList<>());
+
+        u.getRoles().add("Admin");
+
+        assertTrue(persistInATransaction(u));
+    }
 }

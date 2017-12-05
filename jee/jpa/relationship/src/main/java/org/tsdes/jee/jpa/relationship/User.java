@@ -36,6 +36,9 @@ public class User {
     //could have used here a List
     private Map<Long, GroupAssignment> assignments;
 
+    //Need to use this annotation if we deal with collection raw data-types like String
+    @ElementCollection
+    private List<String> roles;
 
 
     public User(){}
@@ -103,5 +106,13 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

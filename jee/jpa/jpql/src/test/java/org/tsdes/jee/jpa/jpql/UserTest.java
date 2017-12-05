@@ -1,16 +1,28 @@
 package org.tsdes.jee.jpa.jpql;
 
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
+import org.jooq.conf.ParamType;
+import org.jooq.impl.DSL;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
+
+import static org.jooq.impl.DSL.field;
+import static org.jooq.impl.DSL.table;
 import static org.junit.Assert.*;
 
 public class UserTest {
 
     private EntityManagerFactory factory;
     private EntityManager em;
+
 
     @Before
     public void init() {
@@ -25,7 +37,7 @@ public class UserTest {
         factory.close();
     }
 
-    private void addDefaultData(){
+    private void addDefaultData() {
 
         User a = new User();
         a.setName("A");
@@ -47,16 +59,16 @@ public class UserTest {
         c.getAddress().setCity("London");
         c.getAddress().setCountry("England");
 
-        makeFriends(a,b);
-        makeFriends(a,b2);
-        makeFriends(a,c);
+        makeFriends(a, b);
+        makeFriends(a, b2);
+        makeFriends(a, c);
 
-        makeFriends(b,b2);
+        makeFriends(b, b2);
 
-        assertTrue(persistInATransaction(a,b,b2,c));
+        assertTrue(persistInATransaction(a, b, b2, c));
     }
 
-    private void makeFriends(User x, User y){
+    private void makeFriends(User x, User y) {
         x.getFriends().add(y);
         y.getFriends().add(x);
     }
@@ -66,7 +78,7 @@ public class UserTest {
         tx.begin();
 
         try {
-            for(Object o : obj) {
+            for (Object o : obj) {
                 em.persist(o);
             }
             tx.commit();
@@ -80,7 +92,7 @@ public class UserTest {
     }
 
     @Test
-    public void testGetAll(){
+    public void testGetAll() {
 
         Query query = em.createNamedQuery(User.GET_ALL);
 
@@ -91,7 +103,7 @@ public class UserTest {
     }
 
     @Test
-    public void testGetAllInNorway(){
+    public void testGetAllInNorway() {
 
         Query query = em.createNamedQuery(User.GET_ALL_IN_NORWAY);
         List<User> users = query.getResultList();
@@ -100,7 +112,7 @@ public class UserTest {
     }
 
     @Test
-    public void testGetAllWithOnTheFlyQuery(){
+    public void testGetAllWithOnTheFlyQuery() {
 
         //you can create queries on the fly. but if a query is used in a lot of different
         //places, it might be best to use a named one
@@ -111,7 +123,7 @@ public class UserTest {
     }
 
     @Test
-    public void testCaseWhen(){
+    public void testCaseWhen() {
 
         // can use "CASE WHEN THEN ELSE" to return different values based on some checks
         Query query = em.createQuery(
@@ -126,7 +138,7 @@ public class UserTest {
     }
 
     @Test
-    public void testNew(){
+    public void testNew() {
 
         /*
             can create new objects based on the data in the database.
@@ -136,7 +148,7 @@ public class UserTest {
             only the needed data is read from database, and not the whole Entity
          */
         Query query = em.createQuery(
-                "select NEW " + Message.class.getName()+"(u.name) from User u");
+                "select NEW " + Message.class.getName() + "(u.name) from User u");
 
         List<Message> messages = query.getResultList();
 
@@ -148,7 +160,7 @@ public class UserTest {
 
 
     @Test
-    public void testDistinct(){
+    public void testDistinct() {
 
         Query query = em.createQuery(
                 "select distinct u.name from User u");
@@ -161,7 +173,7 @@ public class UserTest {
 
 
     @Test
-    public void testAvg(){
+    public void testAvg() {
 
         //how many friends on average?  3+2+2+1 / 4 = 2
         Query query = em.createQuery(
@@ -180,13 +192,13 @@ public class UserTest {
     }
 
     @Test
-    public void testBindingParameters(){
+    public void testBindingParameters() {
 
         assertEquals(3, findUsers("Norway").size());
         assertEquals(2, findUsers("Norway", "Oslo").size());
     }
 
-    private List<User> findUsers(String country){
+    private List<User> findUsers(String country) {
 
         Query query = em.createQuery("select u from User u where u.address.country = :country"); //note the ":"
         query.setParameter("country", country);
@@ -194,7 +206,7 @@ public class UserTest {
         return query.getResultList();
     }
 
-    private List<User> findUsers(String country, String city){
+    private List<User> findUsers(String country, String city) {
 
         Query query = em.createQuery("select u from User u where u.address.country = ?1 and u.address.city = ?2");
         query.setParameter(1, country); //yep, it starts from 1, and not 0...
@@ -205,7 +217,7 @@ public class UserTest {
 
 
     @Test
-    public void testInjection(){
+    public void testInjection() {
 
         String param = "Norway' or '1' = '1"; // this results in a tautology
 
@@ -225,7 +237,7 @@ public class UserTest {
     }
 
 
-    private List<User> findUsers_IN_A_VERY_WRONG_WAY(String country){
+    private List<User> findUsers_IN_A_VERY_WRONG_WAY(String country) {
 
         /*
             NEVER EVER write something like this, ie concatenating a JPQL/SQL query with a + on
@@ -238,16 +250,56 @@ public class UserTest {
 
 
     @Test
-    public void testFindUsersWith_SQL_insteadOf_JPQL(){
+    public void testSubquery() {
+
+        //find all users that have at least a friend in a different country
+        Query query = em.createQuery(
+                "select u from User u where " +
+                        "(select count(f) from User f where (u member of f.friends) and (u.address.country != f.address.country)) " +
+                        "> 0");
+
+
+        List<User> users = query.getResultList();
+        assertEquals(2, users.size());
+        assertTrue(users.stream().map(User::getName).anyMatch(n -> "A".equals(n))); //note the "Yoda-style" to prevent NPE
+        assertTrue(users.stream().map(User::getName).anyMatch(n -> "C".equals(n)));
+    }
+
+    @Test
+    public void testCriteriaBuilder() {
+
+        /*
+            You can use CriteriaBuilder to avoid writing strings, which is more type-safe.
+            However, is far more verbose and arguably more difficult to read and understand.
+            Considering that IntelliJ can validate the syntax of the JPQL strings,
+            I can't really recommend the use of CriteriaBuilder
+         */
 
         //Query query =     em.createQuery("select u from User u where u.address.country = 'Norway'");
-        Query query = em.createNativeQuery("select * from User where country = 'Norway'");
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<User> q = builder.createQuery(User.class);
+        Root<User> u = q.from(User.class);
+        q.select(u).where(builder.equal(u.get("address").get("country"), "Norway"));
+
+        Query query = em.createQuery(q);
+        assertEquals(3, query.getResultList().size());
+    }
+
+
+    @Test
+    public void testFindUsersWith_SQL_insteadOf_JPQL() {
+
+        //Query query =     em.createQuery("select u from User u where u.address.country = 'Norway'");
+        Query query = em.createNativeQuery("SELECT * FROM User WHERE country = 'Norway'");
 
         assertEquals(3, query.getResultList().size());
 
         /*
-            SQL mainly when dealing with legacy, non-JPA code, or when you have very complex
-            queries, and the generated SQL from JPQL is not enough efficient
+            There are a few cases in which you might want to use SQL directly instead of JPQL:
+            - need to use special features of the DB not supported by JPA/Hibernate
+            - queries generated by JPA/Hibernate are not efficient
+            - JPA/Hibernate are wrong (ie not doing what you would expect)
+
             Recall:
             - SQL works directly on the actual tables in the DB (and there is no Address table there)
             - JPQL works at the @Entity level (so User entity has no country, and one has to access it
@@ -255,24 +307,36 @@ public class UserTest {
          */
     }
 
+
     @Test
-    public void testSubquery(){
+    public void testFindUsersWithJOOQ() {
 
-        //find all users that have at least a friend in a different country
-        Query query = em.createQuery(
-                "select u from User u where (select count(f) from User f where (u member of f.friends) and (u.address.country != f.address.country)) > 0");
+        //Query query =     em.createQuery("select u from User u where u.address.country = 'Norway'");
+        //Query query = em.createNativeQuery("select * from User where country = 'Norway'");
 
+        DSLContext create = DSL.using(SQLDialect.H2);
+        String sql = create
+                .select()
+                .from(table("User"))
+                .where(field("country").eq("Norway"))
+                .getSQL(ParamType.INLINED);
 
+        Query query = em.createNativeQuery(sql);
 
-        List<User> users =  query.getResultList();
-        assertEquals(2, users.size());
-        assertTrue(users.stream().map(User::getName).anyMatch(n -> "A".equals(n))); //note the "Yoda-style" to prevent NPE
-        assertTrue(users.stream().map(User::getName).anyMatch(n -> "C".equals(n)));
+        List<User> results = query.getResultList();
+
+        assertEquals(3, results.size());
+
+        /*
+           JOOQ is a popular, easy to use DSL for writing SQL (not JPQL).
+           Besides type-safety and IDE code-completion, one HUGE benefit
+           is that the SQL is targeted for the specific dialect of the
+           target DB.
+         */
     }
 
-
     @Test
-    public void testBulkDeleteAll(){
+    public void testBulkDeleteAll() {
         Query all = em.createNamedQuery(User.GET_ALL);
         assertEquals(4, all.getResultList().size());
 
@@ -284,7 +348,7 @@ public class UserTest {
         try {
             //as it modifies the DB, we need to explicitly wrap it inside a transaction
             delete.executeUpdate();
-        } catch (Exception e){
+        } catch (Exception e) {
             tx.rollback();
             fail();
         }
@@ -293,7 +357,7 @@ public class UserTest {
     }
 
     @Test
-    public void testBulkDelete(){
+    public void testBulkDelete() {
 
         Query all = em.createNamedQuery(User.GET_ALL);
         assertEquals(4, all.getResultList().size());
@@ -310,7 +374,7 @@ public class UserTest {
             //as it modifies the DB, we need to explicitly wrap it inside a transaction
             delete.executeUpdate();
             fail();
-        } catch (Exception e){
+        } catch (Exception e) {
             tx.rollback();
             /*
                 expected, because it would leave the DB in a inconsistent state, as there would
@@ -319,7 +383,7 @@ public class UserTest {
              */
         }
 
-        assertEquals(4, all.getResultList().size()); //rolledback, nothing should had been deleted so far
+        assertEquals(4, all.getResultList().size()); //rollback, nothing should had been deleted so far
 
         /*
             to bulk delete the elements in the 'friends' list,
@@ -335,7 +399,7 @@ public class UserTest {
              we just want to check if the return of the SELECT is non-empty
          */
         Query deletedRelation = em.createNativeQuery(
-                "delete from User_User k where EXISTS(select 1 from User w where k.friends_id=w.id and w.country=?1) ");
+                "DELETE FROM User_User K WHERE EXISTS(SELECT 1 FROM USER w WHERE K.friends_id=w.id AND w.country=?1) ");
         deletedRelation.setParameter(1, country);
 
 
@@ -346,7 +410,7 @@ public class UserTest {
             deletedRelation.executeUpdate();
             delete.executeUpdate();
             tx.commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             tx.rollback();
             fail();
         }
@@ -355,7 +419,7 @@ public class UserTest {
     }
 
     @Test
-    public void testOderBy(){
+    public void testOderBy() {
 
         /*
             Recall:
@@ -369,7 +433,7 @@ public class UserTest {
         query.setMaxResults(2); // return at most 2 values
 
         List<User> users = query.getResultList();
-        assertEquals(2 , users.size());
+        assertEquals(2, users.size());
 
         //in this case, "users" is ordered
         assertEquals("C", users.get(0).getName());

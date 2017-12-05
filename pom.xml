@@ -9,6 +9,7 @@
     <name>Root of TSDES</name>
 
     <modules>
+        <module>misc</module>
         <module>jee</module>
         <module>spring</module>
     </modules>

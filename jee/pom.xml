@@ -13,7 +13,6 @@
     </parent>
 
     <modules>
-        <module>testing</module>
         <module>jpa</module>
         <module>ejb</module>
         <module>jsf</module>

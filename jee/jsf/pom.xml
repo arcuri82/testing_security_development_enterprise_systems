@@ -16,9 +16,6 @@
         <module>base</module>
         <module>examples</module>
         <module>crawler</module>
-
-        <!-- TODO this module needs to be moved and updated in "Spring" -->
-        <!--<module>jacoco</module>-->
     </modules>
 
 

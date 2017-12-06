@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<jboss-web>
+    <context-root>/quiz-game</context-root>
+</jboss-web>

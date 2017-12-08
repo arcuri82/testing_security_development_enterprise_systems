@@ -9,19 +9,31 @@
 
 <ui:composition template="layout.xhtml">
 
-    <ui:define name="title">Quiz Game</ui:define>
+    <ui:define name="title">Match</ui:define>
 
     <ui:define name="content">
 
         <c:choose>
             <c:when test="#{!gameController.isGameOn}">
-
-                <h:commandButton/>
-
-
+                <!-- TODO redirect home-->
             </c:when>
             <c:otherwise>
                 <!-- New Match-->
+
+                <c:choose>
+                    <c:when test="#{!gameController.categorySelected}">
+
+                        <h3>Choose a Category</h3>
+                        <c:forEach var="ctg" items="#{gameController.categories}">
+                            <h:commandButton value="#{ctg.name}" action="#{gameController.selectCategory(ctg.id)}" />
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Actual Match -->
+
+                    </c:otherwise>
+                </c:choose>
+
             </c:otherwise>
         </c:choose>
 
@@ -29,3 +41,6 @@
 
 </ui:composition>
 </html>
+
+
+        </html>

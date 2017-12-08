@@ -3,9 +3,7 @@ package org.tsdes.jee.exercises.quizgame.backend.entity;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -20,7 +18,8 @@ public class Quiz {
     private Long id;
 
     @NotNull
-    private Long subCategoryId;
+    @ManyToOne
+    private SubCategory subCategory;
 
     @NotBlank
     @Size(max = 128)
@@ -54,14 +53,6 @@ public class Quiz {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getSubCategoryId() {
-        return subCategoryId;
-    }
-
-    public void setSubCategoryId(Long subCategoryId) {
-        this.subCategoryId = subCategoryId;
     }
 
     public String getQuestion() {
@@ -110,5 +101,13 @@ public class Quiz {
 
     public void setIndexOfCorrectAnswer(int indexOfCorrectAnswer) {
         this.indexOfCorrectAnswer = indexOfCorrectAnswer;
+    }
+
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
     }
 }

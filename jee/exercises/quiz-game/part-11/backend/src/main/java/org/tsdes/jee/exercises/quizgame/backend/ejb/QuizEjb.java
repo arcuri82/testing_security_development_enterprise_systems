@@ -8,8 +8,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.List;
-import java.util.Random;
+import javax.persistence.TypedQuery;
+import java.util.*;
 
 /**
  * Created by arcuri82 on 02-Dec-16.
@@ -20,18 +20,43 @@ public class QuizEjb {
     @PersistenceContext
     private EntityManager em;
 
-    private Random random = new Random();
 
-    public long getRandomQuizId(){
 
-        Query query = em.createQuery("select q.id from Quiz q");
-        List<Long> ids = query.getResultList();
+    public List<Quiz> getRandomQuizzes(int n, long categoryId){
 
-        if(ids.isEmpty()){
-            throw new IllegalStateException("No quiz available");
+        TypedQuery<Long>  sizeQuery= em.createQuery("select count(q) from Quiz q where q.subCategory.parent.id=?1", Long.class);
+        sizeQuery.setParameter(1, categoryId);
+        long size = sizeQuery.getSingleResult();
+
+        if(n > size){
+            throw new IllegalArgumentException("Cannot chose " + n + " unique quizzes out of the " + size + " existing");
         }
 
-        return  ids.get(random.nextInt(ids.size()));
+        Random random = new Random();
+
+        List<Quiz> quizzes = new ArrayList<>();
+        Set<Integer> chosen = new HashSet<>();
+
+        while(chosen.size() < n) {
+
+            int k = random.nextInt((int)size);
+            if(chosen.contains(k)){
+                continue;
+            }
+            chosen.add(k);
+
+            TypedQuery<Quiz> query = em.createQuery(
+                    "select q from Quiz q where q.subCategory.parent.id=?1",
+                    Quiz.class);
+            query.setParameter(1, categoryId);
+            query.setMaxResults(1);
+            query.setFirstResult(k);
+
+            quizzes.add(query.getSingleResult());
+        }
+
+
+        return  quizzes;
     }
 
     public long createQuiz(
@@ -50,7 +75,7 @@ public class QuizEjb {
         }
 
         Quiz quiz = new Quiz();
-        quiz.setSubCategoryId(subCategoryId);
+        quiz.setSubCategory(subCategory);
         quiz.setQuestion(question);
         quiz.setFirstAnswer(firstAnswer);
         quiz.setSecondAnswer(secondAnswer);
@@ -84,7 +109,7 @@ public class QuizEjb {
             throw new IllegalArgumentException("SubCategory "+subCategoryId+" does not exist");
         }
 
-        quiz.setSubCategoryId(subCategoryId);
+        quiz.setSubCategory(subCategory);
         quiz.setQuestion(question);
         quiz.setFirstAnswer(firstAnswer);
         quiz.setSecondAnswer(secondAnswer);
@@ -101,9 +126,9 @@ public class QuizEjb {
         return query.getResultList();
     }
 
-    public List<Quiz> getQuizzes(long subCategoryId){
-        Query query = em.createQuery("select q from Quiz q where q.subCategoryId=?1");
-        query.setParameter(1, subCategoryId);
+    public List<Quiz> getQuizzes(long categoryId){
+        Query query = em.createQuery("select q from Quiz q where q.subCategory.parent.id=?1");
+        query.setParameter(1, categoryId);
         return query.getResultList();
     }
 

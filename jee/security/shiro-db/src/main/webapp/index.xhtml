@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<h2>Apache Shiro Example With Database</h2>
+
+<br/>
+
+<c:choose>
+    <c:when test="#{jsfSecurityTools.subject.authenticated}">
+        <p> Hello <h:outputText value="Hi #{jsfSecurityTools.userId}!!!"/></p>
+
+        <h:link id="linkToProtectedResourceId" outcome="/protectedResource.jsf" value="Link"/> to protected resourece.
+
+        <h:form>
+            <h:commandButton value="Logout" id="logout" actionListener="#{jsfSecurityTools.doLogout}" ajax="false"/>
+        </h:form>
+    </c:when>
+    <c:otherwise>
+        <p>You are not logged in</p>
+        <h:button id="linkToLoginId" outcome="/login.jsf" value="Log in"/>
+    </c:otherwise>
+</c:choose>
+
+</html>

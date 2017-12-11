@@ -28,6 +28,7 @@
         <shiro.version>1.4.0</shiro.version>
     </properties>
 
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -39,12 +40,12 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Arquillian, needed for integration testing of EJB -->
+            <!-- Arquillian, needed for integration testing of EJB
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>1.1.13.Final</version>
-                <!--
+                <! - -
                     This is bit tricky. The Arquillian ecosystem defines
                     many different dependencies, but often you will just need
                     only some of them.
@@ -56,18 +57,23 @@
                     See:
                     https://mvnrepository.com/artifact/org.jboss.arquillian/arquillian-bom/1.1.11.Final
                     https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html
-                -->
+                - - >
                 <scope>import</scope>
                 <type>pom</type>
-            </dependency>
+                 </dependency>
+
+                 However, one limitation (bug?) of this BOM is that it declares the dependencies
+                 as "compile" instead of "test" scope... which is really bad.
+                 So, we just declare the dependencies we need directly.
+            -->
+
             <dependency>
                 <groupId>org.jboss.arquillian.junit</groupId>
                 <artifactId>arquillian-junit-container</artifactId>
+                <version>1.1.15.Final</version>
                 <!-- make sure it is in test scope -->
                 <scope>test</scope>
             </dependency>
-
-
             <dependency>
                 <groupId>org.wildfly.arquillian</groupId>
                 <artifactId>wildfly-arquillian-container-managed</artifactId>

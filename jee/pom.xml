@@ -60,6 +60,13 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.junit</groupId>
+                <artifactId>arquillian-junit-container</artifactId>
+                <!-- make sure it is in test scope -->
+                <scope>test</scope>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.wildfly.arquillian</groupId>

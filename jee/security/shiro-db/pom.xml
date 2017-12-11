@@ -15,6 +15,11 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.tsdes.misc.testing</groupId>
+            <artifactId>test-utils</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
         </dependency>

@@ -13,6 +13,7 @@
     </parent>
 
     <modules>
+        <module>test-utils</module>
         <module>instrumentation</module>
     </modules>
 

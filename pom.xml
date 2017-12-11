@@ -44,6 +44,14 @@
     <dependencyManagement>
         <dependencies>
 
+            <!-- Our own modules -->
+            <dependency>
+                <groupId>org.tsdes.misc.testing</groupId>
+                <artifactId>test-utils</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+
             <!-- JPA / Hibernate / Database -->
             <dependency>
                 <groupId>org.hibernate.javax.persistence</groupId>

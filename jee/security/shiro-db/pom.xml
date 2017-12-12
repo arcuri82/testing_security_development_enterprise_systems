@@ -67,6 +67,13 @@
 
     <build>
         <finalName>shiro-db</finalName>
+        <plugins>
+            <!-- Make sure that Wildfly is automatically downloaded and installed -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

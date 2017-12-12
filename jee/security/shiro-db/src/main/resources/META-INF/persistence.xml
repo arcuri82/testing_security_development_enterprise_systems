@@ -9,9 +9,9 @@
 
 
 
-    <persistence-unit name="DB" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="DB" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
+        <!--<jta-data-source>jdbc/myDS</jta-data-source>-->
         <properties>
             <property name="connection.driver_class" value="org.h2.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:h2:./target/db"/>

@@ -2,6 +2,7 @@ package org.tsdes.jee.security.shirodb;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
 
 import javax.ejb.Stateless;
@@ -18,8 +19,8 @@ public class UserEjb {
     @PersistenceContext
     private EntityManager em;
 
-    @Inject
-    private PasswordService passwordService;
+
+    private PasswordService passwordService = new DefaultPasswordService();
 
     public void createUser(String name, String password){
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+<f:view contentType="text/html">
+    <h:head>
+        <title>Sign In</title>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+    </h:head>
+    <h:body>
+        <pe:layout>
+            <pe:layoutPane position="center">
+                <h:form prependId="false">
+
+                    <p:outputLabel value="User and/or password are wrong."
+                                   rendered="${!empty param['error']}"/>
+                    <p:focus/>
+                    <p:panelGrid columns="2" layout="grid">
+                        <h:outputText value="username"/>
+                        <p:inputText id="username" value="#{signInController.username}"/>
+                        <h:outputText value="password"/>
+                        <p:password id="password" value="#{signInController.password}"/>
+                    </p:panelGrid>
+                    <p:commandButton id="submit" value="Sign In" ajax="false" action="#{signInController.signInUser}"/>
+
+                </h:form>
+            </pe:layoutPane>
+        </pe:layout>
+    </h:body>
+</f:view>
+</html>

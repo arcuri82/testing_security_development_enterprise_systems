@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <artifactId>spring-jsf</artifactId>
+    <artifactId>spring-authorization</artifactId>
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.spring</groupId>
-        <artifactId>tmp</artifactId>
+        <groupId>org.tsdes.intro.spring.security</groupId>
+        <artifactId>spring-security</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -44,23 +44,15 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
 
 
     </dependencies>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <!-- Need to create self-executable uber/fat jars -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-
-    </build>
 
 </project>

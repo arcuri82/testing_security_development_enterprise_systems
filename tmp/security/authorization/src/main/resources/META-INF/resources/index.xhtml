@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:sec="http://www.springframework.org/security/tags"
+        xmlns:p="http://primefaces.org/ui"
+>
+
+<h2>Spring Security Example With Database</h2>
+
+<br/>
+
+<sec:authenticated>
+    <p><h:outputText value="Hi #{userInfoController.userName}!!!"/></p>
+
+    <p:link href="/protected.jsf">Link</p:link> to protected resourece.
+
+    <br/>
+
+    <p:button id="logoutId" href="/logout" value="Log out"/>
+</sec:authenticated>
+
+<sec:anonymous>
+    <p>You are not logged in</p>
+    <h:button id="linkToLoginId" outcome="/login.jsf" value="Log in"/>
+    <h:button id="linkToSigninId" outcome="/signin.jsf" value="Sign in"/>
+</sec:anonymous>
+
+</html>

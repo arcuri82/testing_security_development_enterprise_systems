@@ -1,3 +1,8 @@
+jsf:
+  PROJECT_STAGE: Production
+#  primefaces:
+#    theme: overcast
+
 spring:
   jpa:
     # just for debugging
@@ -11,8 +16,6 @@ spring:
 # current session of the user.
 # When a user gets authenticated, Spring Security will create
 # a new HTTP session (based on cookies) for it.
-# From now on, do not need to resend login/password in the header,
-# as just the cookie will suffice
 security:
   sessions: ALWAYS
 

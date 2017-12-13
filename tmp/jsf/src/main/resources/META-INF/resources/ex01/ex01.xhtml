@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- To use the special tags from JSF, we need to define a namespace, like "h" in this case for the
+     HTML tags specially handled by JSF-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+
+<h:head>
+    <title>Example with simple counter</title>
+</h:head>
+<h:body>
+
+<h2>Example with simple counter</h2>
+
+    <p>
+        Back to <a href="../index.html">Home</a>
+    </p>
+
+    <p>
+        Every time one of these button is pressed, the browser does a POST, and
+        then retrieve a new HTML page with the updated value.
+    </p>
+
+    <!--
+        when you have a tag like <x:name>, then "x" is the namespace.
+        all these special JSF XML tags will be handled and replaced by the JSF runtime
+        when handling HTTP requests from the client (eg, a browser)
+    -->
+
+    <h:form id="form">
+        <!--
+            Here we group all these action triggering buttons inside the same form:
+            when one of them is clicked, the entire form is sent.
+            Clicking on a <h:commandButton> in the browser leads it to do a HTTP POST
+            toward the JEE server.
+
+            The "action" can be used to do operations on the backing beans on the server side.
+            In this case it works only because there is a @Named bean called "counterBean",
+            on which we do want that its method "increaseCounter" (for example) is called (note
+            the lack of parentheses in the method invocation declaration)
+        -->
+
+        <h:commandButton value="+" action="#{counterBean.increaseCounter}" id="plusButtonId"/>
+        <h:commandButton value="-" action="#{counterBean.decreaseCounter}" id="minusButtonId"/>
+
+        <!-- This actually reads the content of "counterBean.counter" and display it in text field -->
+        <h:outputText value="#{counterBean.counter}" id="counterTextId"/>
+        <h:commandButton value="Reset" action="#{counterBean.reset}" id="resetButtonId" />
+
+        <!--
+            Note: all of these tags have an "id": this will turn useful when writing test cases
+            with Selenium (so each tag can be easily identified and accessed)
+        -->
+    </h:form>
+
+</h:body>
+</html>

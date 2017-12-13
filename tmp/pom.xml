@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.tsdes.intro.spring</groupId>
+    <artifactId>tmp</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.tsdes</groupId>
+        <artifactId>tsdes</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>jsf</module>
+    </modules>
+
+
+    <properties>
+        <version.springboot>1.5.4.RELEASE</version.springboot>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <!--
+                    https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-parent/pom.xml
+                    https://github.com/spring-projects/spring-boot/blob/master/spring-boot-dependencies/pom.xml
+                  -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${version.springboot}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${version.springboot}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${version.springboot}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.myfaces.core</groupId>
+                <artifactId>myfaces-impl</artifactId>
+                <version>2.2.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.myfaces.core</groupId>
+                <artifactId>myfaces-api</artifactId>
+                <version>2.2.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-jasper</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.ocpsoft.rewrite</groupId>
+                <artifactId>rewrite-servlet</artifactId>
+                <version>3.4.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ocpsoft.rewrite</groupId>
+                <artifactId>rewrite-integration-faces</artifactId>
+                <version>3.4.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ocpsoft.rewrite</groupId>
+                <artifactId>rewrite-config-prettyfaces</artifactId>
+                <version>3.4.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.primefaces</groupId>
+                <artifactId>primefaces</artifactId>
+                <version>6.1</version>
+            </dependency>
+
+
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <!-- Need to create self-executable uber/fat jars -->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${version.springboot}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+            </plugins>
+
+        </pluginManagement>
+    </build>
+
+</project>

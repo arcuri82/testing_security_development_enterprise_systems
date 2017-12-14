@@ -16,7 +16,7 @@
         <module>jpa</module>
         <module>ejb</module>
         <module>jsf</module>
-        <module>security</module>
+        <!--<module>security</module>-->
         <module>exercises</module>
     </modules>
 

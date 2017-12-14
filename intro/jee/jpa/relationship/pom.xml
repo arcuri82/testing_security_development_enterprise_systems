@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.jee.jpa</groupId>
+        <groupId>org.tsdes.intro.jee.jpa</groupId>
         <artifactId>jpa</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

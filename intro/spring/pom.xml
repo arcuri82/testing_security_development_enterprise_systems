@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.tsdes.intro.spring</groupId>
-    <artifactId>tmp</artifactId>
+    <artifactId>spring</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes</groupId>
-        <artifactId>tsdes</artifactId>
+        <groupId>org.tsdes.intro</groupId>
+        <artifactId>intro</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

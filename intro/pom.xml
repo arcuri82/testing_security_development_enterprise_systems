@@ -2,19 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
-    <groupId>org.tsdes.intro.spring.security</groupId>
-    <artifactId>spring-security</artifactId>
+    <groupId>org.tsdes.intro</groupId>
+    <artifactId>intro</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.spring</groupId>
-        <artifactId>tmp</artifactId>
+        <groupId>org.tsdes</groupId>
+        <artifactId>tsdes</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
-        <module>authorization</module>
+        <module>jee</module>
+        <module>spring</module>
+        <module>exercises</module>
     </modules>
 
 

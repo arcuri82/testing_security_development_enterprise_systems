@@ -10,9 +10,8 @@
 
     <modules>
         <module>misc</module>
-        <module>jee</module>
+        <module>intro</module>
         <module>spring</module>
-        <module>tmp</module>
     </modules>
 
 

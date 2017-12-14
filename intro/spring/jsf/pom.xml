@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>org.tsdes.intro.spring</groupId>
-        <artifactId>tmp</artifactId>
+        <artifactId>spring</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

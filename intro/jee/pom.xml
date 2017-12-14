@@ -2,13 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.jee</groupId>
+    <groupId>org.tsdes.intro.jee</groupId>
     <artifactId>jee</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes</groupId>
-        <artifactId>tsdes</artifactId>
+        <groupId>org.tsdes.intro</groupId>
+        <artifactId>intro</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -16,8 +16,6 @@
         <module>jpa</module>
         <module>ejb</module>
         <module>jsf</module>
-        <!--<module>security</module>-->
-        <module>exercises</module>
     </modules>
 
 

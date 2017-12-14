@@ -15,7 +15,7 @@
     <modules>
         <module>jee</module>
         <module>spring</module>
-        <module>exercises</module>
+        <!--<module>exercises</module>-->
     </modules>
 
 

@@ -1,0 +1,14 @@
+jsf:
+  PROJECT_STAGE: Production
+
+
+spring:
+  jpa:
+    show-sql: false
+  session:
+    store-type: hash_map
+
+
+security:
+  sessions: ALWAYS
+

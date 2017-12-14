@@ -9,7 +9,7 @@
 
     <modules>
         <module>backend</module>
-        <!--<module>frontend</module>-->
+        <module>frontend</module>
     </modules>
 
     <properties>
@@ -18,10 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <version.java>1.8</version.java>
         <version.springboot>1.5.4.RELEASE</version.springboot>
-        <version.javax.el>2.2.4</version.javax.el>
-        <version.hibernate.jpa>1.0.0.Final</version.hibernate.jpa>
-        <version.hibernate.core>5.2.9.Final</version.hibernate.core>
-        <version.hibernate.validator>5.3.4.Final</version.hibernate.validator>
+        <joinfaces.version>2.4.1</joinfaces.version>
         <version.h2>1.4.194</version.h2>
         <version.testcontainers>1.4.3</version.testcontainers>
     </properties>
@@ -35,6 +32,11 @@
                 <version>${version.springboot}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.joinfaces</groupId>
+                <artifactId>jsf-spring-boot-starter</artifactId>
+                <version>${joinfaces.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>

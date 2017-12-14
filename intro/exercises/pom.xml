@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.intro.spring</groupId>
-    <artifactId>spring</artifactId>
+    <groupId>org.tsdes.intro.exercises</groupId>
+    <artifactId>intro-exercises</artifactId>
     <packaging>pom</packaging>
 
     <parent>
@@ -13,8 +13,12 @@
     </parent>
 
     <modules>
-        <module>jsf</module>
-        <module>security</module>
+        <module>quiz-game</module>
+        <!--<module>event-list</module>-->
+        <!--<module>my-news</module>-->
+        <!--<module>my-cantina</module>-->
     </modules>
+
+
 
 </project>

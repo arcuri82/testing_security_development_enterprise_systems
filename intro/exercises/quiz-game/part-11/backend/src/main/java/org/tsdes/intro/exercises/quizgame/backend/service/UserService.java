@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tsdes.intro.exercises.quizgame.backend.entity.User;
 
+import javax.persistence.EntityManager;
 import java.util.Collections;
 
 /**
@@ -15,7 +17,7 @@ import java.util.Collections;
 public class UserService {
 
     @Autowired
-    private UserRepository userCrud;
+    private EntityManager em;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -26,17 +28,17 @@ public class UserService {
         try {
             String hashedPassword = passwordEncoder.encode(password);
 
-            if (userCrud.exists(username)) {
+            if (em.find(User.class, username) != null) {
                 return false;
             }
 
-            UserEntity user = new UserEntity();
+            User user = new User();
             user.setUsername(username);
             user.setPassword(hashedPassword);
             user.setRoles(Collections.singleton("USER"));
             user.setEnabled(true);
 
-            userCrud.save(user);
+            em.persist(user);
 
             return true;
 

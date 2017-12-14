@@ -14,7 +14,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="USERS")
-public class UserEntity {
+public class User {
 
     @Id
     @NotBlank
@@ -29,7 +29,7 @@ public class UserEntity {
     @NotNull
     private Boolean enabled;
 
-    public UserEntity() {
+    public User() {
     }
 
     public String getUsername() {

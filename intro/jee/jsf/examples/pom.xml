@@ -8,7 +8,7 @@
     <packaging>war</packaging>
 
     <parent>
-        <groupId>org.tsdes.jee.jsf</groupId>
+        <groupId>org.tsdes.intro.jee.jsf</groupId>
         <artifactId>jsf</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

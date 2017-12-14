@@ -1,7 +1,7 @@
 package org.tsdes.intro.jee.jsf.examples.ex05.controller;
 
 
-import org.tsdes.jee.jsf.examples.ex05.ejb.UserEJB;
+import org.tsdes.intro.jee.jsf.examples.ex05.ejb.UserEJB;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;

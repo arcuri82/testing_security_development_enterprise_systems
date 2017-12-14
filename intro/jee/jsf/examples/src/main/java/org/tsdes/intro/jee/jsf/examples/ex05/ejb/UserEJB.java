@@ -3,7 +3,6 @@ package org.tsdes.intro.jee.jsf.examples.ex05.ejb;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.tsdes.intro.jee.jsf.examples.ex05.entity.UserDetails;
-import org.tsdes.jee.jsf.examples.ex05.entity.UserDetails;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

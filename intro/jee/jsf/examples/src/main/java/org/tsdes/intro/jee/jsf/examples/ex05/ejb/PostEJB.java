@@ -3,8 +3,6 @@ package org.tsdes.intro.jee.jsf.examples.ex05.ejb;
 
 import org.tsdes.intro.jee.jsf.examples.ex05.entity.Post;
 import org.tsdes.intro.jee.jsf.examples.ex05.entity.UserDetails;
-import org.tsdes.jee.jsf.examples.ex05.entity.Post;
-import org.tsdes.jee.jsf.examples.ex05.entity.UserDetails;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

@@ -1,8 +1,8 @@
 package org.tsdes.intro.jee.jsf.examples.ex05.controller;
 
 
-import org.tsdes.jee.jsf.examples.ex05.entity.Post;
-import org.tsdes.jee.jsf.examples.ex05.ejb.PostEJB;
+import org.tsdes.intro.jee.jsf.examples.ex05.entity.Post;
+import org.tsdes.intro.jee.jsf.examples.ex05.ejb.PostEJB;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

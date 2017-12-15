@@ -10,28 +10,15 @@
 <ui:composition template="layout.xhtml">
 
     <ui:define name="title">
-        Quiz Game
+        Match
     </ui:define>
 
 
     <ui:define name="content">
 
-        <h2>Quiz Game</h2>
-
-        <sec:authenticated>
-            <c:set value="#{userInfoController.stats}" var="stats"/>
-
-            Your victories: <h:outputLabel value="#{stats.victories}"/>
-
-            <br/>
-
-            Your defeats: <h:outputLabel value="#{stats.defeats}"/>
-        </sec:authenticated>
+        <h2>Match</h2>
 
 
-        <sec:anonymous>
-            Log in to play!!!
-        </sec:anonymous>
 
     </ui:define>
 

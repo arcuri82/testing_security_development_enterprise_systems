@@ -2,10 +2,7 @@ package org.tsdes.intro.exercises.quizgame.backend.entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -23,7 +20,7 @@ public class User {
     @NotBlank
     private String password;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles;
 
     @NotNull

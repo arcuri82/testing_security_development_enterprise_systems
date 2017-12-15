@@ -2,10 +2,7 @@ package org.tsdes.intro.exercises.quizgame.backend.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.tsdes.intro.exercises.quizgame.backend.entity.Quiz;
-import org.tsdes.intro.exercises.quizgame.backend.entity.Category;
-import org.tsdes.intro.exercises.quizgame.backend.entity.SubCategory;
-import org.tsdes.intro.exercises.quizgame.backend.entity.User;
+import org.tsdes.intro.exercises.quizgame.backend.entity.*;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -23,6 +20,11 @@ public class DeleteService {
     private EntityManager em;
 
     public void deleteAll(){
+        //Have to use native SQL for ElementCollection
+        Query query = em.createNativeQuery("delete from user_roles");
+        query.executeUpdate();
+
+        deleteEntities(MatchStats.class);
         deleteEntities(User.class);
         deleteEntities(Quiz.class);
         deleteEntities(SubCategory.class);

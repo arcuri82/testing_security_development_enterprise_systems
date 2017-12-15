@@ -63,7 +63,36 @@
 
     <build>
         <plugins>
-
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${version.springboot}</version>
+                <configuration>
+                    <finalName>quizgame</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <appName>quizgame-pg5100</appName>
+                    <includeTarget>false</includeTarget>
+                    <includes>
+                        <include>target/quizgame.jar</include>
+                    </includes>
+                    <processTypes>
+                        <web>java -jar target/quizgame.jar --server.port=$PORT</web>
+                    </processTypes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

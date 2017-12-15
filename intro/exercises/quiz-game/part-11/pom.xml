@@ -42,7 +42,8 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>${version.h2}</version>
-                <scope>test</scope>
+                <!--<scope>test</scope>-->
+                <scope>compile</scope> <!-- FIXME -->
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

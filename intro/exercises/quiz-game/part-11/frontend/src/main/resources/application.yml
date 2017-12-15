@@ -3,10 +3,14 @@ jsf:
 
 
 spring:
-  jpa:
-    show-sql: false
   session:
     store-type: hash_map
+  datasource:
+    driver-class-name: "org.postgresql.Driver"
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: "update"
 
 
 security:

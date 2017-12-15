@@ -2,12 +2,11 @@
 <!DOCTYPE html>
 <html
         xmlns:h="http://xmlns.jcp.org/jsf/html"
-        xmlns:sec="http://www.springframework.org/security/tags"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 >
 
-<ui:composition template="layout.xhtml">
+<ui:composition template="../layout.xhtml">
 
     <ui:define name="title">
         Match
@@ -18,6 +17,59 @@
 
         <h2>Match</h2>
 
+
+        <c:choose>
+            <c:when test="#{!matchController.matchOn}">
+                No ongoing match.
+                <br/>
+                <h:form>
+                    <h:commandButton value="New Match" action="#{matchController.newMatch}"/>
+                </h:form>
+            </c:when>
+            <c:otherwise>
+                <!-- New Match-->
+                <c:choose>
+                    <!-- Choose a category-->
+                    <c:when test="#{!matchController.categorySelected}">
+                        <h3>Select a Category</h3>
+
+                        <c:forEach var="ctg" items="#{matchController.categories}">
+                            <h:form>
+                                <h:commandButton value="#{ctg.name}" action="#{matchController.selectCategory(ctg.id)}"/>
+                            </h:form>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Answer questions -->
+                        Question <h:outputLabel value="#{matchController.increasedCounter}"/>
+                        out of  <h:outputLabel value="#{matchController.numberOfQuizzes}"/>
+
+                        <br />
+
+
+                        <c:set  var="quiz" value="#{matchController.currentQuiz}"/>
+
+                        Question: "<h:outputLabel value="#{quiz.question}"/>"
+
+                        <h:form>
+                            <h:commandButton value="A: #{quiz.firstAnswer}" action="#{matchController.answerQuiz(0)}" ajax="false"/>
+                        </h:form>
+                        <h:form>
+                            <h:commandButton value="B: #{quiz.secondAnswer}" action="#{matchController.answerQuiz(1)}" ajax="false"/>
+                        </h:form>
+                        <h:form>
+                            <h:commandButton value="C: #{quiz.thirdAnswer}" action="#{matchController.answerQuiz(2)}" ajax="false"/>
+                        </h:form>
+                        <h:form>
+                            <h:commandButton value="D: #{quiz.fourthAnswer}" action="#{matchController.answerQuiz(3)}" ajax="false"/>
+                        </h:form>
+
+                    </c:otherwise>
+
+                </c:choose>
+
+            </c:otherwise>
+        </c:choose>
 
 
     </ui:define>

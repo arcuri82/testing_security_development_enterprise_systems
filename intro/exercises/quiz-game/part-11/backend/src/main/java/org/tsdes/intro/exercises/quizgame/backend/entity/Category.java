@@ -19,6 +19,7 @@ public class Category {
 
     @NotBlank
     @Size(max=128)
+    @Column(unique=true)
     private String name;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)

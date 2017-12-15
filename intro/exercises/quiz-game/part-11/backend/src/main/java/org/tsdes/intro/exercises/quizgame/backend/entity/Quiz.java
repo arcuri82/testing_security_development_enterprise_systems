@@ -23,6 +23,7 @@ public class Quiz {
 
     @NotBlank
     @Size(max = 128)
+    @Column(unique=true)
     private String question;
 
     @NotBlank

@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 /**
  * Created by arcuri82 on 14-Dec-17.
@@ -64,5 +65,20 @@ public class CategoryServiceTest extends ServiceTestBase{
         assertNotNull(c);
         assertEquals(1, c.getSubCategories().size());
         assertEquals(subCtg, c.getSubCategories().get(0).getName());
+    }
+
+    @Test
+    public void testCreateTwice(){
+
+        String ctg = "Computer Science";
+
+        categoryService.createCategory(ctg);
+
+        try {
+            categoryService.createCategory(ctg);
+            fail();
+        }catch (Exception e){
+            //expected
+        }
     }
 }

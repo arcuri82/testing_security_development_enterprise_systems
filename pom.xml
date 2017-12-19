@@ -11,7 +11,7 @@
     <modules>
         <module>misc</module>
         <module>intro</module>
-        <module>spring</module>
+        <module>advanced</module>
     </modules>
 
 

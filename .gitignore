@@ -15,7 +15,7 @@ hs_err_pid*
 derby.log
 
 **/target
-/spring/front-end/react/welcome/node_modules/
-/spring/front-end/react/welcome/coverage/
-/spring/front-end/react/welcome/build/
-/spring/front-end/react/welcome/node/
+/advanced/front-end/react/welcome/build/
+/advanced/front-end/react/welcome/node_modules/
+/advanced/front-end/react/welcome/public/
+/advanced/front-end/react/welcome/node/

@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring.soap</groupId>
+        <groupId>org.tsdes.advanced.soap</groupId>
         <artifactId>soap</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

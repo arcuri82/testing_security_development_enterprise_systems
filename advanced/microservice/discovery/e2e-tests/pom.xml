@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring.microservice.discovery</groupId>
+        <groupId>org.tsdes.advanced.microservice.discovery</groupId>
         <artifactId>discovery</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -23,17 +23,17 @@
 
         <!-- Force this module to be built last -->
         <dependency>
-            <groupId>org.tsdes.spring.microservice.discovery</groupId>
+            <groupId>org.tsdes.advanced.microservice.discovery</groupId>
             <artifactId>consumer</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.tsdes.spring.microservice.discovery</groupId>
+            <groupId>org.tsdes.advanced.microservice.discovery</groupId>
             <artifactId>eureka</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.tsdes.spring.microservice.discovery</groupId>
+            <groupId>org.tsdes.advanced.microservice.discovery</groupId>
             <artifactId>producer</artifactId>
             <version>${project.version}</version>
         </dependency>

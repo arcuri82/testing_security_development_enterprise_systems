@@ -6,8 +6,8 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring</groupId>
-        <artifactId>spring</artifactId>
+        <groupId>org.tsdes.advanced</groupId>
+        <artifactId>advanced</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

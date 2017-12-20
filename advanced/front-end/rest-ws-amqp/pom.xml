@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring.frontend</groupId>
+        <groupId>org.tsdes.advanced.frontend</groupId>
         <artifactId>frontend</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring.microservice.discovery</groupId>
+        <groupId>org.tsdes.advanced.microservice.discovery</groupId>
         <artifactId>discovery</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

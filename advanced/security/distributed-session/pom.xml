@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.spring.security.distributedsession</groupId>
+    <groupId>org.tsdes.advanced.security.distributedsession</groupId>
     <artifactId>distributedsession</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring.security</groupId>
+        <groupId>org.tsdes.advanced.security</groupId>
         <artifactId>security</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

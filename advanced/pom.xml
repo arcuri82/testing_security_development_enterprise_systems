@@ -13,17 +13,16 @@
     </parent>
 
     <modules>
-        <!-- TODO fix package names -->
-        <!--<module>xml-and-json</module>-->
-        <!--<module>kotlin</module>-->
-        <!--<module>examples</module>-->
-        <!--<module>utils</module>-->
-        <!--<module>rest</module>-->
-        <!--<module>soap</module>-->
-        <!--<module>amqp</module>-->
-        <!--<module>microservice</module>-->
-        <!--<module>security</module>-->
-        <!--<module>front-end</module>-->
+        <module>xml-and-json</module>
+        <module>kotlin</module>
+        <module>examples</module>
+        <module>utils</module>
+        <module>rest</module>
+        <module>soap</module>
+        <module>amqp</module>
+        <module>microservice</module>
+        <module>security</module>
+        <module>front-end</module>
     </modules>
 
 
@@ -39,17 +38,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.tsdes.spring.xmlandjson</groupId>
+                <groupId>org.tsdes.advanced.xmlandjson</groupId>
                 <artifactId>xmlandjson</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tsdes.spring.examples</groupId>
+                <groupId>org.tsdes.advanced.examples</groupId>
                 <artifactId>news</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.tsdes.spring.utils</groupId>
+                <groupId>org.tsdes.advanced.utils</groupId>
                 <artifactId>utils</artifactId>
                 <version>${project.version}</version>
             </dependency>

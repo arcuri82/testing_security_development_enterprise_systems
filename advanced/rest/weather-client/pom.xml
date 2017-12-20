@@ -6,14 +6,14 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring.rest</groupId>
+        <groupId>org.tsdes.advanced.rest</groupId>
         <artifactId>rest</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <dependencies>
         <dependency>
-            <groupId>org.tsdes.spring.xmlandjson</groupId>
+            <groupId>org.tsdes.advanced.xmlandjson</groupId>
             <artifactId>xmlandjson</artifactId>
         </dependency>
         <dependency>

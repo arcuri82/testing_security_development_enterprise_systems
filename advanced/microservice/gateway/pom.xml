@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.spring.microservice.gateway</groupId>
+    <groupId>org.tsdes.advanced.microservice.gateway</groupId>
     <artifactId>gateway</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring.microservice</groupId>
+        <groupId>org.tsdes.advanced.microservice</groupId>
         <artifactId>microservice</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

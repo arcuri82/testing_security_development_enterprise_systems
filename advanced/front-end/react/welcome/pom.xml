@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.spring.frontend.react</groupId>
+        <groupId>org.tsdes.advanced.frontend.react</groupId>
         <artifactId>react</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

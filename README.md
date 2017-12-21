@@ -2,6 +2,9 @@
 
 # Testing, Security and Development of Enterprise Systems
 
+![](doc/img/glenn-carstens-peters-120205.jpg  "Photo by Glenn Carstens-Peters on Unsplash")
+
+
 This repository contains a set of examples related to the testing, security
 and development of enterprise systems.
 Currently, this repository focuses on Java/Kotlin, 

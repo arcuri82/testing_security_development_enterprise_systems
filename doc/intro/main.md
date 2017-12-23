@@ -16,7 +16,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **intro/jee/jpa/embedded**            
   * **intro/jee/jpa/attribute**
   
-  Exercises: TODO            
+  Exercises: [quiz-game-part-01](exercises/quiz-game/quiz-game-part-01.md)            
 
 <!---
 ### JEE Exercises

@@ -91,6 +91,7 @@
                 <version>${version.javax.el}</version>
             </dependency>
             <dependency>
+                <!-- Note: this has the other as dependency -->
                 <groupId>org.glassfish.web</groupId>
                 <artifactId>javax.el</artifactId>
                 <version>${version.javax.el}</version>

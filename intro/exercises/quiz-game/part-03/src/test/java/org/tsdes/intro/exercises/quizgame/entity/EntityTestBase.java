@@ -8,7 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class EntityTestBase {
+public abstract class EntityTestBase {
 
     private EntityManagerFactory factory;
     protected EntityManager em;

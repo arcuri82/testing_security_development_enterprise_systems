@@ -33,6 +33,27 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
   Exercises: [quiz-game-part-02](exercises/quiz-game/quiz-game-part-02.md)  
 
+
+
+<br />
+
+* **Lesson 03**: JPA, Database Locks and Bean Validation
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * **intro/jee/jpa/lock**
+  * **intro/jee/jpa/validation**
+  * **intro/jee/jpa/outerjoin**
+
+  Exercises: [quiz-game-part-03](exercises/quiz-game/quiz-game-part-03.md)  
+
+
+<br />
+
+TODO remaining lessons
+
 <!---
 ### JEE Exercises
 

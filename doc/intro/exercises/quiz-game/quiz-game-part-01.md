@@ -14,7 +14,7 @@ The Maven project should have the following dependencies:
 Configure the `maven-compiler-plugin` to use a specific version
 of Java (e.g., Java 1.8).
 
-Create 3 enitity classes:
+Create 3 entity classes:
 
 * *Category*: with a numeric id, and a String name
 * *SubCategory*: with a numeric id, and a String name

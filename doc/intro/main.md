@@ -18,6 +18,21 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   Exercises: [quiz-game-part-01](exercises/quiz-game/quiz-game-part-01.md)            
 
+<br />
+
+* **Lesson 02**: JPA, Table Relationships, EntityManager and JPQL
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * **intro/jee/jpa/relationship**
+  * **intro/jee/jpa/manager**
+  * **intro/jee/jpa/jpql**
+  * **intro/jee/jpa/fetch**
+
+  Exercises: [quiz-game-part-02](exercises/quiz-game/quiz-game-part-02.md)  
+
 <!---
 ### JEE Exercises
 

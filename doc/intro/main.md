@@ -22,7 +22,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 02**: JPA, Table Relationships, EntityManager and JPQL
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_02_jpa.pdf), 
+          [[pptx]](slides/lesson_02_jpa.pptx)
   
   Modules:
      
@@ -39,7 +40,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 03**: JPA, Database Locks and Bean Validation
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_03_jpa.pdf), 
+          [[pptx]](slides/lesson_03_jpa.pptx)
   
   Modules:
      

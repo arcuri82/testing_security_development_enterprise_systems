@@ -23,7 +23,7 @@
                 No ongoing match.
                 <br/>
                 <h:form>
-                    <h:commandButton value="New Match" action="#{matchController.newMatch}"/>
+                    <h:commandButton value="New Match" action="#{matchController.newMatch}" class="gameBtn"/>
                 </h:form>
             </c:when>
             <c:otherwise>
@@ -35,33 +35,33 @@
 
                         <c:forEach var="ctg" items="#{matchController.categories}">
                             <h:form>
-                                <h:commandButton value="#{ctg.name}" action="#{matchController.selectCategory(ctg.id)}"/>
+                                <h:commandButton value="#{ctg.name}" action="#{matchController.selectCategory(ctg.id)}" class="gameBtn"/>
                             </h:form>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
                         <!-- Answer questions -->
-                        Question <h:outputLabel value="#{matchController.increasedCounter}"/>
-                        out of  <h:outputLabel value="#{matchController.numberOfQuizzes}"/>
+                        <p class="question">Question  <h:outputLabel value="#{matchController.increasedCounter}" class="question"/></p>
+                        <p class="question">out of  <h:outputLabel value="#{matchController.numberOfQuizzes}" class="question"/></p>
 
-                        <br />
+                        <br/>
 
 
                         <c:set  var="quiz" value="#{matchController.currentQuiz}"/>
 
-                        Question: "<h:outputLabel value="#{quiz.question}"/>"
+                        <p class="question">Question: "<h:outputLabel value="#{quiz.question}"/>"</p>
 
                         <h:form>
-                            <h:commandButton value="A: #{quiz.firstAnswer}" action="#{matchController.answerQuiz(0)}" ajax="false"/>
+                            <h:commandButton value="A: #{quiz.firstAnswer}" action="#{matchController.answerQuiz(0)}" ajax="false" class="gameBtn answer"/>
                         </h:form>
                         <h:form>
-                            <h:commandButton value="B: #{quiz.secondAnswer}" action="#{matchController.answerQuiz(1)}" ajax="false"/>
+                            <h:commandButton value="B: #{quiz.secondAnswer}" action="#{matchController.answerQuiz(1)}" ajax="false" class="gameBtn answer"/>
                         </h:form>
                         <h:form>
-                            <h:commandButton value="C: #{quiz.thirdAnswer}" action="#{matchController.answerQuiz(2)}" ajax="false"/>
+                            <h:commandButton value="C: #{quiz.thirdAnswer}" action="#{matchController.answerQuiz(2)}" ajax="false" class="gameBtn answer"/>
                         </h:form>
                         <h:form>
-                            <h:commandButton value="D: #{quiz.fourthAnswer}" action="#{matchController.answerQuiz(3)}" ajax="false"/>
+                            <h:commandButton value="D: #{quiz.fourthAnswer}" action="#{matchController.answerQuiz(3)}" ajax="false" class="gameBtn answer"/>
                         </h:form>
 
                     </c:otherwise>

@@ -9,7 +9,7 @@
 <ui:composition template="/layout.xhtml">
 
     <ui:define name="title">
-        Login
+        Log In
     </ui:define>
 
 
@@ -20,12 +20,12 @@
                 <!--<p:outputLabel value="Connection failed: user and/or password are wrong."-->
                 <!--rendered="${!empty param['error']}"/>-->
 
-                <h:outputText value="username"/>
-                <h:inputText id="username"/>
-                <h:outputText value="password"/>
-                <h:inputSecret id="password"/>
+                <h:outputText value="Username: "/>
+                <h:inputText id="username" class="login"/><br/>
+                <h:outputText value="Password: "/>
+                <h:inputSecret id="password" class="login"/><br/>
 
-                <h:commandButton id="submit" value="Login" ajax="false"/>
+                <h:commandButton id="submit" value="Log In" ajax="false" class="gameBtn"/>
             </div>
         </h:form>
 

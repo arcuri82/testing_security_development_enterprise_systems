@@ -21,16 +21,16 @@
         <sec:authenticated>
 
             <h:form>
-                <h:commandButton value="New Match" action="#{matchController.newMatch}" />
+                <h:commandButton value="New Match" action="#{matchController.newMatch}" class="gameBtn" />
             </h:form>
 
             <c:set value="#{userInfoController.stats}" var="stats"/>
 
-            Your victories: <h:outputLabel value="#{stats.victories}"/>
+            <p class="victories">Your Victories: </p><h:outputLabel value="#{stats.victories}" class="victories"/>
 
             <br/>
 
-            Your defeats: <h:outputLabel value="#{stats.defeats}"/>
+           <p class="loses">Your Defeats: </p> <h:outputLabel value="#{stats.defeats}" class="loses"/>
         </sec:authenticated>
 
 

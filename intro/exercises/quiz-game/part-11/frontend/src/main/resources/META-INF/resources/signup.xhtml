@@ -19,12 +19,12 @@
                 <!--<p:outputLabel value="Connection failed: user and/or password are wrong."-->
                 <!--rendered="${!empty param['error']}"/>-->
 
-                <h:outputText value="username"/>
-                <h:inputText id="username" value="#{signInController.username}"/>
-                <h:outputText value="password"/>
-                <h:inputSecret id="password"  value="#{signInController.password}"/>
+                <h:outputText value="Username: "/>
+                <h:inputText id="username" value="#{signInController.username}" class="login"/><br/>
+                <h:outputText value="Password: "/>
+                <h:inputSecret id="password"  value="#{signInController.password}" class="login"/><br/>
 
-                <h:commandButton id="submit" value="Sign Up" ajax="false" action="#{signInController.signInUser}"/>
+                <h:commandButton id="submit" value="Sign Up" ajax="false" action="#{signInController.signInUser}" class="gameBtn"/>
             </div>
         </h:form>
 

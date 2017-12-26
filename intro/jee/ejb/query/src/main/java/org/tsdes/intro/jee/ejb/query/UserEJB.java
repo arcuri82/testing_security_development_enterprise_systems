@@ -4,7 +4,7 @@ package org.tsdes.intro.jee.ejb.query;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
@@ -14,7 +14,7 @@ public class UserEJB {
     private EntityManager em;
 
 
-    public long createUser(String name){
+    public long createUser(String name) {
         User user = new User();
         user.setName(name);
 
@@ -23,7 +23,7 @@ public class UserEJB {
         return user.getId();
     }
 
-    public void createPost(long userId, String text){
+    public void createPost(long userId, String text) {
         Post post = new Post();
         post.setText(text);
         em.persist(post);
@@ -34,7 +34,7 @@ public class UserEJB {
         updateCounter(user);
     }
 
-    public void createComment(long userId, String text){
+    public void createComment(long userId, String text) {
         Comment comment = new Comment();
         comment.setText(text);
         em.persist(comment);
@@ -45,22 +45,24 @@ public class UserEJB {
         updateCounter(user);
     }
 
-    private void updateCounter(User user){
+    private void updateCounter(User user) {
         user.setCounter(user.getPosts().size() + user.getComments().size());
     }
 
 
-    public List<User> getTopUsersUsingCounter(int n){
+    public List<User> getTopUsersUsingCounter(int n) {
 
-        Query query = em.createQuery("select u from User u order by u.counter DESC");
+        TypedQuery<User> query = em.createQuery("select u from User u order by u.counter DESC", User.class);
         query.setMaxResults(n);
 
         return query.getResultList();
     }
 
-    public List<User> getTopUsersWithoutCounter(int n){
+    public List<User> getTopUsersWithoutCounter(int n) {
 
-        Query query = em.createQuery("select u from User u order by size(u.posts) + size(u.comments) DESC");
+        TypedQuery<User> query = em.createQuery(
+                "select u from User u order by size(u.posts) + size(u.comments) DESC",
+                User.class);
         query.setMaxResults(n);
 
         return query.getResultList();

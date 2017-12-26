@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 /*
@@ -41,8 +42,8 @@ public class UserBean {
     }
 
     public long getNumberOfUsers(){
-        Query query = em.createQuery("select count(u) from User u");
-        long n = (Long) query.getSingleResult();
+        TypedQuery<Long> query = em.createQuery("select count(u) from User u", Long.class);
+        long n = query.getSingleResult();
         return n;
     }
 }

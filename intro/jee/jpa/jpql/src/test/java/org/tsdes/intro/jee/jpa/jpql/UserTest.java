@@ -94,7 +94,7 @@ public class UserTest {
     @Test
     public void testGetAll() {
 
-        Query query = em.createNamedQuery(User.GET_ALL);
+        TypedQuery<User> query = em.createNamedQuery(User.GET_ALL, User.class);
 
         //being a read operation, no need to have an explicit transaction here
         List<User> users = query.getResultList();
@@ -105,7 +105,7 @@ public class UserTest {
     @Test
     public void testGetAllInNorway() {
 
-        Query query = em.createNamedQuery(User.GET_ALL_IN_NORWAY);
+        TypedQuery<User> query = em.createNamedQuery(User.GET_ALL_IN_NORWAY, User.class);
         List<User> users = query.getResultList();
 
         assertEquals(3, users.size());
@@ -116,7 +116,7 @@ public class UserTest {
 
         //you can create queries on the fly. but if a query is used in a lot of different
         //places, it might be best to use a named one
-        Query query = em.createQuery("select u from User u");
+        TypedQuery<User> query = em.createQuery("select u from User u", User.class);
         List<User> users = query.getResultList();
 
         assertEquals(4, users.size());
@@ -126,9 +126,9 @@ public class UserTest {
     public void testCaseWhen() {
 
         // can use "CASE WHEN THEN ELSE" to return different values based on some checks
-        Query query = em.createQuery(
+        TypedQuery<String> query = em.createQuery(
                 "select CASE u.address.city WHEN 'Oslo' THEN 'yes' ELSE 'no' END " +
-                        "from User u");
+                        "from User u", String.class);
 
         List<String> osloCounters = query.getResultList();
         assertEquals(4, osloCounters.size());
@@ -147,8 +147,8 @@ public class UserTest {
             need a small subset: by creating this kind of object on the fly,
             only the needed data is read from database, and not the whole Entity
          */
-        Query query = em.createQuery(
-                "select NEW " + Message.class.getName() + "(u.name) from User u");
+        TypedQuery<Message> query = em.createQuery(
+                "select NEW " + Message.class.getName() + "(u.name) from User u", Message.class);
 
         List<Message> messages = query.getResultList();
 
@@ -162,8 +162,8 @@ public class UserTest {
     @Test
     public void testDistinct() {
 
-        Query query = em.createQuery(
-                "select distinct u.name from User u");
+        TypedQuery<String> query = em.createQuery(
+                "select distinct u.name from User u", String.class);
 
         List<String> messages = query.getResultList();
 
@@ -176,18 +176,18 @@ public class UserTest {
     public void testAvg() {
 
         //how many friends on average?  3+2+2+1 / 4 = 2
-        Query query = em.createQuery(
-                "select avg(u.friends.size) from User u");
+        TypedQuery<Double> queryAvg = em.createQuery(
+                "select avg(u.friends.size) from User u", Double.class);
 
-        double avg = (double) query.getSingleResult();
+        double avg = queryAvg.getSingleResult();
         assertEquals(2.0, avg, 0.001);
 
         //other operators are for example: count, max, min, sum
 
-        query = em.createQuery(
-                "select sum(u.friends.size) from User u");
+        TypedQuery<Long> querySum = em.createQuery(
+                "select sum(u.friends.size) from User u", Long.class);
 
-        long sum = (long) query.getSingleResult();
+        long sum = querySum.getSingleResult();
         assertEquals(8L, sum);
     }
 
@@ -200,7 +200,8 @@ public class UserTest {
 
     private List<User> findUsers(String country) {
 
-        Query query = em.createQuery("select u from User u where u.address.country = :country"); //note the ":"
+        TypedQuery<User> query = em.createQuery(
+                "select u from User u where u.address.country = :country", User.class); //note the ":"
         query.setParameter("country", country);
 
         return query.getResultList();
@@ -208,7 +209,9 @@ public class UserTest {
 
     private List<User> findUsers(String country, String city) {
 
-        Query query = em.createQuery("select u from User u where u.address.country = ?1 and u.address.city = ?2");
+        TypedQuery<User> query = em.createQuery(
+                "select u from User u where u.address.country = ?1 and u.address.city = ?2",
+                User.class);
         query.setParameter(1, country); //yep, it starts from 1, and not 0...
         query.setParameter(2, city);
 
@@ -244,7 +247,9 @@ public class UserTest {
             an input parameter... reasons is that SQL injections can compromise the database
          */
 
-        Query query = em.createQuery("select u from User u where u.address.country = '" + country + "'");
+        TypedQuery<User> query = em.createQuery(
+                "select u from User u where u.address.country = '" + country + "'",
+                User.class);
         return query.getResultList();
     }
 
@@ -253,10 +258,11 @@ public class UserTest {
     public void testSubquery() {
 
         //find all users that have at least a friend in a different country
-        Query query = em.createQuery(
+        TypedQuery<User> query = em.createQuery(
                 "select u from User u where " +
                         "(select count(f) from User f where (u member of f.friends) and (u.address.country != f.address.country)) " +
-                        "> 0");
+                        "> 0",
+                User.class);
 
 
         List<User> users = query.getResultList();
@@ -281,7 +287,7 @@ public class UserTest {
         Root<User> u = q.from(User.class);
         q.select(u).where(builder.equal(u.get("address").get("country"), "Norway"));
 
-        Query query = em.createQuery(q);
+        TypedQuery<User> query = em.createQuery(q);
         assertEquals(3, query.getResultList().size());
     }
 
@@ -290,7 +296,7 @@ public class UserTest {
     public void testFindUsersWith_SQL_insteadOf_JPQL() {
 
         //Query query =     em.createQuery("select u from User u where u.address.country = 'Norway'");
-        Query query = em.createNativeQuery("SELECT * FROM User WHERE country = 'Norway'");
+        Query query = em.createNativeQuery("SELECT * FROM User WHERE country = 'Norway'", User.class);
 
         assertEquals(3, query.getResultList().size());
 
@@ -321,7 +327,7 @@ public class UserTest {
                 .where(field("country").eq("Norway"))
                 .getSQL(ParamType.INLINED);
 
-        Query query = em.createNativeQuery(sql);
+        Query query = em.createNativeQuery(sql, User.class);
 
         List<User> results = query.getResultList();
 
@@ -337,7 +343,7 @@ public class UserTest {
 
     @Test
     public void testBulkDeleteAll() {
-        Query all = em.createNamedQuery(User.GET_ALL);
+        TypedQuery<User> all = em.createNamedQuery(User.GET_ALL, User.class);
         assertEquals(4, all.getResultList().size());
 
         //useful when needing to delete/update many entries at the same time
@@ -359,7 +365,7 @@ public class UserTest {
     @Test
     public void testBulkDelete() {
 
-        Query all = em.createNamedQuery(User.GET_ALL);
+        TypedQuery<User> all = em.createNamedQuery(User.GET_ALL, User.class);
         assertEquals(4, all.getResultList().size());
 
         String country = "Norway";
@@ -429,7 +435,7 @@ public class UserTest {
             C: 1
          */
 
-        Query query = em.createQuery("select u from User u order by u.friends.size ASC");
+        TypedQuery<User> query = em.createQuery("select u from User u order by u.friends.size ASC", User.class);
         query.setMaxResults(2); // return at most 2 values
 
         List<User> users = query.getResultList();

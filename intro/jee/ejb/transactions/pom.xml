@@ -6,8 +6,8 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.jee.jpa</groupId>
-        <artifactId>jpa</artifactId>
+        <groupId>org.tsdes.intro.jee.ejb</groupId>
+        <artifactId>ejb</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

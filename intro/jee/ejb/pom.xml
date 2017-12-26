@@ -24,6 +24,7 @@
         <module>async</module>
         <module>time</module>
         <module>lazy</module>
+        <module>transactions</module>
     </modules>
 
 

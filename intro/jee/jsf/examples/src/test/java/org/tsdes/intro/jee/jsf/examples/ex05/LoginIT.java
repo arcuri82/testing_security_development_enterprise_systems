@@ -5,13 +5,8 @@ import org.junit.Test;
 import org.tsdes.intro.jee.jsf.examples.ex05.po.HomePageObject;
 import org.tsdes.intro.jee.jsf.examples.ex05.po.LoginPageObject;
 import org.tsdes.intro.jee.jsf.examples.test.SeleniumTestBase;
-import org.tsdes.jee.jsf.examples.ex05.po.HomePageObject;
-import org.tsdes.jee.jsf.examples.test.SeleniumTestBase;
-import org.tsdes.jee.jsf.examples.ex05.po.LoginPageObject;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LoginIT extends SeleniumTestBase {
 

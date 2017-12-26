@@ -3,7 +3,6 @@ package org.tsdes.intro.jee.jsf.examples.ex03;
 import org.junit.Before;
 import org.junit.Test;
 import org.tsdes.intro.jee.jsf.examples.test.SeleniumTestBase;
-import org.tsdes.jee.jsf.examples.test.SeleniumTestBase;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

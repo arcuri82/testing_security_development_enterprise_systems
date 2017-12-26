@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.tsdes.intro.jee.jsf.examples.test.PageObject;
-import org.tsdes.jee.jsf.examples.test.PageObject;
 
 import java.util.List;
 

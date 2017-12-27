@@ -1,5 +1,8 @@
 # Quiz Game - Part 06
 
+Continue to work on the Maven project started as exercise 
+in the first lesson.
+
 Create a stateless EJB called `QuizEjb` with the following methods:
 
 * `public long createQuiz(

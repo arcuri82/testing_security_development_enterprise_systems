@@ -1,5 +1,8 @@
 # Quiz Game - Part 05
 
+Continue to work on the Maven project started as exercise 
+in the first lesson.
+
 In the `pom.xml` file, add the following dependencies:
 
 * `org.wildfly.arquillian:wildfly-arquillian-container-managed`

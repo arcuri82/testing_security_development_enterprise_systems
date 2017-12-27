@@ -62,18 +62,6 @@ public class CategoryService {
         return categories;
     }
 
-    public boolean doesCategoryExist(long id){
-        Category category = em.find(Category.class, id);
-        return category != null;
-    }
-
-    public Void changeCategoryName(long id, String name){
-        Category category = em.find(Category.class, id);
-        if(category != null){
-            category.setName(name);
-        }
-        return null;
-    }
 
     public Category getCategory(long id, boolean withSub){
 
@@ -85,31 +73,10 @@ public class CategoryService {
         return category;
     }
 
-    public boolean deleteCategory(long id){
-        Category category = em.find(Category.class, id);
-        if(category != null){
-            em.remove(category);
-            return true;
-        }
-        return false;
-    }
 
     public SubCategory getSubCategory(long id){
 
         return em.find(SubCategory.class, id);
-    }
-
-    public List<SubCategory> getSubCategories(Long parentId){
-
-        TypedQuery<SubCategory> query;
-        if(parentId == null){
-            query = em.createQuery("select s from SubCategory s", SubCategory.class);
-        } else {
-            query = em.createQuery("select s from SubCategory s where s.parent.id=?1", SubCategory.class);
-            query.setParameter(1, parentId);
-        }
-
-        return query.getResultList();
     }
 
 }

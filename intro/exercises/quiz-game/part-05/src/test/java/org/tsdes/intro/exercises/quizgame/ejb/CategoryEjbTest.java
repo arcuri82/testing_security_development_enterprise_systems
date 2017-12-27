@@ -4,6 +4,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.tsdes.intro.exercises.quizgame.entity.Category;
@@ -27,15 +28,30 @@ public class CategoryEjbTest {
     }
 
     @EJB
-    private CategoryEjb ejb;
+    private CategoryEjb ctgEjb;
 
+    @EJB
+    private ResetEjb resetEjb;
+
+
+    @Before
+    public void init(){
+        resetEjb.resetDatabase();
+    }
+
+    @Test
+    public void testNoCategory(){
+
+        List<Category> list = ctgEjb.getAllCategories(false);
+        assertEquals(0, list.size());
+    }
 
     @Test
     public void testCreateCategory(){
 
         String name = "testCreateCategory";
 
-        Long id = ejb.createCategory(name);
+        Long id = ctgEjb.createCategory(name);
         assertNotNull(id);
     }
 
@@ -44,9 +60,9 @@ public class CategoryEjbTest {
 
         String name = "testGetCategory";
 
-        long id = ejb.createCategory(name);
+        long id = ctgEjb.createCategory(name);
 
-        Category ctg = ejb.getCategory(id, false);
+        Category ctg = ctgEjb.getCategory(id, false);
 
         assertEquals(name, ctg.getName());
     }
@@ -56,12 +72,12 @@ public class CategoryEjbTest {
     public void testCreateSubCategory(){
 
         String ctgName = "ctg_testCreateSubCategory";
-        long ctgId = ejb.createCategory(ctgName);
+        long ctgId = ctgEjb.createCategory(ctgName);
 
         String subName = "sub_testCreateSubCategory";
-        long subId = ejb.createSubCategory(ctgId, subName);
+        long subId = ctgEjb.createSubCategory(ctgId, subName);
 
-        SubCategory sub = ejb.getSubCategory(subId);
+        SubCategory sub = ctgEjb.getSubCategory(subId);
         assertEquals((Long) ctgId, sub.getParent().getId());
         assertEquals(subName, sub.getName());
     }
@@ -69,16 +85,16 @@ public class CategoryEjbTest {
     @Test
     public void testGetAllCategories(){
 
-        long a = ejb.createCategory("a");
-        long b = ejb.createCategory("b");
-        long c = ejb.createCategory("c");
+        long a = ctgEjb.createCategory("a");
+        long b = ctgEjb.createCategory("b");
+        long c = ctgEjb.createCategory("c");
 
-        ejb.createSubCategory(a, "1");
-        ejb.createSubCategory(b, "2");
-        ejb.createSubCategory(c, "3");
+        ctgEjb.createSubCategory(a, "1");
+        ctgEjb.createSubCategory(b, "2");
+        ctgEjb.createSubCategory(c, "3");
 
 
-        List<Category> categories = ejb.getAllCategories(false);
+        List<Category> categories = ctgEjb.getAllCategories(false);
         assertEquals(3, categories.size());
 
         Category first = categories.get(0);
@@ -90,10 +106,25 @@ public class CategoryEjbTest {
             //expected
         }
 
-        categories = ejb.getAllCategories(true);
+        categories = ctgEjb.getAllCategories(true);
 
         first = categories.get(0);
 
         assertEquals(1, first.getSubCategories().size());
+    }
+
+    @Test
+    public void testCreateTwice(){
+
+        String ctg = "Computer Science";
+
+        ctgEjb.createCategory(ctg);
+
+        try {
+            ctgEjb.createCategory(ctg);
+            fail();
+        }catch (Exception e){
+            //expected
+        }
     }
 }

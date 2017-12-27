@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ServiceTestBase {
 
     @Autowired
-    private DeleteService deleteService;
+    private ResetService deleteService;
 
 
     @Before
     public void cleanDatabase(){
-        deleteService.deleteAll();
+        deleteService.resetDatabase();
     }
 }

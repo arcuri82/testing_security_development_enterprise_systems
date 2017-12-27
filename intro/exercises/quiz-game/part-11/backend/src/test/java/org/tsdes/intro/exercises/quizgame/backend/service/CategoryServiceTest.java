@@ -26,6 +26,7 @@ public class CategoryServiceTest extends ServiceTestBase{
     @Autowired
     private CategoryService categoryService;
 
+
     @Test
     public void testNoCategory(){
 
@@ -36,35 +37,68 @@ public class CategoryServiceTest extends ServiceTestBase{
     @Test
     public void testCreateCategory(){
 
-        String name = "Computer Science";
+        String name = "testCreateCategory";
+
+        Long id = categoryService.createCategory(name);
+        assertNotNull(id);
+    }
+
+    @Test
+    public void testGetCategory(){
+
+        String name = "testGetCategory";
 
         long id = categoryService.createCategory(name);
 
-        Category c = categoryService.getCategory(id, false);
+        Category ctg = categoryService.getCategory(id, false);
 
-        assertNotNull(c);
-        assertEquals(1, categoryService.getAllCategories(false).size());
-        assertEquals(name, c.getName());
+        assertEquals(name, ctg.getName());
     }
 
 
     @Test
     public void testCreateSubCategory(){
 
-        String ctg = "Computer Science";
-        long ctgId = categoryService.createCategory(ctg);
+        String ctgName = "ctg_testCreateSubCategory";
+        long ctgId = categoryService.createCategory(ctgName);
 
-        String subCtg = "Java Enterprise Edition";
-        long subCtgId = categoryService.createSubCategory(ctgId, subCtg);
+        String subName = "sub_testCreateSubCategory";
+        long subId = categoryService.createSubCategory(ctgId, subName);
 
-        SubCategory s = categoryService.getSubCategory(subCtgId);
-        assertNotNull(s);
-        assertEquals(subCtg, s.getName());
+        SubCategory sub = categoryService.getSubCategory(subId);
+        assertEquals((Long) ctgId, sub.getParent().getId());
+        assertEquals(subName, sub.getName());
+    }
 
-        Category c = categoryService.getCategory(ctgId, true);
-        assertNotNull(c);
-        assertEquals(1, c.getSubCategories().size());
-        assertEquals(subCtg, c.getSubCategories().get(0).getName());
+    @Test
+    public void testGetAllCategories(){
+
+        long a = categoryService.createCategory("a");
+        long b = categoryService.createCategory("b");
+        long c = categoryService.createCategory("c");
+
+        categoryService.createSubCategory(a, "1");
+        categoryService.createSubCategory(b, "2");
+        categoryService.createSubCategory(c, "3");
+
+
+        List<Category> categories = categoryService.getAllCategories(false);
+        assertEquals(3, categories.size());
+
+        Category first = categories.get(0);
+
+        try {
+            first.getSubCategories().size();
+            fail();
+        } catch (Exception e){
+            //expected
+        }
+
+        categories = categoryService.getAllCategories(true);
+
+        first = categories.get(0);
+
+        assertEquals(1, first.getSubCategories().size());
     }
 
     @Test

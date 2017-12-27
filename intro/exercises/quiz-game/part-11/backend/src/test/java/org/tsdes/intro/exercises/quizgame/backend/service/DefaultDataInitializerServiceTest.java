@@ -21,7 +21,8 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 //Important, as referring to state given by Singleton that
 //could be modified by previous tests, as they share the same
 //SpringBoot application context (ie SpringBoot is started only
-//once for all tests)
+//once for all tests).
+//Also note that this class does NOT extend ServiceTestBase
 @DirtiesContext(classMode = BEFORE_CLASS)
 public class DefaultDataInitializerServiceTest {
 

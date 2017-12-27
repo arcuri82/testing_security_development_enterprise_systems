@@ -2,21 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.intro.jee.jsf</groupId>
-    <artifactId>jsf</artifactId>
+
+    <groupId>org.tsdes.intro.spring.selenium</groupId>
+    <artifactId>selenium</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.jee</groupId>
-        <artifactId>intro-jee</artifactId>
+        <groupId>org.tsdes.intro.spring</groupId>
+        <artifactId>intro-spring</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
-        <module>base</module>
-        <module>examples</module>
+        <module>crawler</module>
     </modules>
-
 
 
 </project>

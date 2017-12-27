@@ -107,6 +107,21 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
+* **Lesson 07**: JSF, Bash and Docker
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * **intro/jee/**
+ 
+
+  Exercises: [quiz-game-part-07](exercises/quiz-game/quiz-game-part-07.md)  
+
+
+<br />
+
+
 TODO remaining lessons
 
 <!---

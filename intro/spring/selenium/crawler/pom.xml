@@ -4,12 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>crawler</artifactId>
 
-    <!-- Note that here we want to build a WAR and not a JAR file -->
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.jee.jsf</groupId>
-        <artifactId>jsf</artifactId>
+        <groupId>org.tsdes.intro.spring.selenium</groupId>
+        <artifactId>selenium</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

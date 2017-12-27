@@ -9,7 +9,7 @@ In the `pom.xml` file, add the following dependency:
 
 
 Create a `Stateless` EJB called `CategoryEjb`.
-Such class should be in a different folder from where you 
+Such class should be in a different folder/package from where you 
 chose to have your `@Entity` classes.
 
 Inject a `EntityManager` into the EJB, and then write the following methods:

@@ -55,7 +55,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
-* **Lesson 04**: EJB, Dependency Injection, Proxy Classes
+* **Lesson 04**: EJB, Dependency Injection and Proxy Classes
   
   Slides: TODO
   
@@ -67,6 +67,41 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **intro/jee/ejb/framework/proxy**
 
   Exercises: [quiz-game-part-04](exercises/quiz-game/quiz-game-part-04.md)  
+
+
+<br />
+
+
+* **Lesson 05**: EJB, Arquillian and Multithreading
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * **intro/jee/ejb/singleton**
+  * **intro/jee/ejb/arquillian**
+  * **intro/jee/ejb/multithreading**
+  * **intro/jee/ejb/stateful**
+  * **intro/jee/ejb/callback**
+
+  Exercises: [quiz-game-part-05](exercises/quiz-game/quiz-game-part-05.md)  
+
+
+<br />
+
+* **Lesson 06**: EJB and JTA
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * **intro/jee/ejb/async**
+  * **intro/jee/ejb/time**
+  * **intro/jee/ejb/lazy**
+  * **intro/jee/ejb/transactions**
+ 
+
+  Exercises: [quiz-game-part-06](exercises/quiz-game/quiz-game-part-06.md)  
 
 
 <br />

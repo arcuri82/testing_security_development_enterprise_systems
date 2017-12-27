@@ -1,23 +1,18 @@
-package org.tsdes.intro.exercises.quizgame.backend.service;
+package org.tsdes.intro.exercises.quizgame.ejb;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.tsdes.intro.exercises.quizgame.backend.entity.Quiz;
-import org.tsdes.intro.exercises.quizgame.backend.entity.SubCategory;
+import org.tsdes.intro.exercises.quizgame.entity.Quiz;
+import org.tsdes.intro.exercises.quizgame.entity.SubCategory;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.*;
 
-/**
- * Created by arcuri82 on 14-Dec-17.
- */
-@Service
-@Transactional
-public class QuizService {
+@Stateless
+public class QuizEjb {
 
-    @Autowired
+    @PersistenceContext
     private EntityManager em;
 
 
@@ -88,65 +83,12 @@ public class QuizService {
         return quiz.getId();
     }
 
-    public Void updateQuiz(
-            long quizId,
-            long subCategoryId,
-            String question,
-            String firstAnswer,
-            String secondAnswer,
-            String thirdAnswer,
-            String fourthAnswer,
-            int indexOfCorrectAnswer
-    ){
-
-        Quiz quiz = getQuiz(quizId);
-        if(quiz == null){
-            throw new IllegalArgumentException("Quiz not found");
-        }
-
-        SubCategory subCategory = em.find(SubCategory.class, subCategoryId);
-        if(subCategory == null){
-            throw new IllegalArgumentException("SubCategory "+subCategoryId+" does not exist");
-        }
-
-        quiz.setSubCategory(subCategory);
-        quiz.setQuestion(question);
-        quiz.setFirstAnswer(firstAnswer);
-        quiz.setSecondAnswer(secondAnswer);
-        quiz.setThirdAnswer(thirdAnswer);
-        quiz.setFourthAnswer(fourthAnswer);
-        quiz.setIndexOfCorrectAnswer(indexOfCorrectAnswer);
-
-        return null;
-    }
-
-
     public List<Quiz> getQuizzes(){
         TypedQuery<Quiz> query = em.createQuery("select q from Quiz q", Quiz.class);
         return query.getResultList();
     }
 
-    public List<Quiz> getQuizzes(long categoryId){
-        TypedQuery<Quiz> query = em.createQuery(
-                "select q from Quiz q where q.subCategory.parent.id=?1", Quiz.class);
-        query.setParameter(1, categoryId);
-        return query.getResultList();
-    }
-
-
     public Quiz getQuiz(long id){
         return em.find(Quiz.class, id);
-    }
-
-    public boolean isPresent(long id){
-        return getQuiz(id) != null;
-    }
-
-    public Void delete(long id){
-        Quiz quiz = getQuiz(id);
-        if(quiz != null){
-            em.remove(quiz);
-        }
-        return null;
     }
 }

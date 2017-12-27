@@ -4,10 +4,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.tsdes.intro.exercises.quizgame.backend.StubApplication;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFORE_CLASS;
 
 /**
  * Created by arcuri82 on 15-Dec-17.
@@ -15,6 +18,11 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StubApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//Important, as referring to state given by Singleton that
+//could be modified by previous tests, as they share the same
+//SpringBoot application context (ie SpringBoot is started only
+//once for all tests)
+@DirtiesContext(classMode = BEFORE_CLASS)
 public class DefaultDataInitializerServiceTest {
 
     @Autowired

@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-  <display-name>Set of JSF examples</display-name>
+  <display-name>Quiz Game</display-name>
 
   <!-- default page, recall that, if none is defined, then index.html would be the default anyway... -->
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
 
   <!--
@@ -38,25 +38,11 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
 
-  <!--
-    Note: the following mapping would be important.
-    If I client asks for a XHTML, it should be processed by
-    JSF, and not given "raw".
-    However, here, we give it unprocessed, but just for
-    didactic reasons.
-  -->
-  <!--<servlet-mapping>-->
-    <!--<servlet-name>Faces Servlet</servlet-name>-->
-    <!--<url-pattern>*.xhtml</url-pattern>-->
-  <!--</servlet-mapping>-->
-
-
-  <!-- This enables better debugging / error messages -->
-  <context-param>
-    <param-name>javax.faces.PROJECT_STAGE</param-name>
-    <param-value>Development</param-value>
-  </context-param>
 
 
   <!--

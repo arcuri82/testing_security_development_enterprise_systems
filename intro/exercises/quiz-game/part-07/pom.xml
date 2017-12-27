@@ -2,13 +2,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.intro.exercises.quizgame.part05</groupId>
-    <artifactId>quiz-game-part05</artifactId>
-    <packaging>jar</packaging>
+    <groupId>org.tsdes.intro.exercises.quizgame.part07</groupId>
+    <artifactId>quiz-game-part07</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
 
+    <parent>
+        <groupId>org.tsdes.intro.exercises.quizgame</groupId>
+        <artifactId>quiz-game-root</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+
     <dependencies>
+
+        <dependency>
+            <groupId>org.tsdes.intro.exercises.quizgame.part06</groupId>
+            <artifactId>quiz-game-part06</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
@@ -68,6 +82,7 @@
 
 
     <build>
+        <finalName>quizgame</finalName>
 
         <pluginManagement>
             <plugins>

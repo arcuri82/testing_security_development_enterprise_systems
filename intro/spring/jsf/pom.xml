@@ -52,15 +52,5 @@
     </dependencies>
 
 
-    <build>
-        <plugins>
-            <plugin>
-                <!-- Need to create self-executable uber/fat jars -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-
-    </build>
 
 </project>

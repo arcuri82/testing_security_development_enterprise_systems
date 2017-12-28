@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Example using JSTL (JSP Standard Tag Library)
+    </ui:define>
+
+    <ui:define name="content">
+
+        <!-- Set a variable "max" that is going to be re-used in few places in this file-->
+        <c:set var="max" value="10"></c:set>
+
+        <!--
+            what is inside this "c:if" will be part of the final HTML only if the value of
+            "test" is true. Otherwise, the JSF Servlet will skip it.
+        -->
+        <c:if test="#{commentController.getMostRecentComments(max).size() == 0}">
+            <h3>No comment has been posted yet... be the first one!</h3>
+        </c:if>
+
+        <!-- A form with a text ared to create a new comment -->
+        <h:form id="createForm">
+            <h:inputTextarea value="#{commentController.formText}" id="createText"/>
+            <h:commandButton value="Create" action="#{commentController.createNewComment}" id="createButton"/>
+        </h:form>
+
+        <!--
+            Note: we can still use regular HTML tags here, mixed with the specific JSF ones
+        -->
+        <hr/>
+
+        <!--
+            You can think of "c:choose" as it was an if statement with a block (c:when) and
+            an else statement (c:otherwise)
+        -->
+        <c:choose>
+            <c:when test="#{commentController.getMostRecentComments(max).size() == 0}">
+                <h:outputText value="No events yet"/>
+            </c:when>
+
+            <c:otherwise>
+                <!--
+                    We are creating a table for each comment. However, here we only need to
+                    define the columns, as JSF will automatically generate a row for each
+                    comment.
+                -->
+                <h:dataTable value="#{commentController.getMostRecentComments(max)}"
+                             var="comment" border="1" id="commentTable">
+                    <!--
+                        Practically, here JSF is getting the List<Comment> from
+                        getMostRecentComments, and iterates like in a for-loop, where
+                        at each iteration the variable (var) containing the current
+                        comment is called "comment", ie var="comment"
+                    -->
+                    <h:column>
+                        <f:facet name="header">Created</f:facet> <!-- Column name -->
+                        <h:outputText value="#{comment.date}"> <!-- actual value -->
+                            <!-- here we tell JSF how a java.util.Date object should be formatted -->
+                            <f:convertDateTime pattern="dd/MM/yyyy, HH:mm:ss" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Text</f:facet>
+                        <h:outputText value="#{comment.text}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <!--
+                            When this button is clicked, the form will be sent in a POST HTTP request,
+                            where JSF is told to call the method deleteComment on the id of the comment
+                            visualized in this row.
+
+                            Note: actions should be short, ie just one single method call with parameters.
+                            If you need more complexity, the code should be in the Beans, not here where
+                            we define the user-interface.
+                          -->
+                        <h:form id="deleteForm">
+                            <h:commandButton value="Delete" action="#{commentController.deleteComment(comment.id)}"
+                                             id="deleteButton"/>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </c:otherwise>
+        </c:choose>
+    </ui:define>
+
+</ui:composition>
+
+</html>

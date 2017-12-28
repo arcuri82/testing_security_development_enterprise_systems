@@ -46,7 +46,7 @@
 
             <!-- Our own modules -->
             <dependency>
-                <groupId>org.tsdes.misc.testing</groupId>
+                <groupId>org.tsdes.misc</groupId>
                 <artifactId>test-utils</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>

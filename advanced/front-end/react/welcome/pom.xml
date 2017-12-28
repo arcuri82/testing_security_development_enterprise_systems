@@ -11,50 +11,60 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <!--
+        As this can take a long while, we do not do it at each build,
+        but only if the given profile is activated with:
 
-    <build>
-        <plugins>
-            <!--
-                Build the static files for web front-end using NPM.
-                See root pom file for configurations.
-              -->
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-            </plugin>
-            <!--
-                Make sure that, when we run "mvn clean", all the
-                files generated/downloaded by NPM are deleted
-            -->
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.0.0</version>
-                <!--
-                    Even if files are under Git, best to be careful
-                    about deleting files.
-                    So, the deletion settings are done here, and not
-                    in the root pom file, as specific to this project,
-                    and "clean" plugin is on by default on all modules,
-                    ie we do not want to override general settings
-                  -->
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>build</directory>
-                        </fileset>
-                        <fileset>
-                            <directory>coverage</directory>
-                        </fileset>
-                        <fileset>
-                            <directory>node</directory>
-                        </fileset>
-                        <fileset>
-                            <directory>node_modules</directory>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+        -P npm
+      -->
+    <profiles>
+        <profile>
+            <id>npm</id>
+            <build>
+                <plugins>
+                    <!--
+                       Build the static files for web front-end using NPM.
+                       See root pom file for configurations.
+                     -->
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                    </plugin>
+                    <!--
+                         Make sure that, when we run "mvn clean", all the
+                        files generated/downloaded by NPM are deleted
+                      -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <!--
+                            Even if files are under Git, best to be careful
+                            about deleting files.
+                            So, the deletion settings are done here, and not
+                            in the root pom file, as specific to this project,
+                            and "clean" plugin is on by default on all modules,
+                            ie we do not want to override general settings
+                          -->
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>build</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>coverage</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>node</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>node_modules</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

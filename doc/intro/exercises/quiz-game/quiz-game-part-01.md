@@ -2,7 +2,7 @@
 
 Create a new Maven project for a Quiz Game.
 Lesson after lesson, we will add new features to it.
-We start from modelling its data.
+We start from setting up Maven and modelling the application's data.
 
 The Maven project should have the following dependencies:
 
@@ -10,6 +10,10 @@ The Maven project should have the following dependencies:
 * `org.hibernate:hibernate-core`
 * `junit:junit`
 * `com.h2database:h2`
+
+Note: the dependencies above are specified with the format `groupId:artifactId`. 
+When adding a dependency, not only you need to also specify a `version`,
+but also the appropriate `scope`.
 
 Configure the `maven-compiler-plugin` to use a specific version
 of Java (e.g., Java 1.8).

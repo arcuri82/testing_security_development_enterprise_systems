@@ -28,7 +28,6 @@
 
     <properties>
         <version.kotlin>1.1.51</version.kotlin>
-        <version.springboot>1.5.4.RELEASE</version.springboot>
         <version.springcloud>Dalston.SR3</version.springcloud>
         <version.springfox>2.6.1</version.springfox>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
@@ -69,17 +68,6 @@
                 <version>${version.kotlin}</version>
             </dependency>
             <dependency>
-                <!--
-                    https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-parent/pom.xml
-                    https://github.com/spring-projects/spring-boot/blob/master/spring-boot-dependencies/pom.xml
-                  -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${version.springboot}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${version.springfox}</version>
@@ -116,6 +104,40 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- Imports of JS libraries -->
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>webjars-locator</artifactId>
+                <version>0.32-1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>sockjs-client</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>stomp-websocket</artifactId>
+                <version>2.3.3-1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>jquery</artifactId>
+                <version>3.2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.netflix.hystrix</groupId>
+                <artifactId>hystrix-core</artifactId>
+                <version>1.5.12</version>
+            </dependency>
+            <dependency>
+                <groupId>io.reactivex</groupId>
+                <artifactId>rxjava</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -270,6 +292,68 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin>
+
+                <!--
+                 Used to call NPM and other JS tools directly from Maven.
+               -->
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>1.6</version>
+                    <executions>
+                        <!--
+                            Make sure that NPM/Node get installed
+                        -->
+                        <execution>
+                            <id>install node and npm</id>
+                            <goals>
+                                <goal>install-node-and-npm</goal>
+                            </goals>
+                        </execution>
+                        <!--
+                            Make sure to call following:
+                            npm install
+                            npm run build
+                        -->
+                        <execution>
+                            <id>npm install</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <configuration>
+                                <arguments>install</arguments>
+                            </configuration>
+                            <phase>generate-resources</phase>
+                        </execution>
+                        <execution>
+                            <id>npm run build</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <configuration>
+                                <arguments>run build</arguments>
+                            </configuration>
+                            <phase>generate-resources</phase>
+                        </execution>
+                        <!--
+                            when running "mvn test", make sure to
+                            also call "npm test"
+                        -->
+                        <execution>
+                            <id>npm test</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <configuration>
+                                <arguments>test</arguments>
+                            </configuration>
+                            <phase>test</phase>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <nodeVersion>v6.9.5</nodeVersion>
+                    </configuration>
                 </plugin>
 
             </plugins>

@@ -23,7 +23,10 @@
         <wildfly.version>10.1.0.Final</wildfly.version>
         <jbossTarget>${basedir}/target/downloaded_Wildfly</jbossTarget>
         <jbossHome>${jbossTarget}/wildfly-${wildfly.version}</jbossHome>
-        <shiro.version>1.4.0</shiro.version>
+        <version.hibernate.jpa>1.0.0.Final</version.hibernate.jpa>
+        <version.hibernate.core>5.2.9.Final</version.hibernate.core>
+        <version.hibernate.validator>5.3.4.Final</version.hibernate.validator>
+        <version.javax.el>2.2.4</version.javax.el>
     </properties>
 
 
@@ -130,16 +133,24 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- Security -->
+            <!-- these are needed when using Hibernate in SE instead of JEE -->
             <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-core</artifactId>
-                <version>${shiro.version}</version>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${version.javax.el}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-web</artifactId>
-                <version>${shiro.version}</version>
+                <!-- Note: this has the other as dependency -->
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${version.javax.el}</version>
+            </dependency>
+
+            <!-- For EclipseLink -->
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.jpa</artifactId>
+                <version>2.6.4</version>
             </dependency>
 
 
@@ -177,39 +188,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-
-                <!--
-                  Maven phases:
-                  https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
-
-                  Main ones:
-
-                  *clean*
-                  compile
-                  process-test-classes
-                  test
-                  package
-                  pre-integration-test
-                  integration-test
-                  post-integration-test
-                  verify
-                  install
-                  deploy
-
-                  apart from *clean*, when executing one of those phases (eg "mvn test"), all previous
-                  phases are executed as well.
-
-                  Note:
-                  process-test-classes: this is when we download/unpack Wildfly
-                  test: unit tests (*Test.java) are executed
-                  package: creation of jar/war files
-                  integration-test: execute all *IT.java tests
-                  install: copy the jar/war files into your ~/.m2 folder (like any other dependency)
-
-                  clean: delete everything in the "target" folders
-              -->
-
 
             </plugins>
         </pluginManagement>

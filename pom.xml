@@ -14,6 +14,30 @@
         <module>advanced</module>
     </modules>
 
+    <!--
+        Maven phases:
+        https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
+
+        Main ones:
+
+        *clean*
+        compile
+        process-test-classes
+        test
+        package
+        pre-integration-test
+        integration-test
+        post-integration-test
+        verify
+        install
+        deploy
+
+        apart from *clean*, when executing one of those phases (eg "mvn test"), all previous
+        phases are executed as well.
+
+        clean: delete everything in the "target" folders
+    -->
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,11 +45,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <fs>${file.separator}</fs>
         <version.java>1.8</version.java>
+        <version.springboot>1.5.4.RELEASE</version.springboot>
         <version.jacoco>0.7.9</version.jacoco>
-        <version.javax.el>2.2.4</version.javax.el>
-        <version.hibernate.jpa>1.0.0.Final</version.hibernate.jpa>
-        <version.hibernate.core>5.2.9.Final</version.hibernate.core>
-        <version.hibernate.validator>5.3.4.Final</version.hibernate.validator>
         <version.h2>1.4.194</version.h2>
         <version.postgres>42.1.4</version.postgres>
         <version.resteasy>3.1.3.Final</version.resteasy>
@@ -52,22 +73,17 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- JPA / Hibernate / Database -->
+            <!-- SpringBoot BOM -->
             <dependency>
-                <groupId>org.hibernate.javax.persistence</groupId>
-                <artifactId>hibernate-jpa-2.1-api</artifactId>
-                <version>${version.hibernate.jpa}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${version.springboot}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>${version.hibernate.core}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>${version.hibernate.validator}</version>
-            </dependency>
+
+
+            <!-- Database -->
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
@@ -82,49 +98,6 @@
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq</artifactId>
                 <version>3.10.2</version>
-            </dependency>
-
-            <!-- these are needed when using Hibernate in SE instead of JEE -->
-            <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>javax.el-api</artifactId>
-                <version>${version.javax.el}</version>
-            </dependency>
-            <dependency>
-                <!-- Note: this has the other as dependency -->
-                <groupId>org.glassfish.web</groupId>
-                <artifactId>javax.el</artifactId>
-                <version>${version.javax.el}</version>
-            </dependency>
-
-            <!-- For EclipseLink -->
-            <dependency>
-                <groupId>org.eclipse.persistence</groupId>
-                <artifactId>org.eclipse.persistence.jpa</artifactId>
-                <version>2.6.4</version>
-            </dependency>
-
-
-            <!-- Imports of JS libraries -->
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>webjars-locator</artifactId>
-                <version>0.32-1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>sockjs-client</artifactId>
-                <version>1.1.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>stomp-websocket</artifactId>
-                <version>2.3.3-1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>jquery</artifactId>
-                <version>3.2.1</version>
             </dependency>
 
 
@@ -247,16 +220,7 @@
                 <artifactId>asm</artifactId>
                 <version>5.1</version>
             </dependency>
-            <dependency>
-                <groupId>com.netflix.hystrix</groupId>
-                <artifactId>hystrix-core</artifactId>
-                <version>1.5.12</version>
-            </dependency>
-            <dependency>
-                <groupId>io.reactivex</groupId>
-                <artifactId>rxjava</artifactId>
-                <version>1.2.2</version>
-            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
@@ -316,6 +280,20 @@
                     </executions>
                 </plugin>
 
+                <plugin>
+                    <!-- Need to create self-executable uber/fat jars for SpringBoot -->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${version.springboot}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
 
                 <!--
                     Avoid failing War generation if web.xml is missing, as we ll not
@@ -370,68 +348,6 @@
                     </executions>
                 </plugin>
 
-
-                <!--
-                    Used to call NPM and other JS tools directly from Maven.
-                  -->
-                <plugin>
-                    <groupId>com.github.eirslett</groupId>
-                    <artifactId>frontend-maven-plugin</artifactId>
-                    <version>1.6</version>
-                    <executions>
-                        <!--
-                            Make sure that NPM/Node get installed
-                        -->
-                        <execution>
-                            <id>install node and npm</id>
-                            <goals>
-                                <goal>install-node-and-npm</goal>
-                            </goals>
-                        </execution>
-                        <!--
-                            Make sure to call following:
-                            npm install
-                            npm run build
-                        -->
-                        <execution>
-                            <id>npm install</id>
-                            <goals>
-                                <goal>npm</goal>
-                            </goals>
-                            <configuration>
-                                <arguments>install</arguments>
-                            </configuration>
-                            <phase>generate-resources</phase>
-                        </execution>
-                        <execution>
-                            <id>npm run build</id>
-                            <goals>
-                                <goal>npm</goal>
-                            </goals>
-                            <configuration>
-                                <arguments>run build</arguments>
-                            </configuration>
-                            <phase>generate-resources</phase>
-                        </execution>
-                        <!--
-                            when running "mvn test", make sure to
-                            also call "npm test"
-                        -->
-                        <execution>
-                            <id>npm test</id>
-                            <goals>
-                                <goal>npm</goal>
-                            </goals>
-                            <configuration>
-                                <arguments>test</arguments>
-                            </configuration>
-                            <phase>test</phase>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <nodeVersion>v6.9.5</nodeVersion>
-                    </configuration>
-                </plugin>
 
             </plugins>
         </pluginManagement>

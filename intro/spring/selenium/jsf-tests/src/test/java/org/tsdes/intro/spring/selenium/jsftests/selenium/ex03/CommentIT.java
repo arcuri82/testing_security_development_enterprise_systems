@@ -1,8 +1,8 @@
-package org.tsdes.intro.jee.jsf.examples.ex03;
+package org.tsdes.intro.spring.selenium.jsftests.selenium.ex03;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.tsdes.intro.jee.jsf.examples.test.SeleniumTestBase;
+import org.tsdes.intro.spring.selenium.jsftests.selenium.SeleniumTestBase;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

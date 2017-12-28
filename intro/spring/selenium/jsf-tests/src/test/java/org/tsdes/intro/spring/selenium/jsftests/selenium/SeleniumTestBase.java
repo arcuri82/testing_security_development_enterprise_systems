@@ -1,4 +1,4 @@
-package org.tsdes.intro.jee.jsf.examples.test;
+package org.tsdes.intro.spring.selenium.jsftests.selenium;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeTrue;
 
 public abstract class SeleniumTestBase {
 
@@ -89,7 +88,7 @@ public abstract class SeleniumTestBase {
             we need to wait till it is ready.
          */
         for(int i=0; i<30; i++){
-            boolean ready = JBossUtil.isJBossUpAndRunning();
+            boolean ready = false; //FIXME JBossUtil.isJBossUpAndRunning();
             if(!ready){
                 Thread.sleep(1_000); //check every second
                 continue;
@@ -113,6 +112,7 @@ public abstract class SeleniumTestBase {
     public void checkIfWildflyIsRunning(){
 
         //if for any reason WildFly is not running any more, do not fail the tests
-        assumeTrue("Wildfly is not up and running", JBossUtil.isJBossUpAndRunning());
+        //assumeTrue("Wildfly is not up and running", JBossUtil.isJBossUpAndRunning());
+        //FIXME
     }
 }

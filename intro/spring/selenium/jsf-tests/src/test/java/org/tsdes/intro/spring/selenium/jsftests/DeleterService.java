@@ -1,20 +1,23 @@
-package org.tsdes.intro.jee.jsf.examples.test;
+package org.tsdes.intro.spring.selenium.jsftests;
 
 
-import javax.ejb.Stateless;
+import org.springframework.stereotype.Service;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 /*
-    Utility EJB to use ONLY in an Arquillian deployment to clean up the database.
-    Note: you want this EJB under src/test/java, and NEVER under src/main/java.
+    Utility service used to clean up the database.
+    Note: you want this service under src/test/java, and NEVER under src/main/java.
     Plus, should really make sure that you are not running tests against a live,
     production database...
  */
-@Stateless
-public class DeleterEJB {
+@Service
+@Transactional
+public class DeleterService {
 
     @PersistenceContext
     private EntityManager em;

@@ -1,5 +1,6 @@
-package org.tsdes.intro.jee.jsf.examples.ex01;
+package org.tsdes.intro.spring.selenium.jsftests.service;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -37,9 +38,9 @@ public class CounterBeanTest {
         CounterBean cb = new CounterBean();
         int x = cb.getCounter();
         cb.increaseCounter();
-        assertEquals(x+1, cb.getCounter());
+        Assert.assertEquals(x+1, cb.getCounter());
         cb.decreaseCounter();
-        assertEquals(x, cb.getCounter());
+        Assert.assertEquals(x, cb.getCounter());
     }
 
     @Test
@@ -51,6 +52,6 @@ public class CounterBeanTest {
         cb.increaseCounter();  // 2
         cb.decreaseCounter(); // 1
         cb.increaseCounter();  // 2
-        assertEquals(2, cb.getCounter());
+        Assert.assertEquals(2, cb.getCounter());
     }
 }

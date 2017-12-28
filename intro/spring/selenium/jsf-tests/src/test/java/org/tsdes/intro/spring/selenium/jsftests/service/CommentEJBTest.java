@@ -1,59 +1,47 @@
-package org.tsdes.intro.jee.jsf.examples.ex03;
+package org.tsdes.intro.spring.selenium.jsftests.service;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.tsdes.intro.jee.jsf.examples.test.DeleterEJB;
-import org.tsdes.intro.jee.jsf.examples.test.DeleterEJB;
-
-import javax.ejb.EJB;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.tsdes.intro.spring.jsf.ex03.Comment;
+import org.tsdes.intro.spring.jsf.ex03.CommentService;
+import org.tsdes.intro.spring.selenium.jsftests.DeleterService;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-@RunWith(Arquillian.class)
+
 public class CommentEJBTest {
 
-    @Deployment
-    public static JavaArchive createDeployment() {
+    @Autowired
+    private CommentService commentService;
 
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClasses(CommentEJB.class, Comment.class, DeleterEJB.class)
-                .addAsResource("META-INF/persistence.xml");
-    }
-
-    @EJB
-    private CommentEJB ejb;
-    @EJB
-    private DeleterEJB deleterEJB;
+    @Autowired
+    private DeleterService deleterService;
 
     @Before
     @After
     public void clearDatabase(){
-        deleterEJB.deleteEntities(Comment.class);
+        deleterService.deleteEntities(Comment.class);
     }
 
     @Test
     public void testCreate(){
 
-        assertEquals(0 , ejb.getMostRecentComments(10).size());
+        Assert.assertEquals(0 , commentService.getMostRecentComments(10).size());
 
-        ejb.createNewComment("Hello");
+        commentService.createNewComment("Hello");
 
-        List<Comment> comments = ejb.getMostRecentComments(10);
+        List<Comment> comments = commentService.getMostRecentComments(10);
         assertEquals(1 , comments.size());
         assertTrue(comments.stream().map(Comment::getText).anyMatch(s -> "Hello".equals(s)));
 
-        ejb.createNewComment("World");
+        commentService.createNewComment("World");
 
-        comments = ejb.getMostRecentComments(10);
+        comments = commentService.getMostRecentComments(10);
         assertEquals(2 , comments.size());
         assertTrue(comments.stream().map(Comment::getText).anyMatch(s -> "Hello".equals(s)));
         assertTrue(comments.stream().map(Comment::getText).anyMatch(s -> "World".equals(s)));
@@ -71,11 +59,11 @@ public class CommentEJBTest {
     @Test
     public void testReturnDatesInOrder(){
 
-        ejb.createNewComment("a");
-        ejb.createNewComment("b");
-        ejb.createNewComment("c");
+        commentService.createNewComment("a");
+        commentService.createNewComment("b");
+        commentService.createNewComment("c");
 
-        List<Comment> comments = ejb.getMostRecentComments(10);
+        List<Comment> comments = commentService.getMostRecentComments(10);
         assertEquals(3 , comments.size());
 
         /*
@@ -100,18 +88,18 @@ public class CommentEJBTest {
     @Test
     public void testReturnValuesInOrder(){
 
-        ejb.createNewComment("a");
-        ejb.createNewComment("b");
-        ejb.createNewComment("c");
-        ejb.createNewComment("d");
+        commentService.createNewComment("a");
+        commentService.createNewComment("b");
+        commentService.createNewComment("c");
+        commentService.createNewComment("d");
 
-        List<Comment> comments = ejb.getMostRecentComments(10);
+        List<Comment> comments = commentService.getMostRecentComments(10);
         assertEquals(4 , comments.size());
 
-        assertEquals("d", comments.get(0).getText());
-        assertEquals("c", comments.get(1).getText());
-        assertEquals("b", comments.get(2).getText());
-        assertEquals("a", comments.get(3).getText());
+        Assert.assertEquals("d", comments.get(0).getText());
+        Assert.assertEquals("c", comments.get(1).getText());
+        Assert.assertEquals("b", comments.get(2).getText());
+        Assert.assertEquals("a", comments.get(3).getText());
     }
 
     @Test
@@ -132,27 +120,27 @@ public class CommentEJBTest {
             the same idea of trying to have "short tests to the point" would still apply)
          */
 
-        assertEquals(0 , ejb.getMostRecentComments(10).size());
+        Assert.assertEquals(0 , commentService.getMostRecentComments(10).size());
 
-        ejb.createNewComment("a");
-        assertEquals(1 , ejb.getMostRecentComments(10).size());
+        commentService.createNewComment("a");
+        Assert.assertEquals(1 , commentService.getMostRecentComments(10).size());
 
-        ejb.createNewComment("b");
-        assertEquals(2 , ejb.getMostRecentComments(10).size());
+        commentService.createNewComment("b");
+        Assert.assertEquals(2 , commentService.getMostRecentComments(10).size());
 
-        ejb.createNewComment("c");
-        assertEquals(3 , ejb.getMostRecentComments(10).size());
+        commentService.createNewComment("c");
+        Assert.assertEquals(3 , commentService.getMostRecentComments(10).size());
 
-        ejb.createNewComment("d");
-        assertEquals(4 , ejb.getMostRecentComments(10).size());
+        commentService.createNewComment("d");
+        Assert.assertEquals(4 , commentService.getMostRecentComments(10).size());
 
 
-        List<Comment> comments = ejb.getMostRecentComments(10);
+        List<Comment> comments = commentService.getMostRecentComments(10);
 
-        assertEquals("d", comments.get(0).getText());
-        assertEquals("c", comments.get(1).getText());
-        assertEquals("b", comments.get(2).getText());
-        assertEquals("a", comments.get(3).getText());
+        Assert.assertEquals("d", comments.get(0).getText());
+        Assert.assertEquals("c", comments.get(1).getText());
+        Assert.assertEquals("b", comments.get(2).getText());
+        Assert.assertEquals("a", comments.get(3).getText());
 
         assertTrue(comments.get(0).getDate().compareTo(comments.get(1).getDate()) > 0);
         assertTrue(comments.get(1).getDate().compareTo(comments.get(2).getDate()) > 0);
@@ -164,12 +152,12 @@ public class CommentEJBTest {
     public void testCreateFail(){
 
         try{
-            ejb.createNewComment("");
+            commentService.createNewComment("");
             fail();
         } catch (Exception e){}
 
         try{
-            ejb.createNewComment(new String(new char[1000]));
+            commentService.createNewComment(new String(new char[1000]));
             fail();
         } catch (Exception e){}
 
@@ -178,13 +166,13 @@ public class CommentEJBTest {
     @Test
     public void testReturnLimits(){
 
-        ejb.createNewComment("a");
-        ejb.createNewComment("b");
-        ejb.createNewComment("c");
+        commentService.createNewComment("a");
+        commentService.createNewComment("b");
+        commentService.createNewComment("c");
 
 
         try{
-            ejb.getMostRecentComments(-1);
+            commentService.getMostRecentComments(-1);
             fail();
         } catch (Exception e){}
 
@@ -194,29 +182,29 @@ public class CommentEJBTest {
             Not that a query with 0 results would make sense, but if passing
             0 by mistake (ie bug), it would be hard to find out
          */
-        assertEquals(3 , ejb.getMostRecentComments(0).size());
+        Assert.assertEquals(3 , commentService.getMostRecentComments(0).size());
 
-        assertEquals(1 , ejb.getMostRecentComments(1).size());
-        assertEquals(2 , ejb.getMostRecentComments(2).size());
-        assertEquals(3 , ejb.getMostRecentComments(3).size());
+        Assert.assertEquals(1 , commentService.getMostRecentComments(1).size());
+        Assert.assertEquals(2 , commentService.getMostRecentComments(2).size());
+        Assert.assertEquals(3 , commentService.getMostRecentComments(3).size());
 
         //checking when asking more than available
-        assertEquals(3 , ejb.getMostRecentComments(4).size());
-        assertEquals(3 , ejb.getMostRecentComments(100).size());
+        Assert.assertEquals(3 , commentService.getMostRecentComments(4).size());
+        Assert.assertEquals(3 , commentService.getMostRecentComments(100).size());
     }
 
 
     @Test
     public void testDelete(){
 
-        ejb.createNewComment("a");
-        List<Comment> comments = ejb.getMostRecentComments(10);
+        commentService.createNewComment("a");
+        List<Comment> comments = commentService.getMostRecentComments(10);
         assertEquals(1 , comments.size());
 
         Long id = comments.get(0).getId();
-        ejb.deleteComment(id);
+        commentService.deleteComment(id);
 
-        assertEquals(0 , ejb.getMostRecentComments(10).size());
+        Assert.assertEquals(0 , commentService.getMostRecentComments(10).size());
     }
 
 }

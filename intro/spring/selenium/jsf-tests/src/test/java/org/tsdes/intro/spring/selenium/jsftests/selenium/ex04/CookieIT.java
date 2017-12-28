@@ -1,4 +1,4 @@
-package org.tsdes.intro.jee.jsf.examples.ex04;
+package org.tsdes.intro.spring.selenium.jsftests.selenium.ex04;
 
 import org.junit.Test;
 

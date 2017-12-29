@@ -15,11 +15,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.tsdes.misc</groupId>
-            <artifactId>test-utils</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
@@ -55,6 +50,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <!-- Make sure to rename the Wildfly folder to remove the versioning -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

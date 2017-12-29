@@ -22,7 +22,7 @@
     <properties>
         <wildfly.version>10.1.0.Final</wildfly.version>
         <jbossTarget>${basedir}/target/downloaded_Wildfly</jbossTarget>
-        <jbossHome>${jbossTarget}/wildfly-${wildfly.version}</jbossHome>
+        <jbossHome>${jbossTarget}/wildfly</jbossHome>
         <version.hibernate.jpa>1.0.0.Final</version.hibernate.jpa>
         <version.hibernate.core>5.2.9.Final</version.hibernate.core>
         <version.hibernate.validator>5.3.4.Final</version.hibernate.validator>
@@ -184,6 +184,34 @@
                                         <outputDirectory>${jbossTarget}</outputDirectory>
                                     </artifactItem>
                                 </artifactItems>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!--
+                    When unzipping Wildfly, the folder name will contain the version.
+                    This is not good, as then we would need to hardcode such version
+                    in each Arquillian file.
+                    So, we make sure to rename such folder.
+                    Why? If then we change Wildfly version, we only update such value
+                    here in the pom file, and not in every single Arquillian file.
+                -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>Rename Wildfly folder</id>
+                            <phase>process-test-classes</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <target>
+                                    <move file="${jbossTarget}/wildfly-${wildfly.version}"
+                                          tofile="${jbossTarget}/wildfly"/>
+                                </target>
                             </configuration>
                         </execution>
                     </executions>

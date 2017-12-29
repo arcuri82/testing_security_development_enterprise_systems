@@ -307,6 +307,12 @@
                     </configuration>
                 </plugin>
 
+                <!-- For running ANT tasks, like renaming files/folders -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.8</version>
+                </plugin>
 
                 <!--
                     Used to calculate code-coverage of the tests

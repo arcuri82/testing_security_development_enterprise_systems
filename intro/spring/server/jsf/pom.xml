@@ -7,8 +7,8 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.spring</groupId>
-        <artifactId>intro-spring</artifactId>
+        <groupId>org.tsdes.intro.spring.server</groupId>
+        <artifactId>server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

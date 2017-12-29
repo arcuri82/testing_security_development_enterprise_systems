@@ -2,20 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.intro.spring</groupId>
-    <artifactId>intro-spring</artifactId>
+
+    <groupId>org.tsdes.intro.spring.server</groupId>
+    <artifactId>server</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro</groupId>
-        <artifactId>intro</artifactId>
+        <groupId>org.tsdes.intro.spring</groupId>
+        <artifactId>intro-spring</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
-        <module>server</module>
-        <module>selenium</module>
-        <module>security</module>
+        <module>jsf</module>
     </modules>
+
 
 </project>

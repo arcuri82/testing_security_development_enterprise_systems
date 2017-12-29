@@ -16,7 +16,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.tsdes.intro.spring</groupId>
+            <groupId>org.tsdes.intro.spring.server</groupId>
             <artifactId>spring-jsf</artifactId>
             <version>${project.version}</version>
         </dependency>

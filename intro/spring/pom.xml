@@ -13,9 +13,21 @@
     </parent>
 
     <modules>
+        <module>bean</module>
         <module>server</module>
         <module>selenium</module>
         <module>security</module>
     </modules>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.joinfaces</groupId>
+                <artifactId>jsf-spring-boot-starter</artifactId>
+                <version>2.4.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

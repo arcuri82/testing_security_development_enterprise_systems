@@ -100,7 +100,6 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **intro/jee/ejb/lazy**
   * **intro/jee/ejb/transactions**
  
-
   Exercises: [quiz-game-part-06](exercises/quiz-game/quiz-game-part-06.md)  
 
 
@@ -135,13 +134,54 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
+* **Lesson 09**: Selenium and JaCoCo 
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * TODO
+ 
+  Exercises: TODO
 
-TODO remaining lessons
-
-<!---
-### JEE Exercises
+<br />
 
 
-* *MyNews*:   [text](jee/exercises/mynews.md) and [solution](../jee/exercises/my-news)
-* *EvenList*: [text](jee/exercises/eventlist.md) and [solution](../jee/exercises/event-list)
--->
+* **Lesson 10**: Spring Security 
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * TODO
+ 
+  Exercises: TODO
+
+<br />
+
+* **Lesson 11**: Heroku and TODO 
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * TODO
+ 
+  Exercises: TODO
+
+<br />
+
+
+* **Lesson 12**: Revision and Preparation for Exam 
+  
+  Slides: TODO
+  
+  Modules:
+     
+  * TODO
+ 
+  Exercises: TODO
+
+<br />
+
+

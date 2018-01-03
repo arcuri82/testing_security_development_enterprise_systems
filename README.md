@@ -47,6 +47,8 @@ Documentation (early work in progress) is available
 
 * JDK 1.8 or higher
 
+* An IDE (recommended IntelliJ IDEA Ultimate Edition)
+
 * Maven 3.x
 
 * Docker 
@@ -66,24 +68,6 @@ The code in this repository should run on all major operating systems, i.e. Mac,
   many dependencies.
    
  
- <!---   
-### Running The Tests
-
-Besides Maven, you can run tests directly from an IDE (e.g., IntelliJ or Eclipse).
-There are two exceptions though:
- 
-1. Arquillian tests need Wildfly installed. This is automatically done via 
-   Maven by executing for example `mvn test`. This needs to be done only once, 
-   as Wildfly gets installed
-   under the `target` folder of the module.
-   Note: if you do a `mvn clean`, then you will need to do a `mvn test` again to
-   re-deploy Wildfly.
-   
-2. Selenium tests need Wildfly as well, but they do not start the container by 
-   themselves. If you want to run such tests from an IDE, 
-   you need first to manually start Wildfly from command line with for example
-   `mvn wildfly:run`.   
--->
 
 ### How to Contribute
 

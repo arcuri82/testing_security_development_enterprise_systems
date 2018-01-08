@@ -2,6 +2,7 @@ package org.tsdes.intro.spring.selenium.jsftests.service;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.tsdes.intro.spring.jsf.ex01.CounterBean;
 
 import static org.junit.Assert.*;
 

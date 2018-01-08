@@ -25,7 +25,7 @@ Create 3 entity classes:
 * *Quiz*: with a numeric id, a String question, 4 String answers,
           and a numeric index representing the correct answer
           
-Add a `peristence.xml` configuration, enabling Hibernate and H2 with
+Add a `persistence.xml` configuration, enabling Hibernate and H2 with
 locally handled transactions.
 
 Write a `QuizEntityTest` class, where you should have a test 

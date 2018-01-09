@@ -1,6 +1,8 @@
 # Quiz Game - Part 01
 
 Create a new Maven project for a Quiz Game.
+At this point,
+it should contain only one module (i.e., only one `pom.xml` file).
 Lesson after lesson, we will add new features to it.
 We start from setting up Maven and modelling the application's data.
 
@@ -35,4 +37,12 @@ database.
 
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-01` module.            
+`intro/exercises/quiz-game/part-01` module.
+
+Note: the solution module `quiz-game-part01` is self-contained, as it does
+not have any `<parent>` tag.
+The `pom` module `quiz-game-root` does build  `quiz-game-part01`, but it
+is technically not its parent.
+In Maven, a module can define who is its parent, but not its children.
+A `pom` module can build other modules (e.g., with tag `<modules>`), but
+that does not define a parent-child relationship.          

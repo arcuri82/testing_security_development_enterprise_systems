@@ -8,7 +8,15 @@ import javax.persistence.Id;
 @Entity
 public class User01 {
 
-    //need a unique id (ie, the Primary Key) for this row. value is not important, and we let the DB to generate it
+    /*
+        Need a unique id (ie, the Primary Key) for this row. Value is not important, and we let the DB to generate it.
+
+        Note: using "Long" instead of "long", as the field should be null (non-specified) by default.
+        Otherwise, if did use "long" its default value would be 0, which would have a completely different
+        semantics when we try to persist this entity for the first time in the DB.
+        As a rule of thumb, in @Entity objects should not use primitive fields (eg, "int" and "long"),
+        but rather their nullable object versions (ie, "Integer" and "Long").
+     */
     @Id @GeneratedValue
     private Long id;
 

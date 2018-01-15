@@ -42,6 +42,11 @@ public class UserBeanInEmbeddedContainerTest {
 
     protected <T> T getEJB(Class<T> klass){
         try {
+            /*
+                Need to use JNDI to look for the EJB by using a string...
+                Quite awful indeed...
+                Plus, the string prefix might vary based on the actual JEE container...
+             */
             return (T) ctx.lookup("java:global/classes/"+klass.getSimpleName()+"!"+klass.getName());
         } catch (NamingException e) {
             return null;

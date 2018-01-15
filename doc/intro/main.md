@@ -57,7 +57,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 04**: EJB, Dependency Injection and Proxy Classes
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_04_ejb.pdf), 
+          [[pptx]](slides/lesson_04_ejb.pptx)
   
   Modules:
      

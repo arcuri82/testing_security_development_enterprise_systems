@@ -1,4 +1,4 @@
-package org.tsdes.intro.jee.ejb.framework.proxy;
+package org.tsdes.intro.jee.ejb.framework.proxy.se;
 
 public interface A {
 

@@ -54,14 +54,14 @@ public class FooTest {
         EntityManager em = factory.createEntityManager();
 
         try {
-            Query query = em.createQuery("select f from Foo f where f.id=?1");
+            TypedQuery<Foo> query = em.createQuery("select f from Foo f where f.id=?1", Foo.class);
             query.setParameter(1, id);
 
-            List list = query.getResultList();
+            List<Foo> list = query.getResultList();
             if (list.isEmpty()) {
                 return null;
             } else {
-                return (Foo) list.get(0);
+                return list.get(0);
             }
         } finally {
             em.close();
@@ -73,7 +73,6 @@ public class FooTest {
         EntityManager em = factory.createEntityManager();
 
         try {
-            //note: using TypedQuery just to show you how to avoid casting
             TypedQuery<Foo> query = em.createQuery(
                     //here we force the loading of f.lazyBi
                     "select f from Foo f left join fetch f.lazyBi where f.id=?1", Foo.class);

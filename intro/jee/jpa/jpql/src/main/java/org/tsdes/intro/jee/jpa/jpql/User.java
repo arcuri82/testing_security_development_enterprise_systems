@@ -28,6 +28,7 @@ public class User {
 
     private String name;
 
+    @Embedded
     private Address address;
 
     @ManyToMany

@@ -93,7 +93,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 06**: EJB and JTA
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_06_ejb.pdf), 
+          [[pptx]](slides/lesson_06_ejb.pptx)
   
   Modules:
      

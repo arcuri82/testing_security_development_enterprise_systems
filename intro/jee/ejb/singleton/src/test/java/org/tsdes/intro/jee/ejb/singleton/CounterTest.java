@@ -53,7 +53,11 @@ public class CounterTest {
 
     /*
         The same EJB in the JEE container can be injected here in the test,
-        so we can call them directly
+        so we can call them directly.
+
+        The point is that the code of this test class is executed in the JEE container
+        as well, and so we can use dependency injection.
+        This is handled by Arquillian with @RunWith
      */
     @EJB
     private A a;

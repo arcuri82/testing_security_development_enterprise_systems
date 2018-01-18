@@ -75,8 +75,9 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 05**: EJB, Arquillian and Multithreading
   
-  Slides: TODO
-  
+  Slides: [[pdf]](slides/lesson_05_ejb.pdf), 
+          [[pptx]](slides/lesson_05_ejb.pptx)
+            
   Modules:
      
   * **intro/jee/ejb/singleton**

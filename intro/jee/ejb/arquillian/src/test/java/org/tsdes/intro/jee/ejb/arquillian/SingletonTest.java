@@ -20,6 +20,7 @@ public class SingletonTest {
 
         return ShrinkWrap.create(JavaArchive.class)
                 .addClasses(A.class, Data.class)
+                //besides the classes, also need to add resources
                 .addAsResource("META-INF/persistence.xml");
     }
 
@@ -28,11 +29,18 @@ public class SingletonTest {
     private A singleton;
 
     /*
-        Careful: it looks like Arquillian does one single deployment per test
+        By default, Arquillian does one single deployment per test
         class, which means that the tests share the same state.
         Need to be careful of side effects between tests (eg on the DB and EJBs),
         as each test should work when run in isolation and when run with others
         in ANY order.
+
+        In this particular case, 2 tests will be marked as "ignore",
+        as the "assume" check fails because the state has been modified
+        by a previous test.
+        But which tests will be ignored depend on the test order.
+
+        A test can either "pass", "fail" or be "ignored"
      */
 
 
@@ -41,7 +49,7 @@ public class SingletonTest {
 
         assumeTrue(singleton.getInternalX() == 0);
 
-        checkInternalState();
+        checkAndModifyInternalState();
     }
 
     @Test
@@ -49,7 +57,7 @@ public class SingletonTest {
 
         assumeTrue(singleton.getInternalX() == 0);
 
-        checkInternalState();
+        checkAndModifyInternalState();
     }
 
     @Test
@@ -57,7 +65,7 @@ public class SingletonTest {
 
         assumeTrue(singleton.readDB() == 0);
 
-        checkDB();
+        checkAndModifyDB();
     }
 
     @Test
@@ -65,17 +73,17 @@ public class SingletonTest {
 
         assumeTrue(singleton.readDB() == 0);
 
-        checkDB();
+        checkAndModifyDB();
     }
 
 
-    private void checkInternalState(){
+    private void checkAndModifyInternalState(){
         assertEquals(0, singleton.getInternalX());
         singleton.incrementInternalX();
         assertEquals(1, singleton.getInternalX());
     }
 
-    private void checkDB(){
+    private void checkAndModifyDB(){
         assertEquals(0, singleton.readDB());
         singleton.updateDB(1);
         assertEquals(1, singleton.readDB());

@@ -1,2 +1,6 @@
+
+
 logging:
   level: debug
+server:
+  port: 80

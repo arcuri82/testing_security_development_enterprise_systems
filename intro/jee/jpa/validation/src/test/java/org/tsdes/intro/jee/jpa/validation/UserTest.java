@@ -216,4 +216,22 @@ public class UserTest {
         assertTrue(hasViolations(user));
         assertFalse(persistInATransaction(user));
     }
+
+    @Test
+    public void testUnique(){
+
+        String email = "unique@foo.com";
+
+        User a = getAValidUser();
+        a.setEmail(email);
+        assertTrue(persistInATransaction(a));
+
+        User b = getAValidUser();
+        b.setEmail(email+".uk");
+        assertTrue(persistInATransaction(b));
+
+        User c = getAValidUser();
+        c.setEmail(email); //same email
+        assertFalse(persistInATransaction(c));
+    }
 }

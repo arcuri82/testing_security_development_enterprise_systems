@@ -57,6 +57,14 @@ Documentation (early work in progress) is available
 
 The code in this repository should run on all major operating systems, i.e. Mac, Linux and Windows.
 
+On Windows, if you have problems with too long file names 
+when checking out the code with Git, then you might need to run
+the following command on a terminal:
+
+`git config --system core.longpaths true`
+
+
+
 
 ### Useful Maven Command
 

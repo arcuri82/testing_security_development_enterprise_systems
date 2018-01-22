@@ -95,8 +95,9 @@ public class UserTest {
         assertNotNull(u1);
 
         //check that the user with the given name is in the database
-        Query query = em.createQuery("select count(u) from User u where u.name = '"+name+"'");
-        long res = (Long)query.getSingleResult();
+        TypedQuery<Long> query = em.createQuery("select count(u) from User u where u.name = ?1", Long.class);
+        query.setParameter(1, name);
+        long res = query.getSingleResult();
         assertEquals(1 , res);
 
         //do a sync update on a new thread
@@ -107,7 +108,7 @@ public class UserTest {
         });
 
         //name has been changed now
-        res = (Long)query.getSingleResult();
+        res = query.getSingleResult();
         assertEquals(0 , res);
 
         try {

@@ -109,7 +109,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
-* **Lesson 07**: JSF, Bash and Docker
+* **Lesson 07**: JSF and Docker
   
   Slides: TODO
   

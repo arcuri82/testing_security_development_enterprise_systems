@@ -5,7 +5,7 @@ Continue to work on the Maven project started as exercise
 in the first lesson.
 
 
-Make sure you have installed/configured Docker and VirtualBox
+Make sure you have installed/configured Docker 
 on your machine.
 
 In IntelliJ, if not already present, 

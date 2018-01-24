@@ -30,7 +30,7 @@ public class ExampleTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackages(true, "org.tsdes.jee")
+                .addPackages(true, "org.tsdes.intro")
                 .addAsResource("META-INF/persistence.xml");
     }
 

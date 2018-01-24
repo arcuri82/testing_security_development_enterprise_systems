@@ -30,7 +30,7 @@ public class EJB_06_proxyTest extends TestBase{
         // Spelled it out just to make it clear.
         // However, should not write it like this, as name/package refactoring would
         // not change this string, but it would change EJB_06_proxy.class.getName()
-        assertEquals("EJB_06_proxy", actualClass);
+        assertEquals("org.tsdes.intro.jee.jta.transactions.ejb.EJB_06_proxy", actualClass);
 
         //proxy is a different story...
         assertNotEquals(proxiedClass, actualClass);

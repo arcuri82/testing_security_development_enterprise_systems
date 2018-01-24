@@ -102,10 +102,10 @@ public class OuterJoinTest {
         long id = initData();
 
         EntityManager em = factory.createEntityManager();
-        Query query = em.createQuery("select a from A a where a.id=?1").setParameter(1, id);
+        TypedQuery<A> query = em.createQuery("select a from A a where a.id=?1", A.class).setParameter(1, id);
 
         System.out.println("\n* Going to execute JPQL query");
-        A a = (A) query.getSingleResult();
+        A a = query.getSingleResult();
         /*
             Hibernate: select a0_.id as id1_0_ from A a0_ where a0_.id=1
             Hibernate: select listb0_.A_id as A_id1_1_0_, listb0_.listB_id as listB_id2_1_0_, b1_.id as id1_2_1_ from A_B listb0_ inner join B b1_ on listb0_.listB_id=b1_.id where listb0_.A_id=?

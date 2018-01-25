@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 //This annotation modifies how this test is run in JUnit, in particular start a Spring context.
 //Take a moment to appreciate the lack of downloading Wildfly via Maven, and
@@ -98,8 +99,10 @@ public class BaseSingletonTest {
         });
 
         int expected = nThreads * loops;
+        int result = first.getCounter();
 
-        System.out.println(first.getCounter());
-        assertNotEquals(expected, first.getCounter());
+        System.out.println("Result: " + result);
+        assertNotEquals(expected, result);
+        assertTrue(result > loops);
     }
 }

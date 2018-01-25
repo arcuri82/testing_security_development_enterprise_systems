@@ -111,7 +111,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 07**: JSF and Docker
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_07_jsf.pdf), 
+          [[pptx]](slides/lesson_07_jsf.pptx)
   
   Modules:
      
@@ -119,7 +120,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **intro/jee/jsf/examples**
  
   Exercises: [quiz-game-part-07](exercises/quiz-game/quiz-game-part-07.md),  
-    TODO bash/docker exercises
+
 
 <br />
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+<body>
+<h2>Example of Dynamic Page</h2>
+
+<p>
+    Back to <a href="../index.html">Home</a>
+</p>
+
+<p>
+    Current date: <h:outputText value="#{session.lastAccessedTime}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" type="date"/>
+                  </h:outputText>
+</p>
+</body>
+
+</html>

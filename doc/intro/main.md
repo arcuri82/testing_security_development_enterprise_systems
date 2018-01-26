@@ -119,7 +119,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **intro/jee/jsf/base**
   * **intro/jee/jsf/examples**
  
-  Exercises: [quiz-game-part-07](exercises/quiz-game/quiz-game-part-07.md),  
+  Exercises: [quiz-game-part-07](exercises/quiz-game/quiz-game-part-07.md)  
 
 
 <br />

@@ -16,6 +16,7 @@
         <module>service</module>
         <module>jpa</module>
         <module>profile</module>
+        <module>configuration</module>
     </modules>
 
 </project>

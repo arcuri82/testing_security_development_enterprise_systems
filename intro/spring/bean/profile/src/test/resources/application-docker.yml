@@ -1,0 +1,37 @@
+# This configuration file will be used when the profile "docker" is active.
+# As this is activated by profile, it will be applied on top of and override the
+# default application.properties file
+
+# Besides using H2, in some cases we might still want to test against a real DB,
+# possibly of the same kind used in production, although that would be much slower
+# than using an embedded DB like H2.
+# But it poses the problem of installing and starting/stopping the DB on the developer machines...
+# How to do it? Docker...
+
+# Note: the indentation of YML to avoid repeating the same prefix for properties
+
+# Note: usually, best to do not mix ".properties" and ".yml" in same project...
+#       just use the one you prefer
+
+# Note: here not specifying
+#       "spring.datasource.url"
+#       here, as it dynamically depends on TestContainer.
+#       So it will be set at runtime directly in the tests.
+
+spring:
+  datasource:
+    username: postgres
+    password: ""
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: create-drop
+
+
+my:
+  custom:
+    #custom property which will be overridden in all config files
+    foo: docker
+    #custom property defined only in this configuration file
+    docker: docker

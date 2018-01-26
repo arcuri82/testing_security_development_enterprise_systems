@@ -39,6 +39,11 @@ public class CounterService {
         return null;
     }
 
+    //only needed for to show actual behavior of transactions
+    public void clearCache(){
+        em.clear();
+    }
+
     @Transactional
     public long createNewCounter(){
 

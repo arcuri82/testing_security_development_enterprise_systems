@@ -34,6 +34,9 @@ public class CounterServiceTest {
 
         service.increment(id);
 
+        //just make sure we are going to read from DB and avoid cache
+        service.clearCache();
+
         long y = service.getValueForCounter(id);
 
         assertEquals(x + 1, y);
@@ -52,6 +55,9 @@ public class CounterServiceTest {
            the em cache
          */
         service.incrementNotInTransaction(id);
+
+        //just make sure we are going to read from DB and avoid cache
+        service.clearCache();
 
         long y = service.getValueForCounter(id);
 

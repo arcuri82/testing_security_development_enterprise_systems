@@ -7,6 +7,7 @@ import org.tsdes.intro.jee.ejb.framework.injection.data.EmptyClass;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 
 /**
@@ -26,10 +27,16 @@ public abstract class InjectorBaseSuite {
 
 
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testNullClass(){
         Injector injector = getInjector();
-        injector.createInstance(null);
+
+        try {
+            injector.createInstance(null);
+            fail();
+        } catch (IllegalArgumentException e){
+            //expected
+        }
     }
 
     @Test

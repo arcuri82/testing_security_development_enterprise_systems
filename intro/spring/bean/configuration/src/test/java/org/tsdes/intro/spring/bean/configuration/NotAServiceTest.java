@@ -1,6 +1,5 @@
 package org.tsdes.intro.spring.bean.configuration;
 
-import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class NotAServiceTest {
     private NotAService notAServiceA;
 
     @Test
-    public void testValues(){
+    public void testValues() {
         assertEquals("foo", notAServiceFoo.getValue());
         assertEquals("bar", notAServiceBar.getValue());
         assertEquals("bar", bar.getValue());
@@ -40,7 +39,7 @@ public class NotAServiceTest {
     }
 
     @Test
-    public void testSingletons(){
+    public void testSingletons() {
         assertEquals(notAServiceBar, bar);
     }
 }

@@ -100,7 +100,7 @@ follows:
 
 * `Kotlin`: our language of choice. It is a better Java that can reuse all
     of its existing ecosystem. 
-    However, it does have more abstractions and "magic" than Java, which arguable
+    However, it does have more abstractions and "magic" than Java, which arguably
     means that it is not suited to learn as first language, i.e., better
     to learn Java first.
     That is the reason why it is only used in the `advanced` course, and not the
@@ -121,7 +121,7 @@ follows:
    However, in our opinion, it is much worse than Spring.
    Job-wise, at least in Norway, it is used less and less. 
    Still, it is important to look at different frameworks. 
-   As the jump from Java EE to Spring is relative simple, it is a good
+   As the jump from Java EE to Spring is relatively simple, it is a good
    choice as starting point before moving into SpringBoot.
    Furthermore, you cannot really appreciate SpringBoot until you have
    gone through the blood, sweat and tears of debugging an

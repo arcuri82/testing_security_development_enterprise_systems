@@ -7,11 +7,10 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.spring.server</groupId>
-        <artifactId>server</artifactId>
+        <groupId>org.tsdes.intro.spring</groupId>
+        <artifactId>intro-spring</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
 
 
 

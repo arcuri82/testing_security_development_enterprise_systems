@@ -14,7 +14,7 @@
 
     <modules>
         <module>bean</module>
-        <module>server</module>
+        <module>jsf</module>
         <module>security</module>
     </modules>
 

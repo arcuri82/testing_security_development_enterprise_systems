@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Page using URL Parameters
+    </ui:define>
+
+    <ui:define name="content">
+
+        Link back to <a href="ex05_main.jsf"> Ex05 Main </a>
+
+        <br />
+
+        The URL in this page contains <h:outputText value="#{param.size()}"/> parameters.
+
+        <c:if test="#{param.size() >  0}">
+            <h:dataTable value="#{param.entrySet()}" var="p" border="1">
+                <h:column>
+                    <f:facet name="header">Name</f:facet> <!-- Column name -->
+                    <h:outputText value="#{p.key}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Value</f:facet> <!-- Column name -->
+                    <h:outputText value="#{p.value}" />
+                </h:column>
+            </h:dataTable>
+        </c:if>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

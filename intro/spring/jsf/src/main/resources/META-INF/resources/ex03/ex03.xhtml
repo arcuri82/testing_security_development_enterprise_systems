@@ -28,7 +28,7 @@
             <h3>No comment has been posted yet... be the first one!</h3>
         </c:if>
 
-        <!-- A form with a text ared to create a new comment -->
+        <!-- A form with a text area to create a new comment -->
         <h:form id="createForm">
             <h:inputTextarea value="#{commentController.formText}" id="createText"/>
             <h:commandButton value="Create" action="#{commentController.createNewComment}" id="createButton"/>

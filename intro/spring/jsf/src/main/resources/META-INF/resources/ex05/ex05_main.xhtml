@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Example of using URL Parameters
+    </ui:define>
+
+    <ui:define name="content">
+
+        <ul>
+            <li>Link to <a href="ex05_params.xhtml">ex05_params.xhtml</a></li>
+            <li>Link to <a href="ex05_params.xhtml?foo=true">ex05_params.xhtml?foo=true</a></li>
+            <li>Link to <a href="ex05_params.xhtml?foo">ex05_params.xhtml?foo</a></li>
+            <li>Link to <a href="ex05_params.xhtml?foo=true&amp;bar=hello&amp;x=1">ex05_params.xhtml?foo=true&amp;bar=hello&amp;x=1</a></li>
+        </ul>
+
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

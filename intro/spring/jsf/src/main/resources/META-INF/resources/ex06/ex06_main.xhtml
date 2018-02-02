@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Example of Redirections
+    </ui:define>
+
+    <ui:define name="content">
+
+        <p>
+            Push button to increase a session counter by 1, and see result in
+            a new page.
+            The pushing of a button result into a POST HTTP request.
+        </p>
+
+        <br/>
+
+        <h:form id="formSession">
+            <h:commandButton value="Increase and Forward" action="#{navigationBean.increaseAndForward()}"/>
+
+            <br/>
+
+            <h:commandButton value="Increase and Redirect" action="#{navigationBean.increaseAndRedirect()}"/>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

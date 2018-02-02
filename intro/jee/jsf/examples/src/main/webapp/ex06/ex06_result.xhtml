@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Page Showing Redirection
+    </ui:define>
+
+    <ui:define name="content">
+
+        <p>
+            Link back to <a href="ex06_main.jsf"> Ex6 Main </a>
+        </p>
+
+        <br/>
+
+        <p>
+            Session Counter: <h:outputText style="font-weight: bold;" value="#{sessionCounter.counter}"/>
+        </p>
+
+        <br/>
+
+        Based on how this page was reached, the URL on the browser will
+        be different:
+
+
+        <ul>
+            <li><span style="font-style: italic;">Forward</span>:
+                the URL stays the same, pointing to
+                <span style="font-weight: bold;">ex06_main.xhtml</span>,
+                as this page was returned as payload
+                of the POST request.
+            </li>
+            <li><span style="font-style: italic;">Redirect</span>:
+                the URL changes to the correct one for this page, i.e.
+                <span style="font-weight: bold;">ex06_result.xhtml</span>.
+                The response of the POST request had no payload, but rather
+                a 302 redirect status code with a
+                <span style="font-style: italic;">Location</span>
+                header pointing to <span style="font-weight: bold;">ex06_result.xhtml</span>.
+                In such case, the browser does a second request (a GET) to retrieve
+                such page (and so the URL on the browser bar does change).
+            </li>
+        </ul>
+
+        <p>
+            Whether we arrived here with a
+            <span style="font-style: italic;">Forward</span>
+            or a
+            <span style="font-style: italic;">Redirect</span>
+            does also have impact on the
+            <span style="font-style: italic;">Reload this page</span>
+            button in the browser, which does execute the last HTTP command used
+            to display this page.
+            In case of a redirection, this just results in repeating the GET, which
+            keeps the counter the same.
+            On the other hand, in a forward, the last command was a POST.
+            Reloading the page would result in repeating such POST, and increase the
+            counter!!!
+            To see it in action, you can use the
+            <span style="font-style: italic;">Developer tools</span>
+            in Chrome, in particular the
+            <span style="font-style: italic;">Network</span> tab.
+        </p>
+
+        <br/>
+
+        <p>
+            Long story short: unless you know what you are doing, use a
+            <span style="font-style: italic;">Redirect</span>.
+        </p>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

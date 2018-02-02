@@ -1,5 +1,5 @@
 jsf:
-  PROJECT_STAGE: Production
+  projectStage: Production
 
 
 spring:

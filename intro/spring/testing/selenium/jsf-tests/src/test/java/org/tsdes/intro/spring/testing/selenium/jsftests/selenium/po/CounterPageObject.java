@@ -1,9 +1,9 @@
-package org.tsdes.intro.spring.selenium.jsftests.selenium.ex01;
+package org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.tsdes.intro.spring.selenium.jsftests.selenium.PageObject;
+import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.PageObject;
 
 /**
  * See Page Object at:

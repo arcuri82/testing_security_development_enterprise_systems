@@ -1,4 +1,4 @@
-package org.tsdes.intro.spring.selenium.jsftests.selenium;
+package org.tsdes.intro.spring.testing.selenium.jsftests.selenium;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

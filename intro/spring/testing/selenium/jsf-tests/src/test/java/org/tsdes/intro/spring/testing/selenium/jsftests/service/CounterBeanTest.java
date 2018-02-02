@@ -1,4 +1,4 @@
-package org.tsdes.intro.spring.selenium.jsftests.service;
+package org.tsdes.intro.spring.testing.selenium.jsftests.service;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class CounterBeanTest {
 
     /*
-        The logic inside CounterBean is not relying on any JEE feature,
+        The logic inside CounterBean is not relying on any JEE/Spring feature,
         so we can test it with just basic unit tests
      */
 

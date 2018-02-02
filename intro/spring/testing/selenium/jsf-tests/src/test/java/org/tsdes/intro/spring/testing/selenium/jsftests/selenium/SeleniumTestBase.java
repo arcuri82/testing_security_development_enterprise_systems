@@ -1,4 +1,4 @@
-package org.tsdes.intro.spring.selenium.jsftests.selenium;
+package org.tsdes.intro.spring.testing.selenium.jsftests.selenium;
 
 import org.junit.AfterClass;
 import org.junit.Before;

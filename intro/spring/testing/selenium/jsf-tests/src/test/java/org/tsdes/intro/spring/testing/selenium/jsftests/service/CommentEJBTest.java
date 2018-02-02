@@ -1,4 +1,4 @@
-package org.tsdes.intro.spring.selenium.jsftests.service;
+package org.tsdes.intro.spring.testing.selenium.jsftests.service;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tsdes.intro.spring.jsf.ex03.Comment;
 import org.tsdes.intro.spring.jsf.ex03.CommentService;
-import org.tsdes.intro.spring.selenium.jsftests.DeleterService;
+import org.tsdes.intro.spring.testing.selenium.jsftests.DeleterService;
 
 import java.util.List;
 

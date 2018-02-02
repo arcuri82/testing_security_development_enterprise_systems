@@ -3,18 +3,18 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>org.tsdes.intro.spring.testing.selenium</groupId>
-    <artifactId>spring-selenium</artifactId>
+    <groupId>org.tsdes.intro.spring.testing</groupId>
+    <artifactId>spring-testing</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.spring.testing</groupId>
-        <artifactId>spring-testing</artifactId>
+        <groupId>org.tsdes.intro.spring</groupId>
+        <artifactId>intro-spring</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
-        <!--<module>jsf-tests</module>-->
+        <module>selenium</module>
     </modules>
 
 

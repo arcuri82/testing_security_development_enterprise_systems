@@ -1,8 +1,9 @@
-package org.tsdes.intro.spring.selenium.jsftests.selenium.ex03;
+package org.tsdes.intro.spring.testing.selenium.jsftests.selenium.ex03;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.tsdes.intro.spring.selenium.jsftests.selenium.SeleniumTestBase;
+import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.SeleniumTestBase;
+import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po.CommentPageObject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

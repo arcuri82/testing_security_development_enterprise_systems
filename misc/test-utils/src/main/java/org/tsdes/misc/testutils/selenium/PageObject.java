@@ -46,6 +46,10 @@ public abstract class PageObject {
         return port;
     }
 
+    public void refresh(){
+        driver.navigate().refresh();
+    }
+
     public void clickAndWait(String id){
         WebElement element = driver.findElement(By.id(id));
         element.click();

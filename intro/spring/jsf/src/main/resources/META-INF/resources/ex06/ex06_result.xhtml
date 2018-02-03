@@ -16,13 +16,14 @@
     <ui:define name="content">
 
         <p>
-            Link back to <a href="ex06_main.xhtml"> Ex6 Main </a>
+            Link back to <a href="ex06_main.xhtml" id="linkMainId"> Ex6 Main </a>
         </p>
 
         <br/>
 
         <p>
-            Session Counter: <h:outputText style="font-weight: bold;" value="#{sessionCounter.counter}"/>
+            Session Counter:
+            <h:outputText style="font-weight: bold;" value="#{sessionCounter.counter}" id="counterId"/>
         </p>
 
         <br/>

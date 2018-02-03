@@ -244,4 +244,36 @@ public abstract class SeleniumTestBase {
         params = main.clickOnMultiParamsLink();
         assertEquals(3, params.getCounterOfParams());
     }
+
+    //--- Ex 06 ----------------------------------------------------------------
+
+    @Test
+    public void testEx06Redirection(){
+
+        Ex06MainPO main = home.toEx06Page();
+        Ex06ResultPO result = main.clickForward();
+
+        int x = result.getDisplayedCounter();
+
+        main = result.clickBackToMain();
+        result = main.clickForward();
+        assertEquals(x+1, result.getDisplayedCounter());
+
+        main = result.clickBackToMain();
+        result = main.clickRedirect();
+        assertEquals(x+2, result.getDisplayedCounter());
+
+        result.refresh();
+        //no change
+        assertEquals(x+2, result.getDisplayedCounter());
+
+
+        main = result.clickBackToMain();
+        result = main.clickForward();
+        assertEquals(x+3, result.getDisplayedCounter());
+
+        result.refresh();
+        //the POST has been repeated, increasing the counter
+        assertEquals(x+4, result.getDisplayedCounter());
+    }
 }

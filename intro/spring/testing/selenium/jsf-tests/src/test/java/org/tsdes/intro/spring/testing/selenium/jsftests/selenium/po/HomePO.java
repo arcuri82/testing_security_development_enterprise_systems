@@ -80,4 +80,13 @@ public class HomePO extends PageObject{
 
         return po;
     }
+
+    public Ex06MainPO toEx06Page(){
+
+        clickAndWait("ex06LinkId");
+        Ex06MainPO po = new Ex06MainPO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
 }

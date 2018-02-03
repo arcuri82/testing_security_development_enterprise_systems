@@ -5,6 +5,9 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
+<head>
+    <title>Example of Dynamic Page</title>
+</head>
 
 <body>
 <h2>Example of Dynamic Page</h2>
@@ -14,7 +17,7 @@
 </p>
 
 <p>
-    Current date: <h:outputText value="#{session.lastAccessedTime}">
+    Current date: <h:outputText value="#{session.lastAccessedTime}" id="dateTextId">
                         <f:convertDateTime pattern="MM/dd/yyyy" type="date"/>
                   </h:outputText>
 </p>

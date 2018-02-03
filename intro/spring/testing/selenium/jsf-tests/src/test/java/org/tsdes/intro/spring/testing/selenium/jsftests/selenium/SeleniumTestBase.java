@@ -1,24 +1,13 @@
 package org.tsdes.intro.spring.testing.selenium.jsftests.selenium;
 
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po.Ex01PO;
-import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po.Ex03PO;
-import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po.HomePO;
+import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po.*;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public abstract class SeleniumTestBase {
 
@@ -40,6 +29,20 @@ public abstract class SeleniumTestBase {
         assertTrue("Failed to start from Home Page", home.isOnPage());
     }
 
+
+
+
+
+    //--- Ex 00 ----------------------------------------------------------------
+
+    @Test
+    public void testEx00Date(){
+
+        Ex00PO po = home.toEx00Page();
+        LocalDate date = po.getDate();
+
+        assertTrue(date.equals(LocalDate.now()));
+    }
 
     //--- Ex 01 ----------------------------------------------------------------
 
@@ -89,18 +92,32 @@ public abstract class SeleniumTestBase {
         assertEquals(2, (int) po.getCounterValue());
     }
 
+    //--- Ex 02 ----------------------------------------------------------------
+
+    @Test
+    public void testEx02HomeLink(){
+
+        assertTrue(home.isOnPage());
+
+        Ex02PO ex02 = home.toEx02Page();
+        assertFalse(home.isOnPage());
+        assertTrue(ex02.isOnPage());
+
+        ex02.clickBackHome();
+        assertTrue(home.isOnPage());
+        assertFalse(ex02.isOnPage());
+
+        /*
+            could write the same kind of tests for the other links as well,
+            but not the first 2 (ex00 and ex01), as they do not use the template
+            with the Home link having an id
+         */
+    }
+
 
     //--- Ex 03 ----------------------------------------------------------------
 
-     /*
-        Recall, for this kind of tests were the web application is started just once,
-        when I run a test I cannot make assumptions on the current state (eg databases
-        and Singleton EJBs).
-        So, to still make the tests "independent", need to write them in a way in
-        which they should be valid regardless of the current state of the application.
-     */
 
-     //FIXME
     private final int MAX = 10; // the max value of comments in the table
 
     @Test
@@ -155,45 +172,76 @@ public abstract class SeleniumTestBase {
 
 
 
+    //--- Ex 04 ----------------------------------------------------------------
 
-//    @BeforeClass
-//    public static void init() throws InterruptedException {
-//
-//        //driver = getFirefoxDriver(); //not so stable
-//        driver = getChromeDriver();
-//
-//
-//        /*
-//            When the integration tests in this class are run, it might be
-//            that WildFly is not ready yet, although it was started. So
-//            we need to wait till it is ready.
-//         */
-//        for(int i=0; i<30; i++){
-//            boolean ready = false; //FIXME JBossUtil.isJBossUpAndRunning();
-//            if(!ready){
-//                Thread.sleep(1_000); //check every second
-//                continue;
-//            } else {
-//                break;
-//            }
-//        }
-//    }
-//
-//    protected WebDriver getDriver(){
-//        return driver;
-//    }
-//
-//    @AfterClass
-//    public static void tearDown(){
-//        driver.close();
-//    }
-//
-//
-//    @Before
-//    public void checkIfWildflyIsRunning(){
-//
-//        //if for any reason WildFly is not running any more, do not fail the tests
-//        //assumeTrue("Wildfly is not up and running", JBossUtil.isJBossUpAndRunning());
-//        //FIXME
-//    }
+    @Test
+    public void testEx04Request(){
+
+        Ex04PO po = home.toEx04Page();
+
+        po.clickRequestReset();
+        assertEquals(0, po.getRequestCounter());
+
+        po.clickRequestPlus();
+        assertEquals(1, po.getRequestCounter());
+
+        //not changing
+        po.clickRequestPlus();
+        assertEquals(1, po.getRequestCounter());
+
+        po.clickRequestPlus();
+        assertEquals(1, po.getRequestCounter());
+
+        //calling other on Session will reset the one for Request
+        po.clickSessionPlus();
+        assertEquals(0, po.getRequestCounter());
+    }
+
+    @Test
+    public void testEx04Session(){
+
+        Ex04PO po = home.toEx04Page();
+
+        po.clickSessionReset();
+        assertEquals(0, po.getSessionCounter());
+
+        po.clickSessionPlus();
+        assertEquals(1, po.getSessionCounter());
+
+        po.clickSessionPlus();
+        assertEquals(2, po.getSessionCounter());
+
+        po.clickSessionPlus();
+        assertEquals(3, po.getSessionCounter());
+
+        po.clickSessionMinus();
+        assertEquals(2, po.getSessionCounter());
+
+        //calling on Request has no effect for Session
+        po.clickRequestPlus();
+        assertEquals(2, po.getSessionCounter());
+    }
+
+    //--- Ex 05 ----------------------------------------------------------------
+
+    @Test
+    public void testEx05Params(){
+
+        Ex05MainPO main = home.toEx05Page();
+
+        Ex05ParamsPO params = main.clickOnNoParamsLink();
+        assertEquals(0, params.getCounterOfParams());
+
+        main = params.clickOnBackToMain();
+        params = main.clickOnOneParamLink();
+        assertEquals(1, params.getCounterOfParams());
+
+        main = params.clickOnBackToMain();
+        params = main.clickOnParamNoValueLink();
+        assertEquals(1, params.getCounterOfParams());
+
+        main = params.clickOnBackToMain();
+        params = main.clickOnMultiParamsLink();
+        assertEquals(3, params.getCounterOfParams());
+    }
 }

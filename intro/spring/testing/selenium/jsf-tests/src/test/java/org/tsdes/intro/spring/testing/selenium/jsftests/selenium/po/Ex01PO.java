@@ -15,7 +15,7 @@ public class Ex01PO extends PageObject {
 
 
     public Ex01PO(PageObject po) {
-        super(po.getDriver(), po.getHost(), po.getPort());
+        super(po);
     }
 
     //FIXME

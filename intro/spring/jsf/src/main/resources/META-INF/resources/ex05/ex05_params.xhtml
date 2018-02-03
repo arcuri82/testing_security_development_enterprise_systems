@@ -17,11 +17,11 @@
 
     <ui:define name="content">
 
-        Link back to <a href="ex05_main.xhtml"> Ex05 Main </a>
+        Link back to <a href="ex05_main.xhtml" id="linkToMainId"> Ex05 Main </a>
 
         <br />
 
-        The URL in this page contains <h:outputText value="#{param.size()}"/> parameters.
+        The URL in this page contains <h:outputText value="#{param.size()}" id="paramCounterId"/> parameters.
 
         <c:if test="#{param.size() >  0}">
             <h:dataTable value="#{param.entrySet()}" var="p" border="1">

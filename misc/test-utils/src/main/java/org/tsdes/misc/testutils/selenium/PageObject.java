@@ -28,6 +28,10 @@ public abstract class PageObject {
         this.port = port;
     }
 
+    public PageObject(PageObject other) {
+        this(other.getDriver(), other.getHost(), other.getPort());
+    }
+
     public abstract boolean isOnPage();
 
     public WebDriver getDriver() {
@@ -50,6 +54,12 @@ public abstract class PageObject {
 
     public String getText(String id){
         return driver.findElement(By.id(id)).getText();
+    }
+
+    public int getInteger(String id){
+        String text = getText(id);
+
+        return Integer.parseInt(text);
     }
 
     public void setText(String id, String text){

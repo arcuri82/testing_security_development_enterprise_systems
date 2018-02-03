@@ -7,11 +7,11 @@ import org.tsdes.misc.testutils.selenium.PageObject;
 
 import java.util.List;
 
-public class Ex03PO extends PageObject {
+public class Ex03PO extends TemplatePO {
 
 
     public Ex03PO(PageObject po) {
-        super(po.getDriver(), po.getHost(), po.getPort());
+        super(po);
     }
 
     @Override
@@ -19,11 +19,6 @@ public class Ex03PO extends PageObject {
         return getDriver().getTitle().contains("Example using JSTL");
     }
 
-    public void toStartingPage() {
-        //FIXME
-        //getDriver().get(getBaseUrl() + "/ex03/ex03.jsf");
-        waitForPageToLoad();
-    }
 
     public int extractIndex(int position){
         String comment = getCommentText(position);

@@ -14,6 +14,10 @@ public class HomePO extends PageObject{
         super(driver, host, port);
     }
 
+    public HomePO(PageObject po) {
+        this(po.getDriver(), po.getHost(), po.getPort());
+    }
+
     public void toStartingPage(){
         driver.get(host + ":" + port);
     }
@@ -23,6 +27,14 @@ public class HomePO extends PageObject{
         return getDriver().getTitle().contains("JSF Examples");
     }
 
+    public Ex00PO toEx00Page(){
+
+        clickAndWait("ex00LinkId");
+        Ex00PO po = new Ex00PO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
 
     public Ex01PO toEx01Page(){
 
@@ -33,10 +45,37 @@ public class HomePO extends PageObject{
         return po;
     }
 
+    public Ex02PO toEx02Page(){
+
+        clickAndWait("ex02LinkId");
+        Ex02PO po = new Ex02PO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
     public Ex03PO toEx03Page(){
 
         clickAndWait("ex03LinkId");
         Ex03PO po = new Ex03PO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
+    public Ex04PO toEx04Page(){
+
+        clickAndWait("ex04LinkId");
+        Ex04PO po = new Ex04PO(this);
+        assertTrue(po.isOnPage());
+
+        return po;
+    }
+
+    public Ex05MainPO toEx05Page(){
+
+        clickAndWait("ex05LinkId");
+        Ex05MainPO po = new Ex05MainPO(this);
         assertTrue(po.isOnPage());
 
         return po;

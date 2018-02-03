@@ -114,7 +114,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void aBadTestThatYouShould_NOT_write(){
+    public void testAll(){
 
         /*
             This is putting together the previous tests.
@@ -122,7 +122,8 @@ public class CommentServiceTest {
             but it is arguably more difficult to understand and maintain.
 
             This test has _12_ assertions on 4 different features/requirements...
-            far too many.
+            which can be considered too many.
+
             Note: the test is not so long, ie just 17 statements, but still it
             is testing too much.
 

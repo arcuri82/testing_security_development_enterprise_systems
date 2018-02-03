@@ -9,8 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.fail;
-
 /**
  * Created by arcuri82 on 02-Feb-18.
  */
@@ -25,16 +23,18 @@ public class SeleniumDriverHandler {
         return false;
     }
 
-    private static void setupDriverExecutable(String executableName, String property) {
+    private static boolean setupDriverExecutable(String executableName, String property) {
         String homeDir = System.getProperty("user.home");
 
         //first try Linux/Mac executable
         if (!tryToSetGeckoIfExists(property, Paths.get(homeDir, executableName))) {
             //then check if on Windows
             if (!tryToSetGeckoIfExists(property, Paths.get(homeDir, executableName + ".exe"))) {
-                fail("Cannot locate the " + executableName + " in your home directory " + homeDir);
+               return false;
             }
         }
+
+        return true;
     }
 
     public static WebDriver getChromeDriver() {
@@ -46,7 +46,10 @@ public class SeleniumDriverHandler {
             see https://sites.google.com/a/chromium.org/chromedriver/getting-started
          */
 
-        setupDriverExecutable("chromedriver", "webdriver.chrome.driver");
+        boolean OK = setupDriverExecutable("chromedriver", "webdriver.chrome.driver");
+        if(! OK){
+            return null;
+        }
 
         return new ChromeDriver();
     }

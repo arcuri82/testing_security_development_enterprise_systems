@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.atomic.AtomicLong;
 
 
 public abstract class PageObject {
@@ -14,6 +15,12 @@ public abstract class PageObject {
     protected final WebDriver driver;
     protected final String host;
     protected final int port;
+
+    private static final AtomicLong counter = new AtomicLong(System.currentTimeMillis());
+
+    public static String getUniqueId() {
+        return "foo" + counter.incrementAndGet();
+    }
 
     public PageObject(WebDriver driver, String host, int port) {
         this.driver = driver;
@@ -23,6 +30,17 @@ public abstract class PageObject {
 
     public abstract boolean isOnPage();
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public int getPort() {
+        return port;
+    }
 
     public void clickAndWait(String id){
         WebElement element = driver.findElement(By.id(id));

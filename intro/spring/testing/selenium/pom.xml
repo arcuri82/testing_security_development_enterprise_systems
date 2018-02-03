@@ -14,7 +14,7 @@
     </parent>
 
     <modules>
-        <!--<module>jsf-tests</module>-->
+        <module>jsf-tests</module>
     </modules>
 
 

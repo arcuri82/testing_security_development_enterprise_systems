@@ -1,4 +1,4 @@
-package org.tsdes.intro.spring.testing.selenium.jsftests;
+package org.tsdes.intro.spring.testing.selenium.jsftests.service;
 
 
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@ package org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.PageObject;
+import org.tsdes.misc.testutils.selenium.PageObject;
 
 /**
  * See Page Object at:
@@ -11,16 +11,17 @@ import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.PageObject;
  * http://martinfowler.com/bliki/PageObject.html
  *
  */
-public class CounterPageObject extends PageObject {
+public class Ex01PO extends PageObject {
 
 
-    public CounterPageObject(WebDriver driver) {
-        super(driver);
+    public Ex01PO(PageObject po) {
+        super(po.getDriver(), po.getHost(), po.getPort());
     }
 
+    //FIXME
     public void toStartingPage(){
-        getDriver().get(getBaseUrl()+"/ex01/ex01.jsf");
-        waitForPageToLoad();
+//        getDriver().get(getBaseUrl()+"/ex01/ex01.jsf");
+//        waitForPageToLoad();
 
         //make sure we start from a 0 counter
         if(isOnPage() && ! Integer.valueOf(0).equals(getCounterValue())) {

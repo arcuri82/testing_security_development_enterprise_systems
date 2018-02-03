@@ -3,14 +3,15 @@ package org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.PageObject;
+import org.tsdes.misc.testutils.selenium.PageObject;
 
 import java.util.List;
 
-public class CommentPageObject extends PageObject {
+public class Ex03PO extends PageObject {
 
-    public CommentPageObject(WebDriver driver) {
-        super(driver);
+
+    public Ex03PO(PageObject po) {
+        super(po.getDriver(), po.getHost(), po.getPort());
     }
 
     @Override
@@ -19,10 +20,15 @@ public class CommentPageObject extends PageObject {
     }
 
     public void toStartingPage() {
-        getDriver().get(getBaseUrl() + "/ex03/ex03.jsf");
+        //FIXME
+        //getDriver().get(getBaseUrl() + "/ex03/ex03.jsf");
         waitForPageToLoad();
     }
 
+    public int extractIndex(int position){
+        String comment = getCommentText(position);
+        return Integer.parseInt(comment.split(" ")[1]);
+    }
 
     public void createNewComment(String comment){
         WebElement textArea = getDriver().findElement(By.id("createForm:createText"));

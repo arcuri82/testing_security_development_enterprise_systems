@@ -4,17 +4,24 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.tsdes.intro.spring.jsf.Application;
 import org.tsdes.intro.spring.jsf.ex03.Comment;
 import org.tsdes.intro.spring.jsf.ex03.CommentService;
-import org.tsdes.intro.spring.testing.selenium.jsftests.DeleterService;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-
-public class CommentEJBTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {Application.class, DeleterService.class},
+        webEnvironment = NONE)
+public class CommentServiceTest {
 
     @Autowired
     private CommentService commentService;
@@ -86,12 +93,16 @@ public class CommentEJBTest {
     }
 
     @Test
-    public void testReturnValuesInOrder(){
+    public void testReturnValuesInOrder() throws Exception{
 
         commentService.createNewComment("a");
+        Thread.sleep(10);
         commentService.createNewComment("b");
+        Thread.sleep(10);
         commentService.createNewComment("c");
+        Thread.sleep(10);
         commentService.createNewComment("d");
+        Thread.sleep(10);
 
         List<Comment> comments = commentService.getMostRecentComments(10);
         assertEquals(4 , comments.size());

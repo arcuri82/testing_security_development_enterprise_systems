@@ -6,10 +6,11 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.jee.jsf</groupId>
-        <artifactId>jacoco</artifactId>
+        <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
+        <artifactId>coverage-jacoco</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
 
 
     <dependencies>
@@ -20,15 +21,14 @@
             in module B when executing tests in A that have dependency on B.
         -->
         <dependency>
-            <groupId>org.tsdes.jee.jsf</groupId>
+            <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
             <artifactId>backend</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.tsdes.jee.jsf</groupId>
+            <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
             <artifactId>frontend</artifactId>
             <version>${project.version}</version>
-            <type>war</type>
         </dependency>
     </dependencies>
 

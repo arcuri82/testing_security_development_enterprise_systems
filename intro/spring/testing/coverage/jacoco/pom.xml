@@ -2,19 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>jacoco</artifactId>
+    <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
+    <artifactId>coverage-jacoco</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.jee.jsf</groupId>
-        <artifactId>jsf</artifactId>
+        <groupId>org.tsdes.intro.spring.testing.coverage</groupId>
+        <artifactId>coverage</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <!--
         Project divided in 3 modules:
 
-        backend: contains Entity and EJB
+        backend: contains Entity and Service
         frontend: depends on backend, and contains JSF controllers and XHTML pages
         report: used to aggregate coverage results from the other 2 modules
     -->

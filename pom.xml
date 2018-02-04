@@ -370,9 +370,6 @@
                             <goals>
                                 <goal>prepare-agent-integration</goal>
                             </goals>
-                            <configuration>
-                                <propertyName>jacoco.agent</propertyName>
-                            </configuration>
                         </execution>
                         <execution>
                             <id>default-report-integration</id>

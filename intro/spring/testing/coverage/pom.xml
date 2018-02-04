@@ -3,19 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>org.tsdes.intro.spring.testing</groupId>
-    <artifactId>spring-testing</artifactId>
+    <groupId>org.tsdes.intro.spring.testing.coverage</groupId>
+    <artifactId>coverage</artifactId>
     <packaging>pom</packaging>
 
     <parent>
-        <groupId>org.tsdes.intro.spring</groupId>
-        <artifactId>intro-spring</artifactId>
+        <groupId>org.tsdes.intro.spring.testing</groupId>
+        <artifactId>spring-testing</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
-        <module>selenium</module>
-        <module>coverage</module>
+        <module>instrumentation</module>
+        <module>jacoco</module>
     </modules>
 
 

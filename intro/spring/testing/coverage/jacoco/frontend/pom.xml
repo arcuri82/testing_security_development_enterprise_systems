@@ -3,11 +3,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>frontend</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.jee.jsf</groupId>
-        <artifactId>jacoco</artifactId>
+        <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
+        <artifactId>coverage-jacoco</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -16,7 +16,7 @@
 
         <!-- Note the dependency to the other module -->
         <dependency>
-            <groupId>org.tsdes.jee.jsf</groupId>
+            <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
             <artifactId>backend</artifactId>
             <!--
                 For the version, we use a Maven property so we do not need to update it every
@@ -24,46 +24,49 @@
             -->
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tsdes.misc</groupId>
+            <artifactId>test-utils</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>jsf-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
 
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-        </dependency>
-
-        <!-- JBoss JEE -->
-        <dependency>
-            <groupId>org.jboss.spec.javax.faces</groupId>
-            <artifactId>jboss-jsf-api_2.2_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.spec.javax.ejb</groupId>
-            <artifactId>jboss-ejb-api_3.2_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.spec.javax.annotation</groupId>
-            <artifactId>jboss-annotations-api_1.2_spec</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.spec.javax.servlet</groupId>
-            <artifactId>jboss-servlet-api_3.1_spec</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-client</artifactId>
-            <scope>test</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
         </dependency>
-
     </dependencies>
 
 
@@ -74,12 +77,6 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-
-            <!-- Make sure that Wildfly is automatically downloaded and installed -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
 
         </plugins>

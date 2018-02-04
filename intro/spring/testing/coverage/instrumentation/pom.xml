@@ -6,8 +6,8 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.misc.testing</groupId>
-        <artifactId>testing</artifactId>
+        <groupId>org.tsdes.intro.spring.testing.coverage</groupId>
+        <artifactId>coverage</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

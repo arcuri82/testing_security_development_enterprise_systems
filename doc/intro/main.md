@@ -131,9 +131,13 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   Modules:
      
-  * TODO
+  * **intro/spring/bean/service**
+  * **intro/spring/bean/jpa**
+  * **intro/spring/bean/profile**
+  * **intro/spring/bean/configuration**
+  * **intro/spring/jsf**
  
-  Exercises: TODO
+  Exercises: [quiz-game-part-08](exercises/quiz-game/quiz-game-part-08.md)  
 
 <br />
 
@@ -144,7 +148,10 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   Modules:
      
-  * TODO
+  * **intro/spring/testing/selenium/jsf-tests**
+  * **intro/spring/testing/selenium/crawler**
+  * **intro/spring/testing/coverage/jacoco**
+  * **intro/spring/testing/coverage/instrumentation**
  
   Exercises: TODO
 

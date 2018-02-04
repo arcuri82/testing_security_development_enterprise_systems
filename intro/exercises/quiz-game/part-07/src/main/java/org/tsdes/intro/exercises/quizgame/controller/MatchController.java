@@ -44,7 +44,7 @@ public class MatchController implements Serializable{
 
         selectedCategoryId = null;
 
-        return "/ui/match.jsf";
+        return "/ui/match.jsf&faces-redirect=true";
     }
 
     public boolean isCategorySelected(){

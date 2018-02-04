@@ -31,7 +31,7 @@
                 <c:choose>
                     <!-- Choose a category-->
                     <c:when test="#{!matchController.categorySelected}">
-                        <h3>Select a Category</h3>
+                        <h3 id="selectCategoryHeaderId">Select a Category</h3>
 
                         <c:forEach var="ctg" items="#{matchController.categories}">
                             <h:form>

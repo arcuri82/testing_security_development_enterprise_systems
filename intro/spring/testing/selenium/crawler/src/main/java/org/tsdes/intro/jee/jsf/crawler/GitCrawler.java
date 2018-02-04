@@ -4,19 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.tsdes.misc.testutils.selenium.SeleniumDriverHandler;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /*
@@ -26,7 +18,8 @@ import java.util.stream.Collectors;
 
 
 /*
-    Do crawl Github in search of Java projects using Selenium.
+    Do crawl Github in search of Java projects, checking if they are using
+    Maven or Gradle.
 
     Note: this is just an example, as Github provides a REST-api which would be
     better in this context.
@@ -39,30 +32,12 @@ public class GitCrawler {
 
     private static final String github = "https://github.com/";
 
-    private static boolean tryToSetGeckoIfExists(String property, Path path){
-        if(Files.exists(path)){
-            System.setProperty(property, path.toAbsolutePath().toString());
-            return true;
-        }
-        return false;
-    }
 
-    private static void setupDriverExecutable(String executableName, String property){
-        String homeDir = System.getProperty("user.home");
-
-        //first try Linux/Mac executable
-        if(! tryToSetGeckoIfExists(property, Paths.get(homeDir,executableName))){
-            //then check if on Windows
-            if(! tryToSetGeckoIfExists(property, Paths.get(homeDir,executableName+".exe"))){
-                throw new RuntimeException("Cannot locate the "+executableName+" in your home directory "+homeDir);
-            }
-        }
-    }
 
     public static void main(String[] args) {
 
-        setupDriverExecutable("chromedriver", "webdriver.chrome.driver");
-        WebDriver driver =  new ChromeDriver();
+
+        WebDriver driver = SeleniumDriverHandler.getChromeDriver();
 
         try {
             crawl(driver);
@@ -135,9 +110,10 @@ public class GitCrawler {
     private static void scanCurrentPage(WebDriver driver, int page) {
         String current = driver.getCurrentUrl();
 
-        //Note: there was a layout change in the past on Github page
+        //Note: there were layout changes in the past on Github page
         //String xpath = "//h3[@class='repo-list-name']/a";
-        String xpath = "//div[@class='container']//ul//h3//a";
+        //String xpath = "//div[@class='container']//ul//h3//a";
+        String xpath = "//ul[contains(@class,'repo-list')]//h3//a";
 
         List<WebElement> projects = driver.findElements(By.xpath(xpath));
         List<String> names = projects.stream().map(p -> p.getText()).collect(Collectors.toList());
@@ -172,11 +148,11 @@ public class GitCrawler {
                     - build files might not be in root folder
                     - no check if there was any error in the loaded page
                  */
-                List<WebElement> maven = driver.findElements(By.xpath("//td[@class='content']//a[@title='pom.xml']"));
+                List<WebElement> maven = driver.findElements(By.xpath("//td[contains(@class,'content')]//a[@title='pom.xml']"));
                 if (!maven.isEmpty()) {
                     System.out.println("" + name + " uses Maven");
                 } else {
-                    List<WebElement> gradle =  driver.findElements(By.xpath("//td[@class='content']//a[@title='build.gradle']"));
+                    List<WebElement> gradle =  driver.findElements(By.xpath("//td[contains(@class,'content')]//a[@title='build.gradle']"));
                     if (!gradle.isEmpty()) {
                         System.out.println("" + name + " uses Gradle");
                     } else {

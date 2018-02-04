@@ -15,6 +15,7 @@
 
     <modules>
         <module>jsf-tests</module>
+        <module>crawler</module>
     </modules>
 
 

@@ -16,7 +16,7 @@ public abstract class CounterTestBaseJEE extends CounterTestBase {
     private Context ctx;
 
     @Before
-    public void initContainer() throws Exception {
+    public void initContainer() {
 
         /*
             Using an embedded JEE container...
@@ -39,10 +39,10 @@ public abstract class CounterTestBaseJEE extends CounterTestBase {
     }
 
     @Override
-    public Counter getCounter(){
+    public Counter getCounter() {
         String name = getSingletonClass().getSimpleName();
         try {
-            return (Counter) ctx.lookup("java:global/classes/"+name+"!"+Counter.class.getName());
+            return (Counter) ctx.lookup("java:global/classes/" + name + "!" + Counter.class.getName());
         } catch (NamingException e) {
             return null;
         }

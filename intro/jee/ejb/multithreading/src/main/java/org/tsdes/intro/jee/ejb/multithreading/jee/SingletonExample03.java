@@ -11,6 +11,12 @@ public class SingletonExample03 implements Counter {
 
     private int x;
 
+    /*
+        yes, we are going to wait until lock is released, ie
+        another thread executing this method in parallel.
+        However, we are not going to wait forever,
+        and we can specify a timeout
+     */
     @AccessTimeout(value = 2 , unit = TimeUnit.MILLISECONDS)
     @Override
     public void incrementCounter() {

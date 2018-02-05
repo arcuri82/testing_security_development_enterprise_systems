@@ -23,20 +23,17 @@ public abstract class CounterTestBase {
 
         for(int i=0; i<nThreads; i++){
 
-            Thread t = new Thread(){
-                @Override
-                public void run(){
-                    for(int j=0; j<loops; j++){
-                        counter.incrementCounter();
-                    }
+            Thread t = new Thread(() -> {
+                for(int j=0; j<loops; j++){
+                    counter.incrementCounter();
                 }
-            };
+            });
             t.start();
             threads.add(t);
         }
 
         //Java 8 stream, could have used just a loop
-        threads.stream().forEach(t -> {
+        threads.forEach(t -> {
             try {
                 t.join();
             } catch (InterruptedException e) {

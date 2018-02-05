@@ -6,13 +6,13 @@ import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Singleton;
 
-@Lock(LockType.WRITE)
+@Lock(LockType.WRITE)  // default: all method synchronized
 @Singleton
 public class SingletonExample02 implements Counter {
 
     private int x;
 
-    @Lock(LockType.READ)
+    @Lock(LockType.READ) //override default: allow concurrent access
     @Override
     public void incrementCounter() {
         x = x + 1;

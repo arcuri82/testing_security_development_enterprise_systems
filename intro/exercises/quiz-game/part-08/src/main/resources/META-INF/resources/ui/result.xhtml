@@ -17,10 +17,10 @@
 
         <c:choose>
             <c:when test="#{!empty param['victory']}">
-                <h2>YOU WON</h2>
+                <h2 id="wonId">YOU WON</h2>
             </c:when>
             <c:otherwise>
-                <h2>YOU LOST</h2>
+                <h2 id="lostId">YOU LOST</h2>
             </c:otherwise>
         </c:choose>
 

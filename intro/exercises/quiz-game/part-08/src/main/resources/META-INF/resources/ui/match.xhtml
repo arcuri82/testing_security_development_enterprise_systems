@@ -4,6 +4,7 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 >
 
 <ui:composition template="/layout.xhtml">
@@ -34,14 +35,22 @@
                         <h3 id="selectCategoryHeaderId">Select a Category</h3>
 
                         <c:forEach var="ctg" items="#{matchController.categories}">
-                            <h:form>
-                                <h:commandButton value="#{ctg.name}" action="#{matchController.selectCategory(ctg.id)}" class="gameBtn"/>
+                            <h:form prependId="false">
+                                <h:commandButton
+                                        value="#{ctg.name}"
+                                        action="#{matchController.selectCategory(ctg.id)}"
+                                        class="gameBtn"
+                                        p:data-ctgid = "#{ctg.id}"
+                                        id="ctgBtnId_#{ctg.id}"
+                                />
                             </h:form>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
                         <!-- Answer questions -->
-                        <p class="question">Question  <h:outputLabel value="#{matchController.increasedCounter}" class="question"/></p>
+                        <p class="question">Question  <h:outputLabel value="#{matchController.increasedCounter}"
+                                                                     class="question" id="questionCounterId"
+                        /></p>
                         <p class="question">out of  <h:outputLabel value="#{matchController.numberOfQuizzes}" class="question"/></p>
 
                         <br/>
@@ -49,19 +58,36 @@
 
                         <c:set  var="quiz" value="#{matchController.currentQuiz}"/>
 
-                        <p class="question">Question: "<h:outputLabel value="#{quiz.question}"/>"</p>
+                        <p class="question">Question: "<h:outputLabel
+                                value="#{quiz.question}"
+                                p:data-quizid="#{quiz.id}"
+                                id="questionId"
+                        />"
+                        </p>
 
                         <h:form>
-                            <h:commandButton value="A: #{quiz.firstAnswer}" action="#{matchController.answerQuiz(0)}" ajax="false" class="gameBtn answer"/>
+                            <h:commandButton value="A: #{quiz.firstAnswer}" action="#{matchController.answerQuiz(0)}"
+                                             class="gameBtn answer"
+                                             id="answerId_0"
+                            />
                         </h:form>
                         <h:form>
-                            <h:commandButton value="B: #{quiz.secondAnswer}" action="#{matchController.answerQuiz(1)}" ajax="false" class="gameBtn answer"/>
+                            <h:commandButton value="B: #{quiz.secondAnswer}" action="#{matchController.answerQuiz(1)}"
+                                             class="gameBtn answer"
+                                             id="answerId_1"
+                            />
                         </h:form>
                         <h:form>
-                            <h:commandButton value="C: #{quiz.thirdAnswer}" action="#{matchController.answerQuiz(2)}" ajax="false" class="gameBtn answer"/>
+                            <h:commandButton value="C: #{quiz.thirdAnswer}" action="#{matchController.answerQuiz(2)}"
+                                             class="gameBtn answer"
+                                             id="answerId_2"
+                            />
                         </h:form>
                         <h:form>
-                            <h:commandButton value="D: #{quiz.fourthAnswer}" action="#{matchController.answerQuiz(3)}" ajax="false" class="gameBtn answer"/>
+                            <h:commandButton value="D: #{quiz.fourthAnswer}" action="#{matchController.answerQuiz(3)}"
+                                             class="gameBtn answer"
+                                             id="answerId_3"
+                            />
                         </h:form>
 
                     </c:otherwise>

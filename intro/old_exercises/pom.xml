@@ -13,7 +13,6 @@
     </parent>
 
     <modules>
-        <module>quiz-game</module>
         <module>event-list</module>
         <module>my-news</module>
         <module>my-cantina</module>

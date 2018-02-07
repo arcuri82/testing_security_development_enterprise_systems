@@ -58,23 +58,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
     }
 
-//    @Override
-//    protected UserDetailsService userDetailsService() {
-//        return null;
-//    }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) {
-//
-//        try {
-//            auth.inMemoryAuthentication()
-//                    .withUser("foo").password("123").roles("USER").and()
-//                    .withUser("admin").password("bar").roles("ADMIN", "USER");
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
 

@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.Set;
 
@@ -16,18 +17,17 @@ import java.util.Set;
 public class UserService {
 
     @Autowired
-    private UserRepository userCrud;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private EntityManager em;
 
     public boolean createUser(String username, String password) {
 
         try {
             String hashedPassword = passwordEncoder.encode(password);
 
-            if (userCrud.exists(username)) {
+            if (em.find(UserEntity.class, username) == null) {
                 return false;
             }
 
@@ -37,7 +37,7 @@ public class UserService {
             user.setRoles(Collections.singleton("USER"));
             user.setEnabled(true);
 
-            userCrud.save(user);
+            em.persist(user);
 
             return true;
 

@@ -1,7 +1,5 @@
 jsf:
-  PROJECT_STAGE: Production
-#  primefaces:
-#    theme: overcast
+  project-stage: development
 
 spring:
   jpa:

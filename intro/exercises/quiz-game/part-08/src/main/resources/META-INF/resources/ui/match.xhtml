@@ -65,25 +65,25 @@
                         />"
                         </p>
 
-                        <h:form>
+                        <h:form prependId="false">
                             <h:commandButton value="A: #{quiz.firstAnswer}" action="#{matchController.answerQuiz(0)}"
                                              class="gameBtn answer"
                                              id="answerId_0"
                             />
                         </h:form>
-                        <h:form>
+                        <h:form prependId="false">
                             <h:commandButton value="B: #{quiz.secondAnswer}" action="#{matchController.answerQuiz(1)}"
                                              class="gameBtn answer"
                                              id="answerId_1"
                             />
                         </h:form>
-                        <h:form>
+                        <h:form prependId="false">
                             <h:commandButton value="C: #{quiz.thirdAnswer}" action="#{matchController.answerQuiz(2)}"
                                              class="gameBtn answer"
                                              id="answerId_2"
                             />
                         </h:form>
-                        <h:form>
+                        <h:form prependId="false">
                             <h:commandButton value="D: #{quiz.fourthAnswer}" action="#{matchController.answerQuiz(3)}"
                                              class="gameBtn answer"
                                              id="answerId_3"

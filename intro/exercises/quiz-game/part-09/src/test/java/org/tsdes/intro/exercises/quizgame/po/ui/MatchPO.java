@@ -47,7 +47,7 @@ public class MatchPO extends PageObject{
     }
 
     public long getQuizId(){
-        String id = getDriver().findElement(By.xpath("//[@data-quizid]")).getAttribute("data-quizid");
+        String id = getDriver().findElement(By.xpath("//*[@data-quizid]")).getAttribute("data-quizid");
         return Long.parseLong(id);
     }
 

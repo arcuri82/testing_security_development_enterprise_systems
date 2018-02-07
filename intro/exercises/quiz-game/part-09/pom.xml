@@ -16,7 +16,7 @@
         <version.springboot>1.5.4.RELEASE</version.springboot>
         <joinfaces.version>2.4.1</joinfaces.version>
         <version.h2>1.4.194</version.h2>
-        <version.selenium>3.8.1</version.selenium>
+        <version.selenium>3.9.0</version.selenium>
     </properties>
 
 
@@ -91,7 +91,30 @@
             <version>${version.selenium}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>${version.selenium}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>${version.selenium}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>${version.selenium}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>${version.selenium}</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

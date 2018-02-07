@@ -17,6 +17,7 @@
         <joinfaces.version>2.4.1</joinfaces.version>
         <version.h2>1.4.194</version.h2>
         <version.selenium>3.9.0</version.selenium>
+        <version.jacoco>0.7.9</version.jacoco>
     </properties>
 
 
@@ -45,7 +46,6 @@
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-
 
 
         <dependency>
@@ -121,6 +121,18 @@
 
     <build>
 
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -133,7 +145,52 @@
                         <target>${version.java}</target>
                     </configuration>
                 </plugin>
-
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${version.jacoco}</version>
+                    <executions>
+                        <execution>
+                            <id>default-prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-report</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-prepare-agent-integration</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>prepare-agent-integration</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>default-report-integration</id>
+                            <goals>
+                                <goal>report-integration</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

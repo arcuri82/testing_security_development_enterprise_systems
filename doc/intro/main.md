@@ -153,7 +153,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **intro/spring/testing/coverage/jacoco**
   * **intro/spring/testing/coverage/instrumentation**
  
-  Exercises: TODO
+  Exercises: [quiz-game-part-09](exercises/quiz-game/quiz-game-part-09.md)  
 
 <br />
 

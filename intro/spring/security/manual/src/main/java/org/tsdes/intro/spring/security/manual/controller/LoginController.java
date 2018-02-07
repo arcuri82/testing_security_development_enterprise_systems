@@ -1,19 +1,19 @@
-package org.tsdes.intro.jee.jsf.examples.ex05.controller;
+package org.tsdes.intro.spring.security.manual.controller;
 
 
-import org.tsdes.intro.jee.jsf.examples.ex05.ejb.UserEJB;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.tsdes.intro.spring.security.manual.service.UserService;
 
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class LoggingController implements Serializable{
+public class LoginController implements Serializable{
 
-    @Inject
-    private UserEJB userEJB;
+    @Autowired
+    private UserService userService;
 
     private String formUserName;
     private String formPassword;
@@ -24,7 +24,7 @@ public class LoggingController implements Serializable{
     private String registeredUser;
 
 
-    public LoggingController(){
+    public LoginController(){
     }
 
 
@@ -38,25 +38,25 @@ public class LoggingController implements Serializable{
 
     public String logOut(){
         registeredUser = null;
-        return "ex05.jsf";
+        return "index.jsf";
     }
 
 
     public String logIn(){
-        boolean valid = userEJB.login(formUserName, formPassword);
+        boolean valid = userService.login(formUserName, formPassword);
         if(valid){
             registeredUser = formUserName;
-            return "ex05.jsf";
+            return "index.jsf";
         } else {
             return "login.jsf";
         }
     }
 
     public String registerNew(){
-        boolean registered = userEJB.createUser(formUserName,formPassword);
+        boolean registered = userService.createUser(formUserName,formPassword);
         if(registered){
             registeredUser = formUserName;
-            return "ex05.jsf";
+            return "index.jsf";
         } else {
             return "login.jsf";
         }

@@ -1,16 +1,20 @@
-package org.tsdes.intro.jee.jsf.examples.ex05.po;
+package org.tsdes.intro.spring.security.manual.selenium.po;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.tsdes.intro.jee.jsf.examples.test.PageObject;
+import org.tsdes.misc.testutils.selenium.PageObject;
 
 import java.util.List;
 
-public class HomePageObject extends PageObject {
+public class IndexPO extends PageObject {
 
-    public HomePageObject(WebDriver driver) {
-        super(driver);
+    public IndexPO(WebDriver driver, String host, int port) {
+        super(driver, host, port);
+    }
+
+    public IndexPO(PageObject other){
+        super(other);
     }
 
     @Override
@@ -19,7 +23,7 @@ public class HomePageObject extends PageObject {
     }
 
     public void toStartingPage() {
-        getDriver().get(getBaseUrl() + "/ex05/ex05.jsf");
+        getDriver().get(host+":"+port);
         waitForPageToLoad();
         doLogout();
     }
@@ -35,15 +39,12 @@ public class HomePageObject extends PageObject {
     }
 
     public boolean isLoggedOut(){
-        List<WebElement> elements = getDriver().findElements(By.id("loginButton"));
-        return ! elements.isEmpty();
+        return getDriver().findElements(By.id("loginButton")).size() > 0 ;
     }
 
     public void doLogout(){
         if(isLoggedIn()){
-            WebElement logout =  getDriver().findElement(By.id("logoutForm:logoutButton"));
-            logout.click();
-            waitForPageToLoad();
+            clickAndWait("logoutForm:logoutButton");
         }
     }
 
@@ -51,17 +52,16 @@ public class HomePageObject extends PageObject {
         As the login will lead us to a new page, in this method we do return the Page Object
         for such new page, or null if the page transition did not take place
      */
-    public LoginPageObject doLogin(){
+    public LoginPO doLogin(){
 
         if(isLoggedIn()){
             return null;
         }
 
-        WebElement login =  getDriver().findElement(By.id("loginButton"));
-        login.click();
-        waitForPageToLoad();
+        clickAndWait("loginButton");
 
-        LoginPageObject po = new LoginPageObject(getDriver());
+        LoginPO po = new LoginPO(this);
+
         return po;
     }
 

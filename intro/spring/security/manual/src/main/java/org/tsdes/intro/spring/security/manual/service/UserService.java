@@ -1,37 +1,32 @@
-package org.tsdes.intro.jee.jsf.examples.ex05.ejb;
-
+package org.tsdes.intro.spring.security.manual.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.tsdes.intro.jee.jsf.examples.ex05.entity.UserDetails;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.tsdes.intro.spring.security.manual.entity.User;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/**
- *  A good explanation/tutorial on how to handle passwords can be found at:
- *  <p>
- *  https://wblinks.com/notes/storing-passwords-the-wrong-better-and-even-better-way/
- *  <p>
- *  Note: this is independent from Java/JEE
- */
-@Stateless
-public class UserEJB implements Serializable{
 
-    @PersistenceContext()
+@Service
+@Transactional
+public class UserService {
+
+    @PersistenceContext
     private EntityManager em;
 
-    public UserEJB(){
-    }
+    private static final String PEPPER = "some strings, that needs to be stored outside the database";
+
+    private static final int ITERATIONS = 10_000;
+
+    private static final char SEPARATOR = '$';
+
+    private static final char SEPARATOR_REPLACEMENT = '!';
 
     /**
-     *
-     * @param userId
-     * @param password
      * @return {@code false} if for any reason it was not possible to create the user
      */
     public boolean createUser(String userId, String password) {
@@ -39,21 +34,29 @@ public class UserEJB implements Serializable{
             return false;
         }
 
-        UserDetails userDetails = getUser(userId);
+        User userDetails = getUser(userId);
         if (userDetails != null) {
             //a user with same id already exists
             return false;
         }
 
-        userDetails = new UserDetails();
+        userDetails = new User();
         userDetails.setUserId(userId);
 
         //create a "strong" random string of at least 128 bits, needed for the "salt"
-        String salt = getSalt();
-        userDetails.setSalt(salt);
+        String salt = getRandomSalt();
 
-        String hash = computeHash(password, salt);
-        userDetails.setHash(hash);
+        String hash = computeSHA256(password, ITERATIONS, salt, PEPPER);
+
+        /*
+            Note: the paper is not stored in the string in the database.
+            However, the ITERATIONS and the algorithm used need to be stored,
+            because we might change them in the future (eg with something more
+            expensive, as hardware will get faster)
+         */
+        String hashedPassword = "SHA-256"+SEPARATOR+ITERATIONS+SEPARATOR+salt+SEPARATOR+hash;
+
+        userDetails.setPassword(hashedPassword);
 
         em.persist(userDetails);
 
@@ -72,8 +75,8 @@ public class UserEJB implements Serializable{
             return false;
         }
 
-        UserDetails userDetails = getUser(userId);
-        if (userDetails == null) {
+        User user = getUser(userId);
+        if (user == null) {
 
             /*
                 Why computing an hash with a random salt without storing it anywhere???
@@ -87,28 +90,36 @@ public class UserEJB implements Serializable{
                 That is also a reason why, when you fail to login in a website, usually
                 it does not tell you if it was the userId or the password that was wrong...
              */
-            computeHash(password, getSalt());
+            computeSHA256(password, ITERATIONS, getRandomSalt(), PEPPER);
 
             return false;
         }
 
-        String hash = computeHash(password, userDetails.getSalt());
+        String storedHashedPassword = user.getPassword();
+        String[] tokens = storedHashedPassword.split(""+SEPARATOR);
+
+        //NOTE: if we change algorithm, we would need to check it as well
+
+        int iterations = Integer.parseInt(tokens[1]);
+        String salt = tokens[2];
+        String hash = tokens[3];
+
+        String x = computeSHA256(password, iterations, salt, PEPPER);
 
         //check if the computed hash is equal to what stored in the DB
-        return  hash.equals(userDetails.getHash());
+        return  x.equals(hash);
     }
 
 
-    public UserDetails getUser(String userId){
-        return em.find(UserDetails.class, userId);
+    public User getUser(String userId){
+        return em.find(User.class, userId);
     }
 
 
     //------------------------------------------------------------------------
 
 
-    @NotNull
-    protected String computeHash(String password, String salt){
+    protected String computeSHA256(String password, int iterations, String salt, String pepper){
 
          /*
             Given an hash function "f", we have
@@ -122,7 +133,7 @@ public class UserEJB implements Serializable{
             g(hash) = password
          */
 
-        String combined = password + salt;
+        String hash = password + salt + pepper;
 
         /*
             The password is combined with a "salt" to avoid:
@@ -137,16 +148,21 @@ public class UserEJB implements Serializable{
                will be at least the length of the salt (eg 26) regardless of
                the length of the password.
 
+            Note: a hacker accessing the database can read the "salt", but would
+            not be able to read the "pepper".
+
             Note: DigestUtils from commons-codec library is just an utility to simplify
             the usage of Java API own MessageDigest class
          */
 
-        String hash = DigestUtils.sha256Hex(combined);
+        for(int i=0; i<iterations; i++) {
+            hash = DigestUtils.sha256Hex(hash + salt + pepper);
+        }
+
         return hash;
     }
 
-    @NotNull
-    protected String getSalt(){
+    protected String getRandomSalt(){
         SecureRandom random = new SecureRandom();
         int bitsPerChar = 5;
         int twoPowerOfBits = 32; // 2^5
@@ -154,6 +170,8 @@ public class UserEJB implements Serializable{
         assert n * bitsPerChar >= 128;
 
         String salt = new BigInteger(n * bitsPerChar, random).toString(twoPowerOfBits);
+        //we should avoid the separator being part of the random string
+        salt = salt.replace(SEPARATOR, SEPARATOR_REPLACEMENT);
         return salt;
     }
 }

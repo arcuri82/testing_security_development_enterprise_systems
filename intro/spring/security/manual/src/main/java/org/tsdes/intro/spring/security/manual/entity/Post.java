@@ -1,35 +1,30 @@
-package org.tsdes.intro.jee.jsf.examples.ex05.entity;
+package org.tsdes.intro.spring.security.manual.entity;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 @Entity
-@NamedQueries({
-        @NamedQuery(name = Post.GET_ALL, query = "SELECT p FROM Post p ORDER BY p.creationTime DESC"),
-        @NamedQuery(name = Post.DELETE_POST, query = "DELETE FROM Post p WHERE p.id=:id")
-})
 public class Post {
-
-    public static final String GET_ALL = "Post.get_all";
-    public static final String DELETE_POST = "Post.delete_post";
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Size(max = 1000)
     private String text;
 
     @NotNull
     @ManyToOne
-    private UserDetails author;
+    private User author;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creationTime;
+    private ZonedDateTime creationTime;
 
 
     public Post() {
@@ -51,19 +46,19 @@ public class Post {
         this.text = text;
     }
 
-    public UserDetails getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(UserDetails author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
-    public Date getCreationTime() {
+    public ZonedDateTime getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Date creationTime) {
+    public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
     }
 }

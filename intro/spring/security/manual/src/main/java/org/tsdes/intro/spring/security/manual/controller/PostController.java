@@ -1,11 +1,11 @@
-package org.tsdes.intro.jee.jsf.examples.ex05.controller;
+package org.tsdes.intro.spring.security.manual.controller;
 
 
-import org.tsdes.intro.jee.jsf.examples.ex05.entity.Post;
-import org.tsdes.intro.jee.jsf.examples.ex05.ejb.PostEJB;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.tsdes.intro.spring.security.manual.entity.Post;
+import org.tsdes.intro.spring.security.manual.service.PostService;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -14,21 +14,21 @@ import java.util.List;
 @RequestScoped
 public class PostController implements Serializable{
 
-    @Inject
-    private PostEJB postEJB;
+    @Autowired
+    private PostService postService;
 
     private String formText;
 
 
     public String doPostText(String formAuthor){
 
-        boolean posted = postEJB.post(formText,formAuthor);
+        boolean posted = postService.post(formText,formAuthor);
 
         if(posted){
             formText = "";
         }
 
-        return "ex05.jsf";
+        return "index.jsf";
     }
 
     public String getFormText() {
@@ -40,11 +40,11 @@ public class PostController implements Serializable{
     }
 
     public String deletePost(long id){
-        postEJB.delete(id);
-        return "ex05.jsf";
+        postService.deletePost(id);
+        return "index.jsf";
     }
 
     public List<Post> getAllPosts(){
-        return postEJB.getAllPosts();
+        return postService.getAllPosts();
     }
 }

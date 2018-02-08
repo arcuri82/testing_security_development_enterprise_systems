@@ -19,8 +19,10 @@
     <ui:define name="content">
 
         <p>
-            <b>Note</b>: what done here is very <b>unsecure</b>: this means that breaking/hacking this login mechanism
-            is trivial, as we will see in the tests.
+            <b>Note</b>: what done here is  <b>unsecure</b>:
+            this means that it is possible to break/hack the posts of other users.
+            However, to do that we would need to dig into the details of how JSF
+            handles its ViewState...
         </p>
 
         <hr/>
@@ -68,13 +70,17 @@
                     </h:outputText>
 
                     <!--
-                        Only the author of a post can delete it. Note: this is a very weak security
-                        mechanism, as a hacker could just do direct HTTP calls.
+                        Only the author of a post can delete it.
+                        Note: this is a weak security mechanism, as a hacker could just do direct HTTP calls
+                        by crafting the right configurations for the JSF ViewState
                     -->
                     <c:if test="#{post.author.userId.equals(loginController.registeredUser)}">
                         <div class="deleteButton">
-                            <h:form>
-                                <h:commandButton value="Delete" action="#{postController.deletePost(post.id)}"/>
+                            <h:form prependId="false">
+                                <h:commandButton
+                                        value="Delete"
+                                        action="#{postController.deletePost(post.id)}"
+                                        id="deleteButton_#{post.id}"/>
                             </h:form>
                         </div>
                     </c:if>

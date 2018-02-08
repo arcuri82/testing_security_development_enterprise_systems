@@ -23,7 +23,6 @@ public class Post {
     private User author;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
     private ZonedDateTime creationTime;
 
 

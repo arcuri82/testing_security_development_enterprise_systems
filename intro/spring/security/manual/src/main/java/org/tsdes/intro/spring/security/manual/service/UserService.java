@@ -96,7 +96,7 @@ public class UserService {
         }
 
         String storedHashedPassword = user.getPassword();
-        String[] tokens = storedHashedPassword.split(""+SEPARATOR);
+        String[] tokens = storedHashedPassword.split("\\"+SEPARATOR);
 
         //NOTE: if we change algorithm, we would need to check it as well
 

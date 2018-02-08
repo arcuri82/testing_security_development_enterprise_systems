@@ -46,7 +46,7 @@ public class LoginController implements Serializable{
         boolean valid = userService.login(formUserName, formPassword);
         if(valid){
             registeredUser = formUserName;
-            return "index.jsf";
+            return "index.jsf?faces-redirect=true";
         } else {
             return "login.jsf";
         }
@@ -56,7 +56,7 @@ public class LoginController implements Serializable{
         boolean registered = userService.createUser(formUserName,formPassword);
         if(registered){
             registeredUser = formUserName;
-            return "index.jsf";
+            return "index.jsf?faces-redirect=true";
         } else {
             return "login.jsf";
         }

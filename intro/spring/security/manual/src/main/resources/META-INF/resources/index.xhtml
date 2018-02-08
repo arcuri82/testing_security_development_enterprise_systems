@@ -9,28 +9,27 @@
 >
 
 
-<ui:composition template="../layout.xhtml">
+<ui:composition template="layout.xhtml">
 
     <ui:define name="title">
-        Unsecure Logging Example
+        Login Example
     </ui:define>
 
 
     <ui:define name="content">
 
         <p>
-            <b>Note</b>: what done here is very <b>unsecure</b>: this means that breaking/hacking this logging mechanism
-            is trivial.
-            Here, this is done to just give you some basic ways to distinguish between different users.
+            <b>Note</b>: what done here is very <b>unsecure</b>: this means that breaking/hacking this login mechanism
+            is trivial, as we will see in the tests.
         </p>
 
         <hr/>
 
         <c:choose>
-            <c:when test="#{loggingController.loggedIn}">
+            <c:when test="#{loginController.loggedIn}">
                 <h:form id="logoutForm">
-                    <h:outputText value="Hi #{loggingController.registeredUser}!  "/>
-                    <h:commandButton value="Log Out" action="#{loggingController.logOut}" id="logoutButton"/>
+                    <h:outputText value="Hi #{loginController.registeredUser}!  "/>
+                    <h:commandButton value="Log Out" action="#{loginController.logOut}" id="logoutButton"/>
                 </h:form>
             </c:when>
             <c:otherwise>
@@ -41,11 +40,11 @@
 
 
         <!-- Add possibility of creating new post only if user is logged in -->
-        <c:if test="#{loggingController.loggedIn}">
+        <c:if test="#{loginController.loggedIn}">
             <h:form id="postForm">
                 <h:outputLabel value="New post:"/>
                 <h:inputTextarea value="#{postController.formText}" cols="50" rows="5" id="postText"/>
-                <h:commandButton value="Post" action="#{postController.doPostText(loggingController.registeredUser)}"
+                <h:commandButton value="Post" action="#{postController.doPostText(loginController.registeredUser)}"
                     id="createPost"/>
             </h:form>
         </c:if>
@@ -69,10 +68,10 @@
                     </h:outputText>
 
                     <!--
-                        Only the author of a post can delete it. Recall: this is a very weak security
+                        Only the author of a post can delete it. Note: this is a very weak security
                         mechanism, as a hacker could just do direct HTTP calls.
                     -->
-                    <c:if test="#{post.author.userId.equals(loggingController.registeredUser)}">
+                    <c:if test="#{post.author.userId.equals(loginController.registeredUser)}">
                         <div class="deleteButton">
                             <h:form>
                                 <h:commandButton value="Delete" action="#{postController.deletePost(post.id)}"/>

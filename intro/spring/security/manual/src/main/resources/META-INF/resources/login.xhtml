@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
 
-<ui:composition template="../layout.xhtml">
+<ui:composition template="layout.xhtml">
 
     <ui:define name="title">Login / Create New User</ui:define>
 
@@ -21,15 +21,15 @@
 
             <h:panelGrid columns="2">
                 <h:outputLabel value="User name : "/>
-                <h:inputText value="#{loggingController.formUserName}" id="userId"/>
+                <h:inputText value="#{loginController.formUserName}" id="userId"/>
 
                 <h:outputLabel value="Password : "/>
-                <h:inputSecret value="#{loggingController.formPassword}" id="password"/>
+                <h:inputSecret value="#{loginController.formPassword}" id="password"/>
 
             </h:panelGrid>
 
-            <h:commandButton value="Log in" action="#{loggingController.logIn}" id="logIn"/>
-            <h:commandButton value="Register new" action="#{loggingController.registerNew}" id="create"/>
+            <h:commandButton value="Log in" action="#{loginController.logIn}" id="logIn"/>
+            <h:commandButton value="Register new" action="#{loginController.registerNew}" id="create"/>
         </h:form>
 
     </ui:define>

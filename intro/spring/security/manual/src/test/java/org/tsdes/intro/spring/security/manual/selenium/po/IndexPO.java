@@ -19,7 +19,7 @@ public class IndexPO extends PageObject {
 
     @Override
     public boolean isOnPage() {
-        return getDriver().getTitle().contains("Unsecure Logging Example");
+        return getDriver().getTitle().contains("Login Example");
     }
 
     public void toStartingPage() {
@@ -34,8 +34,7 @@ public class IndexPO extends PageObject {
             rather than "findElement", as this latter does throw an exception if the
             element is missing.
          */
-        List<WebElement> elements = getDriver().findElements(By.id("logoutForm:logoutButton"));
-        return ! elements.isEmpty();
+        return getDriver().findElements(By.id("logoutForm:logoutButton")).size() > 0;
     }
 
     public boolean isLoggedOut(){
@@ -86,15 +85,10 @@ public class IndexPO extends PageObject {
             //can happen if not logged in
             return false;
         }
-        List<WebElement> create = getDriver().findElements(By.id("postForm:createPost"));
-        if(create.isEmpty()){
-            return false;
-        }
 
-        input.get(0).clear();
-        input.get(0).sendKeys(text);
-        create.get(0).click();
-        waitForPageToLoad();
+        setText("postForm:postText", text);
+        clickAndWait("postForm:createPost");
+
         return true;
     }
 }

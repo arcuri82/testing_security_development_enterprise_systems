@@ -1,4 +1,4 @@
-package org.tsdes.intro.spring.security.authorization;
+package org.tsdes.intro.spring.security.authorization.selenium;
 
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -6,10 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.tsdes.intro.spring.security.authorization.po.IndexPO;
-import org.tsdes.intro.spring.security.authorization.po.LoginPO;
-import org.tsdes.intro.spring.security.authorization.po.ProtectedPO;
-import org.tsdes.intro.spring.security.authorization.po.SigninPO;
+import org.tsdes.intro.spring.security.authorization.Application;
+import org.tsdes.intro.spring.security.authorization.selenium.po.IndexPO;
+import org.tsdes.intro.spring.security.authorization.selenium.po.LoginPO;
+import org.tsdes.intro.spring.security.authorization.selenium.po.ProtectedPO;
+import org.tsdes.intro.spring.security.authorization.selenium.po.SigninPO;
 import org.tsdes.misc.testutils.selenium.SeleniumDriverHandler;
 
 import java.util.concurrent.atomic.AtomicInteger;

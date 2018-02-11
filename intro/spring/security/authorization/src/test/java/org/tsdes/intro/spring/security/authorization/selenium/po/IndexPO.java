@@ -1,4 +1,4 @@
-package org.tsdes.intro.spring.security.authorization.po;
+package org.tsdes.intro.spring.security.authorization.selenium.po;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

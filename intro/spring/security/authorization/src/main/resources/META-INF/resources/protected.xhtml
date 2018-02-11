@@ -5,21 +5,21 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
 >
 
-<head>
+<h:head>
     <title>Protected resource</title>
-</head>
+</h:head>
 
-<body>
-<h2>Protected resource</h2>
+<h:body>
+    <h2>Protected resource</h2>
 
-<br/>
+    <br/>
 
-<h:link id="homeLinkId" outcome="/index.jsf" value="Home"/>
+    <h:link id="homeLinkId" outcome="/index.jsf" value="Home"/>
 
-<br/>
+    <br/>
 
-<form action="/logout">
-    <input value="Log out" type="submit" id="logoutBtnId"/>
-</form>
-</body>
+    <form action="/logout">
+        <input value="Log out" type="submit" id="logoutBtnId"/>
+    </form>
+</h:body>
 </html>

@@ -6,26 +6,31 @@
         xmlns:sec="http://www.springframework.org/security/tags"
 >
 
-<h2>Spring Security Example With Database</h2>
+<h:head>
+    <title>Spring Security Example</title>
+</h:head>
 
-<br/>
-
-<sec:authenticated>
-    <p><h:outputText value="Hi #{userInfoController.userName}!!!"/></p>
-
-    <a href="/protected.jsf" id="protectedLinkId">Link</a> to protected resource.
+<h:body>
+    <h2>Spring Security Example With Database</h2>
 
     <br/>
 
-    <form action="/logout">
-        <input value="Log out" type="submit" id="logoutBtnId"/>
-    </form>
-</sec:authenticated>
+    <sec:authenticated>
+        <p><h:outputText value="Hi #{userInfoController.userName}!!!" id="helloMsgId"/></p>
 
-<sec:anonymous>
-    <p>You are not logged in</p>
-    <h:button id="loginBtnId" outcome="/login.jsf" value="Log in"/>
-    <h:button id="signinBtnId" outcome="/signin.jsf" value="Sign in"/>
-</sec:anonymous>
+        <a href="/protected.jsf" id="protectedLinkId">Link</a> to protected resource.
 
+        <br/>
+
+        <form action="/logout">
+            <input value="Log out" type="submit" id="logoutBtnId"/>
+        </form>
+    </sec:authenticated>
+
+    <sec:anonymous>
+        <p>You are not logged in</p>
+        <h:button id="loginBtnId" outcome="/login.jsf" value="Log in"/>
+        <h:button id="signinBtnId" outcome="/signin.jsf" value="Sign in"/>
+    </sec:anonymous>
+</h:body>
 </html>

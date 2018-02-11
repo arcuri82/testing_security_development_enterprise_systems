@@ -14,10 +14,12 @@
 
 <br/>
 
-<h:link id="linkToHomeId" outcome="/index.jsf" value="Home"/>
+<h:link id="homeLinkId" outcome="/index.jsf" value="Home"/>
 
 <br/>
 
-<h:button id="logoutId" href="/logout" value="Log out"/>
+<form action="/logout">
+    <input value="Log out" type="submit" id="logoutBtnId"/>
+</form>
 </body>
 </html>

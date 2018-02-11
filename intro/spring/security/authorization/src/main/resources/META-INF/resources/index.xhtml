@@ -13,17 +13,19 @@
 <sec:authenticated>
     <p><h:outputText value="Hi #{userInfoController.userName}!!!"/></p>
 
-    <h:link href="/protected.jsf">Link</h:link> to protected resourece.
+    <a href="/protected.jsf" id="protectedLinkId">Link</a> to protected resource.
 
     <br/>
 
-    <h:button id="logoutId" href="/logout" value="Log out"/>
+    <form action="/logout">
+        <input value="Log out" type="submit" id="logoutBtnId"/>
+    </form>
 </sec:authenticated>
 
 <sec:anonymous>
     <p>You are not logged in</p>
-    <h:button id="linkToLoginId" outcome="/login.jsf" value="Log in"/>
-    <h:button id="linkToSigninId" outcome="/signin.jsf" value="Sign in"/>
+    <h:button id="loginBtnId" outcome="/login.jsf" value="Log in"/>
+    <h:button id="signinBtnId" outcome="/signin.jsf" value="Sign in"/>
 </sec:anonymous>
 
 </html>

@@ -26,7 +26,7 @@ public class UserService {
         try {
             String hashedPassword = passwordEncoder.encode(password);
 
-            if (em.find(UserEntity.class, username) == null) {
+            if (em.find(UserEntity.class, username) != null) {
                 return false;
             }
 

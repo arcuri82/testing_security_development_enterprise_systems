@@ -1,5 +1,6 @@
 package org.tsdes.intro.spring.security.authorization.jsf;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,13 +19,13 @@ import javax.inject.Named;
 @RequestScoped
 public class SignInController {
 
-    @Inject
+    @Autowired
     private UserService userService;
 
-    @Inject
+    @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Inject
+    @Autowired
     private UserDetailsService userDetailsService;
 
 
@@ -50,9 +51,9 @@ public class SignInController {
                 SecurityContextHolder.getContext().setAuthentication(token);
             }
 
-            return "/index.jsf";
+            return "/index.jsf?faces-redirect=true";
         } else {
-            return "/signin.jsf?error=true";
+            return "/signin.jsf?faces-redirect=true&error=true";
         }
     }
 

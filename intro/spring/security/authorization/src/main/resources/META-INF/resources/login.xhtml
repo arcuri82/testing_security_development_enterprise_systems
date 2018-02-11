@@ -12,18 +12,18 @@
     </h:head>
     <h:body>
         <h:form prependId="false">
-            <div id="starterDiv" class="ui-fluid">
-                <h:outputLabel value="Connection failed: user and/or password are wrong."
-                               rendered="${!empty param['error']}"/>
-
-                <h:panelGrid columns="2" layout="grid">
-                    <h:outputText value="username"/>
-                    <h:inputText id="username"/>
-                    <h:outputText value="password"/>
-                    <h:inputHidden id="password"/>
-                </h:panelGrid>
-                <h:commandButton id="submit" value="Login" />
-            </div>
+            <h:outputLabel value="Login failed: user and/or password are wrong."
+                           rendered="${!empty param['error']}"/>
+            <!-- Note: need to have these specific IDs, oterwise
+                 Spring Security will not recognize them by default
+              -->
+            <h:panelGrid columns="2" layout="grid">
+                <h:outputText value="username"/>
+                <h:inputText id="username" />
+                <h:outputText value="password"/>
+                <h:inputSecret id="password"/>
+            </h:panelGrid>
+            <h:commandButton id="submitBtnId" value="Log in"/>
         </h:form>
     </h:body>
 </f:view>

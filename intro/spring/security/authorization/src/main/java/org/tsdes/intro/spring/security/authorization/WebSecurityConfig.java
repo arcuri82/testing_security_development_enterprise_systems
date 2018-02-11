@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception{
+    public UserDetailsService userDetailsServiceBean() throws Exception {
         return super.userDetailsServiceBean();
     }
 
@@ -36,12 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) {
         try {
             http.csrf().disable();
-            http
-                    //        .userDetailsService(userDetailsService())
-                    .authorizeRequests()
+            http.authorizeRequests()
                     .antMatchers("/").permitAll()
-                    .antMatchers("/index.jsf").permitAll()
-                    .antMatchers("/signin.jsf").permitAll()
+                    .antMatchers("/index.*").permitAll()
+                    .antMatchers("/signin.*").permitAll()
                     .antMatchers("/javax.faces.resource/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
@@ -49,10 +47,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login.jsf")
                     .permitAll()
                     .failureUrl("/login.jsf?error=true")
-                    .defaultSuccessUrl("/index.jsf")
+                    .defaultSuccessUrl("/index.jsf?faces-redirect=true")
                     .and()
                     .logout()
-                    .logoutSuccessUrl("/index.jsf");
+                    .logoutSuccessUrl("/index.jsf?faces-redirect=true");
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

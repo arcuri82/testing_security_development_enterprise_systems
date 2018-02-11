@@ -4,7 +4,6 @@
 <html
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:sec="http://www.springframework.org/security/tags"
-        xmlns:p="http://primefaces.org/ui"
 >
 
 <h2>Spring Security Example With Database</h2>
@@ -14,11 +13,11 @@
 <sec:authenticated>
     <p><h:outputText value="Hi #{userInfoController.userName}!!!"/></p>
 
-    <p:link href="/protected.jsf">Link</p:link> to protected resourece.
+    <h:link href="/protected.jsf">Link</h:link> to protected resourece.
 
     <br/>
 
-    <p:button id="logoutId" href="/logout" value="Log out"/>
+    <h:button id="logoutId" href="/logout" value="Log out"/>
 </sec:authenticated>
 
 <sec:anonymous>

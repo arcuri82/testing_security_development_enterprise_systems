@@ -52,16 +52,16 @@
                         <p class="question">Question: "<h:outputLabel value="#{quiz.question}"/>"</p>
 
                         <h:form>
-                            <h:commandButton value="A: #{quiz.firstAnswer}" action="#{matchController.answerQuiz(0)}" ajax="false" class="gameBtn answer"/>
+                            <h:commandButton value="A: #{quiz.firstAnswer}" action="#{matchController.answerQuiz(0)}"  class="gameBtn answer"/>
                         </h:form>
                         <h:form>
-                            <h:commandButton value="B: #{quiz.secondAnswer}" action="#{matchController.answerQuiz(1)}" ajax="false" class="gameBtn answer"/>
+                            <h:commandButton value="B: #{quiz.secondAnswer}" action="#{matchController.answerQuiz(1)}"  class="gameBtn answer"/>
                         </h:form>
                         <h:form>
-                            <h:commandButton value="C: #{quiz.thirdAnswer}" action="#{matchController.answerQuiz(2)}" ajax="false" class="gameBtn answer"/>
+                            <h:commandButton value="C: #{quiz.thirdAnswer}" action="#{matchController.answerQuiz(2)}"  class="gameBtn answer"/>
                         </h:form>
                         <h:form>
-                            <h:commandButton value="D: #{quiz.fourthAnswer}" action="#{matchController.answerQuiz(3)}" ajax="false" class="gameBtn answer"/>
+                            <h:commandButton value="D: #{quiz.fourthAnswer}" action="#{matchController.answerQuiz(3)}"  class="gameBtn answer"/>
                         </h:form>
 
                     </c:otherwise>

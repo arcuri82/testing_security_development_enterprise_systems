@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:sec="http://www.springframework.org/security/tags"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <link rel="stylesheet" href="/assets/style.css"/>
+
+
+    <title>
+        <ui:insert name="title">Default title</ui:insert>
+    </title>
+
+    <ui:insert name="headTags"/>
+</head>
+
+
+<body>
+
+    <sec:authenticated>
+        <p><h:outputText value="Hi #{userInfoController.userName}!!!"/></p>
+
+
+        <a id="logoutId" href="logout" class="btn">Log Out</a>
+
+    </sec:authenticated>
+
+
+    <sec:anonymous>
+        <p>You are not logged in</p>
+        <a id="linkToLoginId" href="login.jsf" class="btn">Log In</a>
+        <a id="linkToSignupId" href="/signup.jsf" class="btn" >Sign Up</a>
+    </sec:anonymous>
+
+    <hr/>
+
+
+    <ui:insert name="content" />
+
+    <hr/>
+
+    <p>
+        Code available at: <a
+            href="https://github.com/arcuri82/testing_security_development_enterprise_systems" class="code"> https://github.com/arcuri82/testing_security_development_enterprise_systems</a>
+    </p>
+
+</body>
+</html>

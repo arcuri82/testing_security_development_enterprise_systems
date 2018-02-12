@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Log In
+    </ui:define>
+
+
+    <ui:define name="content">
+
+        <h:form prependId="false">
+            <div>
+                <!--<p:outputLabel value="Connection failed: user and/or password are wrong."-->
+                <!--rendered="${!empty param['error']}"/>-->
+
+                <h:outputText value="Username: "/>
+                <h:inputText id="username" class="login"/><br/>
+                <h:outputText value="Password: "/>
+                <h:inputSecret id="password" class="login"/><br/>
+
+                <h:commandButton id="submit" value="Log In"  class="gameBtn"/>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+
+
+</html>

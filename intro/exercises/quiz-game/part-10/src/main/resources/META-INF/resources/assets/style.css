@@ -1,0 +1,58 @@
+html, body{
+    margin: 0px;
+    background-color: rgb(243, 239, 231);
+    color: rgb(71, 53, 25);
+    text-align: center;
+    font-size: 1.2em;
+    position: relative;
+}
+
+a:visited{
+    color: rgb(71, 53, 25);
+}
+
+.btn{
+    border: 2px solid rgb(30,30,30);
+    border-radius: 5px;
+    background-color: rgb(207, 205, 200);
+    color: rgb(71, 53, 25);
+  /*  height: 30px;*/
+    margin: 5px;
+    padding: 3px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.gameBtn{
+    height: 50px;
+    background-color: rgb(207, 205, 200);
+    font-size: 1em;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+.code{
+    color: rgb(71, 53, 25);
+}
+
+.code:visited{
+    color: rgb(195, 136, 195)
+}
+
+.answer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 35%;
+}
+
+.question{
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+}

@@ -6,7 +6,11 @@ import org.tsdes.misc.testutils.selenium.PageObject;
 
 import static org.junit.Assert.assertTrue;
 
-public class IndexPO extends PageObject {
+public class IndexPO extends LayoutPO {
+
+    public IndexPO(PageObject other) {
+        super(other);
+    }
 
     public IndexPO(WebDriver driver, String host, int port) {
         super(driver, host, port);

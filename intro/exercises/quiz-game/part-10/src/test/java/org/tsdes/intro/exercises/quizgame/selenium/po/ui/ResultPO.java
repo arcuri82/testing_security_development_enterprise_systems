@@ -1,12 +1,13 @@
 package org.tsdes.intro.exercises.quizgame.selenium.po.ui;
 
 import org.openqa.selenium.By;
+import org.tsdes.intro.exercises.quizgame.selenium.po.LayoutPO;
 import org.tsdes.misc.testutils.selenium.PageObject;
 
 /**
  * Created by arcuri82 on 06-Feb-18.
  */
-public class ResultPO extends PageObject {
+public class ResultPO extends LayoutPO {
 
     public ResultPO(PageObject other) {
         super(other);

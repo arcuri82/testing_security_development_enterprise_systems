@@ -9,10 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.tsdes.intro.exercises.quizgame.Application;
 import org.tsdes.intro.exercises.quizgame.selenium.po.IndexPO;
+import org.tsdes.intro.exercises.quizgame.selenium.po.SignUpPO;
 import org.tsdes.intro.exercises.quizgame.selenium.po.ui.MatchPO;
 import org.tsdes.intro.exercises.quizgame.selenium.po.ui.ResultPO;
 import org.tsdes.intro.exercises.quizgame.service.QuizService;
 import org.tsdes.misc.testutils.selenium.SeleniumDriverHandler;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -29,6 +32,14 @@ public class SeleniumLocalIT {
 
     @Autowired
     private QuizService quizService;
+
+
+    private static final AtomicInteger counter = new AtomicInteger(0);
+
+    private String getUniqueId(){
+        return "foo_SeleniumLocalIT_" + counter.getAndIncrement();
+    }
+
 
 
     @BeforeClass
@@ -52,6 +63,19 @@ public class SeleniumLocalIT {
 
     private IndexPO home;
 
+
+    private IndexPO createNewUser(String username, String password){
+
+        home.toStartingPage();
+
+        SignUpPO signUpPO = home.toSignUp();
+
+        IndexPO indexPO = signUpPO.createUser(username, password);
+        assertNotNull(indexPO);
+
+        return indexPO;
+    }
+
     @Before
     public void initTest() {
 
@@ -66,6 +90,24 @@ public class SeleniumLocalIT {
         home.toStartingPage();
 
         assertTrue("Failed to start from Home Page", home.isOnPage());
+    }
+
+    @Test
+    public void testCreateAndLogoutUser(){
+
+        assertFalse(home.isLoggedIn());
+
+        String username = getUniqueId();
+        String password = "123456789";
+        home = createNewUser(username, password);
+
+        assertTrue(home.isLoggedIn());
+        assertTrue(home.getDriver().getPageSource().contains(username));
+
+        home.doLogout();
+
+        assertFalse(home.isLoggedIn());
+        assertFalse(home.getDriver().getPageSource().contains(username));
     }
 
     @Test

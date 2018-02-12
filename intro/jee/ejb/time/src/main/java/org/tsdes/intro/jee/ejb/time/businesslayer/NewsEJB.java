@@ -21,7 +21,7 @@ public class NewsEJB {
     }
 
     public List<News> getAllNews(){
-        return em.createNamedQuery(News.GET_ALL).getResultList();
+        return em.createQuery("SELECT n FROM News n", News.class).getResultList();
     }
 
 }

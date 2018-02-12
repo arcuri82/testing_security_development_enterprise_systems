@@ -69,8 +69,10 @@ public class ExampleTest {
             Note the use of "flatMap" here... ie, from a stream of News we map to
             a stream of Comment coming from all of the news
          */
-        long comments = news.stream().flatMap(n -> n.getComments().stream())
-                .filter(c -> c.getAuthor().equals(CommentatorBot.COMMENTATOR)).count();
+        long comments = news.stream()
+                .flatMap(n -> n.getComments().stream())
+                .filter(c -> c.getAuthor().equals(CommentatorBot.COMMENTATOR))
+                .count();
 
         assertTrue(comments>0); //at least one Comment
     }

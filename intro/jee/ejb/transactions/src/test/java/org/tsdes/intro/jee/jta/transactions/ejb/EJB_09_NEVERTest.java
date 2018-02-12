@@ -15,11 +15,17 @@ public class EJB_09_NEVERTest extends TestBase{
         assertTrue(ejb.getTrue()); //fine, as we are not in a transaction
     }
 
-    @Test(expected = EJBException.class)
+    @Test
     public void testGetFromRequired() throws Exception {
         EJB_09_NEVER ejb = getEJB(EJB_09_NEVER.class);
 
-        ejb.getFromRequired();//will fail, as a transaction will be created
+        //will fail, as a transaction will be created
+        try {
+            ejb.getFromRequired();
+            fail();
+        }catch (EJBException e){
+            //expected
+        }
     }
 
     @Test

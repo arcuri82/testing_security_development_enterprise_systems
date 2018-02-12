@@ -52,7 +52,8 @@ public class EJB_06_proxyTest extends TestBase{
         assertNotEquals(proxiedMethods.length, ejb.getMethodsFromEJBInstance().length);
 
         Set<String> methodNames = Arrays.asList(ejb.getMethodsFromEJBInstance()).stream()
-                .map(Method::getName).collect(Collectors.toSet());
+                .map(Method::getName)
+                .collect(Collectors.toSet());
 
         Set<String> addedMethods = Arrays.asList(proxiedMethods).stream()
                 .map(Method::getName)

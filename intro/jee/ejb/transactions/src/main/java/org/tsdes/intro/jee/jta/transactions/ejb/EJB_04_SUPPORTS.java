@@ -16,6 +16,7 @@ public class EJB_04_SUPPORTS {
     private EntityManager em;
 
 
+    //Redundant annotation, as REQUIRED is the default
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void createFooWithRequiredTransaction(String name){
         Foo foo = new Foo(name);
@@ -23,9 +24,12 @@ public class EJB_04_SUPPORTS {
     }
 
 
-    // if a transaction is not needed, for performance one can instruct
-    // the container to do not create one. This would had been the default
-    // behavior in a REQUIRED
+    /*
+        if a transaction is not needed, for performance one can instruct
+        the container to do not create one (which would had been the default
+        behavior in a REQUIRED).
+        However, if we are currently in a transaction, join it.
+     */
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public boolean isPresentWithSupports(String name){
         return em.find(Foo.class, name) != null;

@@ -26,6 +26,10 @@ public class EJB_05_REQUIRES_NEW {
         em.persist(foo);
     }
 
+    /*
+        This create a new transaction. If one is currently activated,
+        put it on hold first and do not join it
+     */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void createFooRequiresNew(String name){
         Foo foo = new Foo(name);
@@ -35,8 +39,9 @@ public class EJB_05_REQUIRES_NEW {
 
     public void createTwoWithRollback(String first, String second){
 
-        createFooRequired(first); //uses current transaction
-        createFooRequiresNew(second); //creates a new one
+        //call from inside instance are not on the proxy, so annotations ignored
+        createFooRequired(first); //would had used current transaction
+        createFooRequiresNew(second); //would had created a new one
 
         /*
             would expect no impact on "second", but it does, because those above

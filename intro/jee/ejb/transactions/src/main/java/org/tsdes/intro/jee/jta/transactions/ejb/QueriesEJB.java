@@ -14,11 +14,7 @@ public class QueriesEJB {
     private EntityManager em;
 
     public int deleteAll(){
-        return em.createNamedQuery(Foo.DELETE_ALL).executeUpdate();
-    }
-
-    public List<Foo> findAll(){
-        return em.createNamedQuery(Foo.FIND_ALL).getResultList();
+        return em.createQuery("DELETE FROM Foo").executeUpdate();
     }
 
     public boolean isInDB(String name){

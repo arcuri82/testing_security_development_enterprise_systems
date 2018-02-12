@@ -9,14 +9,19 @@ import static org.junit.Assert.*;
 public class EJB_08_NOT_SUPPORTEDTest extends TestBase{
 
 
-    @Test(expected = EJBException.class)
+    @Test
     public void testDirectCall(){
         EJB_08_NOT_SUPPORTED ejb = getEJB(EJB_08_NOT_SUPPORTED.class);
 
         String name = "abc";
 
         //write outside of a transaction will fail
-        ejb.createFooNotSupported(name);
+        try {
+            ejb.createFooNotSupported(name);
+            fail();
+        }catch (EJBException e){
+            //expected
+        }
     }
 
     @Test
@@ -33,7 +38,7 @@ public class EJB_08_NOT_SUPPORTEDTest extends TestBase{
     }
 
 
-    @Test(expected = EJBException.class)
+    @Test
     public void testIndirectEJB(){
         EJB_08_NOT_SUPPORTED ejb = getEJB(EJB_08_NOT_SUPPORTED.class);
 
@@ -41,7 +46,12 @@ public class EJB_08_NOT_SUPPORTEDTest extends TestBase{
 
         //even if this method will create a transaction, then its internal call will be
         //outside one due to NOT_SUPPORTED
-        ejb.createFooIndirectlyWithEJBCall(name);
+        try {
+            ejb.createFooIndirectlyWithEJBCall(name);
+            fail();
+        }catch (EJBException e){
+            //expected
+        }
     }
 
 

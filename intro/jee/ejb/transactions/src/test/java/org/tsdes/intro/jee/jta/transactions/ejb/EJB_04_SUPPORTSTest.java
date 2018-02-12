@@ -27,7 +27,7 @@ public class EJB_04_SUPPORTSTest extends TestBase{
     }
 
 
-    @Test(expected = EJBException.class)
+    @Test
     public void testFailWrite(){
 
         EJB_04_SUPPORTS ejb = getEJB(EJB_04_SUPPORTS.class);
@@ -37,7 +37,12 @@ public class EJB_04_SUPPORTSTest extends TestBase{
         assertFalse(queriesEJB.isInDB(name));
 
         //this will fail, as calling a persist on EntityManager outside of a transaction
-        ejb.createFooWithSupports(name);
+        try {
+            ejb.createFooWithSupports(name);
+            fail();
+        } catch (EJBException e){
+            //expected
+        }
     }
 
 

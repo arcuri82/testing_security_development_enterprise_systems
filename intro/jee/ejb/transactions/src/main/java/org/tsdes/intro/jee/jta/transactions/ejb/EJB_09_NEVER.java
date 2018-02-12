@@ -19,6 +19,9 @@ public class EJB_09_NEVER {
     private SessionContext ctx;
 
 
+    /*
+        Throw exception if called inside of a transaction
+     */
     @TransactionAttribute(TransactionAttributeType.NEVER)
     public boolean getTrue(){
         return true;

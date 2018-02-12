@@ -11,9 +11,6 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class EJB_10_multi_caller {
 
-    @PersistenceContext
-    private EntityManager em;
-
     @Resource
     private SessionContext ctx;
 

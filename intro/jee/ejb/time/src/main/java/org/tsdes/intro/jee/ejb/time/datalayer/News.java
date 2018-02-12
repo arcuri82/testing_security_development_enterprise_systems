@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = News.GET_ALL, query = "SELECT n FROM News n")
 public class News implements Serializable {
 
-    public static final String GET_ALL = "get_all";
 
     @Id @GeneratedValue
     private Long id;

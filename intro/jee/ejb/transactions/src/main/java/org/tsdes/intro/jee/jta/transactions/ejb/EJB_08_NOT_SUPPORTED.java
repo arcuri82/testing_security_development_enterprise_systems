@@ -19,7 +19,9 @@ public class EJB_08_NOT_SUPPORTED {
     @Resource
     private SessionContext ctx;
 
-
+    /*
+        If there is an ongoing transaction, put it on hold
+     */
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
     public void createFooNotSupported(String name){
         Foo foo = new Foo(name);

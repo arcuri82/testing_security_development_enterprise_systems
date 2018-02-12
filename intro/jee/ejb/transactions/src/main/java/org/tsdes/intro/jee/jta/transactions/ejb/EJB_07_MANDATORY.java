@@ -19,6 +19,9 @@ public class EJB_07_MANDATORY {
         em.persist(foo);
     }
 
+    /*
+        There must be a transaction already, otherwise throw exception
+     */
     @TransactionAttribute(TransactionAttributeType.MANDATORY)
     public void createFooMandatory(String name){
         Foo foo = new Foo(name);

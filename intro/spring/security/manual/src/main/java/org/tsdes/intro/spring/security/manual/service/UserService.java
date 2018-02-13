@@ -27,10 +27,11 @@ public class UserService {
     private static final char SEPARATOR_REPLACEMENT = '!';
 
     /**
-     * @return {@code false} if for any reason it was not possible to create the user
+     * @return {@code false} if any initial validation fails.
+     *         Note: this method can still throw an exception if the transaction fails
      */
     public boolean createUser(String userId, String password) {
-        if (userId == null || userId.isEmpty() || password == null || password.isEmpty()) {
+        if (userId == null) {
             return false;
         }
 
@@ -71,7 +72,7 @@ public class UserService {
      * @return  {@code true} if a user with the given password exists
      */
     public boolean login(String userId, String password) {
-        if (userId == null || userId.isEmpty() || password == null || password.isEmpty()) {
+        if (userId == null) {
             return false;
         }
 

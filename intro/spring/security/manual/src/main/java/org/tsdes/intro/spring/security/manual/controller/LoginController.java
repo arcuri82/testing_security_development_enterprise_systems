@@ -53,7 +53,14 @@ public class LoginController implements Serializable{
     }
 
     public String registerNew(){
-        boolean registered = userService.createUser(formUserName,formPassword);
+
+        boolean registered = false;
+        try {
+            registered = userService.createUser(formUserName, formPassword);
+        }catch (Exception e){
+            //nothing to do
+        }
+
         if(registered){
             registeredUser = formUserName;
             return "index.jsf?faces-redirect=true";

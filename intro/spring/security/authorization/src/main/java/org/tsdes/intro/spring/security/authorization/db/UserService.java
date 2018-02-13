@@ -23,25 +23,20 @@ public class UserService {
 
     public boolean createUser(String username, String password) {
 
-        try {
-            String hashedPassword = passwordEncoder.encode(password);
+        String hashedPassword = passwordEncoder.encode(password);
 
-            if (em.find(UserEntity.class, username) != null) {
-                return false;
-            }
-
-            UserEntity user = new UserEntity();
-            user.setUsername(username);
-            user.setPassword(hashedPassword);
-            user.setRoles(Collections.singleton("USER"));
-            user.setEnabled(true);
-
-            em.persist(user);
-
-            return true;
-
-        } catch (Exception e) {
+        if (em.find(UserEntity.class, username) != null) {
             return false;
         }
+
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setPassword(hashedPassword);
+        user.setRoles(Collections.singleton("USER"));
+        user.setEnabled(true);
+
+        em.persist(user);
+
+        return true;
     }
 }

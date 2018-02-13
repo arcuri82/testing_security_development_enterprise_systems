@@ -25,25 +25,15 @@ public class PostService {
     private EntityManager em;
 
 
-    public boolean post(String text, String author) {
+    public void post(String text, String author) {
 
-        if (text == null || text.isEmpty()) {
-            return false;
-        }
+        Post post = new Post();
+        post.setCreationTime(ZonedDateTime.now());
+        post.setText(text);
+        User userDetails = userService.getUser(author);
+        post.setAuthor(userDetails);
 
-        try {
-            Post post = new Post();
-            post.setCreationTime(ZonedDateTime.now());
-            post.setText(text);
-            User userDetails = userService.getUser(author);
-            post.setAuthor(userDetails);
-
-            em.persist(post);
-        } catch (Exception e) {
-            return false;
-        }
-
-        return true;
+        em.persist(post);
     }
 
     public List<Post> getAllPosts() {

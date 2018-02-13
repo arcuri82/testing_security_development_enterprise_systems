@@ -22,7 +22,13 @@ public class PostController implements Serializable{
 
     public String doPostText(String formAuthor){
 
-        boolean posted = postService.post(formText,formAuthor);
+        boolean posted = false;
+        try {
+            postService.post(formText, formAuthor);
+            posted = true;
+        }catch (Exception e){
+            //nothing to do
+        }
 
         if(posted){
             formText = "";

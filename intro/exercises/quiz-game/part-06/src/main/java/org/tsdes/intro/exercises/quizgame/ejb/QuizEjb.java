@@ -15,7 +15,19 @@ public class QuizEjb {
     @PersistenceContext
     private EntityManager em;
 
-
+    /*
+     Note that here we return "long" and not "Long".
+     "long" is a primitive type, whereas "Long" is an object wrapper.
+     This latter can be "null", whereas the former cannot.
+     In this particular case, when the method creates a quiz,
+     then such a quiz should exist, so the id shouldn't be null, and so "long" type.
+     On the other hand, a null when using "Long" could mean a failure in creating the quiz.
+     But, in this case, if there is a problem, then an exception would be thrown,
+     either by throwing directly a IllegalArgumentException, or by the container
+     when the transaction fails.
+     Therefore, in such case, there is no point to have the method having the possibility
+     to return null.
+     */
     public long createQuiz(
             long subCategoryId,
             String question,

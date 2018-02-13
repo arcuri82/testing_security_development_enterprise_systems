@@ -164,9 +164,11 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   Modules:
      
-  * TODO
+  * **intro/spring/security/manual**
+  * **intro/spring/security/authorization**
  
-  Exercises: TODO
+  Exercises: [quiz-game-part-10](exercises/quiz-game/quiz-game-part-10.md)  
+
 
 <br />
 

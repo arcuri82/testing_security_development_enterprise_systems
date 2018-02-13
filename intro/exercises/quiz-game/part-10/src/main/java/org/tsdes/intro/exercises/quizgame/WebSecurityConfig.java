@@ -36,9 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) {
         try {
             http.csrf().disable();
-            http
-                    //        .userDetailsService(userDetailsService())
-                    .authorizeRequests()
+            http.authorizeRequests()
                     .antMatchers("/", "/index.jsf", "/signup.jsf", "/assets/**").permitAll()
                     .antMatchers("/javax.faces.resource/**").permitAll()
                     .antMatchers("/ui/**").authenticated()

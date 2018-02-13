@@ -16,7 +16,7 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class SignInController {
+public class SignUpController {
 
     @Inject
     private UserService userService;
@@ -32,7 +32,7 @@ public class SignInController {
 
     private String password;
 
-    public String signInUser(){
+    public String signUpUser(){
 
         boolean registered = userService.createUser(username, password);
 

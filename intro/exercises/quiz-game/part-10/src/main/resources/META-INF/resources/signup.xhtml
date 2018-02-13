@@ -18,11 +18,11 @@
             <div>
 
                 <h:outputText value="Username: "/>
-                <h:inputText id="username" value="#{signInController.username}" class="login"/><br/>
+                <h:inputText id="username" value="#{signUpController.username}" class="login"/><br/>
                 <h:outputText value="Password: "/>
-                <h:inputSecret id="password"  value="#{signInController.password}" class="login"/><br/>
+                <h:inputSecret id="password" value="#{signUpController.password}" class="login"/><br/>
 
-                <h:commandButton id="submit" value="Sign Up"  action="#{signInController.signInUser}" class="gameBtn"/>
+                <h:commandButton id="submit" value="Sign Up" action="#{signUpController.signUpUser}" class="gameBtn"/>
             </div>
         </h:form>
 

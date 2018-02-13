@@ -4,7 +4,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.TransactionAttribute;
 import java.util.function.Supplier;
+
+import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 
 @Singleton
 @Startup
@@ -16,7 +19,27 @@ public class DefaultDataInitializerEjb {
     @EJB
     private QuizEjb quizEjb;
 
+    /*
+        Note: this is tricky...
+        Handling of default data in database (and migrations in general), should be
+        handled in an external tool (eg Flyway and Liquibase).
+        Here, for simplicity, we just do it from code.
+        However, what would happen if application is restarted against an actual
+        production database? (which is an actual scenario which would happen in practice...)
+        We do not want to save the same questions again and again at each restart.
+        As the names should be unique, the violation constraints would fail.
+        So, here we want each write in its own transaction, and ignore them if fail.
+        This is the reason why we use NOT_SUPPORTED here, as otherwise it would be
+        a single transaction (remember how REQUIRED works) which would fail the
+        initialization of this singleton, potentially taking down the entire application.
+
+        Note: this is tricky to test, as we would need an actual database like Postgres (we ll see
+        it later in the course), which "survives" (ie, keep same schema and data) at each Wildfly
+        restart, and then restart Wildfly at least twice against the same database
+     */
+
     @PostConstruct
+    @TransactionAttribute(NOT_SUPPORTED)
     public void initialize(){
 
         Long ctgSE = attempt(() -> categoryEjb.createCategory("Software Engineering"));

@@ -34,7 +34,12 @@ public class SignInController {
 
     public String signInUser(){
 
-        boolean registered = userService.createUser(username, password);
+        boolean registered = false;
+        try {
+            registered = userService.createUser(username, password);
+        }catch (Exception e){
+            //nothing to do
+        }
 
         if(registered){
 

@@ -8,10 +8,13 @@ pom:
 spring-boot-starter-security
 
 
-user in DefaultDataInitializerService
 
 
 added User and MatchStats entities, and services for them
+
+
+user in DefaultDataInitializerService
+
 
 update MatchController
 added UserInfoController, SignInController
@@ -35,6 +38,7 @@ Selenium:
 abstract LayoutPO (all others extend it)
 SignUpPO
 testCreateAndLogoutUser
+update all existing tests to create a new user each time
 
 Solutions to this exercise can be found in the 
 `intro/exercises/quiz-game/part-10` module.

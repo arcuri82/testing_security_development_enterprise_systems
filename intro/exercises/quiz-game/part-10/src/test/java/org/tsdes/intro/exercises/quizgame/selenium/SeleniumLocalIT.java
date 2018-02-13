@@ -113,12 +113,16 @@ public class SeleniumLocalIT {
     @Test
     public void testNewMatch() {
 
+        createNewUser(getUniqueId(), "123");
+
         MatchPO po = home.startNewMatch();
         assertTrue(po.canSelectCategory());
     }
 
     @Test
     public void testFirstQuiz() {
+
+        createNewUser(getUniqueId(), "123");
 
         MatchPO po = home.startNewMatch();
         String ctgId = po.getCategoryIds().get(0);
@@ -135,6 +139,8 @@ public class SeleniumLocalIT {
 
     @Test
     public void testWrongAnswer() {
+
+        createNewUser(getUniqueId(), "123");
 
         MatchPO matchPO = home.startNewMatch();
         String ctgId = matchPO.getCategoryIds().get(0);
@@ -155,6 +161,8 @@ public class SeleniumLocalIT {
 
     @Test
     public void testWinAMatch() {
+
+        createNewUser(getUniqueId(), "123");
 
         MatchPO matchPO = home.startNewMatch();
         String ctgId = matchPO.getCategoryIds().get(0);

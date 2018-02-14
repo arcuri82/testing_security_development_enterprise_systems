@@ -39,7 +39,7 @@ public class Ex03PO extends TemplatePO {
         /*
             Bit tricky: here we need to use XPath:
 
-            http://www.w3schools.com/xsl/xpath_syntax.asp
+            https://www.w3schools.com/xml/xpath_syntax.asp
 
             The idea is that we define a "query" over the HTML/XML web page, and then
             get back a reference to all the XML tags / web elements satisfying such query.

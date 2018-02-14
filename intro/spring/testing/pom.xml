@@ -15,6 +15,7 @@
 
     <modules>
         <module>selenium</module>
+        <module>mocking</module>
         <module>coverage</module>
     </modules>
 

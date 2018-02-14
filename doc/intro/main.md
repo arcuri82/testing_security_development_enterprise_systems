@@ -150,7 +150,9 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   Modules:
      
   * **intro/spring/testing/selenium/jsf-tests**
+  * **misc/test-utils**
   * **intro/spring/testing/selenium/crawler**
+  * **intro/spring/testing/mocking**
   * **intro/spring/testing/coverage/jacoco**
   * **intro/spring/testing/coverage/instrumentation**
  

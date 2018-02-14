@@ -125,9 +125,10 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
-* **Lesson 08**: SpringBoot
+* **Lesson 08**: Spring and SpringBoot
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_08_spring.pdf), 
+          [[pptx]](slides/lesson_08_spring.pptx)
   
   Modules:
      

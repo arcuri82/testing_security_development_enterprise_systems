@@ -145,7 +145,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 09**: Selenium and JaCoCo 
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_09_selenium.pdf), 
+          [[pptx]](slides/lesson_09_selenium.pptx)
   
   Modules:
      

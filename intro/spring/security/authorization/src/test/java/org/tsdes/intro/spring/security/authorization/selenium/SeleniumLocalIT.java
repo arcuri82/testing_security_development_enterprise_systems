@@ -10,7 +10,7 @@ import org.tsdes.intro.spring.security.authorization.Application;
 import org.tsdes.intro.spring.security.authorization.selenium.po.IndexPO;
 import org.tsdes.intro.spring.security.authorization.selenium.po.LoginPO;
 import org.tsdes.intro.spring.security.authorization.selenium.po.ProtectedPO;
-import org.tsdes.intro.spring.security.authorization.selenium.po.SigninPO;
+import org.tsdes.intro.spring.security.authorization.selenium.po.SignupPO;
 import org.tsdes.misc.testutils.selenium.SeleniumDriverHandler;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -79,7 +79,7 @@ public class SeleniumLocalIT {
 
     @Test
     public void testCreateUser() {
-        SigninPO signin = home.doSignin();
+        SignupPO signin = home.doSignup();
         assertTrue(signin.isOnPage());
         assertFalse(home.isOnPage());
 
@@ -102,7 +102,7 @@ public class SeleniumLocalIT {
         ProtectedPO protectedPO = home.goToProtectedPage();
         assertNull(protectedPO);
 
-        SigninPO signin = home.doSignin();
+        SignupPO signin = home.doSignup();
         home = signin.createUser(getUniqueId(), "foo");
 
         assertTrue(home.isLoggedIn());
@@ -120,7 +120,7 @@ public class SeleniumLocalIT {
 
         assertTrue(home.isLoggedOut());
 
-        SigninPO signin = home.doSignin();
+        SignupPO signin = home.doSignup();
         String userId = getUniqueId();
         String password = "foo";
         home = signin.createUser(userId, password);

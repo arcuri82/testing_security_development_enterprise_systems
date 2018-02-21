@@ -35,11 +35,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) {
         try {
+            /*
+                Spring does the right thing, and activate CSRF protections.
+                However, to avoid having to deal with them in JSF, and also
+                because anyway we will see them in details in the "advanced"
+                Enterprise 2 course, we just deactivate them
+             */
             http.csrf().disable();
+
             http.authorizeRequests()
                     .antMatchers("/").permitAll()
                     .antMatchers("/index.*").permitAll()
-                    .antMatchers("/signin.*").permitAll()
+                    .antMatchers("/signup.*").permitAll()
                     .antMatchers("/javax.faces.resource/**").permitAll()
                     .anyRequest().authenticated()
                     .and()

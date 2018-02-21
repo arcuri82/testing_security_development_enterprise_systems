@@ -39,10 +39,10 @@ public class IndexPO extends PageObject {
     }
 
 
-    public SigninPO doSignin() {
+    public SignupPO doSignup() {
 
-        clickAndWait("signinBtnId");
-        SigninPO po = new SigninPO(this);
+        clickAndWait("signupBtnId");
+        SignupPO po = new SignupPO(this);
         assertTrue(po.isOnPage());
 
         return po;

@@ -17,7 +17,7 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class SignInController {
+public class SignUpController {
 
     @Autowired
     private UserService userService;
@@ -33,7 +33,7 @@ public class SignInController {
 
     private String password;
 
-    public String signInUser(){
+    public String signUpUser(){
 
         boolean registered = false;
         try {
@@ -58,7 +58,7 @@ public class SignInController {
 
             return "/index.jsf?faces-redirect=true";
         } else {
-            return "/signin.jsf?faces-redirect=true&error=true";
+            return "/signup.jsf?faces-redirect=true&error=true";
         }
     }
 

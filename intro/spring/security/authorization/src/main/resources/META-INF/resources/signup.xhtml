@@ -15,11 +15,11 @@
 
         <h:panelGrid columns="2" layout="grid">
             <h:outputText value="username"/>
-            <h:inputText id="usernameTextId" value="#{signInController.username}"/>
+            <h:inputText id="usernameTextId" value="#{signUpController.username}"/>
             <h:outputText value="password"/>
-            <h:inputSecret id="passwordTextId" value="#{signInController.password}"/>
+            <h:inputSecret id="passwordTextId" value="#{signUpController.password}"/>
         </h:panelGrid>
-        <h:commandButton id="submitBtnId" value="Sign In"  action="#{signInController.signInUser}"/>
+        <h:commandButton id="submitBtnId" value="Sign Up"  action="#{signUpController.signUpUser}"/>
 
     </h:form>
 

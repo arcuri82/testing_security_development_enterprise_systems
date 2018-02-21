@@ -2,10 +2,10 @@ package org.tsdes.intro.spring.security.authorization.selenium.po;
 
 import org.tsdes.misc.testutils.selenium.PageObject;
 
-public class SigninPO extends PageObject {
+public class SignupPO extends PageObject {
 
 
-    public SigninPO(PageObject other) {
+    public SignupPO(PageObject other) {
         super(other);
     }
 

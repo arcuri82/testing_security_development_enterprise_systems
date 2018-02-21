@@ -97,7 +97,7 @@ your application.
 Add a `@Configuration` file called `WebSecurityConfig` in which
 you set up Spring Security, where user info is stored on database.
 An anonymous user should be able to access the home page and the
-signup/login pages.
+sign-up/login pages.
 However, s/he should not be able to access the `match` and the 
 `result` pages.
 Have also proper redirection.
@@ -133,8 +133,8 @@ In the `SeleniumLocalIT` test class, add the following test:
 
 * `testCreateAndLogoutUser`: from home page, verify that by default
   a user is not logged in (e.g., there should be no logout button,
-  and there should be the links to login/signup).
-  Go to the signup page, and register a new valid user.
+  and there should be the links to login/sign-up).
+  Go to the sign-up page, and register a new valid user.
   You should be automatically redirected back to the home page.
   Verify that you are actually logged in, and that the username of the
   user is displayed on the page.
@@ -147,7 +147,7 @@ Note: all previous existing Selenium tests will fail once you are
 adding Spring Security.
 The reason is that they try to play the game without having a user
 being logged in.
-On each of such tests, do first the step to singup a new user.
+On each of such tests, do first the step to sign-up a new user.
 This should be enough to make the tests now passing.
 
 

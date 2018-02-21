@@ -164,7 +164,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 10**: Spring Security 
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_10_security.pdf), 
+          [[pptx]](slides/lesson_10_security.pptx)
   
   Modules:
      
@@ -193,10 +194,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   Slides: TODO
   
-  Modules:
+  Modules: none
      
-  * TODO
- 
   Exercises: TODO
 
 <br />

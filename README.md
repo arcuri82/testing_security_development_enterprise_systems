@@ -190,6 +190,10 @@ There are many ways in which you can contribute:
   Note: in some cases, for didactic reasons there will be non-secure code.
   But in those cases that should be explicitly stated.
 
+* If a comment regarding a tool/library/framework is no longer valid (e.g., since a new version
+  has been released), please report it on the
+  [issues](https://github.com/arcuri82/testing_security_development_enterprise_systems/issues)
+  page.
 
 ### License & Copyright
 

@@ -24,7 +24,7 @@ class AmqpIntegrationDockerIT {
                 Looks like currently some issues in running Docker-Compose on Travis
              */
 
-            val travis = System.getenv("TRAVIS") != null
+            val travis = System.getProperty("TRAVIS") != null
             assumeTrue(! travis)
         }
 

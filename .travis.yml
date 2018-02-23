@@ -1,8 +1,14 @@
 language: java
-sudo: false
 
 jdk:
   - oraclejdk8
+
+
+sudo: true
+
+services:
+  - docker
+
 
 # As the build will download JAR files from Maven Central, optimize their storage,
 # so they do not get re-downloaded each time
@@ -15,6 +21,5 @@ notifications:
   email: false
 
 
-# Note: there is no "-P selenium" here, as by default those tests would fail on Travis, unless extra
-# configurations are set (eg, remote servers / testing providers where GUI tests can be run)
-script: mvn clean verify  -Dmaven.test.redirectTestOutputToFile=true
+
+script: mvn clean verify  --quiet

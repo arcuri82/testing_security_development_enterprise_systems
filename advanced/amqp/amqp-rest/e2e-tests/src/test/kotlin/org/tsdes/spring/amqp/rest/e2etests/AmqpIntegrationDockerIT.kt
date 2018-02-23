@@ -2,8 +2,9 @@ package org.tsdes.spring.amqp.rest.e2etests
 
 import io.restassured.RestAssured.given
 import org.hamcrest.CoreMatchers.equalTo
+import org.junit.Assume.assumeTrue
+import org.junit.BeforeClass
 import org.junit.ClassRule
-import org.junit.Ignore
 import org.junit.Test
 import org.testcontainers.containers.DockerComposeContainer
 import java.io.File
@@ -15,18 +16,26 @@ class AmqpIntegrationDockerIT {
 
     companion object {
 
-        class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
+        @BeforeClass @JvmStatic
+        fun checkEnvironment(){
 
-        /*
-            TODO
-            Note: this is currently broken in Windows, but fix is already in master branch
-            of the TestContainer library (ie, will be in next release after 1.4.3)
-         */
+            /*
+                TODO
+                Looks like currently some issues in running Docker-Compose on Travis
+             */
+
+            val travis = System.getenv("TRAVIS") != null
+            assumeTrue(! travis)
+        }
+
+
+        class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
 
         @ClassRule @JvmField
         val env = KDockerComposeContainer(File("../docker-compose.yml"))
                 .withLocalCompose(true)
     }
+
 
     /*
         TODO: GenericContainer has a waitingFor method, but not DockerComposeContainer.

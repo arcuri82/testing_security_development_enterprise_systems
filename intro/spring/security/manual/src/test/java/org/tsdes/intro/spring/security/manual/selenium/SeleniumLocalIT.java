@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class SeleniumLocalIT {
 
     private static WebDriver driver;

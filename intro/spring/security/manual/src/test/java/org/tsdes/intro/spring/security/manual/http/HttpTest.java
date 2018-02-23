@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.tsdes.intro.spring.security.manual.Application;
 import org.tsdes.misc.testutils.HttpUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,7 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  * Created by arcuri82 on 08-Feb-18.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class HttpTest {
 
     @LocalServerPort

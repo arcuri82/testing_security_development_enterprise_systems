@@ -17,6 +17,7 @@
         <module>jsf</module>
         <module>testing</module>
         <module>security</module>
+        <module>deployment</module>
     </modules>
 
 

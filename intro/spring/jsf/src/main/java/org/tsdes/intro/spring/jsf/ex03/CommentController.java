@@ -1,7 +1,8 @@
 package org.tsdes.intro.spring.jsf.ex03;
 
 
-import javax.ejb.EJB;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.util.List;
@@ -12,20 +13,20 @@ public class CommentController {
 
     private String formText;
 
-    @EJB
-    private CommentService ejb;
+    @Autowired
+    private CommentService service;
 
     public void createNewComment() {
-        ejb.createNewComment(formText);
+        service.createNewComment(formText);
         formText = "";
     }
 
-    public List<Comment> getMostRecentComments(int max){
-        return ejb.getMostRecentComments(max);
+    public List<Comment> getMostRecentComments(int max) {
+        return service.getMostRecentComments(max);
     }
 
-    public void deleteComment(Long id){
-        ejb.deleteComment(id);
+    public void deleteComment(Long id) {
+        service.deleteComment(id);
     }
 
     public String getFormText() {

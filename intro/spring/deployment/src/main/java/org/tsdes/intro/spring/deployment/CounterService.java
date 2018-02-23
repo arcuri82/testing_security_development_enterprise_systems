@@ -20,22 +20,24 @@ public class CounterService {
     public Long getValueForCounter(String id){
 
         CounterEntity entity = em.find(CounterEntity.class, id);
-        if(entity != null){
-            return entity.getValue();
+        if(entity == null){
+            entity = createNewCounter(id);
         }
 
-        return null;
+        return entity.getValue();
     }
 
 
     @Transactional
-    public void createNewCounter(String name){
+    public CounterEntity createNewCounter(String name){
 
         CounterEntity entity = new CounterEntity();
         entity.setId(name);
         entity.setValue(0L);
 
         em.persist(entity);
+
+        return entity;
     }
 
     @Transactional
@@ -43,7 +45,7 @@ public class CounterService {
 
         CounterEntity entity = em.find(CounterEntity.class, id);
         if(entity == null){
-            createNewCounter(id);
+            entity = createNewCounter(id);
         }
 
         entity.setValue(1L + entity.getValue());

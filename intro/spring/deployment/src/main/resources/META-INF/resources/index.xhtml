@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+
+
+<h:head>
+    <title>
+        Basic Deployment Example
+    </title>
+</h:head>
+
+
+<h:body>
+
+
+    <h1>
+        Basic Deployment Example
+    </h1>
+
+    <hr/>
+
+    <h:form>
+        <h:commandButton value="+" action="#{counterController.increaseCounter}" />
+        <h:outputText    value="#{counterController.counter}"                    />
+    </h:form>
+
+    <hr/>
+
+    <p>
+        Code available at: <a href="https://github.com/arcuri82/testing_security_development_enterprise_systems"> https://github.com/arcuri82/testing_security_development_enterprise_systems</a>
+    </p>
+
+</h:body>
+</html>

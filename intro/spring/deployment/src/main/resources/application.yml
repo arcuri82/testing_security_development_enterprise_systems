@@ -1,0 +1,12 @@
+jsf:
+  projectStage: Production
+
+
+spring:
+  datasource:
+    driver-class-name: "org.postgresql.Driver"
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: "update"
+

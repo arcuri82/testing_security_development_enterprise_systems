@@ -5,6 +5,8 @@ import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.*
+import org.junit.Assume
+import org.junit.BeforeClass
 import org.junit.ClassRule
 import org.junit.Test
 import org.testcontainers.containers.DockerComposeContainer
@@ -14,6 +16,19 @@ import java.io.File
 class DiscoveryIntegrationDockerIT {
 
     companion object {
+
+        @BeforeClass
+        @JvmStatic
+        fun checkEnvironment(){
+
+            /*
+                TODO
+                Looks like currently some issues in running Docker-Compose on Travis
+             */
+
+            val travis = System.getProperty("TRAVIS") != null
+            Assume.assumeTrue(!travis)
+        }
 
         class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
 

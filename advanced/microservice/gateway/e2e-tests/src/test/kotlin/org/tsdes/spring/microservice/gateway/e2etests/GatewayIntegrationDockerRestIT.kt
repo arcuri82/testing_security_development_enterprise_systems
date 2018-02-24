@@ -3,12 +3,9 @@ package org.tsdes.spring.microservice.gateway.e2etests
 import io.restassured.RestAssured.given
 import org.awaitility.Awaitility.await
 import org.hamcrest.CoreMatchers.equalTo
+import org.junit.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.ClassRule
-import org.junit.Rule
-import org.junit.Test
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.testcontainers.containers.BrowserWebDriverContainer
 import org.testcontainers.containers.DockerComposeContainer
@@ -19,6 +16,19 @@ import java.util.concurrent.TimeUnit
 class GatewayIntegrationDockerRestIT {
 
     companion object {
+
+        @BeforeClass
+        @JvmStatic
+        fun checkEnvironment(){
+
+            /*
+                TODO
+                Looks like currently some issues in running Docker-Compose on Travis
+             */
+
+            val travis = System.getProperty("TRAVIS") != null
+            Assume.assumeTrue(!travis)
+        }
 
         class KDockerComposeContainer(id: String, path: File) : DockerComposeContainer<KDockerComposeContainer>(id, path)
 

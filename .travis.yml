@@ -31,7 +31,7 @@ cache:
 # Useful when working in team. If someone breaks the build (code does not compile
 # or some tests are failing), then get notified by email immidiately.
 notifications:
-  email: false
+  email: true
 
 
 # The actual command we do for compiling.
@@ -44,3 +44,6 @@ script: mvn clean verify  --quiet
 # So that you can do deployment by just doing a Git Push.
 # However, in such case, best to have a special Git Branch for it, and
 # not the master one.
+#
+# Note: the status of Travis build can also be put on the README.md as an
+# image linked from Travis

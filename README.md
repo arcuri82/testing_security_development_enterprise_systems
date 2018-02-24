@@ -1,14 +1,10 @@
-<!---
-
-FIXME: add back once configuring Docker on Travis
-
-[![Build Status](https://travis-ci.org/arcuri82/testing_security_development_enterprise_systems.svg?branch=master)](https://travis-ci.org/arcuri82/testing_security_development_enterprise_systems)
-
--->
-
 # Testing, Security and Development of Enterprise Systems
 
 ![](doc/img/glenn-carstens-peters-120205.jpg  "Photo by Glenn Carstens-Peters on Unsplash")
+
+
+<!--- Travis CI build status banner -->
+[![Build Status](https://travis-ci.org/arcuri82/testing_security_development_enterprise_systems.svg?branch=master)](https://travis-ci.org/arcuri82/testing_security_development_enterprise_systems)
 
 
 This repository contains a set of examples related to the testing, security

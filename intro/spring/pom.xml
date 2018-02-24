@@ -18,6 +18,7 @@
         <module>testing</module>
         <module>security</module>
         <module>deployment</module>
+        <module>flyway</module>
     </modules>
 
 

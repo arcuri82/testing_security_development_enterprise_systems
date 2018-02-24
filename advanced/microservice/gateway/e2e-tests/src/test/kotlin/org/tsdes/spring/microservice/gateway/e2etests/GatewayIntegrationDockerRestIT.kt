@@ -12,7 +12,7 @@ import org.testcontainers.containers.DockerComposeContainer
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-
+@Ignore //FIXME
 class GatewayIntegrationDockerRestIT {
 
     companion object {

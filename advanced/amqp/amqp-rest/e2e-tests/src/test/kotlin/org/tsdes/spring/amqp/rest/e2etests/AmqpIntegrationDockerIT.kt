@@ -5,6 +5,7 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assume.assumeTrue
 import org.junit.BeforeClass
 import org.junit.ClassRule
+import org.junit.Ignore
 import org.junit.Test
 import org.testcontainers.containers.DockerComposeContainer
 import java.io.File
@@ -12,6 +13,7 @@ import java.io.File
 /**
  * Created by arcuri82 on 11-Aug-17.
  */
+@Ignore //FIXME
 class AmqpIntegrationDockerIT {
 
     companion object {

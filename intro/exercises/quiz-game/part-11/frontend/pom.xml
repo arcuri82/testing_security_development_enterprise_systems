@@ -132,7 +132,7 @@
                         <include>target/quizgame.jar</include>
                     </includes>
                     <processTypes>
-                        <web>java -jar target/quizgame.jar --server.port=$PORT</web>
+                        <web>java -Dserver.port=$PORT -jar target/quizgame.jar </web>
                     </processTypes>
                 </configuration>
             </plugin>

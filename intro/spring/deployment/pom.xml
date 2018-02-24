@@ -20,11 +20,6 @@
             <groupId>org.joinfaces</groupId>
             <artifactId>jsf-spring-boot-starter</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -50,6 +45,15 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -71,6 +75,22 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <configuration>
+                    <appName>deployment-pg5100</appName>
+                    <includeTarget>false</includeTarget>
+                    <includes>
+                        <include>target/deployment-example-exec.jar</include>
+                    </includes>
+                    <processTypes>
+                        <web>java -Dserver.port=$PORT -jar target/deployment-example-exec.jar </web>
+                    </processTypes>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 

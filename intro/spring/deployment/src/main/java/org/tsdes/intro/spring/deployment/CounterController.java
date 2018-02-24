@@ -15,7 +15,7 @@ public class CounterController {
 
     private static final String COUNTER_NAME = "MAIN_COUNTER";
 
-    @Inject
+    @Autowired
     private CounterService service;
 
 

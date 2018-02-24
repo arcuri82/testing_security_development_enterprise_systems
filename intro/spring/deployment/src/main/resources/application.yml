@@ -1,6 +1,8 @@
 jsf:
   projectStage: Production
 
+# Note: no need to specify URL of database, as Heroku will
+# automatically set environmental variables used by Spring
 
 spring:
   datasource:

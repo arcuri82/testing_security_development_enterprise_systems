@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
  * Created by arcuri82 on 26-Jan-18.
  */
 @Service
+@Transactional
 public class CounterService {
 
 
@@ -28,7 +29,6 @@ public class CounterService {
     }
 
 
-    @Transactional
     public CounterEntity createNewCounter(String name){
 
         CounterEntity entity = new CounterEntity();
@@ -40,7 +40,6 @@ public class CounterService {
         return entity;
     }
 
-    @Transactional
     public void increment(String id){
 
         CounterEntity entity = em.find(CounterEntity.class, id);

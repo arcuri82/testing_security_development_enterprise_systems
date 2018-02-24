@@ -414,7 +414,12 @@
                     </executions>
                 </plugin>
 
-
+                <!-- For cloud deployment on Heroku -->
+                <plugin>
+                    <groupId>com.heroku.sdk</groupId>
+                    <artifactId>heroku-maven-plugin</artifactId>
+                    <version>2.0.2</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

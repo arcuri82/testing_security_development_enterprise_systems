@@ -76,6 +76,7 @@
                 </executions>
             </plugin>
 
+            <!-- command: "mvn clean package heroku:deploy -Dheroku.logProgress=true " -->
             <plugin>
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>

@@ -5,7 +5,11 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: none
+      # Do not create the schema with Hibernate, but rather
+      # check if your current Entities do match what in the
+      # current existing schema (which would be created by
+      # Flyway here the first time the migration is run)
+      ddl-auto: validate
     database: h2
     show-sql: true
 

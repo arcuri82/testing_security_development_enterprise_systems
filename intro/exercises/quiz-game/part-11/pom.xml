@@ -20,7 +20,7 @@
         <version.springboot>1.5.4.RELEASE</version.springboot>
         <joinfaces.version>2.4.1</joinfaces.version>
         <version.h2>1.4.194</version.h2>
-        <version.testcontainers>1.4.3</version.testcontainers>
+        <version.testcontainers>1.6.0</version.testcontainers>
         <version.selenium>3.9.0</version.selenium>
     </properties>
 

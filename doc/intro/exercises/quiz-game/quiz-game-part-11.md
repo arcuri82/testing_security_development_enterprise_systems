@@ -4,24 +4,27 @@ TODO
 
 split in 3 modules
 
-copy&paste test-utils 
+Flyway
 
-TODO update error handling in login.xhtml/signup.xhtml
+Build jar + Docker
 
-TODO maybe gameIsOn stored on database, otherwise easy to cheat.
-     If not, at least add test to show that it is easy to cheat?
+Selenium on Docker + PG
 
-TODO copy over Selenium tests
-
-more Selenium tests
 
 Heroku deployment
 
 
-Zap???
-
-OWASP dependency scan
-
+ 
 Solutions to this exercise can be found in the 
 `intro/exercises/quiz-game/part-11` module.
 
+
+# Extra
+
+TODO db handling, remove init Singleton
+
+TODO admin
+
+
+TODO maybe gameIsOn stored on database, otherwise easy to cheat.
+     If not, at least add test to show that it is easy to cheat?

@@ -15,8 +15,10 @@
     <ui:define name="content">
 
         <h:form prependId="false">
-            <div>
+            <h:outputLabel value="User and/or password are wrong."
+                           rendered="${!empty param['error']}"/>
 
+            <div>
                 <h:outputText value="Username: "/>
                 <h:inputText id="username" value="#{signUpController.username}" class="login"/><br/>
                 <h:outputText value="Password: "/>

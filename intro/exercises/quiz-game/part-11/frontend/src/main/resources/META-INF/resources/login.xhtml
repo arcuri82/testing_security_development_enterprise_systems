@@ -17,8 +17,8 @@
 
         <h:form prependId="false">
             <div>
-                <!--<p:outputLabel value="Connection failed: user and/or password are wrong."-->
-                <!--rendered="${!empty param['error']}"/>-->
+                <h:outputLabel value="Login failed: user and/or password are wrong."
+                               rendered="${!empty param['error']}"/>
 
                 <h:outputText value="Username: "/>
                 <h:inputText id="username" class="login"/><br/>

@@ -34,7 +34,13 @@ public class SignUpController {
 
     public String signUpUser(){
 
-        boolean registered = userService.createUser(username, password);
+        boolean registered = false;
+        try {
+            registered = userService.createUser(username, password);
+        } catch (Exception e){
+            //nothing to do
+        }
+
 
         if(registered){
 
@@ -50,9 +56,9 @@ public class SignUpController {
                 SecurityContextHolder.getContext().setAuthentication(token);
             }
 
-            return "/index.jsf";
+            return "/index.jsf?faces-redirect=true";
         } else {
-            return "/signin.jsf?error=true";
+            return "/signup.jsf?faces-redirect=true&error=true";
         }
     }
 

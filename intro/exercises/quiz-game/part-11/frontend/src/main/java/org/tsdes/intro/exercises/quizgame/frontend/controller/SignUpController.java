@@ -55,9 +55,9 @@ public class SignUpController {
                 SecurityContextHolder.getContext().setAuthentication(token);
             }
 
-            return "/index.jsf";
+            return "/index.jsf?faces-redirect=true";
         } else {
-            return "/signin.jsf?error=true";
+            return "/signup.jsf?faces-redirect=true&error=true";
         }
     }
 

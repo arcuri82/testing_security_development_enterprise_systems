@@ -46,9 +46,11 @@ Create these new pages:
 
 * `login.xhtml`: provide a form with button in which one can try to login
   by providing a username and a password.
+  If one fails to log in, an error messag should be displayed.
 
 * `signup.xhtml`: similar to `login.xhtml`, but instead of logging in an
   existing user, do a create a new one.
+  If one fails to sign up, an error message should be displayed.
 
 Update the following existing pages:
 

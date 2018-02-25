@@ -21,6 +21,7 @@
         <joinfaces.version>2.4.1</joinfaces.version>
         <version.h2>1.4.194</version.h2>
         <version.testcontainers>1.4.3</version.testcontainers>
+        <version.selenium>3.9.0</version.selenium>
     </properties>
 
 
@@ -55,50 +56,7 @@
                 <version>4.12</version>
                 <scope>test</scope>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
-
-
-    <build>
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-        </plugins>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
-                    <inherited>true</inherited>
-                    <configuration>
-                        <source>${version.java}</source>
-                        <target>${version.java}</target>
-                    </configuration>
-                </plugin>
-
-                <!-- this is needed to run integration tests -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.19.1</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>integration-test</goal>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-            </plugins>
-        </pluginManagement>
-    </build>
 
 </project>

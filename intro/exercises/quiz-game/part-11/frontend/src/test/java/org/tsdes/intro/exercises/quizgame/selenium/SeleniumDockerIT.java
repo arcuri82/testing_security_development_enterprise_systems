@@ -65,8 +65,8 @@ public class SeleniumDockerIT extends SeleniumTestBase {
 
     public static GenericContainer spring = new GenericContainer(
             new ImageFromDockerfile("quizgame")
-                    .withFileFromPath("target/quizgame.jar",
-                            Paths.get("target/quizgame.jar"))
+                    .withFileFromPath("target/quizgame-exec.jar",
+                            Paths.get("target/quizgame-exec.jar"))
                     .withFileFromPath("Dockerfile", Paths.get("Dockerfile")))
             .withExposedPorts(8080)
             .withNetwork(network)

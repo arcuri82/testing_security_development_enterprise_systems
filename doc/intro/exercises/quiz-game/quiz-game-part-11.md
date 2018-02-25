@@ -6,7 +6,7 @@ split in 3 modules
 
 Flyway
 
-Build jar + Docker
+Build jar 
 
 Selenium on Docker + PG
 

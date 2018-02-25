@@ -179,7 +179,7 @@ public class DefaultDataInitializerService {
 
 
     private void createQuiz(
-            long subCategoryId,
+            Long subCategoryId,
             String question,
             String firstAnswer,
             String secondAnswer,

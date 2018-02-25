@@ -21,6 +21,10 @@
             <artifactId>spring-jpa</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tsdes.misc</groupId>
+            <artifactId>test-utils</artifactId>
+        </dependency>
 
 
         <dependency>

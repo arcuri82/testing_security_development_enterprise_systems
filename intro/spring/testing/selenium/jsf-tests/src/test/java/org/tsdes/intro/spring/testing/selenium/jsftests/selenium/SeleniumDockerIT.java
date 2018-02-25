@@ -4,9 +4,11 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.Wait;
 import org.testcontainers.images.builder.ImageFromDockerfile;
 
@@ -19,6 +21,12 @@ public class SeleniumDockerIT extends SeleniumTestBase {
     @ClassRule
     public static Network network = Network.newNetwork();
 
+    /*
+        Here we first start the Spring Application once (@ClassRule only apply once).
+        Then, before each test, we start new container with the browser, as
+        as @Rule is applied per test
+     */
+
     @ClassRule
     public static GenericContainer spring = new GenericContainer(
             new ImageFromDockerfile("jsf-tests")
@@ -28,7 +36,9 @@ public class SeleniumDockerIT extends SeleniumTestBase {
             .withExposedPorts(8080)
             .withNetwork(network)
             .withNetworkAliases(HOST_ALIAS)
-            .waitingFor(Wait.forHttp("/"));
+            .waitingFor(Wait.forHttp("/"))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("SPRING-APPLICATION")))
+            ;
 
     @Rule
     public BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()

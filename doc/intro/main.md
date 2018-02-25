@@ -178,13 +178,15 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
-* **Lesson 11**: Heroku and TODO 
+* **Lesson 11**: Continuous Integration and Cloud Deployment 
   
   Slides: TODO
   
   Modules:
      
-  * TODO
+  * **.travis.yml**
+  * **intro/spring/flyway**
+  * **intro/spring/deployment**
  
   Exercises: TODO
 

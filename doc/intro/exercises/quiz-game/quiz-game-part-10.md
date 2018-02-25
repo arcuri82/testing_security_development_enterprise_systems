@@ -152,6 +152,9 @@ being logged in.
 On each of such tests, do first the step to sign-up a new user.
 This should be enough to make the tests now passing.
 
+As part of the build, add the `org.owasp:dependency-check-maven` plugin
+to check for known security issues in the used libraries.
+
 
 Solutions to this exercise can be found in the 
 `intro/exercises/quiz-game/part-10` module.

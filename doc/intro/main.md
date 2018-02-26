@@ -180,7 +180,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 11**: Continuous Integration and Cloud Deployment 
   
-  Slides: TODO
+  Slides: [[pdf]](slides/lesson_11_ci.pdf), 
+          [[pptx]](slides/lesson_11_ci.pptx)
   
   Modules:
      
@@ -188,14 +189,14 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **intro/spring/flyway**
   * **intro/spring/deployment**
  
-  Exercises: TODO
+  Exercises: [quiz-game-part-11](exercises/quiz-game/quiz-game-part-11.md)  
 
 <br />
 
 
 * **Lesson 12**: Revision and Preparation for Exam 
   
-  Slides: TODO
+  Slides: none
   
   Modules: none
      

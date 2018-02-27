@@ -29,7 +29,7 @@ cache:
   - $HOME/.m2
 
 # Useful when working in team. If someone breaks the build (code does not compile
-# or some tests are failing), then get notified by email immidiately.
+# or some tests are failing), then get notified by email immediately.
 notifications:
   email: true
 

@@ -168,28 +168,25 @@ the following command on a terminal:
 
 ### How to Contribute
 
-There are many ways in which you can contribute:
-
-* If you found the material in this repository of any use, the easiest
-  way to show appreciation is to *star* it.
+There are many ways in which you can contribute. 
+If you found the material in this repository of any use, the easiest
+way to show appreciation is to *star* it.
+Furthermore, if you find issues, you can report them on 
+the [issues](https://github.com/arcuri82/testing_security_development_enterprise_systems/issues) 
+page.
+Possible types of issues:
   
-* If you find some of the code examples unclear, or with not enough
-  documentation to understand exactly what is going on, write 
-  about it on 
-  the [issues](https://github.com/arcuri82/testing_security_development_enterprise_systems/issues) 
-  page.
+* Some of the code examples are unclear, or with not enough
+  documentation to understand exactly what is going on.
    
   
-* If you find a *non-intended* security vulnerability or bad practice in any of the 
-  code examples, please report it on the [issues](https://github.com/arcuri82/testing_security_development_enterprise_systems/issues) 
-  page.
+* You find a *non-intended* security vulnerability or bad practice in any of the 
+  code examples.
   Note: in some cases, for didactic reasons there will be non-secure code.
   But in those cases that should be explicitly stated.
 
-* If a comment regarding a tool/library/framework is no longer valid (e.g., since a new version
-  has been released), please report it on the
-  [issues](https://github.com/arcuri82/testing_security_development_enterprise_systems/issues)
-  page.
+* Comments regarding a tool/library/framework are no longer valid (e.g., since a new version
+  has been released).
 
 ### License & Copyright
 

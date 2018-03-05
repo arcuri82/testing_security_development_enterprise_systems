@@ -12,7 +12,7 @@ public class StringUtilTest {
         int n = 10;
         String foo = StringUtil.getRandomString(n);
         assertNotNull(foo);
-        assertTrue(foo.length() >= 0);
+        assertTrue(foo.length() > 0);
         assertTrue("" + foo.length() +" > " + n, foo.length() <= n);
     }
 }

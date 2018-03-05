@@ -18,16 +18,6 @@ public class Ex01PO extends PageObject {
         super(po);
     }
 
-    //FIXME
-    public void toStartingPage(){
-//        getDriver().get(getBaseUrl()+"/ex01/ex01.jsf");
-//        waitForPageToLoad();
-
-        //make sure we start from a 0 counter
-        if(isOnPage() && ! Integer.valueOf(0).equals(getCounterValue())) {
-            clickReset();
-        }
-    }
 
 
     @Override

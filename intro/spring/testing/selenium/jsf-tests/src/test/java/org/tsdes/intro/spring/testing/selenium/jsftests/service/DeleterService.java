@@ -1,6 +1,7 @@
 package org.tsdes.intro.spring.testing.selenium.jsftests.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class DeleterService {
 
-    @PersistenceContext
+    @Autowired
     private EntityManager em;
 
     public void deleteEntities(Class<?> entity){

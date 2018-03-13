@@ -1,5 +1,6 @@
 package org.tsdes.intro.exercises.quizgame.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,13 +19,13 @@ import javax.inject.Named;
 @RequestScoped
 public class SignUpController {
 
-    @Inject
+    @Autowired
     private UserService userService;
 
-    @Inject
+    @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Inject
+    @Autowired
     private UserDetailsService userDetailsService;
 
 

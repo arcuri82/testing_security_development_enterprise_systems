@@ -1,5 +1,6 @@
 package org.tsdes.intro.exercises.quizgame.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.tsdes.intro.exercises.quizgame.entity.MatchStats;
@@ -16,7 +17,7 @@ import javax.inject.Named;
 @RequestScoped
 public class UserInfoController {
 
-    @Inject
+    @Autowired
     private MatchStatsService matchStatsService;
 
     public String getUserName(){

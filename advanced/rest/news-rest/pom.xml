@@ -58,12 +58,12 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.tsdes.advanced.examples</groupId>
-            <artifactId>news</artifactId>
+            <groupId>org.tsdes.advanced</groupId>
+            <artifactId>example-news</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.tsdes.advanced.utils</groupId>
-            <artifactId>utils</artifactId>
+            <groupId>org.tsdes.misc</groupId>
+            <artifactId>test-utils</artifactId>
         </dependency>
 
 

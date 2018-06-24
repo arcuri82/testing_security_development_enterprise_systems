@@ -13,8 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.tsdes.advanced.xmlandjson</groupId>
-            <artifactId>xmlandjson</artifactId>
+            <groupId>org.tsdes.advanced</groupId>
+            <artifactId>dataformat</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

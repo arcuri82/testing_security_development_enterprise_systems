@@ -16,8 +16,8 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.tsdes.advanced.utils</groupId>
-            <artifactId>utils</artifactId>
+            <groupId>org.tsdes.misc</groupId>
+            <artifactId>test-utils</artifactId>
         </dependency>
 
 

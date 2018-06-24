@@ -285,13 +285,6 @@
 
     <build>
 
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-        </plugins>
-
         <!--
             like dependencyManagement, this only defines which (and how) plugins to use.
             to actually activate them, they need to be directly under <plugins> (without

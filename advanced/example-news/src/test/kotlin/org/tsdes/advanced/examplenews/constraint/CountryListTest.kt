@@ -1,4 +1,4 @@
-package org.tsdes.spring.examples.news.constraint
+package org.tsdes.advanced.examplenews.constraint
 
 import org.junit.Assert.*
 import org.junit.Test

@@ -1,7 +1,7 @@
-package org.tsdes.spring.examples.news
+package org.tsdes.advanced.examplenews
 
 import org.hibernate.validator.constraints.NotBlank
-import org.tsdes.spring.examples.news.constraint.Country
+import org.tsdes.advanced.examplenews.constraint.Country
 import java.time.ZonedDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

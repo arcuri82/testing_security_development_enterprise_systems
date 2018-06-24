@@ -1,4 +1,4 @@
-package org.tsdes.spring.examples.news.constraint
+package org.tsdes.advanced.examplenews.constraint
 
 import com.google.common.io.Resources
 import java.nio.charset.Charset

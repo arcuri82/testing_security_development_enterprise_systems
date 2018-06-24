@@ -1,4 +1,4 @@
-package org.tsdes.spring.examples.news
+package org.tsdes.advanced.examplenews
 
 import org.junit.Assert.*
 import org.junit.Before

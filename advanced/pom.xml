@@ -15,7 +15,7 @@
     <modules>
         <module>kotlin</module>
         <module>data-format</module>
-        <module>examples</module>
+        <module>example-news</module>
         <module>utils</module>
         <module>rest</module>
         <module>amqp</module>

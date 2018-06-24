@@ -210,7 +210,9 @@
                             <configuration>
                                 <target>
                                     <move file="${jbossTarget}/wildfly-${wildfly.version}"
-                                          tofile="${jbossTarget}/wildfly"/>
+                                          tofile="${jbossTarget}/wildfly"
+                                          failonerror="false"
+                                    />
                                 </target>
                             </configuration>
                         </execution>

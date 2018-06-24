@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 
     /*
     Need to register. Linked to a user.
-    Up to 500 calls per day, 10 per minute.
+    At time of registering, it was up to 500 calls per day, 10 per minute.
     To have more, you need to pay.
     */
     val code = "302f56c7ad8e8c82"
@@ -34,20 +34,6 @@ fun main(args: Array<String>) {
 
     val result = response.readEntity(String::class.java)
     println("Result as string : $result")
-
-    /*
-    Missing XSD:
-
-    https://apicommunity.wunderground.com/weatherapi/topics/is_there_an_xsd_document_available_to_create_an_object_model_from_for_deserialization_in_c
-
-    so cannot automatically generate Java classes for binding/conversion
-
-    No documentation, just list of field names:
-
-    http://www.wunderground.com/weather/api/d/docs?d=data/conditions&MR=1
-
-    could manually write a POJO, and then map/translate with GSon, but quite large, see w_example.json
-    */
 
     //just extract one element of interest
     val parser = JsonParser()

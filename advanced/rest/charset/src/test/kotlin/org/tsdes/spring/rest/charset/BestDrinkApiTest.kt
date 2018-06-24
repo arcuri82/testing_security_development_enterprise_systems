@@ -6,7 +6,7 @@ import org.junit.runner.RunWith
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
-import org.tsdes.spring.utils.HttpUtil
+import org.tsdes.misc.testutils.HttpUtils
 import java.nio.charset.Charset
 
 /**
@@ -27,8 +27,8 @@ class BestDrinkApiTest {
         message += "Accept:text/plain\r\n"
         message += "\r\n"
 
-        val response = HttpUtil.executeHttpCommand("localhost", port, message)
-        val body = HttpUtil.getBodyBlock(response)
+        val response = HttpUtils.executeHttpCommand("localhost", port, message)
+        val body = HttpUtils.getBodyBlock(response)
 
         assertTrue("Body: $body", body!!.trim().equals("beer", ignoreCase = true))
     }
@@ -44,8 +44,8 @@ class BestDrinkApiTest {
         message += "Accept-Language:no\r\n"
         message += "\r\n"
 
-        val response = HttpUtil.executeHttpCommand("localhost", port, message)
-        val body = HttpUtil.getBodyBlock(response)
+        val response = HttpUtils.executeHttpCommand("localhost", port, message)
+        val body = HttpUtils.getBodyBlock(response)
 
         assertTrue("Body: $body", body!!.trim().equals("øl", ignoreCase = true))
     }
@@ -96,12 +96,12 @@ class BestDrinkApiTest {
         message += "Accept-Language:en\r\n"
         message += "\r\n"
 
-        val response = HttpUtil.executeHttpCommand("localhost", port, message, "UTF-8")
+        val response = HttpUtils.executeHttpCommand("localhost", port, message, "UTF-8")
 
-        val type = HttpUtil.getHeaderValue("Content-Type", response)
+        val type = HttpUtils.getHeaderValue(response, "Content-Type")
         assertTrue(type, type!!.contains("ISO-8859-1"))
 
-        val body = HttpUtil.getBodyBlock(response)
+        val body = HttpUtils.getBodyBlock(response)
 
         //no problem, as "beer", being ASCII, has the same bytes in both UTF-8 and ISO-8859-1
         assertTrue("Body: $body", body!!.trim().equals("beer", ignoreCase = true))
@@ -116,18 +116,18 @@ class BestDrinkApiTest {
         message += "Accept-Language:no\r\n"
         message += "\r\n"
 
-        val response = HttpUtil.executeHttpCommand("localhost", port, message, "UTF-8")
+        val response = HttpUtils.executeHttpCommand("localhost", port, message, "UTF-8")
 
-        val type = HttpUtil.getHeaderValue("Content-Type", response)
+        val type = HttpUtils.getHeaderValue(response, "Content-Type")
         assertTrue(type, type!!.contains("ISO-8859-1"))
 
-        var body = HttpUtil.getBodyBlock(response)
+        var body = HttpUtils.getBodyBlock(response)
         body = body!!.trim()
 
         //this now fails, as charset conversion problem
         assertFalse("Body: $body", body.toLowerCase() == "øl")
         assertEquals(2, body.length) // first invalid, but still 2 characters
-        println("Read value: " + body)  // �l
+        println("Read value: $body")  // �l
     }
 
     @Test
@@ -234,12 +234,12 @@ class BestDrinkApiTest {
         message += "Accept-Language:no\r\n"
         message += "\r\n"
 
-        val response = HttpUtil.executeHttpCommand("localhost", port, message, "ISO-8859-1")
+        val response = HttpUtils.executeHttpCommand("localhost", port, message, "ISO-8859-1")
 
-        val type = HttpUtil.getHeaderValue("Content-Type", response)
+        val type = HttpUtils.getHeaderValue(response, "Content-Type")
         assertTrue(type, type!!.contains("UTF-8"))
 
-        var body = HttpUtil.getBodyBlock(response)
+        var body = HttpUtils.getBodyBlock(response)
         body = body!!.trim()
 
         //this now fails, as charset conversion problem
@@ -247,7 +247,7 @@ class BestDrinkApiTest {
         assertEquals(3, body.length) // first invalid, but still 2 characters
 
         assertEquals("Ã\u0098l", body)
-        println("Body: " + body)
+        println("Body: $body")
     }
 
     @Test

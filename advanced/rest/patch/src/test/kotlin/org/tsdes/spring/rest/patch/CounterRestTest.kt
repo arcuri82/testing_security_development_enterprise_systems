@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
-import org.tsdes.spring.utils.HttpUtil
+import org.tsdes.misc.testutils.HttpUtils
 
 /**
  * Created by arcuri82 on 31-Jul-17.
@@ -60,14 +60,14 @@ class CounterRestTest {
         message += "\r\n"
         message += body
 
-        val response = HttpUtil.executeHttpCommand("localhost", port, message)
-        val headers = HttpUtil.getHeaderBlock(response)
+        val response = HttpUtils.executeHttpCommand("localhost", port, message)
+        val headers = HttpUtils.getHeaderBlock(response)
 
         assertTrue(headers, headers.contains("201"))
 
         //Response should contain header telling where the newly created
         //resource is available
-        val location = HttpUtil.getHeaderValue("Location", headers)
+        val location = HttpUtils.getHeaderValue(headers, "Location")
         assertTrue(location, location!!.contains(basePath))
 
         //extract the last path element, ie the {id} in /patch/api/counters/{id}
@@ -235,7 +235,7 @@ class CounterRestTest {
         createNew(dto)
 
         val modifiedValue = value * 3
-        val modifiedName = "modified from " + name
+        val modifiedName = "modified from $name"
 
         //name is correct, but value is wrongly passed as string, not integer
         patchWithMergeJSon(id, "{\"name\":\"$modifiedName\", \"value\":\"$modifiedValue\"}", 400)

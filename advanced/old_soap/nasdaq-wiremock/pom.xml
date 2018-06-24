@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>nasdaq</artifactId>
+    <artifactId>nasdaq-wiremock</artifactId>
     <packaging>jar</packaging>
 
     <parent>
@@ -16,12 +16,12 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jre8</artifactId>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-standalone</artifactId>
         </dependency>
 
     </dependencies>
@@ -51,7 +51,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <!--
                     As we have done custom compilation of source code, we need
@@ -73,7 +72,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 

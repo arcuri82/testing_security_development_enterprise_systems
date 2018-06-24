@@ -18,7 +18,7 @@
         <module>examples</module>
         <module>utils</module>
         <module>rest</module>
-        <module>soap</module>
+        <!--<module>soap</module>-->
         <module>amqp</module>
         <module>microservice</module>
         <module>security</module>
@@ -27,12 +27,30 @@
 
 
     <properties>
-        <version.kotlin>1.1.51</version.kotlin>
+        <version.kotlin>1.2.50</version.kotlin>
         <version.springcloud>Dalston.SR3</version.springcloud>
         <version.springfox>2.6.1</version.springfox>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
+
+    <dependencies>
+        <!--
+               The Java API comes with the JDK itself.
+               On the other hand, the Kotlin API is treated like any other
+               third-party library, and we need to include it here as a dependency.
+
+                Unfortunately, the name of the supported JDK is in the id of
+                the artifact itself.
+                Why a problem? The day a new JDK version is used, would need to update
+                every single module :(
+                So, we add it by default to all submodules
+          -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+        </dependency>
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -52,14 +70,10 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <!--
-                The Java API comes with the JDK itself.
-                On the other hand, the Kotlin API is treated like any other
-                third-party library, and we need to include it here as a dependency.
-            -->
+
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-stdlib-jre8</artifactId>
+                <artifactId>kotlin-stdlib-jdk8</artifactId>
                 <version>${version.kotlin}</version>
             </dependency>
             <dependency>

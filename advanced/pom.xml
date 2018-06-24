@@ -13,16 +13,17 @@
     </parent>
 
     <modules>
-        <module>xml-and-json</module>
         <module>kotlin</module>
+        <module>data-format</module>
         <module>examples</module>
         <module>utils</module>
         <module>rest</module>
-        <!--<module>soap</module>-->
         <module>amqp</module>
         <module>microservice</module>
         <module>security</module>
         <module>front-end</module>
+        <!--<module>xml-and-json</module>-->
+        <!--<module>soap</module>-->
     </modules>
 
 

@@ -136,7 +136,9 @@
                         <configuration>
                             <target>
                                 <move file="${basedir}/target/downloaded_Wildfly/wildfly-10.1.0.Final"
-                                      tofile="${basedir}/target/downloaded_Wildfly/wildfly"/>
+                                      tofile="${basedir}/target/downloaded_Wildfly/wildfly"
+                                      failonerror="false"
+                                />
                             </target>
                         </configuration>
                     </execution>

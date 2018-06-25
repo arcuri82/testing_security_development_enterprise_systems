@@ -1,5 +1,6 @@
 package org.tsdes.advanced.examplenews
 
+import com.google.common.base.Throwables
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -46,7 +47,7 @@ class NewsTest {
         val id = crud.createNews("author", "someText", "Norway")
 
         assertEquals(1, crud.count())
-        assertEquals(id, crud.findOne(id).id)
+        assertEquals(id, crud.findById(id).get().id)
     }
 
     @Test
@@ -55,13 +56,13 @@ class NewsTest {
         assertEquals(0, crud.count())
 
         val id = crud.createNews("author", "text", "Norway")
-        assertTrue(crud.exists(id))
+        assertTrue(crud.existsById(id))
         assertTrue(crud.findAll().any { n -> n.id == id })
         assertEquals(1, crud.count())
 
-        crud.delete(id)
+        crud.deleteById(id)
 
-        assertFalse(crud.exists(id))
+        assertFalse(crud.existsById(id))
         assertFalse(crud.findAll().any { n -> n.id == id })
         assertEquals(0, crud.count())
     }
@@ -74,7 +75,7 @@ class NewsTest {
         val country = "Norway"
 
         val id = crud.createNews(author, text, country)
-        val news = crud.findOne(id)
+        val news = crud.findById(id).get()
 
         assertEquals(author, news.authorId)
         assertEquals(text, news.text)
@@ -87,12 +88,12 @@ class NewsTest {
         val text = "someText"
 
         val id = crud.createNews("author", text, "Norway")
-        assertEquals(text, crud.findOne(id).text)
+        assertEquals(text, crud.findById(id).get().text)
 
         val updated = "new updated text"
 
         crud.updateText(id, updated)
-        assertEquals(updated, crud.findOne(id).text)
+        assertEquals(updated, crud.findById(id).get().text)
     }
 
 
@@ -158,8 +159,9 @@ class NewsTest {
         try {
             crud.createNews("", "text", "Norway")
             fail()
-        } catch (e: ConstraintViolationException) {
+        } catch (e: Exception) {
             //expected
+            assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
         }
     }
 
@@ -169,8 +171,9 @@ class NewsTest {
         try {
             crud.createNews("author", "text", "Foo")
             fail()
-        } catch (e: ConstraintViolationException) {
+        } catch (e: Exception) {
             //expected
+            assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
         }
     }
 
@@ -180,8 +183,9 @@ class NewsTest {
         try {
             crud.createNews("author", "", "Norway")
             fail()
-        } catch (e: ConstraintViolationException) {
+        } catch (e: Exception) {
             //expected
+            assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
         }
     }
 
@@ -194,8 +198,9 @@ class NewsTest {
         try {
             crud.createNews("author", text, "Norway")
             fail()
-        } catch (e: ConstraintViolationException) {
+        } catch (e: Exception) {
             //expected
+            assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
         }
     }
 
@@ -213,7 +218,7 @@ class NewsTest {
             fail()
         }catch (e: Exception){}
 
-        assertNotEquals(updated, crud.findOne(id).text)
+        assertNotEquals(updated, crud.findById(id).get().text)
     }
 }
 

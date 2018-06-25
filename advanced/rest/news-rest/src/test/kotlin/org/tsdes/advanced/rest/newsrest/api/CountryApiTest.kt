@@ -7,7 +7,7 @@ import org.apache.http.util.EntityUtils
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.boot.context.embedded.LocalServerPort
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.advanced.rest.newsrest.NewsRestApplication
@@ -83,8 +83,7 @@ class CountryApiTest{
         val body = EntityUtils.toString(response.entity)
         println(body)
 
-        val gson = Gson()
-        val countries = gson.fromJson(body, List::class.java)
+        val countries = Gson().fromJson(body, List::class.java)
 
         assertTrue(countries.size > 200)
         assertTrue(countries.contains("Norway"))

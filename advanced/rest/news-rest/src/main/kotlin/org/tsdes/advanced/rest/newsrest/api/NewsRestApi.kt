@@ -1,5 +1,6 @@
 package org.tsdes.advanced.rest.newsrest.api
 
+import com.google.common.base.Throwables
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -137,13 +138,11 @@ class NewsRestApi {
         val id: Long?
         try {
             id = crud.createNews(dto.authorId!!, dto.text!!, dto.country!!)
-        } catch (e: ConstraintViolationException) {
-            return ResponseEntity.status(400).build()
-        }
-
-        if (id == null) {
-            //this likely would happen only if bug
-            return ResponseEntity.status(500).build()
+        } catch (e: Exception) {
+            if(Throwables.getRootCause(e) is ConstraintViolationException) {
+                return ResponseEntity.status(400).build()
+            }
+            throw e
         }
 
         return ResponseEntity.status(201).body(id)
@@ -168,7 +167,7 @@ class NewsRestApi {
             return ResponseEntity.status(404).build()
         }
 
-        val entity = crud.findOne(id) ?: return ResponseEntity.status(404).build()
+        val entity = crud.findById(id).orElse(null) ?: return ResponseEntity.status(404).build()
 
         return ResponseEntity.ok(NewsConverter.transform(entity))
     }
@@ -212,7 +211,7 @@ class NewsRestApi {
             return ResponseEntity.status(409).build()
         }
 
-        if (!crud.exists(id)) {
+        if (!crud.existsById(id)) {
             //Here, in this API, made the decision to not allow to create a news with PUT.
             // So, if we cannot find it, should return 404 instead of creating it
             return ResponseEntity.status(404).build()
@@ -242,7 +241,7 @@ class NewsRestApi {
    */
 
     @ApiOperation("Update the text content of an existing news")
-    @PutMapping(path = arrayOf("/id/{id}/text"), consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE))
+    @PutMapping(path = ["/id/{id}/text"], consumes = [(MediaType.TEXT_PLAIN_VALUE)])
     fun updateText(
             @ApiParam(ID_PARAM)
             @PathVariable("id")
@@ -256,7 +255,7 @@ class NewsRestApi {
             return ResponseEntity.status(400).build()
         }
 
-        if (!crud.exists(id)) {
+        if (!crud.existsById(id)) {
             return ResponseEntity.status(404).build()
         }
 
@@ -300,11 +299,11 @@ class NewsRestApi {
             be different (this does not affect the definition of
             idempotent)
          */
-        if (!crud.exists(id)) {
+        if (!crud.existsById(id)) {
             return ResponseEntity.status(404).build()
         }
 
-        crud.delete(id)
+        crud.deleteById(id)
         return ResponseEntity.status(204).build()
     }
 
@@ -326,7 +325,7 @@ class NewsRestApi {
 
         Important: we also need to add @Validated on this class.
      */
-    @ExceptionHandler(value = ConstraintViolationException::class)
+    @ExceptionHandler(value = [(ConstraintViolationException::class)])
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     fun handleValidationFailure(ex: ConstraintViolationException): String {
 

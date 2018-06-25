@@ -44,7 +44,7 @@ class NewsRestApi {
     @Autowired
     private lateinit var crud: NewsRepository
 
-    @Value("\${server.contextPath}")
+    @Value("\${server.servlet.context-path}")
     private lateinit var contextPath : String
 
     /*
@@ -140,7 +140,7 @@ class NewsRestApi {
 
 
     @ApiOperation("Get a single news specified by id")
-    @GetMapping(path = arrayOf("/{id}"))
+    @GetMapping(path = ["/{id}"])
     fun getNews(@ApiParam(ID_PARAM)
                 @PathVariable("id")
                 pathId: String?)
@@ -157,14 +157,14 @@ class NewsRestApi {
             return ResponseEntity.status(404).build()
         }
 
-        val dto = crud.findOne(id) ?: return ResponseEntity.status(404).build()
+        val dto = crud.findById(id).orElse(null) ?: return ResponseEntity.status(404).build()
 
         return ResponseEntity.ok(NewsConverter.transform(dto))
     }
 
 
     @ApiOperation("Update an existing news")
-    @PutMapping(path = arrayOf("/{id}"), consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PutMapping(path = ["/{id}"], consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     fun update(
             @ApiParam(ID_PARAM)
             @PathVariable("id")
@@ -191,7 +191,7 @@ class NewsRestApi {
             return ResponseEntity.status(409).build()
         }
 
-        if (!crud.exists(dtoId)) {
+        if (!crud.existsById(dtoId)) {
             //Here, in this API, made the decision to not allow to create a news with PUT.
             // So, if we cannot find it, should return 404 instead of creating it
             return ResponseEntity.status(404).build()
@@ -226,7 +226,7 @@ class NewsRestApi {
             return ResponseEntity.status(400).build()
         }
 
-        if (!crud.exists(id)) {
+        if (!crud.existsById(id)) {
             return ResponseEntity.status(404).build()
         }
 
@@ -241,7 +241,7 @@ class NewsRestApi {
 
 
     @ApiOperation("Delete a news with the given id")
-    @DeleteMapping(path = arrayOf("/{id}"))
+    @DeleteMapping(path = ["/{id}"])
     fun delete(@ApiParam(ID_PARAM)
                @PathVariable("id")
                pathId: String?): ResponseEntity<Any> {
@@ -253,16 +253,16 @@ class NewsRestApi {
             return ResponseEntity.status(400).build()
         }
 
-        if (!crud.exists(id)) {
+        if (!crud.existsById(id)) {
             return ResponseEntity.status(404).build()
         }
 
-        crud.delete(id)
+        crud.deleteById(id)
         return ResponseEntity.status(204).build()
     }
 
 
-    @ExceptionHandler(value = ConstraintViolationException::class)
+    @ExceptionHandler(value = [ConstraintViolationException::class])
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     fun handleValidationFailure(ex: ConstraintViolationException): String {
 
@@ -351,7 +351,7 @@ class NewsRestApi {
 
     @ApiOperation("Get all the news in the specified country")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @GetMapping(path = arrayOf("/countries/{country}"))
+    @GetMapping(path = ["/countries/{country}"])
     @Deprecated
     fun deprecatedGetByCountry(@ApiParam("The country name")
                                @PathVariable("country")
@@ -369,7 +369,7 @@ class NewsRestApi {
 
     @ApiOperation("Get all the news written by the specified author")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @GetMapping(path = arrayOf("/authors/{author}"))
+    @GetMapping(path = ["/authors/{author}"])
     @Deprecated
     fun deprecatedGetByAuthor(@ApiParam("The id of the author who wrote the news")
                     @PathVariable("author")
@@ -385,7 +385,7 @@ class NewsRestApi {
 
     @ApiOperation("Get all the news from a given country written by a given author")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @GetMapping(path = arrayOf("/countries/{country}/authors/{author}"))
+    @GetMapping(path = ["/countries/{country}/authors/{author}"])
     @Deprecated
     fun deprecatedGetByCountryAndAuthor(
             @ApiParam("The country name")
@@ -410,7 +410,7 @@ class NewsRestApi {
 
     @ApiOperation("Get a single news specified by id")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @GetMapping(path = arrayOf("/id/{id}"))
+    @GetMapping(path = ["/id/{id}"])
     @Deprecated
     fun deprecatedGetById(@ApiParam(ID_PARAM)
                           @PathVariable("id")
@@ -425,7 +425,7 @@ class NewsRestApi {
 
     @ApiOperation("Update an existing news")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @PutMapping(path = arrayOf("/id/{id}"), consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PutMapping(path = ["/id/{id}"], consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     @Deprecated
     fun deprecatedUpdate(
             @ApiParam(ID_PARAM)
@@ -445,7 +445,7 @@ class NewsRestApi {
 
     @ApiOperation("Update the text content of an existing news")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @PutMapping(path = arrayOf("/id/{id}/text"), consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE))
+    @PutMapping(path = ["/id/{id}/text"], consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE))
     @Deprecated
     fun deprecatedUpdateText(
             @ApiParam(ID_PARAM)
@@ -465,7 +465,7 @@ class NewsRestApi {
 
     @ApiOperation("Delete a news with the given id")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @DeleteMapping(path = arrayOf("/id/{id}"))
+    @DeleteMapping(path = ["/id/{id}"])
     @Deprecated
     fun deprecatedDelete(@ApiParam(ID_PARAM)
                          @PathVariable("id")

@@ -18,7 +18,8 @@
         <module>example-news</module>
         <module>rest</module>
         <module>amqp</module>
-        <module>microservice</module>
+        <!-- TODO put back once fixed Spring Cloud dependencies and replaced Zuul-->
+        <!--<module>microservice</module>-->
         <module>security</module>
         <module>front-end</module>
     </modules>
@@ -26,8 +27,8 @@
 
     <properties>
         <version.kotlin>1.2.50</version.kotlin>
-        <version.springcloud>Dalston.SR3</version.springcloud>
-        <version.springfox>2.6.1</version.springfox>
+        <version.springcloud>Finchley.RELEASE</version.springcloud>
+        <version.springfox>2.9.2</version.springfox>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
@@ -205,6 +206,7 @@
                         So here we have to use special plugins to bypass this Kotlin "feature"...
                     -->
                     <configuration>
+                        <jvmTarget>${version.java}</jvmTarget>
                         <compilerPlugins>
                             <plugin>spring</plugin>
                             <plugin>jpa</plugin>

@@ -45,7 +45,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <fs>${file.separator}</fs>
         <version.java>1.8</version.java>
-        <version.springboot>1.5.4.RELEASE</version.springboot>
+        <version.springboot>2.0.3.RELEASE</version.springboot>
         <version.jacoco>0.7.9</version.jacoco>
         <version.h2>1.4.194</version.h2>
         <version.postgres>42.1.4</version.postgres>

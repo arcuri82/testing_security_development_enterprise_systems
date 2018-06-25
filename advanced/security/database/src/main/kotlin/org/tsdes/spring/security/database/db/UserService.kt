@@ -24,7 +24,7 @@ class UserService(
         try {
             val hash = passwordEncoder.encode(password)
 
-            if (userCrud.exists(username)) {
+            if (userCrud.existsById(username)) {
                 return false
             }
 

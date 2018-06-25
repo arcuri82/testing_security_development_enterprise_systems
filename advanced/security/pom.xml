@@ -15,7 +15,8 @@
     <modules>
         <module>basic</module>
         <module>database</module>
-        <module>distributed-session</module>
+        <!-- TODO put back once fixed Spring Cloud dependencies and replaced Zuul-->
+        <!--<module>distributed-session</module>-->
     </modules>
 
 

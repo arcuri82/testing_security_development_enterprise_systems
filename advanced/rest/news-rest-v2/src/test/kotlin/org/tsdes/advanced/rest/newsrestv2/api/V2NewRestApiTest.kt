@@ -66,9 +66,9 @@ class V2NewRestApiTest : NRTestBase() {
                 .statusCode(201)
                 .extract().asString()
 
-        delete("/" + id).then().statusCode(204)
+        delete("/$id").then().statusCode(204)
 
         //delete again
-        delete("/" + id).then().statusCode(404) //note the change from 204 to 404
+        delete("/$id").then().statusCode(404) //note the change from 204 to 404
     }
 }

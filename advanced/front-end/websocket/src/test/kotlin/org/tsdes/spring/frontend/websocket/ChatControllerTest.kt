@@ -5,10 +5,9 @@ import org.junit.Assert.assertTrue
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.messaging.converter.MappingJackson2MessageConverter
-import org.springframework.messaging.converter.StringMessageConverter
 import org.springframework.messaging.simp.stomp.*
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.web.socket.WebSocketHttpHeaders

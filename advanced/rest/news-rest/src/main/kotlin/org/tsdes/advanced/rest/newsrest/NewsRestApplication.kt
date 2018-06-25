@@ -63,6 +63,11 @@ class NewsRestApplication {
                 .build()
     }
 
+
+    /*
+        FIXME this might no longer be necessary in Spring Boot 2
+     */
+
     /*
         Bean used to configure how JSON un/marshalling is done.
      */

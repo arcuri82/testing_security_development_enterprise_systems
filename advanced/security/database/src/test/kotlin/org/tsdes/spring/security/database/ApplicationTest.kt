@@ -261,8 +261,7 @@ class ApplicationTest {
 
         given().post("/logout")
                 .then()
-                //default behavior for "logout" is not REST friendly...
-                .statusCode(302)
+                .statusCode(204)
 
         given().accept("${ContentType.TEXT},*/*")
                 .cookie("JSESSIONID", cookie)
@@ -273,7 +272,7 @@ class ApplicationTest {
         given().cookie("JSESSIONID", cookie)
                 .post("/logout")
                 .then()
-                .statusCode(302)
+                .statusCode(204)
 
         given().accept("${ContentType.TEXT},*/*")
                 .cookie("JSESSIONID", cookie)

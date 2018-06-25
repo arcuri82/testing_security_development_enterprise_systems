@@ -14,7 +14,8 @@
 
     <modules>
         <module>base-queue</module>
-        <module>distributed-work</module>
+        <!--FIXME giving problems-->
+        <!--<module>distributed-work</module>-->
         <module>fanout</module>
         <module>direct-exchange</module>
         <module>topic-exchange</module>

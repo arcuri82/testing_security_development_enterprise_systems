@@ -37,8 +37,8 @@ class RestApi(
             no authentication.
          */
         val map = mutableMapOf<String,Any>()
-        map.put("name", user.name)
-        map.put("roles", AuthorityUtils.authorityListToSet(user.authorities))
+        map["name"] = user.name
+        map["roles"] = AuthorityUtils.authorityListToSet(user.authorities)
 
         /*
             Returning such data is useful when we want to have different GUIs
@@ -49,8 +49,8 @@ class RestApi(
     }
 
 
-    @PostMapping(path = arrayOf("/signIn"),
-            consumes = arrayOf(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
+    @PostMapping(path = ["/signIn"],
+            consumes = [(MediaType.APPLICATION_FORM_URLENCODED_VALUE)])
     fun signIn(@ModelAttribute(name = "the_user") username: String,
                @ModelAttribute(name = "the_password") password: String)
             : ResponseEntity<Void> {
@@ -82,8 +82,8 @@ class RestApi(
         return ResponseEntity.status(204).build()
     }
 
-    @GetMapping(produces = arrayOf(MediaType.TEXT_PLAIN_VALUE),
-            path = arrayOf("/resource"))
+    @GetMapping(produces = [(MediaType.TEXT_PLAIN_VALUE)],
+            path = ["/resource"])
     fun resource(): String {
         return "The Resource"
     }

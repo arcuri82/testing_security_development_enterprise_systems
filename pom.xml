@@ -45,7 +45,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <fs>${file.separator}</fs>
         <version.java>1.8</version.java>
-        <version.springboot>2.0.3.RELEASE</version.springboot>
         <version.jacoco>0.7.9</version.jacoco>
         <version.h2>1.4.194</version.h2>
         <version.postgres>42.1.4</version.postgres>
@@ -73,16 +72,6 @@
                 <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
-
-            <!-- SpringBoot BOM -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${version.springboot}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
 
             <!-- Database -->
             <dependency>

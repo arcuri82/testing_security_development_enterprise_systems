@@ -1,5 +1,6 @@
 package org.tsdes.advanced.rest.newsrestv2.api
 
+import com.google.common.base.Throwables
 import io.swagger.annotations.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -122,13 +123,11 @@ class NewsRestApi {
         val id: Long?
         try {
             id = crud.createNews(dto.authorId!!, dto.text!!, dto.country!!)
-        } catch (e: ConstraintViolationException) {
-            return ResponseEntity.status(400).build()
-        }
-
-        if (id == null) {
-            //this likely would happen only if bug
-            return ResponseEntity.status(500).build()
+        } catch (e: Exception) {
+            if(Throwables.getRootCause(e) is ConstraintViolationException) {
+                return ResponseEntity.status(400).build()
+            }
+            throw e
         }
 
         return ResponseEntity.status(201).body(id)
@@ -203,8 +202,11 @@ class NewsRestApi {
 
         try {
             crud.update(dtoId, dto.text!!, dto.authorId!!, dto.country!!, dto.creationTime!!)
-        } catch (e: ConstraintViolationException) {
-            return ResponseEntity.status(400).build()
+        } catch (e: Exception) {
+            if(Throwables.getRootCause(e) is ConstraintViolationException) {
+                return ResponseEntity.status(400).build()
+            }
+            throw e
         }
 
         return ResponseEntity.status(204).build()
@@ -212,7 +214,7 @@ class NewsRestApi {
 
 
     @ApiOperation("Update the text content of an existing news")
-    @PutMapping(path = arrayOf("/{id}/text"), consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE))
+    @PutMapping(path = ["/{id}/text"], consumes = [(MediaType.TEXT_PLAIN_VALUE)])
     fun updateText(
             @ApiParam(ID_PARAM)
             @PathVariable("id")
@@ -232,8 +234,11 @@ class NewsRestApi {
 
         try {
             crud.updateText(id, text)
-        } catch (e: ConstraintViolationException) {
-            return ResponseEntity.status(400).build()
+        } catch (e: Exception) {
+            if(Throwables.getRootCause(e) is ConstraintViolationException) {
+                return ResponseEntity.status(400).build()
+            }
+            throw e
         }
 
         return ResponseEntity.status(204).build()
@@ -425,7 +430,7 @@ class NewsRestApi {
 
     @ApiOperation("Update an existing news")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @PutMapping(path = ["/id/{id}"], consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PutMapping(path = ["/id/{id}"], consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     @Deprecated
     fun deprecatedUpdate(
             @ApiParam(ID_PARAM)
@@ -445,7 +450,7 @@ class NewsRestApi {
 
     @ApiOperation("Update the text content of an existing news")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @PutMapping(path = ["/id/{id}/text"], consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE))
+    @PutMapping(path = ["/id/{id}/text"], consumes = [(MediaType.TEXT_PLAIN_VALUE)])
     @Deprecated
     fun deprecatedUpdateText(
             @ApiParam(ID_PARAM)

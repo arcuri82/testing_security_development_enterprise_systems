@@ -27,6 +27,7 @@
 
     <properties>
         <version.kotlin>1.2.50</version.kotlin>
+        <version.springboot>2.0.3.RELEASE</version.springboot>
         <version.springcloud>Finchley.RELEASE</version.springcloud>
         <version.springfox>2.9.2</version.springfox>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
@@ -43,12 +44,21 @@
                the artifact itself.
                Why a problem? The day a new JDK version is used, would need to update
                every single module :(
-               So, we add it by default to all submodules
+               So, we add it by default to all submodules.
           -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
+        <!--
+            Looks like kotlin-reflect is now a requirement in Spring Boot 2.
+            So, as we use Kotlin in all modules, we add it here by default.
+        -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -80,7 +90,16 @@
             </dependency>
 
 
-            <!-- Spring dependencies -->
+
+            <!-- SpringBoot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${version.springboot}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
@@ -96,21 +115,21 @@
                 <artifactId>springfox-spring-web</artifactId>
                 <version>${version.springfox}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-amqp</artifactId>
-                <version>${version.springboot}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${version.springboot}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-                <version>${version.springboot}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-amqp</artifactId>-->
+                <!--<version>${version.springboot}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
+                <!--<version>${version.springboot}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-security</artifactId>-->
+                <!--<version>${version.springboot}</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class RestApi {
 
-    @GetMapping(produces = arrayOf(MediaType.TEXT_PLAIN_VALUE),
-            path = arrayOf("/openToAll"))
+    @GetMapping(produces = [(MediaType.TEXT_PLAIN_VALUE)],
+            path = ["/openToAll"])
     fun openToAll() : String{
         return "openToAll"
     }
 
-    @GetMapping(produces = arrayOf(MediaType.TEXT_PLAIN_VALUE),
-            path = arrayOf("/forUsers"))
+    @GetMapping(produces = [(MediaType.TEXT_PLAIN_VALUE)],
+            path = ["/forUsers"])
     fun forUsers() : String{
         return "forUsers"
     }
 
-    @GetMapping(produces = arrayOf(MediaType.TEXT_PLAIN_VALUE),
-            path = arrayOf("/forAdmins"))
+    @GetMapping(produces = [(MediaType.TEXT_PLAIN_VALUE)],
+            path = ["/forAdmins"])
     fun forAdmins() : String{
         return "forAdmins"
     }

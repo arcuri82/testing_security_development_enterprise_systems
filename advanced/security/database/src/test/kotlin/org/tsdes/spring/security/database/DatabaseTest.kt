@@ -44,7 +44,7 @@ class DatabaseTest {
 
         assertTrue(created)
 
-        val user = userRepository.findOne(name)
+        val user = userRepository.findById(name).get()
 
         assertEquals(name, user.username)
         assertNotEquals(pwd, user.password)

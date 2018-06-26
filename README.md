@@ -13,13 +13,17 @@ Currently, this repository focuses on Java/Kotlin,
 targeting frameworks like Spring and Java EE.
 
 The material in this repository is used in two university-level courses at
-the university college [Westerdals Oslo ACT](https://www.westerdals.no/).
+the university college [Høyskolen Kristiania](https://kristiania.no/).
 In particular:
 
-* *PG5100 Enterpriseprogrammering 1*: introduction to enterprise programming.
+* *PG5100 Enterpriseprogrammering 1*: introduction to enterprise programming. 
+   Documentation [here](doc/intro/main.md).
 
-* *PG6100 Enterpriseprogrammering 2*: advanced enterprise programming. 
+* *PG6100 Enterpriseprogrammering 2*: advanced enterprise programming.
+   Documentation [here](doc/advanced/main.md). 
 
+ 
+ 
 
 The repository is built with Maven, and it is divided in two main sub-modules:
 

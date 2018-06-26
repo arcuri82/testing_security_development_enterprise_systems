@@ -17,6 +17,7 @@
         <module>data-format</module>
         <module>example-news</module>
         <module>rest</module>
+        <module>graphql</module>
         <module>amqp</module>
         <!-- TODO put back once fixed Spring Cloud dependencies and replaced Zuul-->
         <!--<module>microservice</module>-->
@@ -30,6 +31,7 @@
         <version.springboot>2.0.3.RELEASE</version.springboot>
         <version.springcloud>Finchley.RELEASE</version.springcloud>
         <version.springfox>2.9.2</version.springfox>
+        <version.graphql-spring>4.2.0</version.graphql-spring>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
@@ -91,7 +93,7 @@
 
 
 
-            <!-- SpringBoot BOM -->
+            <!-- SpringBoot and Cloud BOMs -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
@@ -99,7 +101,15 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${version.springcloud}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
 
+            <!-- SpringFox for Swagger -->
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
@@ -115,28 +125,43 @@
                 <artifactId>springfox-spring-web</artifactId>
                 <version>${version.springfox}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-amqp</artifactId>-->
-                <!--<version>${version.springboot}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
-                <!--<version>${version.springboot}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-security</artifactId>-->
-                <!--<version>${version.springboot}</version>-->
-            <!--</dependency>-->
+
+
+            <!--  GraphQL -->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${version.springcloud}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-spring-boot-starter</artifactId>
+                <version>${version.graphql-spring}</version>
             </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphiql-spring-boot-starter</artifactId>
+                <version>${version.graphql-spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>voyager-spring-boot-starter</artifactId>
+                <version>${version.graphql-spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java-tools</artifactId>
+                <version>5.1.0</version>
+            </dependency>
+
+
+            <!-- Misc -->
+            <dependency>
+                <groupId>com.netflix.hystrix</groupId>
+                <artifactId>hystrix-core</artifactId>
+                <version>1.5.12</version>
+            </dependency>
+            <dependency>
+                <groupId>io.reactivex</groupId>
+                <artifactId>rxjava</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+
 
             <!-- Imports of JS libraries -->
             <dependency>
@@ -160,16 +185,6 @@
                 <version>3.2.1</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.netflix.hystrix</groupId>
-                <artifactId>hystrix-core</artifactId>
-                <version>1.5.12</version>
-            </dependency>
-            <dependency>
-                <groupId>io.reactivex</groupId>
-                <artifactId>rxjava</artifactId>
-                <version>1.2.2</version>
-            </dependency>
 
         </dependencies>
     </dependencyManagement>

@@ -29,7 +29,7 @@ The repository is built with Maven, and it is divided in two main sub-modules:
 
 * `intro`: material used in the first PG5100 course, where the goal is to be able to build
            a web application accessing a SQL database, and deployed on a cloud provider.
-           Main technologies: Java, Java EE, JPA, EJB, JSF, Wildfly, SpringBoot, Spring Security, 
+           Main technologies: Java, JEE, JPA, EJB, JSF, WildFly, SpringBoot, Spring Security, 
            Selenium, Docker.
            
 * `advanced`: material used in the second PG6100 course, where the goal is to dig into the details
@@ -77,7 +77,7 @@ you could end up working with C#/.Net and never touch Java again.
 Therefore, it is important to learn the fundamental concepts behind those 
 languages/frameworks, and not just their low level technical details. 
 
-Trying all possible languages and frameworks would be great. 
+Trying and getting some experience with all the main languages and frameworks would be good. 
 However, when studying 
 such topics for a university degree, time is limited, and one needs to make
 some choices.
@@ -117,15 +117,16 @@ follows:
     a more direct/explicit library. 
     
     
-* `Java EE`: in theory the "official" Java framework for enterprise development.
-   However, in our opinion, it is much worse than Spring.
+* `Java EE`: in theory it was the "official" Java framework for enterprise development.
+   But Oracle (owner of Java) donated it away in 2017, and now it is called `Jakarta EE`.
+   Anyway, in our opinion, it is much worse than Spring.
    Job-wise, at least in Norway, it is used less and less. 
    Still, it is important to look at different frameworks. 
    As the jump from Java EE to Spring is relatively simple, it is a good
    choice as starting point before moving into SpringBoot.
    Furthermore, you cannot really appreciate SpringBoot until you have
    gone through the blood, sweat and tears of debugging an
-   EJB test using Arquillian to deploy to a Wildfly container. 
+   EJB test using Arquillian to deploy to a WildFly container. 
 
 
 ### Documentation
@@ -138,8 +139,9 @@ Documentation (early work in progress) is available
 
 ### Requirements
 
-* JDK 1.8 or higher
-
+* JDK 1.8, **NOT** higher, as Java 9 broke backward compatibility,
+  and next LTS version (Java 11) is not out yet at time of this writing.
+  
 * An IDE (recommended IntelliJ IDEA Ultimate Edition)
 
 * Maven 3.x
@@ -194,9 +196,10 @@ Possible types of issues:
 
 ### License & Copyright
 
-The materials herein are all (c) 2017-now [Andrea Arcuri](http://www.arcuriandrea.org) 
+The materials herein are all Copyright (c) of [Andrea Arcuri](http://www.arcuriandrea.org) 
 and [contributors](https://github.com/arcuri82/testing_security_development_enterprise_systems/graphs/contributors).
-The material was/is produced while working at Westerdals Oslo ACT.
+The material was/is produced while working at 
+Westerdals Oslo ACT and Høyskolen Kristiania.
 
 All the source code in this repository is released under 
 [LGPL version 3 license](LICENSE).

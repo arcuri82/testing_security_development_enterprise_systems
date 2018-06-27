@@ -5,19 +5,19 @@ import org.springframework.stereotype.Component
 @Component
 class UserRepository {
 
-    private val users = mutableMapOf<String, UserDto>()
+    private val users = mutableMapOf<String, UserType>()
 
 
     init {
-        listOf(UserDto("0", "Foo", "Bar", 42),
-                UserDto("1", "Joe", "Black", 18),
-                UserDto("2", "John", "Smith", 7),
-                UserDto("3", "Mario", "Rossi", 25)
+        listOf(UserType("0", "Foo", "Bar", 42),
+                UserType("1", "Joe", "Black", 18),
+                UserType("2", "John", "Smith", 7),
+                UserType("3", "Mario", "Rossi", 25)
         ).forEach { users[it.id] = it }
 
     }
 
-    fun allUsers(): Collection<UserDto> = users.values
+    fun allUsers(): Collection<UserType> = users.values
 
     fun findById(id: String) = users[id]
 }

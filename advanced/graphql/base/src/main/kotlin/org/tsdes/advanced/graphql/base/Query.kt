@@ -10,5 +10,5 @@ class Query(
     : GraphQLQueryResolver {
 
 
-    fun all(): List<UserDto> = repository.allUsers().toList()
+    fun all(): List<UserType> = repository.allUsers().toList()
 }

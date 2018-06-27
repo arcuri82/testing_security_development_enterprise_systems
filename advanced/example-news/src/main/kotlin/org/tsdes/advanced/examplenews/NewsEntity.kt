@@ -1,6 +1,5 @@
 package org.tsdes.advanced.examplenews
 
-import org.hibernate.validator.constraints.NotBlank
 import org.tsdes.advanced.examplenews.constraint.Country
 import java.time.ZonedDateTime
 import javax.persistence.Entity
@@ -8,6 +7,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
+import javax.validation.constraints.NotBlank
 
 /**
  * In Spring we can use JPA, and so have @Entity objects to model our database.

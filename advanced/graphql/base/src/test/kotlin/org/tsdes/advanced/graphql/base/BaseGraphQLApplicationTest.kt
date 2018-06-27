@@ -44,7 +44,7 @@ class BaseGraphQLApplicationTest {
                 .then()
                 .statusCode(200)
                 .body("$", hasKey("data"))
-                .body("$", not(hasKey("error")))
+                .body("$", not(hasKey("errors")))
                 .body("data.all.size()", equalTo(4))
                 .body("data.all.id", hasItems("0", "1", "2", "3"))
                 .body("data.all[0]", hasKey("id"))
@@ -64,7 +64,7 @@ class BaseGraphQLApplicationTest {
                 .then()
                 .statusCode(200)
                 .body("$", hasKey("data"))
-                .body("$", not(hasKey("error")))
+                .body("$", not(hasKey("errors")))
                 .body("data.all.size()", equalTo(4))
                 .body("data.all.id", hasItems("0", "1", "2", "3"))
                 .body("data.all[0]", hasKey("id"))
@@ -89,7 +89,7 @@ class BaseGraphQLApplicationTest {
                 .then()
                 .statusCode(200)
                 .body("$", hasKey("data"))
-                .body("$", not(hasKey("error")))
+                .body("$", not(hasKey("errors")))
                 .body("data.all.size()", equalTo(4))
                 .body("data.all.id", hasItems("0", "1", "2", "3"))
                 .body("data.all[0]", hasKey("id"))
@@ -100,15 +100,34 @@ class BaseGraphQLApplicationTest {
 
     }
 
+    @Test
+    fun testError() {
+
+        given().accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .body("""
+                    { "query" : "invalid query" }
+                    """.trimIndent())
+                .post()
+                .then()
+                .statusCode(200)
+                .body("data", equalTo(null))
+                .body("$", hasKey("errors"))
+    }
+
+
 
     @Test
     fun testRawGet() {
 
         /*
             Recall: query parameters have to be escaped, eg to avoid
-            conflicts with control symbols like ? and &
+            conflicts with control symbols like ? and &.
+            For example:
             %7B = {
             %7d = }
+
+            Note that RestAssured does it automatically for you...
          */
 
         val escapedQuery = "%7Ball%7Bname%7D%7D"

@@ -1,0 +1,26 @@
+
+
+type Query {
+    allPosts: [Post!]
+}
+
+type Author {
+    id: String!,
+    name: String
+    surname: String
+
+}
+
+type Post {
+    id: String!,
+    text: String,
+    author: Author,
+    comments: [Comment!]
+}
+
+type Comment {
+    id: String!,
+    text: String,
+    author: Author,
+    parentPost: Post
+}

@@ -1,7 +1,7 @@
 package org.tsdes.advanced.graphql.base
 
 
-data class UserDto(
+data class UserType(
         var id: String,
         var name: String?,
         var surname: String?,

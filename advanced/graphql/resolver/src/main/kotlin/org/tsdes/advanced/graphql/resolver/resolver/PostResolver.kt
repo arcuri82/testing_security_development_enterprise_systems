@@ -10,6 +10,7 @@ import org.tsdes.advanced.graphql.resolver.type.PostType
 @Component
 class PostResolver(
         private val repository: DataRepository
+
 ) : GraphQLResolver<PostType> {
 
     fun getId(post: PostType) = post.id.toString()

@@ -10,6 +10,7 @@ import org.tsdes.advanced.graphql.resolver.type.PostType
 @Component
 class CommentResolver(
         private val repository: DataRepository
+
 ) : GraphQLResolver<CommentType> {
 
     fun getId(comment: CommentType) = comment.id.toString()

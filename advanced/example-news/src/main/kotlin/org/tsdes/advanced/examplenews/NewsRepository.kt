@@ -34,7 +34,7 @@ interface NewsRepository : CrudRepository<NewsEntity, Long>, NewsRepositoryCusto
     fun findAllByAuthorId(authorId: String): Iterable<NewsEntity>
 
     /*
-        You can have more complex queries by using connecting words like "And".
+        You can have more sophisticated queries by using connecting words like "And".
         This is very convenient for simple queries, but not really for complex ones.
      */
     fun findAllByCountryAndAuthorId(country: String, authorId: String): Iterable<NewsEntity>

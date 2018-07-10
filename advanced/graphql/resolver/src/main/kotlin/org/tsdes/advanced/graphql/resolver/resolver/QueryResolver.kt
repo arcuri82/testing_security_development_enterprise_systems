@@ -8,8 +8,8 @@ import org.tsdes.advanced.graphql.resolver.type.PostType
 @Component
 class QueryResolver(
         private val repository: DataRepository
-)
-    : GraphQLQueryResolver {
+
+) : GraphQLQueryResolver {
 
 
     fun allPosts(): List<PostType> = repository.getAllPosts().toList()

@@ -14,7 +14,7 @@ import java.net.URI
  * Created by arcuri82 on 03-Aug-17.
  */
 @RestController
-@RequestMapping(path = arrayOf("/y"))
+@RequestMapping(path = ["/y"])
 class YRest {
 
     /*
@@ -28,7 +28,7 @@ class YRest {
     private val client: RestTemplate = RestTemplate()
 
 
-    @GetMapping(path = arrayOf("single"))
+    @GetMapping(path = ["single"])
     fun doGetSingle(
             @RequestParam("v", defaultValue = "30")
             v: Long): Long {
@@ -41,7 +41,7 @@ class YRest {
         return result
     }
 
-    @GetMapping(path = arrayOf("multi"))
+    @GetMapping(path = ["multi"])
     fun doGetMulti(
             @RequestParam("a", defaultValue = "30") a: Long,
             @RequestParam("b", defaultValue = "30") b: Long,

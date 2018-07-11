@@ -78,6 +78,11 @@
                 <artifactId>example-news</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.tsdes.advanced.graphql</groupId>
+                <artifactId>graphql-dto</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Kotlin dependencies -->
             <dependency>
@@ -90,7 +95,6 @@
                 <artifactId>kotlin-reflect</artifactId>
                 <version>${version.kotlin}</version>
             </dependency>
-
 
 
             <!-- SpringBoot and Cloud BOMs -->

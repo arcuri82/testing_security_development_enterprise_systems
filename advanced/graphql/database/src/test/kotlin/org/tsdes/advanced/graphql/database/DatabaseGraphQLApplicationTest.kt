@@ -4,12 +4,16 @@ import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.web.client.RestTemplate
+import org.springframework.web.util.UriComponentsBuilder
+import org.tsdes.advanced.graphql.database.dto.GraphQLResponseDto
 
 
 @RunWith(SpringRunner::class)
@@ -21,6 +25,9 @@ class DatabaseGraphQLApplicationTest{
     @LocalServerPort
     protected var port = 0
 
+    private val client: RestTemplate = RestTemplate()
+
+    protected lateinit var uriBuilder: UriComponentsBuilder
 
     @Before
     fun clean() {
@@ -30,6 +37,9 @@ class DatabaseGraphQLApplicationTest{
         RestAssured.port = port
         RestAssured.basePath = "/graphql"
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
+
+        uriBuilder = UriComponentsBuilder.newInstance()
+                .scheme("http").host("localhost").port(port).path("/graphql")
     }
 
     //-------------------------------------------------------------------------------
@@ -86,5 +96,68 @@ class DatabaseGraphQLApplicationTest{
     //-------------------------------------------------------------------------------
     //-- here, we extract the DTOs
 
+    @Test
+    fun testBaseGetDto() {
+
+        val uri = uriBuilder.queryParam("query","{allPosts{id}}")
+                .build().encode().toUri()
+
+        val response = client.getForEntity(uri, GraphQLResponseDto::class.java)
+        assertEquals(200, response.statusCode.value())
+
+        val dto = response.body
+
+        assertNotNull(dto.data)
+        assertNull(dto.errors)
+        assertEquals(3, dto.data!!.allPosts!!.size)
+    }
+
+
+    @Test
+    fun testGetWithAuthorsDto() {
+
+        val uri = uriBuilder.queryParam("query","{allPosts{id,author{name}}}")
+                .build().encode().toUri()
+
+        val response = client.getForEntity(uri, GraphQLResponseDto::class.java)
+        assertEquals(200, response.statusCode.value())
+
+        val dto = response.body
+
+        assertNotNull(dto.data)
+        assertNull(dto.errors)
+        assertEquals(3, dto.data!!.allPosts!!.size)
+
+        val names = dto.data!!.allPosts!!
+                .map { it.author!!.name!! }
+                .distinct()
+
+        assertEquals(2, names.size)
+        assertTrue(names.contains("Foo"))
+        assertTrue(names.contains("John"))
+    }
+
+
+    @Test
+    fun testErrorDto(){
+
+        val wrongField = "blablabla"
+
+        val uri = uriBuilder.queryParam("query","{allPosts{$wrongField}")
+                .build().encode().toUri()
+
+        val response = client.getForEntity(uri, GraphQLResponseDto::class.java)
+        assertEquals(200, response.statusCode.value())
+
+        val dto = response.body
+
+        assertNull(dto.data)
+        assertNotNull(dto.errors)
+        assertEquals(1, dto.errors!!.size)
+
+        val msg = dto.errors!!.first().message!!
+
+        assertNotNull(msg)
+    }
 
 }

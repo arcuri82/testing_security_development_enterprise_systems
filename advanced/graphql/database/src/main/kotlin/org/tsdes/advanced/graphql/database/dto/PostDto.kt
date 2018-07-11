@@ -5,5 +5,5 @@ data class PostDto(
         var id: String? = null,
         var author: AuthorDto? = null,
         var text: String? = null,
-        var comments: MutableList<CommentDto> = mutableListOf()
+        var comments: MutableList<CommentDto>? = mutableListOf()
 )

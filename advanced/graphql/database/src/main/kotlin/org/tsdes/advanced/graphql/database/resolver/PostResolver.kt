@@ -26,7 +26,8 @@ class PostResolver(
     fun getComments(post: PostEntity): List<CommentEntity> {
 
         //FIXME: This in theory should work
-        //Seems same problem as in https://stackoverflow.com/questions/48037601/lazyinitializationexception-with-graphql-spring#
+        //Seems similar problem as in https://stackoverflow.com/questions/48037601/lazyinitializationexception-with-graphql-spring#
+        //Reported issue at https://github.com/graphql-java/graphql-spring-boot/issues/92#issuecomment-404050755
 
 //        println("------- TRANSACTION: " + TransactionSynchronizationManager.isActualTransactionActive())
 //        val reloaded = postRepository.findById(post.id).get()

@@ -1,0 +1,47 @@
+#A set of operations to modify user information
+type Mutation {
+    # Create a new user, and return its id
+    create(name: String!, surname: String!, age: Int!): String!
+    # Update an existing user.
+    # Return true if update was successful
+    # Note that in GraphQL there is no "Void" type, so we always have
+    # to return something
+    update(user: InputUser!): Boolean!
+}
+
+# A GraphQL API to retrieve info on Users
+type Query {
+    # Get all users
+    all: [User!]
+    # Get a user specified by id
+    findById(id: String!): User
+}
+
+#A user of the API
+type User{
+    #The unique id of the user
+    id: String!,
+    #The name of the user
+    name: String
+    #The surname of the user
+    surname: String
+    #The age of the user
+    age: Int
+}
+
+# Unfortunately, GraphQL is not particularly good at DRY (Don't Repeat Yourself).
+# "input" types (used as parameters sent by user) cannot extend
+# other types, and can only have basic fiels.
+# And "types" returned in qieries cannot be used as input :(
+input InputUser{
+    #The unique id of the user
+    id: String!,
+    #The name of the user
+    name: String
+    #The surname of the user
+    surname: String
+    #The age of the user
+    age: Int
+}
+
+

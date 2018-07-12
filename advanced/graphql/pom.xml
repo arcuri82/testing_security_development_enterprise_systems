@@ -18,6 +18,7 @@
         <module>database</module>
         <module>graphqldto</module>
         <module>mutation</module>
+        <module>news-graphql</module>
     </modules>
 
 

@@ -18,6 +18,7 @@ import javax.validation.Valid
 import org.springframework.web.util.UriComponentsBuilder
 import java.lang.Deprecated
 
+
 const val ID_PARAM = "The numeric id of the news"
 const val BASE_JSON = "application/json;charset=UTF-8"
 
@@ -98,7 +99,7 @@ class NewsRestApi {
 
 
     @ApiOperation("Create a news")
-    @PostMapping(consumes = arrayOf(V2_NEWS_JSON, BASE_JSON))
+    @PostMapping(consumes = [V2_NEWS_JSON, BASE_JSON])
     @ApiResponse(code = 201, message = "The id of newly created news")
     fun createNews(
             @ApiParam("Text of news, plus author id and country. Should not specify id or creation time")
@@ -342,7 +343,7 @@ class NewsRestApi {
 
     /*
         Kotlin support: Spring is adding first-class support for Kotlin, but
-        current version (in 2017) still has some rough-edges...
+        current version of SpringFox (in 2018) still has some rough-edges...
         In particular, to get the deprecation properly visualized in Swagger-UI
         we need to use
 
@@ -351,6 +352,9 @@ class NewsRestApi {
         instead of
 
         @kotlin.Deprecated
+
+        Opened issue on SpringFox at:
+        https://github.com/springfox/springfox/issues/2551
      */
 
 

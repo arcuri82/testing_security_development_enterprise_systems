@@ -45,7 +45,7 @@ class NewsRestApplication {
                 .build()
     }
 
-    @Bean(name = arrayOf("OBJECT_MAPPER_BEAN"))
+    @Bean(name = ["OBJECT_MAPPER_BEAN"])
     fun jsonObjectMapper(): ObjectMapper {
         return Jackson2ObjectMapperBuilder.json()
                 .serializationInclusion(JsonInclude.Include.NON_NULL)

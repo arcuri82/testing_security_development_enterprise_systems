@@ -1,0 +1,37 @@
+type Query {
+    countries: [String!]
+    newsById(id: String!) : News
+    news: [News!]
+}
+
+type Mutation {
+    #Create a news. Return the id of the generated News
+    createNews(news: InputNews): String
+    deleteNewsById(id: String!): Boolean
+}
+
+type News {
+    # The id of the news
+    newsId: String,
+    # The id of the author that wrote/created this news
+    authorId: String,
+    # The text of the news
+    text: String,
+    # The country this news is related to
+    country: String,
+    # When the news was first created/published.
+    # NOTE: currently GraphQL does not support Date scalars, so need
+    # to create a custom one. But maybe it will be supported in the future.
+    # See: https://github.com/facebook/graphql/pull/315
+    #TODO
+    #    creationTime: MyDateTime
+}
+
+input InputNews {
+    # The id of the author that wrote/created this news
+    authorId: String!,
+    # The text of the news
+    text: String!,
+    # The country this news is related to
+    country: String!
+}

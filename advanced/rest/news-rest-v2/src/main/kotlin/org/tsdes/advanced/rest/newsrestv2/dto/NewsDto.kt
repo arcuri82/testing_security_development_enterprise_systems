@@ -44,6 +44,15 @@ data class NewsDto(
 ) {
 
 
+    /*
+        Note: OpenAPI 2.0 currently does not handle deprecation of fields.
+
+        https://github.com/OAI/OpenAPI-Specification/issues/584
+
+        This means they are not going to be visualized in any special way
+        in the GUI (eg, greyed/crossed out, like deprecated endpoints)
+     */
+
     @ApiModelProperty("Deprecated. Use newsId instead")
     @Deprecated
     var id: String? = null

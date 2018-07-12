@@ -24,11 +24,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
  * When started it will recursively scan the classpath of current
  * package and subpackages for beans to instantiate.
  *
- * One problem here is that we are in "org.tsdes.spring.rest.newsrest",
- * which is not an ancestor of the "org.tsdes.spring.examples.news"
+ * One problem here is that we are in "org.tsdes.advanced.rest.newsrest",
+ * which is not an ancestor of the "org.tsdes.advanced.examplenews"
  * library module we want to use.
  * Therefore, we need to explicitly tell Spring which packages to scan.
- * In our case, their common ancestor is "org.tsdes.spring".
+ * In our case, their common ancestor is "org.tsdes.advanced".
  * However, in that case, we also have to do the same for
  * @EnableJpaRepositories and @EntityScan.
  * These latter two annotations would not had been needed if
@@ -36,9 +36,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
  *
  * Created by arcuri82 on 06-Jul-17.
  */
-@SpringBootApplication(scanBasePackages = ["org.tsdes"])
-@EnableJpaRepositories(basePackages = ["org.tsdes"])
-@EntityScan(basePackages = ["org.tsdes"])
+@SpringBootApplication(scanBasePackages = ["org.tsdes.advanced"])
+@EnableJpaRepositories(basePackages = ["org.tsdes.advanced"])
+@EntityScan(basePackages = ["org.tsdes.advanced"])
 @EnableSwagger2 //needed to enable Swagger
 class NewsRestApplication {
 

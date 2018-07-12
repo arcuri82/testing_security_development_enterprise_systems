@@ -20,7 +20,7 @@ class V2NewRestApiTest : NRTestBase() {
         val dto = NewsDto(null, author, text, country, null)
 
         //no news
-        given().contentType(V2_NEWS_JSON)
+        given().accept(V2_NEWS_JSON)
                 .get()
                 .then()
                 .statusCode(200)
@@ -35,7 +35,7 @@ class V2NewRestApiTest : NRTestBase() {
                 .extract().asString()
 
         //should be 1 news now
-        given().contentType(V2_NEWS_JSON)
+        given().accept(V2_NEWS_JSON)
                 .get()
                 .then()
                 .statusCode(200)

@@ -62,34 +62,6 @@ class NewsRestApplication {
                 .version("1.0")
                 .build()
     }
-
-
-    /*
-        FIXME this might no longer be necessary in Spring Boot 2
-     */
-
-    /*
-        Bean used to configure how JSON un/marshalling is done.
-     */
-    @Bean(name = ["OBJECT_MAPPER_BEAN"])
-    fun jsonObjectMapper(): ObjectMapper {
-        return Jackson2ObjectMapperBuilder.json()
-                .serializationInclusion(JsonInclude.Include.NON_NULL) // Don’t include null values
-                /*
-                    JSON does not specify how dates should be represented, whereas JavaScript does.
-                    And in JavaScript it is ISO 8601.
-                    So, to represent dates to send over a network consumed by different clients,
-                    it is reasonable to send them in ISO 8601 instead of a numeric timestamp.
-                    Here we make sure timestamps are not used in marshalling of JSON data.
-
-                    Example:
-                    2001-01-05T13:15:30Z
-                 */
-                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) //ISODate
-                //make sure we can use Java 8 dates
-                .modules(JavaTimeModule())
-                .build()
-    }
 }
 
 /*

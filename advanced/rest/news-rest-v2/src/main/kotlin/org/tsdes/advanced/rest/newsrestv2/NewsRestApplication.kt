@@ -44,15 +44,6 @@ class NewsRestApplication {
                 .version("2.0.0") // Note the change in version
                 .build()
     }
-
-    @Bean(name = ["OBJECT_MAPPER_BEAN"])
-    fun jsonObjectMapper(): ObjectMapper {
-        return Jackson2ObjectMapperBuilder.json()
-                .serializationInclusion(JsonInclude.Include.NON_NULL)
-                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .modules(JavaTimeModule())
-                .build()
-    }
 }
 
 fun main(args: Array<String>) {

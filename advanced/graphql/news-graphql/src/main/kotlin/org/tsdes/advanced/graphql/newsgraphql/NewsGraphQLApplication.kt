@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 
-@SpringBootApplication(scanBasePackages = ["org.tsdes"])
-@EnableJpaRepositories(basePackages = ["org.tsdes"])
-@EntityScan(basePackages = ["org.tsdes"])
+@SpringBootApplication(scanBasePackages = ["org.tsdes.advanced"])
+@EnableJpaRepositories(basePackages = ["org.tsdes.advanced"])
+@EntityScan(basePackages = ["org.tsdes.advanced"])
 class NewsGraphQLApplication
 
 

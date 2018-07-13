@@ -1,14 +1,22 @@
 type Query {
     countries: [String!]
     newsById(id: String!) : News
-    news: [News!]
+    news(country: String, authorId: String): [News!]
 }
 
 type Mutation {
     #Create a news. Return the id of the generated News
     createNews(news: InputNews): String
     deleteNewsById(id: String!): Boolean
+    updateNewsById(id: String!, news: InputUpdateNews!): Boolean
 }
+
+
+# NOTE: currently GraphQL does not support Date scalars, so need
+# to create a custom one. But maybe it will be supported in the future.
+# See: https://github.com/facebook/graphql/pull/315
+# So we need to implement our own custom parser for it
+scalar MyDateTime
 
 type News {
     # The id of the news
@@ -20,11 +28,7 @@ type News {
     # The country this news is related to
     country: String,
     # When the news was first created/published.
-    # NOTE: currently GraphQL does not support Date scalars, so need
-    # to create a custom one. But maybe it will be supported in the future.
-    # See: https://github.com/facebook/graphql/pull/315
-    #TODO
-    #    creationTime: MyDateTime
+    creationTime: MyDateTime
 }
 
 input InputNews {
@@ -34,4 +38,22 @@ input InputNews {
     text: String!,
     # The country this news is related to
     country: String!
+}
+
+# Recall that GraphQL is very bad in regards of DRY of fields.
+# Here, when we update, we also want to be able to update the creationTime.
+# So, we cannot use InputNews directly, and have to copy&paste its fields.
+#
+# However, to avoid possible inconsistencies and mispel errors, we can
+# still use inheritance in the Kotlin classes mapping those types
+#
+input InputUpdateNews {
+    # The id of the author that wrote/created this news
+    authorId: String!,
+    # The text of the news
+    text: String!,
+    # The country this news is related to
+    country: String!
+    # When the news was first created/published.
+    creationTime: MyDateTime
 }

@@ -75,7 +75,7 @@ class NewsRestApi {
    */
 
     @ApiOperation("Get all the news in the specified country")
-    @GetMapping(path = arrayOf("/countries/{country}"))
+    @GetMapping(path = ["/countries/{country}"])
     fun getByCountry(@ApiParam("The country name")
                      @PathVariable("country")
                      @Valid @Country
@@ -85,7 +85,7 @@ class NewsRestApi {
 
 
     @ApiOperation("Get all the news written by the specified author")
-    @GetMapping(path = arrayOf("/authors/{author}"))
+    @GetMapping(path = ["/authors/{author}"])
     fun getByAuthor(@ApiParam("The id of the author who wrote the news")
                     @PathVariable("author")
                     author: String): ResponseEntity<List<NewsDto>> {
@@ -93,7 +93,7 @@ class NewsRestApi {
     }
 
     @ApiOperation("Get all the news from a given country written by a given author")
-    @GetMapping(path = arrayOf("/countries/{country}/authors/{author}"))
+    @GetMapping(path = ["/countries/{country}/authors/{author}"])
     fun getByCountryAndAuthor(
             @ApiParam("The country name")
             @PathVariable("country")
@@ -109,7 +109,7 @@ class NewsRestApi {
     }
 
     @ApiOperation("Create a news")
-    @PostMapping(consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PostMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     @ApiResponse(code = 201, message = "The id of newly created news")
     fun createNews(
             @ApiParam("Text of news, plus author id and country. Should not specify id or creation time")
@@ -150,7 +150,7 @@ class NewsRestApi {
 
 
     @ApiOperation("Get a single news specified by id")
-    @GetMapping(path = arrayOf("/id/{id}"))
+    @GetMapping(path = ["/id/{id}"])
     fun getById(@ApiParam(ID_PARAM)
                 @PathVariable("id")
                 pathId: String?)
@@ -184,7 +184,7 @@ class NewsRestApi {
     */
 
     @ApiOperation("Update an existing news")
-    @PutMapping(path = arrayOf("/id/{id}"), consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PutMapping(path = ["/id/{id}"], consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     fun update(
             @ApiParam(ID_PARAM)
             @PathVariable("id")
@@ -270,7 +270,7 @@ class NewsRestApi {
 
 
     @ApiOperation("Delete a news with the given id")
-    @DeleteMapping(path = arrayOf("/id/{id}"))
+    @DeleteMapping(path = ["/id/{id}"])
     fun delete(@ApiParam(ID_PARAM)
                @PathVariable("id")
                pathId: String?): ResponseEntity<Any> {

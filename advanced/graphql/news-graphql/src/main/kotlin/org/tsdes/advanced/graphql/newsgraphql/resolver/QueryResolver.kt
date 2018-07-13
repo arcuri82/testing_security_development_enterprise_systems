@@ -2,6 +2,7 @@ package org.tsdes.advanced.graphql.newsgraphql.resolver
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import org.springframework.stereotype.Component
+import org.springframework.web.bind.annotation.RequestParam
 import org.tsdes.advanced.examplenews.NewsRepository
 import org.tsdes.advanced.examplenews.constraint.CountryList
 import org.tsdes.advanced.graphql.newsgraphql.NewsConverter
@@ -31,10 +32,18 @@ class QueryResolver(
         return NewsConverter.transform(entity)
     }
 
-    fun news() : List<NewsType>{
+    fun news(country: String?, authorId: String?) : List<NewsType>{
 
-        //TODO filter
+        val list = if (country.isNullOrBlank() && authorId.isNullOrBlank()) {
+            crud.findAll()
+        } else if (!country.isNullOrBlank() && !authorId.isNullOrBlank()) {
+            crud.findAllByCountryAndAuthorId(country!!, authorId!!)
+        } else if (!country.isNullOrBlank()) {
+            crud.findAllByCountry(country!!)
+        } else {
+            crud.findAllByAuthorId(authorId!!)
+        }
 
-        return NewsConverter.transform(crud.findAll())
+        return NewsConverter.transform(list)
     }
 }

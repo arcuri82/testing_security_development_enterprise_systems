@@ -1,5 +1,6 @@
 package org.tsdes.advanced.examplenews
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -67,13 +68,10 @@ interface NewsRepositoryCustom {
 /*
     IMPORTANT: this class has to have the same name X of Repository interface + "Impl"
     See http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.single-repository-behaviour
-
-    Furthermore, as it is not marked with any Spring annotation, Kotlin makes it final by default, which
-    does crash Spring (because it needs to create a proxy bean for it). So have to explicitly add "open"
 */
 @Repository
 @Transactional
-open class NewsRepositoryImpl : NewsRepositoryCustom {
+class NewsRepositoryImpl : NewsRepositoryCustom {
 
     /*
         To operate manually on the database with JPA, we can inject a reference
@@ -88,7 +86,7 @@ open class NewsRepositoryImpl : NewsRepositoryCustom {
         is not null, but we are going to initialize it at a later stage.
      */
 
-    @PersistenceContext
+    @Autowired
     private lateinit var em: EntityManager
 
     override fun createNews(authorId: String, text: String, country: String): Long {

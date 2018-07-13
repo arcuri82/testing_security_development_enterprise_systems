@@ -32,7 +32,7 @@ type User{
 # Unfortunately, GraphQL is not particularly good at DRY (Don't Repeat Yourself).
 # "input" types (used as parameters sent by user) cannot extend
 # other types, and can only have basic fiels.
-# And "types" returned in qieries cannot be used as input :(
+# And "types" returned in queries cannot be used as input :(
 input InputUser{
     #The unique id of the user
     id: String!,

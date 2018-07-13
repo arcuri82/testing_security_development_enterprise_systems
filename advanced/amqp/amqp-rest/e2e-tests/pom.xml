@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>e2e-tests</artifactId>
+    <artifactId>amqp-rest-e2e-tests</artifactId>
     <packaging>jar</packaging>
 
     <parent>
@@ -46,12 +46,12 @@
         -->
         <dependency>
             <groupId>org.tsdes.advanced.amqp</groupId>
-            <artifactId>receiver</artifactId>
+            <artifactId>amqp-rest-receiver</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tsdes.advanced.amqp</groupId>
-            <artifactId>sender</artifactId>
+            <artifactId>amqp-rest-sender</artifactId>
             <version>${project.version}</version>
         </dependency>
 

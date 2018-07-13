@@ -4,7 +4,7 @@ import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import org.springframework.stereotype.Component
 
 @Component
-class Query(
+class QueryResolver(
         private val repository: UserRepository
 )
     : GraphQLQueryResolver {

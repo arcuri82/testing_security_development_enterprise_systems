@@ -25,11 +25,11 @@ class MathApi{
             @RequestParam("y", required = true)
             y: Int
 
-    ) : ResponseEntity<WrappedResponse<Int>> {
+    ) : ResponseEntity<WrappedResponse<DivisionDto>> {
 
         if(y == 0){
             return ResponseEntity.status(400).body(
-                    IntResponseDto(
+                    ResponseDto(
                             code = 400,
                             message = "Cannot divide by 0")
                             .validated()
@@ -39,9 +39,9 @@ class MathApi{
         val result = x / y
 
         return ResponseEntity.status(200).body(
-                IntResponseDto(
+                ResponseDto(
                         code = 200,
-                        data = result)
+                        data = DivisionDto(x,y,result))
                         .validated()
         )
     }

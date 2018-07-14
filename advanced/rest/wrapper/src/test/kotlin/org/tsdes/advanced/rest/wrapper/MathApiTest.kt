@@ -49,19 +49,53 @@ class MathApiTest{
                 .statusCode(200)
                 .body("code", equalTo(200))
                 .body("status", equalToIgnoringCase(SUCCESS.toString()))
-                .body("data", equalTo(expected))
+                .body("data.result", equalTo(expected))
+                .body("message", equalTo(null))
     }
 
 
     @Test
+    fun testSuccessDivideByZero(){
+
+        given().accept(ContentType.JSON)
+                .param("x", 10)
+                .param("y", 0)
+                .get()
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("status", equalToIgnoringCase(ERROR.toString()))
+                .body("message", containsString("Cannot divide"))
+    }
+
+    @Test
     fun testMissingParam(){
+
+        /*
+            Here, the validation is done by Spring, and fails before
+            the API code is even called.
+            Spring sends a response with JSON data, with its own format.
+            To make it consistent with our own format of the wrapped,
+            we will need to customize how exceptions are handled
+         */
 
         given().accept(ContentType.JSON)
                 .param("x", 10)
                 .get()
                 .then()
                 .statusCode(400)
+                //note here that "status" represent the HTTP code
                 .body("status", equalTo(400))
                 .body("message", not(equalTo(null)))
+
+        /*
+            {
+                "timestamp": "2018-07-14T12:06:22.906+0000",
+                "status": 400,
+                "error": "Bad Request",
+                "message": "Required int parameter 'y' is not present",
+                "path": "/math/divide"
+            }
+         */
     }
 }

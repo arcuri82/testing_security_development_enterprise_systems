@@ -64,10 +64,12 @@ open class WrappedResponse<T>(
 
         return this
     }
+
+    enum class ResponseStatus {
+        SUCCESS, FAIL, ERROR
+    }
 }
 
 
-enum class ResponseStatus {
-    SUCCESS, FAIL, ERROR
-}
+
 

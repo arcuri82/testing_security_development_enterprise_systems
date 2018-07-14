@@ -13,11 +13,9 @@ class BestDrinkApi {
 
     @ApiOperation("Get the name of the best drink")
     @GetMapping(
-            path = arrayOf("/charset/drinks/best"),
+            path = ["/charset/drinks/best"],
             // provide the resource as String in two different charset encodings
-            produces = arrayOf(
-                    "text/plain;charset=UTF-8",
-                    "text/plain;charset=ISO-8859-1")
+            produces = ["text/plain;charset=UTF-8", "text/plain;charset=ISO-8859-1"]
     )
     fun getTheBest(@RequestHeader("Accept-Language", required = false)
                    languages: String?

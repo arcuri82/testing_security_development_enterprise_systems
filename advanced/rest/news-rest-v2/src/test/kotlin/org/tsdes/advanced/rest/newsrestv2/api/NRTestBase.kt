@@ -18,7 +18,7 @@ import org.tsdes.advanced.rest.newsrestv2.dto.NewsDto
  * Created by arcuri82 on 14-Jul-17.
  */
 @RunWith(SpringRunner::class)
-@SpringBootTest(classes = arrayOf(NewsRestApplication::class),
+@SpringBootTest(classes = [(NewsRestApplication::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 abstract class NRTestBase {
 

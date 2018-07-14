@@ -18,11 +18,11 @@
         <module>example-news</module>
         <module>rest</module>
         <module>graphql</module>
-        <module>amqp</module>
+        <module>front-end</module>
         <!-- TODO put back once fixed Spring Cloud dependencies and replaced Zuul-->
         <!--<module>microservice</module>-->
         <module>security</module>
-        <module>front-end</module>
+        <module>amqp</module>
     </modules>
 
 
@@ -76,6 +76,11 @@
             <dependency>
                 <groupId>org.tsdes.advanced</groupId>
                 <artifactId>example-news</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.tsdes.advanced.rest</groupId>
+                <artifactId>rest-dto</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

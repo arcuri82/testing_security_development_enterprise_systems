@@ -21,7 +21,7 @@
         <module>news-rest-v2</module>
         <module>pagination</module>
         <module>wrapper</module>
-        <module>restdto</module>
+        <module>rest-dto</module>
         <module>wiremock</module>
         <module>hystrix</module>
     </modules>

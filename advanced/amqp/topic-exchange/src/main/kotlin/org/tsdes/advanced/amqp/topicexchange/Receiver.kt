@@ -14,12 +14,12 @@ class Receiver {
     @Autowired
     private lateinit var messages: ReceivedMessages
 
-    @RabbitListener(queues = arrayOf("#{queueX.name}"))
+    @RabbitListener(queues = ["#{queueX.name}"])
     fun receiverX(msg: String) {
         doWork("X", msg)
     }
 
-    @RabbitListener(queues = arrayOf("#{queueY.name}"))
+    @RabbitListener(queues = ["#{queueY.name}"])
     fun receiverY(msg: String) {
         doWork("Y", msg)
     }

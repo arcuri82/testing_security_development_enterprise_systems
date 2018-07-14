@@ -72,7 +72,7 @@ import java.util.concurrent.atomic.AtomicLong
  * Created by arcuri82 on 31-Jul-17.
  */
 @Api("Handle named, numeric counters")
-@RequestMapping(path = arrayOf("/redirect/api/counters"))
+@RequestMapping(path = ["/redirect/api/counters"])
 @RestController
 class CounterRest {
 
@@ -91,7 +91,7 @@ class CounterRest {
 
 
     @ApiOperation("Create a new counter")
-    @PostMapping(consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PostMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     fun create(@RequestBody dto: CounterDto): ResponseEntity<Void> {
 
         if (dto.id == null) {
@@ -123,7 +123,7 @@ class CounterRest {
 
 
     @ApiOperation("Get all the existing counters")
-    @GetMapping(produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @GetMapping(produces = [(MediaType.APPLICATION_JSON_VALUE)])
     fun getAll(): Collection<CounterDto> {
         return map.values
     }
@@ -137,7 +137,7 @@ class CounterRest {
      */
 
     @ApiOperation("Return the counter with the given id")
-    @GetMapping(path = arrayOf("/id/{id}"))
+    @GetMapping(path = ["/id/{id}"])
     fun get(
             @ApiParam("The unique id of the counter")
             @PathVariable("id")
@@ -163,7 +163,7 @@ class CounterRest {
      */
     @ApiOperation("Deprecated. Use \"latest\" instead")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
-    @GetMapping(path = arrayOf("/theLatest"))
+    @GetMapping(path = ["/theLatest"])
     @Deprecated("")
     fun theLatest(): ResponseEntity<Void> {
 
@@ -187,7 +187,7 @@ class CounterRest {
 
     @ApiOperation("Find the most recently created counter")
     @ApiResponses(ApiResponse(code = 307, message = "Temporary redirect."), ApiResponse(code = 409, message = "There is no counter"))
-    @GetMapping(path = arrayOf("/latest"))
+    @GetMapping(path = ["/latest"])
     fun latest(): ResponseEntity<Void> {
 
         if (latest == null) {

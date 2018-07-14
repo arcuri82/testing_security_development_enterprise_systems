@@ -18,7 +18,7 @@ import org.testcontainers.containers.GenericContainer
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@ContextConfiguration(initializers = arrayOf(TopicExchangeDockerTest.Companion.Initializer::class))
+@ContextConfiguration(initializers = [(TopicExchangeDockerTest.Companion.Initializer::class)])
 class TopicExchangeDockerTest {
 
     companion object {

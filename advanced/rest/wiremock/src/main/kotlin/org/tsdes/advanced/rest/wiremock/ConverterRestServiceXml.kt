@@ -17,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder
  * Created by arcuri82 on 02-Aug-17.
  */
 @RestController
-@RequestMapping(path = arrayOf("/convert"))
+@RequestMapping(path = ["/convert"])
 class ConverterRestServiceXml {
 
     /*
@@ -39,7 +39,7 @@ class ConverterRestServiceXml {
     private lateinit var webAddress: String
 
 
-    @GetMapping(produces = arrayOf(MediaType.APPLICATION_XML_VALUE))
+    @GetMapping(produces = [(MediaType.APPLICATION_XML_VALUE)])
     fun getExchangeRate(@RequestParam("from") __from: String,
                         @RequestParam("to") __to: String)
             : ResponseEntity<ConversionDto> {

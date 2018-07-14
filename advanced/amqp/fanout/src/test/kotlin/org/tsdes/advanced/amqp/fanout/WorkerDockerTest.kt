@@ -19,7 +19,7 @@ import org.testcontainers.containers.GenericContainer
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@ContextConfiguration(initializers = arrayOf(WorkerDockerTest.Companion.Initializer::class))
+@ContextConfiguration(initializers = [(WorkerDockerTest.Companion.Initializer::class)])
 class WorkerDockerTest {
 
     companion object {

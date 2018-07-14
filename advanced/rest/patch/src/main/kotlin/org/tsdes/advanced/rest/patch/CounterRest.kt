@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong
  * Created by arcuri82 on 20-Jul-17.
  */
 @Api("Handle named, numeric counters")
-@RequestMapping(path = arrayOf("/patch/api/counters"))
+@RequestMapping(path = ["/patch/api/counters"])
 @RestController
 class CounterRest {
 
@@ -43,7 +43,7 @@ class CounterRest {
      */
 
     @ApiOperation("Create a new counter")
-    @PostMapping(consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PostMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     fun create(@RequestBody dto: CounterDto): ResponseEntity<Void> {
 
         if (dto.id == null) {
@@ -71,15 +71,15 @@ class CounterRest {
 
 
     @ApiOperation("Get all the existing counters")
-    @GetMapping(produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @GetMapping(produces = [(MediaType.APPLICATION_JSON_VALUE)])
     fun getAll(): Collection<CounterDto> {
         return map.values
     }
 
 
     @ApiOperation("Return the counter with the given id")
-    @GetMapping(path = arrayOf("/{id}"),
-            produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @GetMapping(path = ["/{id}"],
+            produces = [(MediaType.APPLICATION_JSON_VALUE)])
     fun getById(
             @ApiParam("The unique id of the counter")
             @PathVariable("id")
@@ -96,7 +96,7 @@ class CounterRest {
      */
 
     @ApiOperation("Replace a counter")
-    @PutMapping(path = arrayOf("/{id}"), consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PutMapping(path = ["/{id}"], consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
     fun update(@ApiParam("The unique id of the counter")
                @PathVariable("id")
                id: Long,
@@ -139,9 +139,9 @@ class CounterRest {
      */
 
     @ApiOperation("Modify the counter based on the instructions in the request body")
-    @PatchMapping(path = arrayOf("/{id}"),
+    @PatchMapping(path = ["/{id}"],
             // could have had a custom type here, but then would need an unmarshaller for it
-            consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE))
+            consumes = [(MediaType.TEXT_PLAIN_VALUE)])
     fun patch(@ApiParam("The unique id of the counter")
               @PathVariable("id")
               id: Long,
@@ -207,8 +207,8 @@ class CounterRest {
      */
 
     @ApiOperation("Modify the counter using JSON Merge Patch")
-    @PatchMapping(path = arrayOf("/{id}"),
-            consumes = arrayOf("application/merge-patch+json"))
+    @PatchMapping(path = ["/{id}"],
+            consumes = ["application/merge-patch+json"])
     fun mergePatch(@ApiParam("The unique id of the counter")
                    @PathVariable("id")
                    id: Long?,

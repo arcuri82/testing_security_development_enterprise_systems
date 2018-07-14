@@ -22,7 +22,7 @@ class RestApi {
         message from RabbitMQ
      */
 
-    @RabbitListener(queues = arrayOf("#{queue.name}"))
+    @RabbitListener(queues = ["#{queue.name}"])
     fun receiveFromAMQP(msg: String) {
 
         print(msg)
@@ -35,7 +35,7 @@ class RestApi {
         that have been received so far.
      */
 
-    @GetMapping(path = arrayOf("/counter"))
+    @GetMapping(path = ["/counter"])
     fun get(): ResponseEntity<Int> =  ResponseEntity.ok(counter)
 
 }

@@ -27,7 +27,7 @@ class News(
         @get:OneToMany(
                 fetch = FetchType.LAZY,
                 mappedBy = "news",
-                cascade = arrayOf(CascadeType.ALL)
+                cascade = [(CascadeType.ALL)]
         )
         var comments: MutableList<Comment> = mutableListOf(),
 
@@ -35,7 +35,7 @@ class News(
         @get:OneToMany(
                 fetch = FetchType.LAZY,
                 mappedBy = "news",
-                cascade = arrayOf(CascadeType.ALL)
+                cascade = [(CascadeType.ALL)]
         )
         var votes: MutableList<Vote> = mutableListOf()
 )

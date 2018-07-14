@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration
  */
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@ContextConfiguration(initializers = arrayOf(DirectExchangeDockerTest.Companion.Initializer::class))
+@ContextConfiguration(initializers = [(DirectExchangeDockerTest.Companion.Initializer::class)])
 class DirectExchangeDockerTest {
 
     companion object {

@@ -18,7 +18,7 @@ class RestApi {
     @Autowired
     private lateinit var fanout: FanoutExchange
 
-    @PostMapping(path = arrayOf("/sender"))
+    @PostMapping(path = ["/sender"])
     fun send(@RequestBody msg: String) : ResponseEntity<Void>{
 
         /*

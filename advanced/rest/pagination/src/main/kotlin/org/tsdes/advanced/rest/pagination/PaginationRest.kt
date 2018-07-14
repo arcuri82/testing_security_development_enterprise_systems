@@ -19,8 +19,8 @@ import org.tsdes.advanced.rest.pagination.entity.News
 
 @Api(value = "/news", description = "Handling of creating and retrieving news")
 @RequestMapping(
-        path = arrayOf("/news"),
-        produces = arrayOf(MediaType.APPLICATION_JSON_VALUE)
+        path = ["/news"],
+        produces = [(MediaType.APPLICATION_JSON_VALUE)]
 )
 @RestController
 @Validated
@@ -49,7 +49,7 @@ class PaginationRest {
 
 
     @ApiOperation("Return a paginated list of current news")
-    @GetMapping(produces = arrayOf(Format.HAL_V1))
+    @GetMapping(produces = [(Format.HAL_V1)])
     fun getNews(
             @ApiParam("The country of the news")
             @RequestParam("country", required = false)
@@ -171,7 +171,7 @@ class PaginationRest {
     }
 
     @ApiOperation("Delete the news specified by id")
-    @DeleteMapping(path = arrayOf("/{id}"))
+    @DeleteMapping(path = ["/{id}"])
     fun deleteNews(@PathVariable("id") newsId: Long): ResponseEntity<Void> {
         service.deleteNews(newsId)
         return ResponseEntity.status(204).build()
@@ -181,7 +181,7 @@ class PaginationRest {
         Note: here I could have "expand" as well as parameter
      */
     @ApiOperation("Retrieved the news specified by id, with all of its comments and votes")
-    @GetMapping(path = arrayOf("/{id}"), produces = arrayOf(Format.JSON_V1))
+    @GetMapping(path = ["/{id}"], produces = [(Format.JSON_V1)])
     fun getNews(@PathVariable("id") newsId: Long): ResponseEntity<NewsDto> {
 
         val news = service.getNews(newsId)
@@ -192,7 +192,7 @@ class PaginationRest {
 
 
     @ApiOperation("Create a news with the given text for a given country")
-    @PostMapping(consumes = arrayOf(Format.JSON_V1))
+    @PostMapping(consumes = [(Format.JSON_V1)])
     fun createNews(@RequestBody dto: NewsDto): ResponseEntity<Void> {
 
         if(dto.text == null || dto.country == null){
@@ -207,8 +207,8 @@ class PaginationRest {
     }
 
     @ApiOperation("Create a new vote for the given news identified by id")
-    @PostMapping(path = arrayOf("/{id}/votes"),
-            consumes = arrayOf(Format.JSON_V1))
+    @PostMapping(path = ["/{id}/votes"],
+            consumes = [(Format.JSON_V1)])
     fun createVote(
             @PathVariable("id")
             newsId: Long,
@@ -225,8 +225,8 @@ class PaginationRest {
     }
 
     @ApiOperation("Create a new comment for the given news identified by id")
-    @PostMapping(path = arrayOf("/{id}/comments"),
-            consumes = arrayOf(Format.JSON_V1))
+    @PostMapping(path = ["/{id}/comments"],
+            consumes = [(Format.JSON_V1)])
     fun createComment(
             @PathVariable("id")
             newsId: Long,

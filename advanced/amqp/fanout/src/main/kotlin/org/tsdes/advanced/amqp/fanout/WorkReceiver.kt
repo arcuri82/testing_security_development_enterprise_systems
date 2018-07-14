@@ -23,7 +23,7 @@ class WorkReceiver(val id: String) {
         when the beans are created.
      */
 
-    @RabbitListener(queues = arrayOf("#{queueNameHolder.name}"))
+    @RabbitListener(queues = ["#{queueNameHolder.name}"])
     fun receive(x: java.lang.Long) {
         doWork(x)
     }

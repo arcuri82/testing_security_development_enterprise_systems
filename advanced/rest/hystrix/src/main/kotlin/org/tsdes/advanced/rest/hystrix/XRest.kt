@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class XRest {
 
-    @PostMapping(path = arrayOf("/x"))
+    @PostMapping(path = ["/x"])
     fun doProcess(@RequestBody x: Long): Long {
 
         /*

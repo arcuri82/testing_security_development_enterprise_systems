@@ -18,7 +18,7 @@ import org.tsdes.advanced.rest.pagination.dto.collection.ListDto
 import java.util.*
 
 @RunWith(SpringRunner::class)
-@SpringBootTest(classes = arrayOf(PaginationApplication::class),
+@SpringBootTest(classes = [(PaginationApplication::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PaginationRestTest {
 

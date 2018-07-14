@@ -70,7 +70,7 @@
             -->
             <dependency>
                 <groupId>org.tsdes.advanced</groupId>
-                <artifactId>dataformat</artifactId>
+                <artifactId>data-format</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

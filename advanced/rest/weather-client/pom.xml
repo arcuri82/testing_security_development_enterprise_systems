@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>org.tsdes.advanced</groupId>
-            <artifactId>dataformat</artifactId>
+            <artifactId>data-format</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.ERROR
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.SUCCESS
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.FAIL
+import org.tsdes.advanced.rest.exceptionhandling.exception.RestResponseEntityExceptionHandler
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(classes = [(ExceptionHandlingApplication::class)],
@@ -97,7 +98,7 @@ class ExceptionHandlingApiTest{
                 .statusCode(500)
                 .body("code", equalTo(500))
                 .body("status", equalToIgnoringCase(FAIL.toString()))
-                .body("message", containsString("A simulated bug"))
+                .body("message", containsString(RestResponseEntityExceptionHandler.INTERNAL_SERVER_ERROR_MESSAGE))
     }
 
 

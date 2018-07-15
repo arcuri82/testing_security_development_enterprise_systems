@@ -17,6 +17,12 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
 
     companion object {
 
+        /**
+         * For security reasons, we should not leak internal details, like
+         * class names, or even the fact we are using Spring
+         */
+        const val INTERNAL_SERVER_ERROR_MESSAGE = "Internal server error"
+
         fun handlePossibleConstraintViolation(e: Exception){
             val cause = Throwables.getRootCause(e)
             if(cause is ConstraintViolationException) {
@@ -62,7 +68,9 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
     fun handleBugsForUnexpectedExceptions(ex: Exception, request: WebRequest): ResponseEntity<Any> {
 
         return handleExceptionInternal(
-                ex, null, HttpHeaders(), HttpStatus.valueOf(500), request)
+                RuntimeException(INTERNAL_SERVER_ERROR_MESSAGE),
+                null, HttpHeaders(),
+                HttpStatus.valueOf(500), request)
     }
 
 

@@ -7,7 +7,7 @@ import org.tsdes.advanced.rest.pagination.entity.News
 import org.tsdes.advanced.rest.pagination.entity.Vote
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
-import javax.persistence.Query
+import javax.persistence.TypedQuery
 
 /*
     Here we define am injectable singleton bean (Service),
@@ -43,11 +43,11 @@ class NewsService {
                     withVotes: Boolean,
                     limit: Int): List<News> {
 
-        val query: Query
+        val query: TypedQuery<News>
         if (country == null) {
-            query = em.createQuery("select n from News n")
+            query = em.createQuery("select n from News n", News::class.java)
         } else {
-            query = em.createQuery("select n from News n where n.country=?1")
+            query = em.createQuery("select n from News n where n.country=?1", News::class.java)
             query.setParameter(1, country)
         }
         query.maxResults = limit
@@ -64,7 +64,7 @@ class NewsService {
             operation, still done from an Entity whose Entity Manager is
             still active
          */
-        val result = query.resultList as List<News>
+        val result = query.resultList
         if (withComments) {
             result.stream().forEach { n -> n.comments.size }
         }

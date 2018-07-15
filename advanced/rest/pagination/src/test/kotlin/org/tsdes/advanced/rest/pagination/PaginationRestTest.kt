@@ -8,13 +8,13 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit4.SpringRunner
+import org.tsdes.advanced.rest.dto.hal.ListDto
 import org.tsdes.advanced.rest.pagination.dto.base.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.base.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.base.VoteDto
-import org.tsdes.advanced.rest.pagination.dto.collection.ListDto
 import java.util.*
 
 @RunWith(SpringRunner::class)
@@ -55,10 +55,15 @@ class PaginationRestTest {
                     .`as`(ListDto::class.java)
 
             listDto.list.stream()
-                    //the "NewsDto" get unmarshalled into a map of fields
-                    .map({ n -> (n as Map<String,*>)["id"] })
-                    .forEach { id ->
-                        given().delete("/" + id)
+                    /*
+                        the "NewsDto" get unmarshalled into a map of fields,
+                        as Generics T info was not provided. In contrast to
+                        RestTemplate in Spring, in RestAssured doesn't seem
+                        to be a clean way to extract with Generics info
+                     */
+                    .map({ (it as Map<String,*>)["id"] })
+                    .forEach {
+                        given().delete("/$it")
                                 .then()
                                 .statusCode(204)
                     }
@@ -120,16 +125,16 @@ class PaginationRestTest {
 
         val values = HashSet<String>()
         selfDto.list.stream()
-                .map({ m -> (m as Map<String,String>)["text"] })
-                .forEach { t -> if(t!=null){values.add(t)} }
+                .map{ (it as Map<String,String>)["text"] }
+                .forEach { if(it!=null){values.add(it)} }
 
         return values
     }
 
     private fun assertContainsTheSame(a: Collection<*>, b: Collection<*>) {
         assertEquals(a.size.toLong(), b.size.toLong())
-        a.stream().forEach { v -> assertTrue(b.contains(v)) }
-        b.stream().forEach { v -> assertTrue(a.contains(v)) }
+        a.stream().forEach { assertTrue(b.contains(it)) }
+        b.stream().forEach { assertTrue(a.contains(it)) }
     }
 
 
@@ -293,14 +298,14 @@ class PaginationRestTest {
         given().basePath("")
                 .body(VoteDto(user = "a user"))
                 .contentType(Format.JSON_V1)
-                .post(newsLocation + "/votes")
+                .post("$newsLocation/votes")
                 .then()
                 .statusCode(201)
 
         given().basePath("")
                 .body(CommentDto(null, "a comment"))
                 .contentType(Format.JSON_V1)
-                .post(newsLocation + "/comments")
+                .post("$newsLocation/comments")
                 .then()
                 .statusCode(201)
     }
@@ -315,7 +320,7 @@ class PaginationRestTest {
                 .body("list.size()", equalTo(1))
                 .body("list[0].comments.id.size()", equalTo(expectedComments))
                 .body("list[0].votes.id.size()", equalTo(expectedVotes))
-                .body("_links.self.href", containsString("expand=" + expandType))
+                .body("_links.self.href", containsString("expand=$expandType"))
     }
 
     @Test

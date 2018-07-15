@@ -6,14 +6,13 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
+import org.tsdes.advanced.rest.dto.hal.HalLink
+import org.tsdes.advanced.rest.dto.hal.ListDto
 import org.tsdes.advanced.rest.pagination.dto.base.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.base.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.base.VoteDto
-import org.tsdes.advanced.rest.pagination.dto.collection.ListDto
-import org.tsdes.advanced.rest.pagination.dto.hal.HalLink
 import org.tsdes.advanced.rest.pagination.entity.News
 
 
@@ -23,7 +22,6 @@ import org.tsdes.advanced.rest.pagination.entity.News
         produces = [(MediaType.APPLICATION_JSON_VALUE)]
 )
 @RestController
-@Validated
 class PaginationRest {
 
     /*
@@ -54,15 +52,19 @@ class PaginationRest {
             @ApiParam("The country of the news")
             @RequestParam("country", required = false)
             country: String?,
+
             @ApiParam("Offset in the list of news")
             @RequestParam("offset", defaultValue = "0")
             offset: Int,
+
             @ApiParam("Limit of news in a single retrieved page")
             @RequestParam("limit", defaultValue = "10")
             limit: Int,
+
             @ApiParam("Whether to retrieve or not votes and comments for the given news")
             @RequestParam("expand", defaultValue = "NONE")
             expand: Expand
+
     ): ResponseEntity<ListDto<NewsDto>> {
 
         if (offset < 0 || limit < 1) {
@@ -202,9 +204,10 @@ class PaginationRest {
         val id = service.createNews(dto.text!!, dto.country!!)
 
         return ResponseEntity.created(UriComponentsBuilder
-                .fromPath("/news/" + id).build().toUri()
+                .fromPath("/news/$id").build().toUri()
         ).build()
     }
+
 
     @ApiOperation("Create a new vote for the given news identified by id")
     @PostMapping(path = ["/{id}/votes"],
@@ -223,6 +226,7 @@ class PaginationRest {
 
         return ResponseEntity.status(201).build()
     }
+
 
     @ApiOperation("Create a new comment for the given news identified by id")
     @PostMapping(path = ["/{id}/comments"],

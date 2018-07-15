@@ -1,10 +1,8 @@
-package org.tsdes.advanced.rest.pagination.dto.collection
+package org.tsdes.advanced.rest.dto.hal
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import org.tsdes.advanced.rest.pagination.dto.hal.HalLink
-import org.tsdes.advanced.rest.pagination.dto.hal.HalObject
 
 
 /*

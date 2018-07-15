@@ -1,9 +1,9 @@
 package org.tsdes.advanced.rest.pagination
 
+import org.tsdes.advanced.rest.dto.hal.ListDto
 import org.tsdes.advanced.rest.pagination.dto.base.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.base.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.base.VoteDto
-import org.tsdes.advanced.rest.pagination.dto.collection.ListDto
 import org.tsdes.advanced.rest.pagination.entity.Comment
 import org.tsdes.advanced.rest.pagination.entity.News
 import org.tsdes.advanced.rest.pagination.entity.Vote
@@ -59,7 +59,7 @@ object DtoTransformer {
                 .toList().toMutableList()
 
 
-        return ListDto<NewsDto>(
+        return ListDto(
                 list = dtoList,
                 rangeMin = offset,
                 rangeMax = offset + dtoList.size - 1,

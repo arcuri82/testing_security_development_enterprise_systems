@@ -22,6 +22,7 @@
         <module>pagination</module>
         <module>wrapper</module>
         <module>rest-dto</module>
+        <module>exception-handling</module>
         <module>wiremock</module>
         <module>hystrix</module>
     </modules>

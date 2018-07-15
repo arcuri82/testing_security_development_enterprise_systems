@@ -1,16 +1,13 @@
 package org.tsdes.advanced.rest.wrapper
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers.*
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.core.ParameterizedTypeReference
@@ -18,7 +15,8 @@ import org.springframework.http.HttpMethod
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.web.client.RestTemplate
 import org.tsdes.advanced.rest.dto.WrappedResponse
-import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.*
+import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.ERROR
+import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.SUCCESS
 
 
 @RunWith(SpringRunner::class)
@@ -30,8 +28,6 @@ class MathApiTest{
     @LocalServerPort
     protected var port = 0
 
-    @Autowired
-    protected lateinit var mapper : ObjectMapper
 
     @Before
     fun initTest() {
@@ -88,7 +84,7 @@ class MathApiTest{
     }
 
     @Test
-    fun testSuccessDivideByZero(){
+    fun testDivideByZero(){
 
         given().accept(ContentType.JSON)
                 .param("x", 10)

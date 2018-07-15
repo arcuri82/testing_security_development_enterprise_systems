@@ -1,15 +1,22 @@
 package org.tsdes.advanced.rest.wrapper
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers.*
+import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.core.ParameterizedTypeReference
+import org.springframework.http.HttpMethod
 import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.web.client.RestTemplate
 import org.tsdes.advanced.rest.dto.WrappedResponse
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.*
 
@@ -22,6 +29,9 @@ class MathApiTest{
 
     @LocalServerPort
     protected var port = 0
+
+    @Autowired
+    protected lateinit var mapper : ObjectMapper
 
     @Before
     fun initTest() {
@@ -53,6 +63,29 @@ class MathApiTest{
                 .body("message", equalTo(null))
     }
 
+    @Test
+    fun testUnmarshalling(){
+
+        val url = "http://localhost:$port/math/divide?x=10&y=2"
+        val client =  RestTemplate()
+
+
+        val responseSubclass = client.getForEntity(url, ResponseDto::class.java)
+
+        assertEquals(200, responseSubclass.statusCode.value())
+        assertEquals(5, responseSubclass.body.data!!.result)
+
+
+        //dealing with Generics is slightly bit more cumbersome
+        val responseGenerics = client.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                object : ParameterizedTypeReference<WrappedResponse<DivisionDto>>() {})
+
+        assertEquals(200, responseGenerics.statusCode.value())
+        assertEquals(5, responseGenerics.body.data!!.result)
+    }
 
     @Test
     fun testSuccessDivideByZero(){

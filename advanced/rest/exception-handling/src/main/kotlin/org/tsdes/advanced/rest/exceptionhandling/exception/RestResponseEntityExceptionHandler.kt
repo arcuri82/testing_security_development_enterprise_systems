@@ -41,7 +41,25 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
                 ex, null, HttpHeaders(), HttpStatus.valueOf(ex.httpCode), request)
     }
 
-    
+
+    /*
+       This is one case in which JEE is actually better than Spring.
+       You might want to have constraints on user inputs directly
+       as annotations in method parameters, like it is done for
+       example on EJBs.
+       Unfortunately, Spring does not do such validation by default.
+       See poor excuse/motivation at:
+
+       https://github.com/spring-projects/spring-boot/issues/6228
+       https://github.com/spring-projects/spring-boot/issues/6574
+
+       This means we need to manually register an exception handler.
+       Every time a ConstraintViolationException is thrown, instead
+       of ending up in a 500 error, we catch it are return 400.
+
+       Important: we also need to add @Validated on this class.
+    */
+
     @ExceptionHandler(value = [ConstraintViolationException::class])
     protected fun handleFrameworkExceptionsForUserInputs(ex: Exception, request: WebRequest)
             : ResponseEntity<Any> {

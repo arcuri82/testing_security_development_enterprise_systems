@@ -39,7 +39,6 @@ const val V2_NEWS_JSON = "application/vnd.tsdes.news+json;charset=UTF-8;version=
         produces = [V2_NEWS_JSON, BASE_JSON]
 )
 @RestController
-@Validated // This is needed to do automated input validation
 class NewsRestApi {
 
 
@@ -268,19 +267,6 @@ class NewsRestApi {
     }
 
 
-    @ExceptionHandler(value = [ConstraintViolationException::class])
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    fun handleValidationFailure(ex: ConstraintViolationException): String {
-
-        val messages = StringBuilder()
-
-        for (violation in ex.constraintViolations) {
-            messages.append(violation.message + "\n")
-        }
-
-        return messages.toString()
-    }
-
     /**
      * Code used to keep backward compatibility
      */
@@ -364,7 +350,7 @@ class NewsRestApi {
     @Deprecated
     fun deprecatedGetByCountry(@ApiParam("The country name")
                                @PathVariable("country")
-                               @Valid @Country
+                               @Country
                                country: String): ResponseEntity<List<NewsDto>> {
 
         return ResponseEntity

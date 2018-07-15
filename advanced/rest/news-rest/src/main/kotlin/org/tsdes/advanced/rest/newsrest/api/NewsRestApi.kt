@@ -27,7 +27,6 @@ import javax.validation.Valid
         produces = [(MediaType.APPLICATION_JSON_VALUE)] // states that, when a method returns something, it is in Json
 )
 @RestController
-@Validated // This is needed to do automated input validation
 class NewsRestApi {
 
     /*
@@ -78,7 +77,7 @@ class NewsRestApi {
     @GetMapping(path = ["/countries/{country}"])
     fun getByCountry(@ApiParam("The country name")
                      @PathVariable("country")
-                     @Valid @Country
+                     @Country
                      country: String): ResponseEntity<List<NewsDto>> {
         return ResponseEntity.ok(NewsConverter.transform(crud.findAllByCountry(country)))
     }
@@ -307,36 +306,6 @@ class NewsRestApi {
         return ResponseEntity.status(204).build()
     }
 
-
-    /*
-        This is one case in which JEE is actually better than Spring.
-        You might want to have constraints on user inputs directly
-        as annotations in method parameters, like it is done for
-        example on EJBs.
-        Unfortunately, Spring does not do such validation by default.
-        See poor excuse/motivation at:
-
-        https://github.com/spring-projects/spring-boot/issues/6228
-        https://github.com/spring-projects/spring-boot/issues/6574
-
-        This means we need to manually register an exception handler.
-        Every time a ConstraintViolationException is thrown, instead
-        of ending up in a 500 error, we catch it are return 400.
-
-        Important: we also need to add @Validated on this class.
-     */
-    @ExceptionHandler(value = [(ConstraintViolationException::class)])
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    fun handleValidationFailure(ex: ConstraintViolationException): String {
-
-        val messages = StringBuilder()
-
-        for (violation in ex.constraintViolations) {
-            messages.append(violation.message + "\n")
-        }
-
-        return messages.toString()
-    }
 }
 
 const val ID_PARAM = "The numeric id of the news"

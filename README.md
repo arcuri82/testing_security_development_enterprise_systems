@@ -70,12 +70,13 @@ Also two different frameworks are used: *Spring* and *Java EE*.
 Why such choices? 
 When studying the concepts of enterprise software development/testing/security,
 the actual used languages/frameworks are not so important.
-For example, using C# with .Net would had been a viable option as well.
 The languages/frameworks are just used to get *practice*, and get your hands dirty.
+For example, using C# with .Net would had been a viable option as well.
 When you get a degree in software engineering, by all means afterwards
 you could end up working with C#/.Net and never touch Java again. 
 Therefore, it is important to learn the fundamental concepts behind those 
 languages/frameworks, and not just their low level technical details. 
+
 
 Trying and getting some experience with all the main languages and frameworks would be good. 
 However, when studying 
@@ -96,7 +97,18 @@ follows:
   TypeScript is statically typed, but it is still JavaScript in its core...  
   Nowadays, C# is a good option, and as a language might even be considered
   better than Java.
-  However, it does not have as large ecosystem as Java.  
+  On one hand, it does not have as large ecosystem as Java.
+  On the other hand, considering the bullshit of Oracle's new 6 month release cycle,
+  .Net seems a more open-source friendly option (depending on how effective
+  [adoptopenjdk.net](adoptopenjdk.net) will be).
+  Note: stating something like this before 2010 (when Oracle bought Sun) would
+  rightly grant you a single way ticket to your local asylum.
+  So strange to see how much the computing world has changed since 
+  the [Java Zone Trailer](https://www.youtube.com/watch?v=8Px-GHPxB4I)
+  and 
+  [Lady Java](https://www.youtube.com/watch?v=1JZnj4eNHXE)
+  videos came out. 
+  
 
 * `Kotlin`: our language of choice. It is a better Java that can reuse all
     of its existing ecosystem. 

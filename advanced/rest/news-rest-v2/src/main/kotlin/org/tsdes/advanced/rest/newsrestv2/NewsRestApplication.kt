@@ -1,15 +1,10 @@
 package org.tsdes.advanced.rest.newsrestv2
 
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.Bean
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 import springfox.documentation.builders.ApiInfoBuilder
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.service.ApiInfo
@@ -22,9 +17,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
  *
  * Created by arcuri82 on 06-Jul-17.
  */
-@SpringBootApplication(scanBasePackages = ["org.tsdes"])
-@EnableJpaRepositories(basePackages = ["org.tsdes"])
-@EntityScan(basePackages = ["org.tsdes"])
+@SpringBootApplication(scanBasePackages = ["org.tsdes.advanced"])
+@EnableJpaRepositories(basePackages = ["org.tsdes.advanced"])
+@EntityScan(basePackages = ["org.tsdes.advanced"])
 @EnableSwagger2
 class NewsRestApplication {
 

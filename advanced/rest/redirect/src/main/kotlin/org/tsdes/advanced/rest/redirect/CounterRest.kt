@@ -20,19 +20,21 @@ import java.util.concurrent.atomic.AtomicLong
     The problem stems from the fact of how browsers handled 3xx codes,
     and at times it was in a very wrong way, which did impact the
     writing of the standards.
-    However, here we do not deal directly with browsers, but clients of a RESTful API,
+    However, here we do not deal directly with browsers (eg, submissions of HTML forms),
+    but clients of a RESTful API (including AJAX calls in browsers),
     where we also provide documentation with Swagger on how to use it.
 
     To summarize:
 
     300: do NOT use, unless you are implementing a HATEOAS API.
 
-    301: permanent redirect, using the same HTTP verb, ie, the follow up of a POST should still
-         be the a POST to the redirected resource (defined in the "Location" header).
-         You might want to specify in Swagger that this does not allow changing the verb,
-         ie, the follow up of a PUT should still be a PUT.
-         Goal: when redirecting from X to Y, this means that we are telling the client
-         that X is not a valid URI anymore, and so should always use Y from now on.
+    301: permanent redirect. Goal: when redirecting from X to Y, this means that we are telling
+         the client that X is not a valid URI anymore, and so should always use Y from now on.
+         However, the specs allow changing verb, which does not make any sense.
+         E.g, do not get surprised if some libraries/tools redirect a DELETE into
+         a GET (!?!).
+         This should be used for permanent redirect of GETs, but, for the other
+         methods like POST, see 308.
 
 
     302: do NOT use. Do use 307 instead. However, most browsers interpret 302 like
@@ -50,22 +52,33 @@ import java.util.concurrent.atomic.AtomicLong
          be better, but still with a valid Location header.
          The client of the API will then decide what to do with it.
 
+    304: needed when dealing with caches. It means that a resource has not been
+         changed since last request, so the copy in cache can used without the
+         server needing to resend the payload.
 
     307: temporary redirect, using the same verb (see discussion about 301).
-         In contrast to 301, in Swagger do not need to specify that the verb
-         should be the same, as that is implicit in the 307 code.
          Usage: needed when a resource location can change several times.
          Example: latest news, this might vary each hour. You might want
          to a have a fixed URI resource for "latest" that does a temporarily
          redirect to the current latest news.
 
 
-    308: AVOID LIKE THE PLAGUE. Complex story, but in short:
-         - still in the "experimental" state
-         - should be like 301, but most internet entities (eg Google) use this
+    308: permanent redirect, using the same verb.
+         However, it is a complex story:
+         - added afterwards (2015), and not so widely supported.
+         - should be like 301 with no verb change allowed,
+           but many internet entities (eg Google) use this
            code as a non-standard code with a completely different meaning,
            ie "Resume Incomplete"
-
+         - apart from POST -> GET with a 302, might not be possible to have redirection
+           but for GET. If you try to use a 301 redirection with POST/PUT/DELETE/PATCH,
+           expect all kinds of weird behaviors from your clients if the
+           redirections are followed automatically.
+         - for POST/PUT/DELETE/PATCH could still use 308 for documentation, even
+           if many libraries will not handle it (not handling 308 is still better
+           than screwing you up by changing verb into a GET)
+         - for backward compatibility and wide support, for GET do not use 308, but
+           rather 301
  */
 
 /**

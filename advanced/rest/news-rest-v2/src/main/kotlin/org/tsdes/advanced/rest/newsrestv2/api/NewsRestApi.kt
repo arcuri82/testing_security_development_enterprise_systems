@@ -299,8 +299,11 @@ class NewsRestApi {
         Increasing X "might" break backward compatibility.
 
         An approach for maintainability is to keep the old API, but
-        then do automated permanent redirect (ie 301) to the new API.
-        This only works if the new API is semantically equivalent
+        then do automated permanent redirect (eg 301) to the new API.
+        This only works if the new API is semantically equivalent.
+        However, need to remember the issues with 301 when
+        dealing with POST/PUT/DELETE/PATCH.
+        So, 301 for GET, and 308 for the others.
 
         WHY are the following methods deprecated?
         Reason is that the HTTP endpoints were not written "properly".
@@ -419,7 +422,7 @@ class NewsRestApi {
     }
 
     @ApiOperation("Update an existing news")
-    @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
+    @ApiResponses(ApiResponse(code = 308, message = "Deprecated URI. Moved permanently."))
     @PutMapping(path = ["/id/{id}"], consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     @Deprecated
     fun deprecatedUpdate(
@@ -433,13 +436,13 @@ class NewsRestApi {
     ): ResponseEntity<Any> {
 
         return ResponseEntity
-                .status(301)
+                .status(308)
                 .location(UriComponentsBuilder.fromUriString("$contextPath/news/$pathId").build().toUri()
                 ).build()
     }
 
     @ApiOperation("Update the text content of an existing news")
-    @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
+    @ApiResponses(ApiResponse(code = 308, message = "Deprecated URI. Moved permanently."))
     @PutMapping(path = ["/id/{id}/text"], consumes = [(MediaType.TEXT_PLAIN_VALUE)])
     @Deprecated
     fun deprecatedUpdateText(
@@ -453,13 +456,13 @@ class NewsRestApi {
     ): ResponseEntity<Any> {
 
         return ResponseEntity
-                .status(301)
+                .status(308)
                 .location(UriComponentsBuilder.fromUriString("$contextPath/news/$id/text").build().toUri()
                 ).build()
     }
 
     @ApiOperation("Delete a news with the given id")
-    @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
+    @ApiResponses(ApiResponse(code = 308, message = "Deprecated URI. Moved permanently."))
     @DeleteMapping(path = ["/id/{id}"])
     @Deprecated
     fun deprecatedDelete(@ApiParam(ID_PARAM)
@@ -467,7 +470,7 @@ class NewsRestApi {
                          pathId: String?): ResponseEntity<Any> {
 
         return ResponseEntity
-                .status(301)
+                .status(308)
                 .location(UriComponentsBuilder.fromUriString("$contextPath/news/$pathId").build().toUri()
                 ).build()
     }

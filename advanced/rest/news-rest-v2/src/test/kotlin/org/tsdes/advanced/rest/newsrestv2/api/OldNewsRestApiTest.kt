@@ -8,6 +8,7 @@ import org.junit.Test
 import org.tsdes.advanced.rest.newsrestv2.dto.NewsDto
 import java.time.ZonedDateTime
 
+
 /*
    NOTE: in "theory", this should just be COPY&PASTE of the tests
    of the previous module with version 1.0
@@ -23,8 +24,10 @@ import java.time.ZonedDateTime
 
     https://github.com/rest-assured/rest-assured/issues/750
 
-   and maybe one day, when you have some free time (such  a
-   rare luxury) you can also provide a patch...
+   It is possible to force RestAssured to always do a redirect, but, then,
+   the underlying library Apache HTTPClient has the great idea of
+   transforming DELETE into GET when 301... and it ignores 308...
+
  */
 class OldNewsRestApiTest : NRTestBase() {
 
@@ -81,9 +84,9 @@ class OldNewsRestApiTest : NRTestBase() {
                 .body("size()", equalTo(1))
                 .body("id[0]", containsString(id))
 
-        delete("/id/" + id).then().statusCode(301) //instead of 204
+        delete("/id/$id").then().statusCode(308) //instead of 204
 
-        //get().then().body("id", not(containsString(id)))
+//        get().then().body("id", not(containsString(id)))
     }
 
 
@@ -101,7 +104,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .extract().asString()
 
         //check if POST was fine
-        get("/id/" + id).then().body("text", equalTo(text))
+        get("/id/$id").then().body("text", equalTo(text))
 
         val updatedText = "new updated text"
 
@@ -111,7 +114,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .body(NewsDto(id, "foo", updatedText, "Norway", ZonedDateTime.now()))
                 .put("/id/{id}")
                 .then()
-                .statusCode(301) // instead of 204
+                .statusCode(308) // instead of 204
 
 //        //was the PUT fine?
 //        get("/id/" + id).then().body("text", equalTo(updatedText))
@@ -138,7 +141,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .pathParam("id", "-333")
                 .put("/id/{id}")
                 .then()
-                .statusCode(301) // instead of 404
+                .statusCode(308) // instead of 404
     }
 
     @Test
@@ -149,7 +152,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .pathParam("id", "-333")
                 .put("/id/{id}")
                 .then()
-                .statusCode(301) //instead of 409
+                .statusCode(308) //instead of 409
     }
 
 
@@ -169,7 +172,7 @@ class OldNewsRestApiTest : NRTestBase() {
                 .body(NewsDto(id, null, updatedText, null, null))
                 .put("/id/{id}")
                 .then()
-                .statusCode(301) // instead of 400
+                .statusCode(308) // instead of 400
     }
 
     private fun createSomeNews() {

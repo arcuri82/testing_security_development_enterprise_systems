@@ -100,7 +100,7 @@ follows:
   On one hand, it does not have as large ecosystem as Java.
   On the other hand, considering the bullshit of Oracle's new 6 month release cycle,
   .Net seems a more open-source friendly option (depending on how effective
-  [adoptopenjdk.net](adoptopenjdk.net) will be).
+  [adoptopenjdk.net](https://adoptopenjdk.net) will be).
   Note: stating something like this before 2010 (when Oracle bought Sun) would
   rightly grant you a single way ticket to your local asylum.
   So strange to see how much the computing world has changed since 

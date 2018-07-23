@@ -3,16 +3,13 @@ package org.tsdes.advanced.graphql.database.resolver
 import com.coxautodev.graphql.tools.GraphQLResolver
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.tsdes.advanced.graphql.database.entity.CommentEntity
 import org.tsdes.advanced.graphql.database.entity.PostEntity
-import org.tsdes.advanced.graphql.database.repository.CommentRepository
 import org.tsdes.advanced.graphql.database.repository.PostRepository
 
 @Component
 class PostResolver(
-        private val postRepository: PostRepository,
-        private val commentRepository: CommentRepository
+        private val postRepository: PostRepository
 ) : GraphQLResolver<PostEntity> {
 
     fun getId(post: PostEntity) = post.id.toString()
@@ -25,15 +22,10 @@ class PostResolver(
     @Transactional
     fun getComments(post: PostEntity): List<CommentEntity> {
 
-        //FIXME: This in theory should work
-        //Seems similar problem as in https://stackoverflow.com/questions/48037601/lazyinitializationexception-with-graphql-spring#
-        //Reported issue at https://github.com/graphql-java/graphql-spring-boot/issues/92#issuecomment-404050755
+        val reloaded = postRepository.findById(post.id).get()
 
-//        println("------- TRANSACTION: " + TransactionSynchronizationManager.isActualTransactionActive())
-//        val reloaded = postRepository.findById(post.id).get()
-//        return reloaded.comments
-
-
-        return commentRepository.findByParentPostId(post.id!!)
+        //recall to force loading here inside the joined transaction
+        reloaded.comments.size
+        return reloaded.comments
     }
 }

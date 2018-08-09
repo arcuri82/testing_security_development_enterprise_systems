@@ -1,4 +1,4 @@
-package org.tsdes.spring.kotlin;
+package org.tsdes.advanced.kotlin;
 
 /**
  * Created by arcuri82 on 17-Aug-17.

@@ -1,6 +1,8 @@
-package org.tsdes.spring.kotlin
+package org.tsdes.advanced.kotlin
 
 /**
+ * Compared this class with its equivalent called JavaElvis
+ *
  * Created by arcuri82 on 17-Aug-17.
  */
 class KotlinElvis {

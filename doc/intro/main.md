@@ -1,4 +1,4 @@
-# Intro to Enterprise Programming 1 (PG5100)
+# Intro: Enterprise Programming 1 (PG5100)
 
 The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 

@@ -29,7 +29,17 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
+* **Lesson 03**: Charsets and PATCH
+  
+  Slides: [[pdf]](slides/lesson_03.pdf), 
+          [[pptx]](slides/lesson_03.pptx)
+          
+  Modules:     
+  
+  * **advanced/rest/charset**
+  * **advanced/rest/patch**
 
+<br />
 
 
 TODO remaining classes

@@ -46,6 +46,7 @@ TODO remaining classes
   Note: in that link it is called *Designing and Deploying Microservices*.  All of it.
 * Spring [online documentation](https://spring.io).
   Plenty of resources and tutorials.
+* Kotlin [documentation](https://kotlinlang.org/docs/kotlin-docs.pdf).
 
 ## Exercises
 

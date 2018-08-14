@@ -16,6 +16,21 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
+* **Lesson 02**: HTTP and Web Services
+  
+  Slides: [[pdf]](slides/lesson_02.pdf), 
+          [[pptx]](slides/lesson_02.pptx)
+          
+  Modules:     
+  
+  * **advanced/rest/weather-client**
+  * **advanced/example-news**
+  * **advanced/rest/news-rest**
+
+<br />
+
+
+
 
 TODO remaining classes
 

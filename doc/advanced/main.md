@@ -34,6 +34,9 @@ TODO remaining classes
   All of it.  
 * [RFC-7234](https://tools.ietf.org/html/rfc7234): *Hypertext Transfer Protocol (HTTP/1.1): Caching*. 
   Pages 1-29 (up to Section 5.4).
+* [RFC-7235](https://tools.ietf.org/html/rfc7235): *Hypertext Transfer Protocol (HTTP/1.1): Authentication*. 
+  Pages 1-9 (up to Section 4.4),
+  and 12-13.
 * [RFC-7396](https://tools.ietf.org/html/rfc7396): *JSON Merge Patch*.
   All of it.
 * Todd Fredrich, *RESTful Service Best Practices*, [available in different formats](https://www.restapitutorial.com/resources.html).
@@ -41,6 +44,8 @@ TODO remaining classes
 * Chris Richardson and Floyd Smith, *Microservices From Design to Deployment*.
   Free ebook, but need registration to download its [PDF](https://www.nginx.com/resources/library/designing-deploying-microservices/).
   Note: in that link it is called *Designing and Deploying Microservices*.  All of it.
+* Spring [online documentation](https://spring.io).
+  Plenty of resources and tutorials.
 
 ## Exercises
 

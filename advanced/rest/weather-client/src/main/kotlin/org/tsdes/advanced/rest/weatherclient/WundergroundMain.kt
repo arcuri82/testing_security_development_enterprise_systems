@@ -15,9 +15,11 @@ fun main(args: Array<String>) {
     //http://api.wunderground.com/api/302f56c7ad8e8c82/geolookup/conditions/forecast/q/Norway/Oslo.xml
 
     /*
-    Need to register. Linked to a user.
-    At time of registering, it was up to 500 calls per day, 10 per minute.
-    To have more, you need to pay.
+        Need to register. Linked to a user.
+        At time of registering, it was up to 500 calls per day, 10 per minute.
+        To have more, you need to pay.
+        However, it looks like they no longer give evaluation keys...
+        But there are several you can choose from at http://www.programmableweb.com/
     */
     val code = "302f56c7ad8e8c82"
     val country = "Norway"

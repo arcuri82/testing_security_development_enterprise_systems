@@ -76,6 +76,8 @@ TODO remaining classes
   and 12-13.
 * [RFC-7396](https://tools.ietf.org/html/rfc7396): *JSON Merge Patch*.
   All of it.
+* [RFC-7538](https://tools.ietf.org/html/rfc7538): *The Hypertext Transfer Protocol Status Code 308 (Permanent Redirect)*.
+  All of it.    
 * Todd Fredrich, *RESTful Service Best Practices*, [available in different formats](https://www.restapitutorial.com/resources.html).
   All  of it.  
 * Chris Richardson and Floyd Smith, *Microservices From Design to Deployment*.

@@ -89,8 +89,7 @@ TODO remaining classes
 
 ## Exercises
 
-There is no exercise with solutions in this course, as the group
-exam will start soon after the first few classes.
+There is no exercise with solutions in this course (yet).
 
 If you have never used Kotlin before, it is recommended to do some
 Kotlin Koans, like [this one](https://kotlinlang.org/docs/tutorials/koans.html). 

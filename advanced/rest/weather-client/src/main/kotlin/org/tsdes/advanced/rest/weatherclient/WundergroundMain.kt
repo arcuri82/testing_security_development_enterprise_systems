@@ -20,6 +20,7 @@ fun main(args: Array<String>) {
         To have more, you need to pay.
         However, it looks like they no longer give evaluation keys...
         But there are several you can choose from at http://www.programmableweb.com/
+        like for example https://openweathermap.org/
     */
     val code = "302f56c7ad8e8c82"
     val country = "Norway"

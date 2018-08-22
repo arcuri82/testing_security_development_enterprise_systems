@@ -2,9 +2,7 @@ package org.tsdes.advanced.examplenews
 
 import org.tsdes.advanced.examplenews.constraint.Country
 import java.time.ZonedDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 import javax.validation.constraints.NotBlank

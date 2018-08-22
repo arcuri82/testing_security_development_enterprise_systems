@@ -2,9 +2,10 @@ package org.tsdes.advanced.graphql.newsgraphql.resolver
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver
 import com.google.common.base.Throwables
+import graphql.execution.DataFetcherResult
+import graphql.servlet.GenericGraphQLError
 import org.springframework.stereotype.Component
 import org.tsdes.advanced.examplenews.NewsRepository
-import org.tsdes.advanced.graphql.newsgraphql.MyGenericGraphQLError
 import org.tsdes.advanced.graphql.newsgraphql.type.InputNewsType
 import org.tsdes.advanced.graphql.newsgraphql.type.InputUpdateNewsType
 import javax.validation.ConstraintViolationException
@@ -15,7 +16,7 @@ class MutationResolver(
 
 ) : GraphQLMutationResolver {
 
-    fun createNews(input: InputNewsType): String {
+    fun createNews(input: InputNewsType): DataFetcherResult<String> {
 
         val id = try {
             /*
@@ -26,39 +27,44 @@ class MutationResolver(
             crud.createNews(input.authorId!!, input.text!!, input.country!!)
         } catch (e: Exception) {
             val cause = Throwables.getRootCause(e)
-            if(cause is ConstraintViolationException) {
-                throw MyGenericGraphQLError("Violated constraints: ${cause.message}")
+            val msg = if (cause is ConstraintViolationException) {
+                "Violated constraints: ${cause.message}"
+            }else {
+                e.message
             }
-            throw MyGenericGraphQLError(e.message)
+            return DataFetcherResult<String>(null, listOf(GenericGraphQLError(msg)))
         }
 
-        return id.toString()
+        return DataFetcherResult(id.toString(), listOf())
     }
 
-    fun updateNewsById(pathId: String, input: InputUpdateNewsType): Boolean {
+    fun updateNewsById(pathId: String, input: InputUpdateNewsType): DataFetcherResult<Boolean> {
 
         val id: Long
         try {
             id = pathId.toLong()
         } catch (e: Exception) {
-            throw MyGenericGraphQLError("No News with id $pathId exists")
+            return DataFetcherResult<Boolean>(null, listOf(
+                    GenericGraphQLError("No News with id $pathId exists")))
         }
 
         if (!crud.existsById(id)) {
-            throw MyGenericGraphQLError("No News with id $id exists")
+            return DataFetcherResult<Boolean>(null, listOf(
+                    GenericGraphQLError("No News with id $id exists")))
         }
 
         try {
             crud.update(id, input.text!!, input.authorId!!, input.country!!, input.creationTime!!)
         } catch (e: Exception) {
             val cause = Throwables.getRootCause(e)
-            if(cause is ConstraintViolationException) {
-                throw MyGenericGraphQLError("Violated constraints: ${cause.message}")
+            if (cause is ConstraintViolationException) {
+                return DataFetcherResult<Boolean>(null, listOf(
+                        GenericGraphQLError("Violated constraints: ${cause.message}")))
             }
             throw e
         }
 
-        return true
+        return DataFetcherResult(true, listOf())
     }
 
     fun deleteNewsById(pathId: String): Boolean {

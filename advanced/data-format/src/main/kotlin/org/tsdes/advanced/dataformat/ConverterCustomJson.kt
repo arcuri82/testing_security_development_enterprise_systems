@@ -48,16 +48,18 @@ class ConverterCustomJson<T: Any>(type: Class<T>) : ConverterImp<T>(type) {
             with no value, ie null
          */
         val fields = obj::class.java.declaredFields
-                .filter { f ->
-                    f.apply { isAccessible = true }.get(obj) != null
-                }
-
+                .filter { it.apply { isAccessible = true }.get(obj) != null }
+                /*
+                    "isAccessible = true" is to avoid issues with private fields
+                    when doing reflection.
+                    Note: being a property, what actually called is "setIsAccessible(true)"
+                 */
 
 
         for (i in fields.indices) {
 
             val field = fields[i]
-            field.isAccessible = true // avoid issues with private fields
+
 
             val value = field.get(obj)
 

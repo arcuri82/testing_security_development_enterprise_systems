@@ -25,6 +25,7 @@
         <module>exception-handling</module>
         <module>wiremock</module>
         <module>hystrix</module>
+        <module>conditional-get</module>
     </modules>
 
 

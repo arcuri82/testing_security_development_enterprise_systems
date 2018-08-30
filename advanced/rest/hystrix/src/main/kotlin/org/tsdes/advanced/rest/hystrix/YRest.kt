@@ -24,7 +24,8 @@ class YRest {
         instances running on two different JVM processes
      */
 
-    private val uri: URI = URI("http://localhost:8080/x")
+    var port = 8080
+
     private val client: RestTemplate = RestTemplate()
 
 
@@ -77,6 +78,8 @@ class YRest {
                 Note: this synchronous call could fail (and so throw an exception),
                 or even just taking a long while (if server is under heavy load)
              */
+
+            val uri: URI = URI("http://localhost:$port/x")
 
             val result = client.postForEntity(uri, x, Long::class.java)
 

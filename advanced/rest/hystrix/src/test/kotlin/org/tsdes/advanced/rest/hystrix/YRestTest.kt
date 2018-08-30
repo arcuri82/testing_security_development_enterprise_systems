@@ -9,7 +9,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit4.SpringRunner
 import java.util.concurrent.TimeUnit
 
@@ -18,14 +20,20 @@ import java.util.concurrent.TimeUnit
  * Created by arcuri82 on 04-Aug-17.
  */
 @RunWith(SpringRunner::class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class YRestTest {
+
+    @LocalServerPort
+    private var port = 0
+
+    @Autowired
+    private lateinit var yRest: YRest
 
     @Before
     fun reset() {
 
         RestAssured.baseURI = "http://localhost"
-        RestAssured.port = 8080
+        RestAssured.port = port
         RestAssured.basePath = "/y"
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
@@ -40,7 +48,9 @@ class YRestTest {
             seem to guarantee to be blocking until EVERYTHING is actually reset.
             So here we do an explicit extra wait.
          */
-        Thread.sleep(10_000)
+        Thread.sleep(5_000)
+
+        yRest.port = port
     }
 
 

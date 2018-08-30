@@ -26,6 +26,7 @@
         <module>wiremock</module>
         <module>hystrix</module>
         <module>conditional-get</module>
+        <module>conditional-change</module>
     </modules>
 
 

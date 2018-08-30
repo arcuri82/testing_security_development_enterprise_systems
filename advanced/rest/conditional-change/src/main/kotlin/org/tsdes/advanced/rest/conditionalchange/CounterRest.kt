@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.context.request.WebRequest
 import java.time.ZonedDateTime
 
 /**
@@ -28,7 +27,7 @@ class CounterRest {
 
     @ApiOperation("Get the counter")
     @GetMapping
-    fun get() : ResponseEntity<CounterDto> {
+    fun get(): ResponseEntity<CounterDto> {
 
         /*
             If this was saved on a database, could use the unique primary
@@ -52,19 +51,13 @@ class CounterRest {
     @ApiOperation("Change the counter")
     @PutMapping
     fun update(
-           // webRequest: WebRequest,
             @RequestHeader("If-Match") ifMatch: String?,
             @RequestBody dto: CounterDto
-    ) : ResponseEntity<Void>{
+    ): ResponseEntity<Void> {
 
-        if(ifMatch != null && ifMatch.trim() != computeETag()){
+        if (ifMatch != null && ifMatch.trim() != computeETag()) {
             return ResponseEntity.status(412).build()
         }
-
-//        if(! webRequest.checkNotModified(computeETag())){
-//            //412: precondition failed
-//            return ResponseEntity.status(412).build()
-//        }
 
         synchronized(this) {
             this.counter = dto.value!!

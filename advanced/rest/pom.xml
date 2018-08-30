@@ -27,6 +27,7 @@
         <module>hystrix</module>
         <module>conditional-get</module>
         <module>conditional-change</module>
+        <module>cache</module>
     </modules>
 
 

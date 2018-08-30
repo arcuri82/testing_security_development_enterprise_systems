@@ -258,6 +258,26 @@
             </dependency>
 
 
+            <!-- for caching -->
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>2.10.5</version>
+            </dependency>
+            <!-- Looks like we cannot use new version, as HttpClient still rely on 2.x-->
+            <!--<dependency>-->
+                <!--<groupId>org.ehcache</groupId>-->
+                <!--<artifactId>ehcache</artifactId>-->
+                <!--<version>3.5.2</version>-->
+            <!--</dependency>-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient-cache</artifactId>
+                <version>4.5.6</version>
+            </dependency>
+
+
+
         </dependencies>
     </dependencyManagement>
 

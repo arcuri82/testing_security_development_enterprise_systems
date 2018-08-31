@@ -77,7 +77,6 @@ class NewsRestApi {
     @GetMapping(path = ["/countries/{country}"])
     fun getByCountry(@ApiParam("The country name")
                      @PathVariable("country")
-                     @Country
                      country: String): ResponseEntity<List<NewsDto>> {
         return ResponseEntity.ok(NewsConverter.transform(crud.findAllByCountry(country)))
     }
@@ -96,7 +95,6 @@ class NewsRestApi {
     fun getByCountryAndAuthor(
             @ApiParam("The country name")
             @PathVariable("country")
-            @Country
             country: String,
             //
             @ApiParam("The id of the author who wrote the news")

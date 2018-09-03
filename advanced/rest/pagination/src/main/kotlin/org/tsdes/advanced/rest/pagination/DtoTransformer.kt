@@ -1,9 +1,9 @@
 package org.tsdes.advanced.rest.pagination
 
 import org.tsdes.advanced.rest.dto.hal.ListDto
-import org.tsdes.advanced.rest.pagination.dto.base.CommentDto
-import org.tsdes.advanced.rest.pagination.dto.base.NewsDto
-import org.tsdes.advanced.rest.pagination.dto.base.VoteDto
+import org.tsdes.advanced.rest.pagination.dto.CommentDto
+import org.tsdes.advanced.rest.pagination.dto.NewsDto
+import org.tsdes.advanced.rest.pagination.dto.VoteDto
 import org.tsdes.advanced.rest.pagination.entity.Comment
 import org.tsdes.advanced.rest.pagination.entity.News
 import org.tsdes.advanced.rest.pagination.entity.Vote
@@ -52,7 +52,7 @@ object DtoTransformer {
                   withComments: Boolean,
                   withVotes: Boolean): ListDto<NewsDto> {
 
-        var dtoList: MutableList<NewsDto> = newsList.stream()
+        val dtoList: MutableList<NewsDto> = newsList.stream()
                 .skip(offset.toLong()) // this is a good example of how streams simplify coding
                 .limit(limit.toLong())
                 .map { transform(it, withComments, withVotes) }

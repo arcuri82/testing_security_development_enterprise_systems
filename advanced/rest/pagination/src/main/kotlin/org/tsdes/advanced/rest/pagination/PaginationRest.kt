@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import org.tsdes.advanced.rest.dto.hal.HalLink
 import org.tsdes.advanced.rest.dto.hal.ListDto
-import org.tsdes.advanced.rest.pagination.dto.base.CommentDto
-import org.tsdes.advanced.rest.pagination.dto.base.NewsDto
-import org.tsdes.advanced.rest.pagination.dto.base.VoteDto
+import org.tsdes.advanced.rest.pagination.dto.CommentDto
+import org.tsdes.advanced.rest.pagination.dto.NewsDto
+import org.tsdes.advanced.rest.pagination.dto.VoteDto
 import org.tsdes.advanced.rest.pagination.entity.News
 
 
@@ -98,8 +98,8 @@ class PaginationRest {
         /*
             Note: we could cache the results of the JPQL query.
             This is tricky:
-            - an internal cache would not work if the load balancer redirect following
-              requests to a different running instance
+            - an internal cache would not work if the load balancer in a microservice
+              redirects following requests to a different running instance
             - caches are inefficient if most of the users will just read the first page
             - if no cache, then there is no guarantee that the data has not been changed
               meanwhile when asking for the "next" page

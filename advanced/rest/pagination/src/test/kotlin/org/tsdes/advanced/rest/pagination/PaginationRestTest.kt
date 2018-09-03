@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.advanced.rest.dto.hal.ListDto
-import org.tsdes.advanced.rest.pagination.dto.base.CommentDto
-import org.tsdes.advanced.rest.pagination.dto.base.NewsDto
-import org.tsdes.advanced.rest.pagination.dto.base.VoteDto
+import org.tsdes.advanced.rest.pagination.dto.CommentDto
+import org.tsdes.advanced.rest.pagination.dto.NewsDto
+import org.tsdes.advanced.rest.pagination.dto.VoteDto
 import java.util.*
 
 @RunWith(SpringRunner::class)

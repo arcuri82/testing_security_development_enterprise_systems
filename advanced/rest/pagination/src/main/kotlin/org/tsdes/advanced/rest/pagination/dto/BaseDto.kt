@@ -1,4 +1,4 @@
-package org.tsdes.advanced.rest.pagination.dto.base
+package org.tsdes.advanced.rest.pagination.dto
 
 import io.swagger.annotations.ApiModelProperty
 

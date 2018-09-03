@@ -54,6 +54,20 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
+* **Lesson 05**: Wrapped Responses and Pagination
+  
+  Slides: [[pdf]](slides/lesson_05.pdf), 
+          [[pptx]](slides/lesson_05.pptx)
+          
+  Modules:     
+  
+  * **advanced/rest/wrapper**
+  * **advanced/rest/rest-dto**
+  * **advanced/rest/pagination**
+
+<br />
+
+
 TODO remaining classes
 
 ## External Resources

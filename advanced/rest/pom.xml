@@ -19,9 +19,9 @@
         <module>patch</module>
         <module>redirect</module>
         <module>news-rest-v2</module>
-        <module>pagination</module>
         <module>wrapper</module>
         <module>rest-dto</module>
+        <module>pagination</module>
         <module>exception-handling</module>
         <module>wiremock</module>
         <module>hystrix</module>

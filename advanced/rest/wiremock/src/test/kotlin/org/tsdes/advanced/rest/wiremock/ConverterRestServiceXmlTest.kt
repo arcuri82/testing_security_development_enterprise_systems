@@ -71,7 +71,7 @@ class ConverterRestServiceXmlTest {
     }
 
     private fun getAMockedJsonResponse(usd: Double, eur: Double, gbp: Double): String {
-        var json = """
+        val json = """
         {
         "base": "NOK" ,
         "date": "2016-04-29",

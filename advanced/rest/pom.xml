@@ -24,7 +24,7 @@
         <module>pagination</module>
         <module>exception-handling</module>
         <module>wiremock</module>
-        <module>hystrix</module>
+        <module>circuit-breaker</module>
         <module>conditional-get</module>
         <module>conditional-change</module>
         <module>cache</module>

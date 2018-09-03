@@ -1,4 +1,4 @@
-package org.tsdes.advanced.rest.hystrix
+package org.tsdes.advanced.rest.circuitbreaker
 
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

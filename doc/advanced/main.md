@@ -67,6 +67,19 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
+* **Lesson 06**: Wrapped Responses and Pagination
+  
+  Slides: [[pdf]](slides/lesson_06.pdf), 
+          [[pptx]](slides/lesson_06.pptx)
+          
+  Modules:     
+  
+  * **advanced/rest/exception-handling**
+  * **advanced/rest/wiremock**
+  * **advanced/rest/circuit-breaker**
+
+<br />
+
 
 TODO remaining classes
 

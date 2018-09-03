@@ -1,4 +1,4 @@
-package org.tsdes.advanced.rest.hystrix
+package org.tsdes.advanced.rest.circuitbreaker
 
 import com.netflix.hystrix.Hystrix
 import io.restassured.RestAssured
@@ -50,6 +50,7 @@ class YRestTest {
          */
         Thread.sleep(5_000)
 
+        //make sure Y is calling X on the right port
         yRest.port = port
     }
 

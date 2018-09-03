@@ -1,4 +1,4 @@
-package org.tsdes.advanced.rest.hystrix
+package org.tsdes.advanced.rest.circuitbreaker
 
 import com.netflix.hystrix.HystrixCommand
 import com.netflix.hystrix.HystrixCommandGroupKey
@@ -32,14 +32,14 @@ class YRest {
     @GetMapping(path = ["single"])
     fun doGetSingle(
             @RequestParam("v", defaultValue = "30")
-            v: Long): Long {
+            v: Long
+    ): Long {
 
         /*
             this is synchronous, but would still give an answer within the given time (or
             immediately if the circuit breaker is on)
          */
-        val result = CallX(v).execute()
-        return result
+        return CallX(v).execute()
     }
 
     @GetMapping(path = ["multi"])
@@ -51,7 +51,7 @@ class YRest {
             @RequestParam("e", defaultValue = "30") e: Long
     ): Long {
 
-        val result = Observable.merge(
+        return Observable.merge(
                 CallX(a).observe(), // make these 5 calls in parallel,
                 CallX(b).observe(), // and asynchronously
                 CallX(c).observe(),
@@ -60,9 +60,7 @@ class YRest {
         ).toList().toBlocking().single() // collect the results into a list
                 .stream()
                 .mapToLong { l -> l }
-                .sum() // sum all the returned values in the list
-
-        return result
+                .sum()
     }
 
 
@@ -79,7 +77,7 @@ class YRest {
                 or even just taking a long while (if server is under heavy load)
              */
 
-            val uri: URI = URI("http://localhost:$port/x")
+            val uri = URI("http://localhost:$port/x")
 
             val result = client.postForEntity(uri, x, Long::class.java)
 

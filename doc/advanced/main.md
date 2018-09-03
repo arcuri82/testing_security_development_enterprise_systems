@@ -67,7 +67,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
-* **Lesson 06**: Wrapped Responses and Pagination
+* **Lesson 06**: Exceptions in Spring, Mocking and Circuit Breakers
   
   Slides: [[pdf]](slides/lesson_06.pdf), 
           [[pptx]](slides/lesson_06.pptx)

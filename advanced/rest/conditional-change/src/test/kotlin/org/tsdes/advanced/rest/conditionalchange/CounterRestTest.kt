@@ -108,10 +108,11 @@ class CounterRestTest {
             in similar concept as in JPA for databases.
             We want a read+write operation done atomically, but, instead of locking
             the server on the GET (which should not be done in HTTP), we just throw
-            an error if we detect that the state was changed before we do the PUT/POST.
+            an error if we detect that the state was changed by someone else
+            before we do the PUT/POST.
 
             Note: this is just a simple example. In this particular case of just increasing
-            a value by 1, a PATCH would had been a better solution.
+            a value by 1, a PATCH would had been a better solution...
          */
     }
 }

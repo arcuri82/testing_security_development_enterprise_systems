@@ -19,6 +19,16 @@ class ConditionalGetRest(
     @GetMapping
     fun getAll() : ResponseEntity<List<String>>{
 
+        /*
+            Here, we do not save on computing the response.
+            Still need to use CPU/IO for it.
+            However, if detected a match on ETag or Last-Modified,
+            then Spring will automatically change response into a 304
+            and strip off the body payload.
+            This does not save CPU/IO on the server, but reduce the
+            size of the response sent over the network.
+            This is particularly useful if the payload is large.
+         */
         return ResponseEntity
                 .status(200)
                 .lastModified(repository.time.toInstant().toEpochMilli())

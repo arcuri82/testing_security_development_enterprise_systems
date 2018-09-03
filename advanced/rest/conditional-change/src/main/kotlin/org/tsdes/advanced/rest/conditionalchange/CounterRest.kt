@@ -31,8 +31,8 @@ class CounterRest {
 
         /*
             If this was saved on a database, could use the unique primary
-            key as etag. here, i just need something unique.
-            if this would be too long, then one option could to hash it to
+            key as etag. here, we just need something unique.
+            If this would be too long, then one option could be to hash it to
             a fixed size string (eg, using MD5).
             This does not guarantee uniqueness, but a clash would be extremely
             unlikely.
@@ -55,6 +55,10 @@ class CounterRest {
             @RequestBody dto: CounterDto
     ): ResponseEntity<Void> {
 
+        /*
+            Here, we explicitly check if ETag does match.
+            If not, we manually return a 412: Precondition Failed
+         */
         if (ifMatch != null && ifMatch.trim() != computeETag()) {
             return ResponseEntity.status(412).build()
         }

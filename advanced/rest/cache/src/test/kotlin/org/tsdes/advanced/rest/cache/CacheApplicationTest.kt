@@ -25,6 +25,12 @@ class CacheApplicationTest{
     @LocalServerPort
     protected var port = 0
 
+    /*
+        Note: here we are simulating 2 different services: X and Y.
+        But, for simplicity, we run them both in the same JVM and
+        Spring context.
+     */
+
     @Autowired
     protected lateinit var  yrest: YRest
 

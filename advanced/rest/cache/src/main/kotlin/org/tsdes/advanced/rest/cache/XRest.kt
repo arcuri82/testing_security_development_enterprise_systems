@@ -13,8 +13,8 @@ import org.springframework.web.client.RestTemplate
 @RestController
 @RequestMapping(path = ["/x"])
 class XRest(
-        //we inject bean, so we get the configurations for cache define
-        //in entry-point of the app
+        //we inject the bean, so we get the configurations for caches defined
+        //in the cache configuration bean
         val restTemplate: RestTemplate
 ) {
 

@@ -81,6 +81,19 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
+* **Lesson 07**: Conditional Requests and Caching
+  
+  Slides: [[pdf]](slides/lesson_07.pdf), 
+          [[pptx]](slides/lesson_07.pptx)
+          
+  Modules:     
+  
+  * **advanced/rest/conditional-get**
+  * **advanced/rest/conditional-change**
+  * **advanced/rest/cache**
+
+<br />
+
 TODO remaining classes
 
 ## External Resources

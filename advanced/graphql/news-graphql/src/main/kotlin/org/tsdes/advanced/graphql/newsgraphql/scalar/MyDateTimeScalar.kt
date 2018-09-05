@@ -12,8 +12,20 @@ import java.time.format.DateTimeParseException
 
 
 /*
-    TODO check when will be supported by default
+    JSON does not define how Date objects should be represented, although
+    JavaScript does (ISO-8601).
+    So, GraphQL by default does not support dates either as basic types.
+    We could use a String to transfer dates, but then we lose all the
+    static checks on its constraints.
+    So, we define a custom-type for GraphQL to represent dates.
+
+    Dates are very common, and it might be that GraphQL libraries do
+    provide custom scalars for them by default.
+    This is not the case yet for graphql-java, see:
     https://github.com/graphql-java/graphql-java/issues/991
+
+    Anyway, even if one day it will be supported by default, it is still
+    interesting to use it as an example of how to handle custom types.
  */
 
 @Component

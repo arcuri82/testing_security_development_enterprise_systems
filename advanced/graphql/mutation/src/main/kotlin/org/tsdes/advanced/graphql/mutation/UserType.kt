@@ -1,7 +1,5 @@
 package org.tsdes.advanced.graphql.mutation
 
-import graphql.schema.GraphQLInputType
-
 
 data class UserType (
         var id: String,

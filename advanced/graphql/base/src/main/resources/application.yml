@@ -1,3 +1,5 @@
+# Default settings can be fine. But if we want customizations,
+# can have properties here.
 graphql:
       servlet:
                mapping: /graphql

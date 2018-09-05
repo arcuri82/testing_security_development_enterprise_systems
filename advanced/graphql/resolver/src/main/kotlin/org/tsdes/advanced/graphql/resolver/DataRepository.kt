@@ -5,6 +5,10 @@ import org.tsdes.advanced.graphql.resolver.type.AuthorType
 import org.tsdes.advanced.graphql.resolver.type.CommentType
 import org.tsdes.advanced.graphql.resolver.type.PostType
 
+/*
+    This could had been access to database.
+    But, for simplicity, let's just have some maps in memory.
+ */
 @Component
 class DataRepository {
 

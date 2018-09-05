@@ -1,9 +1,11 @@
 package org.tsdes.advanced.graphql.database
 
 import io.restassured.RestAssured
+import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
+import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -49,30 +51,28 @@ class DatabaseGraphQLApplicationTest{
     @Test
     fun testBaseGet() {
 
-        RestAssured.given().accept(ContentType.JSON)
+        given().accept(ContentType.JSON)
                 .queryParam("query", "{allPosts{id}}")
                 .get()
                 .then()
                 .statusCode(200)
-                .body("$", Matchers.hasKey("data"))
-                .body("$", Matchers.not(Matchers.hasKey("errors")))
-                .body("data.allPosts.size()", CoreMatchers.equalTo(3))
-                //.body("data.allPosts.id", CoreMatchers.hasItems("0", "1", "2"))
+                .body("$", hasKey("data"))
+                .body("$", not(hasKey("errors")))
+                .body("data.allPosts.size()", equalTo(3))
     }
 
     @Test
     fun testGetWithAuthors() {
 
-        RestAssured.given().accept(ContentType.JSON)
+        given().accept(ContentType.JSON)
                 .queryParam("query", "{allPosts{id,author{name}}}")
                 .get()
                 .then()
                 .statusCode(200)
-                .body("$", Matchers.hasKey("data"))
-                .body("$", Matchers.not(Matchers.hasKey("errors")))
-                .body("data.allPosts.size()", CoreMatchers.equalTo(3))
-                //.body("data.allPosts.id", CoreMatchers.hasItems("0", "1", "2"))
-                .body("data.allPosts.author.name", CoreMatchers.hasItems("Foo", "John"))
+                .body("$", hasKey("data"))
+                .body("$", not(hasKey("errors")))
+                .body("data.allPosts.size()", equalTo(3))
+                .body("data.allPosts.author.name", hasItems("Foo", "John"))
     }
 
     @Test
@@ -83,12 +83,9 @@ class DatabaseGraphQLApplicationTest{
                 .get()
                 .then()
                 .statusCode(200)
-                .body("$", Matchers.hasKey("data"))
-                .body("$", Matchers.not(Matchers.hasKey("errors")))
-                .body("data.allPosts.size()", CoreMatchers.equalTo(3))
-                //.body("data.allPosts.id", CoreMatchers.hasItems("0", "1", "2"))
-                //.body("data.allPosts.comments.parentPost.id.flatten()", CoreMatchers.hasItems("0", "1"))
-                //.body("data.allPosts.comments.parentPost.id.flatten()", Matchers.not(CoreMatchers.hasItems("2")))
+                .body("$", hasKey("data"))
+                .body("$", not(Matchers.hasKey("errors")))
+                .body("data.allPosts.size()", equalTo(3))
     }
 
 

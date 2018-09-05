@@ -23,6 +23,11 @@ class BaseGraphQLApplicationTest {
     @LocalServerPort
     protected var port = 0
 
+    /*
+        A GraphQL query can be sent in two ways:
+        1) as a query parameter in a GET
+        2) as body payload in a POST
+     */
 
     @Before
     fun clean() {

@@ -133,8 +133,6 @@ class NewsGraphQLApplicationTest{
     }
 
 
-    //TODO invalid inputs
-
     @Test
     fun testCreateWithMissingFields(){
 
@@ -279,8 +277,6 @@ class NewsGraphQLApplicationTest{
 
 
 
-    //TODO test filters
-
     private fun createSomeNews() {
         createNews("a", "text", "Norway")
         createNews("a", "other text", "Norway")
@@ -309,6 +305,7 @@ class NewsGraphQLApplicationTest{
 
         given().queryParam("query", "{news{newsId}}").get()
                 .then().body("data.news.size()", equalTo(0))
+
         createSomeNews()
 
         given().queryParam("query", "{news{newsId}}").get()

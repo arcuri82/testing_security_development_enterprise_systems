@@ -94,6 +94,23 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
+* **Lesson 08**: SOAP and GraphQL
+  
+  Slides: [[pdf]](slides/lesson_08.pdf), 
+          [[pptx]](slides/lesson_08.pptx)
+          
+  Modules:     
+  
+  * **advanced/graphql/base**
+  * **advanced/graphql/resolver**
+  * **advanced/graphql/database**
+  * **advanced/graphql/graphql-dto**
+  * **advanced/graphql/mutation**
+  * **advanced/graphql/news-graphql**
+
+<br />
+
+
 TODO remaining classes
 
 ## External Resources
@@ -125,7 +142,8 @@ TODO remaining classes
   Note: in that link it is called *Designing and Deploying Microservices*.  All of it.
 * Spring [online documentation](https://spring.io).
   Plenty of resources and tutorials.
-* Kotlin [documentation](https://kotlinlang.org/docs/kotlin-docs.pdf).
+* Kotlin [online documentation](https://kotlinlang.org/docs/kotlin-docs.pdf).
+* GraphQL [online documentation](https://graphql.org/).
 
 ## Exercises
 

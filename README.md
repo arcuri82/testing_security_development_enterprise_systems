@@ -33,8 +33,9 @@ The repository is built with Maven, and it is divided in two main sub-modules:
            Selenium, Docker.
            
 * `advanced`: material used in the second PG6100 course, where the goal is to dig into the details
-            of web services and microservice architectures.
-            Main technologies: Kotlin, SpringBoot, REST, GraphQL, Docker, Spring Security, Spring Cloud, AMQP.            
+            of web services and micro-service architectures.
+            Main technologies: Kotlin, SpringBoot, REST, GraphQL, React, Docker, Spring Security, 
+            Spring Cloud, AMQP.            
 
 
 ### Philosophy of This Repository

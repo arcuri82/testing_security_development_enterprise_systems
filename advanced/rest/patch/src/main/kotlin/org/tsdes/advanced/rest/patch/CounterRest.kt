@@ -96,7 +96,7 @@ class CounterRest {
      */
 
     @ApiOperation("Replace a counter")
-    @PutMapping(path = ["/{id}"], consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @PutMapping(path = ["/{id}"], consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     fun update(@ApiParam("The unique id of the counter")
                @PathVariable("id")
                id: Long,
@@ -119,7 +119,11 @@ class CounterRest {
 
             Here, I am allowing creating resources with PUT.
             Using 201 (created) to mark this event instead of
-            a generic 204 (OK, but no content to return)
+            a generic 204 (OK, but no content to return).
+
+            Also note that this code leads to a BUG, as IDs could clash
+            with the ones used afterwards when we create a new resource with POST,
+            ie we must guarantee that POST will pick unused ids.
          */
         val code = if (map.containsKey(id)) 204 else 201
 
@@ -197,11 +201,11 @@ class CounterRest {
         {"A":... , "B":null}
         are technically not the same.
 
-        However, as we will deal with Java objects, we can safely "ignore"
+        However, as we will deal with Kotlin objects, we can safely "ignore"
         this distinction in our model: ie make no difference between a
         missing element and an element with null value.
 
-        The only catch is in the parsing of the PATCH JSon merge objects.
+        The only catch is in the parsing of the PATCH JSON Merge objects.
         We CANNOT unmarshal it to a DTO, as we would have no way to distinguish
         between missing elements and actual null values.
      */

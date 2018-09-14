@@ -13,8 +13,8 @@
     </parent>
 
     <modules>
-        <module>react</module>
-        <module>websocket</module>
+        <!--<module>react</module>-->
+        <!--<module>websocket</module>-->
         <!-- TODO put back once fixed Spring Cloud dependencies and replaced Zuul-->
         <!--<module>rest-ws-amqp</module>-->
     </modules>

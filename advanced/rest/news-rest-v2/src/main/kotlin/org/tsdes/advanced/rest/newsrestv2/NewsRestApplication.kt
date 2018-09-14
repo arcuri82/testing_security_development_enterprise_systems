@@ -41,6 +41,12 @@ class NewsRestApplication {
     }
 }
 
+/*
+    If you run this directly, you can then check the Swagger documentation at:
+
+    http://localhost:8080/newsrest/api/swagger-ui.html
+
+ */
 fun main(args: Array<String>) {
     SpringApplication.run(NewsRestApplication::class.java, *args)
 }

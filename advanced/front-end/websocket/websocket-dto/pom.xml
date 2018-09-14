@@ -2,20 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tsdes.advanced.frontend</groupId>
-    <artifactId>frontend</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>websocket-dto</artifactId>
+    <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.advanced</groupId>
-        <artifactId>advanced</artifactId>
+        <groupId>org.tsdes.advanced.frontend.websocket</groupId>
+        <artifactId>websocket</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
-    <modules>
-        <module>spa-rest</module>
-        <module>websocket</module>
-    </modules>
-
 
 </project>

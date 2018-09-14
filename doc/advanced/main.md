@@ -141,7 +141,6 @@ TODO remaining classes
   Free ebook, but need registration to download its [PDF](https://www.nginx.com/resources/library/designing-deploying-microservices/).
   Note: in that link it is called *Designing and Deploying Microservices*.  All of it.
 * Spring [online documentation](https://spring.io).
-  Plenty of resources and tutorials.
 * Kotlin [online documentation](https://kotlinlang.org/docs/kotlin-docs.pdf).
 * GraphQL [online documentation](https://graphql.org/).
 

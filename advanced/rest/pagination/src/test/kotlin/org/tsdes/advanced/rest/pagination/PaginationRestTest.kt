@@ -419,7 +419,7 @@ class PaginationRestTest {
 
         /*
             So, this is an issue. If we misspell an existing
-            query parameter (eg, not the missing "d"), by default
+            query parameter (eg, note the missing "d"), by default
             it will be just ignored
          */
         given().queryParam("expan", "ALL")
@@ -427,5 +427,12 @@ class PaginationRestTest {
                 .then()
                 .statusCode(200)
 
+        /*
+            As ignored, the check against the enum would not be done
+         */
+        given().queryParam("expan", "foo")
+                .get()
+                .then()
+                .statusCode(200)
     }
 }

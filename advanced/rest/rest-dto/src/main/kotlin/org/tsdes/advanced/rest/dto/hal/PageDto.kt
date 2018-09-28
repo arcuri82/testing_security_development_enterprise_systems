@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty
     with all needed links and pagination info
  */
 @ApiModel(description = "Paginated list of resources with HAL links, like to 'next' and 'previous' pages ")
-class ListDto<T>(
+class PageDto<T>(
 
         @get:ApiModelProperty("The list of resources in the current retrieved page")
         var list: MutableList<T> = mutableListOf(),

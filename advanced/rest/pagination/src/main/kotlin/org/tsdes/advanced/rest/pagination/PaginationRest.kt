@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import org.tsdes.advanced.rest.dto.hal.HalLink
-import org.tsdes.advanced.rest.dto.hal.ListDto
+import org.tsdes.advanced.rest.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto
@@ -65,7 +65,7 @@ class PaginationRest {
             @RequestParam("expand", defaultValue = "NONE")
             expand: Expand
 
-    ): ResponseEntity<ListDto<NewsDto>> {
+    ): ResponseEntity<PageDto<NewsDto>> {
 
         if (offset < 0 || limit < 1) {
             return ResponseEntity.status(400).build()

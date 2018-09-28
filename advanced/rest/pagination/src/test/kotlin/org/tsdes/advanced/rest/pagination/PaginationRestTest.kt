@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit4.SpringRunner
-import org.tsdes.advanced.rest.dto.hal.ListDto
+import org.tsdes.advanced.rest.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto
@@ -52,7 +52,7 @@ class PaginationRestTest {
                     .then()
                     .statusCode(200)
                     .extract()
-                    .`as`(ListDto::class.java)
+                    .`as`(PageDto::class.java)
 
             listDto.list.stream()
                     /*
@@ -121,7 +121,7 @@ class PaginationRestTest {
     /**
      * Extract the "text" fields from all the News
      */
-    private fun getTexts(selfDto: ListDto<*>): MutableSet<String> {
+    private fun getTexts(selfDto: PageDto<*>): MutableSet<String> {
 
         val values = HashSet<String>()
         selfDto.list.stream()
@@ -150,7 +150,7 @@ class PaginationRestTest {
                 .then()
                 .statusCode(200)
                 .extract()
-                .`as`(ListDto::class.java)
+                .`as`(PageDto::class.java)
 
         assertEquals(n, listDto.totalSize)
         assertEquals(0, listDto.rangeMin)
@@ -167,7 +167,7 @@ class PaginationRestTest {
                 .then()
                 .statusCode(200)
                 .extract()
-                .`as`(ListDto::class.java)
+                .`as`(PageDto::class.java)
 
         val first = getTexts(listDto)
         val self = getTexts(selfDto)
@@ -182,13 +182,13 @@ class PaginationRestTest {
         val n = createSeveralNews(30)
         val limit = 10
 
-        var listDto: ListDto<*> = given()
+        var listDto: PageDto<*> = given()
                 .queryParam("limit", limit)
                 .get()
                 .then()
                 .statusCode(200)
                 .extract()
-                .`as`(ListDto::class.java)
+                .`as`(PageDto::class.java)
 
         assertEquals(n, listDto.totalSize)
         assertNotNull(listDto.next!!.href)
@@ -211,7 +211,7 @@ class PaginationRestTest {
                     .then()
                     .statusCode(200)
                     .extract()
-                    .`as`(ListDto::class.java)
+                    .`as`(PageDto::class.java)
 
             values.addAll(getTexts(listDto))
 
@@ -251,7 +251,7 @@ class PaginationRestTest {
                 .then()
                 .statusCode(200)
                 .extract()
-                .`as`(ListDto::class.java)
+                .`as`(PageDto::class.java)
 
         val first = getTexts(listDto)
 
@@ -262,7 +262,7 @@ class PaginationRestTest {
                 .then()
                 .statusCode(200)
                 .extract()
-                .`as`(ListDto::class.java)
+                .`as`(PageDto::class.java)
 
         val next = getTexts(nextDto)
         // check that an element of next page was not in the first page
@@ -280,7 +280,7 @@ class PaginationRestTest {
                 .then()
                 .statusCode(200)
                 .extract()
-                .`as`(ListDto::class.java)
+                .`as`(PageDto::class.java)
 
         val previous = getTexts(previousDto)
         assertContainsTheSame(first, previous)
@@ -415,5 +415,17 @@ class PaginationRestTest {
                 .get()
                 .then()
                 .statusCode(200)
+
+
+        /*
+            So, this is an issue. If we misspell an existing
+            query parameter (eg, not the missing "d"), by default
+            it will be just ignored
+         */
+        given().queryParam("expan", "ALL")
+                .get()
+                .then()
+                .statusCode(200)
+
     }
 }

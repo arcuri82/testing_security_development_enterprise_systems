@@ -1,6 +1,6 @@
 package org.tsdes.advanced.rest.pagination
 
-import org.tsdes.advanced.rest.dto.hal.ListDto
+import org.tsdes.advanced.rest.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto
@@ -50,7 +50,7 @@ object DtoTransformer {
                   offset: Int,
                   limit: Int,
                   withComments: Boolean,
-                  withVotes: Boolean): ListDto<NewsDto> {
+                  withVotes: Boolean): PageDto<NewsDto> {
 
         val dtoList: MutableList<NewsDto> = newsList.stream()
                 .skip(offset.toLong()) // this is a good example of how streams simplify coding
@@ -59,7 +59,7 @@ object DtoTransformer {
                 .toList().toMutableList()
 
 
-        return ListDto(
+        return PageDto(
                 list = dtoList,
                 rangeMin = offset,
                 rangeMax = offset + dtoList.size - 1,

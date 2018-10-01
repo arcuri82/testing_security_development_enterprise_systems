@@ -1,7 +1,7 @@
 package org.tsdes.advanced.kotlin
 
 /**
- * Compared this class with its equivalent called JavaBase
+ * Compare this class with its equivalent called JavaBase
  *
  * Created by arcuri82 on 17-Aug-17.
  */

@@ -1,5 +1,6 @@
 package org.tsdes.advanced.rest.pagination
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.tsdes.advanced.rest.pagination.entity.Comment
@@ -23,7 +24,7 @@ class NewsService {
         rather handling all manually via an JPA Entity Manager.
      */
 
-    @PersistenceContext
+    @Autowired
     private lateinit var em: EntityManager
 
 

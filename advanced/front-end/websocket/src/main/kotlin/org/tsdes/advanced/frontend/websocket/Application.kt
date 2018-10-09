@@ -1,15 +1,14 @@
-package org.tsdes.advanced.frontend.websocket.backend
+package org.tsdes.advanced.frontend.websocket
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
-
+/**
+ * Created by arcuri82 on 16-Nov-17.
+ */
 @SpringBootApplication
-class WebSocketBackendApplication {
-
-}
-
+class Application
 
 fun main(args: Array<String>) {
-    SpringApplication.run(WebSocketBackendApplication::class.java, *args)
+    SpringApplication.run(Application::class.java, *args)
 }

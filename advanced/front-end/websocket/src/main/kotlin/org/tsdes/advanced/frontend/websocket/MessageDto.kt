@@ -1,4 +1,4 @@
-package org.tsdes.spring.frontend.websocket
+package org.tsdes.advanced.frontend.websocket
 
 
 data class MessageDto(

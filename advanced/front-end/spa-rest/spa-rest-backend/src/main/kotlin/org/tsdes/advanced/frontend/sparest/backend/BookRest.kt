@@ -4,13 +4,11 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.tsdes.advanced.frontend.sparest.backend.db.BookRepository
 import org.tsdes.advanced.frontend.sparest.dto.BookDto
 import org.tsdes.advanced.rest.dto.WrappedResponse
+import org.tsdes.advanced.rest.exception.RestResponseFactory
 
 
 @Api(value = "/books", description = "Handling of creating and retrieving book entries")
@@ -26,7 +24,7 @@ class BookRest(
      */
     @ApiOperation("Get all the books")
     @GetMapping
-    fun get(): ResponseEntity<WrappedResponse<List<BookDto>>> {
+    fun getAll(): ResponseEntity<WrappedResponse<List<BookDto>>> {
 
         return ResponseEntity.status(200).body(
                 WrappedResponse(
@@ -36,6 +34,12 @@ class BookRest(
         )
     }
 
+//    @ApiOperation("Create a new book")
+//    @PostMapping
+//    fun create(): ResponseEntity<WrappedResponse<Void>> {
+//
+//
+//    }
 
     @ApiOperation("Get a specific book, by id")
     @GetMapping(path = ["/{id}"])
@@ -45,29 +49,43 @@ class BookRest(
             pathId: String
     ): ResponseEntity<WrappedResponse<BookDto>> {
 
-        //FIXME
-        var id: Long
-//        try {
-        id = pathId.toLong()
-//        } catch (e: Exception) {
-//           //TODO
-//            //return
-//        }
+        val id: Long
+        try {
+            id = pathId.toLong()
+        } catch (e: Exception) {
+            return RestResponseFactory.userFailure("Invalid id '$pathId'")
+        }
 
         val book = repository.findById(id).orElse(null)
-                ?: return ResponseEntity.status(404).body(
-                        WrappedResponse<BookDto>(code = 404,
-                                message = "The requested booked with id '$id' is not in the database")
-                                .validated()
-                )
+                ?: return RestResponseFactory.notFound(
+                        "The requested booked with id '$id' is not in the database")
 
-        return ResponseEntity.status(200).body(
-                WrappedResponse(
-                        code = 200,
-                        data = DtoConverter.transform(book))
-                        .validated()
-        )
+        return RestResponseFactory.payload(200, DtoConverter.transform(book))
     }
 
 
+    @ApiOperation("Delete a specific book, by id")
+    @GetMapping(path = ["/{id}"])
+    fun deleteById(
+            @ApiParam("The id of the book")
+            @PathVariable("id")
+            pathId: String
+    ): ResponseEntity<WrappedResponse<Void>> {
+
+        val id: Long
+        try {
+            id = pathId.toLong()
+        } catch (e: Exception) {
+            return RestResponseFactory.userFailure("Invalid id '$pathId'")
+        }
+
+        if (!repository.existsById(id)) {
+            return RestResponseFactory.notFound(
+                    "The requested booked with id '$id' is not in the database")
+        }
+
+        repository.deleteById(id)
+
+        return RestResponseFactory.noPayload(204)
+    }
 }

@@ -9,7 +9,7 @@ import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = ["org.tsdes.advanced"])
 @EnableSwagger2
 class SpaRestBackendApplication {
 

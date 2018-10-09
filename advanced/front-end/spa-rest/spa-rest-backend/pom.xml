@@ -26,6 +26,17 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.tsdes.advanced.frontend.sparest</groupId>
+            <artifactId>spa-rest-dto</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.advanced.rest</groupId>
+            <artifactId>rest-dto</artifactId>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

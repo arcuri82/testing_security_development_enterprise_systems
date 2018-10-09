@@ -1,4 +1,4 @@
-package org.tsdes.advanced.rest.exceptionhandling.exception
+package org.tsdes.advanced.rest.exception
 
 
 class UserInputValidationException(

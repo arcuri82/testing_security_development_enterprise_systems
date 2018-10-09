@@ -84,6 +84,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.tsdes.advanced.rest</groupId>
+                <artifactId>rest-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.tsdes.advanced.graphql</groupId>
                 <artifactId>graphql-dto</artifactId>
                 <version>${project.version}</version>

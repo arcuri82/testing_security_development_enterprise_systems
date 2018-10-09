@@ -23,6 +23,7 @@
         <module>rest-dto</module>
         <module>pagination</module>
         <module>exception-handling</module>
+        <module>rest-exception</module>
         <module>wiremock</module>
         <module>circuit-breaker</module>
         <module>conditional-get</module>

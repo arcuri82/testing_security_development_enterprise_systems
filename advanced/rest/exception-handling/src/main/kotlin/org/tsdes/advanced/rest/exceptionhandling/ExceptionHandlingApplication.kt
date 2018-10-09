@@ -8,7 +8,8 @@ import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
-@SpringBootApplication
+//need to be able to scan for the beans in the "rest-exception" module
+@SpringBootApplication(scanBasePackages = ["org.tsdes.advanced"])
 @EnableSwagger2
 class ExceptionHandlingApplication {
 

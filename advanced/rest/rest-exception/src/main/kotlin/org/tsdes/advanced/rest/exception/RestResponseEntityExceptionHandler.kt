@@ -1,4 +1,4 @@
-package org.tsdes.advanced.rest.exceptionhandling.exception
+package org.tsdes.advanced.rest.exception
 
 import com.google.common.base.Throwables
 import org.springframework.http.HttpHeaders
@@ -33,8 +33,19 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
     }
 
     /*
-        Note: 404 needs to be handled specially. To do this, look
-        at the configurations under application.properties
+        Note: 404 needs to be handled specially. To do this, need to
+        add some configurations under application.properties
+
+        https://github.com/spring-projects/spring-boot/issues/3980
+
+        Point is, we need to explicitly tell Spring to throw an exception when 404
+
+        spring.mvc.throwExceptionIfNoHandlerFound=true
+
+        And we need to make sure that "/ **" handler for static files is disabled,
+        otherwise the MVC handler throwing exceptions will never be called
+
+        spring.resources.add-mappings=false
      */
 
 

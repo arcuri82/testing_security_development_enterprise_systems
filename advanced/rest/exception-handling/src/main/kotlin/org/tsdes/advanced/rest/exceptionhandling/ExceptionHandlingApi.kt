@@ -11,8 +11,8 @@ import org.tsdes.advanced.rest.exceptionhandling.constraint.NotZero
 import org.tsdes.advanced.rest.exceptionhandling.db.UserEntity
 import org.tsdes.advanced.rest.exceptionhandling.db.UserRepository
 import org.tsdes.advanced.rest.exceptionhandling.dto.DivisionDto
-import org.tsdes.advanced.rest.exceptionhandling.exception.RestResponseEntityExceptionHandler
-import org.tsdes.advanced.rest.exceptionhandling.exception.UserInputValidationException
+import org.tsdes.advanced.rest.exception.RestResponseEntityExceptionHandler
+import org.tsdes.advanced.rest.exception.UserInputValidationException
 
 
 @RestController

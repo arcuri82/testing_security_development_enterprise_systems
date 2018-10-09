@@ -75,6 +75,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   Modules:     
   
   * **advanced/rest/exception-handling**
+  * **advanced/rest/rest-exception**
   * **advanced/rest/wiremock**
   * **advanced/rest/circuit-breaker**
 

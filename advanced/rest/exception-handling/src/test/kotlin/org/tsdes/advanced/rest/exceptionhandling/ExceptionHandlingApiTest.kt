@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.ERROR
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.SUCCESS
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.FAIL
-import org.tsdes.advanced.rest.exceptionhandling.exception.RestResponseEntityExceptionHandler
+import org.tsdes.advanced.rest.exception.RestResponseEntityExceptionHandler
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(classes = [(ExceptionHandlingApplication::class)],

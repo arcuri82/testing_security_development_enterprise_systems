@@ -27,7 +27,7 @@
 
 
     <properties>
-        <version.kotlin>1.2.50</version.kotlin>
+        <version.kotlin>1.2.70</version.kotlin>
         <version.springboot>2.0.3.RELEASE</version.springboot>
         <version.springcloud>Finchley.RELEASE</version.springcloud>
         <version.springfox>2.9.2</version.springfox>

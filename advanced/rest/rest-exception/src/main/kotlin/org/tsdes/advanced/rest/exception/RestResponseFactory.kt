@@ -2,6 +2,7 @@ package org.tsdes.advanced.rest.exception
 
 import org.springframework.http.ResponseEntity
 import org.tsdes.advanced.rest.dto.WrappedResponse
+import java.net.URI
 
 
 object RestResponseFactory {
@@ -13,10 +14,10 @@ object RestResponseFactory {
                         .validated())
     }
 
-    fun <T> userFailure(message: String): ResponseEntity<WrappedResponse<T>> {
+    fun <T> userFailure(message: String, httpCode: Int = 400): ResponseEntity<WrappedResponse<T>> {
 
-        return ResponseEntity.status(400).body(
-                WrappedResponse<T>(code = 400, message = message)
+        return ResponseEntity.status(httpCode).body(
+                WrappedResponse<T>(code = httpCode, message = message)
                         .validated())
     }
 
@@ -27,9 +28,15 @@ object RestResponseFactory {
                         .validated())
     }
 
-    fun  noPayload(httpCode: Int): ResponseEntity<WrappedResponse<Void>> {
+    fun noPayload(httpCode: Int): ResponseEntity<WrappedResponse<Void>> {
 
         return ResponseEntity.status(httpCode).body(
                 WrappedResponse<Void>(code = httpCode).validated())
+    }
+
+    fun created(uri: URI): ResponseEntity<WrappedResponse<Void>> {
+
+        return ResponseEntity.created(uri).body(
+                WrappedResponse<Void>(code = 201).validated())
     }
 }

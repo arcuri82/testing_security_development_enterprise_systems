@@ -1,19 +1,23 @@
 package org.tsdes.advanced.frontend.sparest.dto
 
 import io.swagger.annotations.ApiModelProperty
+import javax.validation.constraints.NotNull
 
 
 class BookDto(
 
         @ApiModelProperty("The title of the book")
-        var title: String?,
+        @get:NotNull
+        var title: String? =null,
 
         @ApiModelProperty("The author of the book")
-        var author: String?,
+        @get:NotNull
+        var author: String? = null,
 
         @ApiModelProperty("The year in which the book was first published")
-        var year: Int?,
+        @get:NotNull
+        var year: Int? = null,
 
         @ApiModelProperty("The unique id of the book")
-        var id: String?
+        var id: String? = null
 )

@@ -19,6 +19,8 @@ import java.net.URI
 @RequestMapping(path = ["/books"])
 @RestController
 @Validated
+//Enable CORS for all endpoints in this REST controller for the frontend
+@CrossOrigin(origins = ["http://localhost:8080"])
 class BookRest(
         val repository: BookRepository
 ) {

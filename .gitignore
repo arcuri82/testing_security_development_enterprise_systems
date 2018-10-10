@@ -15,8 +15,8 @@ hs_err_pid*
 derby.log
 
 **/target
-/advanced/front-end/react/welcome/build/
-/advanced/front-end/react/welcome/node_modules/
-/advanced/front-end/react/welcome/public/
-/advanced/front-end/react/welcome/node/
+
+**/node_modules
+bundle.js
+
 ~$*

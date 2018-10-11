@@ -17,16 +17,13 @@ import javax.persistence.TypedQuery
  */
 @Service
 @Transactional
-class NewsService {
-
+class NewsService(
+        val em: EntityManager
+) {
     /*
         Here I am not using a CRUD repository, but
         rather handling all manually via an JPA Entity Manager.
      */
-
-    @Autowired
-    private lateinit var em: EntityManager
-
 
     fun getNews(id: Long): News? {
         val news = em.find(News::class.java, id)
@@ -67,10 +64,10 @@ class NewsService {
          */
         val result = query.resultList
         if (withComments) {
-            result.stream().forEach { n -> n.comments.size }
+            result.forEach { n -> n.comments.size }
         }
         if (withVotes) {
-            result.stream().forEach { n -> n.votes.size }
+            result.forEach { n -> n.votes.size }
         }
 
         return result

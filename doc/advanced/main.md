@@ -156,3 +156,9 @@ Before the exam starts, it makes sense to develop a pet project to get practice.
 In other words, choose a topic you like, and build a RESTful API for it.
 Each class, when a new concept is introduced, extend your project with what
 you learn. 
+
+## Exam
+
+In this course the exam is divided in two parts: a written, theoretical exam,
+and a group project.
+An example of mock exam for theoretical part can be found [here](exams/theory_mock_exam.pdf).

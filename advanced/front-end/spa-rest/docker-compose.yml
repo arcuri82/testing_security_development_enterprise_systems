@@ -1,0 +1,29 @@
+# Useful commands:
+# docker-compose up
+# docker-compose ps
+# docker-compose down
+
+version: '3.7'
+
+services:
+
+  frontend:
+    build:
+      context: ./spa-rest-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+  # Note that here I am using a real database, and not
+  # an embedded one like H2
+  postgres:
+    image: "postgres:10"
+
+  backend:
+     build:
+        context: ./spa-rest-backend
+        dockerfile: Dockerfile
+     depends_on:
+        - postgres
+     ports:
+        - "8081:8081"

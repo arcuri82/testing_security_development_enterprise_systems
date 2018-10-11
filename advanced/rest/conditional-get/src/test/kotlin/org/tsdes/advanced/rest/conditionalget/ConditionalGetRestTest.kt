@@ -111,9 +111,9 @@ class ConditionalGetRestTest{
 
 
     @Test
-    fun tetLastModified(){
+    fun testLastModified(){
 
-        val lastmodified = given().accept(ContentType.JSON)
+        val lastModified = given().accept(ContentType.JSON)
                 .get()
                 .then()
                 .statusCode(200)
@@ -133,7 +133,7 @@ class ConditionalGetRestTest{
             Point is, client and server machines most likely have clocks NOT in sync.
          */
         given().accept(ContentType.JSON)
-                .header("If-Modified-Since", lastmodified)
+                .header("If-Modified-Since", lastModified)
                 .get()
                 .then()
                 .statusCode(304)
@@ -143,7 +143,7 @@ class ConditionalGetRestTest{
     @Test
     fun tetLastModifiedAfterUpdate(){
 
-        val lastmodified = given().accept(ContentType.JSON)
+        val lastModified = given().accept(ContentType.JSON)
                 .get()
                 .then()
                 .statusCode(200)
@@ -153,7 +153,7 @@ class ConditionalGetRestTest{
                 .extract().header("last-modified")
 
         given().accept(ContentType.JSON)
-                .header("If-Modified-Since", lastmodified)
+                .header("If-Modified-Since", lastModified)
                 .get()
                 .then()
                 .statusCode(304)
@@ -174,13 +174,13 @@ class ConditionalGetRestTest{
                 .statusCode(201)
 
         given().accept(ContentType.JSON)
-                .header("If-Modified-Since", lastmodified)
+                .header("If-Modified-Since", lastModified)
                 .get()
                 .then()
                 .statusCode(200)
                 .content(not(equalTo("")))
                 .body("size()", equalTo(1))
                 .header("last-modified", notNullValue())
-                .header("last-modified", not(equalTo(lastmodified)))
+                .header("last-modified", not(equalTo(lastModified)))
     }
 }

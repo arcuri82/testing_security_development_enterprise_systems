@@ -12,6 +12,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.advanced.frontend.sparest.backend.db.Book
 import org.tsdes.advanced.frontend.sparest.backend.db.BookRepository
@@ -20,6 +21,7 @@ import org.tsdes.advanced.frontend.sparest.dto.BookDto
 /**
  * Created by arcuri82 on 14-Sep-18.
  */
+@ActiveProfiles("test")
 @RunWith(SpringRunner::class)
 @SpringBootTest(classes = [(SpaRestBackendApplication::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

@@ -35,6 +35,9 @@ class CounterRest {
             hash it to a fixed size string (eg, using MD5).
             This does not guarantee uniqueness, but a clash would be extremely
             unlikely.
+            Furthermore, if we combine it with Last-Modified, then it would be very,
+            very unlikely to have a problem, ie hash conflict in the same second
+            resolution.
          */
         val etag = computeETag()
 

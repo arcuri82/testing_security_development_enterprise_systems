@@ -44,7 +44,11 @@ class NewsRepository {
      * case, we keep track of each modification in a counter.
      * Another option is to compute a hash on the HTTP responses.
      * This latter is more expensive, but way more general.
-     * Spring has some automated support for it, eg see ShallowEtagHeaderFilter
+     * Spring has some automated support for it, eg see ShallowEtagHeaderFilter.
+     *
+     * If we are dealing with @Entity in database, if such table use @Version
+     * (recall JPA and optimistic locks), then such version value could be used
+     * as ETAG (as changing every time there is a change in the data)
      */
     final val etag: String
         get() = counter.toString()

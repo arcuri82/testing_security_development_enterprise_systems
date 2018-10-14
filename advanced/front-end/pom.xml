@@ -14,7 +14,7 @@
 
     <modules>
         <module>spa-rest</module>
-        <module>websocket</module>
+        <module>websocket-chat</module>
     </modules>
 
 

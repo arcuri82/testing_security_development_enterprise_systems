@@ -1,0 +1,28 @@
+{
+  "name": "websocket-chat",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "net": "^1.0.2",
+    "react": "16.5.0",
+    "react-dom": "16.5.0",
+    "sockjs-client": "^1.3.0",
+    "stompjs": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel-core": "6.26.3",
+    "babel-loader": "^7.0.2",
+    "babel-preset-react": "6.24.1",
+    "webpack": "4.17.2",
+    "webpack-cli": "3.1.0",
+    "webpack-dev-server": "3.1.8"
+  }
+}

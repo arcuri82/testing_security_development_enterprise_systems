@@ -1,4 +1,4 @@
-package org.tsdes.advanced.frontend.websocket
+package org.tsdes.advanced.frontend.websocketchat
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

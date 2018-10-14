@@ -1,17 +1,17 @@
-package org.tsdes.advanced.frontend.websocket
+package org.tsdes.advanced.frontend.websocketchat
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.messaging.simp.config.MessageBrokerRegistry
-import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer
 
 /*
     This creates an embedded broker for the WS messages
  */
 @Configuration
 @EnableWebSocketMessageBroker
-class WebSocketConfig : AbstractWebSocketMessageBrokerConfigurer() {
+class WebSocketConfig : WebSocketMessageBrokerConfigurer {
 
     override fun configureMessageBroker(config: MessageBrokerRegistry) {
         /*

@@ -1,4 +1,5 @@
 # Useful commands:
+# docker-compose build
 # docker-compose up
 # docker-compose ps
 # docker-compose down
@@ -27,3 +28,10 @@ services:
         - postgres
      ports:
         - "8081:8081"
+
+# Only needed if then you have other images joining later this network.
+# Otherwise, if not overriding the name, it might have a random component
+# in the name.
+networks:
+  default:
+    name: spa-rest-network

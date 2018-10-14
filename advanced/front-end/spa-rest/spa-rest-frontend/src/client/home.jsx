@@ -102,11 +102,13 @@ export class Home extends React.Component {
                             <td>{b.year}</td>
                             <td>
                                 <Link to={"/edit?bookId=" + b.id}>
-                                    <button className="btn">
+                                    <button className="btn" id={"home_edit_btn_" + b.id}>
                                         <i className="fas fa-edit"></i>
                                     </button>
                                 </Link>
-                                <button className="btn" onClick={_ => this.deleteBook(b.id)}>
+                                <button className="btn"
+                                        id={"home_delete_btn_" + b.id}
+                                        onClick={_ => this.deleteBook(b.id)}>
                                     <i className="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -120,7 +122,7 @@ export class Home extends React.Component {
         return (
             <div>
                 <h2>Book List</h2>
-                <Link to={"/create"}>
+                <Link to={"/create"} id={"home_create_btn"}>
                     <button className="btn">New</button>
                 </Link>
                 {table}

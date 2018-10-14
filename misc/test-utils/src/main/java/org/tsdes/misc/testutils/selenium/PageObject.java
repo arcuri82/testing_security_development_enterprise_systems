@@ -1,10 +1,8 @@
 package org.tsdes.misc.testutils.selenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -81,5 +79,17 @@ public abstract class PageObject {
             String res = jsExecutor.executeScript("return /loaded|complete/.test(document.readyState);").toString();
             return Boolean.parseBoolean(res);
         });
+    }
+
+    public boolean waitForVisibility(int timeoutSeconds, By locator){
+
+        try {
+            new WebDriverWait(driver, timeoutSeconds).until(
+                    ExpectedConditions.visibilityOfElementLocated(locator));
+        }catch (TimeoutException e){
+            return false;
+        }
+
+        return true;
     }
 }

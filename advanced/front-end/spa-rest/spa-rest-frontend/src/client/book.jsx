@@ -60,6 +60,7 @@ class Book extends React.Component {
                         value={this.state.author}
                         onChange={this.onAuthorChange} 
                         className="bookInput"
+                        id={"author_input"}
                     />
                     <div className="inputTitle">Title:</div>
                     <input
@@ -67,6 +68,7 @@ class Book extends React.Component {
                         value={this.state.title}
                         onChange={this.onTitleChange}
                         className="bookInput"
+                        id={"title_input"}
                     />
                     <div className="inputTitle">Year:</div>
                     <input
@@ -74,10 +76,11 @@ class Book extends React.Component {
                         value={this.state.year}
                         onChange={this.onYearChange}
                         className="bookInput"
+                        id={"year_input"}
                     />
 
-                    <button type="submit" className={"btn"}>{this.ok}</button>
-                    <Link to={"/"}><button className={"btn"}>Cancel</button></Link>
+                    <button type="submit" className={"btn"} id={"submit_btn"}>{this.ok}</button>
+                    <Link to={"/"}><button className={"btn"} id={"cancel_btn"}>Cancel</button></Link>
                 </form>
             </div>
         );

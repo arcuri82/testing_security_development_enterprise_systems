@@ -163,6 +163,8 @@ Documentation (early work in progress) is available
 
 * Chrome and Chrome Driver (only needed to run Selenium tests locally instead of in Docker)
 
+* NPM and NodeJS
+
 The code in this repository should run on all major operating systems, i.e. Mac, Linux and Windows.
 
 On Windows, if you have problems with too long file names 

@@ -1,0 +1,9 @@
+# Disable Eureka
+eureka:
+  client:
+    enabled: false
+
+producer-server:
+  ribbon:
+      # making it point to WireMock
+    listOfServers: localhost:8099

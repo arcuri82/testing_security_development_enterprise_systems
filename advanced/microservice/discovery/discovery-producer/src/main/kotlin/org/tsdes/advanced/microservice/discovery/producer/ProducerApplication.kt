@@ -1,6 +1,5 @@
 package org.tsdes.advanced.microservice.discovery.producer
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController
 class ProducerApplication {
 
 
-    @GetMapping(path = arrayOf("producerData"),
-            produces = arrayOf(MediaType.TEXT_PLAIN_VALUE))
+    @GetMapping(path = ["producerData"],
+            produces = [(MediaType.TEXT_PLAIN_VALUE)])
     fun get() : ResponseEntity<String>{
 
         /*

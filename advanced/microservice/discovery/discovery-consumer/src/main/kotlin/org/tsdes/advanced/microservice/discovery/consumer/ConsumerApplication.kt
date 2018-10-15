@@ -43,16 +43,15 @@ class ConsumerApplication {
 
 
 
-    @GetMapping(path = arrayOf("consumerData"),
-            produces = arrayOf(MediaType.TEXT_PLAIN_VALUE))
+    @GetMapping(path = ["consumerData"],
+            produces = [(MediaType.TEXT_PLAIN_VALUE)])
     fun get(): ResponseEntity<String> {
 
         val msg = try {
             restTemplate.getForObject(
                     /*
                         Note here that the "host" name is not a valid one.
-                        It is actually the name of a service registered
-                        on Eureka.
+                        It is actually the name of a service registered on Eureka.
                         In this case, the same name used in
                         "spring.application.name" property in the
                         "producer" module

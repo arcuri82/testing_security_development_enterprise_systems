@@ -1,0 +1,140 @@
+package org.tsdes.advanced.microservice.discovery.e2etests
+
+import io.restassured.RestAssured
+import io.restassured.RestAssured.given
+import io.restassured.http.ContentType
+import org.awaitility.Awaitility
+import org.hamcrest.CoreMatchers.equalTo
+import org.junit.*
+import org.junit.Assert.*
+import org.testcontainers.containers.DockerComposeContainer
+import java.io.File
+import java.util.concurrent.TimeUnit
+
+@Ignore //FIXME
+class DiscoveryIntegrationDockerIT {
+
+    companion object {
+
+        @BeforeClass
+        @JvmStatic
+        fun checkEnvironment(){
+
+            /*
+                TODO
+                Looks like currently some issues in running Docker-Compose on Travis
+             */
+
+            val travis = System.getProperty("TRAVIS") != null
+            Assume.assumeTrue(!travis)
+        }
+
+        class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
+
+
+        @ClassRule
+        @JvmField
+        val env = KDockerComposeContainer(File("../docker-compose.yml"))
+                .withLocalCompose(true)
+
+
+        @BeforeClass
+        @JvmStatic
+        fun waitForServers() {
+
+            RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
+
+            /*
+                Wait for when these services are up and running.
+                Status endpoints are added automatically when the Actuator
+                library is on the pom.xml dependencies
+             */
+            Awaitility.await()
+                    .atMost(90, TimeUnit.SECONDS)
+                    .pollInterval(3, TimeUnit.SECONDS)
+                    .ignoreExceptions()
+                    .until {
+                        given().port(8761).get("/actuator/health").then().body("status", equalTo("UP"))
+                        given().port(9000).get("/actuator/health").then().body("status", equalTo("UP"))
+                        given().port(9001).get("/actuator/health").then().body("status", equalTo("UP"))
+                        given().port(9002).get("/actuator/health").then().body("status", equalTo("UP"))
+                        given().port(9003).get("/actuator/health").then().body("status", equalTo("UP"))
+                        true
+                    }
+
+            /*
+                Not only we need to wait for the servers to be up and running,
+                but also need to wait for when they are registered on Eureka.
+
+                Note: with default settings, when running many Docker images on
+                a laptop, might take a while before all services are registered,
+                especially considering that heartbeats might be sent just every
+                30s, and there is the need of up to 3 heartbeats to complete
+                all registrations.
+                Plus all caches need to be updated.
+                Long story short: it can take up to 2 minutes to have all system
+                up and running:
+                https://github.com/spring-cloud/spring-cloud-netflix/issues/373
+            */
+
+            Awaitility.await()
+                    .atMost(120, TimeUnit.SECONDS)
+                    .pollInterval(6, TimeUnit.SECONDS)
+                    .ignoreExceptions()
+                    .until {
+                        given().port(8761).get("/eureka/apps")
+                                .then()
+                                .body("applications.application.instance.size()", equalTo(4))
+                        true
+                    }
+
+            /*
+                Might take time before the list of available instances per service
+                is updated in all the clients of Eureka for client-side balancing
+                with Ribbon.
+            */
+            Awaitility.await()
+                    .atMost(40, TimeUnit.SECONDS)
+                    .pollInterval(4, TimeUnit.SECONDS)
+                    .ignoreExceptions()
+                    .until {
+                        val msg = callConsumer()
+                        assertTrue(msg, msg.startsWith("Received:"))
+                        assertTrue(msg, !msg.contains("ERROR", ignoreCase = true))
+                        true
+                    }
+        }
+
+        private fun callConsumer(): String{
+
+            return given().accept(ContentType.TEXT)
+                    .get("http://localhost:9000/consumerData")
+                    .then()
+                    .statusCode(200)
+                    .extract().body().asString()
+        }
+    }
+
+
+    @Test
+    fun testIntegration(){
+
+        /*
+            Now that everything is setup, send many messages.
+            Each "Producer" service should get at least 1 of them.
+         */
+
+        val responses : MutableList<String> = mutableListOf()
+
+        val n = 100
+
+        (0 until n).forEach { responses.add(callConsumer()) }
+
+        assertEquals(n, responses.size)
+
+        assertEquals(3, responses.toSet().size)
+    }
+
+
+
+}

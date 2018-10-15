@@ -14,7 +14,8 @@
 
     <modules>
         <module>discovery</module>
-        <module>gateway</module>
+        <!-- TODO put back once fixed Spring Cloud dependencies and replaced Zuul-->
+        <!--<module>gateway</module>-->
     </modules>
 
 

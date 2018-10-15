@@ -13,10 +13,10 @@
     </parent>
 
     <modules>
-        <module>eureka</module>
-        <module>producer</module>
-        <module>consumer</module>
-        <module>e2e-tests</module>
+        <module>discovery-eureka</module>
+        <module>discovery-producer</module>
+        <module>discovery-consumer</module>
+        <module>discovery-e2e-tests</module>
     </modules>
 
 

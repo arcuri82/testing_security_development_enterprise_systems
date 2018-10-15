@@ -7,7 +7,7 @@ services:
 
   eureka:
     build:
-      context: ./eureka
+      context: ./discovery-eureka
       dockerfile: Dockerfile
     ports:
       # By default, Eureka provides a GUI
@@ -15,7 +15,7 @@ services:
 
   consumer:
     build:
-        context: ./consumer
+        context: ./discovery-consumer
         dockerfile: Dockerfile
     ports:
        - "9000:8080"
@@ -27,7 +27,7 @@ services:
 
   producer_0:
      build:
-        context: ./producer
+        context: ./discovery-producer
         dockerfile: Dockerfile
      ports:
         - "9001:8080"
@@ -38,7 +38,7 @@ services:
 
   producer_1:
      build:
-        context: ./producer
+        context: ./discovery-producer
         dockerfile: Dockerfile
      ports:
         - "9002:8080"
@@ -49,7 +49,7 @@ services:
 
   producer_2:
      build:
-        context: ./producer
+        context: ./discovery-producer
         dockerfile: Dockerfile
      ports:
         - "9003:8080"

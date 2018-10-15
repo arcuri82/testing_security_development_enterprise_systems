@@ -288,6 +288,11 @@
         You can use "-P <id>" to activate a profile with the given <id>, eg
 
         mvn verify -P <id>
+
+        To see all available profiles in a project (which could be declared in sub-modules),
+        user:
+
+        mvn help:all-profiles | grep "Profile Id"
     -->
     <profiles>
     </profiles>

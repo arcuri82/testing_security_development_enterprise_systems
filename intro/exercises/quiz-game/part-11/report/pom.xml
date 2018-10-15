@@ -25,6 +25,25 @@
         </dependency>
     </dependencies>
 
+
+    <!--
+       This can be very expensive on a clean build.
+       So, we only do it if profile is activated
+   -->
+    <profiles>
+        <profile>
+            <id>dependency-check</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -43,21 +62,5 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
-        <plugins>
-            <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-
     </build>
 </project>

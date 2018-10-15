@@ -18,6 +18,18 @@
             <artifactId>test-utils</artifactId>
         </dependency>
 
+        <!-- Make sure it is built after the other modules-->
+        <dependency>
+            <groupId>org.tsdes.advanced.frontend.sparest</groupId>
+            <artifactId>spa-rest-backend</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.advanced.frontend.sparest</groupId>
+            <artifactId>spa-rest-frontend</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

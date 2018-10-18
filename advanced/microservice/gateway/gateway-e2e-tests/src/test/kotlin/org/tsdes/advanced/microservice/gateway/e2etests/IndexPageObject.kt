@@ -1,4 +1,4 @@
-package org.tsdes.spring.microservice.gateway.e2etests
+package org.tsdes.advanced.microservice.gateway.e2etests
 
 import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor

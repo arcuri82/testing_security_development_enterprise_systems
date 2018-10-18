@@ -1,4 +1,4 @@
-package org.tsdes.spring.microservice.gateway.e2etests
+package org.tsdes.advanced.microservice.gateway.e2etests
 
 import io.restassured.RestAssured.given
 import org.awaitility.Awaitility.await
@@ -58,6 +58,8 @@ class GatewayIntegrationDockerRestIT {
         production.
         So, the approach here is to start it in its own Docker, and then make sure
         such Docker image share the same network of the Docker Compose one.
+
+        FIXME: same issue as in Discovery example. Need to wait for fix in TestContainer
      */
 
     @Rule

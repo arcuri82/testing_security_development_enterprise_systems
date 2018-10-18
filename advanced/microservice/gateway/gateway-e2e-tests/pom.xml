@@ -27,17 +27,17 @@
         <!-- Force this module to be built last -->
         <dependency>
             <groupId>org.tsdes.advanced.microservice.gateway</groupId>
-            <artifactId>eureka</artifactId>
+            <artifactId>gateway-eureka</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tsdes.advanced.microservice.gateway</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>gateway-service</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tsdes.advanced.microservice.gateway</groupId>
-            <artifactId>zuul</artifactId>
+            <artifactId>gateway-scg</artifactId>
             <version>${project.version}</version>
         </dependency>
 

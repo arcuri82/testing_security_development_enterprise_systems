@@ -14,14 +14,14 @@
 
     <modules>
         <!--
-            Note: gateway-frontend is not here in this list, at it
+            Note: gateway-frontend is not here in this list, as it
             is not a Maven project... it is just a folder with static
             assets that are not compiled.
         -->
         <module>gateway-service</module>
         <module>gateway-eureka</module>
         <module>gateway-scg</module>
-        <!--<module>e2e-tests</module>-->
+        <module>gateway-e2e-tests</module>
     </modules>
 
 

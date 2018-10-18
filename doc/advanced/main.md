@@ -126,6 +126,19 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
+* **Lesson 10**: MicroService Architectures
+  
+  Slides: [[pdf]](slides/lesson_10.pdf), 
+          [[pptx]](slides/lesson_10.pptx)
+          
+  Modules:     
+  
+  * **advanced/advanced/microservice/discovery/***
+  * **advanced/advanced/microservice/gateway/***
+  
+<br />
+
+
 TODO remaining classes
 
 ## External Resources

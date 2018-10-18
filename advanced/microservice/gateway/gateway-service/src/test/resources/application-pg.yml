@@ -1,0 +1,18 @@
+# Note: not specifying
+# "spring.datasource.url"
+# here, as it dynamically depends on TestContainer.
+# So it will be set at runtime directly in the tests.
+
+spring:
+  datasource:
+    username: "postgres"
+    password: ""
+    driver-class-name: "org.postgresql.Driver"
+  jpa:
+    database: "postgresql"
+    hibernate:
+      ddl-auto: "create-drop"
+
+eureka:
+  client:
+    enabled: false

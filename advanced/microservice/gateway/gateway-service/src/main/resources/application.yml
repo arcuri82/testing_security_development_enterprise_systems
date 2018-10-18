@@ -1,0 +1,28 @@
+# Configuring here to use an actual database, whose IP address depends
+# on where Docker Compose starts it
+
+spring:
+  application:
+    name: service
+  datasource:
+    url: "jdbc:postgresql://postgres:5432/postgres"
+    username: "postgres"
+    password: ""
+    driver-class-name: "org.postgresql.Driver"
+  jpa:
+    database: "postgresql"
+    hibernate:
+      # We should rather use Flyway. But for simplicity, here rely
+      # on Hibernate to handle the schema (which is usually not a good idea).
+      ddl-auto: "update"
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+

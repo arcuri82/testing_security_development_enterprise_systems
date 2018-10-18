@@ -1,0 +1,24 @@
+## Note: one of the benefits of SpringBoot is that it can automatically
+## configure your system with sensible defaults based on what you have
+## on the classpath, eg H2 database with "test" scope dependency.
+## Here, I am setting up manually some of these configurations to make
+## them explicit.
+## For example, here, instead of using real database, I am going to use an
+## embedded one.
+## See: https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+spring:
+  application:
+    name: service
+  datasource:
+    url: "jdbc:h2:mem:"
+    driver-class-name: "org.h2.Driver"
+  jpa:
+    database: "h2"
+    hibernate:
+      ddl-auto: "create-drop"
+
+eureka:
+  client:
+    enabled: false
+

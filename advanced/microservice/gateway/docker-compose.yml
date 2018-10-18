@@ -2,13 +2,13 @@ version: '3.3'
 
 services:
 
-  # The Gateway Zuul will be the ONLY Docker instance
+  # The Spring Cloud Gateway will be the ONLY Docker instance
   # that does open a port accessible from outside the
   # Docker network.
 
-  zuul:
+  scg:
     build:
-      context: ./zuul
+      context: ./gateway-scg
       dockerfile: Dockerfile
     ports:
       - "80:8080"
@@ -17,14 +17,15 @@ services:
 
   eureka:
     build:
-      context: ./eureka
+      context: ./gateway-eureka
       dockerfile: Dockerfile
 
 
   frontend:
     build:
-      context: ./front-end
+      context: ./gateway-frontend
       dockerfile: Dockerfile
+
 
   # Note that here I am using a real database.
   # Cannot use embedded H2 as done so far, because
@@ -35,32 +36,33 @@ services:
 
   service_0:
      build:
-        context: ./service
+        context: ./gateway-service
         dockerfile: Dockerfile
      environment:
         - TSDES_SERVICE_ID=A
      depends_on:
-        - zuul
+        - scg
         - postgres
+
 
   service_1:
      build:
-        context: ./service
+        context: ./gateway-service
         dockerfile: Dockerfile
      environment:
         - TSDES_SERVICE_ID=B
      depends_on:
-        - zuul
+        - scg
         - postgres
 
   service_2:
      build:
-        context: ./service
+        context: ./gateway-service
         dockerfile: Dockerfile
      environment:
         - TSDES_SERVICE_ID=C
      depends_on:
-        - zuul
+        - scg
         - postgres
 
 

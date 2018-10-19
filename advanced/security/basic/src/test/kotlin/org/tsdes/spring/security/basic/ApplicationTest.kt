@@ -50,10 +50,21 @@ class ApplicationTest {
     @Test
     fun testNotAuthenticated() {
 
+        /*
+            Here, we get a 401 not authenticated.
+            Server also needs to tell us how authentication is done, like for
+            example using "Basic" protocol.
+            The server could have several domains of authentication, each one with
+            its own system and different users/passwords.
+            The "realm" specifies which domain is involved in the requested resource.
+            If we do not configure it in Spring Security, it will just choose a default
+            name like "Realm".
+         */
+
         given().get("/forUsers")
                 .then()
                 .statusCode(401)
-                .header("WWW-Authenticate", containsString("Basic realm"))
+                .header("WWW-Authenticate", containsString("Basic realm=\"Realm\""))
     }
 
 
@@ -63,7 +74,11 @@ class ApplicationTest {
         given()
                 /*
                     this setup the header "Authorization: Basic X", where X is
-                    the user+password in Base64 format
+                    the user:password in Base64 format.
+                    You could set it up manually by doing a
+                    .header("Authorization", "Basic " + X)
+                    but then would need to convert manually to Base64 (or use library for it).
+                    RestAssured does it automatically for you.
                  */
                 .auth().basic("foo", "123456")
                 .get("/forUsers")

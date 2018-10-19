@@ -117,11 +117,11 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
           
   Modules:     
   
-  * **advanced/front-end/spa-rest/spa-rest-backend**
-  * **advanced/front-end/spa-rest/spa-rest-dto**
-  * **advanced/front-end/spa-rest/spa-rest-frontend**
-  * **advanced/front-end/spa-rest/spa-rest-e2e-tests**
-  * **advanced/front-end/websocket-chat**
+  * **advanced/frontend/spa-rest/spa-rest-backend**
+  * **advanced/frontend/spa-rest/spa-rest-dto**
+  * **advanced/frontend/spa-rest/spa-rest-frontend**
+  * **advanced/frontend/spa-rest/spa-rest-e2e-tests**
+  * **advanced/frontend/websocket-chat**
 
 <br />
 

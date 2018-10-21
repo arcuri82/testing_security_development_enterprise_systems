@@ -1,4 +1,4 @@
-package org.tsdes.spring.security.database
+package org.tsdes.advanced.security.session
 
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
-import org.tsdes.spring.security.database.db.UserRepository
+import org.tsdes.advanced.security.session.db.UserRepository
 
 /**
  * Created by arcuri82 on 08-Nov-17.
@@ -63,7 +63,7 @@ class ApplicationTest {
         return given().contentType(ContentType.URLENC)
                 .formParam("the_user", id)
                 .formParam("the_password", password)
-                .post("/signIn")
+                .post("/signUp")
                 .then()
                 .statusCode(204)
                 .extract().cookie("JSESSIONID")
@@ -78,14 +78,14 @@ class ApplicationTest {
         given().contentType(ContentType.URLENC)
                 .formParam("the_user", name)
                 .formParam("the_password", pwd)
-                .post("/signIn")
+                .post("/signUp")
                 .then()
                 .statusCode(204)
 
         given().contentType(ContentType.URLENC)
                 .formParam("the_user", name)
                 .formParam("the_password", pwd)
-                .post("/signIn")
+                .post("/signUp")
                 .then()
                 .statusCode(400)
     }
@@ -183,14 +183,14 @@ class ApplicationTest {
     }
 
     @Test
-    fun testSignInCreateAuthenticatedSession() {
+    fun testSignUpCreateAuthenticatedSession() {
 
         val cookie = registerUser("hello", "world")
         assertNotNull(cookie)
     }
 
     @Test
-    fun testSignInAndUseCookie() {
+    fun testSignUpAndUseCookie() {
 
         val first = registerUser("a", "b")
 
@@ -203,11 +203,15 @@ class ApplicationTest {
                 .statusCode(200)
                 .extract().cookie("JSESSIONID")
 
+        /*
+            Using valid cookie for an existing authenticated session.
+            No need to create a new one
+         */
         assertNull(second)
     }
 
     @Test
-    fun testUseBasicAfterSignIn() {
+    fun testUseBasicAfterSignUp() {
 
         val name = "foo"
         val pwd = "bar"
@@ -221,6 +225,10 @@ class ApplicationTest {
                 .statusCode(200)
                 .extract().cookie("JSESSIONID")
 
+        /*
+            Logging in with Basic header will create a new session,
+            with its own new cookie
+         */
         assertNotNull(first)
         assertNotNull(second)
         assertNotEquals(first, second)
@@ -228,7 +236,7 @@ class ApplicationTest {
 
 
     @Test
-    fun testUseBasicAfterSignInWithSameCookie() {
+    fun testUseBasicAfterSignUpWithSameCookie() {
 
         val name = "foo"
         val pwd = "bar"
@@ -243,6 +251,11 @@ class ApplicationTest {
                 .statusCode(200)
                 .extract().cookie("JSESSIONID")
 
+        /*
+            Here, as we provided both the Cookie and the Basic auth,
+            because they are valid, no new session/cookie needs to
+            be created
+         */
         assertNotNull(first)
         assertNull(second)
     }
@@ -259,21 +272,25 @@ class ApplicationTest {
                 .then()
                 .statusCode(200)
 
+        //this does nothing, as no Auth provided in the request
         given().post("/logout")
                 .then()
                 .statusCode(204)
 
+        //previous cookie is still valid
         given().accept("${ContentType.TEXT},*/*")
                 .cookie("JSESSIONID", cookie)
                 .get("/resource")
                 .then()
                 .statusCode(200)
 
+        //now, logout will invalidate the cookie
         given().cookie("JSESSIONID", cookie)
                 .post("/logout")
                 .then()
                 .statusCode(204)
 
+        //resource no longer available with that cookie
         given().accept("${ContentType.TEXT},*/*")
                 .cookie("JSESSIONID", cookie)
                 .get("/resource")
@@ -293,6 +310,14 @@ class ApplicationTest {
         given().get("/user")
                 .then()
                 .statusCode(401)
+
+        /*
+            technically, we can login on any endpoint as long
+            as we provide the right Basic auth.
+            What we get back is an authenticated cookie, which then
+            we can use in any following request instead of re-sending
+            the Basic auth.
+         */
 
         given().auth().basic(name, pwd)
                 .get("/user")

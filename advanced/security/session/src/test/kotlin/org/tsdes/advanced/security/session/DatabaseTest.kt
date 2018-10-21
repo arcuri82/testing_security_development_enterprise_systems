@@ -1,4 +1,4 @@
-package org.tsdes.spring.security.database
+package org.tsdes.advanced.security.session
 
 import org.junit.Assert.*
 import org.junit.Before
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.context.junit4.SpringRunner
-import org.tsdes.spring.security.database.db.UserRepository
-import org.tsdes.spring.security.database.db.UserService
+import org.tsdes.advanced.security.session.db.UserRepository
+import org.tsdes.advanced.security.session.db.UserService
 
 /**
  * Created by arcuri82 on 08-Nov-17.

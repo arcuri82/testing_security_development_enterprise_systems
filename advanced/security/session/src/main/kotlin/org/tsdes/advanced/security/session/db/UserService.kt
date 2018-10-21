@@ -1,6 +1,5 @@
-package org.tsdes.spring.security.database.db
+package org.tsdes.advanced.security.session.db
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.CrudRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -12,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional
 class UserService(
-        @Autowired
         private val userCrud: UserRepository,
-        @Autowired
         private val passwordEncoder: PasswordEncoder
 ){
 
@@ -28,7 +25,7 @@ class UserService(
                 return false
             }
 
-            val user = UserEntity(username, hash, roles.map{"ROLE_$it"}.toSet())
+            val user = UserEntity(username, hash, roles.map { "ROLE_$it" }.toSet())
 
             userCrud.save(user)
 

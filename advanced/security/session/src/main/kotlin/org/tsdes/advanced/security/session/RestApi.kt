@@ -1,17 +1,15 @@
-package org.tsdes.spring.security.database
+package org.tsdes.advanced.security.session
 
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
-import org.tsdes.spring.security.database.db.UserService
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.AuthorityUtils
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.web.bind.annotation.*
-import java.security.Principal
-import java.util.LinkedHashMap
+import org.tsdes.advanced.security.session.db.UserService
 
 
 /**
@@ -49,7 +47,7 @@ class RestApi(
     }
 
 
-    @PostMapping(path = ["/signIn"],
+    @PostMapping(path = ["/signUp"],
             consumes = [(MediaType.APPLICATION_FORM_URLENCODED_VALUE)])
     fun signIn(@ModelAttribute(name = "the_user") username: String,
                @ModelAttribute(name = "the_password") password: String)
@@ -82,8 +80,8 @@ class RestApi(
         return ResponseEntity.status(204).build()
     }
 
-    @GetMapping(produces = [(MediaType.TEXT_PLAIN_VALUE)],
-            path = ["/resource"])
+    @GetMapping(path = ["/resource"],
+            produces = [(MediaType.TEXT_PLAIN_VALUE)])
     fun resource(): String {
         return "The Resource"
     }

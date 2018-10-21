@@ -1,7 +1,4 @@
 spring:
-  jpa:
-    # just for debugging
-    show-sql: true
   session:
     # specify how sessions should be stored.
     # here we are saying to use an in-memory hash map

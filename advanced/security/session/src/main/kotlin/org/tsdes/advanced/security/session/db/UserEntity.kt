@@ -1,11 +1,11 @@
-package org.tsdes.spring.security.database.db
+package org.tsdes.advanced.security.session.db
 
-import org.hibernate.validator.constraints.NotBlank
 import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.NotBlank
 
 /**
  * Created by arcuri82 on 08-Nov-17.

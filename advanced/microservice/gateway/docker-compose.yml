@@ -30,7 +30,12 @@ services:
   # Note that here I am using a real database.
   # Cannot use embedded H2 as done so far, because
   # all the different instances of the replicated services
-  # need to work on the same data
+  # need to work on the same data.
+  #
+  # All these replicated instances of "service" will use the
+  # same database.
+  # However, if we had other kinds of APIs here, each kind will
+  # need to use their own database.
   postgres:
     image: "postgres:10"
 

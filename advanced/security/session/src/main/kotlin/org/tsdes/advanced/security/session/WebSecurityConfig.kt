@@ -49,10 +49,12 @@ class WebSecurityConfig(
                     CSRF protection is on by default.
                     Here for simplicity we deactivate it, as
                     it complicates how we do the HTTP calls.
-                    However, it is extremely important when
-                    the clients are browser, so
-                    in practice it should not be deactivated.
-                    Anyway, we ll look at it in the next module.
+                    In general, in a JSON-based app with endpoints
+                    following the HTTP semantics (eg, GET do not
+                    have side-effects), then CSRF would not be so important,
+                    as covered by CORS (could add SameSite for extra protection).
+                    However, note that "/signUp" here would require CSRF protection,
+                    as using the format "application/x-www-form-urlencoded".
                   */
                 .csrf().disable()
     }

@@ -3,6 +3,7 @@ package org.tsdes.advanced.security.session
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
+import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.Matchers.contains
 import org.junit.Assert.*
@@ -66,6 +67,8 @@ class ApplicationTest {
                 .post("/signUp")
                 .then()
                 .statusCode(204)
+                .header("Set-Cookie", containsString("JSESSIONID"))
+                .header("Set-Cookie", containsString("HttpOnly"))
                 .extract().cookie("JSESSIONID")
     }
 

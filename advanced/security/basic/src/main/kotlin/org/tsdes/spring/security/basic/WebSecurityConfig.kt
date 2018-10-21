@@ -59,6 +59,11 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
      */
     override fun configure(auth: AuthenticationManagerBuilder) {
 
+        /*
+            "{noop}" means to use NoOpPasswordEncoder when password is saved,
+            ie no modifications, as plain text, no hashed
+         */
+
         auth.inMemoryAuthentication()
                 .withUser("foo").password("{noop}123456").roles("USER").and()
                 .withUser("admin").password("{noop}bar").roles("ADMIN", "USER")

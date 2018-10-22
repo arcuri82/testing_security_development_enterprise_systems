@@ -1,0 +1,29 @@
+
+spring:
+  redis:
+    host: redis
+    port: 6379
+  session:
+    store-type: redis
+  cloud:
+    gateway:
+      routes:
+      - id: user-service
+        uri: http://user-service:8080
+        predicates:
+        - Path=/user-service/**
+        filters:
+         - StripPrefix=1
+      - id: greetings
+        uri: http://greetings:8080
+        predicates:
+        - Path=/greetings/**
+        filters:
+        - StripPrefix=1
+      - id: auth
+        uri: http://auth:8080
+        predicates:
+        - Path=/auth/**
+        filters:
+        - StripPrefix=1
+

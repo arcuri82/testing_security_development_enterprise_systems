@@ -16,9 +16,11 @@ services:
   # However, ideally I should start here on Postgres per service that needs
   # a database (eg, zuul and user-service here)
 
-  zuul:
+  # TODO actual databases here, two instances
+
+  scg:
     build:
-      context: ./zuul
+      context: ./ds-scg
       dockerfile: Dockerfile
     ports:
       - "80:8080"
@@ -28,7 +30,7 @@ services:
 
   user-service:
     build:
-      context: ./user-service
+      context: ./ds-user-service
       dockerfile: Dockerfile
     depends_on:
       - redis
@@ -36,7 +38,14 @@ services:
 
   greetings:
     build:
-      context: ./greetings
+      context: ./ds-greetings
       dockerfile: Dockerfile
     depends_on:
       - redis
+
+  auth:
+    build:
+      context: ./ds-auth
+      dockerfile: Dockerfile
+    depends_on:
+    - redis

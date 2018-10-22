@@ -1,0 +1,11 @@
+spring:
+  # specify where Redis can be found.
+  # Note: the IP address is based on Docker-Compose
+  redis:
+    host: redis
+    port: 6379
+  session:
+    # specify that session tokes should be stored in Redis
+    store-type: redis
+
+

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.tsdes.advanced.security.distributedsession</groupId>
-    <artifactId>distributedsession</artifactId>
+    <artifactId>distributed-session</artifactId>
     <packaging>pom</packaging>
 
     <parent>
@@ -13,10 +13,12 @@
     </parent>
 
     <modules>
-        <module>zuul</module>
-        <module>user-service</module>
-        <module>greetings</module>
-        <module>e2e-tests</module>
+        <module>ds-scg</module>
+        <module>ds-auth</module>
+        <module>ds-user-service-dto</module>
+        <module>ds-user-service</module>
+        <module>ds-greetings</module>
+        <module>ds-e2e-tests</module>
     </modules>
 
 

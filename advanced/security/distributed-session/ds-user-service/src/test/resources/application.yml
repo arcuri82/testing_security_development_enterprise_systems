@@ -3,8 +3,9 @@
 spring:
   session:
     # during testing for this service in isolation,
-    # do not use Redis
-    store-type: hash_map
+    # do not use Redis. Disabling SpringSession will fall-back to
+    # default sessions in the servlet
+    store-type: none
 
 
 logging:

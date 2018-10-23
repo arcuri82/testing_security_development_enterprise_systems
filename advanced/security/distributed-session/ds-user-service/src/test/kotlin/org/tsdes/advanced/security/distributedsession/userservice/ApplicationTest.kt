@@ -16,8 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.advanced.security.distributedsession.userservice.dto.UserInfoDto
 
 
-//FIXME
-@Ignore
+
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationTest{

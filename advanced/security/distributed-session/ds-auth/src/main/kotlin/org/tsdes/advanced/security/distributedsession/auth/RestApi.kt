@@ -8,10 +8,8 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.web.bind.annotation.*
 import org.tsdes.advanced.security.distributedsession.auth.db.UserService
 import java.security.Principal
 
@@ -33,21 +31,21 @@ class RestApi(
         return ResponseEntity.ok(map)
     }
 
-
-    //FIXME: both name and consumes
-    @PostMapping(path = ["/signIn"],
-            consumes = [(MediaType.APPLICATION_FORM_URLENCODED_VALUE)])
-    fun signIn(@ModelAttribute(name = "the_user") username: String,
-               @ModelAttribute(name = "the_password") password: String)
+    @PostMapping(path = ["/signUp"],
+            consumes = [(MediaType.APPLICATION_JSON_UTF8_VALUE)])
+    fun signIn(@RequestBody dto: AuthDto)
             : ResponseEntity<Void> {
 
-        val registered = service.createUser(username, password, setOf("USER"))
+        val userId : String = dto.userId!!
+        val password : String = dto.password!!
+
+        val registered = service.createUser(userId, password, setOf("USER"))
 
         if (!registered) {
             return ResponseEntity.status(400).build()
         }
 
-        val userDetails = userDetailsService.loadUserByUsername(username)
+        val userDetails = userDetailsService.loadUserByUsername(userId)
         val token = UsernamePasswordAuthenticationToken(userDetails, password, userDetails.authorities)
 
         authenticationManager.authenticate(token)
@@ -57,6 +55,32 @@ class RestApi(
         }
 
         return ResponseEntity.status(204).build()
+    }
+
+    @PostMapping(path = ["/login"],
+            consumes = [(MediaType.APPLICATION_JSON_UTF8_VALUE)])
+    fun login(@RequestBody dto: AuthDto)
+            : ResponseEntity<Void> {
+
+        val userId : String = dto.userId!!
+        val password : String = dto.password!!
+
+        val userDetails = try{
+            userDetailsService.loadUserByUsername(userId)
+        } catch (e: UsernameNotFoundException){
+            return ResponseEntity.status(400).build()
+        }
+
+        val token = UsernamePasswordAuthenticationToken(userDetails, password, userDetails.authorities)
+
+        authenticationManager.authenticate(token)
+
+        if (token.isAuthenticated) {
+            SecurityContextHolder.getContext().authentication = token
+            return ResponseEntity.status(204).build()
+        }
+
+        return ResponseEntity.status(400).build()
     }
 
 }

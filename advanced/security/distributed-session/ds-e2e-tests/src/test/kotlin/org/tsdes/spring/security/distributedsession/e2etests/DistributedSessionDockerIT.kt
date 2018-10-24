@@ -76,12 +76,15 @@ class DistributedSessionDockerIT {
 
     private fun registerUser(id: String, password: String): String {
 
-        val sessionCookie =  given().contentType(ContentType.URLENC)
-                .formParam("the_user", id)
-                .formParam("the_password", password)
-                .post("/auth/signIn")
+        val sessionCookie = given().contentType(ContentType.JSON)
+                .body("""
+                    {"userId": "$id", "password": "$password"}
+                """.trimIndent())
+                .post("/auth/signUp")
                 .then()
                 .statusCode(204)
+                .header("Set-Cookie", not(equalTo(null)))
+                .cookie("SESSION")
                 .extract().cookie("SESSION")
 
         return sessionCookie
@@ -120,6 +123,15 @@ class DistributedSessionDockerIT {
                 .cookie("SESSION")
                 .body("name", equalTo(id))
                 .body("roles", contains("ROLE_USER"))
+
+        given().contentType(ContentType.JSON)
+                .body("""
+                    {"userId": "$id", "password": "$pwd"}
+                """.trimIndent())
+                .post("/auth/login")
+                .then()
+                .statusCode(204)
+                .cookie("SESSION")
     }
 
     @Test

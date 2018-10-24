@@ -21,7 +21,8 @@ class WebSecurityConfigLocalFake : WebSecurityConfig() {
     override fun configure(http: HttpSecurity) {
         super.configure(http)
 
-        http.httpBasic()
+        http
+                .httpBasic()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)

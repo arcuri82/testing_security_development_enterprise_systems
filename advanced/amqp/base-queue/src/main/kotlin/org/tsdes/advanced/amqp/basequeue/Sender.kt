@@ -11,7 +11,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate
  */
 class Sender(val host: String, val port: Int) {
 
-    fun send(queueName: String, msg: String){
+    fun send(queueName: String, msg: String) {
 
         /*
             Note: no Spring application here.

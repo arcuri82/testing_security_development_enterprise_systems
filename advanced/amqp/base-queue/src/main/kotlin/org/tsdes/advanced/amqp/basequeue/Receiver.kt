@@ -10,7 +10,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate
  */
 class Receiver(val host: String, val port: Int) {
 
-    fun receive(queueName: String) : String?{
+    fun receive(queueName: String): String? {
 
         val connectionFactory = CachingConnectionFactory()
         connectionFactory.host = host

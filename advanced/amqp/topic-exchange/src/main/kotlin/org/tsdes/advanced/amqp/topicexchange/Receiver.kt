@@ -1,6 +1,5 @@
 package org.tsdes.advanced.amqp.topicexchange
 
-import org.springframework.amqp.rabbit.annotation.EnableRabbit
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -24,7 +23,7 @@ class Receiver {
         doWork("Y", msg)
     }
 
-    private fun doWork(receiver: String, msg: String){
+    private fun doWork(receiver: String, msg: String) {
 
         val s = "$receiver received: '$msg'"
 

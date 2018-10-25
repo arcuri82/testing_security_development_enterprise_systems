@@ -36,6 +36,6 @@ class RestApi {
      */
 
     @GetMapping(path = ["/counter"])
-    fun get(): ResponseEntity<Int> =  ResponseEntity.ok(counter)
+    fun get(): ResponseEntity<Int> = ResponseEntity.ok(counter)
 
 }

@@ -11,17 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired
 class WorkSender {
 
     @Autowired
-    private lateinit var  template: RabbitTemplate
+    private lateinit var template: RabbitTemplate
 
     @Autowired
     private lateinit var fanout: FanoutExchange
 
 
-    fun send(list: List<Long>){
-        list.forEach{send(it)}
+    fun send(list: List<Long>) {
+        list.forEach { send(it) }
     }
 
-    private fun send( msg: Long){
+    private fun send(msg: Long) {
 
         /*
             AMQP does not send to a Queue, but rather to an

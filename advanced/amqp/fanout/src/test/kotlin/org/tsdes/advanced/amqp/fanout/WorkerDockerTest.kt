@@ -7,7 +7,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.util.EnvironmentTestUtils
+import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ContextConfiguration
@@ -26,17 +26,17 @@ class WorkerDockerTest {
 
         class KGenericContainer(imageName: String) : GenericContainer<KGenericContainer>(imageName)
 
-        @ClassRule @JvmField
+        @ClassRule
+        @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3").withExposedPorts(5672)
 
         class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
             override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
-                EnvironmentTestUtils.addEnvironment(
-                        "testcontainers",
-                        configurableApplicationContext.environment,
-                        "spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
-                        "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672)
-                )
+
+                TestPropertyValues
+                        .of("spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
+                                "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672))
+                        .applyTo(configurableApplicationContext.environment)
             }
         }
     }
@@ -64,7 +64,7 @@ class WorkerDockerTest {
         val data = counter.retrieveJobsDone()
 
         assertEquals(2, data.size)
-        assertEquals(2 * sum,  data.values.sum())
+        assertEquals(2 * sum, data.values.sum())
         assertTrue(data.all { it.value == sum })
 
         /*

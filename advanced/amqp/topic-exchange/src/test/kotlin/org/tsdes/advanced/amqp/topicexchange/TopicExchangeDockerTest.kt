@@ -6,7 +6,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.util.EnvironmentTestUtils
+import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ContextConfiguration
@@ -25,17 +25,16 @@ class TopicExchangeDockerTest {
 
         class KGenericContainer(imageName: String) : GenericContainer<KGenericContainer>(imageName)
 
-        @ClassRule @JvmField
+        @ClassRule
+        @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3").withExposedPorts(5672)
 
         class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
             override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
-                EnvironmentTestUtils.addEnvironment(
-                        "testcontainers",
-                        configurableApplicationContext.environment,
-                        "spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
-                        "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672)
-                )
+                TestPropertyValues
+                        .of("spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
+                                "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672))
+                        .applyTo(configurableApplicationContext.environment)
             }
         }
     }
@@ -48,7 +47,7 @@ class TopicExchangeDockerTest {
 
 
     @Test
-    fun testTopicExchange(){
+    fun testTopicExchange() {
 
         messages.reset(5)
 
@@ -60,13 +59,13 @@ class TopicExchangeDockerTest {
             Y: *.norway.*
          */
 
-        sender.publish("smith","usa","sport","a") // X
-        sender.publish("smith","norway","politics",textForNewsInNorwayBySmith) // X and Y
-        sender.publish("black","norway","politics","c")  // Y
-        sender.publish("white","norway","science","d")   // Y
-        sender.publish("white","usa","science","d")      // none
-        sender.publish("white","germany","sport","e")    // none
-        sender.publish("white","germany","politics","e") // none
+        sender.publish("smith", "usa", "sport", "a") // X
+        sender.publish("smith", "norway", "politics", textForNewsInNorwayBySmith) // X and Y
+        sender.publish("black", "norway", "politics", "c")  // Y
+        sender.publish("white", "norway", "science", "d")   // Y
+        sender.publish("white", "usa", "science", "d")      // none
+        sender.publish("white", "germany", "sport", "e")    // none
+        sender.publish("white", "germany", "politics", "e") // none
 
 
         val completed = messages.await(2)

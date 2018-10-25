@@ -22,7 +22,7 @@ class RabbitConfiguration {
 
     @Bean
     fun binding(fanout: FanoutExchange,
-                 queue: Queue): Binding {
+                queue: Queue): Binding {
         return BindingBuilder.bind(queue).to(fanout)
     }
 

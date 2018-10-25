@@ -72,7 +72,7 @@ class Application {
     }
 
     /*
-        Note that the @Autowired annotation on the input
+        Recall that the @Autowired annotation on the input
         beans is not strictly necessary, as Spring will automatically
         treat all input parameters as beans to inject.
      */

@@ -11,12 +11,12 @@ import java.util.concurrent.TimeUnit
 @Service
 class ReceivedMessages {
 
-    private val buffer : MutableList<String> = CopyOnWriteArrayList<String>()
+    private val buffer: MutableList<String> = CopyOnWriteArrayList<String>()
 
     val data: List<String>
-        get(){return buffer}
+        get() = buffer
 
-    private var latch : CountDownLatch = CountDownLatch(0)
+    private var latch: CountDownLatch = CountDownLatch(0)
 
     fun addMessage(msg: String) {
         buffer.add(msg)
@@ -24,12 +24,12 @@ class ReceivedMessages {
     }
 
 
-    fun reset(n: Int){
+    fun reset(n: Int) {
         buffer.clear()
         latch = CountDownLatch(n)
     }
 
-    fun await(seconds: Int): Boolean{
+    fun await(seconds: Int): Boolean {
         return latch.await(seconds.toLong(), TimeUnit.SECONDS)
     }
 }

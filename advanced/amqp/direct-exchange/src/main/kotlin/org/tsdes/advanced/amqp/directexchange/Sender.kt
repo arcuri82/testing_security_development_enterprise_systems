@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service
 class Sender {
 
     @Autowired
-    private lateinit var  template: RabbitTemplate
+    private lateinit var template: RabbitTemplate
 
     @Autowired
     private lateinit var direct: DirectExchange
 
-    private fun send(msg: String, key: String){
+    private fun send(msg: String, key: String) {
         template.convertAndSend(direct.name, key, msg);
     }
 

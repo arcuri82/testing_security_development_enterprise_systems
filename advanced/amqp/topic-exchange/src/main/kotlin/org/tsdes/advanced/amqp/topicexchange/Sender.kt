@@ -1,6 +1,5 @@
 package org.tsdes.advanced.amqp.topicexchange
 
-import org.springframework.amqp.core.DirectExchange
 import org.springframework.amqp.core.TopicExchange
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,13 +12,13 @@ import org.springframework.stereotype.Service
 class Sender {
 
     @Autowired
-    private lateinit var  template: RabbitTemplate
+    private lateinit var template: RabbitTemplate
 
     @Autowired
     private lateinit var topic: TopicExchange
 
-    private fun send(msg: String, key: String){
-        template.convertAndSend(topic.name, key, msg);
+    private fun send(msg: String, key: String) {
+        template.convertAndSend(topic.name, key, msg)
     }
 
     fun publish(author: String, country: String, kind: String, text: String) {

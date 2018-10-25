@@ -55,7 +55,7 @@ class Application {
 
     @Bean
     fun bindingX_ERROR(direct: DirectExchange,
-                 queueX: Queue): Binding {
+                       queueX: Queue): Binding {
         return BindingBuilder
                 .bind(queueX)
                 .to(direct)
@@ -64,7 +64,7 @@ class Application {
 
     @Bean
     fun bindingY_ERROR(direct: DirectExchange,
-                 queueY: Queue): Binding {
+                       queueY: Queue): Binding {
         return BindingBuilder
                 .bind(queueY)
                 .to(direct)
@@ -74,7 +74,7 @@ class Application {
 
     @Bean
     fun bindingY_WARN(direct: DirectExchange,
-                 queueY: Queue): Binding {
+                      queueY: Queue): Binding {
         return BindingBuilder
                 .bind(queueY)
                 .to(direct)

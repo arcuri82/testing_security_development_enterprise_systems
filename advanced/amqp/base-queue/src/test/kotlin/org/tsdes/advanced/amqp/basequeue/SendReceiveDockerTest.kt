@@ -1,21 +1,16 @@
 package org.tsdes.advanced.amqp.basequeue
 
-import org.junit.Test
-import org.junit.Assert.*
-import org.testcontainers.containers.GenericContainer
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.ClassRule
-import org.testcontainers.containers.FixedHostPortGenericContainer
-import org.springframework.boot.test.util.EnvironmentTestUtils
-import org.springframework.context.ConfigurableApplicationContext
-import org.springframework.context.ApplicationContextInitializer
-
-
+import org.junit.Test
+import org.testcontainers.containers.GenericContainer
 
 
 /**
  * Created by arcuri82 on 07-Aug-17.
  */
-class SendReceiveDockerTest{
+class SendReceiveDockerTest {
 
     /*
         If we you are using Windows, make sure that under the "General" configurations
@@ -41,13 +36,14 @@ class SendReceiveDockerTest{
             However, here, although the port is exposed, it is mapped to a
             random, free one.
          */
-        @ClassRule @JvmField
+        @ClassRule
+        @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3")
                 .withExposedPorts(5672)
     }
 
     @Test
-    fun receiveNull(){
+    fun receiveNull() {
 
         val msg = Receiver(rabbitMQ.containerIpAddress, rabbitMQ.getMappedPort(5672))
                 .receive("queue:receiveNull")
@@ -56,7 +52,7 @@ class SendReceiveDockerTest{
 
 
     @Test
-    fun testSendAndReceive(){
+    fun testSendAndReceive() {
 
         val msg = "Hello World!"
         val queueName = "queue:testSendAndReceive"

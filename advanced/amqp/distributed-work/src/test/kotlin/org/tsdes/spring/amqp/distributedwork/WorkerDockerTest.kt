@@ -3,13 +3,11 @@ package org.tsdes.spring.amqp.distributedwork
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.ClassRule
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.util.EnvironmentTestUtils
-//import org.springframework.boot.test.util.TestPropertyValues
+import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ContextConfiguration
@@ -19,9 +17,6 @@ import org.testcontainers.containers.GenericContainer
 /**
  * Created by arcuri82 on 07-Aug-17.
  */
-
-//FIXME: this is broken in SpringBoot 2.x, but works fine in 1.5
-@Ignore
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @ContextConfiguration(initializers = [(WorkerDockerTest.Companion.Initializer::class)])
@@ -44,17 +39,10 @@ class WorkerDockerTest {
          */
         class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
             override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
-                //FIXME
-//                TestPropertyValues
-//                        .of("spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
-//                                "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672))
-//                        .applyTo(configurableApplicationContext.environment)
-                EnvironmentTestUtils.addEnvironment(
-                        "testcontainers",
-                        configurableApplicationContext.environment,
-                        "spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
-                        "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672)
-                )
+                TestPropertyValues
+                        .of("spring.rabbitmq.host=" + rabbitMQ.containerIpAddress,
+                                "spring.rabbitmq.port=" + rabbitMQ.getMappedPort(5672))
+                        .applyTo(configurableApplicationContext.environment)
             }
         }
     }
@@ -95,7 +83,9 @@ class WorkerDockerTest {
         /*
             While the first worker to pull from the
             queue will process the longest task, the other worker
-            will pull and process all the other remaining tasks
+            will pull and process all the other remaining tasks.
+            Note: to achieve this, we need to remove the default "prefetch"
+            functionality, which can be done in application.properties
          */
     }
 }

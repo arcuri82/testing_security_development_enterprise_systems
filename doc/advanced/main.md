@@ -138,6 +138,19 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
 <br />
 
+* **Lesson 11**: Security in MicroServices
+  
+  Slides: [[pdf]](slides/lesson_11.pdf), 
+          [[pptx]](slides/lesson_11.pptx)
+          
+  Modules:     
+  
+  * **advanced/advanced/security/basic**
+  * **advanced/advanced/security/session**
+  * **advanced/advanced/security/distributed-session/***
+  
+<br />
+
 
 TODO remaining classes
 

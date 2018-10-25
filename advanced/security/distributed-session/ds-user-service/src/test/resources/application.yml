@@ -6,7 +6,14 @@ spring:
     # do not use Redis. Disabling SpringSession will fall-back to
     # default sessions in the servlet
     store-type: none
-
+  datasource:
+    url: "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"
+    driver-class-name: "org.h2.Driver"
+  jpa:
+    database: "h2"
+    hibernate:
+      ddl-auto: "create-drop"
+    show-sql: true
 
 logging:
   level:

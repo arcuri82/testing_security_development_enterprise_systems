@@ -37,7 +37,7 @@ class DistributedSessionDockerIT {
         val env = KDockerComposeContainer(File("../docker-compose.yml"))
                 .withLocalCompose(true)
                 //if needed for debugging
-                //.withLogConsumer("greetings") {System.out.println("[DOCKER] " + it.utf8String)}
+                .withLogConsumer("user-service") {System.out.println("[DOCKER] " + it.utf8String)}
 
         private var counter = System.currentTimeMillis()
 

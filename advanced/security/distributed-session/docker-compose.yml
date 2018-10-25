@@ -11,12 +11,16 @@ services:
     image: "redis:latest"
 
 
-  # Note: for simplicity I am not starting any real database in this example.
-  # I am going to use embedded H2 databases.
-  # However, ideally I should start here on Postgres per service that needs
-  # a database (eg, zuul and user-service here)
+  # Having 2 different services ("auth" and "user-service") accessing a SQL database.
+  # Those must be different running instances.
+  # Different services should not access the same database (apart from Redis dealing
+  # with distributed session tokens).
+  auth-db:
+    image: "postgres:10"
 
-  # TODO actual databases here, two instances
+  user-service-db:
+    image: "postgres:10"
+
 
   scg:
     build:

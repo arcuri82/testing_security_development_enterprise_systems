@@ -4,3 +4,16 @@ spring:
   redis:
     host: redis
     port: 6379
+  datasource:
+    url: "jdbc:postgresql://auth-db:5432/postgres"
+    username: "postgres"
+    password: ""
+    driver-class-name: "org.postgresql.Driver"
+  jpa:
+    database: "postgresql"
+    hibernate:
+      # We should rather use Flyway. But for simplicity, here rely
+      # on Hibernate to handle the schema (which is usually not a good idea).
+      ddl-auto: "update"
+
+

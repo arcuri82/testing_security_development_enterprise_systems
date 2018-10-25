@@ -7,5 +7,15 @@ spring:
   session:
     # specify that session tokes should be stored in Redis
     store-type: redis
-
+  datasource:
+    url: "jdbc:postgresql://user-service-db:5432/postgres"
+    username: "postgres"
+    password: ""
+    driver-class-name: "org.postgresql.Driver"
+  jpa:
+    database: "postgresql"
+    hibernate:
+      # We should rather use Flyway. But for simplicity, here rely
+      # on Hibernate to handle the schema (which is usually not a good idea).
+      ddl-auto: "update"
 

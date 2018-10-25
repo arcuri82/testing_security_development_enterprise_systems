@@ -16,17 +16,17 @@ class WorkSender {
         on the Spring configuration.
      */
     @Autowired
-    private lateinit var  template: RabbitTemplate
+    private lateinit var template: RabbitTemplate
 
     @Autowired
-    private lateinit var  queue: Queue
+    private lateinit var queue: Queue
 
 
-    fun send(list: List<Long>){
-        list.forEach{send(it)}
+    fun send(list: List<Long>) {
+        list.forEach { send(it) }
     }
 
-    private fun send( msg: Long){
+    private fun send(msg: Long) {
         template.convertAndSend(queue.name, msg)
     }
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
  *
  * Created by arcuri82 on 07-Aug-17.
  */
-class Counter{
+class Counter {
 
     /**
         key -> worker id
@@ -22,30 +22,30 @@ class Counter{
         Latch used to wait until a certain number of jobs have
         been completed
      */
-    private var latch : CountDownLatch = CountDownLatch(0)
+    private var latch: CountDownLatch = CountDownLatch(0)
 
-    fun reset(n: Int){
+    fun reset(n: Int) {
         jobsDone.clear()
         latch = CountDownLatch(n)
     }
 
-    fun doneJob(id: String){
+    fun doneJob(id: String) {
         /*
             Merge: if "id" is not present, value becomes 1.
             If present, existing value is increased by 1.
          */
-        jobsDone.merge(id, 1, { old, delta -> (old+delta)})
+        jobsDone.merge(id, 1) { old, delta -> (old + delta) }
         latch.countDown()
     }
 
-    fun retrieveJobsDone() : Map<String, Int>{
+    fun retrieveJobsDone(): Map<String, Int> {
         return jobsDone
     }
 
     /**
      * Await until N jobs are completed
      */
-    fun await(seconds: Int): Boolean{
+    fun await(seconds: Int): Boolean {
         return latch.await(seconds.toLong(), TimeUnit.SECONDS)
     }
 }

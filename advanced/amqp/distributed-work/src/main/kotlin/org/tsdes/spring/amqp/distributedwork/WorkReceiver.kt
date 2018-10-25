@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired
  * for this class. All these singletons will use
  * the same named queue.
  */
-@RabbitListener(queues = arrayOf(QUEUE_NAME))
+@RabbitListener(queues = [QUEUE_NAME])
 class WorkReceiver(
         private val id: String
 ) {
@@ -29,7 +29,7 @@ class WorkReceiver(
         queue, as it will be automatically done by Spring.
      */
     @RabbitHandler
-    fun doWork(x: java.lang.Long){
+    fun doWork(x: java.lang.Long) {
 
         println("Worker '$id' going to do work with value: $x")
 

@@ -17,7 +17,7 @@ class Application {
         By using @Bean annotated method here, I
         create beans that are going to be proxied
         by Spring.
-        The point here, is that I can use constructor
+        The point here is that I can use constructor
         to create my instances with my chosen input
         values, and executing any necessary initializing
         code.
@@ -59,7 +59,7 @@ class Application {
     }
 
     @Bean
-    fun counter(): Counter{
+    fun counter(): Counter {
         return Counter()
     }
 }

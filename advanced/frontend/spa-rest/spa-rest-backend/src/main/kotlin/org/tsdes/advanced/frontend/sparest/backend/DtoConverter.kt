@@ -11,7 +11,7 @@ object DtoConverter {
 
         return BookDto(
                 title = book.title,
-                author = book.title,
+                author = book.author,
                 year = book.year,
                 id = book.id.toString()
         )

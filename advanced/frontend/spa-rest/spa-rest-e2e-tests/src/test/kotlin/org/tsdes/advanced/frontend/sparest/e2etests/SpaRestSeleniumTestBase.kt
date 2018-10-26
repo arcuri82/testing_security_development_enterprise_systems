@@ -1,7 +1,7 @@
 package org.tsdes.advanced.frontend.sparest.e2etests
 
-import io.restassured.RestAssured
-import org.awaitility.Awaitility
+import io.restassured.RestAssured.given
+import org.awaitility.Awaitility.await
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.BeforeClass
@@ -37,7 +37,6 @@ abstract class SpaRestSeleniumTestBase {
                         .withLocalCompose(true)
 
 
-
         @BeforeClass
         @JvmStatic
         fun waitForServer() {
@@ -48,11 +47,12 @@ abstract class SpaRestSeleniumTestBase {
                 Note: here I am using the Awaitility library to do such waits
              */
 
-            Awaitility.await().atMost(40, TimeUnit.SECONDS)
+            await().atMost(40, TimeUnit.SECONDS)
+                    .pollInterval(4, TimeUnit.SECONDS)
                     .ignoreExceptions()
                     .until {
-                        RestAssured.given().get("http://localhost:8080/index.html").then().statusCode(200)
-                        RestAssured.given().get("http://localhost:8081/books").then().statusCode(200)
+                        given().get("http://localhost:8080/index.html").then().statusCode(200)
+                        given().get("http://localhost:8081/books").then().statusCode(200)
                         true
                     }
         }
@@ -69,7 +69,6 @@ abstract class SpaRestSeleniumTestBase {
 
         assertTrue("Failed to start from Home Page", home!!.isOnPage)
     }
-
 
 
     @Test

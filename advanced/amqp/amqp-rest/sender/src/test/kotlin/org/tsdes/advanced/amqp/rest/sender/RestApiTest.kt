@@ -1,10 +1,14 @@
 package org.tsdes.advanced.amqp.rest.sender
 
-import org.junit.Assert.*
+import io.restassured.RestAssured
+import io.restassured.RestAssured.given
+import org.junit.Before
 import org.junit.ClassRule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.util.TestPropertyValues
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ContextConfiguration
@@ -13,10 +17,9 @@ import org.testcontainers.containers.GenericContainer
 
 
 @RunWith(SpringRunner::class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = [(RestApiTest.Companion.Initializer::class)])
 class RestApiTest{
-
 
     companion object {
 
@@ -34,5 +37,30 @@ class RestApiTest{
                         .applyTo(configurableApplicationContext.environment)
             }
         }
+    }
+
+    @LocalServerPort
+    protected var port = 0
+
+
+    @Before
+    fun clean() {
+
+        // RestAssured configs shared by all the tests
+        RestAssured.baseURI = "http://localhost"
+        RestAssured.port = port
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
+    }
+
+    @Test
+    fun testSend(){
+
+        val msg = "foo"
+
+        given().port(port)
+                .body(msg)
+                .post("/sender")
+                .then()
+                .statusCode(204)
     }
 }

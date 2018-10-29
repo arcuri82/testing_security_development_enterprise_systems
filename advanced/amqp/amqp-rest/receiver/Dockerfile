@@ -1,5 +1,5 @@
-FROM openjdk:8
+FROM openjdk:8-alpine
 
 ADD target/receiver.jar .
 
-CMD java -jar receiver.jar  --spring.profiles.active=dc
+CMD java -jar receiver.jar

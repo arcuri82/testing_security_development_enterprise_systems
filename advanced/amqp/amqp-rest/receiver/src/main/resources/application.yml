@@ -1,8 +1,7 @@
-# Note the "-dc" in the file name.
-# This is to specify that this property file is used only if
-# the profile "dc" is active.
 
 # By default, it would bind to localhost.
 # But inside a Docker image, localhost would point to the image itself,
 # and not the Docker image in which RabbitMQ is running.
-spring.rabbitmq.host=rabbitmq
+spring:
+  rabbitmq:
+    host: rabbitmq

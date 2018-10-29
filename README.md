@@ -144,11 +144,9 @@ follows:
 
 ### Documentation
 
-This repository is still in an early stage of development.
-Documentation (early work in progress) is available 
+Current documentation is available 
 [here](doc/intro/main.md) for the `intro` course, and
-[here](doc/advanced/main.md) for the second `advanced` course 
-(this latter has code examples, but no documentation yet).
+[here](doc/advanced/main.md) for the second `advanced` course.
 
 ### Requirements
 

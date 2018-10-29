@@ -152,8 +152,21 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
-TODO remaining classes
+* **Lesson 12**: AMQP and RabbitMQ
+  
+  Slides: [[pdf]](slides/lesson_12.pdf), 
+          [[pptx]](slides/lesson_12.pptx)
+          
+  Modules:     
+  
+  * **advanced/advanced/amqp/base-queue**
+  * **advanced/advanced/amqp/distributed-work**
+  * **advanced/advanced/amqp/fanout**
+  * **advanced/advanced/amqp/direct-exchange**
+  * **advanced/advanced/amqp/topic-exchange**
+  * **advanced/advanced/amqp/amqp-rest**
 
+ 
 ## External Resources
 
 * [RFC-5789](https://tools.ietf.org/html/rfc5789): *PATCH Method for HTTP*. 
@@ -186,6 +199,8 @@ TODO remaining classes
 * Spring [online documentation](https://spring.io).
 * Kotlin [online documentation](https://kotlinlang.org/docs/kotlin-docs.pdf).
 * GraphQL [online documentation](https://graphql.org/).
+* RabbitMQ [online documentation](https://www.rabbitmq.com/)
+
 
 ## Exercises
 

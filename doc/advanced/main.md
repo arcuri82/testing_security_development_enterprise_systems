@@ -6,8 +6,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 01**: Intro, Kotlin and JSON
   
-  Slides: [[pdf]](slides/lesson_01_intro.pdf), 
-          [[pptx]](slides/lesson_01_intro.pptx)
+  Slides: [[pdf]](slides/lesson_01.pdf), 
+          [[pptx]](slides/lesson_01.pptx)
           
   Modules:     
   

@@ -92,6 +92,9 @@ class DiscoveryIntegrationDockerIT {
                 Might take time before the list of available instances per service
                 is updated in all the clients of Eureka for client-side balancing
                 with Ribbon.
+                However, although here we can check that Consumer can speak with at
+                least 1 Producer, it does not necessarily mean that it has yet the
+                IP addresses of all 3 producers.
             */
             Awaitility.await()
                     .atMost(40, TimeUnit.SECONDS)
@@ -120,21 +123,33 @@ class DiscoveryIntegrationDockerIT {
     fun testIntegration(){
 
         /*
-            Now that everything is setup, send many messages.
+            Now that everything is (mostly) setup, send many messages.
             Each "Producer" service should get at least 1 of them.
+            "Mostly" -> Consumer might have to wait up to 30s to get
+            notified by Eureka of all Producers
          */
 
         val responses : MutableList<String> = mutableListOf()
 
-        val n = 100
+        var counter = 0
 
-        (0 until n).forEach { responses.add(callConsumer()) }
+        Awaitility.await()
+                .atMost(40, TimeUnit.SECONDS)
+                .pollInterval(4, TimeUnit.SECONDS)
+                .ignoreExceptions()
+                .until {
+                    (0 until 10).forEach {
+                        counter++
+                        responses.add(callConsumer())
+                    }
 
-        assertEquals(n, responses.size)
+                    assertEquals(counter, responses.size)
 
-        assertEquals(3, responses.toSet().size)
+                    //should get responses from all 3 Producers
+                    assertEquals(3, responses.toSet().size)
+
+                    true
+                }
+
     }
-
-
-
 }

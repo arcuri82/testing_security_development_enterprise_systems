@@ -30,7 +30,7 @@ class MutationResolver(
             val msg = if (cause is ConstraintViolationException) {
                 "Violated constraints: ${cause.message}"
             }else {
-                e.message
+                "${e.javaClass}: ${e.message}"
             }
             return DataFetcherResult<String>(null, listOf(GenericGraphQLError(msg)))
         }

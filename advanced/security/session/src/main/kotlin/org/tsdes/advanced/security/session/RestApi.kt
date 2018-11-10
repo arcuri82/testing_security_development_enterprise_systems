@@ -47,6 +47,11 @@ class RestApi(
     }
 
 
+    /*
+        Note: this is just an example. Considering a SPA frontend, we should
+        never use endpoints with form encoding, as those are a security liability
+        due to CSRF attacks. Here, we should rather use JSON.
+     */
     @PostMapping(path = ["/signUp"],
             consumes = [(MediaType.APPLICATION_FORM_URLENCODED_VALUE)])
     fun signIn(@ModelAttribute(name = "the_user") username: String,

@@ -1,24 +1,18 @@
 package org.tsdes.intro.exercises.quizgame.selenium;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.tsdes.intro.exercises.quizgame.Application;
+import org.tsdes.intro.exercises.quizgame.backend.service.QuizService;
 import org.tsdes.intro.exercises.quizgame.selenium.po.IndexPO;
 import org.tsdes.intro.exercises.quizgame.selenium.po.SignUpPO;
 import org.tsdes.intro.exercises.quizgame.selenium.po.ui.MatchPO;
 import org.tsdes.intro.exercises.quizgame.selenium.po.ui.ResultPO;
-import org.tsdes.intro.exercises.quizgame.backend.service.QuizService;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 public abstract class SeleniumTestBase {
 
@@ -35,7 +29,7 @@ public abstract class SeleniumTestBase {
 
     private static final AtomicInteger counter = new AtomicInteger(0);
 
-    private String getUniqueId(){
+    private String getUniqueId() {
         return "foo_SeleniumLocalIT_" + counter.getAndIncrement();
     }
 
@@ -43,7 +37,7 @@ public abstract class SeleniumTestBase {
     private IndexPO home;
 
 
-    private IndexPO createNewUser(String username, String password){
+    private IndexPO createNewUser(String username, String password) {
 
         home.toStartingPage();
 
@@ -72,7 +66,7 @@ public abstract class SeleniumTestBase {
     }
 
     @Test
-    public void testCreateAndLogoutUser(){
+    public void testCreateAndLogoutUser() {
 
         assertFalse(home.isLoggedIn());
 
@@ -158,7 +152,7 @@ public abstract class SeleniumTestBase {
 
             resultPO = matchPO.answerQuestion(rightAnswer);
 
-            if(i != 5) {
+            if (i != 5) {
                 assertNull(resultPO);
             }
         }

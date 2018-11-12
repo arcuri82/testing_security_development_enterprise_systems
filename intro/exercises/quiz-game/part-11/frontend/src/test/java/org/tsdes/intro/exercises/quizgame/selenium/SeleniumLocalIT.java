@@ -5,8 +5,8 @@ import org.junit.AssumptionViolatedException;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
-import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.tsdes.intro.exercises.quizgame.Application;
@@ -16,7 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
-public class SeleniumLocalIT extends SeleniumTestBase{
+public class SeleniumLocalIT extends SeleniumTestBase {
 
     private static WebDriver driver;
 
@@ -25,11 +25,11 @@ public class SeleniumLocalIT extends SeleniumTestBase{
 
 
     @BeforeClass
-    public static void initClass(){
+    public static void initClass() {
 
         driver = SeleniumDriverHandler.getChromeDriver();
 
-        if(driver == null){
+        if (driver == null) {
             //Do not fail the tests.
             throw new AssumptionViolatedException("Cannot find/initialize Chrome driver");
         }
@@ -37,7 +37,7 @@ public class SeleniumLocalIT extends SeleniumTestBase{
 
     @AfterClass
     public static void tearDown() {
-        if(driver != null) {
+        if (driver != null) {
             driver.close();
         }
     }

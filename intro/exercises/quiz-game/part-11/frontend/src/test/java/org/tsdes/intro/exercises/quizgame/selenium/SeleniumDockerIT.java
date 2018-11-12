@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.util.EnvironmentTestUtils;
+import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -40,8 +40,7 @@ public class SeleniumDockerIT extends SeleniumTestBase {
             .withExposedPorts(5432)
             .withNetwork(network)
             .withNetworkAliases(PG_ALIAS)
-            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("POSTGRES")))
-            ;
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("POSTGRES")));
 
 
     public static class DockerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
@@ -52,13 +51,11 @@ public class SeleniumDockerIT extends SeleniumTestBase {
             String host = postgres.getContainerIpAddress();
             int port = postgres.getMappedPort(5432);
 
-            EnvironmentTestUtils.addEnvironment(
-                    "testcontainers",
-                    configurableApplicationContext.getEnvironment(),
+            TestPropertyValues.of(
                     "spring.datasource.url=jdbc:postgresql://" + host + ":" + port + "/postgres",
                     "spring.datasource.username=postgres",
                     "spring.datasource.password"
-            );
+            ).applyTo(configurableApplicationContext.getEnvironment());
         }
     }
 
@@ -72,8 +69,7 @@ public class SeleniumDockerIT extends SeleniumTestBase {
             .withNetwork(network)
             .withNetworkAliases(QUIZ_HOST_ALIAS)
             .waitingFor(Wait.forHttp("/"))
-            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("QUIZGAME")))
-            ;
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("QUIZGAME")));
 
     public BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
             .withDesiredCapabilities(DesiredCapabilities.chrome())

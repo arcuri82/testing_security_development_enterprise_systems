@@ -18,10 +18,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <version.java>1.8</version.java>
-        <version.springboot>1.5.4.RELEASE</version.springboot>
-        <joinfaces.version>2.4.1</joinfaces.version>
+        <version.springboot>2.1.0.RELEASE</version.springboot>
+        <joinfaces.version>3.2.3</joinfaces.version>
         <version.h2>1.4.194</version.h2>
-        <version.testcontainers>1.6.0</version.testcontainers>
+        <version.testcontainers>1.10.1</version.testcontainers>
         <version.selenium>3.9.0</version.selenium>
         <version.jacoco>0.7.9</version.jacoco>
     </properties>

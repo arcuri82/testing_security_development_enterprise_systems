@@ -1,6 +1,6 @@
 # ONLY used for testing
 
-FROM openjdk:8
+FROM openjdk:8-alpine
 
 ADD target/quizgame-exec.jar .
 

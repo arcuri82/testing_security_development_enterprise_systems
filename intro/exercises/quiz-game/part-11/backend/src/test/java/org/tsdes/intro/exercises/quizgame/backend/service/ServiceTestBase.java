@@ -1,6 +1,6 @@
 package org.tsdes.intro.exercises.quizgame.backend.service;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -12,7 +12,7 @@ public class ServiceTestBase {
     private ResetService deleteService;
 
 
-    @Before
+    @BeforeEach
     public void cleanDatabase(){
         deleteService.resetDatabase();
     }

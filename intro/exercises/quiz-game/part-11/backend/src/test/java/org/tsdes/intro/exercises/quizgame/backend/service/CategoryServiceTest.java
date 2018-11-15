@@ -1,41 +1,42 @@
 package org.tsdes.intro.exercises.quizgame.backend.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.tsdes.intro.exercises.quizgame.backend.StubApplication;
 import org.tsdes.intro.exercises.quizgame.backend.entity.Category;
 import org.tsdes.intro.exercises.quizgame.backend.entity.SubCategory;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 /**
  * Created by arcuri82 on 14-Dec-17.
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = StubApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class CategoryServiceTest extends ServiceTestBase{
+public class CategoryServiceTest extends ServiceTestBase {
 
     @Autowired
     private CategoryService categoryService;
 
 
     @Test
-    public void testNoCategory(){
+    public void testNoCategory() {
 
         List<Category> list = categoryService.getAllCategories(false);
         assertEquals(0, list.size());
     }
 
     @Test
-    public void testCreateCategory(){
+    public void testCreateCategory() {
 
         String name = "testCreateCategory";
 
@@ -44,7 +45,7 @@ public class CategoryServiceTest extends ServiceTestBase{
     }
 
     @Test
-    public void testGetCategory(){
+    public void testGetCategory() {
 
         String name = "testGetCategory";
 
@@ -57,7 +58,7 @@ public class CategoryServiceTest extends ServiceTestBase{
 
 
     @Test
-    public void testCreateSubCategory(){
+    public void testCreateSubCategory() {
 
         String ctgName = "ctg_testCreateSubCategory";
         long ctgId = categoryService.createCategory(ctgName);
@@ -71,7 +72,7 @@ public class CategoryServiceTest extends ServiceTestBase{
     }
 
     @Test
-    public void testGetAllCategories(){
+    public void testGetAllCategories() {
 
         long a = categoryService.createCategory("a");
         long b = categoryService.createCategory("b");
@@ -90,7 +91,7 @@ public class CategoryServiceTest extends ServiceTestBase{
         try {
             first.getSubCategories().size();
             fail();
-        } catch (Exception e){
+        } catch (Exception e) {
             //expected
         }
 
@@ -102,7 +103,7 @@ public class CategoryServiceTest extends ServiceTestBase{
     }
 
     @Test
-    public void testCreateTwice(){
+    public void testCreateTwice() {
 
         String ctg = "Computer Science";
 
@@ -111,7 +112,7 @@ public class CategoryServiceTest extends ServiceTestBase{
         try {
             categoryService.createCategory(ctg);
             fail();
-        }catch (Exception e){
+        } catch (Exception e) {
             //expected
         }
     }

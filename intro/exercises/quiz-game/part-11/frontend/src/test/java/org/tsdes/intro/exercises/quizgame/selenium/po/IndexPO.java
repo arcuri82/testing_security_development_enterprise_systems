@@ -4,7 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.tsdes.intro.exercises.quizgame.selenium.PageObject;
 import org.tsdes.intro.exercises.quizgame.selenium.po.ui.MatchPO;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class IndexPO extends LayoutPO {
 

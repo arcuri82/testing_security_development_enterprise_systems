@@ -1,7 +1,8 @@
 package org.tsdes.intro.exercises.quizgame.selenium;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tsdes.intro.exercises.quizgame.backend.service.QuizService;
@@ -12,7 +13,8 @@ import org.tsdes.intro.exercises.quizgame.selenium.po.ui.ResultPO;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public abstract class SeleniumTestBase {
 
@@ -49,7 +51,7 @@ public abstract class SeleniumTestBase {
         return indexPO;
     }
 
-    @Before
+    @BeforeEach
     public void initTest() {
 
         /*
@@ -62,7 +64,7 @@ public abstract class SeleniumTestBase {
 
         home.toStartingPage();
 
-        assertTrue("Failed to start from Home Page", home.isOnPage());
+        assertTrue(home.isOnPage(), "Failed to start from Home Page");
     }
 
     @Test

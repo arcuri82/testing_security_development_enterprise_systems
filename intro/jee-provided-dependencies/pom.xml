@@ -75,13 +75,6 @@
             </dependency>
 
 
-
-            <dependency>
-                <groupId>org.hibernate.javax.persistence</groupId>
-                <artifactId>hibernate-jpa-2.1-api</artifactId>
-                <version>${version.hibernate.jpa}</version>
-                <scope>provided</scope>
-            </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>

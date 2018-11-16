@@ -41,7 +41,7 @@ notifications:
 # The actual command we do for compiling.
 # Note: Travis has a quite limited handling of build log files, so need
 # to minimize them, ie do not be too verbose
-script: mvn clean verify  --quiet
+script: mvn clean verify
 
 # Note: in Continuous Delivery, we could do a "mvn deploy" here to automatically
 # deploy the artifacts if build is successful.

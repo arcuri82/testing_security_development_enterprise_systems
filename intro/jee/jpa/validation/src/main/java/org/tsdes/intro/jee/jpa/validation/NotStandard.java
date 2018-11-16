@@ -1,18 +1,21 @@
 package org.tsdes.intro.jee.jpa.validation;
 
-import org.hibernate.validator.constraints.Email;
+
+
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.ZonedDateTime;
 
 /**
+ * In JEE 7, @NotBlank and @Email were available in Hibernate, but not JPA.
+ * You could still use them, but not with other providers besides Hibernate.
+ * But, because they are quite usuful, in JEE 8 those "not-standard" constraints
+ * were added to JPA.
+ *
  * Created by arcuri82 on 25-Jan-17.
  */
 @Entity
@@ -31,8 +34,8 @@ public class NotStandard {
     private String  name;
 
     /*
-        this is custom from Hibernate, and means:
-        not null, not empty while ignoring trailing spaces.
+        NotBlank means:
+        not null, and not empty while ignoring trailing spaces.
 
         Note: if you do not want to allow spaces, you need to use
         a regular expression

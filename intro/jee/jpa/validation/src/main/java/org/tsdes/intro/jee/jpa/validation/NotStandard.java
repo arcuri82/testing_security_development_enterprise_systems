@@ -46,7 +46,8 @@ public class NotStandard {
 
     /*
         When you want to represent a date in Java, use
-        ZonedDateTime (Java 8) and not Date (Java <= 7)
+        ZonedDateTime (Java 8) and not Date (Java <= 7).
+        You can consider java.util.Date as deprecated.
 
         Note: if you are interested in just the date, and not the time,
         you can use LocalDate (like it would be for a birthday date).
@@ -58,12 +59,12 @@ public class NotStandard {
         - the time: eg 16:43:23
         - the zone: eg CET (Central European Time) and UTC (Coordinated Universal Time)
 
-        Note: JPA 2.1 does not support Java 8 time objects, but Hibernate does
+        Note: JPA 2.1 (JEE 7) did not support Java 8 time objects, whereas Hibernate did.
+        JPA 2.2 (in JEE 8) does support directly them.
      */
     @Past
     private ZonedDateTime dateOfBirth;
 
-    //another custom constraint from Hibernate
     @Email
     private String email;
 

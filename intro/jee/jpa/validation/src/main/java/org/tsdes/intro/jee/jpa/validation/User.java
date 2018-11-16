@@ -55,6 +55,8 @@ public class User {
     private Date dateOfRegistration;
 
     /*
+        FIXME replace all Date and merge NotStandard
+
        unfortunately, Date is Java <= 7, and the one supported in JPA 2.1.
        to handle the new Java 8 Time API (java.time.*) we would need special mappings
        or use non-standard (ie no JPA) functionalities in Hibernate

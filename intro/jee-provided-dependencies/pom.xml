@@ -12,9 +12,9 @@
     </parent>
 
     <properties>
-        <version.hibernate.jpa>1.0.0.Final</version.hibernate.jpa>
-        <version.hibernate.core>5.2.9.Final</version.hibernate.core>
-        <version.hibernate.validator>5.3.4.Final</version.hibernate.validator>
+        <version.hibernate.jpa>1.0.2.Final</version.hibernate.jpa>
+        <version.hibernate.core>5.3.7.Final</version.hibernate.core>
+        <version.hibernate.validator>6.0.13.Final</version.hibernate.validator>
         <version.javax.el>2.2.4</version.javax.el>
     </properties>
 
@@ -22,8 +22,8 @@
         <dependencies>
             <dependency>
                 <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-7.0</artifactId>
-                <version>1.0.4.Final</version>
+                <artifactId>jboss-javaee-8.0</artifactId>
+                <version>1.0.1.Final</version>
                 <!-- Import all libraries definitions in this dependency pom file  -->
                 <type>pom</type>
                 <scope>import</scope>
@@ -70,7 +70,7 @@
             <dependency>
                 <groupId>javax</groupId>
                 <artifactId>javaee-api</artifactId>
-                <version>7.0</version>
+                <version>8.0</version>
                 <scope>provided</scope>
             </dependency>
 

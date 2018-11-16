@@ -11,7 +11,7 @@ language: java
 jdk:
   - oraclejdk8
 
-# TODO check if working fine on Travis
+# In some examples, we will use NodeJS as runtime to run JavaScript code
 node_js:
   - node
 

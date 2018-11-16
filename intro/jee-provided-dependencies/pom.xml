@@ -15,7 +15,7 @@
         <version.hibernate.jpa>1.0.2.Final</version.hibernate.jpa>
         <version.hibernate.core>5.3.7.Final</version.hibernate.core>
         <version.hibernate.validator>6.0.13.Final</version.hibernate.validator>
-        <version.javax.el>2.2.4</version.javax.el>
+        <version.javax.el>3.0.0</version.javax.el>
     </properties>
 
     <dependencyManagement>
@@ -109,7 +109,7 @@
             </dependency>
             <dependency>
                 <!-- Note: this has the other as dependency -->
-                <groupId>org.glassfish.web</groupId>
+                <groupId>org.glassfish</groupId>
                 <artifactId>javax.el</artifactId>
                 <version>${version.javax.el}</version>
             </dependency>

@@ -27,7 +27,6 @@
 
     <properties>
         <version.kotlin>1.2.70</version.kotlin>
-        <version.springboot>2.0.6.RELEASE</version.springboot>
         <version.springcloud>Finchley.SR1</version.springcloud>
         <version.springfox>2.9.2</version.springfox>
         <version.graphql-spring>4.2.0</version.graphql-spring>
@@ -106,14 +105,7 @@
             </dependency>
 
 
-            <!-- SpringBoot and Cloud BOMs -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${version.springboot}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
+            <!-- Spring Cloud BOM -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

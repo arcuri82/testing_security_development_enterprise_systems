@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 /**
  * Created by arcuri82 on 26-Jan-18.
  */
-@ActiveProfiles("docker") //activate profile, load configs from application-docker.yml
+@ActiveProfiles("bar") //activate profile, load configs from application-bar.properties
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class PropertiesProfileTest {
@@ -26,8 +26,8 @@ public class PropertiesProfileTest {
     @Value("${my.custom.test}")
     private String test;
 
-    @Value("${my.custom.docker}")
-    private String docker;
+    @Value("${my.custom.bar}")
+    private String bar;
 
     @Autowired
     private Environment env;
@@ -37,14 +37,14 @@ public class PropertiesProfileTest {
 
         assertNotNull(foo);
         assertNotNull(test);
-        assertNotNull(docker);
+        assertNotNull(bar);
 
         assertEquals(foo, env.getProperty("my.custom.foo"));
         assertEquals(test, env.getProperty("my.custom.test"));
-        assertEquals(docker, env.getProperty("my.custom.docker"));
+        assertEquals(bar, env.getProperty("my.custom.bar"));
 
-        assertEquals("docker", foo);
-        assertEquals(foo, docker);
+        assertEquals("bar", foo);
+        assertEquals(foo, bar);
         assertNotEquals(foo, test);
     }
 }

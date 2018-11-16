@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>report</artifactId>
+    <artifactId>jacoco-report</artifactId>
     <packaging>jar</packaging>
 
     <parent>
@@ -22,12 +22,12 @@
         -->
         <dependency>
             <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
-            <artifactId>backend</artifactId>
+            <artifactId>jacoco-backend</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
-            <artifactId>frontend</artifactId>
+            <artifactId>jacoco-frontend</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

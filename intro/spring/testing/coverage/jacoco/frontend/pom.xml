@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>frontend</artifactId>
+    <artifactId>jacoco-frontend</artifactId>
     <packaging>jar</packaging>
 
     <parent>
@@ -17,7 +17,7 @@
         <!-- Note the dependency to the other module -->
         <dependency>
             <groupId>org.tsdes.intro.spring.testing.coverage.jacoco</groupId>
-            <artifactId>backend</artifactId>
+            <artifactId>jacoco-backend</artifactId>
             <!--
                 For the version, we use a Maven property so we do not need to update it every
                 time we make a new release

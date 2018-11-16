@@ -21,15 +21,4 @@
         <module>flyway</module>
     </modules>
 
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.joinfaces</groupId>
-                <artifactId>jsf-spring-boot-starter</artifactId>
-                <version>2.4.1</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
 </project>

@@ -188,14 +188,8 @@ public class CommentServiceTest {
             fail();
         } catch (Exception e){}
 
-        /*
-            WARN: undocumented, counter-intuitive behavior:
-            if 0 value, JPA/Hibernate just ignores it and returns everything.
-            Not that a query with 0 results would make sense, but if passing
-            0 by mistake (ie bug), it would be hard to find out
-         */
-        Assert.assertEquals(3 , commentService.getMostRecentComments(0).size());
 
+        Assert.assertEquals(0 , commentService.getMostRecentComments(0).size());
         Assert.assertEquals(1 , commentService.getMostRecentComments(1).size());
         Assert.assertEquals(2 , commentService.getMostRecentComments(2).size());
         Assert.assertEquals(3 , commentService.getMostRecentComments(3).size());

@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jee-provided-dependencies</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.tsdes.intro</groupId>
+        <artifactId>intro</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <version.hibernate.jpa>1.0.0.Final</version.hibernate.jpa>
+        <version.hibernate.core>5.2.9.Final</version.hibernate.core>
+        <version.hibernate.validator>5.3.4.Final</version.hibernate.validator>
+        <version.javax.el>2.2.4</version.javax.el>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-7.0</artifactId>
+                <version>1.0.4.Final</version>
+                <!-- Import all libraries definitions in this dependency pom file  -->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.junit</groupId>
+                <artifactId>arquillian-junit-container</artifactId>
+                <version>1.4.1.Final</version>
+                <!-- make sure it is in test scope -->
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.core</groupId>
+                <artifactId>arquillian-core-api</artifactId>
+                <version>1.4.1.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.arquillian</groupId>
+                <artifactId>wildfly-arquillian-container-managed</artifactId>
+                <version>2.1.1.Final</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <!-- embedded JEE GlassFish container -->
+                <groupId>org.glassfish.main.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>4.1.1</version>
+            </dependency>
+
+
+            <!--
+                The scope
+                <scope>provided</scope>
+                is quite important for JEE.
+                It means that those libraries are available at compilation and test time, but,
+                they will not be included in the final WAR/JAR files.
+                Why? Because the JEE container will already contain them. However, what is
+                actually contained depends from container to container (eg few differences
+                between GlassFish and JBoss/WildFly). Here we have settings for WildFly.
+                Note: actual settings can be overwritten in the module pom.xml files.
+            -->
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>7.0</version>
+                <scope>provided</scope>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>${version.hibernate.jpa}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${version.hibernate.core}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${version.hibernate.validator}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${version.h2}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- these are needed when using Hibernate in SE instead of JEE -->
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${version.javax.el}</version>
+            </dependency>
+            <dependency>
+                <!-- Note: this has the other as dependency -->
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${version.javax.el}</version>
+            </dependency>
+
+            <!-- For EclipseLink -->
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.jpa</artifactId>
+                <version>2.6.4</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

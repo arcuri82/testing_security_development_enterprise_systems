@@ -3,7 +3,7 @@ package org.tsdes.intro.spring.bean.profile;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.util.EnvironmentTestUtils;
+import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -56,11 +56,8 @@ public class PostgresDocketTest extends DbTestBase {
             String host = postgres.getContainerIpAddress();
             int port = postgres.getMappedPort(5432);
 
-            EnvironmentTestUtils.addEnvironment(
-                    "testcontainers",
-                    configurableApplicationContext.getEnvironment(),
-                    "spring.datasource.url=jdbc:postgresql://" + host + ":" + port + "/postgres"
-            );
+            TestPropertyValues.of("spring.datasource.url=jdbc:postgresql://" + host + ":" + port + "/postgres")
+                    .applyTo(configurableApplicationContext.getEnvironment());
         }
     }
 

@@ -7,7 +7,7 @@ import org.tsdes.misc.testutils.selenium.PageObject;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MatchPO extends LayoutPO {
 

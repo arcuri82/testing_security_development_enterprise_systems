@@ -8,14 +8,17 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.*
-import org.junit.*
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationTest {
 
@@ -32,7 +35,7 @@ class ApplicationTest {
 
         private lateinit var wiremockServer: WireMockServer
 
-        @BeforeClass
+        @BeforeAll
         @JvmStatic
         fun initClass() {
             RestAssured.baseURI = "http://localhost"
@@ -45,14 +48,14 @@ class ApplicationTest {
             wiremockServer.start()
         }
 
-        @AfterClass
+        @AfterAll
         @JvmStatic
         fun tearDown() {
             wiremockServer.stop()
         }
     }
 
-    @Before
+    @BeforeEach
     fun initialize() {
         RestAssured.port = port
         wiremockServer.resetAll()

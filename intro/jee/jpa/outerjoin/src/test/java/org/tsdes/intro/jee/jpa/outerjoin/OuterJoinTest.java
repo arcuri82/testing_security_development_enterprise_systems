@@ -1,11 +1,14 @@
 package org.tsdes.intro.jee.jpa.outerjoin;
 
-import org.junit.After;
-import org.junit.Test;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 /**
  * Created by arcuri82 on 02-Feb-17.
@@ -15,7 +18,7 @@ public class OuterJoinTest {
     private EntityManagerFactory factory;
 
 
-    @After
+    @AfterEach
     public void tearDown() {
         factory.close();
     }

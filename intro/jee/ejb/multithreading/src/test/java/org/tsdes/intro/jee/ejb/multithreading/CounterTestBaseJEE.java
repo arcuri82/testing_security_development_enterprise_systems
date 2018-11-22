@@ -1,7 +1,7 @@
 package org.tsdes.intro.jee.ejb.multithreading;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
@@ -15,7 +15,7 @@ public abstract class CounterTestBaseJEE extends CounterTestBase {
     private EJBContainer ec;
     private Context ctx;
 
-    @Before
+    @BeforeEach
     public void initContainer() {
 
         /*
@@ -30,7 +30,7 @@ public abstract class CounterTestBaseJEE extends CounterTestBase {
         ctx = ec.getContext();
     }
 
-    @After
+    @AfterEach
     public void closeContainer() throws Exception {
         if (ctx != null)
             ctx.close();

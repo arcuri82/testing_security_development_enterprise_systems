@@ -1,11 +1,14 @@
 package org.tsdes.intro.spring.security.authorization.selenium;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.tsdes.intro.spring.security.authorization.Application;
 import org.tsdes.intro.spring.security.authorization.selenium.po.IndexPO;
 import org.tsdes.intro.spring.security.authorization.selenium.po.LoginPO;
@@ -15,10 +18,13 @@ import org.tsdes.misc.testutils.selenium.SeleniumDriverHandler;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 public class SeleniumLocalIT {
 
@@ -36,25 +42,22 @@ public class SeleniumLocalIT {
     }
 
 
-    @BeforeClass
+    @BeforeAll
     public static void initClass() {
 
         driver = SeleniumDriverHandler.getChromeDriver();
 
-        if (driver == null) {
-            //Do not fail the tests.
-            throw new AssumptionViolatedException("Cannot find/initialize Chrome driver");
-        }
+        assumeTrue(driver != null, "Cannot find/initialize Chrome driver");
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() {
         if (driver != null) {
             driver.close();
         }
     }
 
-    @Before
+    @BeforeEach
     public void initTest() {
 
         /*
@@ -67,7 +70,7 @@ public class SeleniumLocalIT {
 
         home.toStartingPage();
 
-        assertTrue("Failed to start from Home Page", home.isOnPage());
+        assertTrue(home.isOnPage(), "Failed to start from Home Page");
     }
 
 

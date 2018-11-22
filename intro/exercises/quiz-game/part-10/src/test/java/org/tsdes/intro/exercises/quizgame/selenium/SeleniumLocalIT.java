@@ -1,12 +1,15 @@
 package org.tsdes.intro.exercises.quizgame.selenium;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.tsdes.intro.exercises.quizgame.Application;
 import org.tsdes.intro.exercises.quizgame.selenium.po.IndexPO;
 import org.tsdes.intro.exercises.quizgame.selenium.po.SignUpPO;
@@ -17,10 +20,11 @@ import org.tsdes.misc.testutils.selenium.SeleniumDriverHandler;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class,
         webEnvironment = RANDOM_PORT)
 public class SeleniumLocalIT {
@@ -42,18 +46,16 @@ public class SeleniumLocalIT {
 
 
 
-    @BeforeClass
+    @BeforeAll
     public static void initClass() {
 
         driver = SeleniumDriverHandler.getChromeDriver();
 
-        if (driver == null) {
-            //Do not fail the tests.
-            throw new AssumptionViolatedException("Cannot find/initialize Chrome driver");
-        }
+        //Do not fail the tests.
+        assumeTrue(driver != null, "Cannot find/initialize Chrome driver");
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() {
         if (driver != null) {
             driver.close();
@@ -76,7 +78,7 @@ public class SeleniumLocalIT {
         return indexPO;
     }
 
-    @Before
+    @BeforeEach
     public void initTest() {
 
         /*
@@ -89,7 +91,7 @@ public class SeleniumLocalIT {
 
         home.toStartingPage();
 
-        assertTrue("Failed to start from Home Page", home.isOnPage());
+        assertTrue(home.isOnPage(), "Failed to start from Home Page");
     }
 
     @Test

@@ -1,14 +1,15 @@
 package org.tsdes.advanced.frontend.websocketchat
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.BeforeClass
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.messaging.converter.MappingJackson2MessageConverter
 import org.springframework.messaging.simp.stomp.*
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.web.socket.WebSocketHttpHeaders
 import org.springframework.web.socket.client.standard.StandardWebSocketClient
@@ -19,7 +20,7 @@ import java.lang.reflect.Type
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ChatControllerTest {
 
@@ -35,7 +36,7 @@ class ChatControllerTest {
 
         private lateinit var stompClient: WebSocketStompClient
 
-        @BeforeClass
+        @BeforeAll
         @JvmStatic
         fun initializeTests() {
             val transports = listOf(WebSocketTransport(StandardWebSocketClient()))

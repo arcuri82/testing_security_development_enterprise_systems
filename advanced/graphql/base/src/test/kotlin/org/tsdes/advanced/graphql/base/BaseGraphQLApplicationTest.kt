@@ -5,17 +5,17 @@ import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.Matchers.hasKey
-import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.misc.testutils.HttpUtils
 
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [BaseGraphQLApplication::class],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BaseGraphQLApplicationTest {
@@ -29,7 +29,7 @@ class BaseGraphQLApplicationTest {
         2) as body payload in a POST
      */
 
-    @Before
+    @BeforeEach
     fun clean() {
 
         // RestAssured configs shared by all the tests

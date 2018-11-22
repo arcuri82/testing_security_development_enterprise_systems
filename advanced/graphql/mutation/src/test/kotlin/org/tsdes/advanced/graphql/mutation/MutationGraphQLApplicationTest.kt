@@ -4,15 +4,15 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [MutationGraphQLApplication::class],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MutationGraphQLApplicationTest {
@@ -24,7 +24,7 @@ class MutationGraphQLApplicationTest {
     private lateinit var repository: UserRepository
 
 
-    @Before
+    @BeforeEach
     fun clean() {
 
         // RestAssured configs shared by all the tests

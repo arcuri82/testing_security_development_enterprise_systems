@@ -1,9 +1,10 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
@@ -19,7 +20,7 @@ public class TestBase {
 
     protected static QueriesEJB queriesEJB;
 
-    @BeforeClass
+    @BeforeAll
     public static void initContainer() throws Exception {
         Map<String, Object> properties = new HashMap<>();
         properties.put(EJBContainer.MODULES, new File("target/classes"));
@@ -37,7 +38,7 @@ public class TestBase {
         }
     }
 
-    @AfterClass
+    @AfterAll
     public static void closeContainer() throws Exception {
         if (ctx != null)
             ctx.close();
@@ -45,8 +46,8 @@ public class TestBase {
             ec.close();
     }
 
-    @Before
-    @After
+    @BeforeEach
+    @AfterEach
     public void emptyDatabase(){
         //this is quicker than re-initialize the whole DB / EJB container
         queriesEJB.deleteAll();

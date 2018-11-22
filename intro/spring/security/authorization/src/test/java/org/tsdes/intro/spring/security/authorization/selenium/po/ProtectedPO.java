@@ -2,7 +2,8 @@ package org.tsdes.intro.spring.security.authorization.selenium.po;
 
 import org.tsdes.misc.testutils.selenium.PageObject;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class ProtectedPO extends PageObject {
 

@@ -1,7 +1,8 @@
 package org.tsdes.intro.spring.testing.selenium.jsftests.selenium;
 
-import org.junit.ClassRule;
-import org.junit.Rule;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ public class SeleniumDockerIT extends SeleniumTestBase {
 
     private static String HOST_ALIAS = "jsf-tests";
 
-    @ClassRule
     public static Network network = Network.newNetwork();
 
     /*
@@ -27,7 +27,7 @@ public class SeleniumDockerIT extends SeleniumTestBase {
         as @Rule is applied per test
      */
 
-    @ClassRule
+
     public static GenericContainer spring = new GenericContainer(
             new ImageFromDockerfile("jsf-tests")
                     .withFileFromPath("target/spring-jsf-exec.jar",
@@ -40,12 +40,24 @@ public class SeleniumDockerIT extends SeleniumTestBase {
             .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("SPRING-APPLICATION")))
             ;
 
-    @Rule
-    public BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
+
+    public static BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
             .withDesiredCapabilities(DesiredCapabilities.chrome())
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.SKIP, null)
             .withNetwork(network);
 
+
+    @BeforeAll
+    public static void init(){
+        spring.start();
+        browser.start();
+    }
+
+    @AfterAll
+    public static void tearDown(){
+        browser.stop();
+        spring.stop();
+    }
 
     @Override
     protected WebDriver getDriver() {

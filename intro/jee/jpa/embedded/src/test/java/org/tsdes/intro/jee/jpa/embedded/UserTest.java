@@ -1,28 +1,31 @@
 package org.tsdes.intro.jee.jpa.embedded;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class UserTest {
 
     private EntityManagerFactory factory;
     private EntityManager em;
 
-    @Before
+    @BeforeEach
     public void init() {
         factory = Persistence.createEntityManagerFactory("DB");
         em = factory.createEntityManager();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         em.close();
         factory.close();

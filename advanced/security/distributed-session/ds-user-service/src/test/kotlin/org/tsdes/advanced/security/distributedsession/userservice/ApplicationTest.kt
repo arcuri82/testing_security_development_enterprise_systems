@@ -4,20 +4,18 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Ignore
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.advanced.security.distributedsession.userservice.dto.UserInfoDto
 
 
-
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationTest{
 
@@ -28,7 +26,7 @@ class ApplicationTest{
     private lateinit var userInfoRepository : UserInfoRepository
 
 
-    @Before
+    @BeforeEach
     fun initialize() {
         RestAssured.baseURI = "http://localhost"
         RestAssured.basePath = "/usersInfo"

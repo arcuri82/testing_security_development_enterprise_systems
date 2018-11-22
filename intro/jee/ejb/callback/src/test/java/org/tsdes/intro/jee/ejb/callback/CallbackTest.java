@@ -1,8 +1,8 @@
 package org.tsdes.intro.jee.ejb.callback;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
@@ -11,14 +11,17 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 
 public class CallbackTest {
 
     protected static EJBContainer ec;
     protected static Context ctx;
 
-    @Before
+    @BeforeEach
     public void initContainer() throws Exception {
         Map<String, Object> properties = new HashMap<>();
         properties.put(EJBContainer.MODULES, new File("target/classes"));
@@ -34,7 +37,7 @@ public class CallbackTest {
         }
     }
 
-    @After
+    @AfterEach
     public void closeContainer() throws Exception {
         if (ctx != null)
             ctx.close();

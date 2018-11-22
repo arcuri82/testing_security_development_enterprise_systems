@@ -1,15 +1,16 @@
 package org.tsdes.intro.exercises.quizgame.entity;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class QuizEntityTest {
@@ -18,13 +19,13 @@ public class QuizEntityTest {
     private EntityManagerFactory factory;
     private EntityManager em;
 
-    @Before
+    @BeforeEach
     public void init() {
         factory = Persistence.createEntityManagerFactory("DB");
         em = factory.createEntityManager();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         em.close();
         factory.close();

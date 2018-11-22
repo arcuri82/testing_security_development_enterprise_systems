@@ -1,23 +1,26 @@
 package org.tsdes.intro.jee.jpa.lock;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class UserTest {
 
     private EntityManagerFactory factory;
 
-    @Before
+    @BeforeEach
     public void init() {
         factory = Persistence.createEntityManagerFactory("DB");
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         factory.close();
     }

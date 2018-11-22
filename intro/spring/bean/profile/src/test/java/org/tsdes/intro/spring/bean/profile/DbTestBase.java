@@ -1,11 +1,12 @@
 package org.tsdes.intro.spring.bean.profile;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.tsdes.intro.spring.bean.jpa.CounterService;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * Created by arcuri82 on 26-Jan-18.

@@ -9,18 +9,18 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.core.IsEqual.equalTo
-import org.junit.AfterClass
-import org.junit.BeforeClass
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
 /**
  * Created by arcuri82 on 03-Aug-17.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("test") //to override properties, eg "fixerWebAddress"
 class ConverterRestServiceXmlTest {
@@ -47,7 +47,7 @@ class ConverterRestServiceXmlTest {
 
         private lateinit var wiremockServer: WireMockServer
 
-        @BeforeClass @JvmStatic
+        @BeforeAll @JvmStatic
         fun initClass() {
             RestAssured.baseURI = "http://localhost"
             RestAssured.port = 8080
@@ -64,7 +64,7 @@ class ConverterRestServiceXmlTest {
             wiremockServer.start()
         }
 
-        @AfterClass @JvmStatic
+        @AfterAll @JvmStatic
         fun tearDown() {
             wiremockServer.stop()
         }

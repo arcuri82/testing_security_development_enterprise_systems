@@ -1,13 +1,13 @@
 package org.tsdes.intro.jee.ejb.framework.injection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tsdes.intro.jee.ejb.framework.injection.data.BasicInjectionClass;
 import org.tsdes.intro.jee.ejb.framework.injection.data.CompositeInjectionClass;
 import org.tsdes.intro.jee.ejb.framework.injection.data.EmptyClass;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**

@@ -1,10 +1,14 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import javax.ejb.EJBException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class EJB_08_NOT_SUPPORTEDTest extends TestBase{
 

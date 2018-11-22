@@ -4,8 +4,8 @@ package org.tsdes.advanced.rest.newsrest.api
 import io.restassured.RestAssured.*
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.*
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import org.tsdes.advanced.rest.newsrest.dto.NewsDto
 import org.tsdes.misc.testutils.HttpUtils
 
@@ -107,7 +107,7 @@ class HttpTest : NRTestBase() {
         http += "\n"
 
         val response = HttpUtils.executeHttpCommand("localhost", port, http)
-        assertTrue("Response:\n" + response, response.contains("405"))
+        assertTrue(response.contains("405"), "Response:\n$response")
     }
 
     @Test

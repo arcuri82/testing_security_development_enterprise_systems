@@ -4,22 +4,22 @@ import com.netflix.hystrix.Hystrix
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.util.concurrent.TimeUnit
 
 
 /**
  * Created by arcuri82 on 04-Aug-17.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class YRestTest {
 
@@ -29,7 +29,7 @@ class YRestTest {
     @Autowired
     private lateinit var yRest: YRest
 
-    @Before
+    @BeforeEach
     fun reset() {
 
         RestAssured.baseURI = "http://localhost"
@@ -130,7 +130,7 @@ class YRestTest {
         exe(value)
         delta = System.currentTimeMillis() - start
 
-        assertTrue("Delta: $delta", delta < 1000) //likely even shorter than 1s
+        assertTrue(delta < 1000, "Delta: $delta") //likely even shorter than 1s
     }
 
 
@@ -147,6 +147,6 @@ class YRestTest {
         val delta = System.currentTimeMillis() - start
 
         assertEquals(5 * value * 2, res)
-        assertTrue("Delta: $delta", delta < 600)
+        assertTrue(delta < 600, "Delta: $delta")
     }
 }

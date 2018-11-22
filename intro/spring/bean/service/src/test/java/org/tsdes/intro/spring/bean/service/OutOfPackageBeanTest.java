@@ -1,19 +1,21 @@
 package org.tsdes.intro.spring.bean.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.tsdes.intro.spring.bean.service.root.Application;
 import org.tsdes.intro.spring.bean.service.root.BaseSingleton;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 
 /**
  * Created by arcuri82 on 25-Jan-18.
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 //as Application is in a inner package, I need to
 //explicitly state which is my SpringBoot entry-point
 @SpringBootTest(classes = Application.class)

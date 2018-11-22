@@ -1,20 +1,20 @@
 package org.tsdes.advanced.security.session
 
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.advanced.security.session.db.UserRepository
 import org.tsdes.advanced.security.session.db.UserService
 
 /**
  * Created by arcuri82 on 08-Nov-17.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.NONE)
 class DatabaseTest {
 
@@ -28,7 +28,7 @@ class DatabaseTest {
     private lateinit var passwordEncoder: PasswordEncoder
 
 
-    @Before
+    @BeforeEach
     fun clean(){
         userRepository.deleteAll()
     }

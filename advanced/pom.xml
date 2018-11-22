@@ -27,6 +27,7 @@
 
     <properties>
         <version.kotlin>1.2.70</version.kotlin>
+        <!-- MUST update to Greenwich once out, as current not compatible with Spring 2.1.x-->
         <version.springcloud>Finchley.SR1</version.springcloud>
         <version.springfox>2.9.2</version.springfox>
         <version.graphql-spring>4.2.0</version.graphql-spring>

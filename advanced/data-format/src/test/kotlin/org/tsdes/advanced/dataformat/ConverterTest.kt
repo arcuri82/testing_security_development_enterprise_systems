@@ -1,7 +1,7 @@
 package org.tsdes.advanced.dataformat
 
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import org.tsdes.advanced.dataformat.data.Post
 import org.tsdes.advanced.dataformat.data.TopPosts
 import java.util.*

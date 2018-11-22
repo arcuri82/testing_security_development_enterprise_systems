@@ -4,26 +4,26 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.springframework.boot.web.server.LocalServerPort
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.misc.testutils.HttpUtils
 
 /**
  * Created by arcuri82 on 31-Jul-17.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CounterRestTest {
 
     @LocalServerPort
     private var port = 0
 
-    @Before
+    @BeforeEach
     fun initialize() {
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = port
@@ -63,12 +63,12 @@ class CounterRestTest {
         val response = HttpUtils.executeHttpCommand("localhost", port, message)
         val headers = HttpUtils.getHeaderBlock(response)
 
-        assertTrue(headers, headers.contains("201"))
+        assertTrue(headers.contains("201"))
 
         //Response should contain header telling where the newly created
         //resource is available
         val location = HttpUtils.getHeaderValue(headers, "Location")
-        assertTrue(location, location!!.contains(basePath))
+        assertTrue(location!!.contains(basePath))
 
         //extract the last path element, ie the {id} in /patch/api/counters/{id}
         val locationId = Integer.parseInt(

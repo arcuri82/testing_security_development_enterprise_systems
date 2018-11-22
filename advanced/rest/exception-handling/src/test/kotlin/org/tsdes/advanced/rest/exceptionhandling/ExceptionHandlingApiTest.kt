@@ -4,18 +4,16 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
-import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.ERROR
-import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.SUCCESS
-import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.FAIL
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.*
 import org.tsdes.advanced.rest.exception.RestResponseEntityExceptionHandler
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(ExceptionHandlingApplication::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ExceptionHandlingApiTest{
@@ -24,7 +22,7 @@ class ExceptionHandlingApiTest{
     protected var port = 0
 
 
-    @Before
+    @BeforeEach
     fun initTest() {
 
         // RestAssured configs shared by all the tests

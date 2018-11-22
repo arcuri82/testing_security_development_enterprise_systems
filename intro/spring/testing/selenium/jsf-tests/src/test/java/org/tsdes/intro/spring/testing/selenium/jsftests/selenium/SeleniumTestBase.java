@@ -1,13 +1,17 @@
 package org.tsdes.intro.spring.testing.selenium.jsftests.selenium;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.tsdes.intro.spring.testing.selenium.jsftests.selenium.po.*;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public abstract class SeleniumTestBase {
 
@@ -20,13 +24,13 @@ public abstract class SeleniumTestBase {
 
     private HomePO home;
 
-    @Before
+    @BeforeEach
     public void initTest(){
         home = new HomePO(getDriver(), getServerHost(), getServerPort());
 
         home.toStartingPage();
 
-        assertTrue("Failed to start from Home Page", home.isOnPage());
+        assertTrue(home.isOnPage(), "Failed to start from Home Page");
     }
 
 

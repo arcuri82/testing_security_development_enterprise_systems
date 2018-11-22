@@ -1,10 +1,12 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import javax.transaction.Status;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * Created by arcuri82 on 13-Feb-18.

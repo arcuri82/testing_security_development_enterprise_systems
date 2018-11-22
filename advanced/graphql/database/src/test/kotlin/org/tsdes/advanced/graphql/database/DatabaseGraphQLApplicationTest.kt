@@ -3,22 +3,21 @@ package org.tsdes.advanced.graphql.database
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
-import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.*
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
 import org.tsdes.advanced.graphql.database.dto.GraphQLResponseDto
 
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [DatabaseGraphQLApplication::class],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class DatabaseGraphQLApplicationTest{
@@ -31,7 +30,7 @@ class DatabaseGraphQLApplicationTest{
 
     protected lateinit var uriBuilder: UriComponentsBuilder
 
-    @Before
+    @BeforeEach
     fun clean() {
 
         // RestAssured configs shared by all the tests

@@ -1,6 +1,9 @@
 package org.tsdes.intro.jee.ejb.stateless;
 
-import org.junit.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.ejb.EJBException;
 import javax.ejb.embeddable.EJBContainer;
@@ -10,14 +13,15 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class UserBeanInEmbeddedContainerTest {
 
     protected static EJBContainer ec;
     protected static Context ctx;
 
-    @Before
+    @BeforeEach
     public void initContainer() throws Exception {
 
         /*
@@ -53,7 +57,7 @@ public class UserBeanInEmbeddedContainerTest {
         }
     }
 
-    @After
+    @AfterEach
     public void closeContainer() throws Exception {
         if (ctx != null)
             ctx.close();

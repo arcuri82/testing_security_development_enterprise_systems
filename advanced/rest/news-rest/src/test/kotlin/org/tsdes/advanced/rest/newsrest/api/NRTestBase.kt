@@ -4,19 +4,19 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.After
-import org.junit.Before
-import org.junit.runner.RunWith
-import org.springframework.boot.web.server.LocalServerPort
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.advanced.rest.newsrest.NewsRestApplication
 import org.tsdes.advanced.rest.newsrest.dto.NewsDto
 
 /**
  * Created by arcuri82 on 14-Jul-17.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(NewsRestApplication::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 abstract class NRTestBase {
@@ -24,8 +24,8 @@ abstract class NRTestBase {
     @LocalServerPort
     protected var port = 0
 
-    @Before
-    @After
+    @BeforeEach
+    @AfterEach
     fun clean() {
 
         // RestAssured configs shared by all the tests

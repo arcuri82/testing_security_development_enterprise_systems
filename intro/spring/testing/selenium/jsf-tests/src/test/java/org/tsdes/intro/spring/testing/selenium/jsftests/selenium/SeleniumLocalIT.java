@@ -1,20 +1,20 @@
 package org.tsdes.intro.spring.testing.selenium.jsftests.selenium;
 
-import org.junit.AfterClass;
-import org.junit.AssumptionViolatedException;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.tsdes.intro.spring.jsf.Application;
 import org.tsdes.misc.testutils.selenium.SeleniumDriverHandler;
 
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class,
         webEnvironment = RANDOM_PORT)
 public class SeleniumLocalIT extends SeleniumTestBase{
@@ -25,18 +25,15 @@ public class SeleniumLocalIT extends SeleniumTestBase{
     private int port;
 
 
-    @BeforeClass
+    @BeforeAll
     public static void initClass(){
 
         driver = SeleniumDriverHandler.getChromeDriver();
 
-        if(driver == null){
-            //Do not fail the tests.
-            throw new AssumptionViolatedException("Cannot find/initialize Chrome driver");
-        }
+        assumeTrue(driver != null, "Cannot find/initialize Chrome driver");
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() {
         if(driver != null) {
             driver.close();

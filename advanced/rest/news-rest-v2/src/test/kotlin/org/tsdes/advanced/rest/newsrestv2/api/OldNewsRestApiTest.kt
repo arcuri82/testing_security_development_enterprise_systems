@@ -4,7 +4,7 @@ import io.restassured.RestAssured.*
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.tsdes.advanced.rest.newsrestv2.dto.NewsDto
 import java.time.ZonedDateTime
 

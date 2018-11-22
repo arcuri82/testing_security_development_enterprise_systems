@@ -1,12 +1,12 @@
 package org.tsdes.intro.spring.testing.selenium.jsftests.service;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.tsdes.intro.spring.jsf.Application;
 import org.tsdes.intro.spring.jsf.ex03.Comment;
@@ -16,9 +16,8 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {Application.class, DeleterService.class},
         webEnvironment = NONE)
 public class CommentServiceTest {
@@ -29,8 +28,8 @@ public class CommentServiceTest {
     @Autowired
     private DeleterService deleterService;
 
-    @Before
-    @After
+    @BeforeEach
+    @AfterEach
     public void clearDatabase(){
         deleterService.deleteEntities(Comment.class);
     }
@@ -38,7 +37,7 @@ public class CommentServiceTest {
     @Test
     public void testCreate(){
 
-        Assert.assertEquals(0 , commentService.getMostRecentComments(10).size());
+        assertEquals(0 , commentService.getMostRecentComments(10).size());
 
         commentService.createNewComment("Hello");
 
@@ -107,10 +106,10 @@ public class CommentServiceTest {
         List<Comment> comments = commentService.getMostRecentComments(10);
         assertEquals(4 , comments.size());
 
-        Assert.assertEquals("d", comments.get(0).getText());
-        Assert.assertEquals("c", comments.get(1).getText());
-        Assert.assertEquals("b", comments.get(2).getText());
-        Assert.assertEquals("a", comments.get(3).getText());
+        assertEquals("d", comments.get(0).getText());
+        assertEquals("c", comments.get(1).getText());
+        assertEquals("b", comments.get(2).getText());
+        assertEquals("a", comments.get(3).getText());
     }
 
     @Test
@@ -132,27 +131,27 @@ public class CommentServiceTest {
             the same idea of trying to have "short tests to the point" would still apply)
          */
 
-        Assert.assertEquals(0 , commentService.getMostRecentComments(10).size());
+        assertEquals(0 , commentService.getMostRecentComments(10).size());
 
         commentService.createNewComment("a");
-        Assert.assertEquals(1 , commentService.getMostRecentComments(10).size());
+        assertEquals(1 , commentService.getMostRecentComments(10).size());
 
         commentService.createNewComment("b");
-        Assert.assertEquals(2 , commentService.getMostRecentComments(10).size());
+        assertEquals(2 , commentService.getMostRecentComments(10).size());
 
         commentService.createNewComment("c");
-        Assert.assertEquals(3 , commentService.getMostRecentComments(10).size());
+        assertEquals(3 , commentService.getMostRecentComments(10).size());
 
         commentService.createNewComment("d");
-        Assert.assertEquals(4 , commentService.getMostRecentComments(10).size());
+        assertEquals(4 , commentService.getMostRecentComments(10).size());
 
 
         List<Comment> comments = commentService.getMostRecentComments(10);
 
-        Assert.assertEquals("d", comments.get(0).getText());
-        Assert.assertEquals("c", comments.get(1).getText());
-        Assert.assertEquals("b", comments.get(2).getText());
-        Assert.assertEquals("a", comments.get(3).getText());
+        assertEquals("d", comments.get(0).getText());
+        assertEquals("c", comments.get(1).getText());
+        assertEquals("b", comments.get(2).getText());
+        assertEquals("a", comments.get(3).getText());
 
         assertTrue(comments.get(0).getDate().compareTo(comments.get(1).getDate()) > 0);
         assertTrue(comments.get(1).getDate().compareTo(comments.get(2).getDate()) > 0);
@@ -189,14 +188,14 @@ public class CommentServiceTest {
         } catch (Exception e){}
 
 
-        Assert.assertEquals(0 , commentService.getMostRecentComments(0).size());
-        Assert.assertEquals(1 , commentService.getMostRecentComments(1).size());
-        Assert.assertEquals(2 , commentService.getMostRecentComments(2).size());
-        Assert.assertEquals(3 , commentService.getMostRecentComments(3).size());
+        assertEquals(0 , commentService.getMostRecentComments(0).size());
+        assertEquals(1 , commentService.getMostRecentComments(1).size());
+        assertEquals(2 , commentService.getMostRecentComments(2).size());
+        assertEquals(3 , commentService.getMostRecentComments(3).size());
 
         //checking when asking more than available
-        Assert.assertEquals(3 , commentService.getMostRecentComments(4).size());
-        Assert.assertEquals(3 , commentService.getMostRecentComments(100).size());
+        assertEquals(3 , commentService.getMostRecentComments(4).size());
+        assertEquals(3 , commentService.getMostRecentComments(100).size());
     }
 
 
@@ -210,7 +209,7 @@ public class CommentServiceTest {
         Long id = comments.get(0).getId();
         commentService.deleteComment(id);
 
-        Assert.assertEquals(0 , commentService.getMostRecentComments(10).size());
+        assertEquals(0 , commentService.getMostRecentComments(10).size());
     }
 
 }

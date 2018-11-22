@@ -3,7 +3,7 @@ package org.tsdes.advanced.rest.newsrestv2.api
 import io.restassured.RestAssured.delete
 import io.restassured.RestAssured.given
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.tsdes.advanced.rest.newsrestv2.dto.NewsDto
 
 /**

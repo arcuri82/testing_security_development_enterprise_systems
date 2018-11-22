@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.fail;
 
 /**
  * Created by arcuri82 on 02-Feb-18.

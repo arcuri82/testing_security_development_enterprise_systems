@@ -1,9 +1,11 @@
 package org.tsdes.intro.jee.ejb.framework.proxy.se;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tsdes.intro.jee.ejb.framework.proxy.se.se.ObjectFactory;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 public class ObjectFactoryTest {
 

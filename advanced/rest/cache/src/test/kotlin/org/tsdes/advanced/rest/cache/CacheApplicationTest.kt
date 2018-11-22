@@ -3,21 +3,22 @@ package org.tsdes.advanced.rest.cache
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.cache.Cache
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.context.junit4.SpringRunner
 
 /**
  * Created by arcuri82 on 30-Aug-18.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [CacheApplication::class],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CacheApplicationTest{
@@ -40,7 +41,7 @@ class CacheApplicationTest{
     @Value("#{cacheManager.getCache('httpClient')}")
     private lateinit var httpClientCache: Cache
 
-    @Before
+    @BeforeEach
     fun init() {
         // RestAssured configs shared by all the tests
         RestAssured.baseURI = "http://localhost"

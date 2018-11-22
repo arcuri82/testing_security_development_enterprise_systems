@@ -1,8 +1,8 @@
 package org.tsdes.intro.jee.jpa.validation;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +15,9 @@ import javax.validation.ValidatorFactory;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 /**
  * Created by arcuri82 on 25-Jan-17.
@@ -28,7 +30,7 @@ public class NotStandardTest {
     private ValidatorFactory valFactory;
     private Validator validator;
 
-    @Before
+    @BeforeEach
     public void init() {
         emFactory = Persistence.createEntityManagerFactory("DB");
         em = emFactory.createEntityManager();
@@ -37,7 +39,7 @@ public class NotStandardTest {
         validator = valFactory.getValidator();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         em.close();
         emFactory.close();

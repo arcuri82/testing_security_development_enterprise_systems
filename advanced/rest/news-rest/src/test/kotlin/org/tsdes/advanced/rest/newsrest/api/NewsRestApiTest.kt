@@ -1,13 +1,9 @@
 package org.tsdes.advanced.rest.newsrest.api
 
-import io.restassured.RestAssured.given
-import io.restassured.RestAssured.get
-import io.restassured.RestAssured.delete
+import io.restassured.RestAssured.*
 import io.restassured.http.ContentType
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.CoreMatchers.containsString
-import org.hamcrest.CoreMatchers.not
-import org.junit.Test
+import org.hamcrest.CoreMatchers.*
+import org.junit.jupiter.api.Test
 import org.tsdes.advanced.rest.newsrest.dto.NewsDto
 import java.time.ZonedDateTime
 
@@ -72,7 +68,7 @@ class NewsRestApiTest : NRTestBase() {
                 .body("size()", equalTo(1))
                 .body("id[0]", containsString(id))
 
-        delete("/id/" + id)
+        delete("/id/$id")
 
         get().then().body("id", not(containsString(id)))
     }
@@ -92,7 +88,7 @@ class NewsRestApiTest : NRTestBase() {
                 .extract().asString()
 
         //check if POST was fine
-        get("/id/" + id).then().body("text", equalTo(text))
+        get("/id/$id").then().body("text", equalTo(text))
 
         val updatedText = "new updated text"
 
@@ -105,7 +101,7 @@ class NewsRestApiTest : NRTestBase() {
                 .statusCode(204)
 
         //was the PUT fine?
-        get("/id/" + id).then().body("text", equalTo(updatedText))
+        get("/id/$id").then().body("text", equalTo(updatedText))
 
 
         //now rechange, but just the text
@@ -118,7 +114,7 @@ class NewsRestApiTest : NRTestBase() {
                 .then()
                 .statusCode(204)
 
-        get("/id/" + id).then().body("text", equalTo(anotherText))
+        get("/id/$id").then().body("text", equalTo(anotherText))
     }
 
     @Test

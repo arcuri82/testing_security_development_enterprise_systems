@@ -30,12 +30,6 @@
             <artifactId>javax.el-api</artifactId>
         </dependency>
 
-        <!-- test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
 
     </dependencies>
 

@@ -4,26 +4,25 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.*
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.springframework.boot.web.server.LocalServerPort
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.spring.rest.patch.CounterDto
 
 /**
  * Created by arcuri82 on 01-Aug-17.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CounterRestTest {
 
     @LocalServerPort
     private var port = 0
 
-    @Before
+    @BeforeEach
     fun initTestSuite() {
         // RestAssured configs shared by all the tests
         RestAssured.baseURI = "http://localhost"

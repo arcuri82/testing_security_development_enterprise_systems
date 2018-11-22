@@ -1,6 +1,9 @@
 package org.tsdes.intro.spring.bean.profile;
 
 import org.junit.ClassRule;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
@@ -8,6 +11,7 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.GenericContainer;
 import org.tsdes.intro.spring.bean.jpa.Application;
@@ -25,7 +29,7 @@ import org.tsdes.intro.spring.bean.jpa.Application;
  */
 @ActiveProfiles("docker") //activate profile, load configs from application-docker.yml
 @ContextConfiguration(initializers = PostgresDocketTest.DockerInitializer.class)
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
 public class PostgresDocketTest extends DbTestBase {
 
@@ -37,10 +41,19 @@ public class PostgresDocketTest extends DbTestBase {
         When TestContainers open a port in Docker, it will map it to an ephemeral
         one on the host OS.
      */
-    @ClassRule
     public static GenericContainer postgres = new GenericContainer("postgres:10")
             .withExposedPorts(5432);
 
+
+    @BeforeAll
+    public static void init(){
+        postgres.start();
+    }
+
+    @AfterAll
+    public static void tearDown(){
+        postgres.stop();
+    }
 
     /*
         As actual host/port will be known only at runtime (eg ephemeral port), we cannot set

@@ -4,22 +4,22 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers.*
-import org.junit.Assert.assertEquals
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpMethod
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.web.client.RestTemplate
 import org.tsdes.advanced.rest.dto.WrappedResponse
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.ERROR
 import org.tsdes.advanced.rest.dto.WrappedResponse.ResponseStatus.SUCCESS
 
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(MathApplication::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MathApiTest{
@@ -29,7 +29,7 @@ class MathApiTest{
     protected var port = 0
 
 
-    @Before
+    @BeforeEach
     fun initTest() {
 
         // RestAssured configs shared by all the tests

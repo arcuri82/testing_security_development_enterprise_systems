@@ -3,21 +3,21 @@ package org.tsdes.advanced.rest.pagination
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import org.hamcrest.Matchers.*
-import org.junit.After
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.advanced.rest.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto
 import java.util.*
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(PaginationApplication::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PaginationRestTest {
@@ -26,8 +26,8 @@ class PaginationRestTest {
     protected var port = 0
 
 
-    @Before
-    @After
+    @BeforeEach
+    @AfterEach
     fun clean() {
 
         // RestAssured configs shared by all the tests
@@ -133,8 +133,8 @@ class PaginationRestTest {
 
     private fun assertContainsTheSame(a: Collection<*>, b: Collection<*>) {
         assertEquals(a.size.toLong(), b.size.toLong())
-        a.stream().forEach { assertTrue(b.contains(it)) }
-        b.stream().forEach { assertTrue(a.contains(it)) }
+        a.forEach { assertTrue(b.contains(it)) }
+        b.forEach { assertTrue(a.contains(it)) }
     }
 
 

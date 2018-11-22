@@ -5,14 +5,15 @@ import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.not
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.advanced.frontend.sparest.backend.db.Book
 import org.tsdes.advanced.frontend.sparest.backend.db.BookRepository
@@ -22,7 +23,7 @@ import org.tsdes.advanced.frontend.sparest.dto.BookDto
  * Created by arcuri82 on 14-Sep-18.
  */
 @ActiveProfiles("test")
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(SpaRestBackendApplication::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SpaRestBackendApplicationTest {
@@ -34,8 +35,8 @@ class SpaRestBackendApplicationTest {
     @Autowired
     protected lateinit var repository: BookRepository
 
-    @Before
-    @After
+    @BeforeEach
+    @AfterEach
     fun clean() {
 
         // RestAssured configs shared by all the tests

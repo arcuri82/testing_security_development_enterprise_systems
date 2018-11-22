@@ -1,16 +1,17 @@
 package org.tsdes.intro.spring.testing.coverage.instrumentation;
 
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by arcuri82 on 17-Mar-17.
  */
 public class InstrumentationTest {
 
-    @Before
+    @BeforeEach
     public void reset(){
         ExecutionTracer.reset();
     }

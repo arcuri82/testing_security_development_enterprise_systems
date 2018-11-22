@@ -1,29 +1,30 @@
 package org.tsdes.advanced.rest.newsrest.api
 
 import com.google.gson.Gson
+import io.restassured.RestAssured.given
+import io.restassured.http.ContentType
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.HttpClients
 import org.apache.http.util.EntityUtils
-import org.junit.Assert.*
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.springframework.boot.web.server.LocalServerPort
+import org.hamcrest.Matchers.containsString
+import org.hamcrest.Matchers.greaterThan
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.web.client.RestTemplate
 import org.tsdes.advanced.rest.newsrest.NewsRestApplication
 import org.tsdes.misc.testutils.HttpUtils
 import javax.ws.rs.client.ClientBuilder
 import javax.ws.rs.core.UriBuilder
-import io.restassured.RestAssured.given
-import io.restassured.http.ContentType
-import org.hamcrest.Matchers.containsString
-import org.hamcrest.Matchers.greaterThan
-import org.springframework.web.client.RestTemplate
 
 /**
  * Created by arcuri82 on 12-Jul-17.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(NewsRestApplication::class)],
         webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CountryApiTest{

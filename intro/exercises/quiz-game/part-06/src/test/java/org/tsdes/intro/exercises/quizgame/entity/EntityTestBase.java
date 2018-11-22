@@ -1,7 +1,7 @@
 package org.tsdes.intro.exercises.quizgame.entity;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,13 +13,13 @@ public abstract class EntityTestBase {
     private EntityManagerFactory factory;
     protected EntityManager em;
 
-    @Before
+    @BeforeEach
     public void init() {
         factory = Persistence.createEntityManagerFactory("DB");
         em = factory.createEntityManager();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         em.close();
         factory.close();

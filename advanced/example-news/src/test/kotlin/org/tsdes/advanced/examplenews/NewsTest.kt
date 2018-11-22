@@ -1,14 +1,14 @@
 package org.tsdes.advanced.examplenews
 
 import com.google.common.base.Throwables
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 import javax.validation.ConstraintViolationException
@@ -16,7 +16,7 @@ import javax.validation.ConstraintViolationException
 /**
  * Created by arcuri82 on 16-Jun-17.
  */
-@RunWith(SpringRunner::class) // needed to let Spring doing all the dependency injection and bean initialization
+@ExtendWith(SpringExtension::class) // needed to let Spring doing all the dependency injection and bean initialization
 @DataJpaTest //this take care to start and re-init an embedded database at each test execution
 @Transactional(propagation = Propagation.NEVER)
 class NewsTest {
@@ -29,7 +29,7 @@ class NewsTest {
     @Autowired
     private lateinit var crud: NewsRepository
 
-    @Before
+    @BeforeEach
     fun cleanDatabase(){
         crud.deleteAll()
     }
@@ -158,7 +158,7 @@ class NewsTest {
     fun testInvalidAuthor() {
         try {
             crud.createNews("", "text", "Norway")
-            fail()
+            fail<Any>()
         } catch (e: Exception) {
             //expected
             assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
@@ -170,7 +170,7 @@ class NewsTest {
     fun testInvalidCountry() {
         try {
             crud.createNews("author", "text", "Foo")
-            fail()
+            fail<Any>()
         } catch (e: Exception) {
             //expected
             assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
@@ -182,7 +182,7 @@ class NewsTest {
     fun testInvalidText() {
         try {
             crud.createNews("author", "", "Norway")
-            fail()
+            fail<Any>()
         } catch (e: Exception) {
             //expected
             assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
@@ -197,7 +197,7 @@ class NewsTest {
 
         try {
             crud.createNews("author", text, "Norway")
-            fail()
+            fail<Any>()
         } catch (e: Exception) {
             //expected
             assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
@@ -213,10 +213,7 @@ class NewsTest {
 
         val updated = "a".repeat(1025)
 
-        try {
-            crud.updateText(id, updated)
-            fail()
-        }catch (e: Exception){}
+        assertThrows(Exception::class.java){crud.updateText(id, updated)}
 
         assertNotEquals(updated, crud.findById(id).get().text)
     }

@@ -4,18 +4,17 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
 /**
  * Created by arcuri82 on 30-Aug-18.
  */
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [ConditionalChangeApplication::class],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CounterRestTest {
@@ -23,7 +22,7 @@ class CounterRestTest {
     @LocalServerPort
     protected var port = 0
 
-    @Before
+    @BeforeEach
     fun init() {
 
         // RestAssured configs shared by all the tests

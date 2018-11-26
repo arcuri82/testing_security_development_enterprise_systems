@@ -4,13 +4,14 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 ## Lessons
 
-* **Lesson 01**: Intro, Java EE, Maven and JPA
+* **Lesson 01**: Intro, JEE, Maven and JPA
   
   Slides: [[pdf]](slides/lesson_01_intro.pdf), 
           [[pptx]](slides/lesson_01_intro.pptx)
           
   Modules:     
   
+  * **intro/jee-provided-dependencies**            
   * **intro/jee/jpa/entity**            
   * **intro/jee/jpa/table**            
   * **intro/jee/jpa/embedded**            

@@ -18,13 +18,25 @@
         <version.javax.el>3.0.0</version.javax.el>
     </properties>
 
+    <!--
+        We use a BOM (Bill of Material) instead of having such definition in
+        "intro" pom.xml due to Hibernate:
+        in "jee" and some modules in "exercises" we need the "provided" scope,
+        as running on WildFly (which already has Hibernate);
+        on the other hand, that would be wrong in SpringBoot.
+        Re-specifying the <scope> each time would be too tedious.
+
+        Plus this is also an example of how to define a BOM.
+        And a BOM can use other BOMs, eg from org.jboss.spec
+    -->
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.jboss.spec</groupId>
                 <artifactId>jboss-javaee-8.0</artifactId>
                 <version>1.0.1.Final</version>
-                <!-- Import all libraries definitions in this dependency pom file  -->
+                <!-- BOM: Import all libraries definitions in this dependency pom file  -->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

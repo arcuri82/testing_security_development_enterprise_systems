@@ -7,9 +7,8 @@ import java.util.List;
 
 /*
     If you are using IntelliJ, and you get errors in the query string, make sure
-    that in "File -> Project Structure -> Facets -> JPA" the "Default JPA Provider"
-    is set to Hibernate, and also add the "persistence.xml" file in the Facets's JPA
-    configuration
+    that in "File -> Project Structure -> Module" you add "JPA" with the "Default JPA Provider"
+    set to Hibernate. See slides.
  */
 @NamedQueries({
         @NamedQuery(name = User.GET_ALL, query = "select u from User u"),

@@ -1,12 +1,11 @@
 package org.tsdes.intro.jee.jpa.validation;
 
-import javax.persistence.*;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 
 /*
@@ -18,6 +17,9 @@ import java.util.Date;
     2) can be used as non-ambiguous documentation
 
     3) prevent some kinds of malicious attacks (eg consume all hard-drive space)
+
+    For list of available annotations, can look at:
+    https://javaee.github.io/javaee-spec/javadocs/javax/validation/constraints/package-summary.html
  */
 
 @UserClassConstraints //custom constraint
@@ -44,32 +46,46 @@ public class User {
     @Size(min = 0 , max = 128)
     private String middleName;
 
-    @NotNull
+    /*
+        NotBlank means:
+        not null, and not empty while ignoring trailing spaces.
+
+        Note: if you do not want to allow spaces, you need to use
+        a regular expression
+      */
+    @NotBlank
     @Size(min = 2 , max = 128)
     private String surname;
+
+     /*
+        When you want to represent a date in Java, use classes from java.time.* package,
+        like for example ZonedDateTime (Java 8) and not Date (Java <= 7).
+        You can consider java.util.Date as deprecated.
+
+        Note: if you are interested in just the date, and not the time,
+        you can use LocalDate (like it would be for a birthday date).
+        If you are only interested in the time,  use LocalTime.
+        If need both and also time zone, use
+        ZonedDateTime, because it contains all the following:
+
+        - the date: eg 1/1/2017
+        - the time: eg 16:43:23
+        - the zone: eg CET (Central European Time) and UTC (Coordinated Universal Time)
+
+        Note: JPA 2.1 (JEE 7) did not support Java 8 time objects, whereas Hibernate did.
+        JPA 2.2 (in JEE 8) does support directly them.
+     */
+
 
     //can't be in the future...
     @Past  // there is a @Future constraint as well
     @NotNull
-    @Temporal(TemporalType.DATE)
-    private Date dateOfRegistration;
-
-    /*
-        FIXME replace all Date and merge NotStandard
-
-       unfortunately, Date is Java <= 7, and the one supported in JPA 2.1.
-       to handle the new Java 8 Time API (java.time.*) we would need special mappings
-       or use non-standard (ie no JPA) functionalities in Hibernate
-
-       http://www.thoughts-on-java.org/persist-localdate-localdatetime-jpa/
-       http://www.thoughts-on-java.org/hibernate-5-date-and-time/
-     */
+    private LocalDate dateOfRegistration;
 
 
     @Age(min = 18) //this is a custom constraint
     @NotNull
-    @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     /*
         By using a regular expression, we uniquely specify what values the string can have,
@@ -78,14 +94,14 @@ public class User {
         See: https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html
         for the grammar to use to define regular expressions in Java
 
-        See: https://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
-
         ^  : beginning
         $  : end
         [] : characters, eg any in uppercase [A-Z], or lowercase [0-9]
         +  : one or more times, eg [A-Z]+ means one or more uppercase letters
         *  : zero or several times
         {m,M} : at least m times, but max M
+
+        Note: here it is just an example, as should rather use @Email instead
      */
     @NotNull
     @Column(unique=true)
@@ -127,19 +143,19 @@ public class User {
         this.surname = surname;
     }
 
-    public Date getDateOfRegistration() {
+    public LocalDate getDateOfRegistration() {
         return dateOfRegistration;
     }
 
-    public void setDateOfRegistration(Date dateOfRegistration) {
+    public void setDateOfRegistration(LocalDate dateOfRegistration) {
         this.dateOfRegistration = dateOfRegistration;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

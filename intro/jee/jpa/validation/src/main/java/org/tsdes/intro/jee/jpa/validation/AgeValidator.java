@@ -2,12 +2,13 @@ package org.tsdes.intro.jee.jpa.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
 
-public class AgeValidator implements ConstraintValidator<Age,Date>{
+public class AgeValidator implements ConstraintValidator<Age, LocalDate>{
 
     private int min;
 
@@ -17,14 +18,9 @@ public class AgeValidator implements ConstraintValidator<Age,Date>{
     }
 
     @Override
-    public boolean isValid(Date value, ConstraintValidatorContext context) {
+    public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
 
-        Date now = new Date();
-
-        int years = Period.between(
-                value.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-                now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
-                .getYears();
+        int years = Period.between(value, LocalDate.now()).getYears();
 
         return years >= min;
     }

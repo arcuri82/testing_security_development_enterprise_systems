@@ -8,9 +8,8 @@ We start from setting up Maven and modelling the application's data.
 
 The Maven project should have the following dependencies:
 
-* `org.hibernate.javax.persistence:hibernate-jpa-2.1-api`
 * `org.hibernate:hibernate-core`
-* `junit:junit`
+* `org.junit.jupiter:junit-jupiter-engine`
 * `com.h2database:h2`
 
 Note: the dependencies above are specified with the format `groupId:artifactId`. 
@@ -39,10 +38,9 @@ database.
 Solutions to this exercise can be found in the 
 `intro/exercises/quiz-game/part-01` module.
 
-Note: the solution module `quiz-game-part01` is self-contained, as it does
-not have any `<parent>` tag.
-The `pom` module `quiz-game-root` does build  `quiz-game-part01`, but it
-is technically not its parent.
-In Maven, a module can define who is its parent, but not its children.
-A `pom` module can build other modules (e.g., with tag `<modules>`), but
-that does not define a parent-child relationship.          
+Note: the solution module `quiz-game-part01` is **NOT** self-contained, as it does
+have a `<parent>` tag, and a reference to `jee-provided-dependencies`.
+When you create your own Maven project, you should not use any `<parent>` tag, nor
+use any SNAPSHOT dependency from this repository.
+You can of course use dependencies from Maven Central. 
+      

@@ -12,10 +12,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -71,8 +68,8 @@ public class UserTest {
         user.setEmail("foobar@gmail.com");
 
         //converting to/from times in Java 7 and 8 is not so nice...
-        user.setDateOfBirth(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        user.setDateOfRegistration(Date.from(LocalDate.of(2015, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        user.setDateOfBirth(LocalDate.of(1970, 1, 1));
+        user.setDateOfRegistration(LocalDate.of(2015, 1, 1));
 
         return user;
     }
@@ -141,13 +138,12 @@ public class UserTest {
         /*
             There is no constraint on the Entity that a name should
             not be blank, ie all empty spaces.
-            Would need a regular expression avoiding spaces, or
-            a custom one
+            Would need either a regular expression avoiding spaces,
+            a custom one, or @NotBlank
          */
         assertFalse(hasViolations(user));
         assertTrue(persistInATransaction(user));
     }
-
 
 
     @Test
@@ -168,10 +164,38 @@ public class UserTest {
         assertTrue(hasViolations(user));
     }
 
+
+    @Test
+    public void testBlankSurname(){
+
+        User user = getAValidUser();
+        // Not null, but blank
+        user.setSurname("    ");
+
+        //should hence fail validation
+        assertTrue(hasViolations(user));
+        assertFalse(persistInATransaction(user));
+    }
+
+    @Test
+    public void testShortSurname(){
+
+        User user = getAValidUser();
+        user.setSurname("   a  ");
+
+        /*
+            This does not fail the constrain: it is
+            not blank (there is a "a") and at least two
+            characters (empty spaces)
+         */
+        assertFalse(hasViolations(user));
+        assertTrue(persistInATransaction(user));
+    }
+
     @Test
     public void testRegistrationInTheFuture(){
         User user = getAValidUser();
-        user.setDateOfRegistration(Date.from(LocalDate.of(2116, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        user.setDateOfRegistration(LocalDate.of(2116, 1, 1));
 
         assertTrue(hasViolations(user));
         assertFalse(persistInATransaction(user));
@@ -180,7 +204,7 @@ public class UserTest {
     @Test
     public void testTooYoung(){
         User user = getAValidUser();
-        user.setDateOfBirth(Date.from(LocalDate.of(2014, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        user.setDateOfBirth(LocalDate.of(2014, 1, 1));
 
         assertTrue(hasViolations(user));
         assertFalse(persistInATransaction(user));
@@ -194,8 +218,8 @@ public class UserTest {
     @Test
     public void testRegisteredBeforeBeingBorn(){
         User user = getAValidUser();
-        user.setDateOfBirth(Date.from(LocalDate.of(1980, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        user.setDateOfRegistration(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        user.setDateOfBirth(LocalDate.of(1980, 1, 1));
+        user.setDateOfRegistration(LocalDate.of(1970, 1, 1));
 
         assertTrue(hasViolations(user));
         assertFalse(persistInATransaction(user));

@@ -12,7 +12,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.time.ZonedDateTime;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -67,10 +66,9 @@ public class NotStandardTest {
     private NotStandard getAValidInstance(){
 
         NotStandard notStandard = new NotStandard();
-        notStandard.setName("     ");
-        notStandard.setSurname("foo");
-        notStandard.setDateOfBirth(ZonedDateTime.now().minusHours(1));
+        notStandard.setName("foo");
         notStandard.setEmail("foo@bar.com");
+        notStandard.setAgeInYears(21);
 
         return notStandard;
     }
@@ -88,7 +86,6 @@ public class NotStandardTest {
 
     @Test
     public void testValid(){
-
         NotStandard ns = getAValidInstance();
 
         //no violation of the constraints
@@ -98,40 +95,6 @@ public class NotStandardTest {
         assertTrue(persistInATransaction(ns));
     }
 
-    @Test
-    public void testBlankSurname(){
-
-        NotStandard ns = getAValidInstance();
-        ns.setSurname("    ");
-
-        assertTrue(hasViolations(ns));
-        assertFalse(persistInATransaction(ns));
-    }
-
-    @Test
-    public void testShortSurname(){
-
-        NotStandard ns = getAValidInstance();
-        ns.setSurname("   a  ");
-
-        /*
-            This does not fail the constrain: it is
-            not blank (there is a "a") and at least two
-            characters (empty spaces)
-         */
-        assertFalse(hasViolations(ns));
-        assertTrue(persistInATransaction(ns));
-    }
-
-    @Test
-    public void testBornInTheFuture(){
-
-        NotStandard ns = getAValidInstance();
-        ns.setDateOfBirth(ZonedDateTime.now().plusYears(1));
-
-        assertTrue(hasViolations(ns));
-        assertFalse(persistInATransaction(ns));
-    }
 
     @Test
     public void testEmail(){
@@ -148,6 +111,46 @@ public class NotStandardTest {
         ns.setEmail("thisIsActually@valid");
         ns.setId(null);
 
+        assertFalse(hasViolations(ns));
+        assertTrue(persistInATransaction(ns));
+    }
+
+    @Test
+    public void testUrl(){
+        NotStandard ns = getAValidInstance();
+        ns.setHomePage("anInvalidHomePage");
+
+        assertTrue(hasViolations(ns));
+        assertFalse(persistInATransaction(ns));
+
+        /*
+            This is a valid URL
+         */
+        ns.setHomePage("https://github.com/arcuri82/testing_security_development_enterprise_systems");
+        ns.setId(null);
+
+        assertFalse(hasViolations(ns));
+        assertTrue(persistInATransaction(ns));
+    }
+
+    @Test
+    public void testRange() {
+        NotStandard ns = getAValidInstance();
+
+        //too small
+        ns.setAgeInYears(-4);
+        assertTrue(hasViolations(ns));
+        assertFalse(persistInATransaction(ns));
+
+        //too large
+        ns.setAgeInYears(200);
+        ns.setId(null);
+        assertTrue(hasViolations(ns));
+        assertFalse(persistInATransaction(ns));
+
+        //fine
+        ns.setAgeInYears(18);
+        ns.setId(null);
         assertFalse(hasViolations(ns));
         assertTrue(persistInATransaction(ns));
     }

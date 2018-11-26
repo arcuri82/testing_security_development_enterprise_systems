@@ -32,18 +32,6 @@ public class Song {
     @Enumerated(EnumType.STRING)
     private MusicFormat format;
 
-
-    /*
-        Time values are handled specially.
-        We need to specify if we are interested in just the date (eg 29/08/2016)
-        or in the exact timestamp (eg including seconds)
-     */
-    @Temporal(TemporalType.DATE)
-    private Date publishDate;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timeEnteredInTheSystem;
-
-
     /*
         If for any reason a field should not be mapped to a column in the database,
         then we can use @Transient.

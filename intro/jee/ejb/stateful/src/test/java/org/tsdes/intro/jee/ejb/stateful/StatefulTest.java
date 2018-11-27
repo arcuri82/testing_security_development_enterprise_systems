@@ -3,50 +3,29 @@ package org.tsdes.intro.jee.ejb.stateful;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import javax.ejb.embeddable.EJBContainer;
-import javax.naming.Context;
-import javax.naming.NamingException;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import org.tsdes.misc.testutils.EmbeddedJeeSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StatefulTest {
 
-    protected static EJBContainer ec;
-    protected static Context ctx;
+    private static EmbeddedJeeSupport container = new EmbeddedJeeSupport();
 
     @BeforeEach
-    public void initContainer() throws Exception {
-        Map<String, Object> properties = new HashMap<>();
-        properties.put(EJBContainer.MODULES, new File("target/classes"));
-        ec = EJBContainer.createEJBContainer(properties);
-        ctx = ec.getContext();
-    }
-
-    protected <T> T getEJB(Class<T> klass){
-        try {
-            return (T) ctx.lookup("java:global/classes/"+klass.getSimpleName()+"!"+klass.getName());
-        } catch (NamingException e) {
-            return null;
-        }
+    public void initContainer()  {
+        container.initContainer();
     }
 
     @AfterEach
     public void closeContainer() throws Exception {
-        if (ctx != null)
-            ctx.close();
-        if (ec != null)
-            ec.close();
+        container.closeContainer();
     }
 
 
     @Test
     public void testStateful(){
 
-        A a = getEJB(A.class);
+        A a = container.getEJB(A.class);
 
         a.increment();
         a.increment();

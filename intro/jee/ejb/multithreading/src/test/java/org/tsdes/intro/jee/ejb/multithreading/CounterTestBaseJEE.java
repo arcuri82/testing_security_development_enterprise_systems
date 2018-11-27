@@ -2,51 +2,26 @@ package org.tsdes.intro.jee.ejb.multithreading;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-
-import javax.ejb.embeddable.EJBContainer;
-import javax.naming.Context;
-import javax.naming.NamingException;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import org.tsdes.misc.testutils.EmbeddedJeeSupport;
 
 public abstract class CounterTestBaseJEE extends CounterTestBase {
 
-    private EJBContainer ec;
-    private Context ctx;
+    private static EmbeddedJeeSupport container = new EmbeddedJeeSupport();
 
     @BeforeEach
-    public void initContainer() {
-
-        /*
-            Using an embedded JEE container...
-            recall, this is done just to simplify those examples, but
-            you will have to use Arquillian when testing an actual application
-         */
-
-        Map<String, Object> properties = new HashMap<>();
-        properties.put(EJBContainer.MODULES, new File("target/classes"));
-        ec = EJBContainer.createEJBContainer(properties);
-        ctx = ec.getContext();
+    public void initContainer()  {
+        container.initContainer();
     }
 
     @AfterEach
     public void closeContainer() throws Exception {
-        if (ctx != null)
-            ctx.close();
-        if (ec != null)
-            ec.close();
+        container.closeContainer();
     }
 
     @Override
     public Counter getCounter() {
-        String name = getSingletonClass().getSimpleName();
-        try {
-            return (Counter) ctx.lookup("java:global/classes/" + name + "!" + Counter.class.getName());
-        } catch (NamingException e) {
-            return null;
-        }
+        return  container.getEJB(getSingletonClass(), Counter.class);
     }
 
-    protected abstract Class<?> getSingletonClass();
+    protected abstract Class<? extends Counter> getSingletonClass();
 }

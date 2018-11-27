@@ -1,6 +1,5 @@
 package org.tsdes.jee.exercises.mycantina.backend.entity;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

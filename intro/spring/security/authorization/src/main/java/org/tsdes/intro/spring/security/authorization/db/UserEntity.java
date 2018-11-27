@@ -1,11 +1,10 @@
 package org.tsdes.intro.spring.security.authorization.db;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 

@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
 
+    <!--
+        Default settings, when creating a new cache
+    -->
     <defaultCache
             maxElementsInMemory="100"
             eternal="false"
             timeToIdleSeconds="120"
             timeToLiveSeconds="200" />
 
+    <!--
+        In a running system, there can be several caches,
+        eg one for HTTP and one for SQL accesses to databases.
+        Different caches can have different tuned settings.
+        Caches can be accessed by name, eg when using
+        "cacheManager.getCache(name)"
+    -->
     <cache
         name="httpClient"
         maxElementsInMemory="2000"

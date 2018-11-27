@@ -35,7 +35,7 @@ entities in the database.
 Write a test class called `CategoryEjbTest`, configured with Arquillian
 using a managed Wildfly.
 Inject a reference to `CategoryEjb` and `ResetEjb`.
-Add a `@Before` method in which the database is reset.
+Add a `@BeforeEach` method in which the database is reset.
 Write at least the following tests for `CategoryEjb`:
 
 * `testNoCategory`: check that database is empty, i.e. no existing categories.

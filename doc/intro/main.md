@@ -65,6 +65,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
      
   * **intro/jee/ejb/stateless**
   * **intro/jee/ejb/query**
+  * **intro/jee/ejb/lazy**
   * **intro/jee/ejb/framework/injection**
   * **intro/jee/ejb/framework/proxy**
 
@@ -101,7 +102,6 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
      
   * **intro/jee/ejb/async**
   * **intro/jee/ejb/time**
-  * **intro/jee/ejb/lazy**
   * **intro/jee/ejb/transactions**
  
   Exercises: [quiz-game-part-06](exercises/quiz-game/quiz-game-part-06.md)  

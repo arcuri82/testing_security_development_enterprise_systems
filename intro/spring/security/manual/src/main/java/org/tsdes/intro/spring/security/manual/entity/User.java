@@ -1,11 +1,9 @@
 package org.tsdes.intro.spring.security.manual.entity;
 
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity

@@ -1,8 +1,8 @@
 package org.tsdes.intro.exercises.quizgame.entity;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;

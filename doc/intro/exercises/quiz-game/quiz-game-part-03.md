@@ -38,7 +38,7 @@ Create a test class `CategoryEntityTest` with  the following tests:
 
 In the test folder, create an *abstract* class named `EntityTestBase`.
 Both  `QuizEntityTest` and `CategoryEntityTest` should extend such class.
-Move all the shared code (e.g., the `@Before`/`@After` database handling methods)
+Move all the shared code (e.g., the `@BeforeEach`/`@AfterEach` database handling methods)
 into such abstract class.
 Note: it is important that such class name does not end with `Test`, otherwise
 it would be executed as test by Maven.

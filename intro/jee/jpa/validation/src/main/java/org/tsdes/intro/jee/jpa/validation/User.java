@@ -101,6 +101,9 @@ public class User {
         *  : zero or several times
         {m,M} : at least m times, but max M
 
+        You might also want to (re-)look at Lesson 09 (Text Search and Regular Expressions)
+        from the Algorithms and Data Structures course.
+
         Note: here it is just an example, as should rather use @Email instead
      */
     @NotNull

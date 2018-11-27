@@ -33,7 +33,7 @@ In the `QuizEntityTest` class, add the following tests:
    
 As you now have 3 different tests in `QuizEntityTest`, to avoid repeating
 writing the same code, make sure that the creation/shutdown of 
-the `EntityManager` is done in `@Before`/`@After` methods.   
+the `EntityManager` is done in `@BeforeEach`/`@AfterEach` methods.   
 
 Solutions to this exercise can be found in the 
 `intro/exercises/quiz-game/part-02` module.            

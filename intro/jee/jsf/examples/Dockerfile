@@ -7,4 +7,4 @@ FROM jboss/wildfly:14.0.1.Final
 # in the folder where Widlfly is expecting to find installed WAR files
 ADD target/examples.war /opt/jboss/wildfly/standalone/deployments/
 
-# No need of CMD here, as Widlfly is automatically started as a service
+# No need of CMD here, as WidlFly is automatically started as a service

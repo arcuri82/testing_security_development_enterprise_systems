@@ -43,7 +43,7 @@ When you write these tests, you will need to take the following into account:
 
 * You might need to change the `xhtml` files by adding for example `id` attributes and 
   `prependId="false"` in the forms.
-  
+    
 * To avoid dependencies among tests, you will need to reset the cookies (in particular the
   session one) before running each test. You can do that by calling 
   `driver.manage().deleteAllCookies()`.

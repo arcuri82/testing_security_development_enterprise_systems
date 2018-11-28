@@ -93,7 +93,7 @@ Add a CSS file shared by all the pages, with some basic settings (e.g.,
 background color). The actual content does not really matter. 
 
 Add a Docker file in which you deploy the generate WAR file into a
-Wildfly container.
+WildFly container.
 
 When the Docker image is started with exposed port 8080, you should be
 able to access the webpage at:

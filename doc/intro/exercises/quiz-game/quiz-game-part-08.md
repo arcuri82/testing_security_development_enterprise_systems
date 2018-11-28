@@ -1,7 +1,7 @@
 # Quiz Game - Part 08
 
 
-From now on, we will use SpringBoot and leave behind Java EE Containers like Wildfly.
+From now on, we will use SpringBoot and leave behind JEE Containers like WildFly.
 The goal now is to adapt your code written so far into SpringBoot.
 
 Start a new Maven project.
@@ -17,7 +17,7 @@ Among your dependencies, you should have:
 * `org.springframework.boot:spring-boot-starter-data-jpa`
 * `org.springframework.boot:spring-boot-starter-validation`
 * `org.springframework.boot:spring-boot-starter-test`
-* `junit:junit`
+* `org.junit.jupiter:junit-jupiter-engine`
 * `com.h2database:h2`
 
 For each dependency, choose the appropriate version and scope.

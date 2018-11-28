@@ -39,8 +39,8 @@ Here, you need to run three processes in three different Docker images:
 the Spring application, the Chrome browser, and a Postgres database.
 All these images should share the same virtual network.
 
-The Postgres database should be started with a `@ClassRule`, so that
-it is started only once for all the tests.
+---- FIXME ----
+The Postgres database should be started only once for all the tests.
 The other two images should be started for each test.
 To make sure that the browser starts after the Spring application,
 you will need to use a JUnit `RuleChain`. 
@@ -52,7 +52,7 @@ first test.
 
 Note 2: these settings are quite tricky, because you will still need in
 `SeleniumDockerIT` to be able to use `QuizService` inside the tests.
-
+---- FIXME ----
 
 Run your build and tests from command line using `mvn clean verify`.
 Not only the build should be successful, but you should also be
@@ -72,7 +72,7 @@ Heroku Postgres database.
  
 Solutions to this exercise can be found in the 
 `intro/exercises/quiz-game/part-11` module.
-Note: the Heroku application name must be unique. 
+Note 1: the Heroku application name must be unique. 
 So, you will not be able to re-use the same name used in the solutions.
 Note 2: solutions have no Travis file. You can just look at the
 root one in  this whole repository.

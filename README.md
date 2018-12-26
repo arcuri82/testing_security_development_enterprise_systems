@@ -38,6 +38,10 @@ The repository is built with Maven, and it is divided in two main sub-modules:
             Spring Cloud, AMQP.            
 
 
+For building GUIS, the second part of the course `advanced` relies on knowledge of JavaScript and Single-Page-Applications.
+This is covered in a different course, called [Web Development and API Design](https://github.com/arcuri82/web_development_and_api_design) (PG6300).
+Such course should be taken before the `advanced` one (PG6100), in parallel or after the `intro` course (PG5100). 
+
 ### Philosophy of This Repository
 
 There are many resources (e.g., courses and books) out there that deal with the
@@ -151,7 +155,7 @@ Current documentation is available
 ### Requirements
 
 * JDK 1.8, **NOT** higher, as Java 9 broke backward compatibility,
-  and next LTS version (Java 11) is not out yet at time of this writing.
+  and the next LTS version (Java 11) is not widely supported yet (at the time of this writing).
   
 * An IDE (recommended IntelliJ IDEA Ultimate Edition)
 

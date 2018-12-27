@@ -196,10 +196,10 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 * Chris Richardson and Floyd Smith, *Microservices From Design to Deployment*.
   Free ebook, but need registration to download its [PDF](https://www.nginx.com/resources/library/designing-deploying-microservices/).
   Note: in that link it is called *Designing and Deploying Microservices*.  All of it.
-* Spring [online documentation](https://spring.io).
-* Kotlin [online documentation](https://kotlinlang.org/docs/kotlin-docs.pdf).
-* GraphQL [online documentation](https://graphql.org/).
-* RabbitMQ [online documentation](https://www.rabbitmq.com/)
+* [Spring](https://spring.io)
+* [Kotlin](https://kotlinlang.org/docs/kotlin-docs.pdf)
+* [GraphQL](https://graphql.org/)
+* [RabbitMQ](https://www.rabbitmq.com/)
 
 
 ## Exercises

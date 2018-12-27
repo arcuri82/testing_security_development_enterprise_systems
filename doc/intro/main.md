@@ -203,6 +203,16 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
      
   Exercises: TODO
 
-<br />
+
+
+## External Resources
+
+* [Maven](https://maven.apache.org/)
+* [Java EE](https://www.oracle.com/technetwork/java/javaee/documentation/index.html)
+  and [Jakarta EE](https://jakarta.ee/)
+* [Spring](https://spring.io)
+* [Docker](https://www.docker.com/)
+* [JUnit](https://junit.org/junit5/)    
+* [Selenium](https://www.seleniumhq.org/)
 
 

@@ -38,8 +38,8 @@ The repository is built with Maven, and it is divided in two main sub-modules:
             Spring Cloud, AMQP.            
 
 
-For building GUIS, the second part of the course `advanced` relies on knowledge of JavaScript and Single-Page-Applications.
-This is covered in a different course, called [Web Development and API Design](https://github.com/arcuri82/web_development_and_api_design) (PG6300).
+For building GUIs, the second part of the course `advanced` relies on knowledge of JavaScript and Single-Page-Applications.
+This is covered in a different course, called [Web Development and API Design](https://github.com/arcuri82/web_development_and_api_design) (PG6301).
 Such course should be taken before the `advanced` one (PG6100), in parallel or after the `intro` course (PG5100). 
 
 ### Philosophy of This Repository

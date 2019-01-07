@@ -33,7 +33,9 @@ public class User {
     private List<MessageWithUserLink> sentMessagesWithSenderLink;
 
     @ManyToMany
-    //could have used here a List
+    /*
+        Usually best to have a list. But could have any collection here
+     */
     private Map<Long, GroupAssignment> assignments;
 
     //Need to use this annotation if we deal with collection raw data-types like String

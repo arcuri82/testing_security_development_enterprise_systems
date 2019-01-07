@@ -53,13 +53,13 @@ create table User_roles (
   User_id bigint not null,
   roles varchar(255));
 
-alter table User_Message add constraint UK_812qgr2woxiu6e0776qiioy12 unique (sentMessages_id);
-alter table Message add constraint FKqchb6i03kpgj2gnq4xhmkydxc foreign key (destination_id) references User;
-alter table Message add constraint FKcrnfc5k5lxdfurq3b97o52dnv foreign key (sender_id) references User;
 alter table User add constraint FKlq0qkm58rh351bb84y4o5c447 foreign key (address_id) references Address;
 alter table User add constraint FKe537pv7sahdo44b6y2lajtge1 foreign key (addressWithUserLink_id) references Address;
-alter table User_GroupAssignment add constraint FK6d0gq3ig4kqv0ner5boes9yl2 foreign key (assignments_id) references GroupAssignment;
-alter table User_GroupAssignment add constraint FKc8mwm9kd13wr9wtmbtvabd455 foreign key (authors_id) references User;
+alter table Message add constraint FKqchb6i03kpgj2gnq4xhmkydxc foreign key (destination_id) references User;
+alter table Message add constraint FKcrnfc5k5lxdfurq3b97o52dnv foreign key (sender_id) references User;
+alter table User_Message add constraint UK_812qgr2woxiu6e0776qiioy12 unique (sentMessages_id);
 alter table User_Message add constraint FK6qbykpe0c8j68iwgm77hjtvhp foreign key (sentMessages_id) references Message;
 alter table User_Message add constraint FKevixh4x7y5n4lc9pah5ndnqp9 foreign key (User_id) references User;
+alter table User_GroupAssignment add constraint FK6d0gq3ig4kqv0ner5boes9yl2 foreign key (assignments_id) references GroupAssignment;
+alter table User_GroupAssignment add constraint FKc8mwm9kd13wr9wtmbtvabd455 foreign key (authors_id) references User;
 alter table User_roles add constraint FKi81fp6mx433heb7dvbxqaqvpv foreign key (User_id) references User;

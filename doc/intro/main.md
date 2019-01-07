@@ -29,6 +29,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   Modules:
      
   * **intro/jee/jpa/relationship**
+  * **intro/jee/jpa/relationship-sql**
   * **intro/jee/jpa/manager**
   * **intro/jee/jpa/jpql**
   * **intro/jee/jpa/fetch**

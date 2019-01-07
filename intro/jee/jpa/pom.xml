@@ -18,6 +18,7 @@
         <module>embedded</module>
         <module>attribute</module>
         <module>relationship</module>
+        <module>relationship-sql</module>
         <module>manager</module>
         <module>jpql</module>
         <module>fetch</module>

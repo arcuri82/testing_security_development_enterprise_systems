@@ -157,7 +157,7 @@ to check for known security issues in the used libraries.
 
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-10` module.
+`intro/exercise-solutions/quiz-game/part-10` module.
 
 Note: to avoid copy&paste of the same code, the solution for `part-10` does
 use the code of `test-utils` as library. 

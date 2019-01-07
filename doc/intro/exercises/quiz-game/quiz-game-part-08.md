@@ -59,4 +59,4 @@ Once started, you should be able to access the game at:
 `localhost:8080/index.xhtml`
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-08` module. 
+`intro/exercise-solutions/quiz-game/part-08` module. 

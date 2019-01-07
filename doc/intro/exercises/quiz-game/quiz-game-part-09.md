@@ -62,7 +62,7 @@ should be run (including the Selenium ones), but you should also get a test cove
 report at `target/site/jacoco-it/index.html`. 
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-09` module. 
+`intro/exercise-solutions/quiz-game/part-09` module. 
 Note: to avoid copy&paste of the same code, the solution for `part-09` does
 use the code of `part-08` and `test-utils` as libraries.
 Furthermore, when you run `mvn verify` on this module, you will only get

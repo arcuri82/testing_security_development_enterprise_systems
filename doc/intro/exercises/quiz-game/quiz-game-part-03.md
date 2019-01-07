@@ -44,4 +44,4 @@ Note: it is important that such class name does not end with `Test`, otherwise
 it would be executed as test by Maven.
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-03` module.            
+`intro/exercise-solutions/quiz-game/part-03` module.            

@@ -36,4 +36,4 @@ writing the same code, make sure that the creation/shutdown of
 the `EntityManager` is done in `@BeforeEach`/`@AfterEach` methods.   
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-02` module.            
+`intro/exercise-solutions/quiz-game/part-02` module.            

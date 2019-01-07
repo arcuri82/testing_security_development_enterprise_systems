@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.tsdes.intro.exercises</groupId>
-    <artifactId>intro-exercises</artifactId>
+    <artifactId>intro-exercise-solutions</artifactId>
     <packaging>pom</packaging>
 
     <parent>
@@ -14,9 +14,6 @@
 
     <modules>
         <module>quiz-game</module>
-        <!--<module>event-list</module>-->
-        <!--<module>my-news</module>-->
-        <!--<module>my-cantina</module>-->
     </modules>
 
 

@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>org.tsdes.intro.exercises</groupId>
-        <artifactId>intro-exercises</artifactId>
+        <artifactId>intro-exercise-solutions</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

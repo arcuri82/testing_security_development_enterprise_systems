@@ -102,7 +102,7 @@ able to access the webpage at:
      
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-07` module. 
+`intro/exercise-solutions/quiz-game/part-07` module. 
 
 Note: to avoid copy&paste of the same code, the solution for `part-07` does
 use the code of `part-06` as a library.

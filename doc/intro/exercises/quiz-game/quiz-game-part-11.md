@@ -71,7 +71,7 @@ Heroku Postgres database.
   
  
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-11` module.
+`intro/exercise-solutions/quiz-game/part-11` module.
 Note 1: the Heroku application name must be unique. 
 So, you will not be able to re-use the same name used in the solutions.
 Note 2: solutions have no Travis file. You can just look at the

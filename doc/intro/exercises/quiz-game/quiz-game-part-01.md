@@ -36,7 +36,7 @@ database.
 
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-01` module.
+`intro/exercise-solutions/quiz-game/part-01` module.
 
 Note: the solution module `quiz-game-part01` is **NOT** self-contained, as it does
 have a `<parent>` tag, and a reference to `jee-provided-dependencies`.

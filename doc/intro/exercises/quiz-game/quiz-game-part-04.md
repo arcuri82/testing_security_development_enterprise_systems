@@ -48,5 +48,5 @@ We will see it in the next lesson.
 
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-04` module.     
+`intro/exercise-solutions/quiz-game/part-04` module.     
   

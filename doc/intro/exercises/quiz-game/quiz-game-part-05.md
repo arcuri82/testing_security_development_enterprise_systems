@@ -62,4 +62,4 @@ Write at least the following tests for `CategoryEjb`:
     Verify that the second attempt fails.
 
 Solutions to this exercise can be found in the 
-`intro/exercises/quiz-game/part-05` module.    
+`intro/exercise-solutions/quiz-game/part-05` module.    

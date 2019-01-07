@@ -149,18 +149,11 @@ public class FooTest {
          */
 
         Foo readBack = getById(id);
-
-        try {
-            readBack.getLazyBi().size();
-            fail(); //recall, this throw Error and not Exception
-        } catch (Exception e) {
-            //expected
-        }
+        assertThrows(Exception.class, () -> readBack.getLazyBi().size());
 
         //following should be fine
-        readBack = getByIdForcingLoading(id);
-
-        assertEquals(1, readBack.getLazyBi().size());
+        Foo readBackForceLoading = getByIdForcingLoading(id);
+        assertEquals(1, readBackForceLoading.getLazyBi().size());
     }
 
 

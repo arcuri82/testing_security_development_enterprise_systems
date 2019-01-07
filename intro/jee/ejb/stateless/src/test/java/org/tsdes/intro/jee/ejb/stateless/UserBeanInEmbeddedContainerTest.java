@@ -54,12 +54,7 @@ public class UserBeanInEmbeddedContainerTest {
     public void testNullValue(){
         UserBean bean = container.getEJB(UserBean.class);
 
-        try {
-            //In EJB, the @NotNull are checked at runtime by the JEE container
-            bean.registerNewUser("0", "a", null);
-            fail();
-        } catch (EJBException e){
-            //expected
-        }
+        //In EJB, the @NotNull are checked at runtime by the JEE container
+        assertThrows(EJBException.class, () -> bean.registerNewUser("0", "a", null));
     }
 }

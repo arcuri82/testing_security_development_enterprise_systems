@@ -104,6 +104,7 @@ public class CategoryEjbTest {
             fail();
         } catch (Exception e){
             //expected
+            //FIXME, refactor with assertThrows once can use JUnit 5 with Arquillian
         }
 
         categories = ctgEjb.getAllCategories(true);
@@ -125,6 +126,7 @@ public class CategoryEjbTest {
             fail();
         }catch (Exception e){
             //expected
+            //FIXME, refactor with assertThrows once can use JUnit 5 with Arquillian
         }
     }
 }

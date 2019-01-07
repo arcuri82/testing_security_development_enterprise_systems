@@ -11,9 +11,7 @@ import org.tsdes.intro.exercises.quizgame.backend.entity.SubCategory;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -87,19 +85,12 @@ public class CategoryServiceTest extends ServiceTestBase {
         assertEquals(3, categories.size());
 
         Category first = categories.get(0);
-
-        try {
-            first.getSubCategories().size();
-            fail();
-        } catch (Exception e) {
-            //expected
-        }
+        assertThrows(Exception.class, () -> first.getSubCategories().size());
 
         categories = categoryService.getAllCategories(true);
 
-        first = categories.get(0);
-
-        assertEquals(1, first.getSubCategories().size());
+        Category readBack = categories.get(0);
+        assertEquals(1, readBack.getSubCategories().size());
     }
 
     @Test
@@ -109,11 +100,6 @@ public class CategoryServiceTest extends ServiceTestBase {
 
         categoryService.createCategory(ctg);
 
-        try {
-            categoryService.createCategory(ctg);
-            fail();
-        } catch (Exception e) {
-            //expected
-        }
+        assertThrows(Exception.class, () -> categoryService.createCategory(ctg));
     }
 }

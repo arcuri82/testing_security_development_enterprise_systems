@@ -66,6 +66,7 @@ public class QuizEjbTest extends EjbTestBase {
             fail();
         }catch (Exception e){
             //expected
+            //FIXME, refactor with assertThrows once can use JUnit 5 with Arquillian
         }
     }
 

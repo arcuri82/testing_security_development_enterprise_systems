@@ -154,38 +154,39 @@ class NewsTest {
         assertEquals(1, crud.findAllByCountryAndAuthorId("Iceland", "c").count())
     }
 
-    @Test
-    fun testInvalidAuthor() {
+
+    private fun <T : Throwable> assertThrowsByRootCause(t: Class<T>, lambda : ()-> Any){
+
         try {
-            crud.createNews("", "text", "Norway")
+            lambda.invoke()
             fail<Any>()
         } catch (e: Exception) {
             //expected
-            assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
+            assertTrue(t.isInstance(Throwables.getRootCause(e)))
+        }
+    }
+
+    @Test
+    fun testInvalidAuthor() {
+
+        assertThrowsByRootCause(ConstraintViolationException::class.java) {
+            crud.createNews("", "text", "Norway")
         }
     }
 
 
     @Test
     fun testInvalidCountry() {
-        try {
+        assertThrowsByRootCause(ConstraintViolationException::class.java) {
             crud.createNews("author", "text", "Foo")
-            fail<Any>()
-        } catch (e: Exception) {
-            //expected
-            assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
         }
     }
 
 
     @Test
     fun testInvalidText() {
-        try {
+        assertThrowsByRootCause(ConstraintViolationException::class.java) {
             crud.createNews("author", "", "Norway")
-            fail<Any>()
-        } catch (e: Exception) {
-            //expected
-            assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
         }
     }
 
@@ -195,12 +196,8 @@ class NewsTest {
 
         val text = "a".repeat(1025)
 
-        try {
+        assertThrowsByRootCause(ConstraintViolationException::class.java) {
             crud.createNews("author", text, "Norway")
-            fail<Any>()
-        } catch (e: Exception) {
-            //expected
-            assertTrue(Throwables.getRootCause(e) is ConstraintViolationException)
         }
     }
 

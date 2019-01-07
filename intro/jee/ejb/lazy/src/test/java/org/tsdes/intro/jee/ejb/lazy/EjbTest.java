@@ -48,6 +48,7 @@ public class EjbTest {
             fail();
         } catch (Exception e) {
             //expected
+            //FIXME, refactor with assertThrows once can use JUnit 5 with Arquillian
         }
     }
 
@@ -80,6 +81,7 @@ public class EjbTest {
             fail();
         } catch (Exception e) {
             //expected
+            //FIXME, refactor with assertThrows once can use JUnit 5 with Arquillian
         }
     }
 

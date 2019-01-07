@@ -2,6 +2,7 @@ package org.tsdes.intro.jee.ejb.stateless;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class UserBeanTest {
@@ -12,19 +13,13 @@ public class UserBeanTest {
 
         UserBean bean = new UserBean();
 
-        try{
-            bean.registerNewUser("a","b","c");
-            /*
-                This should fail with a NPE, because the bean is not managed
-                by the container.
-                even if somehow we would get an entity manager (eg through a setter),
-                would still fail because not executed inside a transaction
-             */
-            fail();
-        } catch (NullPointerException e){
-            //expected
-        }
+        /*
+           This should fail with a NPE, because the bean is not managed
+           by the container.
+           Even if somehow we would get an entity manager (eg through a setter),
+           would still fail because not executed inside a transaction
+         */
+        assertThrows(NullPointerException.class, () -> bean.registerNewUser("a","b","c"));
     }
-
 
 }

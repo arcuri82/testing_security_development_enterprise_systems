@@ -5,9 +5,7 @@ import org.tsdes.intro.jee.ejb.framework.injection.data.BasicInjectionClass;
 import org.tsdes.intro.jee.ejb.framework.injection.data.CompositeInjectionClass;
 import org.tsdes.intro.jee.ejb.framework.injection.data.EmptyClass;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -30,13 +28,7 @@ public abstract class InjectorBaseSuite {
     @Test
     public void testNullClass(){
         Injector injector = getInjector();
-
-        try {
-            injector.createInstance(null);
-            fail();
-        } catch (IllegalArgumentException e){
-            //expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> injector.createInstance(null));
     }
 
     @Test

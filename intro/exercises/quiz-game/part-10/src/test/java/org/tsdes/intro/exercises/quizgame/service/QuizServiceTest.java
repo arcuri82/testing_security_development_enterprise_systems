@@ -68,12 +68,7 @@ public class QuizServiceTest extends ServiceTestBase{
 
         long ctgId = createQuizzes("a", "b", "c");
 
-        try{
-            quizService.getRandomQuizzes(5, ctgId);
-            fail();
-        }catch (IllegalArgumentException e){
-            //expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> quizService.getRandomQuizzes(5, ctgId));
     }
 
     @Test

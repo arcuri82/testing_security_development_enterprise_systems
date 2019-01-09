@@ -34,7 +34,6 @@ public abstract class CounterTestBase {
             threads.add(t);
         }
 
-        //Java 8 stream, could have used just a loop
         threads.forEach(t -> {
             try {
                 t.join();

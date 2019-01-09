@@ -114,8 +114,8 @@ public class ConcurrencyTest {
             threads.add(t);
         }
 
-        //Java 8 stream, could have used just a loop
-        threads.stream().forEach(t -> {
+        //Could have used just a loop
+        threads.forEach(t -> {
             try {
                 t.join();
             } catch (InterruptedException e) {

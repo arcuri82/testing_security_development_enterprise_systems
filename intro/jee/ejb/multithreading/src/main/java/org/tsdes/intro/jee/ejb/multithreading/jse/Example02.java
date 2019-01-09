@@ -5,7 +5,7 @@ import org.tsdes.intro.jee.ejb.multithreading.Counter;
 public class Example02 implements Counter {
 
     /**
-     * Note the "volatile" keywords here to force reading/writing to memory
+     * Note the "volatile" keywords here to force reading/writing to RAM
      * and not local thread cache
      */
     private volatile int x;

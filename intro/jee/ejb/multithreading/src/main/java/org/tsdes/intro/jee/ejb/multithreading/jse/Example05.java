@@ -6,6 +6,11 @@ public class Example05 implements Counter {
 
     private volatile int x;
 
+    /*
+        Synchronized can be put directly on methods, which is equivalent
+        to a "synchronized(this)" command
+     */
+
     @Override
     public synchronized void incrementCounter() {
         x = x + 1;

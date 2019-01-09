@@ -68,6 +68,24 @@ public class QuizEjb {
 
     public List<Quiz> getRandomQuizzes(int n, long categoryId){
 
+        /*
+            There can be different ways to sample N rows at random from a table.
+            Differences are on performance, based on expected size of the table,
+            and the average N values.
+            Following approach is "fine" for large tables and low N.
+
+            The idea is that we first make a query to know how many R rows there
+            are in the table.
+            Then, we make N SQL selects, each one retrieving one row. Rows are
+            selected at random, with no replacement.
+            When we make a JPQL command, we can specify to get only a subsets of the
+            rows, starting at a index K, retrieving Z elements starting from such index K.
+            So, here K is at random, and Z=1.
+            This process is repeated N times.
+            Note that this can end up in 1+N SQL queries. However, it does not require
+            any sorting on the table, which would have a O(R*log(R)) complexity.
+         */
+
         TypedQuery<Long> sizeQuery= em.createQuery(
                 "select count(q) from Quiz q where q.subCategory.parent.id=?1", Long.class);
         sizeQuery.setParameter(1, categoryId);

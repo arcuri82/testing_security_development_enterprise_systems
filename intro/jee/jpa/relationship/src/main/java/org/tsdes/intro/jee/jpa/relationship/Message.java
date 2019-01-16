@@ -11,7 +11,7 @@ public class Message {
     private String text;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User destination;
 
 

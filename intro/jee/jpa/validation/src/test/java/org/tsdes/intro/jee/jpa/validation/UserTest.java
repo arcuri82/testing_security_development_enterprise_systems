@@ -66,8 +66,6 @@ public class UserTest {
         user.setMiddleName(null);
         user.setSurname("Bar");
         user.setEmail("foobar@gmail.com");
-
-        //converting to/from times in Java 7 and 8 is not so nice...
         user.setDateOfBirth(LocalDate.of(1970, 1, 1));
         user.setDateOfRegistration(LocalDate.of(2015, 1, 1));
 

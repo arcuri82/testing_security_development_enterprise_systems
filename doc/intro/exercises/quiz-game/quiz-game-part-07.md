@@ -87,7 +87,7 @@ Create the following JSF pages:
     to the home page.
     
 All these 3 JSF pages should share the same `layout.xhtml` template.
-Add a common footer in this template (actual content it is not important).
+Add a common footer in this template (actual content is not important).
 
 Add a CSS file shared by all the pages, with some basic settings (e.g.,
 background color). The actual content does not really matter. 

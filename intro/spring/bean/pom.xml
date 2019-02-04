@@ -17,6 +17,7 @@
         <module>jpa</module>
         <module>profile</module>
         <module>configuration</module>
+        <module>async</module>
     </modules>
 
 </project>

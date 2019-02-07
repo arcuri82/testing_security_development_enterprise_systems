@@ -19,14 +19,16 @@ import org.springframework.security.config.http.SessionCreationPolicy
 class WebSecurityConfigLocalFake : WebSecurityConfig() {
 
     override fun configure(http: HttpSecurity) {
+        //call method in parent-class to apply same settings
         super.configure(http)
 
-        http
-                .httpBasic()
+        http.httpBasic()
                 .and()
+                //but then override the session management
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
     }
+
     override fun configure(auth: AuthenticationManagerBuilder) {
 
         auth.inMemoryAuthentication()

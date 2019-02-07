@@ -16,8 +16,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
 
-        http
-                .httpBasic()
+        http.httpBasic()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/usersInfoCount").permitAll()

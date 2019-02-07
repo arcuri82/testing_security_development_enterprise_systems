@@ -1,6 +1,7 @@
-
-
 spring:
+  main:
+    # need to allow bean overriding in fake security config
+    allow-bean-definition-overriding: true
   session:
     # during testing for this service in isolation,
     # do not use Redis. Disabling SpringSession will fall-back to

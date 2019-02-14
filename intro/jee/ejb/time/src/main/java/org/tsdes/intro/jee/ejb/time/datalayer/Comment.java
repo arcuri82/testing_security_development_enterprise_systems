@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-public class Comment implements Serializable{
+public class Comment{
 
     @Id @GeneratedValue
     private Long id;

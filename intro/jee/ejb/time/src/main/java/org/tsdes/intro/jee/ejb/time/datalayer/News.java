@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class News implements Serializable {
+public class News {
 
 
     @Id @GeneratedValue

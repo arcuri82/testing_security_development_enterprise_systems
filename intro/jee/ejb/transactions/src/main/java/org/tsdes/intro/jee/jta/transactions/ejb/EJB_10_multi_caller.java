@@ -4,8 +4,6 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 
 @Stateless
@@ -29,7 +27,7 @@ public class EJB_10_multi_caller {
             base.add(second);
         }
 
-        if(! base.isPresent(second)){ //note: called in new transaction
+        if(! base.isPresentByCheckingOnNewTransaction(second)){ //note: called in new transaction
             ctx.setRollbackOnly();
         }
     }

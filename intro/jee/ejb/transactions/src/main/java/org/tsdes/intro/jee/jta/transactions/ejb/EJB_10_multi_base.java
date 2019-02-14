@@ -18,7 +18,7 @@ public class EJB_10_multi_base {
 
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public boolean isPresent(String name){
+    public boolean isPresentByCheckingOnNewTransaction(String name){
         return em.find(Foo.class, name) != null;
     }
 

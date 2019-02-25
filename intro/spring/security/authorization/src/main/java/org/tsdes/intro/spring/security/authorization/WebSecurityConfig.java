@@ -40,29 +40,63 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) {
+
+        /*
+            In this method, we specify the authorization rules, ie the Access Control Policy
+         */
+
         try {
             /*
-                Spring does the right thing, and activate CSRF protections.
-                However, to avoid having to deal with them in JSF, and also
-                because anyway we will see them in details in the "advanced"
-                Enterprise 2 course, we just deactivate them
+                By default, Spring Security enables CSRF Tokens (used to protect from CSRF attacks),
+                which we would have to manually handle in each POST form.
+                This is critical for Spring MVC applications, but arguably not for REST APIs
+                based on JSON.
+                However, JSF has its own CSRF Token mechanism based on JSF-Views.
+                So, we just disable the Spring Security one.
              */
             http.csrf().disable();
+
+            /*
+                Authorization rules are checked 1 at a time, starting from the top.
+                Matching is based on the resource path in the HTTP request, and can
+                user regex for it.
+                We want to allow anyone to access the homepage and the login/signup/logout.
+                All other pages are denied unless the user is authenticated.
+                Note: login and logout pages are handled specially by Spring Security.
+             */
 
             http.authorizeRequests()
                     .antMatchers("/").permitAll()
                     .antMatchers("/index.*").permitAll()
                     .antMatchers("/signup.*").permitAll()
                     .antMatchers("/javax.faces.resource/**").permitAll()
+                    //whitelisting: everything not explicitly allowed above gets denied
                     .anyRequest().authenticated()
                     .and()
+                    /*
+                        Here we tell Spring Security that login is going to be done with a HTML form,
+                        which will encode the username/password using x-www-form-urlencoded
+                     */
                     .formLogin()
+                    // here, we use our custom page to handle the login
                     .loginPage("/login.jsf")
                     .permitAll()
+                    /*
+                        in case of failed login, stay on same page,
+                        but add to the URL the query param "?error=true"
+                     */
                     .failureUrl("/login.jsf?error=true")
+                    //if login is a success, do a 302 redirect to homepage
                     .defaultSuccessUrl("/index.jsf?faces-redirect=true")
                     .and()
+                    /*
+                        we do not have a page for Logout. Spring Security will automatically
+                        create an endpoint which handles POST on /logout.
+                        To call it from JSF (or any HTML page), we can just do <form> submission
+                        toward it
+                      */
                     .logout()
+                    //on logout, do a 302 redirect to homepage
                     .logoutSuccessUrl("/index.jsf?faces-redirect=true");
         } catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -71,6 +105,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
+
+        /*
+            Here, we need to tell Spring Security how to access the SQL database
+            to check the username and the hashed password when trying to authenticate
+            a user.
+         */
 
         try {
             auth.jdbcAuthentication()

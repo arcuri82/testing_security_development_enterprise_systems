@@ -15,6 +15,11 @@
 
     <br/>
 
+    <!--
+        To know whether we are authenticated or not with Spring Security, we can use some
+        of its special JSP tags, which can be used in JSF.
+    -->
+
     <sec:authenticated>
         <p><h:outputText value="Hi #{userInfoController.userName}!!!" id="helloMsgId"/></p>
 

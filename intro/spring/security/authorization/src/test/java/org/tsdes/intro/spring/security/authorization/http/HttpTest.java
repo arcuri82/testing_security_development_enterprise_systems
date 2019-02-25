@@ -22,13 +22,6 @@ public class HttpTest {
     @LocalServerPort
     private int port;
 
-    private static final AtomicInteger counter = new AtomicInteger(0);
-
-    private String getUniqueId(){
-        return "foo_HttpTest_" + counter.getAndIncrement();
-    }
-
-
 
     @Test
     public void testFailAccessProtectedResource() throws Exception {

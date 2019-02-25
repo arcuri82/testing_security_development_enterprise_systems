@@ -219,3 +219,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 * [Selenium](https://www.seleniumhq.org/)
 
 
+## Exam
+
+In this course the exam is a home-project, to be completed in 48 hours. 
+An example of mock exam can be 
+found [here](exams/mock_exam.pdf).

@@ -90,6 +90,12 @@ public class UserService {
 
                 That is also a reason why, when you fail to login in a website, usually
                 it does not tell you if it was the userId or the password that was wrong...
+
+                Note: to find out if a userId already exists, could just try to register it
+                as a new user. However, it is common in these cases to use CAPTCHAs to
+                limit/reduce the number of attempts. From a usability perspective, having
+                a CAPTCHA on signup is fine (eg, a user needs to do it only once),
+                whereas it could be quite annoying if having to do it at each login.
              */
             computeSHA256(password, ITERATIONS, getRandomSalt(), PEPPER);
 
@@ -157,7 +163,7 @@ public class UserService {
          */
 
         for(int i=0; i<iterations; i++) {
-            hash = DigestUtils.sha256Hex(hash + salt + pepper);
+            hash = DigestUtils.sha256Hex(hash);
         }
 
         return hash;

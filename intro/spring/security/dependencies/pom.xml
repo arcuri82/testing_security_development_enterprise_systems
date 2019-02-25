@@ -15,6 +15,9 @@
 
 
     <dependencies>
+        <!--
+            Just an example of a version of a library with a known security vulnerability
+        -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
@@ -25,7 +28,11 @@
 
     <!--
         This can be very expensive on a clean build.
-        So, we only do it if profile is activated
+        So, we only do it if profile is activated, using "-P" followed by
+        the id of the profile. Eg,
+
+        mvn verify -P dependency-check
+
     -->
     <profiles>
         <profile>

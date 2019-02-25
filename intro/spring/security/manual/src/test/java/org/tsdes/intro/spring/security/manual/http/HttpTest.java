@@ -24,13 +24,6 @@ public class HttpTest {
     @LocalServerPort
     private int port;
 
-    private static final AtomicInteger counter = new AtomicInteger(0);
-
-    private String getUniqueId(){
-        return "foo_HttpTest_" + counter.getAndIncrement();
-    }
-
-
     @Test
     public void testSetCookies() throws Exception {
 
@@ -40,7 +33,7 @@ public class HttpTest {
         String response = HttpUtils.executeHttpCommand("localhost", port, httpGet);
 
         assertTrue(response.contains("200"));
-        //Wildfly creates a new session, and tell us its id to use as cookie in the next HTTP requests
+        //WildFly creates a new session, and tell us its id to use as cookie in the next HTTP requests
         assertTrue(response.contains("Set-Cookie"));
 
         System.out.println(response);

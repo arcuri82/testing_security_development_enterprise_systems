@@ -39,20 +39,8 @@ Here, you need to run three processes in three different Docker images:
 the Spring application, the Chrome browser, and a Postgres database.
 All these images should share the same virtual network.
 
----- FIXME ----
-The Postgres database should be started only once for all the tests.
-The other two images should be started for each test.
-To make sure that the browser starts after the Spring application,
-you will need to use a JUnit `RuleChain`. 
-
-Note 1: with this configuration, the Spring application will be restarted
-for each test, whereas the database is not.
-This means that the `Flyway` migration is executed only once, for the
-first test. 
-
-Note 2: these settings are quite tricky, because you will still need in
+Note: these settings are quite tricky, because you will still need in
 `SeleniumDockerIT` to be able to use `QuizService` inside the tests.
----- FIXME ----
 
 Run your build and tests from command line using `mvn clean verify`.
 Not only the build should be successful, but you should also be
@@ -78,17 +66,4 @@ Note 2: solutions have no Travis file. You can just look at the
 root one in  this whole repository.
 
 
-# Extra
-
-This application can be extended in many different ways.
-Here some ideas (but no solution provided):
-
-* Give the ability to create and edit quizzes in the database directly
-  from the web application.
-  
-* Create an `admin` role. For example, only an admin should be able to 
-  edit quizzes.   
-
-* Make sure that players cannot cheat. For example, currently a player could
-  just log out to avoid answering a quiz s/he does not know.
 

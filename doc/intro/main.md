@@ -136,8 +136,10 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
      
   * **intro/spring/bean/service**
   * **intro/spring/bean/jpa**
+  * **intro/spring/bean/repository**
   * **intro/spring/bean/profile**
   * **intro/spring/bean/configuration**
+  * **intro/spring/bean/async**
   * **intro/spring/jsf**
  
   Exercises: [quiz-game-part-08](exercises/quiz-game/quiz-game-part-08.md)  
@@ -202,7 +204,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   Modules: none
      
-  Exercises: TODO
+  Exercises: [quiz-game-part-12](exercises/quiz-game/quiz-game-part-12.md)
 
 
 

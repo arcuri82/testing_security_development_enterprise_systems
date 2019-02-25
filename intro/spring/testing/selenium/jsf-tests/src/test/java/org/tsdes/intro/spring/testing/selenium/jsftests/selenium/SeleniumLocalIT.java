@@ -15,8 +15,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = Application.class,
-        webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 public class SeleniumLocalIT extends SeleniumTestBase{
 
     private static WebDriver driver;
@@ -30,6 +29,11 @@ public class SeleniumLocalIT extends SeleniumTestBase{
 
         driver = SeleniumDriverHandler.getChromeDriver();
 
+        /*
+            If the drivers are not available (eg when running on a remote Continuous Integration server),
+            then do NOT fail the tests. Just mark them as "Ignored".
+            Still, we will have the tests running in Docker anyway.
+         */
         assumeTrue(driver != null, "Cannot find/initialize Chrome driver");
     }
 

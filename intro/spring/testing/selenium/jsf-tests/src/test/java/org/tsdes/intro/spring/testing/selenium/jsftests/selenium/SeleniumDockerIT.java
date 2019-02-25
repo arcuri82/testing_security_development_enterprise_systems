@@ -10,7 +10,7 @@ import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
-import org.testcontainers.containers.wait.Wait;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.images.builder.ImageFromDockerfile;
 
 import java.nio.file.Paths;
@@ -22,9 +22,9 @@ public class SeleniumDockerIT extends SeleniumTestBase {
     public static Network network = Network.newNetwork();
 
     /*
-        Here we first start the Spring Application once (@ClassRule only apply once).
-        Then, before each test, we start new container with the browser, as
-        as @Rule is applied per test
+        For simplicity, we will start both the SpringBoot application and the
+        Browser in two Docker instances. However, those will need to share the
+        same virtual network to be able to talk with each other
      */
 
 
@@ -36,6 +36,11 @@ public class SeleniumDockerIT extends SeleniumTestBase {
             .withExposedPorts(8080)
             .withNetwork(network)
             .withNetworkAliases(HOST_ALIAS)
+            /*
+                once the Docker image is up and running, it might still take several seconds
+                before SpringBoot application is fully initialized. So, here we "wait" until
+                we can fetch the homepage with no problems.
+             */
             .waitingFor(Wait.forHttp("/"))
             .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("SPRING-APPLICATION")))
             ;

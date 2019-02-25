@@ -9,8 +9,6 @@ In the `pom.xml` file, add the following dependency:
 
 * `org.seleniumhq.selenium:selenium-java`
 
-Add a `RedirectForwardHandler` controller to do an automated forward from 
-the root path `/` to the default home page `/index.xhtml`. 
 
 For each of the three existing pages (i.e., `index.xhtml`, `match.xhtml` and `result.xhtml`),
 write a Page Object (e.g., `IndexPO`, `MatchPO` and `ResultPO`).
@@ -63,10 +61,10 @@ report at `target/site/jacoco-it/index.html`.
 
 Solutions to this exercise can be found in the 
 `intro/exercise-solutions/quiz-game/part-09` module. 
+
 Note: to avoid copy&paste of the same code, the solution for `part-09` does
 use the code of `part-08` and `test-utils` as libraries.
-Furthermore, when you run `mvn verify` on this module, you will only get
-coverage results for the class `RedirectForwardHandler`, which is the only one
-in the module (as all other classes are in `part-08`, which is treated as an
-external library).
+Furthermore, when you run `mvn verify` on this module, you will not get
+coverage results, as all the classes are in `part-08`, which is treated as an
+external library.
 

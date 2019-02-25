@@ -50,13 +50,17 @@ The main class should represent the "production" configuration, but we have
 not seen yet the connections with real, non-Docker databases.
 We will go back to this point when doing deployments on cloud providers.
 
+Add a `RedirectForwardHandler` controller to do an automated forward from 
+the root path `/` to the default home page `/index.xhtml`. 
+
+
 Under the `src/test/java` folder, create a class named `LocalApplicationRunner`
 with a main method that does start the application in `Application`.
 Starting such class from an IDE should work, as should use the test classpath,
 which contains `h2`. 
 Once started, you should be able to access the game at:
 
-`localhost:8080/index.xhtml`
+`localhost:8080`
 
 Solutions to this exercise can be found in the 
 `intro/exercise-solutions/quiz-game/part-08` module. 

@@ -88,8 +88,8 @@ However, when studying
 such topics for a university degree, time is limited, and one needs to make
 some choices.
 And switching between too many languages/frameworks would just be a too large overhead
-(e.g., learning of different IDEs and building tools).
-The motivation for choices of language/frameworks in this repository is as
+(e.g., learning different IDEs and building tools).
+The motivation for the choices of languages and frameworks in this repository is as
 follows:
 
 * `Java`: one of the most used programming languages, with a very large
@@ -127,8 +127,8 @@ follows:
 
 * `Spring`: our framework of choice. SpringBoot is simply great.
     It does have a non-trivial learning curve though.
-    However, once you understand the concepts of dependency injection and
-    proxy classes, it is a great tool.
+    However, once you understand the concepts of *dependency injection* and
+    *proxy classes*, it is a great tool.
     For the development of web services, DropWizard can be a good choice
     as well, especially if you do not like the "magic" of Spring and want
     a more direct/explicit library. 

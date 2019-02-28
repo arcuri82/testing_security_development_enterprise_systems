@@ -77,10 +77,10 @@ Create the following JSF pages:
     If the user answers correctly, show the next quiz.
     If all of the 5 quizzes are answered correctly, redirect to `result.xhtml`,
     which should show a victory message.
-    At each quiz, should display its index, e.g. "2 of 5" for the second quiz.
+    At each quiz, should display its index, e.g., "2 of 5" for the second quiz.
     If any quiz is wrongly answered,  redirect to `result.xhtml`,
     which should show a match lost message.
-    Can use a URL query parameter to distinguish between victory and lost.
+    Can use a URL query parameter to distinguish between victory and defeat.
 
 * `result.xhtml`: display either a victory or a match lost message.
     Provide 2 buttons: one to start a new match, and one to go back

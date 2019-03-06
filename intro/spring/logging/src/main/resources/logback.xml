@@ -1,0 +1,41 @@
+<configuration>
+
+    <!--
+        Appenders are what we do with the log statements.
+        The most common case is to just print them out on the console.
+        But there cam be many other options, like saving them to disk on file,
+        or send them to a remote server with a TCP connection.
+    -->
+    <appender name="REGULAR_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--
+                Here we define how the message is going to be displayed. In this
+                particular example, we have:
+                - the time
+                - the thread executing the logger
+                - the level of the logger
+                - the name of the logger (up to 36 characters)
+                - then the actual message
+                Many of this properties can be accessed via named variables using %
+            -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!--
+        Root level for all the loggers in the application, including the ones defined
+        in the third-party libraries, ie, anything that is on the classpath
+    -->
+    <root level="warn">
+        <appender-ref ref="REGULAR_STDOUT" />
+    </root>
+
+    <!--
+        Here we specify that all of the loggers in our app code (based on package prefix)
+        will be on INFO instead of WARN of all the other loggers
+     -->
+    <logger name="org.tsdes" level="INFO" />
+
+
+</configuration>

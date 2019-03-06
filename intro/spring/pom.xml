@@ -17,8 +17,9 @@
         <module>jsf</module>
         <module>testing</module>
         <module>security</module>
-        <module>deployment</module>
         <module>flyway</module>
+        <module>logging</module>
+        <module>deployment</module>
     </modules>
 
 </project>

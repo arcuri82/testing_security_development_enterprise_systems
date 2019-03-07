@@ -45,7 +45,15 @@ public class AsyncServiceTest {
 
         Future<String> future = a.asyncResult();
 
-        //this is blocking
+        /*
+            this is blocking until the other thread executing
+            asyncResult() is completed.
+            Note: this is just an example. It would not make
+            much sense to do an async operation and wait
+            for it immediately after.
+            The idea is that this thread could do other things
+            meanwhile before checking if the async is completed.
+         */
         String result = future.get();
 
         assertEquals("foo", result);

@@ -191,6 +191,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
      
   * **.travis.yml**
   * **intro/spring/flyway**
+  * **intro/spring/logging**
   * **intro/spring/deployment**
  
   Exercises: [quiz-game-part-11](exercises/quiz-game/quiz-game-part-11.md)  

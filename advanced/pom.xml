@@ -15,6 +15,7 @@
     <modules>
         <module>kotlin</module>
         <module>data-format</module>
+        <module>calling-webservice</module>
         <module>example-news</module>
         <module>rest</module>
         <module>graphql</module>

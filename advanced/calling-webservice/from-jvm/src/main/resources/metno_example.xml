@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<textforecast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.api.met.no/schemas/textforecast-0.2.xsd">
+    <meta licenseurl="https://www.met.no/en/free-meteorological-data/Licensing-and-crediting"/>
+    <time from="2019-06-13T12:00:00" to="2019-06-14T00:00:00">
+        <forecasttype name="normal">
+            <location name="Agder, Telemark, Østlandet" id="0503_0608_0609_0610">Minking til skiftende bris. Skyet og regn. Fra i formiddag enkelte regnbyger, gløtt av sol.</location>
+            <location name="Fjellet i Sør-Norge" id="0710">Sørøstlig liten kuling utsatte steder. Regn. Utover dagen noe lettere skydekke og overgang til enkelte regnbyger, først i sør.</location>
+            <location name="Rogaland" id="0611">Søraust liten kuling utsatte steder, og kan hende forbigående stiv kuling nær Obrestad. Skiftende skydekke. Enkelte regnbyger.</location>
+            <location name="Hordaland" id="0612">Austlig eller skiftende bris, frisk bris utsatte steder i indre strøk. Dreining til sørlig liten kuling på kysten. Skiftende skydekke. Enkelte regnbyger.</location>
+            <location name="Sogn og Fjordane" id="0614">Skiftende bris, utsatte steder i indre strøk austlig frisk bris. Dreining til sørlig frisk bris på kysten, kortvarig liten kuling i sør. Skiftende skydekke. Enkelte regnbyger.</location>
+            <location name="Møre og Romsdal" id="0615">Skiftende bris. Enkelte regnbyger på Sunnmøre, ellers delvis skyet stort sett oppholdsvær.</location>
+            <location name="Trøndelag" id="0504">Søraust liten kuling utsatte steder, minkende til frisk bris sent i kveld. Skiftende skydekke. Perioder med regn, sent i ettermiddag lettere vær, først i sørlige deler.</location>
+            <location name="Nordland" id="0618">Austlig bris, frisk bris til liten kuling utsatte steder. I Lofoten og Vesterålen nordøstlig frisk bris, kan hende liten kuling. Skyet og litt regn på Helgeland, ellers oppholdsvær og perioder med sol.</location>
+            <location name="Troms" id="0619">Sør og sørøst bris, på kysten nordøst frisk bris, kan hende liten kuling. Lettskyet, oppholdsvær.</location>
+            <location name="Finnmark" id="0620">Skiftende bris, på kysten av Vest-Finnmark nordøst opp i frisk bris. Delvis skyet. Kan hende spredte regnbyger i øst.</location>
+            <location name="Spitsbergen" id="3011">Vestlig frisk bris utsatte steder, opp i liten kuling i øst. Skyet eller delvis skyet, oppholdsvær.</location>
+        </forecasttype>
+    </time>
+    <time from="2019-06-14T00:00:00" to="2019-06-15T00:00:00">
+        <forecasttype name="normal">
+            <location name="Agder, Telemark, Østlandet" id="0503_0608_0609_0610">Øst og sørøst bris. Enkelte regnbyger, først i sørlige områder, fra om ettermiddagen også nord for Mjøsa. Perioder med sol.</location>
+            <location name="Fjellet i Sør-Norge" id="0710">Sørøstlig bris, natt til fredag liten kuling utsatte steder i Langfjella. Skyet. Etter hvert enkelte regnbyger, i nordlige områder stort sett oppholdsvær.</location>
+            <location name="Rogaland" id="0611">Sørøst til dels liten kuling på kysten, sør for Obrestad kortvarig stiv kuling om natta. Enkelte regnbyger. Utover ettermiddagen søraust frisk bris og lettere vær.</location>
+            <location name="Hordaland" id="0612">Sørøstlig frisk bris utsatte steder. Enkelte regnbyger. Om kvelden skiftende bris og etter hvert lettere vær.</location>
+            <location name="Sogn og Fjordane" id="0614">Skiftende bris. Lettskyet oppholdsvær, utover ettermiddagen skiftende skydekke og enkelte regnbyger.</location>
+            <location name="Møre og Romsdal" id="0615">Skiftende bris. Lettskyet oppholdsvær, utover om ettermiddagen delvis skyet og enkelte regnbyger, vesentlig på Sunnmøre.</location>
+            <location name="Trøndelag" id="0504">Skiftende bris, til dels sørøstlig frisk bris utsatte steder. I nord litt skyet og litt regn, ellers oppholdsvær og perioder med sol.</location>
+            <location name="Nordland" id="0618">Bris mellom nord og øst, I Lofoten og Vesterålen nordaustlig frisk bris, kan hende liten kuling. Sør for Bodø enkelte regnbyger, ellers mye pent vær.</location>
+            <location name="Troms" id="0619">Skiftende bris, på kysten nordaustlig periodevis frisk bris, kan hende liten kuling lengst sør. Til dels pent vær. Om kvelden noe mer skyet på kysten i nord.</location>
+            <location name="Finnmark" id="0620">Nordvestlig bris, på kysten periodevis frisk bris, til dels liten kuling på kysten i aust først på dagen. Til dels pent vær. Fra om ettermiddagen noe mer skyet på kysten.</location>
+            <location name="Spitsbergen" id="3011">Skiftende bris, i nordøst vestlig opp i liten kuling, fra om ettermiddagen skiftende bris. Delvis skyet oppholdsvær.</location>
+        </forecasttype>
+    </time>
+    <time from="2019-06-15T00:00:00" to="2019-06-16T00:00:00">
+        <forecasttype name="normal">
+            <location name="Østlandet" id="0503">Skiftende bris, på kysten nordøstlig periodevis frisk bris. Enkelte regnbyger i sør, ellers oppholdsvær og perioder med sol.</location>
+            <location name="Telemark og Agder" id="0502_0608">Nordøstlig bris, periodevis liten kuling på kysten, om ettermiddagen dreiende østlig. Skyet eller delvis skyet. Enkelte regnbyger, om kvelden regn.</location>
+            <location name="Fjellet i Sør-Norge" id="0710">Sørøstlig frisk bris utsatte steder, om kvelden liten kuling i Langfjella. Enkelte regnbyger i Langfjella, ellers oppholdsvær og perioder med sol.</location>
+            <location name="Rogaland" id="0611">Bris omkring øst, fra lørdag ettermiddag sørøstlig liten kuling på kysten i sør. Tilskyende, fra om ettermiddagen regn.</location>
+            <location name="Hordaland og Sogn og Fjordane" id="0612_0614">Bris omkring øst. Fra lørdag formiddag skiftende bris, periodevis nordlig frisk bris på kysten. Oppholdsvær. Mot kvelden litt regn, først i sør.</location>
+            <location name="Møre og Romsdal og Trøndelag" id="0615_0616_0617">Skiftende bris, fra om ettermiddagen periodevis nordøstlig frisk bris på kysten. Stort sett pent vær.</location>
+            <location name="Nordland" id="0618">Skiftende bris, på kysten nordlig bris. Enkelte regnbyger sør på Helgeland natt til lørdag, ellers opphold og lange perioder med sol.</location>
+            <location name="Troms og Finnmark" id="50890">Nordvestlig bris, fra lørdag ettermiddag liten kuling på kysten av Finnmark. Skyet på kysten, ellers stort sett pent vær.</location>
+            <location name="Spitsbergen" id="3011">Nordvestlig bris, liten kuling utsatte steder. Enkelte sluddbyger i nord, ellers opphold og perioder med sol.</location>
+        </forecasttype>
+    </time>
+    <time from="2019-06-16T00:00:00" to="2019-06-17T00:00:00">
+        <forecasttype name="normal">
+            <location name="Østlandet" id="0503">Sørøstlig bris. Fra søndag ettermiddag sørvestlig bris, liten kuling på kysten. Regn, om kvelden oppholdsvær og lettere skydekke i sør.</location>
+            <location name="Telemark og Agder" id="0502_0608">Sørøstlig bris. Fra søndag formiddag sørvestlig bris, liten kuling på kysten. Regn, fra utpå ettermiddagen enkelte regnbyger og perioder med sol.</location>
+            <location name="Fjellet i Sør-Norge" id="0710">Sørøstlig frisk bris utsatte steder, om kvelden skiftende bris. Regn, om kvelden noe lettere vær i Langfjella.</location>
+            <location name="Vestlandet sør for Stad" id="0505">Skiftende bris. Regn. Fra søndag ettermiddag sørlig bris, frisk bris på kysten. Regnbyger.</location>
+            <location name="Møre og Romsdal og Trøndelag" id="0615_0616_0617">Skiftende bris, nordøstlig frisk bris på kysten i nord. Fra søndag morgen sørvestlig bris, frisk bris på kysten i sør. Regn, først i sør.</location>
+            <location name="Nordland og Troms" id="50392">Nordøstlig bris, periodevis frisk bris på kysten. Litt regn sør på Helgeland om kvelden, ellers oppholdsvær og perioder med sol.</location>
+            <location name="Finnmark" id="0620">Nordvestlig bris, periodevis frisk bris på kysten, om ettermiddagen dreiende nordøstlig i Vest-Finnmark. Oppholdsvær og perioder med sol.</location>
+            <location name="Spitsbergen" id="3011">Nordvestlig bris, liten kuling utsatte steder. Litt sludd i nord, ellers oppholdsvær.</location>
+        </forecasttype>
+    </time>
+</textforecast>

@@ -18,7 +18,7 @@ import javax.ws.rs.core.UriBuilder
 fun main() {
 
     /*
-        Here, we use JAX-RS to access/create RESTful web services.
+        Here, we use JAX-RS to access RESTful web services.
         But any HTTP client would do.
 
         JAX-RS is just a spec. Different implementations are for example

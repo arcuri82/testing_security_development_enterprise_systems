@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test
 import org.tsdes.advanced.dataformat.data.Post
 import org.tsdes.advanced.dataformat.data.TopPosts
 import java.util.*
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlRootElement
 
 class ConverterTest{
 
@@ -74,7 +77,7 @@ class ConverterTest{
     @Test
     fun testCustomJson() {
 
-        val converter = ConverterCustomJson<TopPosts>(TopPosts::class.java)
+        val converter = ConverterCustomJson(TopPosts::class.java)
         val topPosts = getTopPosts()
 
         val custom = converter.toJSon(topPosts)
@@ -83,6 +86,38 @@ class ConverterTest{
         val backWithGson = converter.fromJSon(custom)
 
         verifyEquivalence(topPosts, backWithGson)
+    }
+
+
+    @XmlRootElement
+    @XmlAccessorType(XmlAccessType.FIELD)
+    private data class X (
+            var x: Long = 0
+    )
+
+    @Test
+    fun testLong(){
+
+        val x = X(Long.MAX_VALUE)
+        val converter = ConverterImp(X::class.java)
+
+        val toXml = converter.toXML(x)
+        val fromXml = converter.fromXML(toXml)
+        assertEquals(x, fromXml)
+
+        val toJson = converter.toJSon(x)
+        val fromJson = converter.fromJSon(toJson)
+        assertEquals(x, fromJson)
+
+        /*
+            Note: max long would be 9223372036854775807 , ie, 2^63
+            The JSON will contain the right value here, but technically it would be
+            wrong, as JSON does not have 64bit signed longs, but rather just doubles.
+            For example, a browser like Chrome would not be able to hold such value,
+            and could "silently" round it to: 9223372036854776000.
+            You can try by pasting 9223372036854775807 into the JavaScript console in
+            Developer Tools.
+         */
     }
 
 

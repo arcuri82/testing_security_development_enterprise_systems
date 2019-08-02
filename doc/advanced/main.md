@@ -4,7 +4,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 ## Lessons
 
-* **Lesson 01**: Intro, Kotlin and JSON
+* **Lesson 01**: Intro, Kotlin, JSON and Web Services
   
   Slides: [[pdf]](slides/lesson_01.pdf), 
           [[pptx]](slides/lesson_01.pptx)
@@ -12,18 +12,18 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   Modules:     
   
   * **advanced/kotlin**
-  * **advanced/data-format**            
+  * **advanced/data-format**
+  * **advanced/calling-webservice**            
 
 <br />
 
-* **Lesson 02**: HTTP and Web Services
+* **Lesson 02**: HTTP and RESTful APIs
   
   Slides: [[pdf]](slides/lesson_02.pdf), 
           [[pptx]](slides/lesson_02.pptx)
           
   Modules:     
   
-  * **advanced/rest/weather-client**
   * **advanced/example-news**
   * **advanced/rest/news-rest**
 

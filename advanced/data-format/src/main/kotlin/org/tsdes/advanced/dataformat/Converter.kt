@@ -8,17 +8,17 @@ package org.tsdes.advanced.dataformat
  */
 interface Converter<T: Any> {
 
-    fun toXML(obj: T): String
+    fun toXml(obj: T): String
 
-    fun fromXML(xml: String): T
+    fun fromXml(xml: String): T
 
-    fun toJSon(obj: T): String
+    fun toJson(obj: T): String
 
-    fun fromJSon(json: String): T
+    fun fromJson(json: String): T
 
 
     /*
-        Transforming strings directly from XML to JSon (and vice-versa) would
+        Transforming strings directly from XML to JSON (and vice-versa) would
         be more efficient. But piping together existing methods is very quick
         and easy, and perfectly valid solution when performance is not a major
         constraint.
@@ -28,17 +28,17 @@ interface Converter<T: Any> {
      */
 
 
-    fun fromJSonToXml(json: String): String {
+    fun fromJsonToXml(json: String): String {
 
-        val obj = fromJSon(json)
+        val obj = fromJson(json)
 
-        return toXML(obj)
+        return toXml(obj)
     }
 
-    fun fromXmlToJSon(xml: String): String {
+    fun fromXmlToJson(xml: String): String {
 
-        val obj = fromXML(xml)
+        val obj = fromXml(xml)
 
-        return toJSon(obj)
+        return toJson(obj)
     }
 }

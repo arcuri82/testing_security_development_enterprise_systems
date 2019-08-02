@@ -14,7 +14,7 @@ public interface Converter<T> {
 
 
     /*
-        Transforming strings directly from XML to JSon (and vice-versa) would
+        Transforming strings directly from XML to JSON (and vice-versa) would
         be more efficient. But piping together existing methods is very quick
         and easy, and perfectly valid solution when performance is not a major
         constraint.

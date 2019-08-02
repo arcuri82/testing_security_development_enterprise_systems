@@ -12,7 +12,7 @@ open class ConverterImp<T: Any>(
 ) : Converter<T> {
 
 
-    override fun toXML(obj: T): String {
+    override fun toXml(obj: T): String {
 
         val context = JAXBContext.newInstance(type)
 
@@ -25,7 +25,7 @@ open class ConverterImp<T: Any>(
         return writer.toString()
     }
 
-    override fun fromXML(xml: String): T {
+    override fun fromXml(xml: String): T {
 
         val context = JAXBContext.newInstance(type)
         val u = context.createUnmarshaller()
@@ -35,14 +35,14 @@ open class ConverterImp<T: Any>(
         return u.unmarshal(reader) as T
     }
 
-    override fun toJSon(obj: T): String {
+    override fun toJson(obj: T): String {
 
         //see https://github.com/google/gson
 
         return Gson().toJson(obj)
     }
 
-    override fun fromJSon(json: String): T {
+    override fun fromJson(json: String): T {
 
         return Gson().fromJson(json, type)
     }

@@ -6,7 +6,7 @@ import org.tsdes.advanced.examplenews.constraint.Country
 
 /**
  *  A data transfer object (DTO) is what we will use to represent and (un)marshal
- *  JSon objects.
+ *  JSON objects.
  *
  *  This is just a POJO (plain old Java object), with no logic, just data.
  *  Also note how Swagger is used here to provide documentation.

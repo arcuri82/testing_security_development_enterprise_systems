@@ -281,12 +281,12 @@ class NewsRestApiTest : NRTestBase() {
 
         /*
             HTTP Error 415: "Unsupported media type"
-            The REST API is set to receive data in JSon, ie
+            The REST API is set to receive data in JSON, ie
             "consumes = arrayOf(MediaType.APPLICATION_JSON_VALUE)"
             so, if send XML, we should get a 415 error.
             Note: a server might provide and receive the same
             resource (on same URL) with different formats!
-            Although nowadays most just deal with Json.
+            Although nowadays most just deal with JSON.
          */
 
         given().contentType(ContentType.XML)

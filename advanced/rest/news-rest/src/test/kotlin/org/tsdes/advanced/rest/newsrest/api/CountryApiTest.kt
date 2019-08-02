@@ -45,7 +45,7 @@ class CountryApiTest{
         var request = "GET /newsrest/api/countries HTTP/1.1\r\n"
         //headers are pairs <key>:<value>, where the key is case insensitive
         request += "Host:localhost:$port\r\n"  //this is compulsory: a server running at an IP can serve different host names
-        request += "Accept:application/json\r\n" //we states that we want the resource in Json format
+        request += "Accept:application/json\r\n" //we states that we want the resource in JSON format
         request += "\r\n" //empty line with CRLF indicates the end of the header section
 
         val result = HttpUtils.executeHttpCommand("localhost", port, request)
@@ -157,7 +157,7 @@ class CountryApiTest{
             and decide which is the easiest to read.
 
             One good thing of RestAssured is the ability to define
-            assertions on the JSon responses in the body without
+            assertions on the JSON responses in the body without
             having to manually parsing (or unmarshalling) it first.
          */
 

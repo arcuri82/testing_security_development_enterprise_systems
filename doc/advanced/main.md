@@ -216,9 +216,10 @@ you learn.
 ## Exam
 
 In this course the exam is divided in two parts: a written, theoretical exam,
-and a group project.
+and a project to do at home.
 Two examples of mock exam for the theoretical part can be 
 found [here (mock_0)](exams/theory_mock_exam_0.pdf)
 and [here (mock_1)](exams/theory_mock_exam_1.pdf).
 On the other hand, 
-an example of mock exam for the group project can be found [here](exams/group_mock_exam.pdf).
+an example of mock exam for the project can be 
+found [here](exams/project_mock_exam.pdf) (file not available yet).

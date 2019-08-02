@@ -9,7 +9,12 @@ import org.tsdes.advanced.examplenews.NewsEntity
     but it can become a problem (eg, maintainability and de-coupling) for
     larger projects.
 
-    So here we need a converter from @Entity to DTO
+    So here we need a converter from @Entity to DTO.
+
+    Note: here all values are the same, but for id, which is transformed
+    from a Long into a String.
+    As a rule of thumb, should avoid Long in DTOs, as JSON does not have
+    full support for such type.
  */
 class NewsConverter {
 

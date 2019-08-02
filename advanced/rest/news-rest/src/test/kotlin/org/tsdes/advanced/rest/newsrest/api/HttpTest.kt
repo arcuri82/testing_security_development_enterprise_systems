@@ -115,7 +115,7 @@ class HttpTest : NRTestBase() {
 
         val id = createAPost()
 
-        var getRequest = "GET /newsrest/api/news/id/$id HTTP/1.1\r\n"
+        var getRequest = "GET /newsrest/api/news/$id HTTP/1.1\r\n"
         getRequest += "Host:localhost:$port\r\n"
         getRequest += "Accept:application/json\r\n"
         getRequest += "\r\n"

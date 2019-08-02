@@ -105,7 +105,12 @@ class NewsRestApi {
         } else {
             crud.findAllByAuthorId(authorId!!)
         }
-
+        /*
+            Note: here we return a 200 OK even in the case of no data,
+            as we still return an [] array (albeit empty).
+            Returning a 404 in such a case would be wrong, as the collection
+            does exist, even if it is empty.
+         */
         return ResponseEntity.ok(NewsConverter.transform(list))
     }
 

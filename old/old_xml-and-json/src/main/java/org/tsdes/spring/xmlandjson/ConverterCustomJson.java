@@ -21,7 +21,7 @@ public class  ConverterCustomJson<T> extends ConverterImpl<T> {
 
         /*
             This is quite tricky to implement, as you need to create a parser
-            based on the JSon grammar. If you are interested, you can create
+            based on the JSON grammar. If you are interested, you can create
             parsers for custom grammars using JavaCC:
             https://javacc.java.net/
          */

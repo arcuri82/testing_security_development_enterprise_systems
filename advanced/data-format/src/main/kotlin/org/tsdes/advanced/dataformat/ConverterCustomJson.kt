@@ -8,7 +8,7 @@ import java.util.*
 class ConverterCustomJson<T: Any>(type: Class<T>) : ConverterImp<T>(type) {
 
 
-    override fun fromJSon(json: String): T {
+    override fun fromJson(json: String): T {
 
         /*
             This is quite tricky to implement, as you need to create a parser
@@ -19,11 +19,11 @@ class ConverterCustomJson<T: Any>(type: Class<T>) : ConverterImp<T>(type) {
             https://www.antlr.org/
          */
 
-        return super.fromJSon(json)
+        return super.fromJson(json)
     }
 
 
-    override fun toJSon(obj: T): String {
+    override fun toJson(obj: T): String {
 
         val buffer = StringBuffer(1024)
 

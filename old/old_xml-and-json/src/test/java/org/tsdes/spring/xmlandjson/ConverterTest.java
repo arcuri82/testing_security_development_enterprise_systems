@@ -82,7 +82,7 @@ public class ConverterTest {
         String json = converter.toJSon(topPosts);
         String xml  = converter.toXML(topPosts);
 
-        //usually, XML is larger than JSon
+        //usually, XML is larger than JSON
         assertTrue(xml.length() > json.length());
     }
 

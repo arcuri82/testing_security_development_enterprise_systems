@@ -17,43 +17,43 @@ class ConverterTest{
         val converter = ConverterImp(TopPosts::class.java)
         val topPosts = getTopPosts()
 
-        val xml = converter.toXML(topPosts)
+        val xml = converter.toXml(topPosts)
         println(xml)
 
-        val res = converter.fromXML(xml)
+        val res = converter.fromXml(xml)
 
         verifyEquivalence(topPosts, res)
     }
 
 
     @Test
-    fun testJSon() {
+    fun testJson() {
 
         val converter = ConverterImp(TopPosts::class.java)
 
         val topPosts = getTopPosts()
 
-        val json = converter.toJSon(topPosts)
+        val json = converter.toJson(topPosts)
         println(json)
 
-        val res = converter.fromJSon(json)
+        val res = converter.fromJson(json)
 
         verifyEquivalence(topPosts, res)
     }
 
     @Test
-    fun testToFromJSonXml() {
+    fun testToFromJsonXml() {
 
         val converter = ConverterImp(TopPosts::class.java)
         val topPosts = getTopPosts()
 
-        var json = converter.toJSon(topPosts)
+        var json = converter.toJson(topPosts)
 
-        val xml = converter.fromJSonToXml(json)
+        val xml = converter.fromJsonToXml(json)
 
-        json = converter.fromXmlToJSon(xml)
+        json = converter.fromXmlToJson(xml)
 
-        val res = converter.fromJSon(json)
+        val res = converter.fromJson(json)
 
         verifyEquivalence(topPosts, res)
     }
@@ -65,10 +65,10 @@ class ConverterTest{
         val converter = ConverterImp(TopPosts::class.java)
         val topPosts = getTopPosts()
 
-        val json = converter.toJSon(topPosts)
-        val xml = converter.toXML(topPosts)
+        val json = converter.toJson(topPosts)
+        val xml = converter.toXml(topPosts)
 
-        //usually, XML is larger than JSon
+        //usually, XML is larger than JSON
         assertTrue(xml.length > json.length)
     }
 
@@ -80,10 +80,10 @@ class ConverterTest{
         val converter = ConverterCustomJson(TopPosts::class.java)
         val topPosts = getTopPosts()
 
-        val custom = converter.toJSon(topPosts)
+        val custom = converter.toJson(topPosts)
         println("Custom JSON:\n$custom")
 
-        val backWithGson = converter.fromJSon(custom)
+        val backWithGson = converter.fromJson(custom)
 
         verifyEquivalence(topPosts, backWithGson)
     }
@@ -101,12 +101,12 @@ class ConverterTest{
         val x = X(Long.MAX_VALUE)
         val converter = ConverterImp(X::class.java)
 
-        val toXml = converter.toXML(x)
-        val fromXml = converter.fromXML(toXml)
+        val toXml = converter.toXml(x)
+        val fromXml = converter.fromXml(toXml)
         assertEquals(x, fromXml)
 
-        val toJson = converter.toJSon(x)
-        val fromJson = converter.fromJSon(toJson)
+        val toJson = converter.toJson(x)
+        val fromJson = converter.fromJson(toJson)
         assertEquals(x, fromJson)
 
         /*

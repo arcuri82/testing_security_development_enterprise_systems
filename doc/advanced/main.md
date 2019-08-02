@@ -50,7 +50,6 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   Modules:     
   
   * **advanced/rest/redirect**
-  * **advanced/rest/news-rest-v2**
 
 <br />
 

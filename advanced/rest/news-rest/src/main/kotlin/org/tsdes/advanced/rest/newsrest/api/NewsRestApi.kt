@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import io.swagger.annotations.ApiResponse
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -18,13 +19,14 @@ import org.tsdes.advanced.rest.newsrest.dto.NewsDto
 import javax.validation.ConstraintViolationException
 import javax.validation.Valid
 
+const val ID_PARAM = "The numeric id of the news"
+
 /**
  * Created by arcuri82 on 13-Jul-17.
  */
 @Api(value = "/news", description = "Handling of creating and retrieving news")
 @RequestMapping(
-        path = ["/news"], // when the url is "<base>/news", then this class will be used to handle it
-        produces = [(MediaType.APPLICATION_JSON_VALUE)] // states that, when a method returns something, it is in Json
+        path = ["/news"] // when the url is "<base>/news", then this class will be used to handle it
 )
 @RestController
 class NewsRestApi {
@@ -59,54 +61,57 @@ class NewsRestApi {
     @Autowired
     private lateinit var crud: NewsRepository
 
+        /*
+            request URL parameters are in the form
+
+            ?<name>=<value>&<name>=<value>&...
+
+            for example
+
+            /news?country=Norway&authordId=foo
+
+            So here we ll have a single endpoint for getting "news", where
+            optional filtering on "country" and "authorId" will be based on
+            URL parameters, and not different endpoints
+         */
     @ApiOperation("Get all the news")
-    @GetMapping
-    fun get(): ResponseEntity<List<NewsDto>> {
-        return ResponseEntity.ok(NewsConverter.transform(crud.findAll()))
-    }
-
-    /*
-      NOTE: in the following, we use the URI path to
-      identify the subsets that we want, like "country"
-      and "author". This does work, but is NOT fully correct.
-      Later, we will go back on this point once we discuss
-      URI parameters.
-   */
-
-    @ApiOperation("Get all the news in the specified country")
-    @GetMapping(path = ["/countries/{country}"])
-    fun getByCountry(@ApiParam("The country name")
-                     @PathVariable("country")
-                     country: String): ResponseEntity<List<NewsDto>> {
-        return ResponseEntity.ok(NewsConverter.transform(crud.findAllByCountry(country)))
-    }
-
-
-    @ApiOperation("Get all the news written by the specified author")
-    @GetMapping(path = ["/authors/{author}"])
-    fun getByAuthor(@ApiParam("The id of the author who wrote the news")
-                    @PathVariable("author")
-                    author: String): ResponseEntity<List<NewsDto>> {
-        return ResponseEntity.ok(NewsConverter.transform(crud.findAllByAuthorId(author)))
-    }
-
-    @ApiOperation("Get all the news from a given country written by a given author")
-    @GetMapping(path = ["/countries/{country}/authors/{author}"])
-    fun getByCountryAndAuthor(
-            @ApiParam("The country name")
-            @PathVariable("country")
-            country: String,
+    @GetMapping(produces = [(MediaType.APPLICATION_JSON_VALUE)])
+    fun get(@ApiParam("The country name")
+            @RequestParam("country", required = false)
+            country: String?,
             //
             @ApiParam("The id of the author who wrote the news")
-            @PathVariable("author")
-            author: String)
-            : ResponseEntity<List<NewsDto>> {
+            @RequestParam("authorId", required = false)
+            authorId: String?
 
-        return ResponseEntity.ok(NewsConverter.transform(crud.findAllByCountryAndAuthorId(country, author)))
+    ): ResponseEntity<List<NewsDto>> {
+
+        /*
+            s.isNullOrBlank() might look weird when coming from Java...
+            I mean, if a string "s" is null, wouldn't calling (any) method
+            on it lead to a NPE???
+            This does not happen based on how kotlin code is compiled (you
+            can look into the source code of isNullOrBlank to see how exactly
+            this is achieved, eg by inlining and specifying the method can
+            be called on nullable objects)
+         */
+
+        val list = if (country.isNullOrBlank() && authorId.isNullOrBlank()) {
+            crud.findAll()
+        } else if (!country.isNullOrBlank() && !authorId.isNullOrBlank()) {
+            crud.findAllByCountryAndAuthorId(country, authorId)
+        } else if (!country.isNullOrBlank()) {
+            crud.findAllByCountry(country)
+        } else {
+            crud.findAllByAuthorId(authorId!!)
+        }
+
+        return ResponseEntity.ok(NewsConverter.transform(list))
     }
 
+
     @ApiOperation("Create a news")
-    @PostMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)])
+    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ApiResponse(code = 201, message = "The id of newly created news")
     fun createNews(
             @ApiParam("Text of news, plus author id and country. Should not specify id or creation time")
@@ -114,15 +119,11 @@ class NewsRestApi {
             dto: NewsDto)
             : ResponseEntity<Long> {
 
-        /*
-            Error code 400:
-            the user had done something wrong, eg sent invalid input configurations
-         */
-
-        if (dto.id != null) {
+        if (!dto.id.isNullOrEmpty()) {
             //Cannot specify id for a newly generated news
             return ResponseEntity.status(400).build()
         }
+
         if (dto.creationTime != null) {
             //Cannot specify creationTime for a newly generated news
             return ResponseEntity.status(400).build()
@@ -147,8 +148,8 @@ class NewsRestApi {
 
 
     @ApiOperation("Get a single news specified by id")
-    @GetMapping(path = ["/id/{id}"])
-    fun getById(@ApiParam(ID_PARAM)
+    @GetMapping(path = ["/{id}"])
+    fun getNews(@ApiParam(ID_PARAM)
                 @PathVariable("id")
                 pathId: String?)
             : ResponseEntity<NewsDto> {
@@ -164,36 +165,27 @@ class NewsRestApi {
             return ResponseEntity.status(404).build()
         }
 
-        val entity = crud.findById(id).orElse(null) ?: return ResponseEntity.status(404).build()
+        val dto = crud.findById(id).orElse(null) ?: return ResponseEntity.status(404).build()
 
-        return ResponseEntity.ok(NewsConverter.transform(entity))
+        return ResponseEntity.ok(NewsConverter.transform(dto))
     }
 
 
-    /*
-       PUT is idempotent (ie, applying 1 or 1000 times should end up in same result on the server).
-       However, it will replace the whole resource (News) in this case.
-
-       In some cases, a PUT on an non-existing resource might create it.
-       This depends on the application.
-       Here, as the id is what automatically generate by Hibernate,
-       we will not allow it
-    */
-
     @ApiOperation("Update an existing news")
-    @PutMapping(path = ["/id/{id}"], consumes = [(MediaType.APPLICATION_JSON_VALUE)])
+    @PutMapping(path = ["/{id}"], consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     fun update(
             @ApiParam(ID_PARAM)
             @PathVariable("id")
-            pathId: String?,
+            pathId: String,
             //
             @ApiParam("The news that will replace the old one. Cannot change its id though.")
             @RequestBody
             dto: NewsDto
     ): ResponseEntity<Any> {
+
         val id: Long
         try {
-            id = dto.id!!.toLong()
+            id = pathId.toLong()
         } catch (e: Exception) {
             /*
                 invalid id. But here we return 404 instead of 400,
@@ -220,25 +212,19 @@ class NewsRestApi {
 
         try {
             crud.update(id, dto.text!!, dto.authorId!!, dto.country!!, dto.creationTime!!)
-        } catch (e: ConstraintViolationException) {
-            return ResponseEntity.status(400).build()
+        } catch (e: Exception) {
+            if(Throwables.getRootCause(e) is ConstraintViolationException) {
+                return ResponseEntity.status(400).build()
+            }
+            throw e
         }
 
         return ResponseEntity.status(204).build()
     }
 
 
-    /*
-      If we only want to update the text, using the method above can be inefficient, as we
-      have to send again the WHOLE news. Partial updates are wrong.
-      But, we can have a new resource specifying the content of the news,
-      which then would be allowed to update with a PUT.
-
-      Another approach is to use PATCH, but likely on overkill here...
-   */
-
     @ApiOperation("Update the text content of an existing news")
-    @PutMapping(path = ["/id/{id}/text"], consumes = [(MediaType.TEXT_PLAIN_VALUE)])
+    @PutMapping(path = ["/{id}/text"], consumes = [(MediaType.TEXT_PLAIN_VALUE)])
     fun updateText(
             @ApiParam(ID_PARAM)
             @PathVariable("id")
@@ -258,8 +244,11 @@ class NewsRestApi {
 
         try {
             crud.updateText(id, text)
-        } catch (e: ConstraintViolationException) {
-            return ResponseEntity.status(400).build()
+        } catch (e: Exception) {
+            if(Throwables.getRootCause(e) is ConstraintViolationException) {
+                return ResponseEntity.status(400).build()
+            }
+            throw e
         }
 
         return ResponseEntity.status(204).build()
@@ -267,7 +256,7 @@ class NewsRestApi {
 
 
     @ApiOperation("Delete a news with the given id")
-    @DeleteMapping(path = ["/id/{id}"])
+    @DeleteMapping(path = ["/{id}"])
     fun delete(@ApiParam(ID_PARAM)
                @PathVariable("id")
                pathId: String?): ResponseEntity<Any> {
@@ -276,26 +265,9 @@ class NewsRestApi {
         try {
             id = pathId!!.toLong()
         } catch (e: Exception) {
-            /*
-                If the above fails, it means the variable was not
-                a proper number. So could make sense here to
-                return 400 instead of 404, as we know that
-                the request is wrong
-             */
             return ResponseEntity.status(400).build()
         }
 
-        /*
-            Bit tricky: once a resource is deleted, if you try to
-            delete it a second time, then you would expect a 404,
-            ie resource not found.
-            However, DELETE is idempotent, which might be confusing
-            in this context. Doing 1 or 100 deletes on the server
-            will not alter the result on the server (the resource is
-            deleted), although the return values (204 vs 404) can
-            be different (this does not affect the definition of
-            idempotent)
-         */
         if (!crud.existsById(id)) {
             return ResponseEntity.status(404).build()
         }
@@ -306,4 +278,3 @@ class NewsRestApi {
 
 }
 
-const val ID_PARAM = "The numeric id of the news"

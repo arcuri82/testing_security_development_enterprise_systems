@@ -54,7 +54,7 @@ abstract class NRTestBase {
          */
         list.stream().forEach {
             given().pathParam("id", it.id)
-                    .delete("/id/{id}")
+                    .delete("/{id}")
                     .then()
                     .statusCode(204)
         }

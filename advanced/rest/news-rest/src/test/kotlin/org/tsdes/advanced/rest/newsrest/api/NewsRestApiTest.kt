@@ -44,7 +44,7 @@ class NewsRestApiTest : NRTestBase() {
         given().get().then().statusCode(200).body("size()", equalTo(1))
 
         given().pathParam("id", id)
-                .get("/id/{id}")
+                .get("/{id}")
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(id))
@@ -68,9 +68,12 @@ class NewsRestApiTest : NRTestBase() {
                 .body("size()", equalTo(1))
                 .body("id[0]", containsString(id))
 
-        delete("/id/$id")
+        delete("/$id").then().statusCode(204)
 
         get().then().body("id", not(containsString(id)))
+
+        //delete again
+        delete("/$id").then().statusCode(404) //note the change from 204 to 404
     }
 
 
@@ -88,7 +91,7 @@ class NewsRestApiTest : NRTestBase() {
                 .extract().asString()
 
         //check if POST was fine
-        get("/id/$id").then().body("text", equalTo(text))
+        get("/$id").then().body("text", equalTo(text))
 
         val updatedText = "new updated text"
 
@@ -96,12 +99,12 @@ class NewsRestApiTest : NRTestBase() {
         given().contentType(ContentType.JSON)
                 .pathParam("id", id)
                 .body(NewsDto(id, "foo", updatedText, "Norway", ZonedDateTime.now()))
-                .put("/id/{id}")
+                .put("/{id}")
                 .then()
                 .statusCode(204)
 
         //was the PUT fine?
-        get("/id/$id").then().body("text", equalTo(updatedText))
+        get("/$id").then().body("text", equalTo(updatedText))
 
 
         //now rechange, but just the text
@@ -110,11 +113,11 @@ class NewsRestApiTest : NRTestBase() {
         given().contentType(ContentType.TEXT)
                 .body(anotherText)
                 .pathParam("id", id)
-                .put("/id/{id}/text")
+                .put("/{id}/text")
                 .then()
                 .statusCode(204)
 
-        get("/id/$id").then().body("text", equalTo(anotherText))
+        get("/$id").then().body("text", equalTo(anotherText))
     }
 
     @Test
@@ -123,7 +126,7 @@ class NewsRestApiTest : NRTestBase() {
         given().contentType(ContentType.JSON)
                 .body("{\"id\":\"-333\"}")
                 .pathParam("id", "-333")
-                .put("/id/{id}")
+                .put("/{id}")
                 .then()
                 .statusCode(404)
     }
@@ -134,7 +137,7 @@ class NewsRestApiTest : NRTestBase() {
         given().contentType(ContentType.JSON)
                 .body(NewsDto("222", "foo", "some text", "Norway", ZonedDateTime.now()))
                 .pathParam("id", "-333")
-                .put("/id/{id}")
+                .put("/{id}")
                 .then()
                 .statusCode(409)
     }
@@ -154,7 +157,7 @@ class NewsRestApiTest : NRTestBase() {
         given().contentType(ContentType.JSON)
                 .pathParam("id", id)
                 .body(NewsDto(id, null, updatedText, null, null))
-                .put("/id/{id}")
+                .put("/{id}")
                 .then()
                 .statusCode(400)
     }
@@ -191,9 +194,9 @@ class NewsRestApiTest : NRTestBase() {
         get().then().body("size()", equalTo(0))
         createSomeNews()
 
-        get("/countries/Norway").then().body("size()", equalTo(3))
-        get("/countries/Sweden").then().body("size()", equalTo(1))
-        get("/countries/Iceland").then().body("size()", equalTo(2))
+        get("?country=Norway").then().body("size()", equalTo(3))
+        get("?country=Sweden").then().body("size()", equalTo(1))
+        get("?country=Iceland").then().body("size()", equalTo(2))
     }
 
     @Test
@@ -202,9 +205,11 @@ class NewsRestApiTest : NRTestBase() {
         get().then().body("size()", equalTo(0))
         createSomeNews()
 
-        get("/authors/a").then().body("size()", equalTo(3))
-        get("/authors/b").then().body("size()", equalTo(2))
-        get("/authors/c").then().body("size()", equalTo(1))
+        given().queryParam("authorId", "a")
+                .get()
+                .then().body("size()", equalTo(3))
+        get("?authorId=b").then().body("size()", equalTo(2))
+        get("?authorId=c").then().body("size()", equalTo(1))
     }
 
     @Test
@@ -213,15 +218,15 @@ class NewsRestApiTest : NRTestBase() {
         get().then().body("size()", equalTo(0))
         createSomeNews()
 
-        get("/countries/Norway/authors/a").then().body("size()", equalTo(2))
-        get("/countries/Sweden/authors/a").then().body("size()", equalTo(1))
-        get("/countries/Iceland/authors/a").then().body("size()", equalTo(0))
-        get("/countries/Norway/authors/b").then().body("size()", equalTo(1))
-        get("/countries/Sweden/authors/b").then().body("size()", equalTo(0))
-        get("/countries/Iceland/authors/b").then().body("size()", equalTo(1))
-        get("/countries/Norway/authors/c").then().body("size()", equalTo(0))
-        get("/countries/Sweden/authors/c").then().body("size()", equalTo(0))
-        get("/countries/Iceland/authors/c").then().body("size()", equalTo(1))
+        get("?country=Norway&authorId=a").then().body("size()", equalTo(2))
+        get("?country=Sweden&authorId=a").then().body("size()", equalTo(1))
+        get("?country=Iceland&authorId=a").then().body("size()", equalTo(0))
+        get("?country=Norway&authorId=b").then().body("size()", equalTo(1))
+        get("?country=Sweden&authorId=b").then().body("size()", equalTo(0))
+        get("?country=Iceland&authorId=b").then().body("size()", equalTo(1))
+        get("?country=Norway&authorId=c").then().body("size()", equalTo(0))
+        get("?country=Sweden&authorId=c").then().body("size()", equalTo(0))
+        get("?country=Iceland&authorId=c").then().body("size()", equalTo(1))
     }
 
     @Test
@@ -233,7 +238,8 @@ class NewsRestApiTest : NRTestBase() {
             We will see later of to handle constraint validations
          */
 
-        get("/countries/foo").then()
+        given().queryParam("country", "foo")
+                .get().then()
                 .statusCode(200)
                 .body("size()", equalTo(0))
     }
@@ -241,7 +247,9 @@ class NewsRestApiTest : NRTestBase() {
     @Test
     fun testInvalidGetByCountryAndAuthor() {
 
-        get("/countries/foo/authors/foo").then()
+        given().queryParam("country", "foo")
+                .queryParam("authorId", "foo")
+                .get().then()
                 .statusCode(200)
                 .body("size()", equalTo(0))
     }
@@ -306,7 +314,7 @@ class NewsRestApiTest : NRTestBase() {
             for a String id, the server will say "Not Found", ie 404.
          */
 
-        get("/id/foo")
+        get("/foo")
                 .then()
                 .statusCode(404)
     }

@@ -19,7 +19,6 @@
         <module>example-news</module>
         <module>rest</module>
         <module>graphql</module>
-        <module>frontend</module>
         <module>microservice</module>
         <module>security</module>
         <module>amqp</module>

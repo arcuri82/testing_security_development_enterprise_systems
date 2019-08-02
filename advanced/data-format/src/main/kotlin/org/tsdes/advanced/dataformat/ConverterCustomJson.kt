@@ -12,9 +12,11 @@ class ConverterCustomJson<T: Any>(type: Class<T>) : ConverterImp<T>(type) {
 
         /*
             This is quite tricky to implement, as you need to create a parser
-            based on the JSon grammar. If you are interested, you can create
+            based on the JSON grammar. If you are interested, you can create
             parsers for custom grammars using JavaCC:
             https://javacc.java.net/
+            or ANTLR:
+            https://www.antlr.org/
          */
 
         return super.fromJSon(json)

@@ -38,6 +38,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   * **advanced/rest/charset**
   * **advanced/rest/patch**
+  * **advanced/rest/gui-v1**
 
 <br />
 

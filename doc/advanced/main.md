@@ -43,62 +43,54 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
-* **Lesson 04**: RESTful APIs and 3xx HTTP Redirection
+* **Lesson 04**: Wrapped Responses and Pagination
   
   Slides: [[pdf]](slides/lesson_04.pdf), 
           [[pptx]](slides/lesson_04.pptx)
           
   Modules:     
   
-  * **advanced/rest/redirect**
-
+  * **advanced/rest/wrapper**
+  * **advanced/rest/rest-dto**
+  * **advanced/rest/pagination**
+  * **advanced/rest/exception-handling**
+  * **advanced/rest/rest-exception**
+  
 <br />
 
-* **Lesson 05**: Wrapped Responses and Pagination
+
+* **Lesson 05**: 3xx Redirection, Conditional Requests and Caching
   
   Slides: [[pdf]](slides/lesson_05.pdf), 
           [[pptx]](slides/lesson_05.pptx)
           
   Modules:     
   
-  * **advanced/rest/wrapper**
-  * **advanced/rest/rest-dto**
-  * **advanced/rest/pagination**
-
-<br />
-
-* **Lesson 06**: Exceptions in Spring, Mocking and Circuit Breakers
-  
-  Slides: [[pdf]](slides/lesson_06.pdf), 
-          [[pptx]](slides/lesson_06.pptx)
-          
-  Modules:     
-  
-  * **advanced/rest/exception-handling**
-  * **advanced/rest/rest-exception**
-  * **advanced/rest/wiremock**
-  * **advanced/rest/circuit-breaker**
-
-<br />
-
-
-* **Lesson 07**: Conditional Requests and Caching
-  
-  Slides: [[pdf]](slides/lesson_07.pdf), 
-          [[pptx]](slides/lesson_07.pptx)
-          
-  Modules:     
-  
+  * **advanced/rest/redirect**
   * **advanced/rest/conditional-get**
   * **advanced/rest/conditional-change**
   * **advanced/rest/cache**
 
 <br />
 
-* **Lesson 08**: SOAP and GraphQL
+* **Lesson 06**: Mocking, Circuit Breakers and Test Generation
   
-  Slides: [[pdf]](slides/lesson_08.pdf), 
-          [[pptx]](slides/lesson_08.pptx)
+  Slides: [[pdf]](slides/lesson_06.pdf), 
+          [[pptx]](slides/lesson_06.pptx)
+          
+  Modules:     
+  
+  
+  * **advanced/rest/wiremock**
+  * **advanced/rest/circuit-breaker**
+
+<br />
+
+
+* **Lesson 07**: SOAP and GraphQL
+  
+  Slides: [[pdf]](slides/lesson_07.pdf), 
+          [[pptx]](slides/lesson_07.pptx)
           
   Modules:     
   
@@ -111,25 +103,11 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
-* **Lesson 09**: Frontend and Docker-Compose
-  
-  Slides: none
-          
-  Modules:     
-  
-  * **advanced/frontend/spa-rest/spa-rest-backend**
-  * **advanced/frontend/spa-rest/spa-rest-dto**
-  * **advanced/frontend/spa-rest/spa-rest-frontend**
-  * **advanced/frontend/spa-rest/spa-rest-e2e-tests**
-  * **advanced/frontend/websocket-chat**
 
-<br />
-
-
-* **Lesson 10**: MicroService Architectures
+* **Lesson 08**: MicroService Architectures
   
-  Slides: [[pdf]](slides/lesson_10.pdf), 
-          [[pptx]](slides/lesson_10.pptx)
+  Slides: [[pdf]](slides/lesson_08.pdf), 
+          [[pptx]](slides/lesson_08.pptx)
           
   Modules:     
   
@@ -138,10 +116,10 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
 <br />
 
-* **Lesson 11**: Security in MicroServices
+* **Lesson 09**: Security in MicroServices
   
-  Slides: [[pdf]](slides/lesson_11.pdf), 
-          [[pptx]](slides/lesson_11.pptx)
+  Slides: [[pdf]](slides/lesson_09.pdf), 
+          [[pptx]](slides/lesson_09.pptx)
           
   Modules:     
   
@@ -152,10 +130,15 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
-* **Lesson 12**: AMQP and RabbitMQ
+* **Lesson 10**: To be decided
+
+<br />
+
+
+* **Lesson 11**: AMQP and RabbitMQ
   
-  Slides: [[pdf]](slides/lesson_12.pdf), 
-          [[pptx]](slides/lesson_12.pptx)
+  Slides: [[pdf]](slides/lesson_11.pdf), 
+          [[pptx]](slides/lesson_11.pptx)
           
   Modules:     
   
@@ -165,6 +148,11 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/amqp/direct-exchange**
   * **advanced/advanced/amqp/topic-exchange**
   * **advanced/advanced/amqp/amqp-rest**
+
+
+* **Lesson 12**: Revision
+
+<br />
 
  
 ## External Resources

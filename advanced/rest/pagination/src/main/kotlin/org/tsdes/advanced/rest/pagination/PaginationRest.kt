@@ -14,6 +14,7 @@ import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto
 import org.tsdes.advanced.rest.pagination.entity.News
+import kotlin.math.max
 
 
 @Api(value = "/news", description = "Handling of creating and retrieving news")
@@ -158,7 +159,7 @@ class PaginationRest {
 
         if (!newsList.isEmpty() && offset > 0) {
             dto.previous = HalLink(builder.cloneBuilder()
-                    .queryParam("offset", Math.max(offset - limit, 0))
+                    .queryParam("offset", max(offset - limit, 0))
                     .build().toString()
             )
         }

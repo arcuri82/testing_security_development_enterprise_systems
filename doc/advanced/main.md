@@ -79,8 +79,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
           [[pptx]](slides/lesson_06.pptx)
           
   Modules:     
-  
-  
+    
   * **advanced/rest/wiremock**
   * **advanced/rest/circuit-breaker**
 

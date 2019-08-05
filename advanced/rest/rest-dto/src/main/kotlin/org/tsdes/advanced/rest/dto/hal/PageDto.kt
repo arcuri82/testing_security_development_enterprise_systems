@@ -3,6 +3,7 @@ package org.tsdes.advanced.rest.dto.hal
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
+import java.net.URI
 
 
 /*
@@ -27,7 +28,7 @@ class PageDto<T>(
         /*
             Note: these are input parameters for the constructor (ie, no var/val),
             no properties are generated with getters/setters for them.
-            The reason is that we need to override they getters/setters,
+            The reason is that we need to override their getters/setters,
             and we cannot do it in the constructor.
          */
 
@@ -108,6 +109,22 @@ class PageDto<T>(
         this.previous = previous
         this._self = _self
     }
+
+
+//    companion object {
+//
+//        fun <T> withLinksBasedOnOffsetAndLimitParameters(
+//                list: MutableList<T> = mutableListOf(),
+//                rangeMin: Int = 0,
+//                rangeMax: Int = 0,
+//                totalSize: Int = 0,
+//                baseUri: String
+//        ) : PageDto<T>{
+//
+//            TODO
+//        }
+//
+//    }
 }
 
 

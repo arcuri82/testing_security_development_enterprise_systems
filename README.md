@@ -165,7 +165,7 @@ Current documentation is available
 
 * Chrome and Chrome Driver (only needed to run Selenium tests locally instead of in Docker)
 
-* NPM and NodeJS
+* YARN and NodeJS
 
 The code in this repository should run on all major operating systems, i.e. Mac, Linux and Windows.
 

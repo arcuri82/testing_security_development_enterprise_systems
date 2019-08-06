@@ -3,7 +3,10 @@ package org.tsdes.advanced.rest.dto.hal
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
+import org.springframework.web.util.UriComponentsBuilder
 import java.net.URI
+import kotlin.math.max
+import kotlin.math.min
 
 
 /*
@@ -61,7 +64,7 @@ class PageDto<T>(
         Furthermore, as do not want to replicate the data in the
         generated JSON files, we need to explicitly tells Jackson
         to skip those properties with JsonIgnore. Note: "next" is still going to
-        be marshalled as part of the marshalling of the "_link" set in the
+        be marshaled as part of the marshalling of the "_link" set in the
         superclass.
         Last but not least, we use the default "init" to store the values
         coming from the constructor call into these properties (that have
@@ -111,20 +114,60 @@ class PageDto<T>(
     }
 
 
-//    companion object {
-//
-//        fun <T> withLinksBasedOnOffsetAndLimitParameters(
-//                list: MutableList<T> = mutableListOf(),
-//                rangeMin: Int = 0,
-//                rangeMax: Int = 0,
-//                totalSize: Int = 0,
-//                baseUri: String
-//        ) : PageDto<T>{
-//
-//            TODO
-//        }
-//
-//    }
+
+    companion object {
+
+        /**
+         *  Utility function to build a PageDto where pages are
+         *  defined with "offset" and "limit" query parameters
+         */
+        fun <T> withLinksBasedOnOffsetAndLimitParameters(
+                list: MutableList<T> = mutableListOf(),
+                rangeMin: Int = 0,
+                rangeMax: Int = 0,
+                totalSize: Int = 0,
+                baseUri: UriComponentsBuilder
+        ) : PageDto<T>{
+
+            val limit = (rangeMax - rangeMin) + 1
+
+            /*
+            Create URL links for "self", "next" and "previous" pages.
+            Each page will have up to "limit" NewsDto objects.
+            A page is identified by the offset in the list.
+
+            Note: needs to clone the builder, as each call
+            like "queryParam" does not create a new one, but
+            rather update the existing one
+            */
+
+            val self = HalLink(baseUri.cloneBuilder()
+                    .queryParam("offset", rangeMin)
+                    .queryParam("limit", limit)
+                    .build().toString()
+            )
+
+            val previous = if ( rangeMin > 0) {
+                HalLink(baseUri.cloneBuilder()
+                        .queryParam("offset", max(rangeMin - limit, 0))
+                        .queryParam("limit", min(limit, rangeMin))
+                        .build().toString()
+                )
+            } else null
+
+
+            val next = if (rangeMax + 1 < totalSize) {
+                HalLink(baseUri.cloneBuilder()
+                        .queryParam("offset", rangeMax + 1)
+                        .queryParam("limit", min(limit, totalSize - (rangeMax+1)))
+                        .build().toString()
+                )
+            } else null
+
+            return PageDto(list, rangeMin, rangeMax, totalSize, next, previous, self)
+        }
+
+    }
 }
 
 

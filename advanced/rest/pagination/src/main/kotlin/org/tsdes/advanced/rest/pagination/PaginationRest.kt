@@ -130,45 +130,16 @@ class PaginationRest {
             return ResponseEntity.status(400).build()
         }
 
-        val dto = DtoTransformer.transform(
-                newsList, offset, limit, expand.isWithComments, expand.isWithVotes)
-
         var builder = UriComponentsBuilder
                 .fromPath("/news")
                 .queryParam("expand", expand)
-                .queryParam("limit", limit)
 
         if (country != null) {
             builder = builder.queryParam("country", country)
         }
 
-        /*
-            Create URL links for "self", "next" and "previous" pages.
-            Each page will have up to "limit" NewsDto objects.
-            A page is identified by the offset in the list.
-
-            Note: needs to clone the builder, as each call
-            like "queryParam" does not create a new one, but
-            rather update the existing one
-         */
-
-        dto._self = HalLink(builder.cloneBuilder()
-                .queryParam("offset", offset)
-                .build().toString()
-        )
-
-        if (!newsList.isEmpty() && offset > 0) {
-            dto.previous = HalLink(builder.cloneBuilder()
-                    .queryParam("offset", max(offset - limit, 0))
-                    .build().toString()
-            )
-        }
-        if (offset + limit < newsList.size) {
-            dto.next = HalLink(builder.cloneBuilder()
-                    .queryParam("offset", offset + limit)
-                    .build().toString()
-            )
-        }
+        val dto = DtoTransformer.transform(
+                newsList, offset, limit, expand.isWithComments, expand.isWithVotes, builder)
 
         return ResponseEntity.ok(dto)
     }

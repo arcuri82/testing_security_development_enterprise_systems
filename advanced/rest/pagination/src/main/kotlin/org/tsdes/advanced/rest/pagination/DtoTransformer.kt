@@ -1,5 +1,6 @@
 package org.tsdes.advanced.rest.pagination
 
+import org.springframework.web.util.UriComponentsBuilder
 import org.tsdes.advanced.rest.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
@@ -50,7 +51,8 @@ object DtoTransformer {
                   offset: Int,
                   limit: Int,
                   withComments: Boolean,
-                  withVotes: Boolean): PageDto<NewsDto> {
+                  withVotes: Boolean,
+                  baseUri: UriComponentsBuilder): PageDto<NewsDto> {
 
         val dtoList: MutableList<NewsDto> = newsList.stream()
                 .skip(offset.toLong()) // this is a good example of how streams simplify coding
@@ -59,11 +61,12 @@ object DtoTransformer {
                 .toList().toMutableList()
 
 
-        return PageDto(
+        return PageDto.withLinksBasedOnOffsetAndLimitParameters(
                 list = dtoList,
                 rangeMin = offset,
                 rangeMax = offset + dtoList.size - 1,
-                totalSize = newsList.size
+                totalSize = newsList.size,
+                baseUri = baseUri
         )
     }
 }

@@ -43,7 +43,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
-* **Lesson 04**: Wrapped Responses and Pagination
+* **Lesson 04**: Wrapped Responses, Errors and Pagination
   
   Slides: [[pdf]](slides/lesson_04.pdf), 
           [[pptx]](slides/lesson_04.pptx)
@@ -52,9 +52,9 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   * **advanced/rest/wrapper**
   * **advanced/rest/rest-dto**
-  * **advanced/rest/pagination**
   * **advanced/rest/exception-handling**
   * **advanced/rest/rest-exception**
+  * **advanced/rest/pagination**
   
 <br />
 

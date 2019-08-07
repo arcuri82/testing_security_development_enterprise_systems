@@ -13,18 +13,18 @@ import org.tsdes.advanced.rest.pagination.entity.Vote
 object DtoTransformer {
 
     fun transform(vote: Vote): VoteDto {
-        return VoteDto(vote.id, vote.user)
+        return VoteDto(vote.id.toString(), vote.user)
     }
 
     fun transform(comment: Comment): CommentDto {
-        return CommentDto(comment.id, comment.text)
+        return CommentDto(comment.id.toString(), comment.text)
     }
 
     fun transform(news: News,
                   withComments: Boolean,
                   withVotes: Boolean): NewsDto {
 
-        val dto = NewsDto(news.id, news.text, news.country)
+        val dto = NewsDto(news.id.toString(), news.text, news.country)
 
         if (withComments) {
             news.comments.stream()

@@ -6,5 +6,5 @@ import io.swagger.annotations.ApiModelProperty
 abstract class BaseDto(
 
         @ApiModelProperty("The id of this resource")
-        var id: Long? = null
+        var id: String? = null
 )

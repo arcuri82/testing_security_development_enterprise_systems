@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel(description = "A comment on a news")
 class CommentDto(
 
-        id: Long? = null,
+        id: String? = null,
 
         @ApiModelProperty("The text of the comment")
         var text: String? = null

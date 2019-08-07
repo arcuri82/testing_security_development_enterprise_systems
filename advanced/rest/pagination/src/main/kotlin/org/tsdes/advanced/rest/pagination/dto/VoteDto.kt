@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel(description = "A positive vote for a given news, representing a user that liked it")
 class VoteDto(
 
-        id: Long? = null,
+        id: String? = null,
 
         @ApiModelProperty("The id of the user")
         var user: String? = null

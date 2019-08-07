@@ -51,11 +51,17 @@ class NewsService(
                     limit: Int
     ): List<News> {
 
+        /*
+            When we do pagination, ORDER BY is compulsory.
+            Without it, doing the same query could result retrieving different results,
+            as there are no guarantees on the order of retrieved data and its consistency
+         */
+
         val query: TypedQuery<News>
         if (country == null) {
-            query = em.createQuery("select n from News n", News::class.java)
+            query = em.createQuery("select n from News n order by n.id", News::class.java)
         } else {
-            query = em.createQuery("select n from News n where n.country=?1", News::class.java)
+            query = em.createQuery("select n from News n where n.country=?1  order by n.id", News::class.java)
             query.setParameter(1, country)
         }
         query.firstResult = offset

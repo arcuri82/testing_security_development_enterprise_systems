@@ -2,20 +2,29 @@ package org.tsdes.advanced.rest.pagination
 
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
+import io.restassured.http.ContentType
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.data.repository.CrudRepository
+import org.springframework.stereotype.Repository
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.advanced.rest.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto
+import org.tsdes.advanced.rest.pagination.entity.News
 import java.util.*
+
+
+@Repository
+interface Rep : CrudRepository<News, Long>
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(PaginationApplication::class)],
@@ -24,6 +33,9 @@ class PaginationRestTest {
 
     @LocalServerPort
     protected var port = 0
+
+    @Autowired
+    private lateinit var rep: Rep
 
 
     @BeforeEach
@@ -36,40 +48,7 @@ class PaginationRestTest {
         RestAssured.basePath = "/news"
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
-        var total = Integer.MAX_VALUE
-
-        /*
-            as the REST API does not return the whole state of the database (even,
-            if I use an infinite "limit") I need to keep doing queries until the totalSize is 0
-         */
-
-        while (total > 0) {
-
-            //seems there are some limitations when handling generics
-            val listDto = given()
-                    .queryParam("limit", Integer.MAX_VALUE)
-                    .get()
-                    .then()
-                    .statusCode(200)
-                    .extract()
-                    .`as`(PageDto::class.java)
-
-            listDto.list.stream()
-                    /*
-                        the "NewsDto" get unmarshalled into a map of fields,
-                        as Generics T info was not provided. In contrast to
-                        RestTemplate in Spring, in RestAssured doesn't seem
-                        to be a clean way to extract with Generics info
-                     */
-                    .map({ (it as Map<String,*>)["id"] })
-                    .forEach {
-                        given().delete("/$it")
-                                .then()
-                                .statusCode(204)
-                    }
-
-            total = listDto.totalSize - listDto.list.size
-        }
+        rep.deleteAll()
     }
 
     @Test
@@ -79,7 +58,7 @@ class PaginationRestTest {
         val country = "Norway"
 
         val location = given().body(NewsDto(null, text, country))
-                .contentType(Format.JSON_V1)
+                .contentType(ContentType.JSON)
                 .post()
                 .then()
                 .statusCode(201)
@@ -103,7 +82,7 @@ class PaginationRestTest {
     private fun createNews(text: String, country: String) {
 
         given().body(NewsDto(null, text, country))
-                .contentType(Format.JSON_V1)
+                .contentType(ContentType.JSON)
                 .post()
                 .then()
                 .statusCode(201)
@@ -152,7 +131,7 @@ class PaginationRestTest {
                 .extract()
                 .`as`(PageDto::class.java)
 
-        assertEquals(n, listDto.totalSize)
+        assertEquals(n, listDto.totalSize.toInt())
         assertEquals(0, listDto.rangeMin)
         assertEquals(limit - 1, listDto.rangeMax)
 
@@ -190,7 +169,7 @@ class PaginationRestTest {
                 .extract()
                 .`as`(PageDto::class.java)
 
-        assertEquals(n, listDto.totalSize)
+        assertEquals(n, listDto.totalSize.toInt())
         assertNotNull(listDto.next!!.href)
 
         val values = getTexts(listDto)
@@ -289,7 +268,7 @@ class PaginationRestTest {
 
     private fun createNewsWithCommentAndVote() {
         val newsLocation = given().body(NewsDto(null, "some text", "Sweden"))
-                .contentType(Format.JSON_V1)
+                .contentType(ContentType.JSON)
                 .post()
                 .then()
                 .statusCode(201)
@@ -297,14 +276,14 @@ class PaginationRestTest {
 
         given().basePath("")
                 .body(VoteDto(user = "a user"))
-                .contentType(Format.JSON_V1)
+                .contentType(ContentType.JSON)
                 .post("$newsLocation/votes")
                 .then()
                 .statusCode(201)
 
         given().basePath("")
                 .body(CommentDto(null, "a comment"))
-                .contentType(Format.JSON_V1)
+                .contentType(ContentType.JSON)
                 .post("$newsLocation/comments")
                 .then()
                 .statusCode(201)

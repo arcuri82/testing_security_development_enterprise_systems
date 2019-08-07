@@ -25,8 +25,8 @@ class PageDto<T>(
         @get:ApiModelProperty("The index of the last element of this page")
         var rangeMax: Int = 0,
 
-        @get:ApiModelProperty("The total number of elements in all pages")
-        var totalSize: Int = 0,
+        @get:ApiModelProperty("The total number of elements")
+        var totalSize: Long = 0,
 
         /*
             Note: these are input parameters for the constructor (ie, no var/val),
@@ -125,7 +125,8 @@ class PageDto<T>(
                 list: MutableList<T> = mutableListOf(),
                 rangeMin: Int = 0,
                 rangeMax: Int = 0,
-                totalSize: Int = 0,
+                onDb: Long = 0,
+                maxFromDb: Int = 0,
                 baseUri: UriComponentsBuilder
         ) : PageDto<T>{
 
@@ -155,16 +156,17 @@ class PageDto<T>(
                 )
             } else null
 
+            val availableSize = min(maxFromDb, onDb.toInt())
 
-            val next = if (rangeMax + 1 < totalSize) {
+            val next = if (rangeMax + 1 < availableSize) {
                 HalLink(baseUri.cloneBuilder()
                         .queryParam("offset", rangeMax + 1)
-                        .queryParam("limit", min(limit, totalSize - (rangeMax+1)))
+                        .queryParam("limit", min(limit, availableSize - (rangeMax+1)))
                         .build().toString()
                 )
             } else null
 
-            return PageDto(list, rangeMin, rangeMax, totalSize, next, previous, self)
+            return PageDto(list, rangeMin, rangeMax, onDb, next, previous, self)
         }
 
     }

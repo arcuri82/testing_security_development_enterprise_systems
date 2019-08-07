@@ -8,7 +8,6 @@ import org.tsdes.advanced.rest.pagination.dto.VoteDto
 import org.tsdes.advanced.rest.pagination.entity.Comment
 import org.tsdes.advanced.rest.pagination.entity.News
 import org.tsdes.advanced.rest.pagination.entity.Vote
-import kotlin.streams.toList
 
 
 object DtoTransformer {
@@ -50,22 +49,23 @@ object DtoTransformer {
     fun transform(newsList: List<News>,
                   offset: Int,
                   limit: Int,
+                  onDb: Long,
+                  maxFromDb: Int,
                   withComments: Boolean,
                   withVotes: Boolean,
                   baseUri: UriComponentsBuilder): PageDto<NewsDto> {
 
-        val dtoList: MutableList<NewsDto> = newsList.stream()
-                .skip(offset.toLong()) // this is a good example of how streams simplify coding
-                .limit(limit.toLong())
+        val dtoList: MutableList<NewsDto> = newsList
                 .map { transform(it, withComments, withVotes) }
-                .toList().toMutableList()
+                .toMutableList()
 
 
         return PageDto.withLinksBasedOnOffsetAndLimitParameters(
                 list = dtoList,
                 rangeMin = offset,
-                rangeMax = offset + dtoList.size - 1,
-                totalSize = newsList.size,
+                rangeMax = offset + limit - 1,
+                onDb = onDb,
+                maxFromDb = maxFromDb,
                 baseUri = baseUri
         )
     }

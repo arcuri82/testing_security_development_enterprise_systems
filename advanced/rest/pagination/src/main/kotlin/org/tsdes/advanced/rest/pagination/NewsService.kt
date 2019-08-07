@@ -1,19 +1,16 @@
 package org.tsdes.advanced.rest.pagination
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.tsdes.advanced.rest.pagination.entity.Comment
 import org.tsdes.advanced.rest.pagination.entity.News
 import org.tsdes.advanced.rest.pagination.entity.Vote
 import javax.persistence.EntityManager
-import javax.persistence.PersistenceContext
 import javax.persistence.TypedQuery
 
 /*
     Here we define am injectable singleton bean (Service),
     whose methods are run in a database transaction (Transactional).
-    This is practically equivalent to EJBs in JEE.
  */
 @Service
 @Transactional
@@ -36,10 +33,23 @@ class NewsService(
         return news
     }
 
+    fun numberOfNews(country: String?): Long{
+        val query: TypedQuery<Long>
+        if (country == null) {
+            query = em.createQuery("select count(n) from News n", Long::class.javaObjectType)
+        } else {
+            query = em.createQuery("select count(n) from News n where n.country=?1", Long::class.javaObjectType)
+            query.setParameter(1, country)
+        }
+        return query.singleResult
+    }
+
     fun getNewsList(country: String?,
                     withComments: Boolean,
                     withVotes: Boolean,
-                    limit: Int): List<News> {
+                    offset: Int,
+                    limit: Int
+    ): List<News> {
 
         val query: TypedQuery<News>
         if (country == null) {
@@ -48,6 +58,7 @@ class NewsService(
             query = em.createQuery("select n from News n where n.country=?1", News::class.java)
             query.setParameter(1, country)
         }
+        query.firstResult = offset
         query.maxResults = limit
 
         /*

@@ -15,7 +15,7 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.tsdes.advanced.rest.dto.hal.PageDto
+import org.tsdes.advanced.rest.pagination.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto

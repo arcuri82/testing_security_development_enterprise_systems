@@ -1,4 +1,4 @@
-package org.tsdes.advanced.rest.guiv1
+package org.tsdes.advanced.rest.guiv2
 
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.tsdes.advanced.rest.guiv1.db.Book
-import org.tsdes.advanced.rest.guiv1.db.BookRepository
-import org.tsdes.advanced.rest.guiv1.dto.BookDto
+import org.tsdes.advanced.rest.guiv2.db.Book
+import org.tsdes.advanced.rest.guiv2.db.BookRepository
+import org.tsdes.advanced.rest.guiv2.dto.BookDto
 
 /**
  * Created by arcuri82 on 14-Sep-18.
@@ -59,7 +59,7 @@ class SpaRestBackendApplicationTest {
                 .get()
                 .then()
                 .statusCode(200)
-                .body("size()", equalTo(5))
+                .body("data.size()", equalTo(5))
     }
 
     @Test
@@ -79,8 +79,8 @@ class SpaRestBackendApplicationTest {
                 .get()
                 .then()
                 .statusCode(200)
-                .body("size()", equalTo(5))
-                .extract().body().jsonPath().getList("", BookDto::class.java)
+                .body("data.size()", equalTo(5))
+                .extract().body().jsonPath().getList("data", BookDto::class.java)
 
         for (b in books) {
 
@@ -88,9 +88,9 @@ class SpaRestBackendApplicationTest {
                     .get("/${b.id}")
                     .then()
                     .statusCode(200)
-                    .body("title", equalTo(b.title))
-                    .body("author", equalTo(b.author))
-                    .body("year", equalTo(b.year))
+                    .body("data.title", equalTo(b.title))
+                    .body("data.author", equalTo(b.author))
+                    .body("data.year", equalTo(b.year))
         }
     }
 
@@ -102,7 +102,7 @@ class SpaRestBackendApplicationTest {
                 .get()
                 .then()
                 .statusCode(200)
-                .extract().body().path<Int>("size()")
+                .extract().body().path<Int>("data.size()")
 
         val title = "foo"
 
@@ -118,13 +118,13 @@ class SpaRestBackendApplicationTest {
                 .get(location)
                 .then()
                 .statusCode(200)
-                .body("title", equalTo(title))
+                .body("data.title", equalTo(title))
 
         given().accept(ContentType.JSON)
                 .get()
                 .then()
                 .statusCode(200)
-                .body("size()", equalTo(n + 1))
+                .body("data.size()", equalTo(n + 1))
     }
 
 
@@ -135,8 +135,8 @@ class SpaRestBackendApplicationTest {
                 .get()
                 .then()
                 .statusCode(200)
-                .body("size()", equalTo(5))
-                .extract().body().jsonPath().getList("", BookDto::class.java)
+                .body("data.size()", equalTo(5))
+                .extract().body().jsonPath().getList("data", BookDto::class.java)
 
         for (b in books) {
 
@@ -150,7 +150,7 @@ class SpaRestBackendApplicationTest {
                 .get()
                 .then()
                 .statusCode(200)
-                .body("size()", equalTo(0))
+                .body("data.size()", equalTo(0))
     }
 
 
@@ -171,7 +171,7 @@ class SpaRestBackendApplicationTest {
                 .get(location)
                 .then()
                 .statusCode(200)
-                .body("title", equalTo(title))
+                .body("data.title", equalTo(title))
 
         val id = location.substring(location.lastIndexOf('/') + 1)
 
@@ -188,6 +188,6 @@ class SpaRestBackendApplicationTest {
                 .get(location)
                 .then()
                 .statusCode(200)
-                .body("title", equalTo(modified))
+                .body("data.title", equalTo(modified))
     }
 }

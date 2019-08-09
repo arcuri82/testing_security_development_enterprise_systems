@@ -8,14 +8,11 @@ import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
-import org.tsdes.advanced.rest.dto.hal.HalLink
-import org.tsdes.advanced.rest.dto.hal.PageDto
+import org.tsdes.advanced.rest.pagination.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto
 import org.tsdes.advanced.rest.pagination.entity.News
-import kotlin.math.max
-import kotlin.math.min
 
 
 @Api(value = "/news", description = "Handling of creating and retrieving news")

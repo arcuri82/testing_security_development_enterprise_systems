@@ -1,10 +1,9 @@
-package org.tsdes.advanced.rest.dto.hal
+package org.tsdes.advanced.rest.pagination.dto.hal
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.springframework.web.util.UriComponentsBuilder
-import java.net.URI
 import kotlin.math.max
 import kotlin.math.min
 
@@ -128,7 +127,7 @@ class PageDto<T>(
                 onDb: Long = 0,
                 maxFromDb: Int = 0,
                 baseUri: UriComponentsBuilder
-        ) : PageDto<T>{
+        ) : PageDto<T> {
 
             val limit = (rangeMax - rangeMin) + 1
 
@@ -161,7 +160,7 @@ class PageDto<T>(
             val next = if (rangeMax + 1 < availableSize) {
                 HalLink(baseUri.cloneBuilder()
                         .queryParam("offset", rangeMax + 1)
-                        .queryParam("limit", min(limit, availableSize - (rangeMax+1)))
+                        .queryParam("limit", min(limit, availableSize - (rangeMax + 1)))
                         .build().toString()
                 )
             } else null

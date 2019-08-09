@@ -1,7 +1,7 @@
 package org.tsdes.advanced.rest.pagination
 
 import org.springframework.web.util.UriComponentsBuilder
-import org.tsdes.advanced.rest.dto.hal.PageDto
+import org.tsdes.advanced.rest.pagination.dto.hal.PageDto
 import org.tsdes.advanced.rest.pagination.dto.CommentDto
 import org.tsdes.advanced.rest.pagination.dto.NewsDto
 import org.tsdes.advanced.rest.pagination.dto.VoteDto

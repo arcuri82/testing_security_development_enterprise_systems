@@ -19,9 +19,10 @@
         <module>gui-v1</module>
         <module>wrapper</module>
         <module>rest-dto</module>
-        <module>pagination</module>
         <module>exception-handling</module>
         <module>rest-exception</module>
+        <module>pagination</module>
+        <module>gui-v2</module>
         <module>wiremock</module>
         <module>circuit-breaker</module>
         <module>redirect</module>

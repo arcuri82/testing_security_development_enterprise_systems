@@ -1,7 +1,6 @@
-package org.tsdes.advanced.rest.exception
+package org.tsdes.advanced.rest.dto
 
 import org.springframework.http.ResponseEntity
-import org.tsdes.advanced.rest.dto.WrappedResponse
 import java.net.URI
 
 

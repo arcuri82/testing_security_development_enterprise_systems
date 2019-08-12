@@ -4,6 +4,7 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.*
+import org.hamcrest.Matchers.isEmptyOrNullString
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -62,7 +63,7 @@ class ConditionalGetRestTest{
                 .get()
                 .then()
                 .statusCode(304)
-                .content(equalTo(""))
+                .body(isEmptyOrNullString())
     }
 
     @Test
@@ -82,7 +83,7 @@ class ConditionalGetRestTest{
                 .get()
                 .then()
                 .statusCode(304)
-                .content(equalTo(""))
+                .body(isEmptyOrNullString())
 
         //this will update, and create a new Etag
         given().contentType(ContentType.JSON)
@@ -101,7 +102,6 @@ class ConditionalGetRestTest{
                 .get()
                 .then()
                 .statusCode(200)
-                .content(not(equalTo("")))
                 .body("size()", equalTo(1))
                 .header("ETag", notNullValue())
                 .header("ETag", not(equalTo(etag)))
@@ -135,7 +135,7 @@ class ConditionalGetRestTest{
                 .get()
                 .then()
                 .statusCode(304)
-                .content(equalTo(""))
+                .body(isEmptyOrNullString())
     }
 
     @Test
@@ -155,7 +155,7 @@ class ConditionalGetRestTest{
                 .get()
                 .then()
                 .statusCode(304)
-                .content(equalTo(""))
+                .body(isEmptyOrNullString())
 
         /*
             HTTP Dates have 1 second resolution, not milliseconds.
@@ -176,7 +176,6 @@ class ConditionalGetRestTest{
                 .get()
                 .then()
                 .statusCode(200)
-                .content(not(equalTo("")))
                 .body("size()", equalTo(1))
                 .header("last-modified", notNullValue())
                 .header("last-modified", not(equalTo(lastModified)))

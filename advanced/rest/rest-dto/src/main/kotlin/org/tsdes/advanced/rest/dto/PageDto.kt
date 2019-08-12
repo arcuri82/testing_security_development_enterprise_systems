@@ -15,5 +15,5 @@ class PageDto<T>(
         var list: List<T> = listOf(),
 
         @ApiModelProperty("Link to the next page, if it exists")
-        var next: String?
+        var next: String? = null
 )

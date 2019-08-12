@@ -7,6 +7,7 @@ import org.tsdes.advanced.rest.guiv2.dto.BookDto
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.tsdes.advanced.rest.dto.PageDto
 import org.tsdes.advanced.rest.dto.RestResponseFactory
 import org.tsdes.advanced.rest.dto.WrappedResponse
 import org.tsdes.advanced.rest.guiv2.db.Book
@@ -25,10 +26,25 @@ class BookRest(
 
     @ApiOperation("Get all the books")
     @GetMapping
-    fun getAll(): ResponseEntity<WrappedResponse<List<BookDto>>> {
+    fun getAll(
+            @RequestParam("keysetId", required = false)
+            keysetId: Long?,
+            @RequestParam("keysetYear", required = false)
+            keysetYear: Int?
+    ): ResponseEntity<WrappedResponse<PageDto<BookDto>>> {
 
-        return RestResponseFactory.payload(200,
-                DtoConverter.transform(repository.findAll()))
+        val page = PageDto<BookDto>()
+
+        val n = 5
+        val books = DtoConverter.transform(repository.getNextPage(n, keysetId, keysetYear))
+        page.list = books
+
+        if(books.size == n){
+            val last = books.last()
+            page.next = "/api/books?keysetId=${last.id}&keysetYear=${last.year}"
+        }
+
+        return RestResponseFactory.payload(200, page)
     }
 
 

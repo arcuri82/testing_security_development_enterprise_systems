@@ -20,5 +20,8 @@ class DatabaseInitializer(
             save(Book("A Game of Thrones", "George R. R. Martin", 1996))
             save(Book("The Call of Cthulhu", "H. P. Lovecraft", 1928))
         }
+        for(i in 0 until 100){
+            repository.save(Book("Fake $i", "Foo", 1900 + (i/3)))
+        }
     }
 }

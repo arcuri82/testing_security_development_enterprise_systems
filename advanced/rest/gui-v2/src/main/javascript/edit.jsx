@@ -47,7 +47,7 @@ export class Edit extends React.Component{
         if (response.status === 200) {
             this.setState({
                 error: null,
-                book: payload
+                book: payload.data
             });
         } else {
             this.setState({

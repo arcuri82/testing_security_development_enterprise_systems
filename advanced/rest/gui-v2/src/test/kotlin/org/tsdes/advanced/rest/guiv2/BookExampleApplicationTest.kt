@@ -1,10 +1,13 @@
 package org.tsdes.advanced.rest.guiv2
 
+import io.restassured.common.mapper.TypeRef
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -12,8 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.tsdes.advanced.rest.guiv2.db.Book
+import org.tsdes.advanced.rest.dto.PageDto
 import org.tsdes.advanced.rest.guiv2.db.BookRepository
+import org.tsdes.advanced.rest.guiv2.db.DatabaseInitializer
 import org.tsdes.advanced.rest.guiv2.dto.BookDto
 
 /**
@@ -25,11 +29,13 @@ import org.tsdes.advanced.rest.guiv2.dto.BookDto
 class SpaRestBackendApplicationTest {
 
 
-    @LocalServerPort
-    protected var port = 0
+    @LocalServerPort protected var port = 0
 
-    @Autowired
-    protected lateinit var repository: BookRepository
+    @Autowired protected lateinit var repository: BookRepository
+
+    @Autowired protected lateinit var dbInitializer: DatabaseInitializer
+
+    val page : Int = 5
 
     @BeforeEach
     @AfterEach
@@ -41,25 +47,65 @@ class SpaRestBackendApplicationTest {
         RestAssured.basePath = "/api/books"
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
-        repository.run {
-            deleteAll()
-            save(Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", 1979))
-            save(Book("The Lord of the Rings", "J. R. R. Tolkien", 1954))
-            save(Book("The Last Wish", "Andrzej Sapkowski", 1993))
-            save(Book("A Game of Thrones", "George R. R. Martin", 1996))
-            save(Book("The Call of Cthulhu", "H. P. Lovecraft", 1928))
-        }
+        dbInitializer.initialize()
     }
 
 
     @Test
-    fun testGetAll() {
+    fun testGetPage() {
 
         given().accept(ContentType.JSON)
                 .get()
                 .then()
                 .statusCode(200)
-                .body("data.size()", equalTo(5))
+                .body("data.list.size()", equalTo(page))
+    }
+
+
+    @Test
+    fun testAllPages(){
+
+        RestAssured.basePath = ""
+        val read = mutableSetOf<String>()
+
+        var page = given().accept(ContentType.JSON)
+                .get("/api/books")
+                .then()
+                .statusCode(200)
+                .body("data.list.size()", equalTo(page))
+                //unfortunately, RestAssured does not have good support for Generics... :(
+                .extract().body().jsonPath().getObject("data",object: TypeRef<PageDto<Map<String,Object>>>(){})
+        read.addAll(page.list.map { it["id"].toString()})
+
+        checkOrder(page)
+
+        while(page.next != null){
+            page = given().accept(ContentType.JSON)
+                    .get(page.next)
+                    .then()
+                    .statusCode(200)
+                    .extract().body().jsonPath().getObject("data",object: TypeRef<PageDto<Map<String,Object>>>(){})
+            read.addAll(page.list.map { it["id"].toString()})
+            checkOrder(page)
+        }
+
+        val total = repository.count().toInt()
+
+        //recall that sets have unique elements
+        assertEquals(total, read.size)
+    }
+
+    private fun checkOrder(page: PageDto<Map<String, Object>>) {
+        for (i in 0 until page.list.size - 1) {
+            val ayear = page.list[i]["year"].toString().toInt()
+            val byear = page.list[i + 1]["year"].toString().toInt()
+            val aid = page.list[i]["id"].toString().toLong()
+            val bid = page.list[i + 1]["id"].toString().toLong()
+            assertTrue(ayear >= byear)
+            if (ayear == byear) {
+                assertTrue(aid >= bid)
+            }
+        }
     }
 
     @Test
@@ -73,14 +119,14 @@ class SpaRestBackendApplicationTest {
 
 
     @Test
-    fun testRetrieveEachSingleBook() {
+    fun testRetrieveEachSingleBookInPage() {
 
         val books = given().accept(ContentType.JSON)
                 .get()
                 .then()
                 .statusCode(200)
-                .body("data.size()", equalTo(5))
-                .extract().body().jsonPath().getList("data", BookDto::class.java)
+                .body("data.list.size()", equalTo(page))
+                .extract().body().jsonPath().getList("data.list", BookDto::class.java)
 
         for (b in books) {
 
@@ -98,11 +144,15 @@ class SpaRestBackendApplicationTest {
     @Test
     fun testCreateBook() {
 
+        repository.deleteAll()
+
         val n = given().accept(ContentType.JSON)
                 .get()
                 .then()
                 .statusCode(200)
-                .extract().body().path<Int>("data.size()")
+                .extract().body().path<Int>("data.list.size()")
+
+        assertEquals(0, n)
 
         val title = "foo"
 
@@ -124,33 +174,37 @@ class SpaRestBackendApplicationTest {
                 .get()
                 .then()
                 .statusCode(200)
-                .body("data.size()", equalTo(n + 1))
+                .body("data.list.size()", equalTo(n + 1))
     }
 
 
     @Test
-    fun testDeleteAllBooks() {
+    fun testBooks() {
 
         val books = given().accept(ContentType.JSON)
                 .get()
                 .then()
                 .statusCode(200)
-                .body("data.size()", equalTo(5))
-                .extract().body().jsonPath().getList("data", BookDto::class.java)
+                .body("data.list.size()", equalTo(page))
+                .extract().body().jsonPath().getList("data.list", BookDto::class.java)
 
         for (b in books) {
+
+            given().accept(ContentType.JSON)
+                    .get("/${b.id}")
+                    .then()
+                    .statusCode(200)
 
             given().accept(ContentType.JSON)
                     .delete("/${b.id}")
                     .then()
                     .statusCode(204)
-        }
 
-        given().accept(ContentType.JSON)
-                .get()
-                .then()
-                .statusCode(200)
-                .body("data.size()", equalTo(0))
+            given().accept(ContentType.JSON)
+                    .get("/${b.id}")
+                    .then()
+                    .statusCode(404)
+        }
     }
 
 

@@ -8,11 +8,10 @@ export class Home extends React.Component {
         super(props);
 
         this.state = {
-            books: null,
+            books: [],
+            next: null,
             error: null
         };
-
-        this.deleteBook = this.deleteBook.bind(this);
     }
 
 
@@ -20,9 +19,12 @@ export class Home extends React.Component {
         this.fetchBooks();
     }
 
-    async fetchBooks() {
+    fetchBooks = async () => {
 
-        const url = "/api/books";
+        let url = "/api/books";
+        if(this.state.next !== null){
+            url = this.state.next;
+        }
 
         let response;
         let payload;
@@ -34,25 +36,31 @@ export class Home extends React.Component {
             //Network error: eg, wrong URL, no internet, etc.
             this.setState({
                 error: "ERROR when retrieving list of books: " + err,
-                books: null
+                books: [],
+                next: null
             });
             return;
         }
 
         if (response.status === 200) {
-            this.setState({
-                error: null,
-                books: payload
+            this.setState(prev => {
+                return {
+                    error: null,
+                    books: [...prev.books,...payload.data.list],
+                    next: payload.data.next
+                }
             });
         } else {
             this.setState({
-                error: "Issue with HTTP connection: status code " + response.status,
-                books: null
+                error: "Issue with HTTP connection: status code " + response.status
+                    + ". " + payload.error,
+                books: [],
+                next: null
             });
         }
-    }
+    };
 
-    async deleteBook(id) {
+    deleteBook  = async (id) => {
 
         const url = "/api/books/" + id;
 
@@ -70,10 +78,14 @@ export class Home extends React.Component {
             return false;
         }
 
-        this.fetchBooks();
+        this.setState(prev => {
+            return {
+                books: prev.books.filter(it => it.id !== id)
+            }
+        });
 
         return true;
-    }
+    };
 
     render() {
 
@@ -126,6 +138,9 @@ export class Home extends React.Component {
                     <button className="btn">New</button>
                 </Link>
                 {table}
+                {this.state.next !== null &&
+                    <button className={"btn"} onClick={this.fetchBooks}>Next</button>
+                }
             </div>
         );
     }

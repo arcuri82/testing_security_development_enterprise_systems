@@ -18,8 +18,7 @@ import java.util.concurrent.atomic.AtomicLong
     http://insanecoding.blogspot.no/2014/02/http-308-incompetence-expected.html
 
     The problem stems from the fact of how browsers handled 3xx codes,
-    and at times it was in a very wrong way, which did impact the
-    writing of the standards.
+    and at times it was in a very wrong way, which did impact the writing of the standards.
     However, here we do not deal directly with browsers (eg, submissions of HTML forms),
     but clients of a RESTful API (including AJAX calls in browsers),
     where we also provide documentation with Swagger on how to use it.
@@ -73,7 +72,7 @@ import java.util.concurrent.atomic.AtomicLong
          - apart from POST -> GET with a 302, might not be possible to have redirection
            but for GET. If you try to use a 301 redirection with POST/PUT/DELETE/PATCH,
            expect all kinds of weird behaviors from your clients if the
-           redirections are followed automatically.
+           re-directions are followed automatically.
          - for POST/PUT/DELETE/PATCH could still use 308 for documentation, even
            if many libraries will not handle it (not handling 308 is still better
            than screwing you up by changing verb into a GET)
@@ -177,7 +176,7 @@ class CounterRest {
     @ApiOperation("Deprecated. Use \"latest\" instead")
     @ApiResponses(ApiResponse(code = 301, message = "Deprecated URI. Moved permanently."))
     @GetMapping(path = ["/theLatest"])
-    @Deprecated("")
+    @Deprecated("", ReplaceWith(""))
     fun theLatest(): ResponseEntity<Void> {
 
         return ResponseEntity.status(301)

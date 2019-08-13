@@ -42,6 +42,10 @@ For building GUIs, the second part of the course `advanced` relies on knowledge 
 This is covered in a different course, called [Web Development and API Design](https://github.com/arcuri82/web_development_and_api_design) (PG6301).
 Such course should be taken before the `advanced` one (PG6100), in parallel or after the `intro` course (PG5100). 
 
+Before taking these courses, you might want to refresh your knowledge of algorithms and
+data structures (e.g., [PG4200](https://github.com/arcuri82/algorithms)), as those are widely used here
+(e.g., maps, sets and streams).
+
 ### Philosophy of This Repository
 
 There are many resources (e.g., courses and books) out there that deal with the
@@ -122,7 +126,9 @@ follows:
     to learn Java first.
     That is the reason why it is only used in the `advanced` course, and not the
     `intro` one.
-    Furthermore, job-wise, Kotlin is not so popular yet.
+    Furthermore, job-wise, Kotlin is not so popular yet, although there are some 
+    interesting cases (e.g., the Tax Department of Norway using it for their backend
+    development, with [few systems open-source](https://github.com/Skatteetaten) on GitHub).
 
 
 * `Spring`: our framework of choice. SpringBoot is simply great.

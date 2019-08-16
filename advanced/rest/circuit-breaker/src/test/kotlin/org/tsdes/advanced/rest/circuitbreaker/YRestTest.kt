@@ -91,14 +91,14 @@ class YRestTest {
 
         var start = System.currentTimeMillis()
         exe(value)
-        exe(value) // this will trigger the circuit breaker, as 2 failures due to timeout
+        exe(value) // this will trigger the circuit breaker, as 2 failures due to timeout 600 > 500
         var delta = System.currentTimeMillis() - start
 
         assertTrue(delta >= 1000) // the 2 calls took at least 1000ms
 
         start = System.currentTimeMillis()
         // these will all fail immediately, as CB is on.
-        // if these were not failing immediately, would take at least 10*600 = 6s
+        // if these were not failing immediately, would take at least 10*500 = 5s
         exe(value)
         exe(value)
         exe(value)

@@ -172,7 +172,18 @@
                 <artifactId>rxjava</artifactId>
                 <version>1.2.2</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.evomaster</groupId>
+                <artifactId>evomaster-client-java-controller</artifactId>
+                <version>0.3.0</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.validation</groupId>
+                        <artifactId>validation-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

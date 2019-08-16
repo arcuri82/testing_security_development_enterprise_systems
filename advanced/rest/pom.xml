@@ -25,6 +25,7 @@
         <module>gui-v2</module>
         <module>wiremock</module>
         <module>circuit-breaker</module>
+        <module>evomaster</module>
         <module>redirect</module>
         <module>conditional-get</module>
         <module>conditional-change</module>

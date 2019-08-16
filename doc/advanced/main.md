@@ -83,6 +83,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
     
   * **advanced/rest/wiremock**
   * **advanced/rest/circuit-breaker**
+  * **advanced/rest/evomaster**
 
 <br />
 

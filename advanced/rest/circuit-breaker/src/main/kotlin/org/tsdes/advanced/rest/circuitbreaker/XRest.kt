@@ -19,6 +19,6 @@ class XRest {
          */
         Thread.sleep(x)
 
-        return x * 2
+        return x
     }
 }

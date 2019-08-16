@@ -58,10 +58,7 @@
             <artifactId>commons-configuration</artifactId>
             <version>1.8</version>
         </dependency>
-        <dependency>
-            <groupId>io.reactivex</groupId>
-            <artifactId>rxjava</artifactId>
-        </dependency>
+
 
         <!-- test -->
         <dependency>

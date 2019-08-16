@@ -34,7 +34,6 @@ class YRestTest {
 
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = port
-        RestAssured.basePath = "/y"
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
         /*
@@ -57,32 +56,14 @@ class YRestTest {
 
     private fun exe(value: Long): Long {
 
-        val res = given().queryParam("v", value)
+        return given().queryParam("v", value)
                 .accept(ContentType.ANY)
-                .get("/single")
+                .get("/y")
                 .then()
                 .statusCode(200)
-                .extract().asString()
-
-        return res.toLong()
+                .extract().asString().toLong()
     }
 
-    private fun exe(a: Long, b: Long, c: Long, d: Long, e: Long): Long {
-
-        val res = given()
-                .queryParam("a", a)
-                .queryParam("b", b)
-                .queryParam("c", c)
-                .queryParam("d", d)
-                .queryParam("e", e)
-                .accept(ContentType.ANY)
-                .get("/multi")
-                .then()
-                .statusCode(200)
-                .extract().asString()
-
-        return res.toLong()
-    }
 
     @Test
     fun testBase() {
@@ -90,7 +71,7 @@ class YRestTest {
         val value: Long = 50
         val res = exe(value)
 
-        assertEquals(value * 2, res)
+        assertEquals(value, res)
     }
 
     @Test
@@ -99,7 +80,7 @@ class YRestTest {
         val value: Long = 600
         val res = exe(value)
 
-        assertEquals(0, res)
+        assertEquals(0, res) // 600 > 500
     }
 
 
@@ -110,10 +91,10 @@ class YRestTest {
 
         var start = System.currentTimeMillis()
         exe(value)
-        exe(value) // this will trigger the circuit breaker
+        exe(value) // this will trigger the circuit breaker, as 2 failures due to timeout
         var delta = System.currentTimeMillis() - start
 
-        assertTrue(delta > 1000) // the 2 calls took at least 1200ms
+        assertTrue(delta >= 1000) // the 2 calls took at least 1000ms
 
         start = System.currentTimeMillis()
         // these will all fail immediately, as CB is on.
@@ -130,23 +111,7 @@ class YRestTest {
         exe(value)
         delta = System.currentTimeMillis() - start
 
-        assertTrue(delta < 1000, "Delta: $delta") //likely even shorter than 1s
+        assertTrue(delta < 1000, "Delta: $delta") //likely way shorter than 1s
     }
 
-
-    @Test
-    fun testAsync() {
-
-        val value: Long = 300
-
-        //warm up
-        exe(value, value, value, value, value)
-
-        val start = System.currentTimeMillis()
-        val res = exe(value, value, value, value, value)
-        val delta = System.currentTimeMillis() - start
-
-        assertEquals(5 * value * 2, res)
-        assertTrue(delta < 600, "Delta: $delta")
-    }
 }

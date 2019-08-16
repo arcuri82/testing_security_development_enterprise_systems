@@ -3,18 +3,15 @@ package org.tsdes.advanced.rest.circuitbreaker
 import com.netflix.hystrix.HystrixCommand
 import com.netflix.hystrix.HystrixCommandGroupKey
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
-import rx.Observable
 import java.net.URI
 
 /**
  * Created by arcuri82 on 03-Aug-17.
  */
 @RestController
-@RequestMapping(path = ["/y"])
 class YRest {
 
     /*
@@ -29,9 +26,9 @@ class YRest {
     private val client: RestTemplate = RestTemplate()
 
 
-    @GetMapping(path = ["single"])
+    @GetMapping(path = ["/y"])
     fun doGetSingle(
-            @RequestParam("v", defaultValue = "30")
+            @RequestParam("v")
             v: Long
     ): Long {
 
@@ -42,27 +39,13 @@ class YRest {
         return CallX(v).execute()
     }
 
-    @GetMapping(path = ["multi"])
-    fun doGetMulti(
-            @RequestParam("a", defaultValue = "30") a: Long,
-            @RequestParam("b", defaultValue = "30") b: Long,
-            @RequestParam("c", defaultValue = "30") c: Long,
-            @RequestParam("d", defaultValue = "30") d: Long,
-            @RequestParam("e", defaultValue = "30") e: Long
-    ): Long {
 
-        return Observable.merge(
-                CallX(a).observe(), // make these 5 calls in parallel,
-                CallX(b).observe(), // and asynchronously
-                CallX(c).observe(),
-                CallX(d).observe(),
-                CallX(e).observe()
-        ).toList().toBlocking().single() // collect the results into a list
-                .stream()
-                .mapToLong { l -> l }
-                .sum()
-    }
-
+    /*
+        TODO: note that Hystrix is now no longer in active development, although it is maintained.
+        https://github.com/Netflix/Hystrix
+        Once Spring Cloud Circuit Breaker is out of incubation phase, it should be replaced here
+        https://spring.io/blog/2019/04/16/introducing-spring-cloud-circuit-breaker
+     */
 
     /*
         Calls to an external web service will be wrapped into a HystrixCommand

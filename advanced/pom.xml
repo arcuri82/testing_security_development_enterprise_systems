@@ -92,6 +92,11 @@
                 <artifactId>graphql-dto</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.tsdes.advanced.rest</groupId>
+                <artifactId>rest-gui-v1</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Kotlin dependencies -->
             <dependency>

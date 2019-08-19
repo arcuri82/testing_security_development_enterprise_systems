@@ -67,6 +67,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <finalName>rest-gui-v1</finalName>
+                    <attach>false</attach>
                 </configuration>
             </plugin>
 

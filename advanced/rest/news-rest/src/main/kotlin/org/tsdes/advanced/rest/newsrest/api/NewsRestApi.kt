@@ -6,18 +6,13 @@ import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import io.swagger.annotations.ApiResponse
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.tsdes.advanced.examplenews.NewsRepository
-import org.tsdes.advanced.examplenews.constraint.Country
 import org.tsdes.advanced.rest.newsrest.dto.NewsConverter
 import org.tsdes.advanced.rest.newsrest.dto.NewsDto
 import javax.validation.ConstraintViolationException
-import javax.validation.Valid
 
 const val ID_PARAM = "The numeric id of the news"
 
@@ -170,9 +165,9 @@ class NewsRestApi {
             return ResponseEntity.status(404).build()
         }
 
-        val dto = crud.findById(id).orElse(null) ?: return ResponseEntity.status(404).build()
+        val entity = crud.findById(id).orElse(null) ?: return ResponseEntity.status(404).build()
 
-        return ResponseEntity.ok(NewsConverter.transform(dto))
+        return ResponseEntity.ok(NewsConverter.transform(entity))
     }
 
 

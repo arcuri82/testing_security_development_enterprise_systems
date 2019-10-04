@@ -34,7 +34,7 @@ const deleteMessages = (idMessages) => {
 
 const updateMessages = (idMessages) => {
 
-    const get = new XMLHttpRequest()
+    const get = new XMLHttpRequest();
     get.open("GET", "/service/messages", true);
     get.setRequestHeader("Accept", "application/json;charset=UTF-8");
 

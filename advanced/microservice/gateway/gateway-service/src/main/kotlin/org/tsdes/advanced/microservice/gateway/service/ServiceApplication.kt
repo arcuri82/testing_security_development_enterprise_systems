@@ -77,7 +77,7 @@ class ServiceApplication (
 
 
     @PostMapping(
-            consumes = arrayOf(MediaType.TEXT_PLAIN_VALUE)
+            consumes = [MediaType.TEXT_PLAIN_VALUE]
     )
     fun create(
             @RequestBody

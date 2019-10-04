@@ -68,13 +68,13 @@ class IndexPageObject(
     private fun waitForDisplayedMessages(n: Int){
         val wait = WebDriverWait(driver, 10)
 
-        wait.until({numberOfMessages() == n})
+        wait.until{numberOfMessages() == n}
 
     }
 
     private fun waitForPageToLoad() {
         val wait = WebDriverWait(driver, 10) //give up after 10 seconds
 
-        wait.until({(it as JavascriptExecutor).executeScript("return document.readyState") == "complete"})
+        wait.until{(it as JavascriptExecutor).executeScript("return document.readyState") == "complete"}
     }
 }

@@ -33,13 +33,11 @@ class ConverterRestServiceXmlTest {
 
             Here we need to start the WireMock HTTP server (eg, Jetty) before
             the tests, and stop it after all tests are completed.
-            This is done with @BeforeClass and @AfterClass... but those
-            methods have to be static in JUnit 4!!!
+            This is done with @BeforeAll and @AfterAll... but those
+            methods have to be static in JUnit !!!
             So, here we need to go into a "companion object" and use
             @JvmStatic to get it work... :(
 
-            Note: in the upcoming JUnit 5, this issue can be bypassed,
-            because there is no longer requirement on static.
 
             Plus there is all the issues of accessing injected properties (eg,
             random port for Spring) from a static context...

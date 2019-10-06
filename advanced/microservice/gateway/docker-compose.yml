@@ -13,7 +13,7 @@ services:
     ports:
       - "80:8080"
     depends_on:
-        - eureka
+      - eureka
 
   eureka:
     build:
@@ -40,37 +40,35 @@ services:
     image: "postgres:10"
 
   service_0:
-     build:
-        context: ./gateway-service
-        dockerfile: Dockerfile
-     environment:
-        - TSDES_SERVICE_ID=A
-     depends_on:
-        - scg
-        - postgres
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    environment:
+      - TSDES_SERVICE_ID=A
+    depends_on:
+      - scg
+      - postgres
 
 
   service_1:
-     build:
-        context: ./gateway-service
-        dockerfile: Dockerfile
-     environment:
-        - TSDES_SERVICE_ID=B
-     depends_on:
-        - scg
-        - postgres
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    environment:
+      - TSDES_SERVICE_ID=B
+    depends_on:
+      - scg
+      - postgres
+
 
   service_2:
-     build:
-        context: ./gateway-service
-        dockerfile: Dockerfile
-     environment:
-        - TSDES_SERVICE_ID=C
-     depends_on:
-        - scg
-        - postgres
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    environment:
+      - TSDES_SERVICE_ID=C
+    depends_on:
+      - scg
+      - postgres
 
 
-networks:
-  default:
-    name: gateway-network

@@ -7,6 +7,7 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matchers.contains
 import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Test
@@ -182,7 +183,8 @@ class SecurityTest {
                 .statusCode(400)
                 .extract().cookie("SESSION")
 
-        checkAuthenticatedCookie(noAuth, 401)
+        //session is not created if not required, eg when 400 user error
+        assertNull(noAuth)
 
         registerUser(name, pwd)
 

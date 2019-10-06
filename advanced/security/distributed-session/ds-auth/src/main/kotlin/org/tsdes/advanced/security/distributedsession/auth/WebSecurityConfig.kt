@@ -48,7 +48,7 @@ class WebSecurityConfig(
                 .csrf().disable()
                 //
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
     }
 
 

@@ -33,6 +33,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
                 .and()
                 .csrf().disable()
                 .sessionManagement()
+                //never create a session, but use existing one if provided
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER)
     }
 

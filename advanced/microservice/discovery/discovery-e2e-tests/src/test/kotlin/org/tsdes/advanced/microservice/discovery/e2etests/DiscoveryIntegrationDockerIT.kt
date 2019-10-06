@@ -5,17 +5,23 @@ import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.awaitility.Awaitility
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.*
-import org.junit.Assert.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assumptions.assumeTrue
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
 import org.testcontainers.containers.DockerComposeContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+@Testcontainers
 class DiscoveryIntegrationDockerIT {
 
     companion object {
 
-        @BeforeClass
+        @BeforeAll
         @JvmStatic
         fun checkEnvironment(){
 
@@ -24,20 +30,20 @@ class DiscoveryIntegrationDockerIT {
                 Looks like currently some issues in running Docker-Compose on Travis
              */
 
-            val travis = System.getProperty("TRAVIS") != null
-            Assume.assumeTrue(!travis)
+//            val travis = System.getProperty("TRAVIS") != null
+//            assumeTrue(!travis)
         }
 
         class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
 
 
-        @ClassRule
+        @Container
         @JvmField
         val env = KDockerComposeContainer(File("../docker-compose.yml"))
                 .withLocalCompose(true)
 
 
-        @BeforeClass
+        @BeforeAll
         @JvmStatic
         fun waitForServers() {
 
@@ -101,8 +107,8 @@ class DiscoveryIntegrationDockerIT {
                     .ignoreExceptions()
                     .until {
                         val msg = callConsumer()
-                        assertTrue(msg, msg.startsWith("Received:"))
-                        assertTrue(msg, !msg.contains("ERROR", ignoreCase = true))
+                        assertTrue(msg.startsWith("Received:"), msg)
+                        assertTrue(!msg.contains("ERROR", ignoreCase = true), msg)
                         true
                     }
         }

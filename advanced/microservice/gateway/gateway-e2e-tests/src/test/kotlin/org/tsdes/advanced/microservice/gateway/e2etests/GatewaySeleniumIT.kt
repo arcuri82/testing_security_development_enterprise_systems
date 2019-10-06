@@ -1,12 +1,14 @@
 package org.tsdes.advanced.microservice.gateway.e2etests
 
 import org.awaitility.Awaitility
-import org.junit.Assert
-import org.junit.Ignore
-import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 import org.openqa.selenium.chrome.ChromeOptions
 import org.testcontainers.containers.BrowserWebDriverContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
@@ -14,7 +16,8 @@ import java.util.concurrent.TimeUnit
  * Created by arcuri82 on 04-Oct-19.
  */
 
-@Ignore
+@Disabled
+@Testcontainers
 class GatewaySeleniumIT : GatewayIntegrationDockerTestBase() {
 
 
@@ -34,7 +37,7 @@ class GatewaySeleniumIT : GatewayIntegrationDockerTestBase() {
 
 
 
-    @Rule
+    @Container
     @JvmField
     val browser = KBrowserWebDriverContainer()
             .withCapabilities(ChromeOptions())
@@ -53,19 +56,19 @@ class GatewaySeleniumIT : GatewayIntegrationDockerTestBase() {
 
         po.goToPage("scg", 8080)
 
-        Assert.assertTrue(po.isOnPage())
+        assertTrue(po.isOnPage())
 
         po.deleteMessages()
-        Assert.assertEquals(0, po.numberOfMessages())
+        assertEquals(0, po.numberOfMessages())
 
         po.sendMessage("Hail Zuul!!!")
-        Assert.assertEquals(1, po.numberOfMessages())
+        assertEquals(1, po.numberOfMessages())
 
         po.sendMessage("Just kidding")
-        Assert.assertEquals(2, po.numberOfMessages())
+        assertEquals(2, po.numberOfMessages())
 
         po.deleteMessages()
-        Assert.assertEquals(0, po.numberOfMessages())
+        assertEquals(0, po.numberOfMessages())
     }
 
     @Test
@@ -74,10 +77,10 @@ class GatewaySeleniumIT : GatewayIntegrationDockerTestBase() {
         val po = IndexPageObject(browser.webDriver)
 
         po.goToPage("scg", 8080)
-        Assert.assertTrue(po.isOnPage())
+        assertTrue(po.isOnPage())
 
         po.deleteMessages()
-        Assert.assertEquals(0, po.numberOfMessages())
+        assertEquals(0, po.numberOfMessages())
 
 
         Awaitility.await().atMost(120, TimeUnit.SECONDS)
@@ -87,11 +90,11 @@ class GatewaySeleniumIT : GatewayIntegrationDockerTestBase() {
 
                     val messages = po.messages()
 
-                    Assert.assertEquals(3, messages.toSet().size)
+                    assertEquals(3, messages.toSet().size)
 
-                    Assert.assertTrue(messages.any { it.startsWith("A :") })
-                    Assert.assertTrue(messages.any { it.startsWith("B :") })
-                    Assert.assertTrue(messages.any { it.startsWith("C :") })
+                    assertTrue(messages.any { it.startsWith("A :") })
+                    assertTrue(messages.any { it.startsWith("B :") })
+                    assertTrue(messages.any { it.startsWith("C :") })
 
                     true
                 }

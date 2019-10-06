@@ -7,9 +7,11 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.BeforeAll
 import org.testcontainers.containers.DockerComposeContainer
+import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 @Testcontainers
@@ -43,8 +45,10 @@ abstract class GatewayIntegrationDockerTestBase {
                     be fully initialized.
                     So, I expose it here.
                  */
-                .withExposedService("eureka", 8761)
+                .withExposedService("eureka", 8761,
+                        Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(240)))
                 .withLocalCompose(true)
+
 
 
         @BeforeAll

@@ -6,42 +6,36 @@ import io.restassured.http.ContentType
 import org.awaitility.Awaitility.await
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.Matchers.contains
-import org.junit.*
-import org.junit.Assert.assertTrue
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
 import org.testcontainers.containers.DockerComposeContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-@Ignore //FIXME
+
+@Testcontainers
 class DistributedSessionDockerIT {
+
 
     companion object {
 
-        @BeforeClass @JvmStatic
-        fun checkEnvironment(){
-
-            /*
-                TODO
-                Looks like currently some issues in running Docker-Compose on Travis
-             */
-
-            val travis = System.getProperty("TRAVIS") != null
-            Assume.assumeTrue(!travis)
-        }
 
         class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
 
 
-        @ClassRule
+        @Container
         @JvmField
         val env = KDockerComposeContainer(File("../docker-compose.yml"))
                 .withLocalCompose(true)
                 //if needed for debugging
-                .withLogConsumer("user-service") {System.out.println("[DOCKER] " + it.utf8String)}
+                //.withLogConsumer("user-service") {System.out.println("[DOCKER] " + it.utf8String)}
 
         private var counter = System.currentTimeMillis()
 
-        @BeforeClass
+        @BeforeAll
         @JvmStatic
         fun initialize() {
             RestAssured.baseURI = "http://localhost"

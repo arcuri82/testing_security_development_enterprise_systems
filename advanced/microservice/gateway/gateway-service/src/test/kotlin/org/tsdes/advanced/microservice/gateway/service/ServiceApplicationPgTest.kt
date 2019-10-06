@@ -1,12 +1,13 @@
 package org.tsdes.advanced.microservice.gateway.service
 
-import org.junit.ClassRule
 import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.testcontainers.containers.GenericContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 
 /*
     Here, I want to run the same tests, but on a real database.
@@ -18,6 +19,7 @@ import org.testcontainers.containers.GenericContainer
     own configuration file.
  */
 
+@Testcontainers
 @ActiveProfiles("pg")
 //need special initializer to be able to change properties before starting SpringBoot
 @ContextConfiguration(initializers = [(ServiceApplicationPgTest.Companion.Initializer::class)])
@@ -31,7 +33,7 @@ class ServiceApplicationPgTest : ServiceApplicationTest() {
            See: https://hub.docker.com/_/postgres/
          */
 
-        @ClassRule
+        @Container
         @JvmField
         val postgres = KGenericContainer("postgres:10").withExposedPorts(5432)
 

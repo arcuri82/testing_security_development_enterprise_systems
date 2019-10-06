@@ -5,16 +5,17 @@ import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.awaitility.Awaitility
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assert
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.util.concurrent.TimeUnit
 
 /**
  * Created by arcuri82 on 04-Oct-19.
  */
+@Testcontainers
 class GatewayRestIT : GatewayIntegrationDockerTestBase() {
 
     companion object {
@@ -23,7 +24,7 @@ class GatewayRestIT : GatewayIntegrationDockerTestBase() {
         }
     }
 
-    @Before
+    @BeforeEach
     fun clean(){
         given().delete("/service/messages")
                 .then()

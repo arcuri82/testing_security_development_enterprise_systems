@@ -4,15 +4,15 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import org.awaitility.Awaitility.await
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assume
-import org.junit.Before
-import org.junit.BeforeClass
-import org.junit.ClassRule
+import org.junit.jupiter.api.Assumptions.assumeTrue
+import org.junit.jupiter.api.BeforeAll
 import org.testcontainers.containers.DockerComposeContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-//@Ignore //FIXME
+@Testcontainers
 abstract class GatewayIntegrationDockerTestBase {
 
     companion object {
@@ -22,9 +22,9 @@ abstract class GatewayIntegrationDockerTestBase {
                TODO
                Looks like currently some issues in running Docker-Compose on Travis
             */
-
-            val travis = System.getProperty("TRAVIS") != null
-            Assume.assumeTrue(!travis)
+//
+//            val travis = System.getProperty("TRAVIS") != null
+//            assumeTrue(!travis)
 
 
             RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
@@ -33,7 +33,7 @@ abstract class GatewayIntegrationDockerTestBase {
 
         class KDockerComposeContainer(id: String, path: File) : DockerComposeContainer<KDockerComposeContainer>(id, path)
 
-        @ClassRule
+        @Container
         @JvmField
         val env = KDockerComposeContainer("gateway", File("../docker-compose.yml"))
                 /*
@@ -47,7 +47,7 @@ abstract class GatewayIntegrationDockerTestBase {
                 .withLocalCompose(true)
 
 
-        @BeforeClass
+        @BeforeAll
         @JvmStatic
         fun waitForServer() {
 

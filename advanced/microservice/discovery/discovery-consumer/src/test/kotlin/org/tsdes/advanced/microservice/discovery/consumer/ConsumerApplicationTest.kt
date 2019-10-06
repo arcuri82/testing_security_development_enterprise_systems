@@ -7,21 +7,21 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
-import org.junit.AfterClass
-import org.junit.Assert
-import org.junit.BeforeClass
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
 /**
  * Created by arcuri82 on 15-Oct-18.
  */
 @ActiveProfiles("test")
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ConsumerApplicationTest{
 
@@ -34,7 +34,7 @@ class ConsumerApplicationTest{
 
         const val id = "foo"
 
-        @BeforeClass
+        @BeforeAll
         @JvmStatic
         fun initClass() {
             RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
@@ -52,7 +52,7 @@ class ConsumerApplicationTest{
                                     .withBody(id)))
         }
 
-        @AfterClass
+        @AfterAll
         @JvmStatic
         fun tearDown() {
             wiremockServer.stop()
@@ -68,6 +68,6 @@ class ConsumerApplicationTest{
                 .statusCode(200)
                 .extract().body().asString()
 
-        Assert.assertEquals("Received: $id", msg)
+        assertEquals("Received: $id", msg)
     }
 }

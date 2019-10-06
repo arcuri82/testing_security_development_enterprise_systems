@@ -1,0 +1,109 @@
+### FIXME: unfortunately this configuration is failing
+
+
+version: '3.7'
+
+services:
+
+  # The Spring Cloud Gateway will be the ONLY Docker instance
+  # that does open a port accessible from outside the
+  # Docker network.
+
+  scg:
+    build:
+      context: ./gateway-scg
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"
+    depends_on:
+      - eureka
+    networks:
+      - gateway-network
+
+  eureka:
+    build:
+      context: ./gateway-eureka
+      dockerfile: Dockerfile
+    networks:
+      - gateway-network
+
+
+  frontend:
+    build:
+      context: ./gateway-frontend
+      dockerfile: Dockerfile
+    networks:
+      - gateway-network
+
+
+  # Note that here I am using a real database.
+  # Cannot use embedded H2 as done so far, because
+  # all the different instances of the replicated services
+  # need to work on the same data.
+  #
+  # All these replicated instances of "service" will use the
+  # same database.
+  # However, if we had other kinds of APIs here, each kind will
+  # need to use their own database.
+  postgres:
+    image: "postgres:10"
+    networks:
+      # not on "gateway-network" one... only service_* should be able to access database
+      - service-network
+
+  service_0:
+     build:
+        context: ./gateway-service
+        dockerfile: Dockerfile
+     environment:
+        - TSDES_SERVICE_ID=A
+     depends_on:
+        - scg
+        - postgres
+     networks:
+        - gateway-network
+        - service-network
+
+
+  service_1:
+     build:
+        context: ./gateway-service
+        dockerfile: Dockerfile
+     environment:
+        - TSDES_SERVICE_ID=B
+     depends_on:
+        - scg
+        - postgres
+     networks:
+        - gateway-network
+        - service-network
+
+
+  service_2:
+     build:
+        context: ./gateway-service
+        dockerfile: Dockerfile
+     environment:
+        - TSDES_SERVICE_ID=C
+     depends_on:
+        - scg
+        - postgres
+     networks:
+        - gateway-network
+        - service-network
+
+
+# We can create topologies of virtual networks, each one with its own IP addresses and DNS.
+# A process could be part of multiple networks, in what is called "multi-homing".
+# In our particular case, the database for a web service X should be accessible only from
+# instances of X, and not from any other service. this is done for security reasons.
+# Least privilege: if an entity is not supposed to contact a database, it should not be on
+# the same virtual network. This is a particular problem for example when some web services
+# are exploitable with "remote code execution".
+networks:
+  gateway-network:
+    driver: bridge
+    name: gateway-network
+  service-network:
+    driver: bridge
+    name: service-network

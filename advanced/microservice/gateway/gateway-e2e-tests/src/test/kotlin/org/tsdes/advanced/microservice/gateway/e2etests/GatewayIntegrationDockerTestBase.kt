@@ -20,15 +20,6 @@ abstract class GatewayIntegrationDockerTestBase {
     companion object {
 
         init {
-            /*
-               TODO
-               Looks like currently some issues in running Docker-Compose on Travis
-            */
-//
-//            val travis = System.getProperty("TRAVIS") != null
-//            assumeTrue(!travis)
-
-
             RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
             RestAssured.port = 80
         }
@@ -46,6 +37,12 @@ abstract class GatewayIntegrationDockerTestBase {
                     So, I expose it here.
                  */
                 .withExposedService("eureka", 8761,
+                        /*
+                            By default, Testcontainer will wait up to 60 seconds for the exposed
+                            port to be accessible.
+                            This is too low value on free CIs like Travis when there are many
+                            Docker images running
+                         */
                         Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(240)))
                 .withLocalCompose(true)
 

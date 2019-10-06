@@ -21,19 +21,6 @@ class DiscoveryIntegrationDockerIT {
 
     companion object {
 
-        @BeforeAll
-        @JvmStatic
-        fun checkEnvironment(){
-
-            /*
-                TODO
-                Looks like currently some issues in running Docker-Compose on Travis
-             */
-
-//            val travis = System.getProperty("TRAVIS") != null
-//            assumeTrue(!travis)
-        }
-
         class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
 
 

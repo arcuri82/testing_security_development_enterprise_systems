@@ -42,7 +42,7 @@ class DiscoveryIntegrationDockerIT {
                 library is on the pom.xml dependencies
              */
             Awaitility.await()
-                    .atMost(90, TimeUnit.SECONDS)
+                    .atMost(180, TimeUnit.SECONDS)
                     .pollInterval(3, TimeUnit.SECONDS)
                     .ignoreExceptions()
                     .until {

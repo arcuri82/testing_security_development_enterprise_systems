@@ -212,4 +212,4 @@ found [here (mock_0)](exams/theory_mock_exam_0.pdf)
 and [here (mock_1)](exams/theory_mock_exam_1.pdf).
 On the other hand, 
 an example of mock exam for the project can be 
-found [here](exams/project_mock_exam.pdf) (file not available yet).
+found [here](exams/project_mock_exam.pdf).

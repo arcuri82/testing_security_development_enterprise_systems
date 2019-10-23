@@ -145,6 +145,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/amqp/topic-exchange**
   * **advanced/advanced/amqp/amqp-rest**
 
+<br />
 
 * **Lesson 11**: Revision
 

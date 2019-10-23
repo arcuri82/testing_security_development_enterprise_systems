@@ -75,8 +75,8 @@ abstract class GatewayIntegrationDockerTestBase {
                                 .delete("/service/messages")
                                 .then().statusCode(204)
 
-                        given().baseUri("http://${env.getServiceHost("eureka_1", 8761)}")
-                                .port(env.getServicePort("eureka_1", 8761))
+                        given().baseUri("http://${env.getServiceHost("eureka", 8761)}")
+                                .port(env.getServicePort("eureka", 8761))
                                 .get("/eureka/apps")
                                 .then()
                                 .body("applications.application.instance.size()", equalTo(4))

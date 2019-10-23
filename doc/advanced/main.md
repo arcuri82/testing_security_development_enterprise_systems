@@ -131,15 +131,10 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 <br />
 
 
-* **Lesson 10**: To be decided
-
-<br />
-
-
-* **Lesson 11**: AMQP and RabbitMQ
+* **Lesson 10**: AMQP and RabbitMQ
   
-  Slides: [[pdf]](slides/lesson_11.pdf), 
-          [[pptx]](slides/lesson_11.pptx)
+  Slides: [[pdf]](slides/lesson_10.pdf), 
+          [[pptx]](slides/lesson_10.pptx)
           
   Modules:     
   
@@ -150,6 +145,10 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/amqp/topic-exchange**
   * **advanced/advanced/amqp/amqp-rest**
 
+
+* **Lesson 11**: Revision
+
+<br />
 
 * **Lesson 12**: Revision
 

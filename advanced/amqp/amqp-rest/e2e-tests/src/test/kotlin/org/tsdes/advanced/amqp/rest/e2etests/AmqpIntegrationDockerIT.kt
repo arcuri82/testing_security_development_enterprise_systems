@@ -15,24 +15,9 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by arcuri82 on 11-Aug-17.
  */
-@Ignore //FIXME
 class AmqpIntegrationDockerIT {
 
     companion object {
-
-        @BeforeClass
-        @JvmStatic
-        fun checkEnvironment() {
-
-            /*
-                TODO
-                Looks like currently some issues in running Docker-Compose on Travis
-             */
-
-            val travis = System.getProperty("TRAVIS") != null
-            assumeTrue(!travis)
-        }
-
 
         class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
 
@@ -51,7 +36,7 @@ class AmqpIntegrationDockerIT {
         val receiver1 = 9002
 
         //make sure to wait till the 3 services are up and running
-        await().atMost(30, TimeUnit.SECONDS)
+        await().atMost(180, TimeUnit.SECONDS)
                 .pollInterval(5, TimeUnit.SECONDS)
                 .ignoreExceptions()
                 .until {
@@ -82,7 +67,7 @@ class AmqpIntegrationDockerIT {
             It might take some times for the messages to go from Sender to RabbitMQ
             and then to a Receiver
          */
-        await().atMost(3, TimeUnit.SECONDS)
+        await().atMost(5, TimeUnit.SECONDS)
                 .ignoreExceptions()
                 .until {
                     given().port(receiver0)
@@ -101,7 +86,7 @@ class AmqpIntegrationDockerIT {
 
         given().port(senderPort).body("foo_1").post("/sender").then().statusCode(204)
 
-        await().atMost(3, TimeUnit.SECONDS)
+        await().atMost(5, TimeUnit.SECONDS)
                 .ignoreExceptions()
                 .until {
                     given().port(receiver1)

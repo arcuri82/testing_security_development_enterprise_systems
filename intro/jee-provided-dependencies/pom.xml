@@ -14,7 +14,7 @@
     <properties>
         <version.hibernate.jpa>1.0.2.Final</version.hibernate.jpa>
         <version.hibernate.core>5.3.7.Final</version.hibernate.core>
-        <version.hibernate.validator>6.0.13.Final</version.hibernate.validator>
+        <version.hibernate.validator>6.1.0.Final</version.hibernate.validator>
         <version.javax.el>3.0.0</version.javax.el>
     </properties>
 
@@ -43,20 +43,20 @@
             <dependency>
                 <groupId>org.jboss.arquillian.junit</groupId>
                 <artifactId>arquillian-junit-container</artifactId>
-                <version>1.4.1.Final</version>
+                <version>1.5.0.Final</version>
                 <!-- make sure it is in test scope -->
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.core</groupId>
                 <artifactId>arquillian-core-api</artifactId>
-                <version>1.4.1.Final</version>
+                <version>1.5.0.Final</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.wildfly.arquillian</groupId>
                 <artifactId>wildfly-arquillian-container-managed</artifactId>
-                <version>2.1.1.Final</version>
+                <version>2.2.0.Final</version>
                 <scope>test</scope>
             </dependency>
 
@@ -64,7 +64,7 @@
                 <!-- embedded JEE GlassFish container -->
                 <groupId>org.glassfish.main.extras</groupId>
                 <artifactId>glassfish-embedded-all</artifactId>
-                <version>5.0</version>
+                <version>5.1.0</version>
             </dependency>
 
 
@@ -82,7 +82,7 @@
             <dependency>
                 <groupId>javax</groupId>
                 <artifactId>javaee-api</artifactId>
-                <version>8.0</version>
+                <version>8.0.1</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -123,7 +123,7 @@
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
                 <artifactId>org.eclipse.persistence.jpa</artifactId>
-                <version>2.6.4</version>
+                <version>2.7.5</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

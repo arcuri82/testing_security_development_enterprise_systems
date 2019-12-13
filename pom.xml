@@ -45,16 +45,17 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <fs>${file.separator}</fs>
         <version.java>1.8</version.java>
+        <!--  TODO Need to replace SpringFox before updating to 2.2-->
         <version.springboot>2.1.0.RELEASE</version.springboot>
-        <version.junit>5.3.2</version.junit>
-        <version.junit.platform>1.3.1</version.junit.platform>
-        <version.jacoco>0.7.9</version.jacoco>
-        <version.h2>1.4.197</version.h2>
+        <version.junit>5.5.2</version.junit>
+        <version.junit.platform>1.5.2</version.junit.platform>
+        <version.jacoco>0.8.5</version.jacoco>
+        <version.h2>1.4.200</version.h2>
         <version.postgres>42.1.4</version.postgres>
         <version.resteasy>3.1.3.Final</version.resteasy>
-        <version.testcontainers>1.12.2</version.testcontainers>
+        <version.testcontainers>1.12.4</version.testcontainers>
         <version.selenium>3.141.59</version.selenium>
-        <version.restassured>4.0.0</version.restassured>
+        <version.restassured>4.1.2</version.restassured>
     </properties>
 
 
@@ -130,12 +131,12 @@
             <dependency>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq</artifactId>
-                <version>3.10.2</version>
+                <version>3.12.3</version>
             </dependency>
             <dependency>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-core</artifactId>
-                <version>5.2.1</version>
+                <version>6.1.1</version>
             </dependency>
 
 
@@ -182,7 +183,7 @@
                 <!-- to mock web services -->
                 <groupId>com.github.tomakehurst</groupId>
                 <artifactId>wiremock-standalone</artifactId>
-                <version>2.2.1</version>
+                <version>2.25.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -257,14 +258,14 @@
                 <!-- For handling waiting of asynchronous events -->
                 <groupId>org.awaitility</groupId>
                 <artifactId>awaitility</artifactId>
-                <version>3.1.3</version>
+                <version>4.0.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <!-- To mock/stub objects -->
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>2.23.0</version>
+                <version>3.2.0</version>
                 <scope>test</scope>
             </dependency>
 
@@ -283,12 +284,12 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>28.0-jre</version>
+                <version>28.1-jre</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-jsr310</artifactId>
-                <version>2.8.9</version>
+                <version>2.10.1</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -303,7 +304,7 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.11</version>
+                <version>1.13</version>
             </dependency>
             <dependency>
                 <groupId>commons-logging</groupId>
@@ -328,7 +329,7 @@
             <dependency>
                 <groupId>org.ow2.asm</groupId>
                 <artifactId>asm</artifactId>
-                <version>7.0</version>
+                <version>7.2</version>
             </dependency>
 
 

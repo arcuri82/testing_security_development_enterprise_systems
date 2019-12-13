@@ -46,7 +46,7 @@
             <dependency>
                 <groupId>org.joinfaces</groupId>
                 <artifactId>jsf-spring-boot-starter</artifactId>
-                <version>3.2.3</version>
+                <version>4.1.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

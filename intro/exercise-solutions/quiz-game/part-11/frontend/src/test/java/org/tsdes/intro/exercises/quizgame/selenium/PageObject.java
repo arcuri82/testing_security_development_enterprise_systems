@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public abstract class PageObject {
 
@@ -53,7 +55,9 @@ public abstract class PageObject {
     public void clickAndWait(String id){
         WebElement element = driver.findElement(By.id(id));
         element.click();
+        try{Thread.sleep(200);} catch (Exception e){}
         waitForPageToLoad();
+        try{Thread.sleep(300);} catch (Exception e){}
     }
 
     public String getText(String id){
@@ -69,8 +73,12 @@ public abstract class PageObject {
     public void setText(String id, String text){
         WebElement element = driver.findElement(By.id(id));
         element.clear();
+        element.click();
         element.sendKeys(text);
+
+        assertEquals(text, element.getAttribute("value"));
     }
+
 
     protected Boolean waitForPageToLoad() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;

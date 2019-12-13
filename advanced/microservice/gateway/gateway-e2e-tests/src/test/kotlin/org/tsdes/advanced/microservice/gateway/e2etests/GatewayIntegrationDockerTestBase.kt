@@ -6,6 +6,7 @@ import org.awaitility.Awaitility.await
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.testcontainers.containers.DockerComposeContainer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.junit.jupiter.Container
@@ -14,6 +15,14 @@ import java.io.File
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
+
+@Disabled
+/*
+    Disabled until following is fixed for Travis:
+    https://github.com/testcontainers/testcontainers-java/issues/1998
+
+    however, it works just fine when run locally
+ */
 @Testcontainers
 abstract class GatewayIntegrationDockerTestBase {
 

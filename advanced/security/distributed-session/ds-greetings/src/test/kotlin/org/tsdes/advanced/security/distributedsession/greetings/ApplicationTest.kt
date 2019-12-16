@@ -92,7 +92,7 @@ class ApplicationTest {
         wiremockServer.stubFor(
                 WireMock.get(
                         WireMock.urlMatching("/usersInfo/$userId"))
-                        .withCookie("SESSION", WireMock.notMatching(".+"))
+                        .withCookie("SESSION", WireMock.absent())
                         .willReturn(WireMock.aResponse()
                                 .withStatus(403)))
 

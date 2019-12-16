@@ -22,7 +22,7 @@
     <properties>
         <jbossTarget>${basedir}/target/downloaded_Wildfly</jbossTarget>
         <jbossHome>${jbossTarget}/wildfly</jbossHome>
-        <version.wildfly>14.0.1.Final</version.wildfly>
+        <version.wildfly>18.0.1.Final</version.wildfly>
     </properties>
 
     <dependencyManagement>

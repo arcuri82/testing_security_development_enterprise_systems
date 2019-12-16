@@ -179,11 +179,7 @@
                 <!-- to mock web services -->
                 <groupId>com.github.tomakehurst</groupId>
                 <artifactId>wiremock-standalone</artifactId>
-                <!--
-                    Latest 2.25.1 breaks tests. See:
-                    https://github.com/tomakehurst/wiremock/issues/1238
-                -->
-                <version>2.2.1</version>
+                <version>2.25.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

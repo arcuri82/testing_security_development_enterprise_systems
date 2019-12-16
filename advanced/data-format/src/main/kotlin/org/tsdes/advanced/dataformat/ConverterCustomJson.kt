@@ -85,8 +85,7 @@ class ConverterCustomJson<T: Any>(type: Class<T>) : ConverterImp<T>(type) {
 
             } else if (type == Date::class.java) {
 
-                //"Oct 8, 2016 10:41:28 AM"
-                val format = SimpleDateFormat("MMM dd, yyyy hh:mm:ss a")
+                val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 val date = format.format(value as Date?)
                 buffer.append("\"" + date + "\"")
 

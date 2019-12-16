@@ -83,7 +83,7 @@ class ApplicationTest {
         wiremockServer.stubFor(
                 WireMock.get(
                         WireMock.urlMatching("/usersInfo/$userId"))
-                        .withCookie("SESSION", WireMock.matching(".*"))
+                        .withCookie("SESSION", WireMock.matching(".+"))
                         .willReturn(WireMock.aResponse()
                                 .withStatus(200)
                                 .withHeader("Content-Type", "application/json")
@@ -92,7 +92,7 @@ class ApplicationTest {
         wiremockServer.stubFor(
                 WireMock.get(
                         WireMock.urlMatching("/usersInfo/$userId"))
-                        .withCookie("SESSION", WireMock.notMatching(".*"))
+                        .withCookie("SESSION", WireMock.notMatching(".+"))
                         .willReturn(WireMock.aResponse()
                                 .withStatus(403)))
 

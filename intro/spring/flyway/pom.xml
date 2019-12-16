@@ -25,11 +25,18 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-
+        <!--
+            Note: this not in the parent poms...
+            so, where is the <version> coming from?
+            Answer: it comes from the Spring pom definitions, but
+            it needs to be explicitly added here as dependency
+        -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
+
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

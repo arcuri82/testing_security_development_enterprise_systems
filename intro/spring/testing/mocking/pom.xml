@@ -43,6 +43,20 @@
             <artifactId>mockito-core</artifactId>
         </dependency>
 
+        <dependency>
+            <!--
+                Spring come with its own dependency of byte-buddy,
+                which is used as well by Mockito.
+                And there can be version conflicts.
+                Here, we explicitly set the version to avoid conflicts.
+                We do not do it on root pom file, as this is the only
+                place we use Mockito, and might have side-effects on Spring
+            -->
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.10.2</version>
+        </dependency>
+
     </dependencies>
 
 

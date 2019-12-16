@@ -46,7 +46,13 @@
             <dependency>
                 <groupId>org.joinfaces</groupId>
                 <artifactId>jsf-spring-boot-starter</artifactId>
-                <version>4.1.1</version>
+                <!--
+                    This depends on Spring version, see:
+                    https://github.com/joinfaces/joinfaces
+                    However, SpringBoot 2.1 would require 4.x (eg 4.0.9) here,
+                    but it does not work, whereas 3.2 is fine...
+                -->
+                <version>3.2.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

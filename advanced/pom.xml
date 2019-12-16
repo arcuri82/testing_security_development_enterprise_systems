@@ -29,7 +29,8 @@
         <version.kotlin>1.3.61</version.kotlin>
         <version.springcloud>Greenwich.RELEASE</version.springcloud>
         <version.springfox>2.9.2</version.springfox>
-        <version.graphql-spring>4.2.0</version.graphql-spring>
+        <version.graphql-spring>5.0.2</version.graphql-spring>
+        <version.graphql-java-tools>5.2.4</version.graphql-java-tools>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
@@ -162,7 +163,7 @@
             <dependency>
                 <groupId>com.graphql-java</groupId>
                 <artifactId>graphql-java-tools</artifactId>
-                <version>5.1.0</version>
+                <version>${version.graphql-java-tools}</version>
             </dependency>
 
 

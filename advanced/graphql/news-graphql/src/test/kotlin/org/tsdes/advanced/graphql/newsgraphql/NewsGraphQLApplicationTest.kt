@@ -6,6 +6,7 @@ import io.restassured.http.ContentType
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -172,6 +173,8 @@ class NewsGraphQLApplicationTest{
                 .body("errors.message[0]", containsString("Violated constraints"))
     }
 
+
+    @Disabled
     @Test
     fun testUpdate() {
 

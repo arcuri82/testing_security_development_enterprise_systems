@@ -11,13 +11,15 @@ The Maven project should have the following dependencies:
 * `org.hibernate:hibernate-core`
 * `org.junit.jupiter:junit-jupiter-engine`
 * `com.h2database:h2`
+* `javax.xml.bind:jaxb-api`
+* `org.glassfish.jaxb:jaxb-runtime`
 
 Note: the dependencies above are specified with the format `groupId:artifactId`. 
 When adding a dependency, not only you need to also specify a `version`,
 but also the appropriate `scope`.
 
 Configure the `maven-compiler-plugin` to use a specific version
-of Java (e.g., Java 1.8).
+of Java (i.e., Java 11).
 
 Create 3 entity classes:
 

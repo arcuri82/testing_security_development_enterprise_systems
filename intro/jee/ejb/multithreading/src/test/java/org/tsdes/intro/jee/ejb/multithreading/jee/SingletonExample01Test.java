@@ -1,12 +1,32 @@
 package org.tsdes.intro.jee.ejb.multithreading.jee;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.runner.RunWith;
 import org.tsdes.intro.jee.ejb.multithreading.Counter;
-import org.tsdes.intro.jee.ejb.multithreading.CounterTestBaseJEE;
+import org.tsdes.intro.jee.ejb.multithreading.CounterTestBase;
 
-public class SingletonExample01Test extends CounterTestBaseJEE {
+import javax.ejb.EJB;
+
+
+@RunWith(Arquillian.class)
+public class SingletonExample01Test extends CounterTestBase {
+
+    @Deployment
+    public static JavaArchive createDeployment() {
+
+        return ShrinkWrap.create(JavaArchive.class)
+                .addClasses(Counter.class, SingletonExample01.class, CounterTestBase.class);
+    }
+
+    @EJB
+    private Counter counter;
+
 
     @Override
-    protected Class<? extends Counter> getSingletonClass() {
-        return SingletonExample01.class;
+    protected Counter getCounter() {
+        return counter;
     }
 }

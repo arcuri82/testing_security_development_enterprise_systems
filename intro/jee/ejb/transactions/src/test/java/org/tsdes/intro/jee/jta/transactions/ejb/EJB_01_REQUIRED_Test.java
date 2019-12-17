@@ -1,17 +1,20 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import javax.ejb.EJB;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class EJB_01_REQUIRED_Test extends TestBase{
 
+    @EJB
+    private EJB_01_REQUIRED ejb;
+
     @Test
     public void test(){
-
-        EJB_01_REQUIRED ejb = getEJB(EJB_01_REQUIRED.class);
 
         String name = "a name";
 

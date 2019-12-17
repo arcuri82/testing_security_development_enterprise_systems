@@ -60,14 +60,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <dependency>
-                <!-- embedded JEE GlassFish container -->
-                <groupId>org.glassfish.main.extras</groupId>
-                <artifactId>glassfish-embedded-all</artifactId>
-                <version>5.1.0</version>
-            </dependency>
-
-
             <!--
                 The scope
                 <scope>provided</scope>

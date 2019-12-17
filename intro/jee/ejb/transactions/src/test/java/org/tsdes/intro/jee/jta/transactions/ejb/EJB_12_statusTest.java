@@ -1,11 +1,12 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
+import javax.ejb.EJB;
 import javax.transaction.Status;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -13,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class EJB_12_statusTest extends TestBase{
 
+    @EJB
+    private EJB_12_status ejb;
 
     @Test
     public void testRequired(){
-
-        EJB_12_status ejb = getEJB(EJB_12_status.class);
 
         int status  = ejb.getInRequired();
 
@@ -27,8 +28,6 @@ public class EJB_12_statusTest extends TestBase{
     @Test
     public void testNotSupported(){
 
-        EJB_12_status ejb = getEJB(EJB_12_status.class);
-
         int status  = ejb.getInNotSupported();
 
         assertEquals(Status.STATUS_NO_TRANSACTION, status);
@@ -36,8 +35,6 @@ public class EJB_12_statusTest extends TestBase{
 
     @Test
     public void testPostConstruct(){
-
-        EJB_12_status ejb = getEJB(EJB_12_status.class);
 
         int status  = ejb.getTransactionStatusInPostConstruct();
 

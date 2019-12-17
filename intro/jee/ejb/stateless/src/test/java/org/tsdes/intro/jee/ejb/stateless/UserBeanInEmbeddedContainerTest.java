@@ -1,33 +1,38 @@
 package org.tsdes.intro.jee.ejb.stateless;
 
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.tsdes.misc.testutils.EmbeddedJeeSupport;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+@RunWith(Arquillian.class)
 public class UserBeanInEmbeddedContainerTest {
 
-    private static EmbeddedJeeSupport container = new EmbeddedJeeSupport();
+    @Deployment
+    public static JavaArchive createDeployment() {
 
-    @BeforeEach
-    public void initContainer()  {
-        container.initContainer();
+        return ShrinkWrap.create(JavaArchive.class)
+                .addClasses(UserBean.class, User.class)
+                //besides the classes, also need to add resources
+                .addAsResource("META-INF/persistence.xml");
     }
 
-    @AfterEach
-    public void closeContainer() throws Exception {
-        container.closeContainer();
-    }
+
+    @EJB
+    private UserBean bean;
 
     @Test
     public void testWithEmbeddedContainer(){
-
-        UserBean bean = container.getEJB(UserBean.class);
 
         String userId = "foo";
 
@@ -40,21 +45,33 @@ public class UserBeanInEmbeddedContainerTest {
 
     @Test
     public void testQuery(){
-        UserBean bean = container.getEJB(UserBean.class);
+
+        /*
+            As database is not reset, I cannot assume how many users are already in it,
+            as that depends on the order in which the tests are executed
+         */
+        long k = bean.getNumberOfUsers();
 
         bean.registerNewUser("0","a","b");
         bean.registerNewUser("1","a","b");
         bean.registerNewUser("2","a","b");
 
         long n = bean.getNumberOfUsers();
-        assertEquals(3, n);
+        assertEquals(k+3, n);
     }
 
     @Test
     public void testNullValue(){
-        UserBean bean = container.getEJB(UserBean.class);
 
         //In EJB, the @NotNull are checked at runtime by the JEE container
-        assertThrows(EJBException.class, () -> bean.registerNewUser("0", "a", null));
+        //assertThrows(EJBException.class, () -> bean.registerNewUser("0", "a", null));
+
+        try{
+            bean.registerNewUser("0", "a", null);
+            fail();
+        }catch (EJBException e){
+            //expected
+        }
+
     }
 }

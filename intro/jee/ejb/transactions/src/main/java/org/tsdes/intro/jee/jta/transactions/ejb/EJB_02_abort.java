@@ -14,20 +14,18 @@ public class EJB_02_abort {
 
     public void createTwoCopies(String name){
 
-        try {
-            Foo foo = new Foo(name);
-            Foo copy = new Foo(name);
+        Foo foo = new Foo(name);
+        Foo copy = new Foo(name);
 
-            em.persist(foo);
-            em.persist(copy);//should fail, because same id
-        }catch (Exception e){
-            /*
-                The exception is thrown not when em.persist(copy)
-                is executed, so this catch is not reached.
-                The exception is thrown once this method is completed,
-                and the JEE container will execute the transaction toward
-                the database. Recall, em here is just a cache.
-             */
-        }
+        em.persist(foo);
+        em.persist(copy);//should fail, because same id
+
+        /*
+                The exception is thrown when em.persist(copy) is executed.
+                However, different JPA providers might behave differently,
+                and throw only once this method is completed,
+                ie, when the JEE container will execute the transaction toward
+                the database. Recall, 'em' here is just a cache.
+         */
     }
 }

@@ -1,21 +1,21 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
-import org.junit.jupiter.api.Test;
 
+import org.junit.Test;
+
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.*;
 
 
 public class EJB_04_SUPPORTSTest extends TestBase{
 
+    @EJB
+    private EJB_04_SUPPORTS ejb;
 
     @Test
     public void testRead(){
-
-        EJB_04_SUPPORTS ejb = getEJB(EJB_04_SUPPORTS.class);
 
         String name = "foo";
 
@@ -33,8 +33,6 @@ public class EJB_04_SUPPORTSTest extends TestBase{
     @Test
     public void testFailWrite(){
 
-        EJB_04_SUPPORTS ejb = getEJB(EJB_04_SUPPORTS.class);
-
         String name = "foo";
 
         assertFalse(queriesEJB.isInDB(name));
@@ -51,8 +49,6 @@ public class EJB_04_SUPPORTSTest extends TestBase{
 
     @Test
     public void testWrite(){
-
-        EJB_04_SUPPORTS ejb = getEJB(EJB_04_SUPPORTS.class);
 
         String first = "first";
         String second = "second";

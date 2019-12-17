@@ -1,20 +1,23 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
 
+import org.junit.Test;
+
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 
 public class EJB_02_abortTest extends TestBase{
 
+    @EJB
+    private EJB_02_abort ejb;
+
     @Test
     public void test(){
-
-        EJB_02_abort ejb = getEJB(EJB_02_abort.class);
 
         String name = "a name";
 

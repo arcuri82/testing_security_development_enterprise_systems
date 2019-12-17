@@ -1,18 +1,22 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.Test;
+
+import javax.ejb.EJB;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 
 public class EJB_07_MANDATORYTest extends TestBase{
 
+    @EJB
+    private EJB_07_MANDATORY ejb;
 
     @Test
     public void testWrite(){
-
-        EJB_07_MANDATORY ejb = getEJB(EJB_07_MANDATORY.class);
 
         String name = "bar";
 
@@ -34,8 +38,6 @@ public class EJB_07_MANDATORYTest extends TestBase{
 
     @Test
     public void testRead(){
-
-        EJB_07_MANDATORY ejb = getEJB(EJB_07_MANDATORY.class);
 
         String name = "bar";
 

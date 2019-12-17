@@ -13,19 +13,39 @@
 
 
     <dependencies>
+
         <dependency>
-            <groupId>org.tsdes.misc</groupId>
-            <artifactId>test-utils</artifactId>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.main.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.wildfly.arquillian</groupId>
+            <artifactId>wildfly-arquillian-container-managed</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+        </dependency>
     </dependencies>
 
-
+    <build>
+        <plugins>
+            <!-- Make sure that Wildfly is automatically downloaded and installed -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <!-- Make sure to rename the Wildfly folder to remove the versioning -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

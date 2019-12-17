@@ -43,12 +43,6 @@
             <artifactId>selenium-support</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.main.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-            <scope>provided</scope>
-            <version>5.0</version>
-        </dependency>
     </dependencies>
 
 </project>

@@ -1,31 +1,30 @@
 package org.tsdes.intro.jee.ejb.stateful;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.tsdes.misc.testutils.EmbeddedJeeSupport;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import javax.ejb.EJB;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+@RunWith(Arquillian.class)
 public class StatefulTest {
 
-    private static EmbeddedJeeSupport container = new EmbeddedJeeSupport();
+    @Deployment
+    public static JavaArchive createDeployment() {
 
-    @BeforeEach
-    public void initContainer()  {
-        container.initContainer();
+        return ShrinkWrap.create(JavaArchive.class)
+                .addClasses(A.class, Counter.class, StatefulCounter.class, StatelessCounter.class);
     }
 
-    @AfterEach
-    public void closeContainer() throws Exception {
-        container.closeContainer();
-    }
 
+    @EJB
+    private A a;
 
     @Test
     public void testStateful(){
-
-        A a = container.getEJB(A.class);
 
         a.increment();
         a.increment();

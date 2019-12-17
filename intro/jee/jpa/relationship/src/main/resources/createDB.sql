@@ -8,6 +8,7 @@ drop table User_roles if exists;
 drop sequence if exists hibernate_sequence;
 
 
+-- Sequence used by Hibernate when creating unique IDs
 create sequence hibernate_sequence start with 1 increment by 1;
 
 create table Address (

@@ -1,5 +1,5 @@
 FROM openjdk:8-alpine
 
-ADD target/scg.jar .
+COPY target/scg.jar .
 
 CMD java -jar scg.jar

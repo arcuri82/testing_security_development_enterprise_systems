@@ -4,6 +4,7 @@ package org.tsdes.intro.spring.testing.selenium.jsftests.selenium;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.BrowserWebDriverContainer;
@@ -47,7 +48,7 @@ public class SeleniumDockerIT extends SeleniumTestBase {
 
 
     public static BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
-            .withDesiredCapabilities(DesiredCapabilities.chrome())
+            .withCapabilities(new ChromeOptions())
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.SKIP, null)
             .withNetwork(network);
 

@@ -32,7 +32,7 @@ class SpaRestDockerIT : SpaRestSeleniumTestBase(){
     @Rule
     @JvmField
     val browser: KBrowserWebDriverContainer = KBrowserWebDriverContainer()
-            .withDesiredCapabilities(DesiredCapabilities.chrome())
+            .withCapabilities(new ChromeOptions())
             .withNetworkMode("spa-rest-network")
 
     override fun getDriver(): WebDriver {

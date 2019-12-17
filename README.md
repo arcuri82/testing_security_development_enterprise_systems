@@ -160,18 +160,17 @@ Current documentation is available
 
 ### Requirements
 
-* JDK 1.8, **NOT** higher, as Java 9 broke backward compatibility,
-  and the next LTS version (Java 11) is not widely supported yet (at the time of this writing).
+* JDK 11 (download it from [https://adoptopenjdk.net/](), do not use the JDK from Oracle)
   
-* An IDE (recommended IntelliJ IDEA Ultimate Edition)
+* An IDE (recommended _IntelliJ IDEA Ultimate Edition_)
 
-* Maven 3.x
+* _Maven_ 3.x
 
-* Docker 
+* _Docker_ 
 
-* Chrome and Chrome Driver (only needed to run Selenium tests locally instead of in Docker)
+* _Chrome_ and _Chrome Driver_ (only needed to run Selenium tests locally instead of in Docker)
 
-* YARN and NodeJS
+* _YARN_ and _NodeJS_
 
 The code in this repository should run on all major operating systems, i.e. Mac, Linux and Windows.
 

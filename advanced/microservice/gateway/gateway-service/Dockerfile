@@ -1,5 +1,5 @@
 FROM openjdk:8-alpine
 
-ADD target/service.jar .
+COPY target/service.jar .
 
 CMD java -jar service.jar

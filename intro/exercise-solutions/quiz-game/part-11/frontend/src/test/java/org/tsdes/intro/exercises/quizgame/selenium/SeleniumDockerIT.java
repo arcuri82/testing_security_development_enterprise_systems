@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -69,7 +70,7 @@ public class SeleniumDockerIT extends SeleniumTestBase {
             .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("QUIZGAME")));
 
     public static BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
-            .withDesiredCapabilities(DesiredCapabilities.chrome())
+            .withCapabilities(new ChromeOptions())
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.SKIP, null)
             .withNetwork(network)
             ;

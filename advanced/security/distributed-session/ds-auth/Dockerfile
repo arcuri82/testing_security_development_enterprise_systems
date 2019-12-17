@@ -1,5 +1,5 @@
 FROM openjdk:8-alpine
 
-ADD target/auth.jar .
+COPY target/auth.jar .
 
 CMD java -jar auth.jar

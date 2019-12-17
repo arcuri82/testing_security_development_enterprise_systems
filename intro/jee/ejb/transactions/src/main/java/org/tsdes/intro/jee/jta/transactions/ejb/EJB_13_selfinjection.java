@@ -23,16 +23,12 @@ public class EJB_13_selfinjection {
 
     public boolean createFailDirect() {
 
-        try {
-            String name = "bar";
-            Foo foo = new Foo(name);
-            Foo copy = new Foo(name);
+        String name = "bar";
+        Foo foo = new Foo(name);
+        Foo copy = new Foo(name);
 
-            em.persist(foo);
-            em.persist(copy);
-        } catch (Exception e) {
-            return false;
-        }
+        em.persist(foo);
+        em.persist(copy);
 
         return true;
     }

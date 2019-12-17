@@ -1,46 +1,39 @@
 package org.tsdes.intro.jee.ejb.query;
 
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.tsdes.misc.testutils.EmbeddedJeeSupport;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.jboss.arquillian.junit.Arquillian;
+import org.junit.runner.RunWith;
+
+import javax.ejb.EJB;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
+import static org.junit.Assume.assumeTrue;
 
-
+@RunWith(Arquillian.class)
 public class TopUsersTest {
 
-    private static EmbeddedJeeSupport container = new EmbeddedJeeSupport();
+    @Deployment
+    public static JavaArchive createDeployment() {
 
-    @BeforeEach
-    public void initContainer()  {
-        container.initContainer();
-        initDB();
+        return ShrinkWrap.create(JavaArchive.class)
+                .addClasses(Comment.class, Post.class, User.class, UserEJB.class)
+                //besides the classes, also need to add resources
+                .addAsResource("META-INF/persistence.xml");
     }
 
-    @AfterEach
-    public void closeContainer() throws Exception {
-        container.closeContainer();
-    }
-
-
-    private void initDB(){
-
-        createUser("a", 0, 0);
-        createUser("b", 3, 2);
-        createUser("c", 2, 4);
-        createUser("d", 0, 1);
-        createUser("e", 1, 3);
-
-        //sorted: c,b,e,d,a
-    }
+    @EJB
+    private UserEJB ejb;
 
     private void createUser(String name, int nComments, int nPosts){
 
-        UserEJB ejb = container.getEJB(UserEJB.class);
         long id = ejb.createUser(name);
 
         for(int i=0; i<nComments; i++){
@@ -55,17 +48,18 @@ public class TopUsersTest {
     @Test
     public void testUsingCounter(){
 
-        UserEJB ejb = container.getEJB(UserEJB.class);
-        List<User> list = ejb.getTopUsersUsingCounter(3);
-        test(list);
-    }
+        createUser("a", 0, 0);
+        createUser("b", 3, 2);
+        createUser("c", 2, 4);
+        createUser("d", 0, 1);
+        createUser("e", 1, 3);
+        //sorted: c,b,e,d,a
 
-    @Test
-    public void testWithoutCounter(){
+        List<User> with = ejb.getTopUsersUsingCounter(3);
+        test(with);
 
-        UserEJB ejb = container.getEJB(UserEJB.class);
-        List<User> list = ejb.getTopUsersWithoutCounter(3);
-        test(list);
+        List<User> without = ejb.getTopUsersWithoutCounter(3);
+        test(without);
     }
 
     private void test(List<User> list){

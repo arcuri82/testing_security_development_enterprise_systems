@@ -1,25 +1,25 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
 
+import org.junit.Test;
+
+import javax.ejb.EJB;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class EJB_06_proxyTest extends TestBase{
 
+    @EJB
+    private EJB_06_proxy ejb;
 
     @Test
     public void testProxy(){
-
-        EJB_06_proxy ejb = getEJB(EJB_06_proxy.class);
 
         String proxiedClass = ejb.getClass().getName();
         String actualClass = ejb.getClassNameFromEJBInstance();
@@ -43,7 +43,7 @@ public class EJB_06_proxyTest extends TestBase{
         // in different EJB containers and JEE versions.
         // This assertion is just for explanation, not something you should write,
         // as it is quite brittle
-        assertTrue(proxiedClass.contains("_Generated_"));
+        assertTrue(proxiedClass.contains("$"));
 
 
         //proxy is still a valid EJB_06_proxy, ie a subclass

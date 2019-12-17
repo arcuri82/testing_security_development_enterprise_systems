@@ -1,17 +1,20 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import javax.ejb.EJB;
+
+import static org.junit.Assert.*;
+
 
 public class EJB_11_exceptionsTest extends TestBase{
 
+    @EJB
+    private EJB_11_exceptions ejb;
+
     @Test
     public void testAddAndThrowRuntimeException() throws Exception {
-        EJB_11_exceptions ejb = getEJB(EJB_11_exceptions.class);
 
         String name = "Bar";
 
@@ -29,8 +32,6 @@ public class EJB_11_exceptionsTest extends TestBase{
 
     @Test
     public void testAddAndThrowException() throws Exception {
-        EJB_11_exceptions ejb = getEJB(EJB_11_exceptions.class);
-
         String name = "Bar";
 
         assertFalse(queriesEJB.isInDB(name));
@@ -47,7 +48,6 @@ public class EJB_11_exceptionsTest extends TestBase{
 
     @Test
     public void testAddAndThrowRuntimeExceptionNoRollback() throws Exception {
-        EJB_11_exceptions ejb = getEJB(EJB_11_exceptions.class);
 
         String name = "Bar";
 
@@ -65,7 +65,6 @@ public class EJB_11_exceptionsTest extends TestBase{
 
     @Test
     public void testAddAndThrowExceptionWithRollback() throws Exception {
-        EJB_11_exceptions ejb = getEJB(EJB_11_exceptions.class);
 
         String name = "Bar";
 

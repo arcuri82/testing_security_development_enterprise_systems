@@ -1,21 +1,22 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
 
+import org.junit.Test;
+
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.*;
 
 
 public class EJB_08_NOT_SUPPORTEDTest extends TestBase{
 
+    @EJB
+    private EJB_08_NOT_SUPPORTED ejb;
 
     @Test
     public void testDirectCall(){
-        EJB_08_NOT_SUPPORTED ejb = getEJB(EJB_08_NOT_SUPPORTED.class);
 
         String name = "abc";
 
@@ -30,7 +31,6 @@ public class EJB_08_NOT_SUPPORTEDTest extends TestBase{
 
     @Test
     public void testIndirectCall(){
-        EJB_08_NOT_SUPPORTED ejb = getEJB(EJB_08_NOT_SUPPORTED.class);
 
         String name = "abc";
 
@@ -44,7 +44,6 @@ public class EJB_08_NOT_SUPPORTEDTest extends TestBase{
 
     @Test
     public void testIndirectEJB(){
-        EJB_08_NOT_SUPPORTED ejb = getEJB(EJB_08_NOT_SUPPORTED.class);
 
         String name = "abc";
 
@@ -61,7 +60,6 @@ public class EJB_08_NOT_SUPPORTEDTest extends TestBase{
 
     @Test
     public void testIndirectSupports(){
-        EJB_08_NOT_SUPPORTED ejb = getEJB(EJB_08_NOT_SUPPORTED.class);
 
         String name = "abc";
 

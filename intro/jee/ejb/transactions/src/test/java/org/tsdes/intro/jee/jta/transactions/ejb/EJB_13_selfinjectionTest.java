@@ -1,12 +1,14 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
 
+import org.junit.Test;
+
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 
 /**
@@ -14,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public class EJB_13_selfinjectionTest extends TestBase{
 
+    @EJB
+    private EJB_13_selfinjection ejb;
 
     @Test
     public void testDirectCall(){
-
-        EJB_13_selfinjection ejb = getEJB(EJB_13_selfinjection.class);
 
         try{
             //this does not return a boolean, but rather throw an exception
@@ -31,8 +33,6 @@ public class EJB_13_selfinjectionTest extends TestBase{
 
     @Test
     public void testIndirect(){
-
-        EJB_13_selfinjection ejb = getEJB(EJB_13_selfinjection.class);
 
         boolean result = ejb.createFailIndirect();
 

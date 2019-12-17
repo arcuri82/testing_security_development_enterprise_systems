@@ -1,17 +1,22 @@
 package org.tsdes.intro.jee.jta.transactions.ejb;
 
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.Test;
+
+import javax.ejb.EJB;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 public class EJB_05_REQUIRES_NEWTest extends TestBase{
 
+    @EJB
+    private EJB_05_REQUIRES_NEW ejb;
+
     @Test
     public void testCreateFooRequired() throws Exception {
-        EJB_05_REQUIRES_NEW ejb = getEJB(EJB_05_REQUIRES_NEW.class);
-
         String name = "foo";
 
         assertFalse(queriesEJB.isInDB(name));
@@ -23,7 +28,6 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
 
     @Test
     public void testCreateFooRequiresNew() throws Exception {
-        EJB_05_REQUIRES_NEW ejb = getEJB(EJB_05_REQUIRES_NEW.class);
 
         String name = "foo";
 
@@ -37,8 +41,6 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
 
     @Test
     public void testCreateTwoWithRollback() throws Exception {
-
-        EJB_05_REQUIRES_NEW ejb = getEJB(EJB_05_REQUIRES_NEW.class);
 
         String first = "first";
         String second = "second";
@@ -55,8 +57,6 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
     @Test
     public void testCreateTwoWithRollbackInEJBCall() throws Exception {
 
-        EJB_05_REQUIRES_NEW ejb = getEJB(EJB_05_REQUIRES_NEW.class);
-
         String first = "first";
         String second = "second";
 
@@ -72,8 +72,6 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
 
     @Test
     public void testCreateTwoWithRollbackInEJBCallOnSameTransaction() throws Exception {
-
-        EJB_05_REQUIRES_NEW ejb = getEJB(EJB_05_REQUIRES_NEW.class);
 
         String first = "first";
         String second = "second";

@@ -7,19 +7,17 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 
-    <!--
-        With glassfish-embedded-all in the dependencies and these settings, the default
-        configuration is running a Derby embedded database (similar to H2).
-        Furthermore, by default it uses EclipseLink as JPA provider, and not Hibernate
-    -->
 
 
-    <!-- Note the "JTA" here: it means we delegate the contaier (Embedded GlassFish) to handle the transaction-->
-    <persistence-unit name="DefaultUnit" transaction-type="JTA">
-        <jta-data-source>jdbc/__default</jta-data-source>
+    <persistence-unit name="DB" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="connection.driver_class" value="org.h2.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:h2:./target/db"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.show_sql" value="false"/>
         </properties>
     </persistence-unit>
 </persistence>

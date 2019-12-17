@@ -1,27 +1,31 @@
 package org.tsdes.intro.jee.ejb.callback;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.tsdes.misc.testutils.EmbeddedJeeSupport;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import static org.junit.jupiter.api.Assertions.*;
+import javax.ejb.EJB;
 
+import static org.junit.Assert.*;
 
+@RunWith(Arquillian.class)
 public class CallbackTest {
 
-    private static EmbeddedJeeSupport container = new EmbeddedJeeSupport();
+    @Deployment
+    public static JavaArchive createDeployment() {
 
-    @BeforeEach
-    public void initContainer()  {
-        container.initContainer();
+        return ShrinkWrap.create(JavaArchive.class)
+                .addClasses(A.class, B.class);
     }
 
-    @AfterEach
-    public void closeContainer() throws Exception {
-        container.closeContainer();
-    }
+    @EJB
+    private A a;
 
+    @EJB
+    private B b;
 
     @Test
     public void testPostConstruct(){
@@ -29,12 +33,9 @@ public class CallbackTest {
         A directInstance = new A();
         assertNull(directInstance.getValue());
 
-        A a = container.getEJB(A.class);
         String res = a.getValue();
-
         assertNotNull(res);
 
-        B b = container.getEJB(B.class);
         assertEquals(b.getValue(), res);
     }
 }

@@ -1,10 +1,11 @@
-package org.tsdes.intro.jee.jpa.lock;
+package org.tsdes.intro.jee.jpa.lock.forceincrement;
 
 
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.tsdes.intro.jee.jpa.lock.TransactionExecutor;
 
 import javax.persistence.*;
 
@@ -25,19 +26,23 @@ public class BookTest {
         factory.close();
     }
 
-    private boolean changeTitle(EntityManager em, Long shelf, Long book, LockModeType type){
+    private boolean changeTitle(EntityManager em, Long shelf, Long bookId, LockModeType type){
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        Book x = em.find(Book.class, book, type);
+        Book x = em.find(Book.class, bookId, type);
         x.setTitle("A new title");
 
         //before this transaction is committed, add book to the shelf
         TransactionExecutor executor = new TransactionExecutor(factory);
         executor.syncExe(t -> {
-            //note, here the book does not get modified
-            Book y = t.find(Book.class, book, type);
+            /*
+                note, here the book @Entity does not get modified, although
+                the table is (recall how 1-to-Many relationships are represented
+                with FKs)
+             */
+            Book y = t.find(Book.class, bookId, type);
             Shelf b = t.find(Shelf.class, shelf);
             b.getBooks().add(y);
         });
@@ -80,18 +85,16 @@ public class BookTest {
     public void testBookForceIncrement(){
 
         /*
-            OPTIMISTIC_FORCE_INCREMENT is quite rare.
+            OPTIMISTIC_FORCE_INCREMENT is less common.
             It is needed when in a transaction an entity is not modified, but still
             the fact that it has participated in the transaction should rollback
             all the other transactions currently using such entity.
             For example, adding X to a list in Y (eg unidirectional OneToMany relation)
-            does not change X.
+            does not change the entity X, although it does change the table mapped by
+            X (ie the FK pointing to Y).
 
-            Note: in this example, you might think a business case would be to prevent
-            two transactions each one adding the same book to a different shelf.
-            Yes, that would do, but unnecessary, as the second transaction to complete
-            would fail anyway due to constraint violation of OneToMany (instead it would
-            had work for ManyToMany)
+            A business case would be to prevent a transaction adding a book to a shelf while
+            another concurrent transaction added the same book to a different shelf.
          */
         boolean added = isAdded(LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         assertFalse(added);

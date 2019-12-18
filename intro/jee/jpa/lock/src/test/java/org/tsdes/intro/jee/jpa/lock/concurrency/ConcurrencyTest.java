@@ -1,6 +1,4 @@
-package org.tsdes.intro.jee.jpa.lock;
-
-
+package org.tsdes.intro.jee.jpa.lock.concurrency;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +30,7 @@ public class ConcurrencyTest {
 
     private Long createNewCounter(Class<? extends Counter> klass) throws Exception {
 
-        Counter counter = klass.newInstance();
+        Counter counter = klass.getDeclaredConstructor().newInstance();
 
         EntityManager em = factory.createEntityManager();
         EntityTransaction tx = em.getTransaction();

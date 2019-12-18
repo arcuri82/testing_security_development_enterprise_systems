@@ -1,5 +1,4 @@
-package org.tsdes.intro.jee.jpa.lock;
-
+package org.tsdes.intro.jee.jpa.lock.forceincrement;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,26 +6,17 @@ import javax.persistence.Id;
 import javax.persistence.Version;
 
 @Entity
-public class CounterWithVersion implements Counter {
+public class Book {
+
+    @Id @GeneratedValue
+    private Long id;
 
     @Version
     private Integer version;
 
-    @Id
-    @GeneratedValue
-    private Long id;
+    private String title;
 
-    private int counter;
-
-
-    public CounterWithVersion(){}
-
-    public int getCounter() {
-        return counter;
-    }
-
-    public void setCounter(int counter) {
-        this.counter = counter;
+    public Book() {
     }
 
     public Long getId() {
@@ -36,11 +26,20 @@ public class CounterWithVersion implements Counter {
     public void setId(Long id) {
         this.id = id;
     }
+
     public Integer getVersion() {
         return version;
     }
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

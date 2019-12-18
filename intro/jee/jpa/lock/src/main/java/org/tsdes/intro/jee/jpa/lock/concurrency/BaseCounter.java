@@ -1,4 +1,4 @@
-package org.tsdes.intro.jee.jpa.lock;
+package org.tsdes.intro.jee.jpa.lock.concurrency;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

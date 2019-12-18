@@ -1,10 +1,11 @@
-package org.tsdes.intro.jee.jpa.lock;
+package org.tsdes.intro.jee.jpa.lock.base;
 
 
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.tsdes.intro.jee.jpa.lock.TransactionExecutor;
 
 import javax.persistence.*;
 

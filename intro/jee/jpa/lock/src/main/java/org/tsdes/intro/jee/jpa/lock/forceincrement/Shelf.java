@@ -1,4 +1,4 @@
-package org.tsdes.intro.jee.jpa.lock;
+package org.tsdes.intro.jee.jpa.lock.forceincrement;
 
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 # Specify which OS image to run.
 # In our case, we are using an OS image with WildFly started
 # as a daemon/service
-FROM jboss/wildfly:14.0.1.Final
+FROM jboss/wildfly:18.0.1.Final
 
 # Copy the generated WAR from "target" folder into the Docker image,
 # in the folder where Widlfly is expecting to find installed WAR files

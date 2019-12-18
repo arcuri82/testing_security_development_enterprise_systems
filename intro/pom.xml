@@ -22,6 +22,7 @@
     <properties>
         <jbossTarget>${basedir}/target/downloaded_Wildfly</jbossTarget>
         <jbossHome>${jbossTarget}/wildfly</jbossHome>
+        <!--  When updating this version, must also update Dockerfile using jboss/wildfly images-->
         <version.wildfly>18.0.1.Final</version.wildfly>
     </properties>
 

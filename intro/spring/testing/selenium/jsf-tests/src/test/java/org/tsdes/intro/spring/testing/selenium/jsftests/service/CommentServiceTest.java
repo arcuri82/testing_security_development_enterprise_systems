@@ -63,20 +63,18 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void testReturnDatesInOrder(){
+    public void testReturnDatesInOrder() throws Exception {
 
         commentService.createNewComment("a");
+        Thread.sleep(1);
         commentService.createNewComment("b");
+        Thread.sleep(1);
         commentService.createNewComment("c");
 
         List<Comment> comments = commentService.getMostRecentComments(10);
         assertEquals(3 , comments.size());
 
-        /*
-            not: these check might fail if one day computers are so fast to do 2
-            createNewComment in the same millisecond. However, in such cases
-            could just add some artificial Thread.sleep
-         */
+
         assertTrue(comments.get(0).getDate().compareTo(comments.get(1).getDate()) > 0);
         assertTrue(comments.get(1).getDate().compareTo(comments.get(2).getDate()) > 0);
 

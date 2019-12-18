@@ -28,6 +28,9 @@ class DiscoveryIntegrationDockerIT {
         @JvmField
         val env = KDockerComposeContainer(File("../docker-compose.yml"))
                 .withLocalCompose(true)
+                 //if needed for debugging
+                .withLogConsumer("eureka") {print("[EUREKA] " + it.utf8String)}
+
 
 
         @BeforeAll

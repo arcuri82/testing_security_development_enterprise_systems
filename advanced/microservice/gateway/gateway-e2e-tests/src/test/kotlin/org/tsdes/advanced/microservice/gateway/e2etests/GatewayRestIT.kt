@@ -8,6 +8,7 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.testcontainers.junit.jupiter.Testcontainers
 import java.util.concurrent.TimeUnit
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by arcuri82 on 04-Oct-19.
  */
+@Disabled
 @Testcontainers
 class GatewayRestIT : GatewayIntegrationDockerTestBase() {
 

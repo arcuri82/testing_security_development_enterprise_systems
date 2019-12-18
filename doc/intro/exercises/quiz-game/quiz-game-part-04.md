@@ -42,10 +42,6 @@ Inject a `EntityManager` into the EJB, and then write the following methods:
    Return the subcategory specified by id.
 
 
-Note: before you can write tests for this EJB, you need to learn
-to use Arquillian.
-We will see it in the next lesson.
-
 
 Solutions to this exercise can be found in the 
 `intro/exercise-solutions/quiz-game/part-04` module.     

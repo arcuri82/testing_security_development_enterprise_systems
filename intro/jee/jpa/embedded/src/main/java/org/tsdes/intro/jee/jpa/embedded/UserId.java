@@ -3,7 +3,24 @@ package org.tsdes.intro.jee.jpa.embedded;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Objects;
 
+/**
+ * Embeddable objects used as IDs must implement Serializable, otherwise you will
+ * get a runtime exception. For a reason you can read:
+ * https://stackoverflow.com/questions/9271835/why-composite-id-class-must-implement-serializable
+ *
+ * "Serializable" means that the object can be converted to a bit-string and saved on disk.
+ * By default, Java objects are not serializable, unless explicitly implementing the Serializable
+ * interface.
+ * All object fields must be Serializable as well (note that String does implement Serializable).
+ * If some fields should be skipped, can use "transient" keyword.
+ *
+ * Note: servers might need to store objects locally (eg on hard-drive).
+ * However, sending serialized objects over the network is a security risk (there has been a lot
+ * of vulnerabilities about it).
+ * In such case, an object should rather be unmarshalled into formats like JSON and XML.
+ */
 @Embeddable
 public class UserId implements Serializable {
 
@@ -25,19 +42,14 @@ public class UserId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         UserId userId = (UserId) o;
-
-        if (name != null ? !name.equals(userId.name) : userId.name != null) return false;
-        return surname != null ? surname.equals(userId.surname) : userId.surname == null;
-
+        return Objects.equals(name, userId.name) &&
+                Objects.equals(surname, userId.surname);
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        return result;
+        return Objects.hash(name, surname);
     }
 
     public String getName() {

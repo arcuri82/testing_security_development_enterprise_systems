@@ -84,6 +84,12 @@ public class QuizEjb {
             This process is repeated N times.
             Note that this can end up in 1+N SQL queries. However, it does not require
             any sorting on the table, which would have a O(R*log(R)) complexity.
+
+            However, there is the possibility that a repeated SELECT on same data does not return
+            the same ordering (there is no guarantee), unless we explicitly set it with ORDER BY.
+            But we could handle the rare case of conflicts (eg 2 different indices resulting by chance in the
+            same data because ordering was different) here in the code (which likely would be cheaper
+            than forcing a sorting).
          */
 
         TypedQuery<Long> sizeQuery= em.createQuery(

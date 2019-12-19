@@ -410,7 +410,7 @@
                         <forkCount>1</forkCount>
                         <redirectTestOutputToFile>true</redirectTestOutputToFile>
                         <rerunFailingTestsCount>3</rerunFailingTestsCount>
-                        <argLine>-Xms1024m -Xmx2048m</argLine>
+                        <argLine>-Xms512m -Xmx2048m</argLine>
                     </configuration>
                 </plugin>
 
@@ -423,7 +423,7 @@
                         <forkCount>1</forkCount>
                         <redirectTestOutputToFile>true</redirectTestOutputToFile>
                         <rerunFailingTestsCount>3</rerunFailingTestsCount>
-                        <argLine>-Xms1024m -Xmx4096m</argLine>
+                        <argLine>-Xms512m -Xmx4096m</argLine>
                     </configuration>
                     <executions>
                         <execution>
@@ -479,6 +479,7 @@
                     <executions>
                         <execution>
                             <id>default-prepare-agent</id>
+                            <phase>initialize</phase>
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
@@ -499,6 +500,7 @@
                         </execution>
                         <execution>
                             <id>default-report-integration</id>
+                            <phase>verify</phase>
                             <goals>
                                 <goal>report-integration</goal>
                             </goals>

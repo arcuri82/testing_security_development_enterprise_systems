@@ -59,6 +59,11 @@ When you execute `mvn verify` from command line, not only all the tests
 should be run (including the Selenium ones), but you should also get a test coverage
 report at `target/site/jacoco-it/index.html`. 
 
+Note: if for any reason you are overriding the `<argLine>` settings of the 
+`surefire/failsafe` plugins, then you MUST add the JaCoCo plugin in the `pom.xml` 
+file before them, and you MUST add `${argLine}` inside your overridden `<argLine>`,
+for example `<argLine> ${argLine} your_changes </argLine>`.
+
 Solutions to this exercise can be found in the 
 `intro/exercise-solutions/quiz-game/part-09` module. 
 

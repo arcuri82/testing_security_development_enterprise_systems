@@ -84,18 +84,31 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
 
+            <!--
+                You can notice here that I am overriding the <configuration><argLine>
+                for for Surefire and Failsafe plugins.
+                In general, you would not need it. However, if for any reason you
+                are customizing <argLine> (eg with -Xms and -Xmx), then you MUST add ${argLine} in it, otherwise JaCoCo will not work.
+
+                Notice that here we inherit the configurations from the root pom.xml, in which
+                <argLine> is overridden without ${argLine}. So here I must re-overwrite it.
+                You might ask: why not adding ${argLine} directly in the root pom.xml?
+                The reason is that the argLine variable is set up by the JaCoCo plugin, and so 
+				reading it with ${argLine} would fail in all the modules not using JaCoCo.
+            -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>${argLine} -Xms1024m -Xmx4096m</argLine>
+                    <argLine>${argLine} -Xms512m -Xmx4096m</argLine>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
-                    <argLine>${argLine} -Xms1024m -Xmx4096m</argLine>
+                    <argLine>${argLine} -Xms512m -Xmx4096m</argLine>
                 </configuration>
             </plugin>
 

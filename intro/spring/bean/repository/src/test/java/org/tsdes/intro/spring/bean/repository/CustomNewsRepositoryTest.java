@@ -1,6 +1,5 @@
 package org.tsdes.intro.spring.bean.repository;
 
-import com.google.common.collect.Iterators;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,18 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Created by arcuri82 on 25-Feb-19.
+ * Created by arcuri82 on 20-Dec-19.
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class NewsRepositoryTest {
+public class CustomNewsRepositoryTest {
 
     @Autowired
-    private NewsRepository crud;
+    private CustomNewsRepository crud;
 
     @BeforeEach
     public void cleanDatabase(){
@@ -30,7 +28,6 @@ public class NewsRepositoryTest {
     public void testInitialization(){
         assertNotNull(crud);
     }
-
 
     private Long createNews(String author, String text, String country){
 
@@ -44,6 +41,25 @@ public class NewsRepositoryTest {
         return news.getId();
     }
 
+    @Test
+    public void testChangeText(){
+
+        String foo = "foo";
+        String bar = "bar";
+
+        long id = createNews("a", foo, "Norway");
+
+        assertEquals(foo, crud.findById(id).get().getText());
+
+        crud.changeText(id, bar);
+
+        assertEquals(bar, crud.findById(id).get().getText());
+    }
+
+
+
+
+    //------ same tests as in NewsRepositoryTest -----------------
 
     @Test
     public void testCreate() {
@@ -162,5 +178,6 @@ public class NewsRepositoryTest {
         assertEquals(0, crud.customQuery("Sweden", "c").size());
         assertEquals(1, crud.customQuery("Iceland", "c").size());
     }
+
 
 }

@@ -1,7 +1,10 @@
 package org.tsdes.intro.spring.bean.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by arcuri82 on 25-Feb-19.
@@ -27,14 +30,25 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NewsRepository extends CrudRepository<NewsEntity, Long> {
 
-    Iterable<NewsEntity> findAllByCountry(String country);
+    List<NewsEntity> findAllByCountry(String country);
 
 
-    Iterable<NewsEntity> findAllByAuthorId(String authorId);
+    List<NewsEntity> findAllByAuthorId(String authorId);
 
     /*
         You can have more sophisticated queries by using connecting words like "And".
         This is very convenient for simple queries, but not really for complex ones.
+
+        See Spring documentation, eg:
+        https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference
      */
-    Iterable<NewsEntity> findAllByCountryAndAuthorId(String country, String authorId);
+    List<NewsEntity> findAllByCountryAndAuthorId(String country, String authorId);
+
+    /*
+     * Instead of relying on the method name, you can also create custom
+     * queries with the @Query annotation
+     */
+    @Query("select n from NewsEntity n where n.country=?1 and n.authorId=?2")
+    List<NewsEntity> customQuery(String country, String authorId);
+
 }

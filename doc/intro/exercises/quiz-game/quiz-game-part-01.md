@@ -17,6 +17,9 @@ The Maven project should have the following dependencies:
 Note: the dependencies above are specified with the format `groupId:artifactId`. 
 When adding a dependency, not only you need to also specify a `version`,
 but also the appropriate `scope`.
+To avoid possible conflicts in the dependency versions,
+use the same ones used in this repository.
+  
 
 Configure the `maven-compiler-plugin` to use a specific version
 of Java (i.e., Java 11).

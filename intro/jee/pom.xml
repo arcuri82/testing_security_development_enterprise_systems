@@ -21,6 +21,22 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--
+                All modules in "jee" will inherit from the parent poms ("intro" and root)..
+                However, we also want to import all configurations from the module
+                "jee-provided-dependencies" (which is just a pom file, no code).
+                But a module cannot have 2 parents.
+                The solution is to have this second "parent" added as dependency with
+                scope "import". The result is equivalent.
+
+                Note, we do this for 2 reasons:
+                1) Show a concrete example of BOM (ie, Bill of Materials), as such approach is going
+                   to be used when importing "starter" dependencies from SpringBoot
+                2) We are going to use Hibernate dependencies in 2 scopes: "compile" and "provided".
+                   By default we keep them as "compile" (ie, from pom root hierarchy). When we
+                   need them in "provided" (only here inside "jee" module), we import this BOM
+            -->
+
             <dependency>
                 <groupId>org.tsdes.intro</groupId>
                 <artifactId>jee-provided-dependencies</artifactId>

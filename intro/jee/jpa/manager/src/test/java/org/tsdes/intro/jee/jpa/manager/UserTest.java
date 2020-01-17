@@ -184,7 +184,7 @@ public class UserTest {
 
         //now we "merge" the changes to the detached User instance into the DB
         EntityTransaction tx = em.getTransaction();
-        em.contains(user);
+        assertFalse(em.contains(user));
         tx.begin();
         em.merge(user);
         tx.commit();
@@ -318,6 +318,7 @@ public class UserTest {
             tx.commit();
         } catch (Exception e){
             tx.rollback();
+            //throw Error, and so fail test if this is reached
             fail();
         }
 
@@ -343,13 +344,12 @@ public class UserTest {
         //now try to remove Address from DB
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        try {
+
+        assertThrows(Exception.class, ()->{
             em.remove(address);
             tx.commit();
-            fail();
-        } catch (Exception e){
-            tx.rollback();
-        }
+        });
+        tx.rollback();
 
         //the remove should had fail, because User is owner and still in DB
 

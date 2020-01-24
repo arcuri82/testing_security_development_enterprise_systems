@@ -1,6 +1,7 @@
 # Quiz Game - Part 01
 
 Create a new Maven project for a Quiz Game.
+It has to be in a different folder outside this repository. 
 At this point,
 it should contain only one module (i.e., only one `pom.xml` file).
 Lesson after lesson, we will add new features to it.

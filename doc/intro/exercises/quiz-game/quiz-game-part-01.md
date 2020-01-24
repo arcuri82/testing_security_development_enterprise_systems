@@ -46,7 +46,7 @@ Solutions to this exercise can be found in the
 
 Note: the solution module `quiz-game-part01` is **NOT** self-contained, as it does
 have a `<parent>` tag, and a reference to `jee-provided-dependencies`.
-When you create your own Maven project, you should not use any `<parent>` tag, nor
+When you create your own Maven project, you **MUST NOT** use any `<parent>` tag, nor
 use any SNAPSHOT dependency from this repository.
 You can of course use dependencies from Maven Central. 
       

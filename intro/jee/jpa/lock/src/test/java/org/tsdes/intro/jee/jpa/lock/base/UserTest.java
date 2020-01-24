@@ -1,7 +1,6 @@
 package org.tsdes.intro.jee.jpa.lock.base;
 
 
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ public class UserTest {
     }
 
 
-    private Long createUser(String name){
+    private Long createUser(String name) {
         EntityManager em = factory.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -41,14 +40,14 @@ public class UserTest {
         return user.getId();
     }
 
-    private String getName(Long id){
+    private String getName(Long id) {
         EntityManager em = factory.createEntityManager();
         User user = em.find(User.class, id);
         return user.getName();
     }
 
     @Test
-    public void testVersionIncrement(){
+    public void testVersionIncrement() {
 
         String name = "name";
 
@@ -82,9 +81,8 @@ public class UserTest {
     }
 
 
-
     @Test
-    public void testOptimistic(){
+    public void testOptimistic() {
 
         String name = "optimistic";
 
@@ -102,7 +100,7 @@ public class UserTest {
         TypedQuery<Long> query = em.createQuery("select count(u) from User u where u.name = ?1", Long.class);
         query.setParameter(1, name);
         long res = query.getSingleResult();
-        assertEquals(1 , res);
+        assertEquals(1, res);
 
         //do a sync update on a new thread
         TransactionExecutor executor = new TransactionExecutor(factory);
@@ -113,24 +111,23 @@ public class UserTest {
 
         //name has been changed now
         res = query.getSingleResult();
-        assertEquals(0 , res);
+        assertEquals(0, res);
 
-        try {
-            tx.commit();
-            fail();
-        } catch (Exception e){
-            /*
+        /*
                 This is expected: u1 is in a stale state inside the cache e1.
                 When we try to commit, JPA detects this fact due to the optimistic lock,
                 and so throws an exception
-             */
-        }
+        */
+        assertThrows(RollbackException.class, () -> {
+            tx.commit();
+        });
+
         em.close();
     }
 
 
     @Test
-    public void testPessimisticRead(){
+    public void testPessimisticRead() {
 
         String name = "pessimisticRead";
 
@@ -155,7 +152,7 @@ public class UserTest {
     }
 
     @Test
-    public void testPessimisticReadWithWrite() throws Exception{
+    public void testPessimisticReadWithWrite() throws Exception {
 
         String name = "pessimisticRead";
         String other = "foo";
@@ -197,7 +194,7 @@ public class UserTest {
 
 
     @Test
-    public void testPessimisticWriteWithPessimisticRead() throws Exception{
+    public void testPessimisticWriteWithPessimisticRead() throws Exception {
 
         String name = "pessimisticWrite";
 
@@ -232,7 +229,7 @@ public class UserTest {
     }
 
     @Test
-    public void testPessimisticWriteWithRead() throws Exception{
+    public void testPessimisticWriteWithRead() throws Exception {
 
         String name = "pessimisticWrite";
 
@@ -271,7 +268,7 @@ public class UserTest {
 
 
     @Test
-    public void testPessimisticReadWithUpdate() throws Exception{
+    public void testPessimisticReadWithUpdate() throws Exception {
 
         String name = "pessimisticRead";
         String other = "foo";
@@ -297,7 +294,7 @@ public class UserTest {
 
 
     @Test
-    public void testPessimisticReadWithPessimisticRead() throws Exception{
+    public void testPessimisticReadWithPessimisticRead() throws Exception {
 
         String name = "pessimisticRead";
 

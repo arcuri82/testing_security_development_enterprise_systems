@@ -18,8 +18,8 @@ public class InjectorImp04 implements Injector {
         T t;
 
         try {
-            t = klass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            t = klass.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
             throw new IllegalArgumentException("Failed to instantiate object for "+klass.getName()+" : "+e.getMessage());
         }
 
@@ -34,7 +34,7 @@ public class InjectorImp04 implements Injector {
 
             try {
                 Class<?> typeToInject = field.getType();
-                Object objectToInject = typeToInject.newInstance();
+                Object objectToInject = typeToInject.getDeclaredConstructor().newInstance();
                 field.setAccessible(true); //needed, otherwise fails on private fields
                 field.set(t, objectToInject);
             } catch (Exception e){

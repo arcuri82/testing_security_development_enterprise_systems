@@ -14,8 +14,8 @@ public class InjectorImp03 implements Injector {
         T t;
 
         try {
-            t = klass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            t = klass.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
             throw new IllegalArgumentException("Failed to instantiate object for "+klass.getName()+" : "+e.getMessage());
         }
 

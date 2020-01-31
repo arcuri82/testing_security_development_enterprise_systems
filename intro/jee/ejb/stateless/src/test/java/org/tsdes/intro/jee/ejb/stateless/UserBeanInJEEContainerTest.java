@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @RunWith(Arquillian.class)
-public class UserBeanInEmbeddedContainerTest {
+public class UserBeanInJEEContainerTest {
 
     @Deployment
     public static JavaArchive createDeployment() {

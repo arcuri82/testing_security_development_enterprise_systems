@@ -60,8 +60,6 @@ public class ConcurrencyTest {
 
             counter.increment();
 
-            em.merge(counter); //merge back into database
-
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

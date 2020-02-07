@@ -64,7 +64,6 @@ class MyCustomMethodsImpl implements MyCustomMethods{
         }
 
         news.setText(text);
-        em.merge(news);
 
         return true;
     }

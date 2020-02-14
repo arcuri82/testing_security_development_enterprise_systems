@@ -12,9 +12,6 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class EJB_09_NEVER {
 
-    @PersistenceContext
-    private EntityManager em;
-
     @Resource
     private SessionContext ctx;
 

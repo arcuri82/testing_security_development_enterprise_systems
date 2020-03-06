@@ -37,10 +37,12 @@ You can skip the old tests working directly on the entities by manual transactio
 
 
 Move over all the existing controllers and Web files. 
-Those will need some minor changes in the path links, 
+Those might need some minor changes in the path links, 
 as here in SpringBoot we do not use
-a default prefix in the URLs, and the default redirection for the root
-"/" is not setup yet.   
+a default path prefix in the URLs.
+Also add a `RedirectForwardHandler` controller to do an automated forward from 
+the root path `/` to the default home page `/index.xhtml`. 
+
  
 Create an `Application` class in the `src/main/java` folder which will be your 
 entry point for the quiz game.
@@ -50,8 +52,6 @@ The main class should represent the "production" configuration, but we have
 not seen yet the connections with real, non-Docker databases.
 We will go back to this point when doing deployments on cloud providers.
 
-Add a `RedirectForwardHandler` controller to do an automated forward from 
-the root path `/` to the default home page `/index.xhtml`. 
 
 
 Under the `src/test/java` folder, create a class named `LocalApplicationRunner`

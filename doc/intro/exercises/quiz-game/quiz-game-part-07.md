@@ -7,12 +7,8 @@ in the first lesson.
 
 Make sure you have installed/configured Docker 
 on your machine.
-
-In IntelliJ, if not already present, 
-install the *Docker integration* plugin, which will help
-you running Docker directly from the IDE.
-If you are using a different IDE than IntelliJ, install any 
-similar plugin if available.
+For example, you should be able to run `docker --version`
+on a terminal.
 
 
 In the `pom.xml` file, make sure that the `<packaging>` is set to `war`

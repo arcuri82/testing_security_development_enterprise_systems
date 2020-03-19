@@ -27,9 +27,8 @@ public class FooImp implements Foo{
     }
 
     /*
-        To look at the bytecode, in IntelliJ you need to install the
-        "ASM Bytecode Outline" plugin. Then right click and select
-        "Show Bytecode outline":
+        To look at the bytecode, in IntelliJ you need to select a Java file in the Project frame,
+        and then select "View -> Show Bytecode" from the tool bar
 
 public class org/tsdes/testing/instrumentation/FooImp implements org/tsdes/testing/instrumentation/Foo  {
 

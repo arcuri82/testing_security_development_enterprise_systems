@@ -54,6 +54,8 @@ public class GitCrawler {
         String search =  "search?l=&o=desc&p="+page+"&q=language%3AJava&ref=advsearch&s=stars&type=Repositories&utf8=✓";
 
         driver.get(github + search);
+
+        sleep(6000);
     }
 
     private static void crawl(WebDriver driver) {
@@ -101,8 +103,17 @@ public class GitCrawler {
         next.click();
         waitForPageToLoad(driver);
 
+        sleep(6_000);
+    }
+
+    private static void sleep(int ms){
+        /*
+            yep, the beauty of Java's checked exceptions...
+            another thread could "interrupt" this thread, and Java forces us
+            to handle this case in a try/check
+         */
         try {
-            Thread.sleep(5000);
+            Thread.sleep(ms);
         } catch (InterruptedException e) {
         }
     }
@@ -110,10 +121,14 @@ public class GitCrawler {
     private static void scanCurrentPage(WebDriver driver, int page) {
         String current = driver.getCurrentUrl();
 
-        //Note: there were layout changes in the past on Github page
+        /*
+            Note: there were layout changes in the past on Github page.
+            Practically every year...
+         */
         //String xpath = "//h3[@class='repo-list-name']/a";
         //String xpath = "//div[@class='container']//ul//h3//a";
-        String xpath = "//ul[contains(@class,'repo-list')]//h3//a";
+        //String xpath = "//ul[contains(@class,'repo-list')]//h3//a";
+        String xpath = "//ul[contains(@class,'repo-list')]//div[contains(@class,'f4 text-normal')]//a";
 
         List<WebElement> projects = driver.findElements(By.xpath(xpath));
         List<String> names = projects.stream().map(p -> p.getText()).collect(Collectors.toList());
@@ -123,16 +138,6 @@ public class GitCrawler {
         while (!names.isEmpty()) {
 
             String name = names.remove(0);
-
-            try {
-                /*
-                    do not overflow GitHub of requests. 10 per minutes should be more than enough.
-                    Recall: "If you would like to crawl GitHub contact us at support@github.com."
-                    from  https://github.com/robots.txt
-                 */
-                Thread.sleep(6000);
-            } catch (InterruptedException e) {
-            }
 
             By byName = By.xpath(xpath + "[text()='" + name + "']");
             WebElement a = getElement(driver, byName, page);
@@ -161,8 +166,17 @@ public class GitCrawler {
                 }
             }
 
+            /*
+                    do not overflow GitHub of requests. 10 per minutes should be more than enough.
+                    Recall: "If you would like to crawl GitHub contact us at support@github.com."
+                    from  https://github.com/robots.txt
+            */
+            sleep(6000);
+
             driver.get(current);
             waitForPageToLoad(driver);
+
+            sleep(6000);
         }
     }
 

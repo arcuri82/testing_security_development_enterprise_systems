@@ -33,7 +33,7 @@ public class HttpTest {
         String response = HttpUtils.executeHttpCommand("localhost", port, httpGet);
 
         assertTrue(response.contains("200"));
-        //WildFly creates a new session, and tell us its id to use as cookie in the next HTTP requests
+        //SpringBoot creates a new session, and tell us its id to use as cookie in the next HTTP requests
         assertTrue(response.contains("Set-Cookie"));
 
         System.out.println(response);

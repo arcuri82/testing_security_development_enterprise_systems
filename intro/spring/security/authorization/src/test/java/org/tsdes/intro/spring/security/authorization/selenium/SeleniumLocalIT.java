@@ -82,15 +82,15 @@ public class SeleniumLocalIT {
 
     @Test
     public void testCreateUser() {
-        SignupPO signin = home.doSignup();
-        assertTrue(signin.isOnPage());
+        SignupPO signup = home.doSignup();
+        assertTrue(signup.isOnPage());
         assertFalse(home.isOnPage());
 
         String userId = getUniqueId();
         String password = "foo";
 
-        home = signin.createUser(userId, password);
-        assertFalse(signin.isOnPage());
+        home = signup.createUser(userId, password);
+        assertFalse(signup.isOnPage());
         assertTrue(home.isOnPage());
 
         assertTrue(home.getDriver().getPageSource().contains(userId));
@@ -105,8 +105,8 @@ public class SeleniumLocalIT {
         ProtectedPO protectedPO = home.goToProtectedPage();
         assertNull(protectedPO);
 
-        SignupPO signin = home.doSignup();
-        home = signin.createUser(getUniqueId(), "foo");
+        SignupPO signup = home.doSignup();
+        home = signup.createUser(getUniqueId(), "foo");
 
         assertTrue(home.isLoggedIn());
 
@@ -119,14 +119,14 @@ public class SeleniumLocalIT {
 
 
     @Test
-    public void testSignInLogOutLogIn(){
+    public void testSignUpLogOutLogIn(){
 
         assertTrue(home.isLoggedOut());
 
-        SignupPO signin = home.doSignup();
+        SignupPO signup = home.doSignup();
         String userId = getUniqueId();
         String password = "foo";
-        home = signin.createUser(userId, password);
+        home = signup.createUser(userId, password);
 
         assertTrue(home.isLoggedIn());
 

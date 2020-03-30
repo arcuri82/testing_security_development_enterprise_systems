@@ -160,6 +160,7 @@
                         <processTypes>
                             <web>java -Dserver.port=$PORT -jar target/quizgame-exec.jar</web>
                         </processTypes>
+                        <jdkVersion>11</jdkVersion>
                     </configuration>
                 </plugin>
             </plugins>

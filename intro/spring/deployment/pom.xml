@@ -94,6 +94,7 @@
                     <processTypes>
                         <web>java -Dserver.port=$PORT -jar target/deployment-example-exec.jar </web>
                     </processTypes>
+                    <jdkVersion>11</jdkVersion>
                 </configuration>
             </plugin>
 

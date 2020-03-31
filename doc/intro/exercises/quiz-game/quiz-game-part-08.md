@@ -9,6 +9,8 @@ In the `pom.xml` file, you need the following BOM in your `<dependencyManagement
 
 `org.springframework.boot:spring-boot-starter-parent`
 
+Note: when you will look at the solution, this will be missing, as imported
+automatically from `<parent>`.
 
 Among your dependencies, you should have:
 

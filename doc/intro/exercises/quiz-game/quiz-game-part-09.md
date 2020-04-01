@@ -69,7 +69,10 @@ Solutions to this exercise can be found in the
 
 Note: to avoid copy&paste of the same code, the solution for `part-09` does
 use the code of `part-08` and `test-utils` as libraries.
-Furthermore, when you run `mvn verify` on this module, you will not get
+If you use files from `test-utils` (which you can just copy&paste), then make sure to have them
+under `src/test/java` instead of `src/main/java` (as `test-utils` is imported with `test` scope). 
+
+Also notice that, when you run `mvn verify` on this module, you will not get
 coverage results, as all the classes are in `part-08`, which is treated as an
 external library.
 

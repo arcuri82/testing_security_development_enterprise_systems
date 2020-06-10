@@ -2,6 +2,7 @@ package org.tsdes.advanced.examplenews.constraint
 
 import com.google.common.io.Resources
 import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
 
 /**
  * Created by arcuri82 on 16-Jun-17.
@@ -31,7 +32,7 @@ class CountryList {
                 "country" is defined as "val", which is a constant. This assignment here works
                 only because we are inside a "init" method
              */
-            countries = Resources.readLines(url, Charset.forName("UTF-8"))
+            countries = Resources.readLines(url,  StandardCharsets.UTF_8)
         }
 
         fun isValidCountry(country: String): Boolean {

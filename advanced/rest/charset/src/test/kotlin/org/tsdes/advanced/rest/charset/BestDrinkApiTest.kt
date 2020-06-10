@@ -9,6 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.context.junit4.SpringRunner
 import org.tsdes.misc.testutils.HttpUtils
 import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
 
 /**
  * Created by arcuri82 on 18-Jul-17.
@@ -221,7 +222,7 @@ class BestDrinkApiTest {
         assertEquals(216, first)
         assertEquals(108, second)
 
-        val inUtf8 = String(asIso, Charset.forName("UTF-8"))
+        val inUtf8 = String(asIso,  StandardCharsets.UTF_8)
         assertNotEquals(value, inUtf8)
         assertEquals("�l", inUtf8)
     }
@@ -280,7 +281,7 @@ class BestDrinkApiTest {
         assertEquals(0b01101100, third)
         assertEquals(108, third)
 
-        val inIso = String(asUtf, Charset.forName("ISO-8859-1"))
+        val inIso = String(asUtf,  StandardCharsets.ISO_8859_1)
         assertNotEquals(value, inIso)
         assertEquals(3, inIso.length)
 

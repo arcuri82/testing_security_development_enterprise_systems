@@ -2,10 +2,16 @@
 # Open-Source projects.
 # It can be integrated with GitHub, by making a build each time new code is pushed.
 # This is also done with PRs (Pull Requests), which can be rejected if failing the builds.
+#
+# Note: besides Travis, another option is CircleCI.
 
 # Specify we are working with a Java project.
 # Travis can be used also for many other languages.
 language: java
+
+# Details of the machine types on Travis to run the CI on
+dist: xenial
+os: linux
 
 # The JDK we need for compiling
 jdk:
@@ -38,10 +44,35 @@ notifications:
   email: true
 
 
-# The actual command we do for compiling.
+# The actual commands we do for compiling.
+#
 # Note: Travis has a quite limited handling of build log files, so need
 # to minimize them, ie do not be too verbose
-script: mvn clean verify --fae
+#
+# Note: the reasons for building "intro" and "advanced" separately are:
+# 1) Travis has a restrictive time-limit for each command. Trying to build all
+#    together in one go can fail due to a timeout
+# 2) the 2 courses are taught in different semesters, so fixing breaking changes
+#    have different priorities based on the time of the year
+
+jobs:
+  include:
+    - stage: Root
+      # option -N is used to skip the sub-modules.
+      # We still need to install the root pom.xml, otherwise the sub-modules
+      # will fail when we try to build them (as they have a child-parent relation
+      # to it)
+      script: mvn clean install -N
+    - stage: Intro
+      script:
+        - cd intro
+        # --fae is "fail at the end", ie do not stop build at the first error
+        - mvn clean verify --fae
+    - stage: Advanced
+      script:
+        - cd advanced
+        - mvn clean verify --fae
+
 
 # Note: in Continuous Delivery, we could do a "mvn deploy" here to automatically
 # deploy the artifacts if build is successful.

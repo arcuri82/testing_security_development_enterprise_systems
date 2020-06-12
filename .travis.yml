@@ -55,6 +55,12 @@ notifications:
 # 2) the 2 courses are taught in different semesters, so fixing breaking changes
 #    have different priorities based on the time of the year
 
+# By default, Travis does a "mvn install" during its onw 'install' phase.
+# This is annoying, and unnecessarily time consuming when using multiple run-scripts.
+# So, we override this behavior.
+# We just force the downloading of dependencies here to reduce the clutter in the logs.
+install: mvn dependency:resolve
+
 jobs:
   include:
     - stage: Root

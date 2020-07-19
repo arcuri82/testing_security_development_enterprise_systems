@@ -69,15 +69,18 @@ jobs:
       # will fail when we try to build them (as they have a child-parent relation
       # to it)
       script: mvn clean install -N
+    - stage: Misc
+        - cd misc
+        - mvn clean install --fae
     - stage: Intro
       script:
         - cd intro
         # --fae is "fail at the end", ie do not stop build at the first error
-        - mvn clean verify --fae
+        - mvn clean install --fae
     - stage: Advanced
       script:
         - cd advanced
-        - mvn clean verify --fae
+        - mvn clean install --fae
 
 
 # Note: in Continuous Delivery, we could do a "mvn deploy" here to automatically

@@ -59,7 +59,7 @@ notifications:
 # This is annoying, and unnecessarily time consuming when using multiple run-scripts.
 # So, we override this behavior.
 # We just force the downloading of dependencies here to reduce the clutter in the logs.
-install: mvn dependency:resolve
+install: mvn de.qaware.maven:go-offline-maven-plugin:1.2.5:resolve-dependencies
 
 jobs:
   include:

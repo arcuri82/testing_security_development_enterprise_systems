@@ -36,6 +36,7 @@ public class SeleniumDockerIT extends SeleniumTestBase {
 
     public static GenericContainer postgres = new GenericContainer("postgres:10")
             .withExposedPorts(5432)
+            .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
             .withNetwork(network)
             .withNetworkAliases(PG_ALIAS)
             .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("POSTGRES")));

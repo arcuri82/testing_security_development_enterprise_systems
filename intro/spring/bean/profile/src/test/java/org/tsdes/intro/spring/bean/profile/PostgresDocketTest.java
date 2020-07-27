@@ -42,7 +42,8 @@ public class PostgresDocketTest extends DbTestBase {
         one on the host OS.
      */
     public static GenericContainer postgres = new GenericContainer("postgres:10")
-            .withExposedPorts(5432);
+            .withExposedPorts(5432)
+            .withEnv("POSTGRES_HOST_AUTH_METHOD","trust");
 
 
     @BeforeAll

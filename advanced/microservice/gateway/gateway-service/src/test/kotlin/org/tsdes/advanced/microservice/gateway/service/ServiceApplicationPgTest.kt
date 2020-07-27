@@ -35,7 +35,9 @@ class ServiceApplicationPgTest : ServiceApplicationTest() {
 
         @Container
         @JvmField
-        val postgres = KGenericContainer("postgres:10").withExposedPorts(5432)
+        val postgres = KGenericContainer("postgres:10")
+                .withExposedPorts(5432)
+                .withEnv("POSTGRES_HOST_AUTH_METHOD","trust")
 
         class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
             override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {

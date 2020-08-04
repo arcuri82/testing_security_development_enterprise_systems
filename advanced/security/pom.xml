@@ -15,6 +15,7 @@
     <modules>
         <module>basic</module>
         <module>session</module>
+        <module>remember-me</module>
         <module>distributed-session</module>
     </modules>
 

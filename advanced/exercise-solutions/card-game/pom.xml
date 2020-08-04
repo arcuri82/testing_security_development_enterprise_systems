@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.tsdes.advanced.exercises.cardgame</groupId>
+    <artifactId>card-game-root</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.tsdes.advanced.exercises</groupId>
+        <artifactId>advanced-exercise-solutions</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+<!--        <module>part-01</module>-->
+<!--        <module>part-02</module>-->
+<!--        <module>part-03</module>-->
+<!--        <module>part-04</module>-->
+<!--        <module>part-05</module>-->
+<!--        <module>part-06</module>-->
+<!--        <module>part-07</module>-->
+<!--        <module>part-08</module>-->
+<!--        <module>part-09</module>-->
+<!--        <module>part-10</module>-->
+<!--        <module>part-11</module>-->
+        <module>part-12</module>
+    </modules>
+
+
+</project>

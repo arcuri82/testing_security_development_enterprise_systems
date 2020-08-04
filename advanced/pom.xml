@@ -22,6 +22,7 @@
         <module>microservice</module>
         <module>security</module>
         <module>amqp</module>
+        <module>exercise-solutions</module>
     </modules>
 
 

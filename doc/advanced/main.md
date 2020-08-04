@@ -117,8 +117,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
 <br />
 
-* **Lesson 09**: Security in MicroServices
-  
+* **Lesson 09**: Security: Intro/Revision
+
   Slides: [[pdf]](slides/lesson_09.pdf), 
           [[pptx]](slides/lesson_09.pptx)
           
@@ -126,15 +126,28 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   * **advanced/advanced/security/basic**
   * **advanced/advanced/security/session**
+  * TODO
+
+<br />
+
+
+* **Lesson 10**: Security in MicroServices
+  
+  Slides: [[pdf]](slides/lesson_10.pdf), 
+          [[pptx]](slides/lesson_10.pptx)
+          
+  Modules:     
+  
   * **advanced/advanced/security/distributed-session/***
+  * TODO
   
 <br />
 
 
-* **Lesson 10**: AMQP and RabbitMQ
+* **Lesson 11**: AMQP and RabbitMQ
   
-  Slides: [[pdf]](slides/lesson_10.pdf), 
-          [[pptx]](slides/lesson_10.pptx)
+  Slides: [[pdf]](slides/lesson_11.pdf), 
+          [[pptx]](slides/lesson_11.pptx)
           
   Modules:     
   
@@ -144,10 +157,6 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/amqp/direct-exchange**
   * **advanced/advanced/amqp/topic-exchange**
   * **advanced/advanced/amqp/amqp-rest**
-
-<br />
-
-* **Lesson 11**: Revision
 
 <br />
 

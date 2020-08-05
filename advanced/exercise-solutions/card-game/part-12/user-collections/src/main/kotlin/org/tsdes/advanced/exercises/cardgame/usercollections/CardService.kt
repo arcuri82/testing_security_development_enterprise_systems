@@ -9,9 +9,9 @@ import kotlin.random.Random
 
 
 @Service
-open class CardService {
+class CardService {
 
-    protected val collection: Collection? = null
+    protected var collection: Collection? = null
 
     val cardCollection : List<Card>
         get() = collection?.cards ?: listOf()

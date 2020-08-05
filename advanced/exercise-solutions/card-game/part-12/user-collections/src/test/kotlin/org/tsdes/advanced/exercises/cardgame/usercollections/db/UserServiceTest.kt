@@ -97,7 +97,8 @@ internal class UserServiceTest{
         val totPacks = before.cardPacks
         assertTrue(totPacks > 0)
 
-        userService.openPack(userId)
+        val n = userService.openPack(userId).size
+        assertEquals(UserService.CARDS_PER_PACK, n)
 
         val after = userService.findByIdEager(userId)!!
         assertEquals(totPacks - 1, after.cardPacks)

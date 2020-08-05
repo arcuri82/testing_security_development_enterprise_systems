@@ -117,7 +117,7 @@ class UserService(
         user.coins += millValue
     }
 
-    fun openPack(userId: String) {
+    fun openPack(userId: String) : List<String> {
 
         validateUser(userId)
 
@@ -131,8 +131,13 @@ class UserService(
 
         val selection = cardService.getRandomSelection(CARDS_PER_PACK)
 
+        val ids = mutableListOf<String>()
+
         selection.forEach {
             addCard(user, it.cardId)
+            ids.add(it.cardId)
         }
+
+        return ids
     }
 }

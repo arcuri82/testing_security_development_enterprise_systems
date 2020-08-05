@@ -39,7 +39,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @SpringBootApplication(scanBasePackages = ["org.tsdes.advanced"])
 @EnableJpaRepositories(basePackages = ["org.tsdes.advanced"])
 @EntityScan(basePackages = ["org.tsdes.advanced"])
-@EnableSwagger2 //needed to enable Swagger
 class NewsRestApplication {
 
 
@@ -48,7 +47,7 @@ class NewsRestApplication {
      */
     @Bean
     fun swaggerApi(): Docket {
-        return Docket(DocumentationType.SWAGGER_2)
+        return Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .select()
                 .paths(PathSelectors.any())
@@ -67,7 +66,7 @@ class NewsRestApplication {
 /*
     If you run this directly, you can then check the Swagger documentation at:
 
-    http://localhost:8080/newsrest/api/swagger-ui.html
+    http://localhost:8080/newsrest/api/swagger-ui/index.html
 
  */
 fun main(args: Array<String>) {

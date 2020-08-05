@@ -12,13 +12,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
  * Created by arcuri82 on 27-Aug-18.
  */
 @SpringBootApplication
-@EnableSwagger2
 class ConditionalChangeApplication {
 
 
     @Bean
     fun swaggerApi(): Docket {
-        return Docket(DocumentationType.SWAGGER_2)
+        return Docket(DocumentationType.OAS_30)
                 .select()
                 .paths(PathSelectors.any())
                 .build()

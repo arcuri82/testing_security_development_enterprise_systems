@@ -10,12 +10,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
 @SpringBootApplication
-@EnableSwagger2
 class MathApplication {
 
     @Bean
     fun swaggerApi(): Docket {
-        return Docket(DocumentationType.SWAGGER_2)
+        return Docket(DocumentationType.OAS_30)
                 .select()
                 .paths(PathSelectors.any())
                 .build()

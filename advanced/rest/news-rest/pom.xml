@@ -35,12 +35,12 @@
                     you can see which endpoints it has from the logs of the application.
                     However, you can also access the Swagger schema at:
 
-                    http://localhost:8080/newsrest/api/v2/api-docs
+                    http://localhost:8080/newsrest/api/v3/api-docs
 
                     furthermore, a human-readable UI web page with the documentation
                     is accessible at:
 
-                    http://localhost:8080/newsrest/api/swagger-ui.html
+                    http://localhost:8080/newsrest/api/swagger-ui/index.html
 
                     This can also be used to manually test the API directly from
                     the browser
@@ -77,15 +77,7 @@
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-spring-web</artifactId>
+            <artifactId>springfox-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>

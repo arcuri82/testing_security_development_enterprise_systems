@@ -324,7 +324,7 @@ class NewsRestApiTest : NRTestBase() {
      */
 
     @Test
-    fun testSwaggerSchema(){
+    fun testSwaggerSchemaV2(){
 
         get("../v2/api-docs")
                 .then()
@@ -333,7 +333,16 @@ class NewsRestApiTest : NRTestBase() {
     }
 
     @Test
+    fun testSwaggerSchemaV3(){
+
+        get("../v3/api-docs")
+                .then()
+                .statusCode(200)
+                .body("openapi", equalTo("3.0.3"))
+    }
+
+    @Test
     fun testSwaggerUI(){
-        get("../swagger-ui.html").then().statusCode(200)
+        get("../swagger-ui/index.html").then().statusCode(200)
     }
 }

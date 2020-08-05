@@ -28,13 +28,31 @@ class UserService(
         val cardService: CardService
 ) {
 
-    fun registerNewUser(userId: String) {
+    companion object{
+        const val CARDS_PER_PACK = 5
+    }
+
+    fun findByIdEager(userId: String) : User?{
+
+        val user = userRepository.findById(userId).orElse(null)
+        if(user != null){
+            user.ownedCards.size
+        }
+        return user
+    }
+
+    fun registerNewUser(userId: String) : Boolean{
+
+        if(userRepository.existsById(userId)){
+            return false
+        }
+
         val user = User()
         user.userId = userId
         user.cardPacks = 3
         user.coins = 100
-        //this will fail if userId already exists
         userRepository.save(user)
+        return true
     }
 
     private fun validateCard(cardId: String) {
@@ -111,7 +129,7 @@ class UserService(
 
         user.cardPacks--
 
-        val selection = cardService.getRandomSelection(5)
+        val selection = cardService.getRandomSelection(CARDS_PER_PACK)
 
         selection.forEach {
             addCard(user, it.cardId)

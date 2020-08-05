@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.tsdes.advanced.exercises.cardgame.usercollections.db.UserService
 import org.tsdes.advanced.exercises.cardgame.usercollections.dto.Command
+import org.tsdes.advanced.exercises.cardgame.usercollections.dto.PatchResultDto
 import org.tsdes.advanced.exercises.cardgame.usercollections.dto.PatchUserDto
 import org.tsdes.advanced.exercises.cardgame.usercollections.dto.UserDto
 import org.tsdes.advanced.rest.dto.RestResponseFactory
@@ -49,19 +50,19 @@ class RestAPI(
     fun patchUser(
             @PathVariable("userId") userId: String,
             @RequestBody dto: PatchUserDto
-    ): ResponseEntity<WrappedResponse<Void>>{
+    ): ResponseEntity<WrappedResponse<PatchResultDto>>{
 
         if(dto.command == null){
             return RestResponseFactory.userFailure("Missing command")
         }
 
         if(dto.command == Command.OPEN_PACK){
-            try {
+            val ids = try {
                 userService.openPack(userId)
             } catch (e: IllegalArgumentException){
                 return RestResponseFactory.userFailure(e.message ?: "Failed to open pack")
             }
-            return RestResponseFactory.noPayload(200)
+            return RestResponseFactory.payload(200, PatchResultDto().apply { cardIdsInOpenedPacket.addAll(ids) })
         }
 
         val cardId = dto.cardId
@@ -73,7 +74,7 @@ class RestAPI(
             } catch (e: IllegalArgumentException){
                 return RestResponseFactory.userFailure(e.message ?: "Failed to buy card $cardId")
             }
-            return RestResponseFactory.noPayload(200)
+            return RestResponseFactory.payload(200, PatchResultDto())
         }
 
         if(dto.command == Command.MILL_CARD){
@@ -82,7 +83,7 @@ class RestAPI(
             } catch (e: IllegalArgumentException){
                 return RestResponseFactory.userFailure(e.message ?: "Failed to mill card $cardId")
             }
-            return RestResponseFactory.noPayload(200)
+            return RestResponseFactory.payload(200, PatchResultDto())
         }
 
         return RestResponseFactory.userFailure("Unrecognized command: ${dto.command}")

@@ -10,12 +10,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
 @SpringBootApplication
-@EnableSwagger2
 class BookApplication {
 
     @Bean
     fun swaggerApi(): Docket {
-        return Docket(DocumentationType.SWAGGER_2)
+        return Docket(DocumentationType.OAS_30)
                 .select()
                 .paths(PathSelectors.any())
                 .build()
@@ -26,7 +25,7 @@ class BookApplication {
 /*
     If you run this directly, you can then check the Swagger documentation at:
 
-    http://localhost:8080/swagger-ui.html
+    http://localhost:8080/swagger-ui/index.html
  */
 fun main(args: Array<String>) {
     SpringApplication.run(BookApplication::class.java, *args)

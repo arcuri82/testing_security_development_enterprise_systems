@@ -127,20 +127,10 @@
                 <type>pom</type>
             </dependency>
 
-            <!-- SpringFox for Swagger -->
+            <!-- SpringFox for Swagger/OpenAPI -->
             <dependency>
                 <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${version.springfox}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${version.springfox}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-spring-web</artifactId>
+                <artifactId>springfox-boot-starter</artifactId>
                 <version>${version.springfox}</version>
             </dependency>
 

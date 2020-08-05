@@ -24,8 +24,8 @@ interface UserRepository : CrudRepository<User, String>{
 @Service
 @Transactional
 class UserService(
-        val userRepository: UserRepository,
-        val cardService: CardService
+        private val userRepository: UserRepository,
+        private val cardService: CardService
 ) {
 
     companion object{

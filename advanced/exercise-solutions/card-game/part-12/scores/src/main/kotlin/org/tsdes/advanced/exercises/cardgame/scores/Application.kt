@@ -1,4 +1,4 @@
-package org.tsdes.advanced.exercises.cardgame.usercollections
+package org.tsdes.advanced.exercises.cardgame.scores
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

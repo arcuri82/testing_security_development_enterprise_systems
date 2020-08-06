@@ -15,6 +15,7 @@
     <modules>
         <module>user-collections</module>
         <module>cards-dto</module>
+        <module>scores</module>
     </modules>
 
 </project>

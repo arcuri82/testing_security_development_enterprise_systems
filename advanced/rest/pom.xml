@@ -21,7 +21,7 @@
         <module>rest-dto</module>
         <module>exception-handling</module>
         <module>rest-exception</module>
-        <module>pagination</module>
+        <module>pagination-offset</module>
         <module>gui-v2</module>
         <module>wiremock</module>
         <module>circuit-breaker</module>

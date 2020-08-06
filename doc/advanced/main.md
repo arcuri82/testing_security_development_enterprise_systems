@@ -54,8 +54,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/rest/rest-dto**
   * **advanced/rest/exception-handling**
   * **advanced/rest/rest-exception**
-  * **advanced/rest/pagination**
-  * **advanced/rest/gui-v2**
+  * **advanced/rest/pagination-offset**
+  * **advanced/rest/pagination-keyset-gui-v2**
   
 <br />
 

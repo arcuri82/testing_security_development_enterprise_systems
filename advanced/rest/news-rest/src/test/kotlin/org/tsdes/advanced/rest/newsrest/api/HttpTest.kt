@@ -107,7 +107,15 @@ class HttpTest : NRTestBase() {
         http += "\n"
 
         val response = HttpUtils.executeHttpCommand("localhost", port, http)
-        assertTrue(response.contains("405"), "Response:\n$response")
+
+        //assertTrue(response.contains("405"), "Response:\n$response")
+        /*
+            2020 update: after updating Spring to latest version, this behavior
+            changed again: ie return an empty, non-HTTP response.
+            Always remember that servers are just pieces of software: they can
+            have bugs, weird behaviors, and subtle changes at each new release.
+         */
+        assertTrue(response.isEmpty())
     }
 
     @Test

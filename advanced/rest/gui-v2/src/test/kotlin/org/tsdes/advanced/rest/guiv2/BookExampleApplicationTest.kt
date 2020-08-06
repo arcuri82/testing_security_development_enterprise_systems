@@ -103,7 +103,7 @@ class SpaRestBackendApplicationTest {
             val bid = page.list[i + 1]["id"].toString().toLong()
             assertTrue(ayear >= byear)
             if (ayear == byear) {
-                assertTrue(aid >= bid)
+                assertTrue(aid > bid)
             }
         }
     }

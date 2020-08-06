@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>card-game-part12-usercollections</artifactId>
+    <artifactId>card-game-part12-scores</artifactId>
     <packaging>jar</packaging>
 
     <parent>
@@ -14,11 +14,7 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.tsdes.advanced.exercises.cardgame.part12</groupId>
-            <artifactId>card-game-part12-cards-dto</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.tsdes.advanced.rest</groupId>
             <artifactId>rest-dto</artifactId>

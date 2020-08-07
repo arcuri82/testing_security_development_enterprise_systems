@@ -1,19 +1,18 @@
 package org.tsdes.advanced.rest.circuitbreaker
 
-import com.netflix.hystrix.Hystrix
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.util.concurrent.TimeUnit
+import javax.annotation.PostConstruct
 
 
 /**
@@ -21,6 +20,7 @@ import java.util.concurrent.TimeUnit
  */
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext //to avoid issues with states in the CBs between tests
 class YRestTest {
 
     @LocalServerPort
@@ -29,25 +29,12 @@ class YRestTest {
     @Autowired
     private lateinit var yRest: YRest
 
-    @BeforeEach
-    fun reset() {
+    @PostConstruct
+    fun init() {
 
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = port
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
-
-        /*
-            NOTE: this works ONLY because we are running the RESTful service in the
-            same JVM of the tests
-         */
-        Hystrix.reset(10, TimeUnit.SECONDS)
-
-        /*
-            Looks like a bug in Hystrix, whose "reset" method does not really
-            seem to guarantee to be blocking until EVERYTHING is actually reset.
-            So here we do an explicit extra wait.
-         */
-        Thread.sleep(5_000)
 
         //make sure Y is calling X on the right port
         yRest.port = port

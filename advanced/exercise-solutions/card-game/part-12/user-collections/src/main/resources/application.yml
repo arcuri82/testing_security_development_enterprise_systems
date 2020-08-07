@@ -3,3 +3,4 @@ spring:
     throwExceptionIfNoHandlerFound: true
   resources:
     add-mappings: false
+

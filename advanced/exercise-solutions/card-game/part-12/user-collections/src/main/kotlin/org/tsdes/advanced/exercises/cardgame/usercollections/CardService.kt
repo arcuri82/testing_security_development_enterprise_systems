@@ -56,13 +56,6 @@ class CardService {
                 throw IllegalArgumentException("Invalid cardId $cardId")
 
         return collection!!.prices[card.rarity]!!
-
-//        return when(card.rarity!!){
-//            Rarity.BRONZE -> 100
-//            Rarity.SILVER -> 500
-//            Rarity.GOLD -> 1_000
-//            Rarity.PINK_DIAMOND -> 10_000
-//        }
     }
 
     fun getRandomSelection(n: Int) : List<Card>{

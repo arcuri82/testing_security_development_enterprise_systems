@@ -1,4 +1,4 @@
-package org.tsdes.advanced.exercises.cardgame.usercollections.db
+package org.tsdes.advanced.exercises.cardgame.usercollections
 
 import org.tsdes.advanced.exercises.cardgame.cards.dto.CardDto
 import org.tsdes.advanced.exercises.cardgame.cards.dto.CollectionDto

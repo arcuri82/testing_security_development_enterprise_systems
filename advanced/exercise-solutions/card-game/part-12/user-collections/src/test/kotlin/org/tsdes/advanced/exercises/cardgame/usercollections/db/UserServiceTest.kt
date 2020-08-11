@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.advanced.exercises.cardgame.usercollections.CardService
+import org.tsdes.advanced.exercises.cardgame.usercollections.FakeData
 import org.tsdes.advanced.exercises.cardgame.usercollections.model.Collection
 
 

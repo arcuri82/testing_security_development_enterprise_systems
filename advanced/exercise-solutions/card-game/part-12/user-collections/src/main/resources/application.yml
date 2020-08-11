@@ -4,3 +4,4 @@ spring:
   resources:
     add-mappings: false
 
+cardServiceAddress: cards-service

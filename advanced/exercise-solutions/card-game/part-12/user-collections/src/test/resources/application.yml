@@ -11,3 +11,4 @@ spring:
     show-sql: true
 
 
+cardServiceAddress: cards-service

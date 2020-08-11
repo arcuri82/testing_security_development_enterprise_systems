@@ -18,6 +18,7 @@
         <module>cards-dto</module>
         <module>scores</module>
         <module>api-gateway</module>
+        <module>e2e-tests</module>
     </modules>
 
 </project>

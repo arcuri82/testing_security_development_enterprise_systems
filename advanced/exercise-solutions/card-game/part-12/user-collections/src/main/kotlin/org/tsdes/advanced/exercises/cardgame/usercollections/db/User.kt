@@ -1,13 +1,11 @@
 package org.tsdes.advanced.exercises.cardgame.usercollections.db
 
-import javax.persistence.CascadeType
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.OneToMany
+import javax.persistence.*
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 
 @Entity
+@Table(name="user_data")
 class User(
 
     @get:Id

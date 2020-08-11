@@ -7,10 +7,10 @@ create table card_copy (
     user_user_id varchar(255) not null,
     primary key (id));
 
-create table user (
+create table user_data (
     user_id varchar(255) not null,
     card_packs integer not null check (card_packs>=0),
     coins integer not null check (coins>=0),
     primary key (user_id));
 
-alter table card_copy add constraint FKtco9dei78cocpwi1sxye9mw3b foreign key (user_user_id) references user;
+alter table card_copy add constraint FKtco9dei78cocpwi1sxye9mw3b foreign key (user_user_id) references user_data;

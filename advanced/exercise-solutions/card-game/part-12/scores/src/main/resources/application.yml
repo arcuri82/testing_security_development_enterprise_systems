@@ -9,3 +9,12 @@ spring:
     consul:
       host: discovery
       port: 8500
+  datasource:
+    url: "jdbc:postgresql://postgres-scores:5432/postgres"
+    username: "postgres"
+    password: ""
+    driver-class-name: "org.postgresql.Driver"
+  jpa:
+      database: "postgresql"
+      hibernate:
+        ddl-auto: validate

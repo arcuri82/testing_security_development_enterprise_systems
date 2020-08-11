@@ -13,10 +13,6 @@ services:
 
   discovery:
     image: "consul:1.8"
-    ports:
-    # Just for debugging
-      - "8500:8500"
-
 
 #  frontend:
 #    build:
@@ -25,8 +21,13 @@ services:
 
 
 
-#  postgres:
-#    image: "postgres:10"
+  postgres-user-collections:
+    image: "postgres:10"
+
+  postgres-scores:
+    image: "postgres:10"
+
+
 
   cards_0:
     build:

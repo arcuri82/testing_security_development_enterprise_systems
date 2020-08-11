@@ -2,6 +2,9 @@ spring:
   application:
     name: api-gateway
   cloud:
+    consul:
+      host: discovery
+      port: 8500
     gateway:
       discovery:
         locator:
@@ -12,18 +15,15 @@ spring:
           predicates:
             - Path=/api/cards/**
         - id: Scores
-            uri: lb://scores-service
-            predicates:
-              - Path=/api/scores/**
+          uri: lb://scores-service
+          predicates:
+            - Path=/api/scores/**
         - id: User-Collections
-            uri: lb://user-collections-service
-            predicates:
-              - Path=/api/user-collections/**
+          uri: lb://user-collections-service
+          predicates:
+            - Path=/api/user-collections/**
 #        - id: frontend
 #          uri: http://frontend
 #          predicates:
 #            - Path=/**
-    consul:
-      host: discovery
-      port: 8500
 

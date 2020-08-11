@@ -5,7 +5,6 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-#      ddl-auto: create-drop
       ddl-auto: validate
     database: h2
     show-sql: true

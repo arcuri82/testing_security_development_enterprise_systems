@@ -17,6 +17,7 @@
         <module>cards</module>
         <module>cards-dto</module>
         <module>scores</module>
+        <module>api-gateway</module>
     </modules>
 
 </project>

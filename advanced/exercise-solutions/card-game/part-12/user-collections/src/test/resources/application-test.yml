@@ -9,5 +9,8 @@ spring:
       ddl-auto: validate
     database: h2
     show-sql: true
+  cloud:
+    consul:
+      enabled: false
 
-
+cardServiceAddress: cards-service

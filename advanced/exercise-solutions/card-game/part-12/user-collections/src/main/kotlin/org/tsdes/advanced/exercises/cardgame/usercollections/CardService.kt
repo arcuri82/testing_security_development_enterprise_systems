@@ -19,7 +19,9 @@ import kotlin.random.Random
 
 
 @Service
-class CardService {
+class CardService(
+        private val client: RestTemplate
+) {
 
     companion object{
         private val log = LoggerFactory.getLogger(CardService::class.java)
@@ -28,8 +30,6 @@ class CardService {
     @Value("\${cardServiceAddress}")
     private lateinit var cardServiceAddress: String
 
-    private val client = RestTemplate()
-    
     protected var collection: Collection? = null
 
     val cardCollection : List<Card>

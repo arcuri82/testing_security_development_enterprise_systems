@@ -14,16 +14,25 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.util.TestPropertyValues
+import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import javax.annotation.PostConstruct
 
 /**
  * Created by arcuri82 on 03-Aug-17.
  */
 @ExtendWith(SpringExtension::class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@ActiveProfiles("test") //to override properties, eg "fixerWebAddress"
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ContextConfiguration(initializers = [(ConverterRestServiceXmlTest.Companion.Initializer::class)])
 class ConverterRestServiceXmlTest {
+
+    @LocalServerPort
+    protected var port = 0
 
     companion object {
         /*
@@ -37,28 +46,21 @@ class ConverterRestServiceXmlTest {
             methods have to be static in JUnit !!!
             So, here we need to go into a "companion object" and use
             @JvmStatic to get it work... :(
-
-
-            Plus there is all the issues of accessing injected properties (eg,
-            random port for Spring) from a static context...
          */
 
         private lateinit var wiremockServer: WireMockServer
 
         @BeforeAll @JvmStatic
         fun initClass() {
-            RestAssured.baseURI = "http://localhost"
-            RestAssured.port = 8080
-            RestAssured.basePath = "/wiremockRest/api/convert"
-            RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
+
 
             /*
-              WireMock will run as a process binding on port 8099 (in this case).
+              WireMock will run as a process binding on port (ephemeral in this case).
               We configure the application by, during testing, redirecting all
               calls to external services to WireMock instead.
               In WireMock, we need to define mocked answers.
            */
-            wiremockServer = WireMockServer(wireMockConfig().port(8099).notifier(ConsoleNotifier(true)))
+            wiremockServer = WireMockServer(wireMockConfig().dynamicPort().notifier(ConsoleNotifier(true)))
             wiremockServer.start()
         }
 
@@ -66,7 +68,28 @@ class ConverterRestServiceXmlTest {
         fun tearDown() {
             wiremockServer.stop()
         }
+
+        class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
+            override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
+               /*
+                As we bind WireMock to an ephemeral port, we do not know such port number when
+                this test case is compiled. So, we need to modify the property of Spring after
+                initizialization.
+                */
+                TestPropertyValues.of("fixerWebAddress=localhost:${wiremockServer.port()}")
+                        .applyTo(configurableApplicationContext.environment)
+            }
+        }
     }
+
+    @PostConstruct
+    fun init(){
+        RestAssured.baseURI = "http://localhost"
+        RestAssured.port = port
+        RestAssured.basePath = "/wiremockRest/api/convert"
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
+    }
+
 
     private fun getAMockedJsonResponse(usd: Double, eur: Double, gbp: Double): String {
         val json = """

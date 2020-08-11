@@ -29,7 +29,7 @@ class FakeCardService : CardService(){
 
 
 
-@ActiveProfiles("UserServiceTest")
+@ActiveProfiles("UserServiceTest,test")
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 internal class UserServiceTest{

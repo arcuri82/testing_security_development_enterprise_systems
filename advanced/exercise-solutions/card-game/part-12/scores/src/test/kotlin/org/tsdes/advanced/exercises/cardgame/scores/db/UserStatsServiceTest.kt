@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 
-@ActiveProfiles("FakeData")
+@ActiveProfiles("FakeData,test")
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 internal class UserStatsServiceTest{

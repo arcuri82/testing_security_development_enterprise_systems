@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.advanced.exercises.cardgame.cards.RestApi.Companion.LATEST
 import javax.annotation.PostConstruct
 
 
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(Application::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

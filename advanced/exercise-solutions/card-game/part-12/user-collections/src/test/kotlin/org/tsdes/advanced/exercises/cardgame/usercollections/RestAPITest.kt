@@ -19,6 +19,7 @@ import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.tsdes.advanced.exercises.cardgame.usercollections.db.UserRepository
@@ -30,6 +31,7 @@ import wiremock.com.fasterxml.jackson.databind.ObjectMapper
 import javax.annotation.PostConstruct
 
 
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = [(RestAPITest.Companion.Initializer::class)])

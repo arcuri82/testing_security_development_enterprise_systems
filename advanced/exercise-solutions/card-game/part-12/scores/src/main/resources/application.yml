@@ -3,3 +3,9 @@ spring:
     throwExceptionIfNoHandlerFound: true
   resources:
     add-mappings: false
+  application:
+      name: scores-service
+  cloud:
+    consul:
+      host: discovery
+      port: 8500

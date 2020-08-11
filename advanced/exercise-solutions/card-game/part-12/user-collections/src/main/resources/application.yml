@@ -3,5 +3,11 @@ spring:
     throwExceptionIfNoHandlerFound: true
   resources:
     add-mappings: false
+  application:
+    name: user-collections-service
+  cloud:
+    consul:
+     host: discovery
+     port: 8500
 
-cardServiceAddress: cards-service
+cardServiceAddress: "cards-service:8080"

@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: Cards
+          uri: lb://cards-service
+          predicates:
+            - Path=/api/cards/**
+        - id: Scores
+            uri: lb://scores-service
+            predicates:
+              - Path=/api/scores/**
+        - id: User-Collections
+            uri: lb://user-collections-service
+            predicates:
+              - Path=/api/user-collections/**
+#        - id: frontend
+#          uri: http://frontend
+#          predicates:
+#            - Path=/**
+    consul:
+      host: discovery
+      port: 8500
+

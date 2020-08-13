@@ -11,7 +11,7 @@ spring:
           enabled: true
       routes:
         - id: Auth
-          uri: http://auth-service
+          uri: http://auth:8080
           predicates:
             - Path=/api/auth/**
         - id: Cards

@@ -9,5 +9,10 @@ spring:
   cloud:
     consul:
       enabled: false
+  main:
+    allow-bean-definition-overriding: true
+  session:
+    store-type: none
+
 
 cardServiceAddress: cards-service

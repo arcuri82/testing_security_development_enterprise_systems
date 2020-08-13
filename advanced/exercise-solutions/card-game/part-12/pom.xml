@@ -13,6 +13,7 @@
     </parent>
 
     <modules>
+        <module>auth</module>
         <module>user-collections</module>
         <module>cards</module>
         <module>cards-dto</module>

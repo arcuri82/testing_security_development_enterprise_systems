@@ -8,7 +8,8 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -35,7 +36,7 @@ import javax.annotation.PostConstruct
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = [(RestAPITest.Companion.Initializer::class)])
-internal class RestAPITest{
+internal class RestAPITest {
 
     @LocalServerPort
     protected var port = 0
@@ -83,7 +84,7 @@ internal class RestAPITest{
     }
 
     @PostConstruct
-    fun init(){
+    fun init() {
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = port
         RestAssured.basePath = "/api/user-collections"
@@ -92,16 +93,33 @@ internal class RestAPITest{
 
 
     @BeforeEach
-    fun initTest(){
+    fun initTest() {
         userRepository.deleteAll()
     }
 
 
     @Test
-    fun testCreateUser(){
+    fun testAccessControl() {
+
         val id = "foo"
 
-        given().put("/$id")
+        given().get("/$id").then().statusCode(401)
+        given().put("/$id").then().statusCode(401)
+        given().patch("/$id").then().statusCode(401)
+
+        given().auth().basic("bar", "123")
+                .get("/$id")
+                .then()
+                .statusCode(403)
+    }
+
+
+    @Test
+    fun testCreateUser() {
+        val id = "foo"
+
+        given().auth().basic(id, "123")
+                .put("/$id")
                 .then()
                 .statusCode(201)
 
@@ -109,36 +127,38 @@ internal class RestAPITest{
     }
 
     @Test
-    fun testBuyCard(){
+    fun testBuyCard() {
 
         val userId = "foo"
         val cardId = "c00"
 
-        given().put("/$userId").then().statusCode(201)
+        given().auth().basic(userId, "123").put("/$userId").then().statusCode(201)
 
-        given().contentType(ContentType.JSON)
+        given().auth().basic(userId, "123")
+                .contentType(ContentType.JSON)
                 .body(PatchUserDto(Command.BUY_CARD, cardId))
                 .patch("/$userId")
                 .then()
                 .statusCode(200)
 
         val user = userService.findByIdEager(userId)!!
-        assertTrue(user.ownedCards.any { it.cardId == cardId})
+        assertTrue(user.ownedCards.any { it.cardId == cardId })
     }
 
 
     @Test
-    fun testOpenPack(){
+    fun testOpenPack() {
 
         val userId = "foo"
-        given().put("/$userId").then().statusCode(201)
+        given().auth().basic(userId, "123").put("/$userId").then().statusCode(201)
 
         val before = userService.findByIdEager(userId)!!
         val totCards = before.ownedCards.sumBy { it.numberOfCopies }
         val totPacks = before.cardPacks
         assertTrue(totPacks > 0)
 
-        given().contentType(ContentType.JSON)
+        given().auth().basic(userId, "123")
+                .contentType(ContentType.JSON)
                 .body(PatchUserDto(Command.OPEN_PACK))
                 .patch("/$userId")
                 .then()
@@ -147,20 +167,21 @@ internal class RestAPITest{
         val after = userService.findByIdEager(userId)!!
         assertEquals(totPacks - 1, after.cardPacks)
         assertEquals(totCards + UserService.CARDS_PER_PACK,
-                after.ownedCards.sumBy { it.numberOfCopies }  )
+                after.ownedCards.sumBy { it.numberOfCopies })
     }
 
 
     @Test
-    fun testMillCard(){
+    fun testMillCard() {
 
         val userId = "foo"
-        given().put("/$userId").then().statusCode(201)
+        given().auth().basic(userId, "123").put("/$userId").then().statusCode(201)
 
         val before = userRepository.findById(userId).get()
         val coins = before.coins
 
-        given().contentType(ContentType.JSON)
+        given().auth().basic(userId, "123")
+                .contentType(ContentType.JSON)
                 .body(PatchUserDto(Command.OPEN_PACK))
                 .patch("/$userId")
                 .then()
@@ -171,14 +192,15 @@ internal class RestAPITest{
 
 
         val cardId = between.ownedCards[0].cardId!!
-        given().contentType(ContentType.JSON)
-                        .body(PatchUserDto(Command.MILL_CARD, cardId))
-                        .patch("/$userId")
-                        .then()
-                        .statusCode(200)
+        given().auth().basic(userId, "123")
+                .contentType(ContentType.JSON)
+                .body(PatchUserDto(Command.MILL_CARD, cardId))
+                .patch("/$userId")
+                .then()
+                .statusCode(200)
 
         val after = userService.findByIdEager(userId)!!
         assertTrue(after.coins > coins)
-        assertEquals(n-1, after.ownedCards.sumBy { it.numberOfCopies })
+        assertEquals(n - 1, after.ownedCards.sumBy { it.numberOfCopies })
     }
 }

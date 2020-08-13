@@ -9,6 +9,11 @@ spring:
     consul:
      host: discovery
      port: 8500
+  redis:
+    host: redis
+    port: 6379
+  session:
+      store-type: redis
   datasource:
     url: "jdbc:postgresql://postgres-user-collections:5432/postgres"
     username: "postgres"

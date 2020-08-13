@@ -1,4 +1,4 @@
-package org.tsdes.advanced.security.distributedsession.auth
+package org.tsdes.advanced.exercises.cardgame.auth
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
  * Created by arcuri82 on 10-Nov-17.
  */
 @SpringBootApplication
-class AuthApplication{
+class Application{
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
@@ -20,5 +20,5 @@ class AuthApplication{
 
 
 fun main(args: Array<String>) {
-    SpringApplication.run(AuthApplication::class.java, *args)
+    SpringApplication.run(Application::class.java, *args)
 }

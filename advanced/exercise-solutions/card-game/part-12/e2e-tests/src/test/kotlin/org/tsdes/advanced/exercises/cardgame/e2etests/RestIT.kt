@@ -4,9 +4,11 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.awaitility.Awaitility
+import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.Matchers.greaterThan
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.testcontainers.containers.DockerComposeContainer
 import org.testcontainers.containers.wait.strategy.Wait
@@ -16,6 +18,7 @@ import java.io.File
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
+@Disabled
 @Testcontainers
 class RestIT {
 
@@ -41,7 +44,7 @@ class RestIT {
         @JvmStatic
         fun waitForServers() {
 
-            Awaitility.await().atMost(180, TimeUnit.SECONDS)
+            Awaitility.await().atMost(240, TimeUnit.SECONDS)
                     .ignoreExceptions()
                     .until {
 
@@ -87,13 +90,36 @@ class RestIT {
 
     @Test
     fun testCreateUser() {
-        val id = "foo_testCreateUser_" + System.currentTimeMillis()
         Awaitility.await().atMost(60, TimeUnit.SECONDS)
                 .ignoreExceptions()
                 .until {
+
+                    val id = "foo_testCreateUser_" + System.currentTimeMillis()
+
                     given().put("/api/user-collections/$id")
                             .then()
+                            .statusCode(401)
+
+                    val password = "123456"
+
+                    val cookie = given().contentType(ContentType.JSON)
+                            .body("""
+                                {
+                                    "userId": "$id",
+                                    "password": "$password"
+                                }
+                            """.trimIndent())
+                            .post("/api/auth/signUp")
+                            .then()
+                            .statusCode(204)
+                            .header("Set-Cookie", CoreMatchers.not(equalTo(null)))
+                            .extract().cookie("SESSION")
+
+                    given().cookie("SESSION", cookie)
+                            .put("/api/user-collections/$id")
+                            .then()
                             .statusCode(201)
+
                     true
                 }
     }

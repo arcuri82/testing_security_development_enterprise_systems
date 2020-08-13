@@ -16,6 +16,8 @@ import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
 import java.time.Duration
+import java.time.temporal.Temporal
+import java.time.temporal.TemporalUnit
 import java.util.concurrent.TimeUnit
 
 @Disabled
@@ -37,6 +39,11 @@ class RestIT {
         val env = KDockerComposeContainer("card-game", File("../docker-compose.yml"))
                 .withExposedService("discovery", 8500,
                         Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(240)))
+                .withLogConsumer("cards_0") {print("[CARD_0] " + it.utf8String)}
+                .withLogConsumer("cards_1") {print("[CARD_1] " + it.utf8String)}
+                .withLogConsumer("user-collections") {print("[USER_COLLECTIONS] " + it.utf8String)}
+                .withLogConsumer("scores") {print("[SCORES] " + it.utf8String)}
+                .withLogConsumer("auth") {print("[AUTH] " + it.utf8String)}
                 .withLocalCompose(true)
 
 
@@ -45,6 +52,8 @@ class RestIT {
         fun waitForServers() {
 
             Awaitility.await().atMost(240, TimeUnit.SECONDS)
+                    .pollDelay(Duration.ofSeconds(20))
+                    .pollInterval(Duration.ofSeconds(10))
                     .ignoreExceptions()
                     .until {
 
@@ -63,7 +72,8 @@ class RestIT {
 
     @Test
     fun testGetCollection() {
-        Awaitility.await().atMost(60, TimeUnit.SECONDS)
+        Awaitility.await().atMost(120, TimeUnit.SECONDS)
+                .pollInterval(Duration.ofSeconds(10))
                 .ignoreExceptions()
                 .until {
                     given().get("/api/cards/collection_v1_000")
@@ -76,7 +86,8 @@ class RestIT {
 
     @Test
     fun testGetPage() {
-        Awaitility.await().atMost(60, TimeUnit.SECONDS)
+        Awaitility.await().atMost(120, TimeUnit.SECONDS)
+                .pollInterval(Duration.ofSeconds(10))
                 .ignoreExceptions()
                 .until {
                     given().accept(ContentType.JSON)
@@ -90,11 +101,16 @@ class RestIT {
 
     @Test
     fun testCreateUser() {
-        Awaitility.await().atMost(60, TimeUnit.SECONDS)
+        Awaitility.await().atMost(120, TimeUnit.SECONDS)
+                .pollInterval(Duration.ofSeconds(10))
                 .ignoreExceptions()
                 .until {
 
                     val id = "foo_testCreateUser_" + System.currentTimeMillis()
+
+                    given().get("/api/auth/user")
+                            .then()
+                            .statusCode(401)
 
                     given().put("/api/user-collections/$id")
                             .then()
@@ -114,6 +130,11 @@ class RestIT {
                             .statusCode(204)
                             .header("Set-Cookie", CoreMatchers.not(equalTo(null)))
                             .extract().cookie("SESSION")
+
+                    given().cookie("SESSION", cookie)
+                            .get("/api/auth/user")
+                            .then()
+                            .statusCode(200)
 
                     given().cookie("SESSION", cookie)
                             .put("/api/user-collections/$id")

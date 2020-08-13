@@ -19,6 +19,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
         http.httpBasic()
                 .and()
                 .authorizeRequests()
+                .antMatchers("/swagger*/**", "/v3/api-docs", "/actuator/**").permitAll()
                 .antMatchers("/api/user-collections/{id}")
                 .access("hasRole('USER') and @userSecurity.checkId(authentication, #id)")
                 .anyRequest().denyAll()

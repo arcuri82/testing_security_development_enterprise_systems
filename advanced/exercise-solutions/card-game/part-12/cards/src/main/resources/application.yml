@@ -5,6 +5,8 @@ spring:
     add-mappings: false
   application:
     name: cards-service
+  session:
+    store-type: none
   cloud:
     consul:
       host: discovery

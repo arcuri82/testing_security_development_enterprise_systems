@@ -1,4 +1,4 @@
-package org.tsdes.advanced.security.distributedsession.auth.db
+package org.tsdes.advanced.exercises.cardgame.auth
 
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
@@ -17,16 +17,18 @@ import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import org.tsdes.advanced.security.distributedsession.auth.AuthDto
+import org.tsdes.advanced.exercises.cardgame.auth.db.UserRepository
 
 /**
  * Created by arcuri82 on 10-Nov-17.
  */
+@ActiveProfiles("test")
 @Testcontainers
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -69,6 +71,7 @@ class SecurityTest {
     @BeforeEach
     fun initialize() {
         RestAssured.baseURI = "http://localhost"
+        RestAssured.basePath = "/api/auth"
         RestAssured.port = port
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 

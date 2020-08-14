@@ -115,6 +115,18 @@ internal class RestAPITest {
 
 
     @Test
+    fun testGetUser(){
+
+        val id = "foo"
+        userService.registerNewUser(id)
+
+        given().auth().basic(id, "123")
+                .get("/$id")
+                .then()
+                .statusCode(200)
+    }
+
+    @Test
     fun testCreateUser() {
         val id = "foo"
 

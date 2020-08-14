@@ -15,6 +15,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/data-format**
   * **advanced/calling-webservice**            
 
+  Exercises: [card-game-part-01](exercises/card-game/card-game-part-01.md)     
+
 <br />
 
 * **Lesson 02**: HTTP and RESTful APIs
@@ -26,6 +28,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   * **advanced/example-news**
   * **advanced/rest/news-rest**
+
+  Exercises: [card-game-part-02](exercises/card-game/card-game-part-02.md)     
 
 <br />
 
@@ -39,6 +43,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/rest/charset**
   * **advanced/rest/patch**
   * **advanced/rest/gui-v1**
+
+  Exercises: [card-game-part-03](exercises/card-game/card-game-part-03.md)     
 
 <br />
 
@@ -57,6 +63,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/rest/pagination-offset**
   * **advanced/rest/pagination-keyset-gui-v2**
   
+  Exercises: [card-game-part-04](exercises/card-game/card-game-part-04.md)     
+
 <br />
 
 
@@ -72,6 +80,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/rest/conditional-change**
   * **advanced/rest/cache**
 
+  Exercises: [card-game-part-05](exercises/card-game/card-game-part-05.md)     
+
 <br />
 
 * **Lesson 06**: Mocking, Circuit Breakers and Test Generation
@@ -84,6 +94,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/rest/wiremock**
   * **advanced/rest/circuit-breaker**
   * **advanced/rest/evomaster**
+
+  Exercises: [card-game-part-06](exercises/card-game/card-game-part-06.md)     
 
 <br />
 
@@ -102,6 +114,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/graphql/mutation**
   * **advanced/graphql/news-graphql**
 
+  Exercises: [card-game-part-07](exercises/card-game/card-game-part-07.md)     
+
 <br />
 
 
@@ -115,6 +129,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/microservice/discovery/***
   * **advanced/advanced/microservice/gateway/***
   
+  Exercises: [card-game-part-08](exercises/card-game/card-game-part-08.md)     
+
 <br />
 
 * **Lesson 09**: Security: Intro/Revision
@@ -127,6 +143,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/security/basic**
   * **advanced/advanced/security/session**
   * TODO
+
+  Exercises: [card-game-part-09](exercises/card-game/card-game-part-09.md)     
 
 <br />
 
@@ -141,6 +159,8 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/security/distributed-session/***
   * TODO
   
+  Exercises: [card-game-part-10](exercises/card-game/card-game-part-10.md)     
+
 <br />
 
 
@@ -158,9 +178,13 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/amqp/topic-exchange**
   * **advanced/advanced/amqp/amqp-rest**
 
+  Exercises: [card-game-part-11](exercises/card-game/card-game-part-11.md)     
+
 <br />
 
-* **Lesson 12**: Revision
+* **Lesson 12**: Farewell and Revision
+
+  Exercises: [card-game-part-12](exercises/card-game/card-game-part-12.md)     
 
 <br />
 
@@ -186,19 +210,12 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 * [RabbitMQ](https://www.rabbitmq.com/)
 
 
-## Exercises
-
-There is no exercise with solutions in this course (yet).
-
-If you have never used Kotlin before, it is recommended to do some
-Kotlin Koans, like [this one](https://kotlinlang.org/docs/tutorials/koans.html). 
-
-Before the exam starts, it makes sense to develop a pet project to get practice.
-In other words, choose a topic you like, and build a RESTful API for it.
-Each class, when a new concept is introduced, extend your project with what
-you learn. 
 
 ## Exam
 
 An example of mock exam for the home-project can be 
 found [here](exams/project_mock_exam.pdf).
+
+**WARNING for Fall 2020**: the course is going through some restructuring.
+So the details of the exam will likely change before the end
+of the course.

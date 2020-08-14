@@ -13,7 +13,7 @@
     </parent>
 
     <modules>
-<!--        <module>part-01</module>-->
+        <module>part-01</module>
 <!--        <module>part-02</module>-->
 <!--        <module>part-03</module>-->
 <!--        <module>part-04</module>-->

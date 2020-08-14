@@ -32,7 +32,7 @@ class Application {
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
                 .title("API for User-Collections")
-                .description("TODO")
+                .description("REST service to handle the card collections owned by users")
                 .version("1.0")
                 .build()
     }

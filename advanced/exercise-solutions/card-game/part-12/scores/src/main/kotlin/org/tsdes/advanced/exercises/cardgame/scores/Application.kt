@@ -24,7 +24,7 @@ class Application {
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
                 .title("API for Scores")
-                .description("TODO")
+                .description("REST service for ranking of players")
                 .version("1.0")
                 .build()
     }

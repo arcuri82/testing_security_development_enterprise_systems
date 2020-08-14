@@ -26,7 +26,7 @@ class Application {
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
                 .title("API for Cards")
-                .description("TODO")
+                .description("REST service with info regarding all the cards in the game")
                 .version("1.0")
                 .build()
     }

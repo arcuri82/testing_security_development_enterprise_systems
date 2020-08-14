@@ -1,5 +1,7 @@
 package org.tsdes.advanced.exercises.cardgame.cards
 
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.http.CacheControl
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -12,6 +14,7 @@ import org.tsdes.advanced.rest.dto.WrappedResponse
 import java.net.URI
 import java.util.concurrent.TimeUnit
 
+@Api(value = "/api/cards", description = "Operation on the cards existing in the game")
 @RequestMapping(path = ["/api/cards"])
 @RestController
 class RestApi {
@@ -21,6 +24,7 @@ class RestApi {
     }
 
 
+    @ApiOperation("Return info on all cards in the game")
     @GetMapping(
             path = ["/collection_$LATEST"],
             produces = [MediaType.APPLICATION_JSON_VALUE]
@@ -35,6 +39,7 @@ class RestApi {
                 .body(WrappedResponse(200, collection).validated())
     }
 
+    @ApiOperation("Old-version endpoints. Will automatically redirect to most recent version")
     @GetMapping(path = [
         "/collection_v0_001",
         "/collection_v0_002",
@@ -47,6 +52,7 @@ class RestApi {
                 .build()
     }
 
+    @ApiOperation("Return the image for the specified card")
     @GetMapping(
             path= ["/imgs/{imgId}"],
             produces= ["image/svg+xml"]

@@ -1,5 +1,7 @@
 package org.tsdes.advanced.exercises.cardgame.usercollections
 
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,6 +14,8 @@ import org.tsdes.advanced.rest.dto.RestResponseFactory
 import org.tsdes.advanced.rest.dto.WrappedResponse
 import java.lang.IllegalArgumentException
 
+
+@Api(value = "/api/user-collections", description = "Operations on card collections owned by users")
 @RequestMapping(
         path = ["/api/user-collections"],
         produces = [(MediaType.APPLICATION_JSON_VALUE)]
@@ -21,6 +25,7 @@ class RestAPI(
         private val userService: UserService
 ) {
 
+    @ApiOperation("Retrieve card collection information for a specific user")
     @GetMapping(path = ["/{userId}"])
     fun getUserInfo(
             @PathVariable("userId") userId: String
@@ -34,6 +39,7 @@ class RestAPI(
         return RestResponseFactory.payload(200, DtoConverter.transform(user))
     }
 
+    @ApiOperation("Create a new user, with the given id")
     @PutMapping(path = ["/{userId}"])
     fun createUser(
             @PathVariable("userId") userId: String
@@ -43,6 +49,7 @@ class RestAPI(
             else RestResponseFactory.noPayload(201)
     }
 
+    @ApiOperation("Execute a command on a user's collection, like for example buying/milling cards")
     @PatchMapping(
             path = ["/{userId}"],
             consumes = [(MediaType.APPLICATION_JSON_VALUE)]

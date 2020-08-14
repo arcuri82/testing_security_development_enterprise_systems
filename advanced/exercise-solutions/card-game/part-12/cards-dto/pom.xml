@@ -11,4 +11,11 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

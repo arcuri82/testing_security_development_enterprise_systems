@@ -1,6 +1,8 @@
 package org.tsdes.advanced.exercises.cardgame.usercollections.dto
 
-enum class Command{
+import io.swagger.annotations.ApiModelProperty
+
+enum class Command {
 
     OPEN_PACK,
 
@@ -9,9 +11,11 @@ enum class Command{
     BUY_CARD
 }
 
-data class PatchUserDto (
+data class PatchUserDto(
 
-    var command : Command? = null,
+        @get:ApiModelProperty("Command to execute on a user's collection")
+        var command: Command? = null,
 
-    var cardId: String? = null
+        @get:ApiModelProperty("Optional card id, if a the command requires one")
+        var cardId: String? = null
 )

@@ -13,6 +13,8 @@ services:
 
   discovery:
     image: "consul:1.8"
+    environment:
+      - CONSUL_LOCAL_CONFIG={"log_level":"info"}
 #    ports:
 #      - "8500:8500"
 

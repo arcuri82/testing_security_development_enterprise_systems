@@ -140,24 +140,10 @@ class SecurityTest {
                 .body("roles", contains("ROLE_USER"))
 
 
+
         /*
-            Trying to access with userId/password will reset
+            Trying to login again will reset
             the SESSION token.
-         */
-        val basic = given().auth().basic(name, pwd)
-                .get("/user")
-                .then()
-                .statusCode(200)
-                .cookie("SESSION") // new SESSION cookie
-                .body("name", equalTo(name))
-                .body("roles", contains("ROLE_USER"))
-                .extract().cookie("SESSION")
-
-        assertNotEquals(basic, cookie)
-        checkAuthenticatedCookie(basic, 200)
-
-        /*
-            Same with /login
          */
         val login = given().contentType(ContentType.JSON)
                 .body(AuthDto(name, pwd))
@@ -168,7 +154,6 @@ class SecurityTest {
                 .extract().cookie("SESSION")
 
         assertNotEquals(login, cookie)
-        assertNotEquals(login, basic)
         checkAuthenticatedCookie(login, 200)
     }
 

@@ -98,7 +98,7 @@ class SecurityTest {
                 .body(AuthDto(id, password))
                 .post("/signUp")
                 .then()
-                .statusCode(204)
+                .statusCode(201)
                 .header("Set-Cookie", not(equalTo(null)))
                 .extract().cookie("SESSION")
 

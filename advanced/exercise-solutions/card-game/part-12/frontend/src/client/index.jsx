@@ -7,6 +7,7 @@ import Play from "./play";
 import Login from "./login";
 import SignUp from "./signup";
 import HeaderBar from "./headerbar";
+import Collection from "./collection";
 
 class App extends React.Component {
     constructor(props) {
@@ -66,7 +67,7 @@ class App extends React.Component {
 
     render() {
 
-        const id = this.state.user ? this.state.user.id : null;
+        const id = this.state.user ? this.state.user.name : null;
 
         return (
             <BrowserRouter>
@@ -87,10 +88,10 @@ class App extends React.Component {
                             )}
                         />
                         <Route exact path="/signup" render={(props) => (
-                                <SignUp{...props} fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>
+                                <SignUp {...props} fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>
                             )}
                         />
-                        <Route exact path={"/play"} render={<Play />}/>
+                        <Route exact path={"/play"}><Play/></Route>
                         <Route exact path="/" render={(props) => (
                                 <Home{...props}
                                     user={this.state.user}
@@ -98,6 +99,9 @@ class App extends React.Component {
                                 />
                             )}
                         />
+                        <Route exact path="/collection" render={(props) =>(
+                            <Collection{...props} userId={id} fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>
+                            )}/>
                         <Route component={this.notFound} />
                     </Switch>
                 </div>

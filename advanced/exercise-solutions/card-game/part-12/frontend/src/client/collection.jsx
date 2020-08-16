@@ -18,7 +18,7 @@ export class Collection extends React.Component {
 
     fetchUserStats = async () => {
 
-        const userId = this.props.user.name;
+        const userId = this.props.userId;
         const url = "/api/user-collections/" + userId;
 
         let response;
@@ -52,7 +52,7 @@ export class Collection extends React.Component {
         }
 
         const stats = await response.json();
-        this.setState({userStats: stats, errorMsg: null});
+        this.setState({userStats: stats.data, errorMsg: null});
     };
 
     render() {
@@ -64,7 +64,7 @@ export class Collection extends React.Component {
         return (
             <div>
                 <p>Coins: {this.state.userStats.coins}</p>
-                <p>Packs: {this.state.userStats.packs}</p>
+                <p>Packs: {this.state.userStats.cardPacks}</p>
             </div>
         );
     }

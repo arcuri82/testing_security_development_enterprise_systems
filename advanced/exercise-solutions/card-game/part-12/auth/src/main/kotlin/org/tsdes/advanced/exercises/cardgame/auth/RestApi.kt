@@ -55,7 +55,7 @@ class RestApi(
             SecurityContextHolder.getContext().authentication = token
         }
 
-        return ResponseEntity.status(204).build()
+        return ResponseEntity.status(201).build()
     }
 
     @PostMapping(path = ["/login"],

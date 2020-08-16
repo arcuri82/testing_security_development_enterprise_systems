@@ -128,7 +128,7 @@ class RestIT {
                             """.trimIndent())
                             .post("/api/auth/signUp")
                             .then()
-                            .statusCode(204)
+                            .statusCode(201)
                             .header("Set-Cookie", CoreMatchers.not(equalTo(null)))
                             .extract().cookie("SESSION")
 

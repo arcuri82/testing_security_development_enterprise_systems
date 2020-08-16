@@ -16,8 +16,9 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
 
-        http.httpBasic()
-                .and()
+        http
+//                .httpBasic()
+//                .and()
                 .authorizeRequests()
                 .antMatchers("/swagger*/**", "/v3/api-docs", "/actuator/**").permitAll()
                 .antMatchers("/api/user-collections/{id}")

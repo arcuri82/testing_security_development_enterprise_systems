@@ -15,13 +15,11 @@ services:
     image: "consul:1.8"
     environment:
       - CONSUL_LOCAL_CONFIG={"log_level":"info"}
-#    ports:
-#      - "8500:8500"
 
-#  frontend:
-#    build:
-#      context: ./frontend
-#      dockerfile: Dockerfile
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
 
 
   redis:
@@ -71,8 +69,7 @@ services:
       - discovery
       - postgres-user-collections
       - auth
-#    ports:
-#      - "8600:8080"
+
 
   scores:
     build:

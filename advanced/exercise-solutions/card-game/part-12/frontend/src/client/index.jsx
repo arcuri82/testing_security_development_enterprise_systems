@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import Home from "./home";
 import Play from "./play";
@@ -8,6 +8,7 @@ import Login from "./login";
 import SignUp from "./signup";
 import HeaderBar from "./headerbar";
 import Collection from "./collection";
+import Leaderboard from "./leaderboard"
 
 class App extends React.Component {
     constructor(props) {
@@ -34,7 +35,7 @@ class App extends React.Component {
                 method: "get",
             });
         } catch (err) {
-            this.setState({ errorMsg: "Failed to connect to server: " + err });
+            this.setState({errorMsg: "Failed to connect to server: " + err});
             return;
         }
 
@@ -53,7 +54,7 @@ class App extends React.Component {
     };
 
     updateLoggedInUser = (user) => {
-        this.setState({ user: user });
+        this.setState({user: user});
     };
 
     notFound() {
@@ -72,37 +73,30 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <div>
-                    <HeaderBar userId={id} updateLoggedInUser={this.updateLoggedInUser} />
+                    <HeaderBar userId={id} updateLoggedInUser={this.updateLoggedInUser}/>
                     <Switch>
-                        <Route exact path="/match" render={(props) => (
-                                <Match{...props} user={this.state.user}
-                                    updateLoggedInUser={this.updateLoggedInUser}
-                                    fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}
-                                />
-                            )}
-                        />
                         <Route exact path="/login" render={(props) => (
-                                <Login{...props}
-                                    fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}
-                                />
-                            )}
-                        />
+                            <Login{...props}
+                                  fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}
+                            />
+                        )}/>
                         <Route exact path="/signup" render={(props) => (
-                                <SignUp {...props} fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>
-                            )}
-                        />
+                            <SignUp {...props} fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>
+                        )}/>
                         <Route exact path={"/play"}><Play/></Route>
                         <Route exact path="/" render={(props) => (
-                                <Home{...props}
-                                    user={this.state.user}
-                                    fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}
-                                />
-                            )}
-                        />
-                        <Route exact path="/collection" render={(props) =>(
+                            <Home{...props}
+                                 user={this.state.user}
+                                 fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}
+                            />
+                        )}/>
+                        <Route exact path="/leaderboard" render={(props) => (
+                            <Leaderboard{...props} fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>
+                        )}/>
+                        <Route exact path="/collection" render={(props) => (
                             <Collection{...props} userId={id} fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>
-                            )}/>
-                        <Route component={this.notFound} />
+                        )}/>
+                        <Route component={this.notFound}/>
                     </Switch>
                 </div>
             </BrowserRouter>
@@ -110,4 +104,4 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App/>, document.getElementById("root"));

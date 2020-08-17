@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository
 import javax.sql.DataSource
 
@@ -37,19 +38,18 @@ class WebSecurityConfig(
     override fun configure(http: HttpSecurity) {
 
         http
-                //.formLogin().and()
                 .exceptionHandling()
                 .authenticationEntryPoint( HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
-                //.httpBasic()
-              //  .and()
-                .logout()
+                .logout().logoutUrl("/api/auth/logout")
+                .logoutSuccessHandler((HttpStatusReturningLogoutSuccessHandler(HttpStatus.NO_CONTENT)))
                 .and()
                 //
                 .authorizeRequests()
                 .antMatchers("/api/auth/user").authenticated()
                 .antMatchers("/api/auth/signUp").permitAll()
                 .antMatchers("/api/auth/login").permitAll()
+                .antMatchers("/api/auth/logout").permitAll()
                 .anyRequest().denyAll()
                 .and()
                 .csrf().disable()

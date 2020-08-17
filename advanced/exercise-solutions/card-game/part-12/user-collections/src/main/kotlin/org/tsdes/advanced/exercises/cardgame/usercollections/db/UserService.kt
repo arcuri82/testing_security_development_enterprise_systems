@@ -49,7 +49,7 @@ class UserService(
 
         val user = User()
         user.userId = userId
-        user.cardPacks = 3
+        user.cardPacks = 10
         user.coins = 100
         userRepository.save(user)
         return true

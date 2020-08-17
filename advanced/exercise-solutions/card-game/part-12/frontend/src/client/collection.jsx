@@ -51,9 +51,6 @@ export class Collection extends React.Component {
 
         let response;
 
-        //TODO remove once fixed with AMQP
-        await fetch(url, {method: "put"})
-
         try {
             response = await fetch(url, {method: "get"});
         } catch (err) {

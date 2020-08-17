@@ -25,6 +25,9 @@ services:
   redis:
     image: "redis:latest"
 
+  rabbitmq:
+    image:  "rabbitmq:3"
+
   postgres-user-collections:
     image: "postgres:10"
 
@@ -42,6 +45,7 @@ services:
     depends_on:
       - api-gateway
       - redis
+      - rabbitmq
       - postgres-auth
 
   cards_0:
@@ -67,6 +71,7 @@ services:
     depends_on:
       - api-gateway
       - discovery
+      - rabbitmq
       - postgres-user-collections
       - auth
 
@@ -78,6 +83,7 @@ services:
     depends_on:
       - api-gateway
       - discovery
+      - rabbitmq
       - postgres-scores
 
 

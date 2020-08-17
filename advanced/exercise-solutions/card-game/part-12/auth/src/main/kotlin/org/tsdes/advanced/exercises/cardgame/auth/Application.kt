@@ -1,5 +1,6 @@
 package org.tsdes.advanced.exercises.cardgame.auth
 
+import org.springframework.amqp.core.FanoutExchange
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
@@ -15,6 +16,11 @@ class Application{
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
+    }
+
+    @Bean
+    fun fanout(): FanoutExchange {
+        return FanoutExchange("user-creation")
     }
 }
 

@@ -16,8 +16,6 @@ import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
 import java.time.Duration
-import java.time.temporal.Temporal
-import java.time.temporal.TemporalUnit
 import java.util.concurrent.TimeUnit
 
 @Disabled
@@ -39,11 +37,11 @@ class RestIT {
         val env = KDockerComposeContainer("card-game", File("../docker-compose.yml"))
                 .withExposedService("discovery", 8500,
                         Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(240)))
-                .withLogConsumer("cards_0") {print("[CARD_0] " + it.utf8String)}
-                .withLogConsumer("cards_1") {print("[CARD_1] " + it.utf8String)}
-                .withLogConsumer("user-collections") {print("[USER_COLLECTIONS] " + it.utf8String)}
-                .withLogConsumer("scores") {print("[SCORES] " + it.utf8String)}
-                .withLogConsumer("auth") {print("[AUTH] " + it.utf8String)}
+                .withLogConsumer("cards_0") { print("[CARD_0] " + it.utf8String) }
+                .withLogConsumer("cards_1") { print("[CARD_1] " + it.utf8String) }
+                .withLogConsumer("user-collections") { print("[USER_COLLECTIONS] " + it.utf8String) }
+                .withLogConsumer("scores") { print("[SCORES] " + it.utf8String) }
+                .withLogConsumer("auth") { print("[AUTH] " + it.utf8String) }
                 .withLocalCompose(true)
 
 
@@ -112,10 +110,15 @@ class RestIT {
                             .then()
                             .statusCode(401)
 
-                    //FIXME
-//                    given().put("/api/user-collections/$id")
-//                            .then()
-//                            .statusCode(401)
+                    given().put("/api/user-collections/$id")
+                            .then()
+                            //FIXME 401
+                            .statusCode(403)
+
+                    given().get("/api/scores/$id")
+                            .then()
+                            .statusCode(404)
+
 
                     val password = "123456"
 
@@ -137,10 +140,22 @@ class RestIT {
                             .then()
                             .statusCode(200)
 
-                    given().cookie("SESSION", cookie)
-                            .put("/api/user-collections/$id")
-                            .then()
-                            .statusCode(201)
+                    Awaitility.await().atMost(10, TimeUnit.SECONDS)
+                            .pollInterval(Duration.ofSeconds(2))
+                            .ignoreExceptions()
+                            .until {
+                                given().cookie("SESSION", cookie)
+                                        .get("/api/user-collections/$id")
+                                        .then()
+                                        .statusCode(200)
+
+                                given().get("/api/scores/$id")
+                                        .then()
+                                        .statusCode(200)
+                                        .body("data.score", equalTo(0))
+
+                                true
+                            }
 
                     true
                 }

@@ -6,6 +6,8 @@ spring:
   redis:
     host: redis
     port: 6379
+  rabbitmq:
+    host: rabbitmq
   datasource:
     url: "jdbc:postgresql://postgres-auth:5432/postgres"
     username: "postgres"

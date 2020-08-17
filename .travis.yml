@@ -19,7 +19,7 @@ jdk:
 
 # In some examples, we will use NodeJS as runtime to run JavaScript code
 node_js:
-  - node
+  - 12
 
 
 # "sudo" is a Linux/Bash command to execute other commands in super-user (ie "root")

@@ -1,5 +1,6 @@
 package org.tsdes.advanced.exercises.cardgame.usercollections
 
+import org.springframework.amqp.core.*
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.cloud.client.loadbalancer.LoadBalanced
@@ -36,6 +37,24 @@ class Application {
                 .version("1.0")
                 .build()
     }
+
+
+    @Bean
+    fun fanout(): FanoutExchange {
+        return FanoutExchange("user-creation")
+    }
+
+    @Bean
+    fun queue(): Queue {
+        return Queue("user-creation-user-collections")
+    }
+
+    @Bean
+    fun binding(fanout: FanoutExchange,
+                queue: Queue): Binding {
+        return BindingBuilder.bind(queue).to(fanout)
+    }
+
 }
 
 

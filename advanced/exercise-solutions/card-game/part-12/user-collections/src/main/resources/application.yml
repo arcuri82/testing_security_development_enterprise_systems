@@ -12,6 +12,8 @@ spring:
   redis:
     host: redis
     port: 6379
+  rabbitmq:
+    host: rabbitmq
   session:
       store-type: redis
   datasource:

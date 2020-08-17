@@ -11,6 +11,8 @@ spring:
     consul:
       host: discovery
       port: 8500
+  rabbitmq:
+    host: rabbitmq
   datasource:
     url: "jdbc:postgresql://postgres-scores:5432/postgres"
     username: "postgres"

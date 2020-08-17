@@ -9,6 +9,8 @@ spring:
   cloud:
     consul:
       enabled: false
+  rabbitmq:
+    auto
   main:
     allow-bean-definition-overriding: true
   session:

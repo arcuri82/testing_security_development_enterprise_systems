@@ -17,10 +17,13 @@ os: linux
 jdk:
   - openjdk11
 
-# In some examples, we will use NodeJS as runtime to run JavaScript code
-node_js:
-  - 12
-
+## In some examples, we will use NodeJS as runtime to run JavaScript code
+## But, unfortunately the following command is "silently" ignored when language
+## is set to "java" :( So, need to install it manually with "nvm"
+#node_js:
+#  - 12
+before_install:
+  - nvm install 12
 
 # "sudo" is a Linux/Bash command to execute other commands in super-user (ie "root")
 # mode. This is needed in Travis when using Docker

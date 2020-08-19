@@ -47,8 +47,7 @@ fun main(){
     println("Result as string : $result")
 
     //just extract one element of interest
-    val parser = JsonParser()
-    val json = parser.parse(result) as JsonObject
+    val json = JsonParser.parseString(result) as JsonObject
     val temperature = json.get("main").asJsonObject.get("temp").asString
 
     println("Temperature in Oslo: $temperature C'")

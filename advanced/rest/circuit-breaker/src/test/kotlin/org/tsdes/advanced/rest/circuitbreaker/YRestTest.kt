@@ -20,7 +20,14 @@ import javax.annotation.PostConstruct
  */
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@DirtiesContext //to avoid issues with states in the CBs between tests
+/*
+    We do this to avoid issues with states in the CBs between tests.
+    Usually, resetting the whole context is not great, as time consuming.
+    You would prefer to just reset only what you know has a state.
+    But, Spring Circuit Breaker does not currently seem to provide a clean why
+    to reset its state.
+ */
+@DirtiesContext
 class YRestTest {
 
     @LocalServerPort

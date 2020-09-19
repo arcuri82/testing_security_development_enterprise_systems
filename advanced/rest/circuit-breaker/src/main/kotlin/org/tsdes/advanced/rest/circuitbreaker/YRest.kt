@@ -33,7 +33,11 @@ class YRest(
 
     @PostConstruct
     fun init(){
-        //FIXME: unfortunately this does not work, as factory not initialized yet :(
+        /*
+            FIXME. Unfortunately this does not work, as factory not initialized yet :(
+            See:
+            https://github.com/spring-cloud/spring-cloud-circuitbreaker/issues/78
+         */
         //cb = circuitBreakerFactory.create("circuitBreakerToX")
     }
 

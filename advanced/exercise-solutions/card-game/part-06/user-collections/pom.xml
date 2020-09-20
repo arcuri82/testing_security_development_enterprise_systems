@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>card-game-part12-usercollections</artifactId>
+    <artifactId>card-game-part06-usercollections</artifactId>
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.tsdes.advanced.exercises.cardgame.part12</groupId>
-        <artifactId>card-game-part12</artifactId>
+        <groupId>org.tsdes.advanced.exercises.cardgame.part06</groupId>
+        <artifactId>card-game-part06</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -15,8 +15,8 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.tsdes.advanced.exercises.cardgame.part12</groupId>
-            <artifactId>card-game-part12-cards-dto</artifactId>
+            <groupId>org.tsdes.advanced.exercises.cardgame.part02</groupId>
+            <artifactId>card-game-part02-cards-dto</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -38,47 +38,13 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
-        </dependency>
-
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -96,7 +62,10 @@
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+        </dependency>
 
         <!-- test -->
         <dependency>
@@ -108,12 +77,12 @@
             <artifactId>rest-assured</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock-standalone</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-standalone</artifactId>
         </dependency>
     </dependencies>
 

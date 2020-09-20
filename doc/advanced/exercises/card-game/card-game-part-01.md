@@ -1,6 +1,6 @@
 # Card Game - Part 01
 
-Create a new Maven project for a Collectable Card Game.
+Create a new Maven project for a Collectible Card Game.
 It has to be in a different folder outside this repository. 
 Lesson after lesson, we will add new features to it.
 

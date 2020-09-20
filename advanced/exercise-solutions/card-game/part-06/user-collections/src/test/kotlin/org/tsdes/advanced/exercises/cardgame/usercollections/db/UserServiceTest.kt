@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import org.springframework.web.client.RestTemplate
 import org.tsdes.advanced.exercises.cardgame.usercollections.CardService
 import org.tsdes.advanced.exercises.cardgame.usercollections.FakeData
 import org.tsdes.advanced.exercises.cardgame.usercollections.model.Collection
@@ -21,7 +20,7 @@ import org.tsdes.advanced.exercises.cardgame.usercollections.model.Collection
 @Profile("UserServiceTest")
 @Primary
 @Service
-class FakeCardService: CardService(RestTemplate(), Resilience4JCircuitBreakerFactory()){
+class FakeCardService : CardService(Resilience4JCircuitBreakerFactory()){
 
     override fun fetchData() {
         val dto = FakeData.getCollectionDto()

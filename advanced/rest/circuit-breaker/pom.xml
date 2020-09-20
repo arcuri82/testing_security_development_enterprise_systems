@@ -40,24 +40,6 @@
             <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>com.netflix.hystrix</groupId>-->
-<!--            <artifactId>hystrix-core</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            &lt;!&ndash;-->
-<!--                This in theory is a third-party library coming-->
-<!--                with Hystrix. Although it works fine from Maven,-->
-<!--                it fails to build in IntelliJ if explicit-->
-<!--                declaration is missing here.-->
-<!--                Might be a bug in IntelliJ, or some weird-->
-<!--                classpath edge-case-->
-<!--            &ndash;&gt;-->
-<!--            <groupId>commons-configuration</groupId>-->
-<!--            <artifactId>commons-configuration</artifactId>-->
-<!--            <version>1.8</version>-->
-<!--        </dependency>-->
-
 
         <!-- test -->
         <dependency>

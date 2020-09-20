@@ -20,32 +20,34 @@ import kotlin.random.Random
 
 @Service
 class CardService(
-        private val client: RestTemplate,
         private val circuitBreakerFactory: Resilience4JCircuitBreakerFactory
 ) {
 
-    companion object {
+    companion object{
         private val log = LoggerFactory.getLogger(CardService::class.java)
     }
+
+    protected var collection: Collection? = null
 
     @Value("\${cardServiceAddress}")
     private lateinit var cardServiceAddress: String
 
-    protected var collection: Collection? = null
-
-    val cardCollection: List<Card>
+    val cardCollection : List<Card>
         get() = collection?.cards ?: listOf()
 
     private val lock = Any()
+
     private lateinit var cb: CircuitBreaker
 
+    private val client = RestTemplate()
+
     @PostConstruct
-    fun init() {
+    fun init(){
 
         cb = circuitBreakerFactory.create("circuitBreakerToCards")
 
-        synchronized(lock) {
-            if (cardCollection.isNotEmpty()) {
+        synchronized(lock){
+            if(cardCollection.isNotEmpty()){
                 return
             }
             fetchData()
@@ -54,7 +56,7 @@ class CardService(
 
     fun isInitialized() = cardCollection.isNotEmpty()
 
-    protected fun fetchData() {
+    protected fun fetchData(){
 
         val version = "v1_000"
         val uri = UriComponentsBuilder
@@ -88,36 +90,36 @@ class CardService(
         }
     }
 
-    private fun verifyCollection() {
+    private fun verifyCollection(){
 
-        if (collection == null) {
+        if(collection == null){
             fetchData()
 
-            if (collection == null) {
+            if(collection == null){
                 throw IllegalStateException("No collection info")
             }
         }
     }
 
-    fun millValue(cardId: String): Int {
+    fun millValue(cardId: String) : Int {
         verifyCollection()
-        val card: Card = cardCollection.find { it.cardId == cardId }
-                ?: throw IllegalArgumentException("Invalid cardId $cardId")
+        val card : Card = cardCollection.find { it.cardId  == cardId} ?:
+            throw IllegalArgumentException("Invalid cardId $cardId")
 
         return collection!!.millValues[card.rarity]!!
     }
 
-    fun price(cardId: String): Int {
+    fun price(cardId: String) : Int {
         verifyCollection()
-        val card: Card = cardCollection.find { it.cardId == cardId }
-                ?: throw IllegalArgumentException("Invalid cardId $cardId")
+        val card : Card = cardCollection.find { it.cardId  == cardId} ?:
+                throw IllegalArgumentException("Invalid cardId $cardId")
 
         return collection!!.prices[card.rarity]!!
     }
 
-    fun getRandomSelection(n: Int): List<Card> {
+    fun getRandomSelection(n: Int) : List<Card>{
 
-        if (n <= 0) {
+        if(n <= 0){
             throw IllegalArgumentException("Non-positive n: $n")
         }
 
@@ -133,14 +135,14 @@ class CardService(
 
         repeat(n) {
             val p = Math.random()
-            val r = when {
+            val r = when{
                 p <= bronze -> Rarity.BRONZE
                 p > bronze && p <= bronze + silver -> Rarity.SILVER
                 p > bronze + silver && p <= bronze + silver + gold -> Rarity.GOLD
                 p > bronze + silver + gold -> Rarity.PINK_DIAMOND
                 else -> throw IllegalStateException("BUG for p=$p")
             }
-            val card = collection!!.cardsByRarity[r].let { it!![Random.nextInt(it.size)] }
+            val card = collection!!.cardsByRarity[r].let{ it!![Random.nextInt(it.size)] }
             selection.add(card)
         }
 

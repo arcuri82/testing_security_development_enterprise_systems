@@ -60,7 +60,7 @@
             of Groovy runtime
         -->
         <version.restassured>4.2.0</version.restassured>
-        <version.surefire-failsafe>3.0.0-M4</version.surefire-failsafe>
+        <version.surefire-failsafe>3.0.0-M5</version.surefire-failsafe>
     </properties>
 
 

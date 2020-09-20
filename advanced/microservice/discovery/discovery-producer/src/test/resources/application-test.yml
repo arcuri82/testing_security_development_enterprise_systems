@@ -1,4 +1,5 @@
-# Disable Eureka
-eureka:
-  client:
-    enabled: false
+# Disable Discovery Service
+spring:
+  cloud:
+    consul:
+      enabled: false

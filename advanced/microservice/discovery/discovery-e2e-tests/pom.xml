@@ -32,11 +32,6 @@
         </dependency>
         <dependency>
             <groupId>org.tsdes.advanced.microservice.discovery</groupId>
-            <artifactId>discovery-eureka</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tsdes.advanced.microservice.discovery</groupId>
             <artifactId>discovery-producer</artifactId>
             <version>${project.version}</version>
         </dependency>

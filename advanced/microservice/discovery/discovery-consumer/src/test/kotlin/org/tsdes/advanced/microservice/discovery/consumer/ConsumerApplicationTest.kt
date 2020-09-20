@@ -13,8 +13,12 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 /**
@@ -23,6 +27,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ContextConfiguration(initializers = [(ConsumerApplicationTest.Companion.Initializer::class)])
 class ConsumerApplicationTest{
 
     @LocalServerPort
@@ -39,7 +44,7 @@ class ConsumerApplicationTest{
         fun initClass() {
             RestAssured.enableLoggingOfRequestAndResponseIfValidationFails()
 
-            wiremockServer = WireMockServer(WireMockConfiguration.wireMockConfig().port(8099).notifier(ConsoleNotifier(true)))
+            wiremockServer = WireMockServer(WireMockConfiguration.wireMockConfig().dynamicPort().notifier(ConsoleNotifier(true)))
             wiremockServer.start()
 
             wiremockServer.stubFor(//prepare a stubbed response for the given request
@@ -56,6 +61,13 @@ class ConsumerApplicationTest{
         @JvmStatic
         fun tearDown() {
             wiremockServer.stop()
+        }
+
+        class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
+            override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
+                TestPropertyValues.of("producer-server-address: localhost:${wiremockServer.port()}")
+                        .applyTo(configurableApplicationContext.environment)
+            }
         }
     }
 

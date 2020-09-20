@@ -61,7 +61,7 @@ class RestIT {
                                 .port(env.getServicePort("discovery", 8500))
                                 .get("/v1/agent/services")
                                 .then()
-                                .body("size()", equalTo(4))
+                                .body("size()", equalTo(5))
 
                         true
                     }

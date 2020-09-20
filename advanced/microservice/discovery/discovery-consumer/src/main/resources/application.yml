@@ -1,7 +1,6 @@
 server:
   port: 9000
 
-producer-server:
-  ribbon:
-    eureka:
-      enabled: true
+
+
+producer-server-address: producer-server

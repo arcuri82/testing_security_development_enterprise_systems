@@ -13,7 +13,6 @@
     </parent>
 
     <modules>
-        <module>discovery-eureka</module>
         <module>discovery-producer</module>
         <module>discovery-consumer</module>
         <module>discovery-e2e-tests</module>

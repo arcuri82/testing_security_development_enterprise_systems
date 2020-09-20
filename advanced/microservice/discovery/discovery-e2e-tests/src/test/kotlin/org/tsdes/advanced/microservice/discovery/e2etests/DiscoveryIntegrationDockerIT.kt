@@ -7,7 +7,6 @@ import org.awaitility.Awaitility
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.testcontainers.containers.DockerComposeContainer
@@ -29,7 +28,7 @@ class DiscoveryIntegrationDockerIT {
         val env = KDockerComposeContainer(File("../docker-compose.yml"))
                 .withLocalCompose(true)
                  //if needed for debugging
-                .withLogConsumer("eureka") {print("[EUREKA] " + it.utf8String)}
+                .withLogConsumer("discovery") {print("[CONSUL] " + it.utf8String)}
 
 
 
@@ -49,7 +48,6 @@ class DiscoveryIntegrationDockerIT {
                     .pollInterval(3, TimeUnit.SECONDS)
                     .ignoreExceptions()
                     .until {
-                        given().port(8761).get("/actuator/health").then().body("status", equalTo("UP"))
                         given().port(9000).get("/actuator/health").then().body("status", equalTo("UP"))
                         given().port(9001).get("/actuator/health").then().body("status", equalTo("UP"))
                         given().port(9002).get("/actuator/health").then().body("status", equalTo("UP"))
@@ -59,7 +57,7 @@ class DiscoveryIntegrationDockerIT {
 
             /*
                 Not only we need to wait for the servers to be up and running,
-                but also need to wait for when they are registered on Eureka.
+                but also need to wait for when they are registered on Discovery Service.
 
                 Note: with default settings, when running many Docker images on
                 a laptop, might take a while before all services are registered,
@@ -68,8 +66,7 @@ class DiscoveryIntegrationDockerIT {
                 all registrations.
                 Plus all caches need to be updated.
                 Long story short: it can take up to 2 minutes to have all system
-                up and running:
-                https://github.com/spring-cloud/spring-cloud-netflix/issues/373
+                up and running
             */
 
             Awaitility.await()
@@ -77,16 +74,16 @@ class DiscoveryIntegrationDockerIT {
                     .pollInterval(6, TimeUnit.SECONDS)
                     .ignoreExceptions()
                     .until {
-                        given().port(8761).get("/eureka/apps")
+                        given().port(8500)
+                                .get("/v1/agent/services")
                                 .then()
-                                .body("applications.application.instance.size()", equalTo(4))
+                                .body("size()", equalTo(4))
                         true
                     }
 
             /*
                 Might take time before the list of available instances per service
-                is updated in all the clients of Eureka for client-side balancing
-                with Ribbon.
+                is updated in all the clients of Discovery Service for client-side balancing.
                 However, although here we can check that Consumer can speak with at
                 least 1 Producer, it does not necessarily mean that it has yet the
                 IP addresses of all 3 producers.
@@ -121,7 +118,7 @@ class DiscoveryIntegrationDockerIT {
             Now that everything is (mostly) setup, send many messages.
             Each "Producer" service should get at least 1 of them.
             "Mostly" -> Consumer might have to wait up to 30s to get
-            notified by Eureka of all Producers
+            notified by Discovery Service of all Producers
          */
 
         val responses : MutableList<String> = mutableListOf()

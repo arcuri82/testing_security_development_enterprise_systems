@@ -1,13 +1,20 @@
 # Here is where we set the routing, based on pattern matching on "Path".
-# Note: Spring Cloud Gateway is aware of Eureka, and for routing we just need
+# Note: Spring Cloud Gateway is aware of Discovery Service, and for routing we just need
 # to specify the application name (ie the "spring.application.name"
-# registered on Eureka, which is "service" from the service module
+# registered on Discovery Service, which is "message-service" from the service module
 # in this case), and so would do automatically load balancing.
-# However, the application "frontend" is not registered on Eureka,
+# However, the application "frontend" is not registered on Discovery Service,
 # so need to provide an explicit URL for it.
 
 spring:
+  application:
+    name: gateway
   cloud:
+    consul:
+      host: discovery
+      port: 8500
+      discovery:
+        instanceId: ${spring.application.name}:${random.value}
     gateway:
       discovery:
         locator:
@@ -15,7 +22,7 @@ spring:
       routes:
       - id: service
         # "lb" stands for Load-Balance, which is done with Ribbon
-        uri: lb://service
+        uri: lb://message-service
         predicates:
         - Path=/service/**
         filters:
@@ -25,11 +32,3 @@ spring:
         predicates:
         - Path=/**
 
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    healthcheck:
-      enabled: true
-    serviceUrl:
-      defaultZone: http://eureka:8761/eureka/

@@ -13,6 +13,3 @@ spring:
     hibernate:
       ddl-auto: "create-drop"
 
-eureka:
-  client:
-    enabled: false

@@ -13,12 +13,12 @@ services:
     ports:
       - "80:8080"
     depends_on:
-      - eureka
+      - discovery
 
-  eureka:
-    build:
-      context: ./gateway-eureka
-      dockerfile: Dockerfile
+  discovery:
+    image: "consul:1.8"
+    environment:
+      - CONSUL_LOCAL_CONFIG={"log_level":"info"}
 
 
   frontend:

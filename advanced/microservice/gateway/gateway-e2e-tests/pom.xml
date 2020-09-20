@@ -27,11 +27,6 @@
         <!-- Force this module to be built last -->
         <dependency>
             <groupId>org.tsdes.advanced.microservice.gateway</groupId>
-            <artifactId>gateway-eureka</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tsdes.advanced.microservice.gateway</groupId>
             <artifactId>gateway-service</artifactId>
             <version>${project.version}</version>
         </dependency>

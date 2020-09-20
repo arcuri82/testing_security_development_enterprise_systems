@@ -3,7 +3,7 @@
 
 spring:
   application:
-    name: service
+    name: message-service
   datasource:
     url: "jdbc:postgresql://postgres:5432/postgres"
     username: "postgres"
@@ -15,14 +15,12 @@ spring:
       # We should rather use Flyway. But for simplicity, here rely
       # on Hibernate to handle the schema (which is usually not a good idea).
       ddl-auto: "update"
+  cloud:
+    consul:
+      host: discovery
+      port: 8500
+      discovery:
+        instanceId: ${spring.application.name}:${random.value}
 
 
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    healthcheck:
-      enabled: true
-    serviceUrl:
-      defaultZone: http://eureka:8761/eureka/
 

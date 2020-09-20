@@ -17,8 +17,8 @@ spring:
     database: "h2"
     hibernate:
       ddl-auto: "create-drop"
+  cloud:
+    consul:
+      enabled: false
 
-eureka:
-  client:
-    enabled: false
 

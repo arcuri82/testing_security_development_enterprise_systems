@@ -39,13 +39,13 @@ abstract class GatewayIntegrationDockerTestBase {
         @JvmField
         val env = KDockerComposeContainer("gateway", File("../docker-compose.yml"))
                 /*
-                    In the docker-compose file, I did not expose the port for Eureka.
+                    In the docker-compose file, I did not expose the port for Consul.
                     Nor I made a route for it in the gateway.
                     However, I need it in these tests, as need to query it to wait for it
                     be fully initialized.
                     So, I expose it here.
                  */
-                .withExposedService("eureka", 8761,
+                .withExposedService("discovery", 8500,
                         /*
                             By default, Testcontainer will wait up to 60 seconds for the exposed
                             port to be accessible.
@@ -63,10 +63,8 @@ abstract class GatewayIntegrationDockerTestBase {
 
             /*
                 Need to wait for a bit, because it can take up to 2 minutes before
-                Eureka is fully initialized and all changes are propagated to all
-                of its clients. See:
-                https://github.com/Netflix/eureka/wiki/Understanding-eureka-client-server-communication
-
+                Discovery Service is fully initialized and all changes are propagated to all
+                of its clients.
                 Note: here I am using the Awaitility library to do such waits
              */
 
@@ -84,11 +82,11 @@ abstract class GatewayIntegrationDockerTestBase {
                                 .delete("/service/messages")
                                 .then().statusCode(204)
 
-                        given().baseUri("http://${env.getServiceHost("eureka", 8761)}")
-                                .port(env.getServicePort("eureka", 8761))
-                                .get("/eureka/apps")
+                        given().baseUri("http://${env.getServiceHost("discovery", 8500)}")
+                                .port(env.getServicePort("discovery", 8500))
+                                .get("/v1/agent/services")
                                 .then()
-                                .body("applications.application.instance.size()", equalTo(4))
+                                .body("size()", equalTo(4))
 
                         true
                     }

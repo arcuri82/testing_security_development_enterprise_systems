@@ -1,5 +1,5 @@
 ### FIXME: unfortunately this configuration is failing
-
+### TODO: update to Consul
 
 version: '3.7'
 

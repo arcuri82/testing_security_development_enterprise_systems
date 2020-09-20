@@ -70,6 +70,7 @@ abstract class GatewayIntegrationDockerTestBase {
 
             await().atMost(180, TimeUnit.SECONDS)
                     .ignoreExceptions()
+                    .pollInterval(6, TimeUnit.SECONDS)
                     .until{
 
                         given().get("/index.html").then().statusCode(200)

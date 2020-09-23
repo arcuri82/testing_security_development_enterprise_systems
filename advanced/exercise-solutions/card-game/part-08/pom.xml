@@ -17,6 +17,7 @@
         <module>cards</module>
         <module>scores</module>
         <module>user-collections</module>
+        <module>e2e-tests</module>
     </modules>
 
 </project>

@@ -53,6 +53,7 @@ Recall that the names for the services you choose in this file are
 very important, as those will resolvable from the Docker-Compose's DNS.
 This means that, when in the `application.yml` files you need to define
 the URLs for Consul and Postgres instances, you will need to use those names.
+The APIs needing a database must use Postgres instead of H2.
 
 You need to open the port for the `api-gateway`, e.g.,
 ```
@@ -63,8 +64,39 @@ This must be the ONLY port open, and reachable from outside Docker-Compose,
 i.e., all incoming communications must go through the gateway.
 
 
-## E2E Tests
+## End-to-End Tests
 
+Create a `e2e-tests` module for End-to-End tests.
+Make sure that the `failsafe` plugin is configured/activated, and that
+your test'names end with `IT` and not `Test` (so that they will be executed
+by `failsafe` instead of `surefire`, after the Maven `package` phase).
+Also make sure to add a dependency to all the other modules, 
+to force Maven to build this `e2e-tests` module last.
+This is to enforce that, when running any of the `*IT.kt` tests, all the needed
+`*.jar` executables have been packaged.
+
+Besides `rest-assured`, to write E2E tests you will also need:
+
+* `org.testcontainers:testcontainers`
+* `org.awaitility:awaitility`
+
+Write a test for each of the REST APIs, in which they are accessed through
+the Gateway.
+You will need to use TestContainers to start the `docker-compose.yml`,
+and Awaitility to wait for everything being up and running before starting 
+the tests.
+This is particularly important to wait for Consul initialization, when all
+services have been registered (otherwise, the Gateway will not be able to route
+to the right running instances).  
+
+
+
+
+
+ 
+
+
+ 
 
 
 

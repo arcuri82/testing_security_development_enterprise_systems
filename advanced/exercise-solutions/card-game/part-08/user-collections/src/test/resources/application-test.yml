@@ -6,8 +6,7 @@ spring:
   jpa:
     database: h2
     show-sql: true
-  spring:
-    cloud:
+  cloud:
       consul:
         enabled: false
 

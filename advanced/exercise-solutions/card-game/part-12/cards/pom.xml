@@ -19,6 +19,11 @@
             <artifactId>card-game-part12-cards-dto</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tsdes.advanced.exercises.cardgame</groupId>
+            <artifactId>card-game-images</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.tsdes.advanced.rest</groupId>

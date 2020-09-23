@@ -8,6 +8,9 @@ spring:
       ddl-auto: validate
     database: h2
     show-sql: true
-
+  spring:
+    cloud:
+      consul:
+        enabled: false
 
 

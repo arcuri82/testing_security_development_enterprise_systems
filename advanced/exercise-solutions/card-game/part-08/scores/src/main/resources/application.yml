@@ -16,3 +16,9 @@ spring:
       database: "postgresql"
       hibernate:
         ddl-auto: validate
+  cloud:
+    consul:
+      host: discovery
+      port: 8500
+      discovery:
+        instanceId: ${spring.application.name}:${random.value}

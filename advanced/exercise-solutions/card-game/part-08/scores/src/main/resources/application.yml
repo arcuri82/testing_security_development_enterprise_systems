@@ -1,0 +1,18 @@
+spring:
+  mvc:
+    throwExceptionIfNoHandlerFound: true
+  resources:
+    add-mappings: false
+  application:
+      name: scores-service
+  session:
+    store-type: none
+  datasource:
+    url: "jdbc:postgresql://postgres-scores:5432/postgres"
+    username: "postgres"
+    password: ""
+    driver-class-name: "org.postgresql.Driver"
+  jpa:
+      database: "postgresql"
+      hibernate:
+        ddl-auto: validate

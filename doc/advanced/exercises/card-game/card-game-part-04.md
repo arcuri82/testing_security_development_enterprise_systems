@@ -20,6 +20,14 @@ Furthermore, we use:
 `@SpringBootApplication(scanBasePackages = ["org.tsdes.advanced"])`
 to tell Spring to scan for those beans.
 This is unnecessary if they are under your package hierarchy.
+Furthermore, these classes will need to be used in every single REST API
+in this project.
+Therefore, instead of copying&pasting them in each single module, it would
+make sense to copy the classes of those libraries in their own module in your
+project, to then import as a dependency in all the other modules depending 
+on them (i.e., the different REST APIs).   
+
+
 
 Make also sure to have the following in your `application.yml`:
 ```

@@ -83,7 +83,7 @@ class RestIT {
     }
 
     @Test
-    fun testGetPage() {
+    fun testGetScores() {
         Awaitility.await().atMost(120, TimeUnit.SECONDS)
                 .pollInterval(Duration.ofSeconds(10))
                 .ignoreExceptions()
@@ -113,7 +113,7 @@ class RestIT {
                     given().put("/api/user-collections/$id")
                             .then()
                             //FIXME 401
-                            .statusCode(403)
+                            .statusCode(401)
 
                     given().get("/api/scores/$id")
                             .then()
@@ -159,5 +159,37 @@ class RestIT {
 
                     true
                 }
+    }
+
+
+    @Test
+    fun testUserCollectionAccessControl() {
+
+        val alice = "alice_testUserCollectionAccessControl_" + System.currentTimeMillis()
+        val eve =   "eve_testUserCollectionAccessControl_" + System.currentTimeMillis()
+
+        given().get("/api/user-collections/$alice").then().statusCode(401)
+        given().put("/api/user-collections/$alice").then().statusCode(401)
+        given().patch("/api/user-collections/$alice").then().statusCode(401)
+
+        val cookie = given().contentType(ContentType.JSON)
+                .body("""
+                                {
+                                    "userId": "$eve",
+                                    "password": "123456"
+                                }
+                            """.trimIndent())
+                .post("/api/auth/signUp")
+                .then()
+                .statusCode(201)
+                .header("Set-Cookie", CoreMatchers.not(equalTo(null)))
+                .extract().cookie("SESSION")
+
+
+
+        given().cookie("SESSION", cookie)
+                .get("/api/user-collections/$alice")
+                .then()
+                .statusCode(403)
     }
 }

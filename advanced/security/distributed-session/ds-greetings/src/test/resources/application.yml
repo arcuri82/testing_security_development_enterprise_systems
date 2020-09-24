@@ -1,5 +1,3 @@
-userServiceAddress: "localhost:8099"
-
 spring:
   main:
     # need to allow bean overriding in fake security config

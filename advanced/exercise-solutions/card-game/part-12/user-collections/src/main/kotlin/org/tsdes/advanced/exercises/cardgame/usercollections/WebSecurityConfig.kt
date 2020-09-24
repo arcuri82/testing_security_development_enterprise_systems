@@ -17,8 +17,10 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
 
         http
-//                .httpBasic()
-//                .and()
+                .exceptionHandling().authenticationEntryPoint {req,response,e ->
+                    response.setHeader("WWW-Authenticate","cookie")
+                    response.sendError(401)
+                }.and()
                 .authorizeRequests()
                 .antMatchers("/swagger*/**", "/v3/api-docs", "/actuator/**").permitAll()
                 .antMatchers("/api/user-collections/{id}")
@@ -28,6 +30,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
                 .csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER)
+
     }
 
     @Bean

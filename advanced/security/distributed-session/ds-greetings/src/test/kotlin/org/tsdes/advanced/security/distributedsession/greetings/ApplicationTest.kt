@@ -14,12 +14,17 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ContextConfiguration(initializers = [(ApplicationTest.Companion.Initializer::class)])
 class ApplicationTest {
 
     @LocalServerPort
@@ -44,7 +49,7 @@ class ApplicationTest {
 
             wiremockServer = WireMockServer(
                     WireMockConfiguration.wireMockConfig()
-                            .port(8099).notifier(ConsoleNotifier(true)))
+                            .dynamicPort().notifier(ConsoleNotifier(true)))
             wiremockServer.start()
         }
 
@@ -52,6 +57,13 @@ class ApplicationTest {
         @JvmStatic
         fun tearDown() {
             wiremockServer.stop()
+        }
+
+        class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
+            override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
+                TestPropertyValues.of("userServiceAddress: localhost:${wiremockServer.port()}")
+                        .applyTo(configurableApplicationContext.environment)
+            }
         }
     }
 

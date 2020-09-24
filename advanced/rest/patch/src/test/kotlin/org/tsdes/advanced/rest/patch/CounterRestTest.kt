@@ -96,7 +96,7 @@ class CounterRestTest {
                 .statusCode(201)
     }
 
-    private operator fun get(id: Long): CounterDto {
+    private fun get(id: Long): CounterDto {
 
         return given().accept(ContentType.JSON)
                 .get("$id")

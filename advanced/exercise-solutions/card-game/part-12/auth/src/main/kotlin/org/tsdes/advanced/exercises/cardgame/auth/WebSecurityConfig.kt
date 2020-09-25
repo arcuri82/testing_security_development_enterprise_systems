@@ -38,8 +38,10 @@ class WebSecurityConfig(
     override fun configure(http: HttpSecurity) {
 
         http
-                .exceptionHandling()
-                .authenticationEntryPoint( HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                .exceptionHandling().authenticationEntryPoint {req,response,e ->
+                    response.setHeader("WWW-Authenticate","cookie")
+                    response.sendError(401)
+                }
                 .and()
                 .logout().logoutUrl("/api/auth/logout")
                 .logoutSuccessHandler((HttpStatusReturningLogoutSuccessHandler(HttpStatus.NO_CONTENT)))

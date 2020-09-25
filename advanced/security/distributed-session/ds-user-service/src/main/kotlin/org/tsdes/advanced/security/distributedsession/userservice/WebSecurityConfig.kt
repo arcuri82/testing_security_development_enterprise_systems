@@ -16,7 +16,11 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
 
-        http.httpBasic()
+        http
+                .exceptionHandling().authenticationEntryPoint {req,response,e ->
+                    response.setHeader("WWW-Authenticate","cookie")
+                    response.sendError(401)
+                }
                 .and()
                 .authorizeRequests()
                 .antMatchers("/usersInfoCount").permitAll()

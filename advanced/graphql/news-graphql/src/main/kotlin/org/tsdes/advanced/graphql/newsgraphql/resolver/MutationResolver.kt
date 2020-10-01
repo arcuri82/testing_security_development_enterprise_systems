@@ -32,7 +32,7 @@ class MutationResolver(
             }else {
                 "${e.javaClass}: ${e.message}"
             }
-            return DataFetcherResult<String>(null, listOf(GenericGraphQLError(msg)))
+            return DataFetcherResult<String>("", listOf(GenericGraphQLError(msg)))
         }
 
         return DataFetcherResult(id.toString(), listOf())
@@ -44,12 +44,12 @@ class MutationResolver(
         try {
             id = pathId.toLong()
         } catch (e: Exception) {
-            return DataFetcherResult<Boolean>(null, listOf(
+            return DataFetcherResult<Boolean>(false, listOf(
                     GenericGraphQLError("No News with id $pathId exists")))
         }
 
         if (!crud.existsById(id)) {
-            return DataFetcherResult<Boolean>(null, listOf(
+            return DataFetcherResult<Boolean>(false, listOf(
                     GenericGraphQLError("No News with id $id exists")))
         }
 
@@ -58,7 +58,7 @@ class MutationResolver(
         } catch (e: Exception) {
             val cause = Throwables.getRootCause(e)
             if (cause is ConstraintViolationException) {
-                return DataFetcherResult<Boolean>(null, listOf(
+                return DataFetcherResult<Boolean>(false, listOf(
                         GenericGraphQLError("Violated constraints: ${cause.message}")))
             }
             throw e

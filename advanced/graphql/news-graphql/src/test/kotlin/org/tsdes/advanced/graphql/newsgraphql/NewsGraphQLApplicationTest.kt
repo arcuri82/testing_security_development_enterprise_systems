@@ -169,7 +169,7 @@ class NewsGraphQLApplicationTest{
                 .post()
                 .then()
                 .statusCode(200)
-                .body("data.createNews", equalTo(null))
+                .body("data.createNews", equalTo(""))
                 .body("errors.message[0]", containsString("Violated constraints"))
     }
 

@@ -54,7 +54,7 @@ and Redis.
 ## E2E-Tests
 
 Update all failing E2E-tests that require auth. 
-Add new tests to explicitely check the access controll in `user-collections`, i.e.,
+Add new tests to explicitly check the access control in `user-collections`, i.e.,
 check for both cases of 401 (not authenticated) and 403 (authenticated but forbidden).
 
 

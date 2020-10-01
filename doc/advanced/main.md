@@ -133,7 +133,7 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 <br />
 
-* **Lesson 09**: Security: Intro/Revision
+* **Lesson 09**: Security in Microservices
 
   Slides: [[pdf]](slides/lesson_09.pdf), 
           [[pptx]](slides/lesson_09.pptx)
@@ -142,32 +142,17 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   
   * **advanced/advanced/security/basic**
   * **advanced/advanced/security/session**
-  * TODO
+  * **advanced/advanced/security/distributed-session/***
 
   Exercises: [card-game-part-09](exercises/card-game/card-game-part-09.md)     
 
 <br />
 
 
-* **Lesson 10**: Security in MicroServices
+* **Lesson 10**: Message Oriented Middleware
   
   Slides: [[pdf]](slides/lesson_10.pdf), 
           [[pptx]](slides/lesson_10.pptx)
-          
-  Modules:     
-  
-  * **advanced/advanced/security/distributed-session/***
-  * TODO
-  
-  Exercises: [card-game-part-10](exercises/card-game/card-game-part-10.md)     
-
-<br />
-
-
-* **Lesson 11**: AMQP and RabbitMQ
-  
-  Slides: [[pdf]](slides/lesson_11.pdf), 
-          [[pptx]](slides/lesson_11.pptx)
           
   Modules:     
   
@@ -177,6 +162,20 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
   * **advanced/advanced/amqp/direct-exchange**
   * **advanced/advanced/amqp/topic-exchange**
   * **advanced/advanced/amqp/amqp-rest**
+  
+  Exercises: [card-game-part-10](exercises/card-game/card-game-part-10.md)     
+
+<br />
+
+
+* **Lesson 11**: Frontends in Microservices
+  
+  Slides: [[pdf]](slides/lesson_11.pdf), 
+          [[pptx]](slides/lesson_11.pptx)
+          
+  Modules:     
+  
+  * TODO
 
   Exercises: [card-game-part-11](exercises/card-game/card-game-part-11.md)     
 
@@ -184,7 +183,6 @@ The course is composed of 12 lessons, each one lasting between 2 and 4 hours.
 
 * **Lesson 12**: Farewell and Revision
 
-  Exercises: [card-game-part-12](exercises/card-game/card-game-part-12.md)     
 
 <br />
 

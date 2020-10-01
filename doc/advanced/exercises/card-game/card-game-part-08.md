@@ -90,6 +90,8 @@ services have been registered (otherwise, the Gateway will not be able to route
 to the right running instances).  
 
 
+Solutions to this exercise can be found in the 
+`advanced/exercise-solutions/card-game/part-08` module.
 
 
 

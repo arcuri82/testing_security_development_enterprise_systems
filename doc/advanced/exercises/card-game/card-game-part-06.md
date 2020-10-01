@@ -37,6 +37,7 @@ of `cardServiceAddress` after SpringBoot and WireMock have started, but before t
 tests are run (and recall that WireMock should run on an ephemeral port).
 You will need to activate it with a `@ContextConfiguration`.
 
-
+Solutions to this exercise can be found in the 
+`advanced/exercise-solutions/card-game/part-06` module.
   
  

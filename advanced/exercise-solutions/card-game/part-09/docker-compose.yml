@@ -1,0 +1,79 @@
+version: '3.3'
+
+services:
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"
+    depends_on:
+      - discovery
+
+  discovery:
+    image: "consul:1.8"
+    environment:
+      - CONSUL_LOCAL_CONFIG={"log_level":"info"}
+
+  redis:
+    image: "redis:latest"
+
+  postgres-auth:
+    image: "postgres:10"
+
+  postgres-user-collections:
+    image: "postgres:10"
+
+  postgres-scores:
+    image: "postgres:10"
+
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    depends_on:
+      - api-gateway
+      - redis
+      - postgres-auth
+
+  cards_0:
+    build:
+      context: ../part-08/cards
+      dockerfile: Dockerfile
+    depends_on:
+      - api-gateway
+      - discovery
+
+  cards_1:
+    build:
+      context: ../part-08/cards
+      dockerfile: Dockerfile
+    depends_on:
+      - api-gateway
+      - discovery
+
+  user-collections:
+    build:
+      context: ./user-collections
+      dockerfile: Dockerfile
+    depends_on:
+      - api-gateway
+      - discovery
+      - postgres-user-collections
+      - auth
+
+  scores:
+    build:
+      context: ../part-08/scores
+      dockerfile: Dockerfile
+    depends_on:
+      - api-gateway
+      - discovery
+      - postgres-scores
+
+
+
+
+
+

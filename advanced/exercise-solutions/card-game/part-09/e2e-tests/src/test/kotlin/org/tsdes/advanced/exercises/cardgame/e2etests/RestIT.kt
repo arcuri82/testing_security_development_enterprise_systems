@@ -41,7 +41,6 @@ class RestIT {
                 .withLogConsumer("cards_1") { print("[CARD_1] " + it.utf8String) }
                 .withLogConsumer("user-collections") { print("[USER_COLLECTIONS] " + it.utf8String) }
                 .withLogConsumer("scores") { print("[SCORES] " + it.utf8String) }
-                .withLogConsumer("auth") { print("[AUTH] " + it.utf8String) }
                 .withLocalCompose(true)
 
 
@@ -54,8 +53,6 @@ class RestIT {
                     .pollInterval(Duration.ofSeconds(10))
                     .ignoreExceptions()
                     .until {
-
-                        //given().get("/index.html").then().statusCode(200)
 
                         given().baseUri("http://${env.getServiceHost("discovery", 8500)}")
                                 .port(env.getServicePort("discovery", 8500))
@@ -106,17 +103,9 @@ class RestIT {
 
                     val id = "foo_testCreateUser_" + System.currentTimeMillis()
 
-                    given().get("/api/auth/user")
+                    given().get("/api/user-collections/$id")
                             .then()
                             .statusCode(401)
-
-                    given().put("/api/user-collections/$id")
-                            .then()
-                            .statusCode(401)
-
-                    given().get("/api/scores/$id")
-                            .then()
-                            .statusCode(404)
 
 
                     val password = "123456"
@@ -134,32 +123,20 @@ class RestIT {
                             .header("Set-Cookie", CoreMatchers.not(equalTo(null)))
                             .extract().cookie("SESSION")
 
+
                     given().cookie("SESSION", cookie)
-                            .get("/api/auth/user")
+                            .put("/api/user-collections/$id")
+                            .then()
+                            .statusCode(201)
+
+                    given().cookie("SESSION", cookie)
+                            .get("/api/user-collections/$id")
                             .then()
                             .statusCode(200)
-
-                    Awaitility.await().atMost(10, TimeUnit.SECONDS)
-                            .pollInterval(Duration.ofSeconds(2))
-                            .ignoreExceptions()
-                            .until {
-                                given().cookie("SESSION", cookie)
-                                        .get("/api/user-collections/$id")
-                                        .then()
-                                        .statusCode(200)
-
-                                given().get("/api/scores/$id")
-                                        .then()
-                                        .statusCode(200)
-                                        .body("data.score", equalTo(0))
-
-                                true
-                            }
 
                     true
                 }
     }
-
 
     @Test
     fun testUserCollectionAccessControl() {

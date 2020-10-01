@@ -11,3 +11,5 @@ spring:
         enabled: false
   session:
     store-type: none
+  main:
+    allow-bean-definition-overriding: true

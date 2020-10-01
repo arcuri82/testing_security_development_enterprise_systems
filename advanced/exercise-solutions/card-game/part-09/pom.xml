@@ -13,9 +13,10 @@
     </parent>
 
     <modules>
+        <module>api-gateway</module>
         <module>auth</module>
         <module>user-collections</module>
-<!--        <module>e2e-tests</module>-->
+        <module>e2e-tests</module>
     </modules>
 
 </project>

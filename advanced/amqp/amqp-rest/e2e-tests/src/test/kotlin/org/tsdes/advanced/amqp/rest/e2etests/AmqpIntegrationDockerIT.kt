@@ -3,25 +3,24 @@ package org.tsdes.advanced.amqp.rest.e2etests
 import io.restassured.RestAssured.given
 import org.awaitility.Awaitility.await
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assume.assumeTrue
-import org.junit.BeforeClass
-import org.junit.ClassRule
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.testcontainers.containers.DockerComposeContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
 import java.util.concurrent.TimeUnit
 
 /**
  * Created by arcuri82 on 11-Aug-17.
  */
+@Testcontainers
 class AmqpIntegrationDockerIT {
 
     companion object {
 
         class KDockerComposeContainer(path: File) : DockerComposeContainer<KDockerComposeContainer>(path)
 
-        @ClassRule
+        @Container
         @JvmField
         val env = KDockerComposeContainer(File("../docker-compose.yml"))
                 .withLocalCompose(true)

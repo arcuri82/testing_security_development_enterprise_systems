@@ -1,23 +1,26 @@
 package org.tsdes.advanced.amqp.fanout
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.ClassRule
-import org.junit.Test
-import org.junit.runner.RunWith
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.testcontainers.containers.GenericContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 
 /**
  * Created by arcuri82 on 07-Aug-17.
  */
-@RunWith(SpringRunner::class)
+@Testcontainers
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 @ContextConfiguration(initializers = [(WorkerDockerTest.Companion.Initializer::class)])
 class WorkerDockerTest {
@@ -26,7 +29,7 @@ class WorkerDockerTest {
 
         class KGenericContainer(imageName: String) : GenericContainer<KGenericContainer>(imageName)
 
-        @ClassRule
+        @Container
         @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3").withExposedPorts(5672)
 

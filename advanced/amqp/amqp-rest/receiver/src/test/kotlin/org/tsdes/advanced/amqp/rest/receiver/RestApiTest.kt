@@ -4,10 +4,9 @@ import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import org.awaitility.Awaitility.await
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Before
-import org.junit.ClassRule
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.amqp.core.FanoutExchange
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,11 +16,15 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.context.junit4.SpringRunner
 import org.testcontainers.containers.GenericContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.util.concurrent.TimeUnit
 
-@RunWith(SpringRunner::class)
+@Testcontainers
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = [(RestApiTest.Companion.Initializer::class)])
 class RestApiTest {
@@ -30,7 +33,7 @@ class RestApiTest {
 
         class KGenericContainer(imageName: String) : GenericContainer<KGenericContainer>(imageName)
 
-        @ClassRule
+        @Container
         @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3").withExposedPorts(5672)
 
@@ -53,7 +56,7 @@ class RestApiTest {
     @Autowired
     private lateinit var fanout: FanoutExchange
 
-    @Before
+    @BeforeEach
     fun clean() {
         RestAssured.baseURI = "http://localhost"
         RestAssured.port = port

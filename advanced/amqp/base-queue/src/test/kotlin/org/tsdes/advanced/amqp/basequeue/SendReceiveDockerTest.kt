@@ -1,15 +1,17 @@
 package org.tsdes.advanced.amqp.basequeue
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
-import org.junit.ClassRule
-import org.junit.Test
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Test
 import org.testcontainers.containers.GenericContainer
 
 
 /**
  * Created by arcuri82 on 07-Aug-17.
  */
+@Testcontainers
 class SendReceiveDockerTest {
 
     /*
@@ -36,7 +38,7 @@ class SendReceiveDockerTest {
             However, here, although the port is exposed, it is mapped to a
             random, free one.
          */
-        @ClassRule
+        @Container
         @JvmField
         val rabbitMQ = KGenericContainer("rabbitmq:3")
                 .withExposedPorts(5672)

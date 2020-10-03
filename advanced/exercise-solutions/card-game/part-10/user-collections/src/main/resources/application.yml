@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: user-collections-service
+  datasource:
+    url: "jdbc:postgresql://postgres-user-collections:5432/postgres"
+    username: "postgres"
+    password: ""
+    driver-class-name: org.postgresql.Driver
+  redis:
+      host: redis
+      port: 6379
+  session:
+        store-type: redis
+  rabbitmq:
+    host: rabbitmq
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+  mvc:
+    throwExceptionIfNoHandlerFound: true
+  resources:
+    add-mappings: false
+  cloud:
+    consul:
+      host: discovery
+      port: 8500
+      discovery:
+        instanceId: ${spring.application.name}:${random.value}
+
+cardServiceAddress: "cards-service:8080"

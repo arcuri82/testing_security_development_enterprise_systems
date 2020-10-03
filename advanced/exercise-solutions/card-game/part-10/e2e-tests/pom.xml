@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>card-game-part10-e2etests</artifactId>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.tsdes.advanced.exercises.cardgame.part10</groupId>
+        <artifactId>card-game-part10</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <dependencies>
+        <!-- Force this module to be built last -->
+        <dependency>
+            <groupId>org.tsdes.advanced.exercises.cardgame.part08</groupId>
+            <artifactId>card-game-part08-cards</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.advanced.exercises.cardgame.part08</groupId>
+            <artifactId>card-game-part08-scores</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.advanced.exercises.cardgame.part09</groupId>
+            <artifactId>card-game-part09-usercollections</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.advanced.exercises.cardgame.part09</groupId>
+            <artifactId>card-game-part09-auth</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tsdes.advanced.exercises.cardgame.part09</groupId>
+            <artifactId>card-game-part09-apigateway</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+
+        <!-- tests -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

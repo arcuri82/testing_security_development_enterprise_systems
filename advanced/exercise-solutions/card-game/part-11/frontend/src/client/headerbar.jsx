@@ -35,12 +35,12 @@ export class HeaderBar extends React.Component {
     return (
       <React.Fragment>
         <p className="header-text">
-          Welcome {userId}!!!
+          Welcome {userId}!
         </p>
-        <Link className="header-button" to="/collection" tabIndex="0">My Collection</Link>
-        <Link className="header-button" to="/play" tabIndex="0">Play</Link>
-        <Link className="header-button" to="/leaderboard" tabIndex="0">Leaderboard</Link>
-        <button className="header-button" onClick={this.doLogout} id="logoutBtnId">Logout</button>
+        <Link className="header-link" to="/collection" tabIndex="0">My Collection</Link>
+        <Link className="header-link" to="/play" tabIndex="0">Play</Link>
+        <Link className="header-link" to="/leaderboard" tabIndex="0">Leaderboard</Link>
+        <button className="header-link header-link-logout" onClick={this.doLogout} id="logoutBtnId">Logout</button>
       </React.Fragment>
     );
   }
@@ -50,8 +50,8 @@ export class HeaderBar extends React.Component {
       <React.Fragment>
         <p className="header-text">You are not logged in</p>
         <div className="action-buttons">
-          <Link className="header-button" to="/login" tabIndex="0">LogIn</Link>
-          <Link className="header-button" to="/signup" tabIndex="0">SignUp</Link>
+          <Link className="header-link" to="/login" tabIndex="0">LogIn</Link>
+          <Link className="header-link" to="/signup" tabIndex="0">SignUp</Link>
         </div>
       </React.Fragment>
     );
@@ -70,7 +70,7 @@ export class HeaderBar extends React.Component {
     return (
       <div className="header">
         <Link className="header-logo" to={"/"} tabIndex="0">
-          Home
+          Card Game
         </Link>
         {content}
       </div>

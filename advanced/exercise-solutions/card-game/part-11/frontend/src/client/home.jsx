@@ -9,7 +9,7 @@ export class Home extends React.Component {
 
     render() {
         return(
-          <p>
+          <p className="home-welcome">
               Welcome to our Collectible Card Game!!!
           </p>
         );

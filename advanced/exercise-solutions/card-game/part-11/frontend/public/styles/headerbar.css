@@ -1,0 +1,44 @@
+.header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* align-content: space-between; */
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.header-logo{
+align-self: flex-end;
+/* background-color: crimson; */
+color: black;
+font-size: 5rem;
+font-weight: bolder;
+font-family: "Lucida Console", Courier, monospace;
+padding: 2rem; 
+}
+.header-logo:hover{
+    color: crimson;
+}
+
+.header-text{
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.header-link{
+    font-size: 2rem;
+    color: crimson;
+    text-decoration: underline;
+}
+
+.header-link:hover{
+    text-decoration: underline;
+    color: black;
+}
+
+.header-link-logout{
+    margin-right: 2rem;
+    background-color: transparent;
+    border: none;
+}

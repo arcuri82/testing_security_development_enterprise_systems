@@ -72,7 +72,7 @@ class App extends React.Component {
 
         return (
             <BrowserRouter>
-                <div>
+                <main className="index-main">
                     <HeaderBar userId={id} updateLoggedInUser={this.updateLoggedInUser}/>
                     <Switch>
                         <Route exact path="/login" render={(props) => (
@@ -98,7 +98,7 @@ class App extends React.Component {
                         )}/>
                         <Route component={this.notFound}/>
                     </Switch>
-                </div>
+                </main>
             </BrowserRouter>
         );
     }

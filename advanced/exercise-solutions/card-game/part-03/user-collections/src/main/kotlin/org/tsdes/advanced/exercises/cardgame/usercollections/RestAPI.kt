@@ -67,7 +67,7 @@ class RestAPI(
             } catch (e: IllegalArgumentException){
                 return ResponseEntity.status(400).build()
             }
-            return ResponseEntity.status(200).body(PatchResultDto().apply { cardIdsInOpenedPacket.addAll(ids) })
+            return ResponseEntity.status(200).body(PatchResultDto().apply { cardIdsInOpenedPack.addAll(ids) })
         }
 
         val cardId = dto.cardId

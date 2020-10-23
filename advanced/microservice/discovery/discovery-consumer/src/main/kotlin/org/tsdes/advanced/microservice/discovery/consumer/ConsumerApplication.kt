@@ -42,7 +42,7 @@ class ConsumerApplication {
 
 
 
-    @GetMapping(path = ["consumerData"],
+    @GetMapping(path = ["/consumerData"],
             produces = [(MediaType.TEXT_PLAIN_VALUE)])
     fun get(): ResponseEntity<String> {
 

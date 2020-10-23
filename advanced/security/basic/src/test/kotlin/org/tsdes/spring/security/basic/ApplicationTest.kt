@@ -110,4 +110,12 @@ class ApplicationTest {
     }
 
 
+    @Test
+    fun testNotPresentButAuthenticated() {
+
+        given().auth().basic("foo", "123456")
+                .get("/endpointThatDoesNotExist")
+                .then()
+                .statusCode(403)
+    }
 }

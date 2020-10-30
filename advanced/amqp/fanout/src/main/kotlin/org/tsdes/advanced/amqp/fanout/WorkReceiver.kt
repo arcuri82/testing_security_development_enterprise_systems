@@ -24,11 +24,11 @@ class WorkReceiver(val id: String) {
      */
 
     @RabbitListener(queues = ["#{queueNameHolder.name}"])
-    fun receive(x: java.lang.Long) {
+    fun receive(x: Long) {
         doWork(x)
     }
 
-    private fun doWork(x: java.lang.Long){
+    private fun doWork(x: Long){
 
         println("Worker '$id' going to do work with value: $x")
 

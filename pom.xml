@@ -393,6 +393,12 @@
             the need to reset all their configurations).
             Note: some plugins are default in Maven, like the compiler.
             To see what actually executed, you can look at the logs.
+
+            WARNING: make sure that in your projects you do have the <version> tags
+            for your plugins. If you do not, Maven might silently ignore it...
+            this is very different from forgetting a <version> in an imported library,
+            as that would usually end up in a compilation error (as some needed classes/methods
+            would not be found on the classpath)
         -->
         <pluginManagement>
             <plugins>

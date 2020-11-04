@@ -3,3 +3,30 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.players-stuff{
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 2px solid purple;
+}
+
+.players-stuff > button{
+    background-color: #cad2de;
+    font-weight: bold;
+}
+
+.players-stuff > p {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.card-pack{
+margin: 2rem;
+}
+
+.card-pack > button {
+    background-color: #cad2de;
+    font-weight: bold;
+}

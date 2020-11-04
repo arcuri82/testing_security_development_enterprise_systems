@@ -69,7 +69,8 @@ export class Leaderboard extends React.Component {
         } else if (!this.state.scores || this.state.scores.length === 0) {
             table = <p>There is no leaderboard info</p>
         } else {
-            table = <div>
+            table = 
+            <div>
                 <table className="allScores">
                     <thead>
                     <tr>
@@ -78,9 +79,9 @@ export class Leaderboard extends React.Component {
                         <th>Score</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="leaderboard-rows">
                     {this.state.scores.map(s =>
-                        <tr key={"key_" + s.id} className="oneScore" >
+                        <tr key={"key_" + s.id} className="leaderboard-row" >
                             <td>{s.userId}</td>
                             <td>{s.victories+"/"+s.draws+"/"+s.defeats}</td>
                             <td>{s.score}</td>
@@ -92,11 +93,11 @@ export class Leaderboard extends React.Component {
         }
 
         return (
-            <div>
+            <div className="center">
                 <h2>LeaderBoard</h2>
                 {table}
                 {this.state.next &&
-                <button className={"btn"} onClick={this.fetchScores}>Next</button>
+                <button className="button" onClick={this.fetchScores}>Next</button>
                 }
             </div>
         );

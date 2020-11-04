@@ -1,0 +1,13 @@
+.leaderboard-rows{
+margin: 2rem;
+}
+.leaderboard-rows > tr:nth-child(even) {
+    background:#c2b3c9;
+}
+.leaderboard-rows > tr:nth-child(odd) {
+    background: #cad2de;
+}
+
+.leaderboard-row > td{
+    padding: 1rem;
+}

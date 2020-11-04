@@ -7,3 +7,9 @@
 .big-text{
     font-weight: bolder;
 }
+
+.button{
+    background-color: #cad2de;
+    font-weight: bold;
+    margin: 1rem;
+}

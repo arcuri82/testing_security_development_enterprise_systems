@@ -92,10 +92,11 @@ export class Login extends React.Component {
         </div>
 
         {error}
-
-        <button className="button" onClick={this.doLogIn} id="loginBtn">
-          Log In
-        </button>
+        <div>
+          <button className="button" onClick={this.doLogIn} id="loginBtn">
+            Log In
+          </button>
+        </div>
         <Link className="button" to={"/signup"}>
           Register
         </Link>

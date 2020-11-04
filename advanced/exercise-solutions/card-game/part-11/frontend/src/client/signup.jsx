@@ -117,10 +117,11 @@ export class SignUp extends React.Component {
         </div>
 
         {error}
-
-        <button className="button" onClick={this.doSignUp} id="signUpBtn">
-          Sign Up
-        </button>
+        <div>
+          <button className="button" onClick={this.doSignUp} id="signUpBtn">
+            Sign Up
+          </button>
+        </div>
       </div>
     );
   }

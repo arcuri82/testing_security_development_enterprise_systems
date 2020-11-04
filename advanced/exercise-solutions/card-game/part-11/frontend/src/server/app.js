@@ -9,7 +9,7 @@ const app = express();
 
 
 if(process.env.DEV){
-    const proxiedServer = 'http://128.0.0.1:80'
+    const proxiedServer = 'http://localhost:80'
     app.use("/api/*", createProxyMiddleware({ target: proxiedServer, changeOrigin: true }))
 }
 

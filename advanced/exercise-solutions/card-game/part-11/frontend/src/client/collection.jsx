@@ -161,17 +161,18 @@ export class Collection extends React.Component {
 
         return (
             <div>
-                <p>Coins: {this.state.userStats.coins}</p>
-                <p>Packs: {packs}</p>
+                <p>Coins: {this.state.userStats.coins}  &#128176;</p>
+                <p>Packs: {packs} &#127752;</p>
 
                 <button disabled={packs<=0} onClick={this.openPack}>Open Pack</button>
-
+                <div className="card-container">
                 {this.state.collection.cards.map(c => {
                     const info = this.state.userStats.ownedCards.find(z => z.cardId===c.cardId)
                     const quantity = info ? info.numberOfCopies : 0
                      return  <Card key={c.cardId} {...c} quantity={quantity}/>
                     }
                     )}
+                </div>
             </div>
         );
     }

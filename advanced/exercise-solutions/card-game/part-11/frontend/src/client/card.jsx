@@ -9,9 +9,9 @@ const Card = (props) =>{
     }
 
     return(
-        <div>
-            <p>{label}</p>
-            <img src={"/api/cards/imgs/"+props.imageId}/>
+        <div className="card">
+            <h3>{label}</h3>
+            <img className="card-image" src={"/api/cards/imgs/"+props.imageId}/>
         </div>
     );
 };

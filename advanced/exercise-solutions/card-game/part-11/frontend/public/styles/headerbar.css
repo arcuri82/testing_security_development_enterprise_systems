@@ -10,31 +10,48 @@
 
 .header-logo{
 align-self: flex-end;
-/* background-color: crimson; */
-color: black;
-font-size: 5rem;
-font-weight: bolder;
 font-family: "Lucida Console", Courier, monospace;
-padding: 2rem; 
+padding: 0 2rem; 
+position: relative;
 }
-.header-logo:hover{
+
+.header-logo h1{
     color: crimson;
+    font-size: 6rem;
+    font-weight: bolder;
+}
+
+.header-logo span{
+    color: black;
+    background-color: lightgray;
+    opacity: 0.9;
+    transform: rotate(15deg);
+    position: absolute;
+    top: 30px;
+    right: 0;
+}
+
+.header-logo:hover{
+    color: black;
 }
 
 .header-text{
+    align-self: center;
     font-size: 2.5rem;
     margin: 0;
+    min-width: 20%;
 }
 
 .header-link{
     font-size: 2rem;
-    color: crimson;
+    color: black;
     text-decoration: underline;
+    margin-right: 2rem;
 }
 
 .header-link:hover{
     text-decoration: underline;
-    color: black;
+    color: crimson;
 }
 
 .header-link-logout{

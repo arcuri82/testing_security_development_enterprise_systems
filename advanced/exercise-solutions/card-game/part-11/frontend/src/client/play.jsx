@@ -9,9 +9,9 @@ export class Play extends React.Component {
 
     render() {
         return (
-            <p>
+            <h2 className="center big-text">
                 Unfortunately, this functionality is not available yet... :(
-            </p>
+            </h2>
         )
     }
 }

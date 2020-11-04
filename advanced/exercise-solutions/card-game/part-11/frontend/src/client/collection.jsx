@@ -149,10 +149,15 @@ export class Collection extends React.Component {
             });
 
             return (
-                <div>
-                    <h1>Pack Content</h1>
-                    {cards.map(c => <Card key={c.cardId} {...c}/>)}
-                    <button onClick={this.closePackView}>Close</button>
+                <div className="card-pack">
+                        <button onClick={this.closePackView}>Close</button>
+                        <h1>Pack Content</h1>
+                    <div className="card-container">
+                        {cards.map(c => {
+                            c.quantity = 1;
+                        return <Card key={c.cardId} {...c}/>})
+                    }
+                    </div>
                 </div>
             );
         }
@@ -161,10 +166,11 @@ export class Collection extends React.Component {
 
         return (
             <div>
-                <p>Coins: {this.state.userStats.coins}  &#128176;</p>
-                <p>Packs: {packs} &#127752;</p>
-
-                <button disabled={packs<=0} onClick={this.openPack}>Open Pack</button>
+                <div className="players-stuff">
+                    <p>Coins: {this.state.userStats.coins}  &#128176;</p>
+                    <p>Packs: {packs} &#127752;</p>
+                    <button disabled={packs<=0} onClick={this.openPack}>Open Pack</button>
+                </div>
                 <div className="card-container">
                 {this.state.collection.cards.map(c => {
                     const info = this.state.userStats.ownedCards.find(z => z.cardId===c.cardId)

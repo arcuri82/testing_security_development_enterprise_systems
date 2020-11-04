@@ -10,7 +10,7 @@ export class Play extends React.Component {
     render() {
         return (
             <h2 className="center big-text">
-                Unfortunately, this functionality is not available yet... :(
+                Unfortunately, this functionality is not available yet... &#128546;
             </h2>
         )
     }

@@ -54,7 +54,7 @@ class RestApi(
      */
     @PostMapping(path = ["/signUp"],
             consumes = [(MediaType.APPLICATION_FORM_URLENCODED_VALUE)])
-    fun signIn(@ModelAttribute(name = "the_user") username: String,
+    fun signUp(@ModelAttribute(name = "the_user") username: String,
                @ModelAttribute(name = "the_password") password: String)
             : ResponseEntity<Void> {
 

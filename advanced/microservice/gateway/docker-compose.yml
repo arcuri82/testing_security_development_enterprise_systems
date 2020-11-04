@@ -38,6 +38,8 @@ services:
   # need to use their own database.
   postgres:
     image: "postgres:10"
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
 
   service_0:
     build:

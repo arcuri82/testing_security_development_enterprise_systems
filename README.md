@@ -3,9 +3,8 @@
 ![](doc/img/glenn-carstens-peters-120205.jpg  "Photo by Glenn Carstens-Peters on Unsplash")
 
 
-<!--- Travis CI build status banner -->
-[![Build Status](https://travis-ci.org/arcuri82/testing_security_development_enterprise_systems.svg?branch=master)](https://travis-ci.org/arcuri82/testing_security_development_enterprise_systems)
-
+<!--- Continuous Integration build status banner -->
+![CI](https://github.com/arcuri82/testing_security_development_enterprise_systems/workflows/CI/badge.svg)
 
 This repository contains a set of examples related to the testing, security
 and development of enterprise systems.

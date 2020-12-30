@@ -12,9 +12,8 @@
     </parent>
 
     <properties>
-        <version.hibernate.jpa>1.0.2.Final</version.hibernate.jpa>
-        <version.hibernate.core>5.3.7.Final</version.hibernate.core>
-        <version.hibernate.validator>6.1.0.Final</version.hibernate.validator>
+        <version.hibernate.core>5.4.27.Final</version.hibernate.core>
+        <version.hibernate.validator>6.2.0.Final</version.hibernate.validator>
         <version.javax.el>3.0.0</version.javax.el>
     </properties>
 

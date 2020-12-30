@@ -15,7 +15,7 @@
 
     <modules>
         <module>manual</module>
-        <module>authorization</module>
+        <module>framework</module>
         <module>dependencies</module>
     </modules>
 

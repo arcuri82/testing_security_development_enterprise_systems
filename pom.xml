@@ -45,7 +45,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <fs>${file.separator}</fs>
         <version.java>11</version.java>
-        <version.springboot>2.2.8.RELEASE</version.springboot>
+        <!-- FIXME: 2.3.6 breaks... but anyway jump directly to 2.4.x once Spring Cloud supports it-->
+        <version.springboot>2.3.5.RELEASE</version.springboot>
         <version.junit>5.7.0</version.junit>
         <version.junit.platform>1.5.2</version.junit.platform>
         <version.jacoco>0.8.5</version.jacoco>

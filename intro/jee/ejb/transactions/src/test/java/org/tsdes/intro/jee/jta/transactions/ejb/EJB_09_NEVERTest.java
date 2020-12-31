@@ -24,7 +24,8 @@ public class EJB_09_NEVERTest extends TestBase{
     @Test
     public void testGetFromRequired() throws Exception {
 
-        //will fail, as a transaction will be created
+        //will fail, as a transaction will be created through REQUIRED,
+        //but then we end up with a call on NEVER
         try {
             ejb.getFromRequired();
             fail();
@@ -36,15 +37,22 @@ public class EJB_09_NEVERTest extends TestBase{
     @Test
     public void testGetFromNotSupported() throws Exception {
 
-        assertTrue(ejb.getFromNotSupported());// no transaction, so OK
+        // no transaction, so OK when calling NEVER
+        assertTrue(ejb.getFromNotSupported());
     }
 
 
     @Test
     public void testGetFromRequiredBySuspendingFirst() throws Exception {
 
-        //OK, even if it creates a transaction, because it gets suspended
-        //before calling NEVER
+        /*
+            OK, even if it creates a transaction, because it gets suspended
+            before calling NEVER.
+            It other words:
+            - REQUIRED does a create a new transaction (as tests are not in transaction)
+            - NOT_SUPPORTED will put the transaction on hold
+            - NEVER is fine, as there is no active transaction when called
+         */
         assertTrue(ejb.getFromRequiredBySuspendingFirst());
     }
 

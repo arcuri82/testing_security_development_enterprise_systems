@@ -53,7 +53,8 @@ public class EJB_04_SUPPORTS {
             as we are in a transaction, this will work.
             however, this is regardless of the annotation,
             as this is a java call from inside the EJB, and not
-            the proxy created by the JEE container
+            the proxy created by the JEE container.
+            we ll see this point in more details later
          */
         createFooWithSupports(second);
     }

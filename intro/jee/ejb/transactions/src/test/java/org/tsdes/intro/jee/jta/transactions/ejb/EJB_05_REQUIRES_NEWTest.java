@@ -21,6 +21,7 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
 
         assertFalse(queriesEJB.isInDB(name));
 
+        //no transaction? REQUIRED will create a new one
         ejb.createFooRequired(name);
 
         assertTrue(queriesEJB.isInDB(name));
@@ -33,6 +34,11 @@ public class EJB_05_REQUIRES_NEWTest extends TestBase{
 
         assertFalse(queriesEJB.isInDB(name));
 
+        /*
+            REQUIRES_NEW will always create a new transaction.
+            but, as here there was no ongoing transaction, its behavior
+            is equivalent to REQUIRED
+         */
         ejb.createFooRequiresNew(name);
 
         assertTrue(queriesEJB.isInDB(name));

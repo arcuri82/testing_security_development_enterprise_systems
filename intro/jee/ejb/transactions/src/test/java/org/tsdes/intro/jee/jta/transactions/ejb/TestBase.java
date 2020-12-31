@@ -38,7 +38,6 @@ public abstract class TestBase {
                         EJB_10_multi_caller.class,
                         EJB_11_exceptions.class,
                         EJB_12_status.class,
-                        EJB_13_selfinjection.class,
                         QueriesEJB.class,
                         Foo.class
                 )

@@ -14,6 +14,10 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @Singleton
 public class EJB_12_status {
 
+    /*
+        We can use this injected resource to check the status of
+        the current active transaction (if any)
+     */
     @Resource
     private TransactionSynchronizationRegistry tsr;
 

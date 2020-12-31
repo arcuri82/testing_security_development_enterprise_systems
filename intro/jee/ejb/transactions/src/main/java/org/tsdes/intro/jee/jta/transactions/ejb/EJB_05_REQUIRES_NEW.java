@@ -55,10 +55,13 @@ public class EJB_05_REQUIRES_NEW {
 
         createFooRequired(first); //uses current transaction
 
+        //this is a new proxy, so calls on it will have the annotations applied
         EJB_05_REQUIRES_NEW ejb = ctx.getBusinessObject(EJB_05_REQUIRES_NEW.class);
-        ejb.createFooRequiresNew(second); //creates a new one
+        ejb.createFooRequiresNew(second); //creates a new transactions
+        //after method is completed (and its transaction completed), the previous
+        //transactions is resumed
 
-        ctx.setRollbackOnly(); //should have no impact on "second"
+        ctx.setRollbackOnly(); //should have no impact on "second", as already persisted
     }
 
     public void createTwoWithRollbackInEJBCallOnSameTransaction(String first, String second){
@@ -66,7 +69,9 @@ public class EJB_05_REQUIRES_NEW {
         createFooRequired(first); //uses current transaction
 
         EJB_05_REQUIRES_NEW ejb = ctx.getBusinessObject(EJB_05_REQUIRES_NEW.class);
-        ejb.createFooRequired(second); //same transaction, even if EJB call
+        //same transaction, even if EJB call, as REQUIRED will NOT create a new
+        //transaction if there is an ongoing one. it will just join it
+        ejb.createFooRequired(second);
 
         ctx.setRollbackOnly(); //should have impact on both
     }

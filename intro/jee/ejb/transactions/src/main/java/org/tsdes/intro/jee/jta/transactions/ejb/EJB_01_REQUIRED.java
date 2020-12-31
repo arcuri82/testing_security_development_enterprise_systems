@@ -10,7 +10,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED) //this is the default
+/*
+    REQUIRED is the default, so it is technically unnecessary here.
+    Notice that applying this annotation on the class will be equivalent
+    to apply it on all its public methods.
+ */
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class EJB_01_REQUIRED {
 
     @PersistenceContext

@@ -11,6 +11,16 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class EJB_11_exceptions {
 
+    /*
+        The distinction between CHECKED and UNCHECKED exceptions in Java is a relic
+        of the past.
+        CHECKED exceptions must always be handled (either with "throws" on method signature,
+        or with try/catch).
+        But they only exist at compilation time, and NOT in the JVM, ie not at runtime.
+        This is the reason why modern languages running on the JVM like Kotlin do not deal
+        with checked exceptions (even when using Java APIs).
+     */
+
     @PersistenceContext
     private EntityManager em;
 
@@ -18,6 +28,9 @@ public class EJB_11_exceptions {
     public void addAndThrowRuntimeException(String name){
         Foo foo = new Foo(name);
         em.persist(foo);
+        /*
+            RuntimeException (and any other exception subclassing it) is UNCHECKED
+         */
         throw new RuntimeException("Transaction should roll back");
     }
 
@@ -27,7 +40,13 @@ public class EJB_11_exceptions {
     {
         Foo foo = new Foo(name);
         em.persist(foo);
+        //this is a CHECKED exception
         throw new Exception("Checked exceptions will not lead to rollback");
+        /*
+            unfortunately JPA does NOT rollback transactions in the case of checked exceptions.
+            It does not really make any sense... this yet another case for loathing
+            checked exceptions
+         */
     }
 
     public void addAndThrowRuntimeExceptionNoRollback(String name){
@@ -45,6 +64,10 @@ public class EJB_11_exceptions {
         throw new WithRollbackException("Rollback");
     }
 
+    /*
+        JPA treats checked and unchecked exceptions differently when it comes to rollbacks.
+        but this behavior can be modified with annotations.
+     */
 
     @ApplicationException(rollback = false)
     private static class NoRollbackRuntimeException extends RuntimeException{

@@ -21,10 +21,16 @@ public class EJB_04_SUPPORTSTest extends TestBase{
 
         assertFalse(queriesEJB.isInDB(name));
 
+        //regular REQUIRED, so works as usual
         ejb.createFooWithRequiredTransaction(name);
 
         assertTrue(queriesEJB.isInDB(name));
 
+        /*
+            we are not in a transaction, and, as it is SUPPORT,
+            none would be created. but as it is just a READ, it is
+            not a problem, and it will work
+         */
         boolean present = ejb.isPresentWithSupports(name);
         assertTrue(present);
     }
@@ -37,7 +43,10 @@ public class EJB_04_SUPPORTSTest extends TestBase{
 
         assertFalse(queriesEJB.isInDB(name));
 
-        //this will fail, as calling a persist on EntityManager outside of a transaction
+        /*
+            this will fail, as calling a persist on EntityManager outside of a transaction
+            for a WRITE operation
+         */
         try {
             ejb.createFooWithSupports(name);
             fail();
@@ -58,7 +67,7 @@ public class EJB_04_SUPPORTSTest extends TestBase{
 
         ejb.createTwo(first,second);
 
-        //should work, as SUPPORTS method was called from within a transaction
+        //should work, as annotations apply only on calls on proxy
         assertTrue(queriesEJB.isInDB(first));
         assertTrue(queriesEJB.isInDB(second));
     }

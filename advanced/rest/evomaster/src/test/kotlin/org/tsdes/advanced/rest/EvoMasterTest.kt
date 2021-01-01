@@ -87,7 +87,7 @@ internal class EvoMasterTest {
                 .contentType("application/json")
                 .body("'status'", numberMatches(500.0))
                 .body("'error'", containsString("Internal Server Error"))
-                .body("'message'", containsString("Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction"))
+//                .body("'message'", containsString("Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Error while committing the transaction"))
                 .body("'path'", containsString("/api/books"))
     }
     
@@ -147,7 +147,7 @@ internal class EvoMasterTest {
                 .contentType("application/json")
                 .body("'status'", numberMatches(500.0))
                 .body("'error'", containsString("Internal Server Error"))
-                .body("'message'", containsString("Exception occurred inside setter of org.tsdes.advanced.rest.guiv1.db.Book.author; nested exception is org.hibernate.PropertyAccessException: Exception occurred inside setter of org.tsdes.advanced.rest.guiv1.db.Book.author"))
+//                .body("'message'", containsString("Exception occurred inside setter of org.tsdes.advanced.rest.guiv1.db.Book.author; nested exception is org.hibernate.PropertyAccessException: Exception occurred inside setter of org.tsdes.advanced.rest.guiv1.db.Book.author"))
                 .body("'path'", containsString("/api/books"))
         
         given().accept("*/*")
@@ -210,7 +210,7 @@ internal class EvoMasterTest {
                 .contentType("application/json")
                 .body("'status'", numberMatches(500.0))
                 .body("'error'", containsString("Internal Server Error"))
-                .body("'message'", containsString("No message available"))
+//                .body("'message'", containsString("No message available"))
                 .body("'path'", containsString("/api/books"))
     }
     
@@ -231,7 +231,7 @@ internal class EvoMasterTest {
                 .contentType("application/json")
                 .body("'status'", numberMatches(500.0))
                 .body("'error'", containsString("Internal Server Error"))
-                .body("'message'", containsString("No message available"))
+//                .body("'message'", containsString("No message available"))
                 .body("'path'", containsString("/api/books"))
         
         given().accept("*/*")
@@ -591,7 +591,7 @@ internal class EvoMasterTest {
                 .contentType("application/json")
                 .body("'status'", numberMatches(404.0))
                 .body("'error'", containsString("Not Found"))
-                .body("'message'", containsString("No message available"))
+//                .body("'message'", containsString("No message available"))
                 .body("'path'", containsString("/api/books/saV%C2%853Qk0KK"))
     }
     

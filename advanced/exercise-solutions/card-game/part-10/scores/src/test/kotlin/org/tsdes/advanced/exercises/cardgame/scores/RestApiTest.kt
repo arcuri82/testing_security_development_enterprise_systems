@@ -17,7 +17,7 @@ import org.tsdes.advanced.rest.dto.PageDto
 import javax.annotation.PostConstruct
 
 
-@ActiveProfiles("FakeData,test")
+@ActiveProfiles("FakeData","test")
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [(Application::class)],
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

@@ -36,7 +36,7 @@ class FakeCardService : CardService(){
     }
 }
 
-@ActiveProfiles("RestAPITest,test")
+@ActiveProfiles("RestAPITest","test")
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class RestAPITest {

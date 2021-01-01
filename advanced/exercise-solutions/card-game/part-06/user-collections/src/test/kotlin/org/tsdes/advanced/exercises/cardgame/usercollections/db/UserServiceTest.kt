@@ -30,7 +30,7 @@ class FakeCardService : CardService(Resilience4JCircuitBreakerFactory()){
 
 
 
-@ActiveProfiles("UserServiceTest,test")
+@ActiveProfiles("UserServiceTest","test")
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 internal class UserServiceTest{

@@ -326,7 +326,8 @@ class NewsRestApiTest : NRTestBase() {
     @Test
     fun testSwaggerSchemaV2(){
 
-        get("../v2/api-docs")
+        given().basePath("")
+                .get("/newsrest/api/v2/api-docs")
                 .then()
                 .statusCode(200)
                 .body("swagger", equalTo("2.0"))
@@ -335,7 +336,8 @@ class NewsRestApiTest : NRTestBase() {
     @Test
     fun testSwaggerSchemaV3(){
 
-        get("../v3/api-docs")
+        given().basePath("")
+                .get("/newsrest/api/v3/api-docs")
                 .then()
                 .statusCode(200)
                 .body("openapi", equalTo("3.0.3"))
@@ -343,6 +345,9 @@ class NewsRestApiTest : NRTestBase() {
 
     @Test
     fun testSwaggerUI(){
-        get("../swagger-ui/index.html").then().statusCode(200)
+        given().basePath("")
+                .get("/newsrest/api/swagger-ui/index.html")
+                .then()
+                .statusCode(200)
     }
 }

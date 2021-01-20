@@ -33,12 +33,7 @@ class YRest(
 
     @PostConstruct
     fun init(){
-        /*
-            FIXME. Unfortunately this does not work, as factory not initialized yet :(
-            See:
-            https://github.com/spring-cloud/spring-cloud-circuitbreaker/issues/78
-         */
-        //cb = circuitBreakerFactory.create("circuitBreakerToX")
+        cb = circuitBreakerFactory.create("circuitBreakerToX")
     }
 
     @GetMapping(path = ["/y"])
@@ -46,9 +41,6 @@ class YRest(
             @RequestParam("v")
             v: Long
     ): Long {
-
-        if (cb == null)
-            cb = circuitBreakerFactory.create("circuitBreakerToX")
 
         /*
             this is synchronous, but would still give an answer within the given time (or

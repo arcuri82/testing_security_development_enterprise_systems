@@ -28,7 +28,7 @@ public class EJB_10_multi_caller {
 
         /*
             here we want to add 2 elements. however, for the 2nd element, we
-            want to decide if doing it in the same or a new transcation
+            want to decide if doing it in the same or a new transaction
          */
 
         base.add(first);

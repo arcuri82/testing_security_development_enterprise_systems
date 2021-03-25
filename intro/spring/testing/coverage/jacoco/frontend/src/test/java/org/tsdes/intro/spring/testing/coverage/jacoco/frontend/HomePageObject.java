@@ -19,7 +19,7 @@ public class HomePageObject extends PageObject {
 
 
     public void toStartingPage(){
-        getDriver().get(host + ":" + port);
+        getDriver().get("http://" + host + ":" + port);
         waitForPageToLoad();
     }
 

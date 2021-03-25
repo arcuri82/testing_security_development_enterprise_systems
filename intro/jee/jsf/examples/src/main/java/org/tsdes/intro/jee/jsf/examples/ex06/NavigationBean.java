@@ -1,6 +1,5 @@
 package org.tsdes.intro.jee.jsf.examples.ex06;
 
-
 import org.tsdes.intro.jee.jsf.examples.ex04.SessionCounter;
 
 import javax.enterprise.context.RequestScoped;

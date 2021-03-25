@@ -25,10 +25,10 @@ import org.tsdes.intro.spring.bean.jpa.Application;
  * Created by arcuri82 on 26-Jan-18.
  */
 @ActiveProfiles("docker") //activate profile, load configs from application-docker.yml
-@ContextConfiguration(initializers = PostgresDocketTest.DockerInitializer.class)
+@ContextConfiguration(initializers = PostgresDockerTest.DockerInitializer.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
-public class PostgresDocketTest extends DbTestBase {
+public class PostgresDockerTest extends DbTestBase {
 
     /*
         Following rule would start Postgres inside Docker, and expose the

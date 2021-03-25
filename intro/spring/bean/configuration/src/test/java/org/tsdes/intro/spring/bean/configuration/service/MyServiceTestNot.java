@@ -9,7 +9,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 /**
  * Created by arcuri82 on 26-Jan-18.
  */
-@ExtendWith(SpringExtension.class)@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class MyServiceTestNot {
 
     /*

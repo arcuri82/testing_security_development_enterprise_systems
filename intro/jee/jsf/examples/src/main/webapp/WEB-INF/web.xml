@@ -15,7 +15,7 @@
     responsible to receive and process the HTTP requests from the client.
     Here, we are saying the we should start the servlet that is responsible
     to handle JSF (there can be several different kinds of servlets, even
-    custom ones, but we ll see only JSF in this course).
+    custom ones, but we'll see only JSF in this course).
   -->
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>

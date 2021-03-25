@@ -19,7 +19,7 @@ public class HomePO extends PageObject{
     }
 
     public void toStartingPage(){
-        driver.get(host + ":" + port);
+        driver.get("http://" + host + ":" + port);
     }
 
     @Override

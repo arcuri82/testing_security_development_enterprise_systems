@@ -23,7 +23,7 @@ public class IndexPO extends PageObject {
     }
 
     public void toStartingPage() {
-        getDriver().get(host+":"+port);
+        getDriver().get("http://"+host+":"+port);
         waitForPageToLoad();
         doLogout();
     }

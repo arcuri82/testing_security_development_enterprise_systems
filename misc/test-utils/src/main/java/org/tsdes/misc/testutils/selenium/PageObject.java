@@ -44,6 +44,10 @@ public abstract class PageObject {
         return port;
     }
 
+    public void toOrigin() {
+        driver.get("http://" + host + ":" + port);
+    }
+
     public void refresh(){
         driver.navigate().refresh();
     }

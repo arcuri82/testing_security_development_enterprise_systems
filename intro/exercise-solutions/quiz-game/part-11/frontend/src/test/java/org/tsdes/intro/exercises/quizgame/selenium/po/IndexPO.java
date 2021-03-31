@@ -18,7 +18,7 @@ public class IndexPO extends LayoutPO {
     }
 
     public void toStartingPage(){
-        getDriver().get(host + ":" + port);
+        toOrigin();
     }
 
     @Override

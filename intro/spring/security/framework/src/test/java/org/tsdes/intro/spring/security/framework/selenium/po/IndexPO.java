@@ -24,7 +24,7 @@ public class IndexPO extends PageObject {
     }
 
     public void toStartingPage() {
-        getDriver().get(host + ":" + port);
+        toOrigin();
         waitForPageToLoad();
     }
 

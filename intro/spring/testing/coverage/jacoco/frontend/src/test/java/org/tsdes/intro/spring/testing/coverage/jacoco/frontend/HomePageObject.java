@@ -1,8 +1,6 @@
 package org.tsdes.intro.spring.testing.coverage.jacoco.frontend;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.tsdes.misc.testutils.selenium.PageObject;
 
 public class HomePageObject extends PageObject {
@@ -19,13 +17,12 @@ public class HomePageObject extends PageObject {
 
 
     public void toStartingPage(){
-        getDriver().get("http://" + host + ":" + port);
+        toOrigin();
         waitForPageToLoad();
     }
 
 
     public void changeData(String value){
-
         setText("form:text", value);
         clickAndWait("form:modify");
     }

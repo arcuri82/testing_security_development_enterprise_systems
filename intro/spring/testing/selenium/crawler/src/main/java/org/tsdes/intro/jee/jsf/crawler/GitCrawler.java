@@ -153,11 +153,11 @@ public class GitCrawler {
                     - build files might not be in root folder
                     - no check if there was any error in the loaded page
                  */
-                List<WebElement> maven = driver.findElements(By.xpath("//td[contains(@class,'content')]//a[@title='pom.xml']"));
+                List<WebElement> maven = driver.findElements(By.xpath("//div[contains(@class,'Details')]//a[@title='pom.xml']"));
                 if (!maven.isEmpty()) {
                     System.out.println("" + name + " uses Maven");
                 } else {
-                    List<WebElement> gradle =  driver.findElements(By.xpath("//td[contains(@class,'content')]//a[@title='build.gradle']"));
+                    List<WebElement> gradle =  driver.findElements(By.xpath("//div[contains(@class,'Details')]//a[@title='build.gradle']"));
                     if (!gradle.isEmpty()) {
                         System.out.println("" + name + " uses Gradle");
                     } else {

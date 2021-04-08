@@ -161,7 +161,7 @@ public class GitCrawler {
                     if (!gradle.isEmpty()) {
                         System.out.println("" + name + " uses Gradle");
                     } else {
-                        System.out.println("" + name + " undefined build system");
+                        System.out.println("" + name + " uses unrecognized/no build system");
                     }
                 }
             }

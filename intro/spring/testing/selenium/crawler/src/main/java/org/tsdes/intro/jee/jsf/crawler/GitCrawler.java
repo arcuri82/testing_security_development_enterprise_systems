@@ -173,7 +173,7 @@ public class GitCrawler {
             */
             sleep(6000);
 
-            driver.get(current);
+            driver.navigate().back();
             waitForPageToLoad(driver);
 
             sleep(6000);

@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             /*
                 Authorization rules are checked 1 at a time, starting from the top.
                 Matching is based on the resource path in the HTTP request, and can
-                user regex for it.
+                use a regex for it.
                 We want to allow anyone to access the homepage and the login/signup/logout.
                 All other pages are denied unless the user is authenticated.
                 Note: login and logout pages are handled specially by Spring Security.

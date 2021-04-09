@@ -47,7 +47,7 @@ public class HttpTest {
                 "Host:localhost\r\n" +
                 "\r\n";
 
-        //do one request with no cookie: we ll get asked by server to set one
+        //do one request with no cookie: we'll get asked by server to set one
         String a = HttpUtils.executeHttpCommand("localhost", port, httpGet);
         assertTrue(a.contains("200"));
         assertTrue(a.contains("Set-Cookie"));
